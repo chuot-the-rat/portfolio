@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <div class="container">
         <!-- Left Sidebar -->
@@ -18,10 +16,10 @@
                 <h1>Leana Le</h1>
                 <p class="tagline">UI/UX Designer & Developer</p>
                 <p class="bio">
-                    Digital Design and Development student at BCIT with a passion for creating
+                    Digital Design and Development student at BCIT with a passion for creating 
                     thoughtful user experiences through research-driven design and clean code.
                 </p>
-
+                
                 <!-- CTA Buttons -->
                 <div class="cta-buttons">
                     <a href="Le_Leana_Resume.pdf" class="cta-btn primary" download>
@@ -51,7 +49,7 @@
 
             <div>
                 <h3 class="section-title">Skills</h3>
-
+                
                 <div class="skills-category">
                     <div class="skills-category-label">UX Design</div>
                     <div class="skills">
@@ -101,9 +99,9 @@
             <div>
                 <h3 class="section-title">Contact</h3>
                 <div class="contact-info">
-                    <a href="mailto:leanale003@gmail.com" class="contact-item">
+                    <a href="mailto:your.email@example.com" class="contact-item">
                         <span class="contact-icon">📧</span>
-                        leanale003@gmail.com
+                        your.email@example.com
                     </a>
                     <a href="tel:7789948400" class="contact-item">
                         <span class="contact-icon">📱</span>
@@ -171,7 +169,7 @@
         // Project data
         let projectsList = [];
         let projectsData = {};
-
+        
         // DOM elements
         const canvas = document.getElementById('canvas');
         const modal = document.getElementById('caseStudyModal');
@@ -181,24 +179,24 @@
         // Drag state
         let dragging = null;
         let offset = { x: 0, y: 0 };
-
+        
         // =================================================================
         // 2. DATA LOADING FUNCTIONS
         // =================================================================
-
+        
         // Load projects index from JSON
         async function loadProjects() {
             try {
                 const response = await fetch('projects.json');
                 if (!response.ok) throw new Error('Could not load projects.json');
-
+                
                 projectsList = await response.json();
-
+                
                 // Load each project's detailed data
                 for (const project of projectsList) {
                     await loadProjectData(project.id, project.folder);
                 }
-
+                
                 // Initialize UI with loaded projects
                 initializeCanvas();
             } catch (error) {
@@ -212,7 +210,7 @@
             try {
                 const response = await fetch(`${folder}/data.json`);
                 if (!response.ok) throw new Error(`Could not load data for ${projectId}`);
-
+                
                 projectsData[projectId] = await response.json();
             } catch (error) {
                 console.error(`Error loading project ${projectId}:`, error);
@@ -234,16 +232,16 @@
             const icon = document.createElement('div');
             icon.className = 'project-icon';
             icon.dataset.projectId = project.id;
-
+            
             // Position icons in a grid
             const row = Math.floor(index / 3);
             const col = index % 3;
             const left = 50 + col * 250;
             const top = 50 + row * 250;
-
+            
             icon.style.left = `${left}px`;
             icon.style.top = `${top}px`;
-
+            
             icon.innerHTML = `
                 <img src="${project.thumbnail}" alt="${project.title}" width="180" height="180">
                 <div class="icon-label">
@@ -252,7 +250,7 @@
                     <small style="opacity: 0.7;">${project.category} • ${project.year}</small>
                 </div>
             `;
-
+            
             // Add event listeners
             icon.addEventListener('mousedown', startDrag);
             icon.addEventListener('click', (e) => {
@@ -260,7 +258,7 @@
                     openCaseStudy(project.id);
                 }
             });
-
+            
             return icon;
         }
 
@@ -270,31 +268,31 @@
 
         function startDrag(e) {
             if (e.button !== 0) return; // Only left click
-
+            
             dragging = e.currentTarget;
             dragging.classList.add('dragging');
-
+            
             const rect = dragging.getBoundingClientRect();
             offset.x = e.clientX - rect.left;
             offset.y = e.clientY - rect.top;
-
+            
             document.addEventListener('mousemove', drag);
             document.addEventListener('mouseup', stopDrag);
-
+            
             e.preventDefault();
         }
 
         function drag(e) {
             if (!dragging) return;
-
+            
             const canvasRect = canvas.getBoundingClientRect();
             let x = e.clientX - canvasRect.left - offset.x;
             let y = e.clientY - canvasRect.top - offset.y;
-
+            
             // Keep within canvas bounds
             x = Math.max(0, Math.min(x, canvasRect.width - dragging.offsetWidth));
             y = Math.max(0, Math.min(y, canvasRect.height - dragging.offsetHeight));
-
+            
             dragging.style.left = `${x}px`;
             dragging.style.top = `${y}px`;
         }
@@ -320,7 +318,7 @@
             }
 
             const csContent = document.getElementById('csContent');
-
+            
             // Build case study HTML using side-by-side layout
             let html = `
                 <!-- Hero Section -->
@@ -355,10 +353,10 @@
                         ` : ''}
 
                         ${project.links ? `
-                            <div class="cs-cta">
-                                ${project.links.live ? `<a href="${project.links.live}" class="cs-cta-btn" target="_blank" rel="noopener noreferrer">View Live Site →</a>` : ''}
-                                ${project.links.prototype ? `<a href="${project.links.prototype}" class="cs-cta-btn" target="_blank" rel="noopener noreferrer">View Prototype →</a>` : ''}
-                                ${project.links.github ? `<a href="${project.links.github}" class="cs-cta-btn secondary" target="_blank" rel="noopener noreferrer">View Code →</a>` : ''}
+                            <div class="cs-links">
+                                ${project.links.live ? `<a href="${project.links.live}" class="cs-link" target="_blank">View Live Site →</a>` : ''}
+                                ${project.links.prototype ? `<a href="${project.links.prototype}" class="cs-link" target="_blank">View Prototype →</a>` : ''}
+                                ${project.links.github ? `<a href="${project.links.github}" class="cs-link" target="_blank">View Code →</a>` : ''}
                             </div>
                         ` : ''}
                     </div>
@@ -438,10 +436,9 @@
 
                 // Additional solution images in bento grid
                 if (project.solution.images && project.solution.images.length > 1) {
-                    const layoutClass = project.solution.layout || 'cols-2';
                     html += `
                         <div class="cs-section full-width">
-                            <div class="cs-image-bento ${layoutClass}">
+                            <div class="cs-image-bento cols-2">
                                 ${project.solution.images.slice(1).map(img => `
                                     <div class="cs-bento-item">
                                         <img src="${img.src}" alt="${img.alt}">
@@ -473,32 +470,11 @@
                 `;
             }
 
-            // Style Guide
-            if (project.styleGuide) {
-                html += `
-                    <div class="cs-section">
-                        <div class="cs-section-label">06 — DESIGN SYSTEM</div>
-                        <h2 class="cs-section-title">${project.styleGuide.title}</h2>
-                        <p class="cs-text">${project.styleGuide.description}</p>
-                        
-                        ${project.styleGuide.images && project.styleGuide.images.length > 0 ? `
-                            <div class="cs-styleguide-grid">
-                                ${project.styleGuide.images.map(img => `
-                                    <div class="cs-styleguide-item">
-                                        <img src="${img.src}" alt="${img.alt}">
-                                    </div>
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-
             // Outcomes
             if (project.outcomes) {
                 html += `
                     <div class="cs-section">
-                        <div class="cs-section-label">07 — RESULTS</div>
+                        <div class="cs-section-label">06 — RESULTS</div>
                         <h2 class="cs-section-title">${project.outcomes.title}</h2>
                         <p class="cs-text">${project.outcomes.description}</p>
                         
@@ -563,7 +539,7 @@
         function closeCaseStudy() {
             modal.classList.remove('visible');
             document.body.style.overflow = '';
-
+            
             const selected = document.querySelector('.project-icon.selected');
             if (selected) {
                 selected.classList.remove('selected');
@@ -595,11 +571,11 @@
             resizeTimeout = setTimeout(() => {
                 const icons = document.querySelectorAll('.project-icon');
                 const canvasRect = canvas.getBoundingClientRect();
-
+                
                 icons.forEach(icon => {
                     let x = parseInt(icon.style.left);
                     let y = parseInt(icon.style.top);
-
+                    
                     if (x + icon.offsetWidth > canvasRect.width) {
                         icon.style.left = `${Math.max(0, canvasRect.width - icon.offsetWidth - 20)}px`;
                     }
@@ -611,5 +587,4 @@
         });
     </script>
 </body>
-
 </html>

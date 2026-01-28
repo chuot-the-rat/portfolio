@@ -101,9 +101,9 @@
             <div>
                 <h3 class="section-title">Contact</h3>
                 <div class="contact-info">
-                    <a href="mailto:leanale003@gmail.com" class="contact-item">
+                    <a href="mailto:leanale003@gmail" class="contact-item">
                         <span class="contact-icon">📧</span>
-                        leanale003@gmail.com
+                        your.email@example.com
                     </a>
                     <a href="tel:7789948400" class="contact-item">
                         <span class="contact-icon">📱</span>
@@ -355,10 +355,10 @@
                         ` : ''}
 
                         ${project.links ? `
-                            <div class="cs-cta">
-                                ${project.links.live ? `<a href="${project.links.live}" class="cs-cta-btn" target="_blank" rel="noopener noreferrer">View Live Site →</a>` : ''}
-                                ${project.links.prototype ? `<a href="${project.links.prototype}" class="cs-cta-btn" target="_blank" rel="noopener noreferrer">View Prototype →</a>` : ''}
-                                ${project.links.github ? `<a href="${project.links.github}" class="cs-cta-btn secondary" target="_blank" rel="noopener noreferrer">View Code →</a>` : ''}
+                            <div class="cs-links">
+                                ${project.links.live ? `<a href="${project.links.live}" class="cs-link" target="_blank">View Live Site →</a>` : ''}
+                                ${project.links.prototype ? `<a href="${project.links.prototype}" class="cs-link" target="_blank">View Prototype →</a>` : ''}
+                                ${project.links.github ? `<a href="${project.links.github}" class="cs-link" target="_blank">View Code →</a>` : ''}
                             </div>
                         ` : ''}
                     </div>
@@ -438,10 +438,9 @@
 
                 // Additional solution images in bento grid
                 if (project.solution.images && project.solution.images.length > 1) {
-                    const layoutClass = project.solution.layout || 'cols-2';
                     html += `
                         <div class="cs-section full-width">
-                            <div class="cs-image-bento ${layoutClass}">
+                            <div class="cs-image-bento cols-2">
                                 ${project.solution.images.slice(1).map(img => `
                                     <div class="cs-bento-item">
                                         <img src="${img.src}" alt="${img.alt}">
@@ -473,32 +472,11 @@
                 `;
             }
 
-            // Style Guide
-            if (project.styleGuide) {
-                html += `
-                    <div class="cs-section">
-                        <div class="cs-section-label">06 — DESIGN SYSTEM</div>
-                        <h2 class="cs-section-title">${project.styleGuide.title}</h2>
-                        <p class="cs-text">${project.styleGuide.description}</p>
-                        
-                        ${project.styleGuide.images && project.styleGuide.images.length > 0 ? `
-                            <div class="cs-styleguide-grid">
-                                ${project.styleGuide.images.map(img => `
-                                    <div class="cs-styleguide-item">
-                                        <img src="${img.src}" alt="${img.alt}">
-                                    </div>
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-
             // Outcomes
             if (project.outcomes) {
                 html += `
                     <div class="cs-section">
-                        <div class="cs-section-label">07 — RESULTS</div>
+                        <div class="cs-section-label">06 — RESULTS</div>
                         <h2 class="cs-section-title">${project.outcomes.title}</h2>
                         <p class="cs-text">${project.outcomes.description}</p>
                         
