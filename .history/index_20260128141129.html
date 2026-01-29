@@ -105,6 +105,10 @@
                         <span class="contact-icon">📧</span>
                         leanale003@gmail.com
                     </a>
+                    <a href="tel:7789948400" class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        778 994 8400
+                    </a>
                     <a href="https://linkedin.com/in/leanale" class="contact-item" target="_blank">
                         <span class="contact-icon">💼</span>
                         linkedin.com/in/leanale
@@ -317,6 +321,7 @@
 
             const csContent = document.getElementById('csContent');
 
+            // Build case study HTML using side-by-side layout
             let html = `
                 <!-- Hero Section -->
                 <div class="cs-hero">
@@ -360,6 +365,7 @@
                 </div>
             `;
 
+            // Overview Section (Side by Side)
             if (project.overview) {
                 html += `
                     <div class="cs-section-sidebyside">
@@ -377,6 +383,7 @@
                 `;
             }
 
+            // Problem Section (Side by Side)
             if (project.problem) {
                 html += `
                     <div class="cs-section-sidebyside">
@@ -394,6 +401,7 @@
                 `;
             }
 
+            // Objectives
             if (project.objectives && project.objectives.length > 0) {
                 html += `
                     <div class="cs-section">

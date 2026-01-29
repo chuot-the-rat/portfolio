@@ -105,6 +105,10 @@
                         <span class="contact-icon">📧</span>
                         leanale003@gmail.com
                     </a>
+                    <a href="tel:7789948400" class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        778 994 8400
+                    </a>
                     <a href="https://linkedin.com/in/leanale" class="contact-item" target="_blank">
                         <span class="contact-icon">💼</span>
                         linkedin.com/in/leanale
@@ -317,6 +321,7 @@
 
             const csContent = document.getElementById('csContent');
 
+            // Build case study HTML using side-by-side layout
             let html = `
                 <!-- Hero Section -->
                 <div class="cs-hero">
@@ -360,6 +365,7 @@
                 </div>
             `;
 
+            // Overview Section (Side by Side)
             if (project.overview) {
                 html += `
                     <div class="cs-section-sidebyside">
@@ -377,6 +383,7 @@
                 `;
             }
 
+            // Problem Section (Side by Side)
             if (project.problem) {
                 html += `
                     <div class="cs-section-sidebyside">
@@ -394,6 +401,7 @@
                 `;
             }
 
+            // Objectives
             if (project.objectives && project.objectives.length > 0) {
                 html += `
                     <div class="cs-section">
@@ -411,6 +419,7 @@
                 `;
             }
 
+            // Solution Section (Side by Side)
             if (project.solution) {
                 html += `
                     <div class="cs-section-sidebyside">
@@ -427,6 +436,7 @@
                     </div>
                 `;
 
+                // Additional solution images in bento grid
                 if (project.solution.images && project.solution.images.length > 1) {
                     const layoutClass = project.solution.layout || 'cols-2';
                     html += `
@@ -443,6 +453,7 @@
                 }
             }
 
+            // Design Process
             if (project.designProcess && project.designProcess.length > 0) {
                 html += `
                     <div class="cs-section">
@@ -462,6 +473,7 @@
                 `;
             }
 
+            // Style Guide
             if (project.styleGuide) {
                 html += `
                     <div class="cs-section">
@@ -482,6 +494,7 @@
                 `;
             }
 
+            // Outcomes
             if (project.outcomes) {
                 html += `
                     <div class="cs-section">
@@ -505,13 +518,16 @@
 
             csContent.innerHTML = html;
 
+            // Show modal with scroll enabled
             modal.classList.add('visible');
             document.body.style.overflow = 'hidden';
             modal.scrollTo(0, 0);
 
+            // Initialize scroll animations
             initScrollAnimations();
         }
 
+        // Scroll animations using Intersection Observer
         function initScrollAnimations() {
             const sections = document.querySelectorAll('.cs-section, .cs-section-sidebyside');
 
