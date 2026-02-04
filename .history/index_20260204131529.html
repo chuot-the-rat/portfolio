@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leana Le - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prevent theme flash on load -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            document.body.classList.add('no-transition');
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="3" fill="currentColor" />
+            <path
+                d="M10 1v2M10 17v2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M1 10h2M17 10h2M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42"
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" fill="currentColor" />
+        </svg>
+    </button>
+
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <div class="profile-image">👋</div>
+                <h1>Leana Le</h1>
+                <p class="tagline">UI/UX Designer & Developer</p>
+                <p class="bio">
+                    Digital Design and Development student at BCIT with a passion for creating
+                    thoughtful user experiences through research-driven design and clean code.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="cta-buttons">
+                    <a href="Le_Leana_Resume.pdf" class="cta-btn primary" download>
+                        <span class="cta-icon">📄</span>
+                        Download Resume
+                    </a>
+                    <a href="mailto:your.email@example.com" class="cta-btn secondary">
+                        <span class="cta-icon">✉️</span>
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="section-title">Education</h3>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">2026</div>
+                        <div class="stat-label">BCIT Grad</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">DDD</div>
+                        <div class="stat-label">Diploma</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="section-title">Skills</h3>
+
+                <div class="skills-category">
+                    <div class="skills-category-label">UX Design</div>
+                    <div class="skills">
+                        <span class="skill-tag">User Research</span>
+                        <span class="skill-tag">Wireframing</span>
+                        <span class="skill-tag">Prototyping</span>
+                        <span class="skill-tag">User Testing</span>
+                        <span class="skill-tag">User Flows</span>
+                        <span class="skill-tag">Journey Mapping</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <div class="skills-category-label">UI Design</div>
+                    <div class="skills">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Typography</span>
+                        <span class="skill-tag">Color Theory</span>
+                        <span class="skill-tag">Accessibility</span>
+                        <span class="skill-tag">Responsive Design</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <div class="skills-category-label">Development</div>
+                    <div class="skills">
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Git/Github</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <div class="skills-category-label">Tools</div>
+                    <div class="skills">
+                        <span class="skill-tag">Adobe Illustrator</span>
+                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">After Effects</span>
+                        <span class="skill-tag">VS Code</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="section-title">Contact</h3>
+                <div class="contact-info">
+                    <a href="mailto:leanale003@gmail.com" class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        leanale003@gmail.com
+                    </a>
+                    <a href="https://linkedin.com/in/leanale" class="contact-item" target="_blank">
+                        <span class="contact-icon">💼</span>
+                        linkedin.com/in/leanale
+                    </a>
+                    <a href="https://github.com/chuot-the-rat" class="contact-item" target="_blank">
+                        <span class="contact-icon">💻</span>
+                        github.com/chuot-the-rat
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Canvas Area -->
+        <main class="canvas-area">
+            <div class="canvas-header">
+                <h2 class="canvas-title">Selected Work</h2>
+                <p class="canvas-subtitle">Click a project to view details</p>
+            </div>
+
+            <!-- Refined Project Grid -->
+            <section class="project-grid" aria-label="Project Gallery">
+                <a href="project-inklink.html" class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="projects/inklink/images/cover.jpg" alt="InkLink project cover"
+                            class="project-card__image" />
+                    </div>
+                    <div class="project-card__info">
+                        <h3 class="project-card__title">InkLink</h3>
+                        <p class="project-card__desc">Collaborative drawing app for remote teams</p>
+                    </div>
+                </a>
+                <a href="project-sidequest.html" class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="projects/sidequest/images/cover.jpg" alt="SideQuest project cover"
+                            class="project-card__image" />
+                    </div>
+                    <div class="project-card__info">
+                        <h3 class="project-card__title">SideQuest</h3>
+                        <p class="project-card__desc">Gamified productivity for students</p>
+                    </div>
+                </a>
+                <a href="project-prolog.html" class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="projects/prolog/images/cover.jpg" alt="ProLog project cover"
+                            class="project-card__image" />
+                    </div>
+                    <div class="project-card__info">
+                        <h3 class="project-card__title">ProLog</h3>
+                        <p class="project-card__desc">AI-powered meeting notes and summaries</p>
+                    </div>
+                </a>
+                <a href="project-fizzu.html" class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="projects/inklink/images/can1.jpg" alt="FIZZU can design"
+                            class="project-card__image" />
+                    </div>
+                    <div class="project-card__info">
+                        <h3 class="project-card__title">FIZZU</h3>
+                        <p class="project-card__desc">Beverage branding & packaging gallery</p>
+                    </div>
+                </a>
+            </section>
+        </main>
+    </div>
+
+    <!-- No modal or drag/drop JS needed for static grid -->
+</body>
+
+</html>

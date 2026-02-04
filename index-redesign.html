@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leana Le — UI/UX Designer & Developer</title>
+    <meta name="description" content="UI/UX Designer and Developer crafting thoughtful experiences through research-driven design and clean code.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles-redesign.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Leana Le</a>
+            <div class="nav-links">
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="/Le_Leana_Resume.pdf" class="nav-link nav-link--cta" target="_blank">Resume</a>
+            </div>
+        </div>
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-label">UI/UX Designer & Developer</p>
+                <h1 class="hero-title">
+                    Crafting thoughtful experiences through
+                    <span class="hero-highlight">research-driven design</span>
+                    and clean code
+                </h1>
+                <p class="hero-description">
+                    Currently studying Digital Design and Development at BCIT, graduating 2026
+                </p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn btn--primary" data-magnetic>View Work</a>
+                    <a href="#contact" class="btn btn--secondary" data-magnetic>Get in Touch</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="projects" id="work">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Selected Work</h2>
+                <p class="section-description">
+                    Case studies showcasing my process from research to final design
+                </p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Large Featured Project -->
+                <div class="bento-item bento-item--large">
+                    <a href="project-fintech.html" class="project-card">
+                        <div class="project-card-image">
+                            <img src="projects/fintech-app/images/overview.png" alt="FinTech Banking App interface" />
+                            <div class="project-card-overlay">
+                                <span class="project-card-cta">View Case Study →</span>
+                            </div>
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-card-meta">
+                                <span class="project-tag">UX/UI Design</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <h3 class="project-card-title">FinTech Banking App</h3>
+                            <p class="project-card-description">
+                                Reimagining mobile banking for Gen Z users through intuitive design and gamified savings
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Medium Project -->
+                <div class="bento-item bento-item--medium">
+                    <a href="project-elearning.html" class="project-card">
+                        <div class="project-card-image">
+                            <img src="projects/elearning-platform/images/overview.png" alt="E-Learning Platform" />
+                            <div class="project-card-overlay">
+                                <span class="project-card-cta">View Case Study →</span>
+                            </div>
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-card-meta">
+                                <span class="project-tag">UX/UI Design</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <h3 class="project-card-title">E-Learning Platform</h3>
+                            <p class="project-card-description">
+                                Making education accessible and engaging for everyone
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Medium Project -->
+                <div class="bento-item bento-item--medium">
+                    <a href="project-health.html" class="project-card">
+                        <div class="project-card-image">
+                            <img src="projects/health-tracker/images/overview.png" alt="Health Tracker App" />
+                            <div class="project-card-overlay">
+                                <span class="project-card-cta">View Case Study →</span>
+                            </div>
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-card-meta">
+                                <span class="project-tag">Mobile App</span>
+                                <span class="project-year">2023</span>
+                            </div>
+                            <h3 class="project-card-title">Health Tracker</h3>
+                            <p class="project-card-description">
+                                Personalized wellness tracking with AI-powered insights
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Small Project -->
+                <div class="bento-item bento-item--small">
+                    <a href="project-fizzu.html" class="project-card">
+                        <div class="project-card-image">
+                            <img src="projects/fizzu-soda/images/overview.png" alt="FIZZU Soda Can Series" />
+                            <div class="project-card-overlay">
+                                <span class="project-card-cta">View Case Study →</span>
+                            </div>
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-card-meta">
+                                <span class="project-tag">Packaging Design</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <h3 class="project-card-title">FIZZU Soda Series</h3>
+                            <p class="project-card-description">
+                                Bold flavours with graphic packaging
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Small Project -->
+                <div class="bento-item bento-item--small">
+                    <a href="project-design-system.html" class="project-card">
+                        <div class="project-card-image">
+                            <img src="projects/design-system/images/overview.png" alt="Design System" />
+                            <div class="project-card-overlay">
+                                <span class="project-card-cta">View Case Study →</span>
+                            </div>
+                        </div>
+                        <div class="project-card-content">
+                            <div class="project-card-meta">
+                                <span class="project-tag">Design System</span>
+                                <span class="project-year">2023</span>
+                            </div>
+                            <h3 class="project-card-title">Component Library</h3>
+                            <p class="project-card-description">
+                                Scalable design system for consistency
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content animate-on-scroll">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="about-text">
+                        <p>
+                            I'm a UI/UX Designer and Developer studying Digital Design and Development at BCIT. 
+                            I believe great design is invisible—it just works.
+                        </p>
+                        <p>
+                            My approach combines user research, thoughtful interface design, and front-end development 
+                            to create experiences that are both beautiful and functional. I'm passionate about accessibility, 
+                            clean code, and solving real problems for real people.
+                        </p>
+                        <p>
+                            When I'm not designing, you'll find me exploring Vancouver's coffee shops, 
+                            experimenting with new design tools, or contributing to open-source projects.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="about-skills animate-on-scroll">
+                    <div class="skills-section">
+                        <h3 class="skills-title">Design</h3>
+                        <div class="skills-grid">
+                            <span class="skill-pill">User Research</span>
+                            <span class="skill-pill">Wireframing</span>
+                            <span class="skill-pill">Prototyping</span>
+                            <span class="skill-pill">User Testing</span>
+                            <span class="skill-pill">Information Architecture</span>
+                            <span class="skill-pill">Interaction Design</span>
+                        </div>
+                    </div>
+
+                    <div class="skills-section">
+                        <h3 class="skills-title">Development</h3>
+                        <div class="skills-grid">
+                            <span class="skill-pill">HTML/CSS</span>
+                            <span class="skill-pill">JavaScript</span>
+                            <span class="skill-pill">React</span>
+                            <span class="skill-pill">Next.js</span>
+                            <span class="skill-pill">Python</span>
+                            <span class="skill-pill">Git</span>
+                        </div>
+                    </div>
+
+                    <div class="skills-section">
+                        <h3 class="skills-title">Tools</h3>
+                        <div class="skills-grid">
+                            <span class="skill-pill">Figma</span>
+                            <span class="skill-pill">Adobe Suite</span>
+                            <span class="skill-pill">VS Code</span>
+                            <span class="skill-pill">Notion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content animate-on-scroll">
+                <h2 class="section-title">Let's Work Together</h2>
+                <p class="contact-description">
+                    I'm currently looking for internship and entry-level opportunities in UX/UI design. 
+                    Feel free to reach out if you'd like to collaborate or just chat about design!
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:leanale003@gmail.com" class="contact-link" data-magnetic>
+                        <span class="contact-link-icon">✉️</span>
+                        <span class="contact-link-text">leanale003@gmail.com</span>
+                    </a>
+                    <a href="https://linkedin.com/in/leanale" class="contact-link" target="_blank" data-magnetic>
+                        <span class="contact-link-icon">💼</span>
+                        <span class="contact-link-text">LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/chuot-the-rat" class="contact-link" target="_blank" data-magnetic>
+                        <span class="contact-link-icon">💻</span>
+                        <span class="contact-link-text">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">© 2026 Leana Le. Designed & developed with care.</p>
+                <a href="#hero" class="footer-link">Back to top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

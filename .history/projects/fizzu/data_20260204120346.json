@@ -1,0 +1,115 @@
+{
+    "title": "FIZZU Soda Can Series",
+    "category": "Packaging Design · Illustration · Branding",
+    "year": "2024",
+    "tagline": "Bold, unexpected flavours brought to life through playful, graphic packaging",
+    "role": "Packaging Designer · Visual Designer",
+    "timeline": "4 weeks",
+    "team": "Solo Project",
+    "tools": ["Adobe Illustrator", "Adobe Photoshop", "Packaging Dielines"],
+    "links": {
+        "live": null,
+        "prototype": null,
+        "behance": null
+    },
+    "overview": {
+        "title": "Overview",
+        "description": "FIZZU is a concept soda brand featuring bold, unexpected flavours brought to life through playful, graphic packaging. The goal of this project was to design a cohesive can series that stands out on shelf while keeping each flavour instantly recognizable. The visual system uses strong colour blocking, simple illustrations, and flowing linework to suggest movement, fizz, and flavour. Each can follows the same structure, while distinct palettes and ingredient-inspired graphics differentiate Ponzu Zing, Kewpie Pop, and Ginger Zinger at a glance.",
+        "images": [
+            {
+                "src": "projects/fizzu/images/kewpie.jpg",
+                "alt": "FIZZU can series overview"
+            }
+        ]
+    },
+    "problem": {
+        "title": "The Challenge",
+        "description": "Create a cohesive soda brand that stands out in a crowded beverage market while communicating unique, Asian-inspired flavours through visual design alone. All designs needed to be built directly on a shrink sleeve can dieline, integrating required packaging elements such as nutritional information, barcode, bilingual text, and volume markings.",
+        "images": [
+            {
+                "src": "projects/fizzu/images/yuzu.jpg",
+                "alt": "Design challenge"
+            }
+        ]
+    },
+    "objectives": [
+        "Design a recognizable brand identity system",
+        "Create distinct visual language for each flavour",
+        "Integrate functional packaging requirements seamlessly",
+        "Ensure shelf impact and brand recognition"
+    ],
+    "solution": {
+        "title": "The Solution",
+        "description": "Developed a bold visual system using graphic illustrations, flowing linework, and strong color blocking. Each can features ingredient-inspired graphics that communicate flavour while maintaining brand consistency. The designs successfully balance playful illustration with professional packaging standards, demonstrating strong shelf presence.",
+        "layout": "cols-3",
+        "images": [
+            {
+                "src": "projects/fizzu/images/kewpie.jpg",
+                "alt": "Kewpie Pop can design"
+            },
+            {
+                "src": "projects/fizzu/images/yuzu.jpg",
+                "alt": "Ponzu Zing can design"
+            },
+            {
+                "src": "projects/fizzu/images/ginger.jpg",
+                "alt": "Ginger Zinger can design"
+            }
+        ]
+    },
+    "designProcess": [
+        {
+            "phase": "Research & Concept",
+            "title": "Understanding the Market",
+            "duration": "1 week",
+            "activities": [
+                "Market research",
+                "Flavour profile development",
+                "Visual direction"
+            ]
+        },
+        {
+            "phase": "Visual Design",
+            "title": "Creating the Brand",
+            "duration": "2 weeks",
+            "activities": [
+                "Logo design",
+                "Illustration development",
+                "Color exploration"
+            ]
+        },
+        {
+            "phase": "Production Design",
+            "title": "Finalizing Artwork",
+            "duration": "1 week",
+            "activities": [
+                "Dieline integration",
+                "Regulatory elements",
+                "Mockup creation"
+            ]
+        }
+    ],
+    "styleGuide": {
+        "title": "Design System",
+        "description": "A cohesive visual language that balances playfulness with sophistication. Each flavour maintains consistent brand architecture while using distinct palettes and ingredient-focused illustrations for strong differentiation.",
+        "images": []
+    },
+    "outcomes": {
+        "title": "Results",
+        "description": "Created a cohesive three-can series that successfully balances playful illustration with professional packaging standards. The designs demonstrate strong shelf presence while maintaining brand consistency and integrating all required packaging elements.",
+        "metrics": [
+            {
+                "value": "3",
+                "label": "Distinct Flavours"
+            },
+            {
+                "value": "100%",
+                "label": "Production Ready"
+            },
+            {
+                "value": "4 weeks",
+                "label": "Design Timeline"
+            }
+        ]
+    }
+}

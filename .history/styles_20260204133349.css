@@ -64,67 +64,33 @@
     filter: grayscale(0) brightness(1.04) contrast(1.08) saturate(1.1);
     opacity: 1;
 }
-
-/* Minimal, modern editorial grid inspired by jackiehu.design */
-.editorial-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem 2.5rem;
-    margin: 0 auto;
-    padding: 2.5rem 0 3.5rem;
-    background: none;
-    border-radius: 0;
-    box-shadow: none;
-}
-.editorial-grid .project-card {
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-radius: 1.2rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    overflow: hidden;
-    text-decoration: none;
-    color: #222;
-    transition: transform 0.38s cubic-bezier(0.4,0,0.2,1), box-shadow 0.38s cubic-bezier(0.4,0,0.2,1);
-    will-change: transform, box-shadow;
-}
-.editorial-grid .project-card.card-span-2 {
-    grid-column: span 2;
-}
-.editorial-grid .project-card__image-wrapper {
-    overflow: hidden;
-    aspect-ratio: 16/9;
-    background: #f3f3f3;
-}
-.editorial-grid .project-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: none;
-    opacity: 1;
-    transition: filter 0.38s cubic-bezier(0.4,0,0.2,1), opacity 0.38s cubic-bezier(0.4,0,0.2,1);
-}
 .editorial-grid .project-card__info {
-    padding: 1.2rem 1.5rem 1.5rem;
+    padding: 1.4rem 1.7rem 1.7rem;
+    opacity: 0.82;
+    transform: translateY(18px);
+    transition:
+        opacity 0.5s var(--ease-out),
+        transform 0.5s var(--ease-out);
+}
+.editorial-grid .project-card:hover .project-card__info,
+.editorial-grid .project-card:focus-visible .project-card__info {
     opacity: 1;
-    transform: none;
-    transition: none;
+    transform: translateY(0);
 }
 .editorial-grid .project-card__title {
     margin: 0 0 0.3em;
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.32rem;
+    font-weight: 700;
     letter-spacing: 0.01em;
+    color: var(--text-primary);
+    line-height: 1.18;
 }
 .editorial-grid .project-card__desc {
     margin: 0;
-    font-size: 1rem;
-    color: #666;
-}
-.editorial-grid .project-card:hover,
-.editorial-grid .project-card:focus-visible {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    font-size: 1.04rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    line-height: 1.5;
 }
 @media (max-width: 900px) {
     .editorial-grid {
@@ -137,6 +103,65 @@
         margin-top: 0 !important;
     }
 }
+.portfolio-header {
+    position: relative;
+    overflow: visible;
+    min-height: 320px;
+    padding-top: 4.5rem;
+    padding-bottom: 3.5rem;
+}
+.gradient-text {
+    background: linear-gradient(90deg, #1a1a1a 0%, #a18fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* text-fill-color: transparent; */
+    font-size: 3.1rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.18em;
+    line-height: 1.08;
+}
+.portfolio-header .portfolio-tagline {
+    font-size: 1.18rem;
+    color: #3d2c4a;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.01em;
+    /* Removed stray closing brace or invalid selector at line 1120 */
+    .portfolio-header .portfolio-bio {
+        font-size: 1.08rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        max-width: 520px;
+        text-align: center;
+    }
+    .floating-shape.shape-hero-bg {
+        position: absolute;
+        left: 50%;
+        top: 0.5rem;
+        width: 420px;
+        height: 180px;
+        background: linear-gradient(90deg, #f3f0ff 0%, #ffe3f2 100%);
+        border-radius: 50% 60% 40% 60% / 60% 40% 60% 50%;
+        opacity: 0.38;
+        filter: blur(32px);
+        transform: translateX(-50%) scale(1.08);
+        z-index: 0;
+    }
+    /* ==========================================================================
+     PROJECT GRID - PREMIUM HOVER ANIMATION
+     ========================================================================== */
+
+    .editorial-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem 2.5rem;
+        margin: 0 auto;
+        padding: 2.5rem 0 3.5rem;
+        position: relative;
+        z-index: 1;
+    }
 
     .editorial-grid .project-card {
         display: flex;

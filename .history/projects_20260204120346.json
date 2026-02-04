@@ -1,0 +1,43 @@
+[
+    {
+        "id": "fintech-app",
+        "folder": "projects/fintech-app",
+        "thumbnail": "projects/fintech-app/icon.svg",
+        "title": "FinTech App",
+        "category": "UX/UI Design",
+        "year": "2024"
+    },
+    {
+        "id": "elearning-platform",
+        "folder": "projects/elearning-platform",
+        "thumbnail": "projects/elearning-platform/icon.svg",
+        "title": "E-Learning Platform",
+        "category": "UX/UI Design",
+        "year": "2024"
+    },
+    {
+        "id": "health-tracker",
+        "folder": "projects/health-tracker",
+        "thumbnail": "projects/health-tracker/icon.svg",
+        "title": "Health Tracker",
+        "category": "Mobile App",
+        "year": "2023"
+    },
+    {
+        "id": "fizzu-soda-cans",
+        "folder": "projects/fizzu",
+        "thumbnail": "projects/fizzu/images/kewpie.jpg",
+        "title": "FIZZU Soda Can Series",
+        "category": "Packaging Design · Illustration · Branding",
+        "year": "2024",
+        "featured": true
+    },
+    {
+        "id": "design-system",
+        "folder": "projects/design-system",
+        "thumbnail": "projects/design-system/icon.svg",
+        "title": "Component Library",
+        "category": "Design System",
+        "year": "2023"
+    }
+]

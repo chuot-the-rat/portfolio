@@ -1,0 +1,192 @@
+{
+  "id": "fizzu-soda-cans",
+  "title": "FIZZU Soda Can Series",
+  "category": "Packaging Design · Illustration · Branding",
+  "year": "2024",
+  "featured": true,
+  "thumbnail": "fizzu-project/images/kewpie.jpg",
+  "hero_image": "fizzu-project/images/hero-all-cans.jpg",
+  
+  "meta": {
+    "role": "Packaging Designer · Visual Designer",
+    "timeline": "4 weeks",
+    "year": "2024",
+    "client": "Concept Project",
+    "team": "Solo Project"
+  },
+  
+  "tools": [
+    "Adobe Illustrator",
+    "Adobe Photoshop",
+    "Packaging Dielines"
+  ],
+  
+  "skills": [
+    "Packaging Design",
+    "Brand Identity",
+    "Illustration",
+    "Print Production"
+  ],
+  
+  "links": {
+    "behance": null,
+    "live": null,
+    "prototype": null
+  },
+  
+  "overview": {
+    "title": "Overview",
+    "description": "FIZZU is a concept soda brand featuring bold, unexpected flavours brought to life through playful, graphic packaging. The goal of this project was to design a cohesive can series that stands out on shelf while keeping each flavour instantly recognizable.",
+    "extended_description": "The visual system uses strong colour blocking, simple illustrations, and flowing linework to suggest movement, fizz, and flavour. Each can follows the same structure, while distinct palettes and ingredient-inspired graphics differentiate Ponzu Zing, Kewpie Pop, and Ginger Zinger at a glance. All designs were built directly on a shrink sleeve can dieline, integrating required packaging elements such as nutritional information, barcode, bilingual text, and volume markings. Final artwork was applied to realistic mockups to reflect real-world production and retail context."
+  },
+  
+  "problem": {
+    "title": "The Challenge",
+    "description": "Create a cohesive soda brand that stands out in a crowded beverage market while communicating unique, Asian-inspired flavours through visual design alone."
+  },
+  
+  "objectives": [
+    "Design a recognizable brand identity system",
+    "Create distinct visual language for each flavour",
+    "Integrate functional packaging requirements seamlessly",
+    "Ensure shelf impact and brand recognition"
+  ],
+  
+  "solution": {
+    "title": "The Solution",
+    "description": "Developed a bold visual system using graphic illustrations, flowing linework, and strong color blocking. Each can features ingredient-inspired graphics that communicate flavour while maintaining brand consistency.",
+    "approach": [
+      "Established consistent brand structure across all flavours",
+      "Used colour psychology to convey flavour profiles",
+      "Designed custom illustrations for each ingredient",
+      "Integrated all required packaging elements into cohesive design"
+    ]
+  },
+  
+  "flavours": [
+    {
+      "name": "Kewpie Pop",
+      "description": "A playful take on the iconic Japanese mayo bottle, with rich pink tones and flowing mayo-inspired graphics",
+      "color": "#C13048",
+      "background": "#E5B8CD",
+      "image": "fizzu-project/images/kewpie.jpg",
+      "details": {
+        "inspiration": "Kewpie mayonnaise bottle",
+        "graphics": "Flowing mayo bottles and abstract shapes",
+        "palette": "Rich pink with cream accents"
+      }
+    },
+    {
+      "name": "Ponzu Zing",
+      "description": "Fresh citrus-forward design featuring yuzu illustrations and vibrant yellow flows",
+      "color": "#F5C518",
+      "background": "#7EC8E3",
+      "image": "fizzu-project/images/yuzu.jpg",
+      "details": {
+        "inspiration": "Yuzu citrus and ponzu sauce",
+        "graphics": "Yuzu fruit slices and flowing lines",
+        "palette": "Bright yellow with sky blue"
+      }
+    },
+    {
+      "name": "Ginger Zinger",
+      "description": "Warm, earthy design with ginger root illustrations and golden flowing elements",
+      "color": "#D4A574",
+      "background": "#F4EAA8",
+      "image": "fizzu-project/images/ginger.jpg",
+      "details": {
+        "inspiration": "Fresh ginger root",
+        "graphics": "Ginger root illustrations with green onion accents",
+        "palette": "Golden yellow with tan and green"
+      }
+    }
+  ],
+  
+  "designSystem": {
+    "title": "Design System",
+    "description": "A cohesive visual language that balances playfulness with sophistication",
+    "elements": {
+      "typography": {
+        "headline": "Bold, custom display type",
+        "body": "Clean sans-serif for legibility"
+      },
+      "illustrations": {
+        "style": "Graphic, simplified forms",
+        "approach": "Ingredient-focused, recognizable"
+      },
+      "color": {
+        "strategy": "Distinct palette per flavour",
+        "application": "Strong contrast for shelf impact"
+      },
+      "composition": {
+        "structure": "Consistent brand architecture",
+        "flow": "Dynamic linework suggests effervescence"
+      }
+    }
+  },
+  
+  "process": [
+    {
+      "phase": "1",
+      "title": "Research & Concept",
+      "duration": "1 week",
+      "activities": [
+        "Market research of beverage brands",
+        "Flavour profile development",
+        "Mood boarding and visual direction"
+      ]
+    },
+    {
+      "phase": "2",
+      "title": "Visual Design",
+      "duration": "2 weeks",
+      "activities": [
+        "Logo and wordmark design",
+        "Illustration development",
+        "Color palette exploration",
+        "Composition studies"
+      ]
+    },
+    {
+      "phase": "3",
+      "title": "Production Design",
+      "duration": "1 week",
+      "activities": [
+        "Dieline integration",
+        "Regulatory elements placement",
+        "Final artwork preparation",
+        "Mockup creation"
+      ]
+    }
+  ],
+  
+  "outcomes": {
+    "title": "Results",
+    "description": "Created a cohesive three-can series that successfully balances playful illustration with professional packaging standards. The designs demonstrate strong shelf presence while maintaining brand consistency.",
+    "achievements": [
+      "Cohesive brand system across three distinct flavours",
+      "Professional integration of all packaging requirements",
+      "Strong visual differentiation at point of purchase",
+      "Production-ready artwork on accurate dielines"
+    ]
+  },
+  
+  "learnings": [
+    "Balancing creative expression with functional packaging constraints",
+    "Importance of color psychology in flavour communication",
+    "Technical requirements of shrink sleeve can production",
+    "Creating visual hierarchy within limited surface area"
+  ],
+  
+  "technical_details": {
+    "format": "355mL shrink sleeve can",
+    "elements": [
+      "Nutrition facts panel",
+      "Bilingual ingredients (English/French)",
+      "UPC barcode",
+      "Volume markings",
+      "Brand wordmark and logo"
+    ],
+    "production": "Print-ready dieline artwork"
+  }
+}
