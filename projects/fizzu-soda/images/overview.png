@@ -1,0 +1,18 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" rx="32" fill="url(#bg)"/>
+  <g>
+    <rect x="60" y="60" width="60" height="180" rx="20" fill="#FF8C42"/>
+    <rect x="170" y="60" width="60" height="180" rx="20" fill="#FF6B9D"/>
+    <rect x="280" y="60" width="60" height="180" rx="20" fill="#7ED957"/>
+    <text x="90" y="260" text-anchor="middle" fill="#fff" font-size="18" font-family="'Rubik',sans-serif">Ponzu Zing</text>
+    <text x="200" y="260" text-anchor="middle" fill="#fff" font-size="18" font-family="'Rubik',sans-serif">Kewpie Pop</text>
+    <text x="310" y="260" text-anchor="middle" fill="#fff" font-size="18" font-family="'Rubik',sans-serif">Ginger Zinger</text>
+  </g>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF8C42"/>
+      <stop offset="0.5" stop-color="#FF6B9D"/>
+      <stop offset="1" stop-color="#7ED957"/>
+    </linearGradient>
+  </defs>
+</svg>
