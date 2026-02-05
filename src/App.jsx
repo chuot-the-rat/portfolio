@@ -12,7 +12,7 @@ function App() {
                     element={<Home />}
                 />
                 <Route
-                    path="/project/:id"
+                    path="/projects/:id"
                     element={<ProjectDetail />}
                 />
             </Routes>

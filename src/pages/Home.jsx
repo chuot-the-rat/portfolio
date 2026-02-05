@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import ProjectCard from "../components/ProjectCard";
-import Header from "../components/Header";
 import PreviewPanel from "../components/PreviewPanel";
 import "./Home.css";
 
@@ -54,23 +53,76 @@ const Home = () => {
 
     return (
         <div className="home">
-            <Header />
-
             <main className="home-main">
                 <div className="container">
-                    {/* Hero Section */}
+                    {/* Hero Section with Integrated CTAs */}
                     <motion.section
                         className="home-hero"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
                     >
-                        <h1 className="home-hero-title">Leana Le</h1>
-                        <p className="home-hero-subtitle">
-                            UI/UX Designer & Developer creating thoughtful user
-                            experiences through research-driven design and clean
-                            code.
-                        </p>
+                        <div className="hero-content">
+                            <h1 className="home-hero-title">Leana Le</h1>
+                            <p className="home-hero-subtitle">
+                                UI/UX Designer & Developer creating thoughtful
+                                user experiences through research-driven design
+                                and clean code.
+                            </p>
+                        </div>
+
+                        <motion.div
+                            className="hero-ctas"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                                duration: 0.6,
+                                delay: 0.2,
+                                ease: [0.4, 0, 0.2, 1],
+                            }}
+                        >
+                            <a
+                                href="mailto:leanale003@gmail.com"
+                                className="hero-cta-link primary"
+                            >
+                                <span>Contact</span>
+                                <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 16 16"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M6 12l4-4-4-4"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </a>
+                            <a
+                                href="/resume.pdf"
+                                download
+                                className="hero-cta-link secondary"
+                            >
+                                <span>Download Resume</span>
+                                <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 16 16"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M8 2v10M12 8l-4 4-4-4"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </a>
+                        </motion.div>
                     </motion.section>
 
                     {/* Projects Grid */}

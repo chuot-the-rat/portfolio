@@ -2,19 +2,19 @@
     "title": "InkLink",
     "category": "Mobile App",
     "year": "2025",
-    "tagline": "BLAHEHF EISFJF eleifend",
+    "tagline": "Collaborative Creative Writing Platform",
     "previewLayout": "mobile",
-    "role": "UI/UX Designer & Developer",
-    "timeline": "8 weeks",
-    "team": "Solo Project",
-    "tools": ["Figma", "React Native", "Adobe Illustrator", "Framer"],
+    "role": "UI/UX Designer & Front-end Developer",
+    "timeline": "8–12 weeks",
+    "team": "Designers, Illustrators, Developers",
+    "tools": ["Figma", "Adobe Illustrator", "Framer"],
     "links": {
         "live": "https://inklink.framer.website/",
         "prototype": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup"
     },
     "overview": {
         "title": "Overview",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "description": "InkLink is a platform for collaborative storytelling, enabling writers to extend, remix, and contribute to shared narratives. Our goal was to create an experience that is social, playful, and editorial, supporting participation without overwhelming users. This project was team-based, with contributions across design, illustration, and front-end development.",
         "images": [
             {
                 "src": "projects/inklink/images/overview.svg",
@@ -22,26 +22,36 @@
             }
         ]
     },
-    "problem": {
-        "title": "The Challenge",
-        "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+    "research": {
+        "title": "Research & Ideation",
+        "description": "We began by understanding the audience: competitive analysis of existing writing tools, surveys with writers and creative communities, and workshop sessions to identify needs and pain points. Key insight: Writers wanted inspiration and connectivity, not just a blank canvas. Lo‑fi sketches and user journeys in Figma mapped early flows for story creation, contribution, and exploration.",
         "images": [
             {
                 "src": "projects/inklink/images/problem.svg",
-                "alt": "Problem statement"
+                "alt": "Research findings and early concepts"
             }
         ]
     },
-    "objectives": [
-        "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit",
-        "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet",
-        "Consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt",
-        "Ut labore et dolore magnam aliquam quaerat voluptatem"
-    ],
+    "lofi": {
+        "title": "Lo‑Fi Exploration & Early Concepts",
+        "description": "Wireframed navigation, story discovery, and contribution screens. Tested interaction logic with peers. Feedback highlighted confusion around entry points and contribution actions. Iteration: Simplified the flow so exploration is the default state and designed progressive reveal interactions to guide users.",
+        "images": []
+    },
+    "iterations": {
+        "title": "Iterations & Refinements",
+        "description": "Story Entry Clarity: Highlighted CTAs for joining stories with motion and scale. Hover Previews / Spatial Layout: Removed containers; visuals float in whitespace for editorial impact. Motion Refinement: Retuned animations for snappy, ease-in/ease-out pop-out interactions.",
+        "improvements": [
+            "Highlighted CTAs for joining stories with motion and scale",
+            "Removed containers; visuals float in whitespace",
+            "Retuned animations for snappy ease-in/ease-out interactions",
+            "Progressive reveal interactions to guide users"
+        ],
+        "images": []
+    },
     "solution": {
-        "title": "The Solution",
-        "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.",
-        "layout": "tablet-desktop",
+        "title": "Final Solution",
+        "description": "Editorial layout: asymmetry, whitespace, and modular sections. Interactive hover previews: images/videos float freely, with snappy motion. Team visuals: give personality and emphasize collaboration. Built in Framer, using Figma and Illustrator assets.",
+        "layout": "mobile",
         "images": [
             {
                 "src": "projects/inklink/images/solution-main.svg",
@@ -100,20 +110,20 @@
         }
     ],
     "outcomes": {
-        "title": "Results & Impact",
-        "description": "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue.",
+        "title": "Impact & Lessons Learned",
+        "description": "Successfully communicates collaborative creativity. Balances expressive visuals with usability. Shows strong team collaboration and iterative design process. Lessons Learned: Motion supports storytelling, not just decoration. Negative space and editorial layout enhance readability. Iterations from lo-fi to high-fi are essential for clarity and polish.",
         "metrics": [
             {
-                "value": "42%",
-                "label": "Increase in user engagement"
+                "value": "Social",
+                "label": "Collaborative experience"
             },
             {
-                "value": "87%",
-                "label": "Positive user feedback"
+                "value": "Playful",
+                "label": "Interactive hover previews"
             },
             {
-                "value": "3.2x",
-                "label": "Growth in daily active users"
+                "value": "Editorial",
+                "label": "Asymmetric layout"
             }
         ]
     }

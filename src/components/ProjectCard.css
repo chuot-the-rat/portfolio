@@ -11,27 +11,27 @@
 
 .project-card {
     position: relative;
-    padding: 2rem 1.5rem;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
+    padding: 3rem 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
     cursor: pointer;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
-/* Accent bar on hover */
+/* Bold accent line on hover */
 .project-card::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
+    left: -60px;
+    top: 50%;
+    width: 40px;
+    height: 1px;
     background: var(--color-accent);
     transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: right;
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .project-card:hover::before {
@@ -46,35 +46,43 @@
 }
 
 .project-card-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin: 0;
+    font-size: clamp(2rem, 3vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    margin: 0 0 var(--space-4) 0;
     color: var(--color-text);
-    transition: color 0.3s ease;
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+    line-height: 1.1;
+}
+
+.project-card:hover .project-card-title {
+    transform: translateX(8px);
 }
 
 .project-card-meta {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
+    align-items: baseline;
+    gap: var(--space-3);
+    font-size: 0.6875rem;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
 }
 
 .project-card-category {
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.75rem;
 }
 
 .project-card-separator {
-    opacity: 0.3;
+    opacity: 0.4;
+    font-weight: 300;
 }
 
 .project-card-year {
-    font-weight: 400;
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
 }
 
 /* Arrow Indicator */
