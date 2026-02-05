@@ -86,11 +86,7 @@
             "phase": "Ideation & Wireframing",
             "title": "Exploring Solutions",
             "duration": "3 weeks",
-            "activities": [
-                "Dashboard wireframes",
-                "User flows",
-                "Progress visualization"
-            ]
+            "activities": ["Dashboard wireframes", "User flows", "Progress visualization"]
         },
         {
             "phase": "Visual Design",
@@ -106,11 +102,7 @@
             "phase": "Prototyping & Testing",
             "title": "Validating Design",
             "duration": "2 weeks",
-            "activities": [
-                "Interactive prototyping",
-                "User testing",
-                "Iteration"
-            ]
+            "activities": ["Interactive prototyping", "User testing", "Iteration"]
         }
     ],
     "outcomes": {
