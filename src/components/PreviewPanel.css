@@ -1,0 +1,107 @@
+/* ==========================================================================
+   PREVIEW PANEL - Editorial Hover Preview
+   Lives in whitespace, not inside cards
+   ========================================================================== */
+
+.preview-panel {
+    position: sticky;
+    top: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-8);
+    background-color: var(--color-bg-secondary);
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
+    min-height: 400px;
+    max-height: calc(100vh - var(--space-24) * 2);
+    overflow: hidden;
+}
+
+/* Header */
+.preview-header {
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.preview-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+}
+
+.preview-meta {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+}
+
+/* Images */
+.preview-images {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+}
+
+.preview-images::-webkit-scrollbar {
+    width: 4px;
+}
+
+.preview-images::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.preview-images::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 2px;
+}
+
+.preview-image {
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-bg);
+    aspect-ratio: 16 / 10;
+}
+
+.preview-image-large {
+    aspect-ratio: 4 / 3;
+}
+
+.preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Tagline */
+.preview-tagline {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .preview-panel {
+        display: none; /* Hide on smaller screens - keep layout clean */
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .preview-panel,
+    .preview-header,
+    .preview-image,
+    .preview-tagline {
+        transition: none !important;
+        animation: none !important;
+    }
+}

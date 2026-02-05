@@ -1,6 +1,6 @@
 /* ==========================================================================
-   PROJECT CARD STYLES
-   Minimal, editorial design with premium hover interactions
+   PROJECT CARD STYLES - Minimal Editorial
+   Clean, text-focused cards for side-preview layout
    ========================================================================== */
 
 .project-card-link {
@@ -11,136 +11,93 @@
 
 .project-card {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    cursor: pointer;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-}
-
-/* Image Container */
-.project-card-image-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: var(--color-bg-secondary);
-}
-
-.project-card-image-wrapper {
-    width: 100%;
-    height: 100%;
-}
-
-.project-card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Hover Images - Reveal on hover */
-.project-card-hover-images {
-    position: absolute;
-    top: var(--space-4);
-    right: var(--space-4);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    pointer-events: none;
-}
-
-.project-card-hover-image {
-    width: 120px;
-    aspect-ratio: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: var(--color-bg);
-    box-shadow: var(--shadow-lg);
+    padding: 2rem 1.5rem;
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.project-card-hover-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Overlay */
-.project-card-overlay {
+/* Accent bar on hover */
+.project-card::before {
+    content: "";
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
-    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Content */
+.project-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Content Layout */
 .project-card-content {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
-    position: relative;
+    gap: 0.75rem;
 }
 
 .project-card-title {
-    font-size: var(--font-size-lg);
+    font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.02em;
-    color: var(--color-text);
     margin: 0;
+    color: var(--color-text);
+    transition: color 0.3s ease;
 }
 
 .project-card-meta {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    font-size: var(--font-size-sm);
+    gap: 0.75rem;
+    font-size: 0.875rem;
     color: var(--color-text-secondary);
 }
 
-.project-card-category,
+.project-card-category {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+}
+
+.project-card-separator {
+    opacity: 0.3;
+}
+
 .project-card-year {
     font-weight: 400;
 }
 
-.project-card-separator {
-    opacity: 0.5;
-}
-
-/* Hover Arrow Indicator */
+/* Arrow Indicator */
 .project-card-arrow {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--color-accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .project-card {
-        gap: var(--space-3);
-    }
-
-    .project-card-image-container {
-        aspect-ratio: 4 / 3;
-    }
-
-    .project-card-hover-images {
-        display: none; /* Hide hover images on mobile */
+        padding: 1.5rem 1rem;
     }
 
     .project-card-title {
-        font-size: var(--font-size-base);
+        font-size: 1.25rem;
     }
 
-    .project-card-meta {
-        font-size: var(--font-size-xs);
+    .project-card-arrow {
+        right: 1rem;
     }
 }
 
@@ -150,9 +107,7 @@
         transform: none !important;
     }
 
-    .project-card-image-wrapper,
-    .project-card-hover-image,
-    .project-card-overlay {
-        transform: none !important;
+    .project-card::before {
+        transition: none;
     }
 }

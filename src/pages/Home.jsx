@@ -1,12 +1,14 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import ProjectCard from "../components/ProjectCard";
 import Header from "../components/Header";
+import PreviewPanel from "../components/PreviewPanel";
 import "./Home.css";
 
 const Home = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [hoveredProject, setHoveredProject] = useState(null);
 
     useEffect(() => {
         // Load projects from JSON
@@ -101,21 +103,48 @@ const Home = () => {
                                 />
                             </div>
                         ) : (
-                            <div className="projects-grid">
-                                {projects.map((project, index) => (
-                                    <motion.div
-                                        key={project.id}
-                                        initial={{ opacity: 0, y: 30 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{
-                                            duration: 0.6,
-                                            delay: 0.1 * index,
-                                            ease: [0.4, 0, 0.2, 1],
-                                        }}
-                                    >
-                                        <ProjectCard project={project} />
-                                    </motion.div>
-                                ))}
+                            <div className="projects-layout">
+                                {/* Left: Clean Project Cards */}
+                                <div className="projects-list">
+                                    {projects.map((project, index) => (
+                                        <motion.div
+                                            key={project.id}
+                                            initial={{ opacity: 0, y: 30 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{
+                                                duration: 0.6,
+                                                delay: 0.1 * index,
+                                                ease: [0.4, 0, 0.2, 1],
+                                            }}
+                                        >
+                                            <ProjectCard
+                                                project={project}
+                                                onHover={() =>
+                                                    setHoveredProject(project)
+                                                }
+                                                onLeave={() =>
+                                                    setHoveredProject(null)
+                                                }
+                                                isHovered={
+                                                    hoveredProject?.id ===
+                                                    project.id
+                                                }
+                                            />
+                                        </motion.div>
+                                    ))}
+                                </div>
+
+                                {/* Right: Preview Panel in Whitespace */}
+                                <div className="preview-area">
+                                    <AnimatePresence mode="wait">
+                                        {hoveredProject && (
+                                            <PreviewPanel
+                                                key={hoveredProject.id}
+                                                project={hoveredProject}
+                                            />
+                                        )}
+                                    </AnimatePresence>
+                                </div>
                             </div>
                         )}
                     </section>
