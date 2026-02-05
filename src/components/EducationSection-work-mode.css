@@ -72,14 +72,15 @@
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    
+
     /* Subtle floating animation */
     animation: edu-float 4s ease-in-out infinite;
     animation-delay: calc(var(--entry-delay, 0ms) * 0.5);
 }
 
 @keyframes edu-float {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0px);
     }
     50% {
@@ -218,7 +219,7 @@
     .mode-work .education-content {
         animation: none !important;
     }
-    
+
     .mode-work .education-content:hover {
         transform: none !important;
     }
