@@ -1,0 +1,50 @@
+/* ==========================================================================
+   PROJECT CARD - Bold Editorial Typography with Syne
+   Mode-aware: Work / Chaos / Clean variants
+   ========================================================================== */
+
+.project-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+}
+
+.project-card {
+    position: relative;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-border-light);
+    cursor: pointer;
+    overflow: visible;
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+/* CHAOS MODE - Random offsets */
+.mode-chaos .project-card:nth-child(1) {
+    transform: translateX(-2%) rotate(-0.5deg);
+}
+
+.mode-chaos .project-card:nth-child(2) {
+    transform: translateX(3%) rotate(0.3deg);
+}
+
+.mode-chaos .project-card:nth-child(3) {
+    transform: translateX(-1%) rotate(0.2deg);
+}
+
+/* CLEAN MODE - Perfect alignment */
+.mode-clean .project-card {
+    border-bottom-color: transparent;
+}
+
+.project-card:last-child {
+    border-bottom: none;
+}
+
+/* Bold accent indicator on hover */
+.project-card::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * clamp(1.5rem, 5vw, 4rem));\n    top: 50%;\n    width: clamp(20px, 3vw, 32px);\n    height: 1px;\n    background: var(--color-text);\n    transform: scaleX(0) translateY(-50%);\n    transform-origin: right;\n    transition: transform var(--duration-base) var(--ease-smooth);\n}\n\n.project-card:hover::before {\n    transform: scaleX(1) translateY(-50%);\n}\n\n.project-card:hover {\n    border-bottom-color: var(--color-border);\n}\n\n/* Content Layout */\n.project-card-content {\n    display: flex;\n    flex-direction: column;\n    gap: var(--space-4);\n}\n\n.project-card-title {\n    font-size: clamp(2.25rem, 5vw, 4.5rem);\n    font-weight: 300;\n    letter-spacing: -0.04em;\n    margin: 0;\n    color: var(--color-text);\n    transition:\n        transform var(--duration-base) var(--ease-smooth),\n        letter-spacing var(--duration-base) var(--ease-smooth);\n    line-height: 1;\n}\n\n.project-card:hover .project-card-title {\n    transform: translateX(clamp(4px, 1vw, 12px));\n    letter-spacing: -0.045em;\n}\n\n.project-card-meta {\n    display: flex;\n    align-items: baseline;\n    gap: var(--space-3);\n    font-size: 0.6875rem;\n    color: var(--color-text-tertiary);\n    text-transform: uppercase;\n    letter-spacing: 0.15em;\n    margin-top: var(--space-2);\n}\n\n.project-card-category {\n    font-weight: 600;\n}\n\n.project-card-separator {\n    opacity: 0.3;\n    font-weight: 300;\n}\n\n.project-card-year {\n    font-weight: 400;\n    font-variant-numeric: tabular-nums;\n}\n\n/* Responsive Typography */\n@media (max-width: 768px) {\n    .project-card {\n        padding: 2.5rem 0;\n    }\n\n    .project-card-title {\n        font-size: 2rem;\n    }\n\n    .project-card::before {\n        display: none;\n    }\n}\n\n/* Accessibility - Reduced Motion */\n@media (prefers-reduced-motion: reduce) {\n    .project-card,\n    .project-card-title,\n    .project-card::before {\n        transition: none !important;\n        transform: none !important;\n    }\n}

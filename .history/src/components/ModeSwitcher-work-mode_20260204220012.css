@@ -1,0 +1,42 @@
+/* WORK MODE - Technical ModeSwitcher */
+
+.mode-work .mode-switcher {
+    background: rgba(28, 25, 23, 0.95);
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    padding: 1rem;
+    backdrop-filter: blur(12px);
+}
+
+.mode-work .mode-switcher-label {
+    color: var(--color-text-tertiary);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.mode-work .mode-button {
+    border-radius: 0;
+    border: 1px solid var(--color-border);
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-work .mode-button:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-1px);
+}
+
+.mode-work .mode-button.active {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+}
+
+.mode-work .mode-button-indicator {
+    display: none;
+}
