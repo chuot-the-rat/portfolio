@@ -78,6 +78,32 @@
     color: var(--color-text);
 }
 
+/* Quiet CTA Buttons */
+.header-cta-link {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.header-cta-link:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-1px);
+}
+
+.header-cta-link-secondary {
+    background-color: var(--color-bg-secondary);
+}
+
+.header-cta-link-secondary:hover {
+    background-color: var(--color-border);
+}
+
 .header-nav-link::after {
     content: "";
     position: absolute;
@@ -128,6 +154,11 @@
     }
 
     .header-nav-link {
+        font-size: var(--font-size-xs);
+    }
+
+    .header-cta-link {
+        padding: 0.375rem 0.75rem;
         font-size: var(--font-size-xs);
     }
 

@@ -63,48 +63,38 @@
     color: var(--color-text-tertiary);
 }
 
-/* Projects Grid - Editorial Two-Column Layout */
-.projects-layout {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: var(--space-12);
+/* Projects Container - For Absolute Positioning */
+.projects-container {
+    position: relative;
     margin-top: var(--space-8);
-    align-items: start;
 }
 
+/* Projects List - Clean, Single Column */
 .projects-list {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    max-width: 640px;
 }
 
-.preview-area {
-    position: sticky;
-    top: var(--space-24);
-    height: fit-content;
+/* Absolute Positioned Preview Area */
+.preview-area-absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    min-height: 100vh;
+    pointer-events: none; /* Let clicks pass through */
 }
 
-/* Original grid layout for fallback */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: var(--space-16);
-    margin-top: var(--space-8);
-}
-
-/* Responsive - Stack on smaller screens */
+/* Responsive */
 @media (max-width: 1024px) {
-    .projects-layout {
-        grid-template-columns: 1fr;
-        gap: var(--space-8);
-    }
-
-    .preview-area {
-        display: none; /* Hide preview panel on tablets/mobile */
-    }
-
     .projects-list {
-        gap: var(--space-6);
+        max-width: 100%;
+    }
+
+    .preview-area-absolute {
+        display: none;
     }
 }
 

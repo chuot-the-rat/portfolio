@@ -42,11 +42,20 @@ const Header = () => {
                         >
                             About
                         </a>
+
+                        {/* Quiet CTA Buttons */}
                         <a
                             href="mailto:leanale003@gmail.com"
-                            className="header-nav-link"
+                            className="header-cta-link"
                         >
                             Contact
+                        </a>
+                        <a
+                            href="/resume.pdf"
+                            download
+                            className="header-cta-link header-cta-link-secondary"
+                        >
+                            Download Resume
                         </a>
 
                         <button

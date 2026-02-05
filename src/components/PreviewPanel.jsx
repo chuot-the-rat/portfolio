@@ -2,111 +2,173 @@ import { motion } from "framer-motion";
 import "./PreviewPanel.css";
 
 /**
- * PreviewPanel Component
+ * PreviewPanel - Jackie Hu Free-Floating Media
  *
- * Editorial hover preview panel that appears in whitespace
- * when a project card is hovered. Displays project images
- * with calm, intentional motion.
+ * Media exists directly in whitespace - no containers, cards, or backgrounds.
+ * Snappy, confident motion. Intentional positioning.
  *
  * Design Philosophy:
- * - Lives outside the card, not inside
- * - Emerges into whitespace, doesn't overlay content
- * - Slower, more deliberate motion than card hover
- * - Staggered image reveals for visual interest
+ * - Media floats freely in space, not boxed
+ * - Quick, confident animations
+ * - Absolute positioning for intentional layout
+ * - Support images and videos
+ * - Prevent accidental overlap
  */
 
 const PreviewPanel = ({ project }) => {
-    // Gather preview images from project data
-    const previewImages = [
+    // Determine layout type
+    const layoutType =
+        project.previewLayout ||
+        (project.category?.toLowerCase().includes("mobile")
+            ? "mobile"
+            : project.category?.toLowerCase().includes("web")
+              ? "desktop"
+              : "mixed");
+
+    // Gather preview media (images and videos)
+    const previewMedia = [
         ...(project.hoverImages || []),
-        ...(project.solution?.images?.slice(0, 2) || []),
+        ...(project.solution?.images?.slice(0, 3) || []),
         ...(project.overview?.images?.slice(0, 1) || []),
     ]
         .filter(Boolean)
-        .slice(0, 3); // Max 3 images
+        .slice(0, 3); // Max 3 items to prevent overlap
+
+    // Snappy pop-out animation - fast and confident
+    const getMediaVariants = (index) => ({
+        hidden: {
+            opacity: 0,
+            x: 60 + index * 10,
+            y: -20 + index * 15,
+        },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: {
+                duration: 0.25, // Snappy
+                delay: index * 0.08,
+                ease: [0.2, 0, 0.2, 1],
+            },
+        },
+        exit: {
+            opacity: 0,
+            x: 30,
+            transition: {
+                duration: 0.2, // Fast exit
+                ease: [0.2, 0, 0.2, 1],
+            },
+        },
+    });
+
+    // Intentional positioning per layout type
+    const getMediaPosition = (index, total) => {
+        if (layoutType === "mobile") {
+            return {
+                top: `${40 + index * 180}px`,
+                right: `${60 + (index % 2) * 40}px`,
+            };
+        } else if (layoutType === "desktop") {
+            return {
+                top: `${80 + index * 220}px`,
+                right: "40px",
+            };
+        } else {
+            // Mixed: intentional composition
+            const positions = [
+                { top: "60px", right: "80px" },
+                { top: "280px", right: "40px" },
+                { top: "140px", right: "340px" },
+            ];
+            return positions[index] || positions[0];
+        }
+    };
 
     return (
-        <motion.div
-            className="preview-panel"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{
-                duration: 0.5,
-                ease: [0.4, 0, 0.2, 1],
-            }}
-        >
-            {/* Project Title Context */}
-            <motion.div
-                className="preview-header"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-            >
-                <h3 className="preview-title">{project.title}</h3>
-                <p className="preview-meta">
-                    {project.category} • {project.year}
-                </p>
-            </motion.div>
+        <>
+            {/* Free-Floating Media - No Container */}
+            {previewMedia.length > 0 ? (
+                previewMedia.map((media, index) => {
+                    const isVideo =
+                        media.type === "video" || media.src?.endsWith(".mp4");
+                    const position = getMediaPosition(
+                        index,
+                        previewMedia.length,
+                    );
 
-            {/* Staggered Image Reveals */}
-            <div className="preview-images">
-                {previewImages.length > 0 ? (
-                    previewImages.map((img, index) => (
+                    // Size based on layout
+                    const size =
+                        layoutType === "mobile"
+                            ? { width: "200px", height: "auto" }
+                            : layoutType === "desktop"
+                              ? { width: "380px", height: "auto" }
+                              : index === 0
+                                ? { width: "320px", height: "auto" }
+                                : { width: "240px", height: "auto" };
+
+                    return (
                         <motion.div
                             key={index}
-                            className="preview-image"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{
-                                duration: 0.6,
-                                delay: 0.2 + index * 0.15, // Stagger: 200ms, 350ms, 500ms
-                                ease: [0.4, 0, 0.2, 1],
+                            className="preview-media-float"
+                            variants={getMediaVariants(index)}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            style={{
+                                position: "absolute",
+                                ...position,
+                                ...size,
+                                zIndex: 10 + index,
                             }}
                         >
-                            <img
-                                src={img.src || img}
-                                alt={
-                                    img.alt ||
-                                    `${project.title} preview ${index + 1}`
-                                }
-                                loading="lazy"
-                            />
+                            {isVideo ? (
+                                <video
+                                    src={media.src || media}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="preview-video"
+                                />
+                            ) : (
+                                <img
+                                    src={media.src || media}
+                                    alt={
+                                        media.alt ||
+                                        `${project.title} preview ${index + 1}`
+                                    }
+                                    loading="lazy"
+                                    className="preview-image"
+                                />
+                            )}
                         </motion.div>
-                    ))
-                ) : (
-                    // Fallback: Show main thumbnail if no preview images
-                    <motion.div
-                        className="preview-image preview-image-large"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            duration: 0.6,
-                            delay: 0.2,
-                            ease: [0.4, 0, 0.2, 1],
-                        }}
-                    >
-                        <img
-                            src={project.thumbnail}
-                            alt={project.title}
-                            loading="lazy"
-                        />
-                    </motion.div>
-                )}
-            </div>
-
-            {/* Optional: Brief Project Description */}
-            {project.tagline && (
-                <motion.p
-                    className="preview-tagline"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 0.4 }}
+                    );
+                })
+            ) : (
+                // Fallback: Single thumbnail
+                <motion.div
+                    className="preview-media-float"
+                    variants={getMediaVariants(0)}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    style={{
+                        position: "absolute",
+                        top: "80px",
+                        right: "60px",
+                        width: "340px",
+                        zIndex: 10,
+                    }}
                 >
-                    {project.tagline}
-                </motion.p>
+                    <img
+                        src={project.thumbnail}
+                        alt={project.title}
+                        loading="lazy"
+                        className="preview-image"
+                    />
+                </motion.div>
             )}
-        </motion.div>
+        </>
     );
 };
 
