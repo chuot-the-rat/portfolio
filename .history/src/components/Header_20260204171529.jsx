@@ -42,7 +42,7 @@ const Header = () => {
                         >
                             About
                         </a>
-
+                        
                         {/* Quiet CTA Buttons */}
                         <a
                             href="mailto:leanale003@gmail.com"

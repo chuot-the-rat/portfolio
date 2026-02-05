@@ -103,8 +103,8 @@ const Home = () => {
                                 />
                             </div>
                         ) : (
-                            <div className="projects-container">
-                                {/* Clean Project Cards */}
+                            <div className="projects-layout">
+                                {/* Left: Clean Project Cards */}
                                 <div className="projects-list">
                                     {projects.map((project, index) => (
                                         <motion.div
@@ -134,8 +134,8 @@ const Home = () => {
                                     ))}
                                 </div>
 
-                                {/* Absolute Positioned Preview Area - Free-Floating Media */}
-                                <div className="preview-area-absolute">
+                                {/* Right: Preview Panel in Whitespace */}
+                                <div className="preview-area">
                                     <AnimatePresence mode="wait">
                                         {hoveredProject && (
                                             <PreviewPanel

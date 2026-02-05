@@ -103,8 +103,8 @@ const Home = () => {
                                 />
                             </div>
                         ) : (
-                            <div className="projects-container">
-                                {/* Clean Project Cards */}
+                            <div className="projects-layout">
+                                {/* Left: Clean Project Cards */}
                                 <div className="projects-list">
                                     {projects.map((project, index) => (
                                         <motion.div
@@ -134,8 +134,8 @@ const Home = () => {
                                     ))}
                                 </div>
 
-                                {/* Absolute Positioned Preview Area - Free-Floating Media */}
-                                <div className="preview-area-absolute">
+                                {/* Right: Preview Panel in Whitespace */}
+                                <div className="preview-area">
                                     <AnimatePresence mode="wait">
                                         {hoveredProject && (
                                             <PreviewPanel
@@ -148,6 +148,37 @@ const Home = () => {
                             </div>
                         )}
                     </section>
+
+                    {/* CTA Section - Minimal & Understated */}
+                    <motion.section
+                        className="home-cta"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                    >
+                        <div className="cta-content">
+                            <h2 className="cta-title">Let's work together</h2>
+                            <p className="cta-description">
+                                Interested in collaborating or have a project in mind?
+                            </p>
+                            <div className="cta-actions">
+                                <a
+                                    href="mailto:leanale003@gmail.com"
+                                    className="cta-button cta-button-primary"
+                                >
+                                    Contact Me
+                                </a>
+                                <a
+                                    href="/resume.pdf"
+                                    download
+                                    className="cta-button cta-button-secondary"
+                                >
+                                    Download Resume
+                                </a>
+                            </div>
+                        </div>
+                    </motion.section>
                 </div>
             </main>
 
