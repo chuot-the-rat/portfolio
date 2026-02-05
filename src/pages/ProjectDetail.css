@@ -426,7 +426,9 @@
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.08);
     transform-origin: center;
 }
 
@@ -452,6 +454,7 @@
 }
 
 /* Hover Preview Gallery - Asymmetric Grid */
+.hover-preview-gallery {
     border-bottom: none;
 }
 
@@ -484,7 +487,9 @@
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
     transform-origin: center;
     cursor: pointer;
 }
@@ -492,7 +497,11 @@
 .gallery-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(33, 33, 33, 0.02) 0%, rgba(33, 33, 33, 0.05) 100%);
+    background: linear-gradient(
+        135deg,
+        rgba(33, 33, 33, 0.02) 0%,
+        rgba(33, 33, 33, 0.05) 100%
+    );
     pointer-events: none;
     z-index: 1;
 }

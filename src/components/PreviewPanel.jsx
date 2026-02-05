@@ -1,141 +1,174 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useMode, MODES } from "../context/ModeContext";
 import "./PreviewPanel.css";
 
 /**
- * PreviewPanel - Jackie Hu Free-Floating Media with Interactive Hover Details
+ * PreviewPanel - Mode-Specific Hover System
  *
- * Media exists directly in whitespace - no containers, cards, or backgrounds.
- * Snappy, confident motion. Intentional positioning.
- * Enhanced with hover details (metadata fade in) for editorial micro-interactions.
+ * Work Mode: Floating holographic panels with sci-fi aesthetic
+ * - Semi-transparent cyan/blue gradient
+ * - Edge glow effects
+ * - Vertical oscillation (floating effect)
+ * - Glow pulse animation
+ * - Quick snap entry/exit
+ * - Duration: 200-250ms
+ * - Easing: cubic-bezier(0.25, 0.8, 0.25, 1) for sci-fi snap
  *
- * Design Philosophy:
- * - Media floats freely in space, not boxed
- * - Quick, confident animations
- * - Absolute positioning for intentional layout
- * - Support images and videos
- * - Prevent accidental overlap
- * - Interactive hover details with gentle fade-in
+ * Clean/Chaos Modes: Original side-reveal system
+ * - Sharp clipped masks and motion
+ * - Smooth transitions
+ * - Technical easing
  */
 
-const PreviewPanel = ({ project }) => {
+const PreviewPanel = ({ project, hoverPattern = "pattern-a" }) => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const { mode } = useMode();
+    const isWorkMode = mode === MODES.WORK;
 
-    // Determine layout type
-    const layoutType =
-        project.previewLayout ||
-        (project.category?.toLowerCase().includes("mobile")
-            ? "mobile"
-            : project.category?.toLowerCase().includes("web")
-              ? "desktop"
-              : "mixed");
-
-    // Gather preview media (images and videos)
+    // Gather preview media
     const previewMedia = [
         ...(project.hoverImages || []),
         ...(project.solution?.images?.slice(0, 3) || []),
         ...(project.overview?.images?.slice(0, 1) || []),
     ]
         .filter(Boolean)
-        .slice(0, 3); // Max 3 items to prevent overlap
+        .slice(0, 3);
 
-    // Bold diagonal pop-out - editorial fashion feel with subtle skew
-    const getMediaVariants = (index) => ({
-        hidden: {
-            opacity: 0,
-            x: 80 + index * 20,
-            y: -40 + index * 25,
-            rotate: 2 + index * 1,
-            skewY: 1,
-        },
-        visible: {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            rotate: 0,
-            skewY: 0,
-            transition: {
-                duration: 0.3,
-                delay: index * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-            },
-        },
-        exit: {
-            opacity: 0,
-            x: 40,
-            y: -20,
-            rotate: -2,
-            skewY: -1,
-            transition: {
-                duration: 0.2,
-                ease: [0.6, 0, 0.8, 1],
-            },
-        },
-    });
+    // Holographic panel variants for Work Mode
+    const getHolographicVariants = (index, pattern) => {
+        const baseDelay = pattern === "pattern-b" ? index * 0.06 : 0;
 
-    // Editorial diagonal positioning - asymmetric and bold
-    const getMediaPosition = (index, total) => {
-        if (layoutType === "mobile") {
+        return {
+            hidden: {
+                opacity: 0,
+                x: 80,
+                scale: 0.95,
+            },
+            visible: {
+                opacity: 0.95,
+                x: 0,
+                scale: 1.02,
+                transition: {
+                    duration: 0.22,
+                    delay: baseDelay,
+                    ease: [0.25, 0.8, 0.25, 1], // Sci-fi snap
+                },
+            },
+            exit: {
+                opacity: 0,
+                x: 40,
+                scale: 0.98,
+                transition: {
+                    duration: 0.16,
+                    ease: [0.25, 0.8, 0.25, 1],
+                },
+            },
+        };
+    };
+
+    // Technical side-reveal variants for Clean/Chaos modes
+    const getMediaVariants = (index, pattern) => {
+        const baseDelay = pattern === "pattern-b" ? index * 0.06 : 0;
+
+        return {
+            hidden: {
+                opacity: 0,
+                x: 120,
+                clipPath: "inset(0 100% 0 0)",
+            },
+            visible: {
+                opacity: 0.9,
+                x: 0,
+                clipPath: "inset(0 0% 0 0)",
+                transition: {
+                    duration: pattern === "pattern-c" ? 0.24 : 0.2,
+                    delay: baseDelay,
+                    ease: [0.2, 0.8, 0.2, 1],
+                },
+            },
+            exit: {
+                opacity: 0,
+                x: 60,
+                clipPath: "inset(0 100% 0 0)",
+                transition: {
+                    duration: 0.18,
+                    ease: [0.2, 0.8, 0.2, 1],
+                },
+            },
+        };
+    };
+
+    // Technical positioning - system monitor layout
+    const getMediaPosition = (index, pattern) => {
+        if (pattern === "pattern-a") {
+            // Single large reveal
             return {
-                top: `${60 + index * 200}px`,
-                right: `${40 + (index % 2) * 80}px`,
+                top: "120px",
+                right: "60px",
             };
-        } else if (layoutType === "desktop") {
+        } else if (pattern === "pattern-b") {
+            // Staggered stack
             return {
-                top: `${120 + index * 280}px`,
-                right: `${20 + index * 30}px`,
+                top: `${100 + index * 180}px`,
+                right: `${40 + index * 30}px`,
+            };
+        } else if (pattern === "pattern-c") {
+            // Vertical strip (mobile)
+            return {
+                top: "80px",
+                right: "80px",
             };
         } else {
-            // Mixed: magazine-like composition with diagonal offset
-            const positions = [
-                { top: "80px", right: "100px" },
-                { top: "320px", right: "20px" },
-                { top: "180px", right: "380px" },
-            ];
-            return positions[index] || positions[0];
+            // Pattern D - Video
+            return {
+                top: "140px",
+                right: "50px",
+            };
+        }
+    };
+
+    // Technical sizing based on pattern
+    const getMediaSize = (pattern) => {
+        if (pattern === "pattern-a") {
+            return { width: "520px", height: "auto" };
+        } else if (pattern === "pattern-b") {
+            return { width: "360px", height: "auto" };
+        } else if (pattern === "pattern-c") {
+            return { width: "280px", height: "auto" };
+        } else {
+            return { width: "480px", height: "auto" };
         }
     };
 
     return (
         <>
-            {/* Free-Floating Media - No Container */}
+            {/* Side-Reveal Media System */}
             {previewMedia.length > 0 ? (
                 previewMedia.map((media, index) => {
-                    const isVideo =
-                        media.type === "video" || media.src?.endsWith(".mp4");
-                    const position = getMediaPosition(
-                        index,
-                        previewMedia.length,
-                    );
+                    // Only show first image for pattern A, multiple for pattern B
+                    if (hoverPattern === "pattern-a" && index > 0) return null;
+                    if (hoverPattern === "pattern-c" && index > 0) return null;
+                    if (hoverPattern === "pattern-d" && index > 0) return null;
 
-                    // Bold sizing for editorial impact
-                    const size =
-                        layoutType === "mobile"
-                            ? { width: "240px", height: "auto" }
-                            : layoutType === "desktop"
-                              ? { width: "480px", height: "auto" }
-                              : index === 0
-                                ? { width: "420px", height: "auto" }
-                                : { width: "300px", height: "auto" };
+                    const isVideo =
+                        hoverPattern === "pattern-d" ||
+                        media.type === "video" ||
+                        media.src?.endsWith(".mp4");
+
+                    const position = getMediaPosition(index, hoverPattern);
+                    const size = getMediaSize(hoverPattern);
 
                     return (
                         <motion.div
                             key={index}
-                            className="preview-media-float"
-                            variants={getMediaVariants(index)}
+                            className={`preview-media-reveal ${hoverPattern}`}
+                            variants={getMediaVariants(index, hoverPattern)}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
-                            whileHover={{
-                                scale: 1.02,
-                                rotate: index % 2 === 0 ? -0.5 : 0.5,
-                                transition: {
-                                    duration: 0.3,
-                                    ease: [0.16, 1, 0.3, 1],
-                                },
-                            }}
                             style={{
                                 position: "absolute",
                                 ...position,
@@ -143,110 +176,117 @@ const PreviewPanel = ({ project }) => {
                                 zIndex: 10 + index,
                             }}
                         >
-                            {/* Interactive hover detail overlay */}
-                            <AnimatePresence>
-                                {hoveredIndex === index && (
-                                    <motion.div
-                                        className="preview-hover-detail"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.25 }}
-                                    >
-                                        <span className="preview-detail-label">
-                                            {project.category} · {project.year}
-                                        </span>
-                                    </motion.div>
+                            {/* Hard edge mask container */}
+                            <div className="preview-mask-container">
+                                {isVideo ? (
+                                    <video
+                                        src={media.src || media}
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="preview-video"
+                                    />
+                                ) : (
+                                    <img
+                                        src={media.src || media}
+                                        alt={`${project.title} preview ${index + 1}`}
+                                        loading="lazy"
+                                        className="preview-image"
+                                    />
                                 )}
-                            </AnimatePresence>
+                            </div>
 
-                            {/* Subtle color overlay on hover */}
+                            {/* System state indicator */}
                             <motion.div
-                                className="preview-color-overlay"
+                                className="preview-state-label"
                                 initial={{ opacity: 0 }}
                                 animate={{
-                                    opacity: hoveredIndex === index ? 1 : 0,
+                                    opacity: hoveredIndex === index ? 0.6 : 0,
                                 }}
-                                transition={{ duration: 0.3 }}
-                            />
-
-                            {isVideo ? (
-                                <video
-                                    src={media.src || media}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    className="preview-video"
-                                />
-                            ) : (
-                                <img
-                                    src={media.src || media}
-                                    alt={
-                                        media.alt ||
-                                        `${project.title} preview ${index + 1}`
-                                    }
-                                    loading="lazy"
-                                    className="preview-image"
-                                />
-                            )}
+                                transition={{
+                                    duration: 0.18,
+                                    ease: [0.2, 0.8, 0.2, 1],
+                                }}
+                            >
+                                {isVideo ? "[video_active]" : "[image_loaded]"}
+                            </motion.div>
                         </motion.div>
                     );
                 })
             ) : (
-                // Fallback: Single thumbnail
+                // Fallback: Single thumbnail with pattern A
                 <motion.div
-                    className="preview-media-float"
-                    variants={getMediaVariants(0)}
+                    className={`preview-media-reveal ${hoverPattern}`}
+                    variants={getMediaVariants(0, hoverPattern)}
                     initial="hidden"
                     animate="visible"
                     exit="exit"
                     onMouseEnter={() => setHoveredIndex(0)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    whileHover={{
-                        scale: 1.02,
-                        rotate: -0.5,
-                        transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
-                    }}
                     style={{
                         position: "absolute",
-                        top: "80px",
+                        top: "120px",
                         right: "60px",
-                        width: "340px",
+                        width: "400px",
                         zIndex: 10,
                     }}
                 >
-                    {/* Interactive hover detail */}
-                    <AnimatePresence>
-                        {hoveredIndex === 0 && (
-                            <motion.div
-                                className="preview-hover-detail"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.25 }}
-                            >
-                                <span className="preview-detail-label">
-                                    {project.category} · {project.year}
-                                </span>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    <div className="preview-mask-container">
+                        <img
+                            src={project.thumbnail}
+                            alt={project.title}
+                            loading="lazy"
+                            className="preview-image"
+                        />
+                    </div>
 
-                    {/* Subtle color overlay */}
                     <motion.div
-                        className="preview-color-overlay"
+                        className="preview-state-label"
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: hoveredIndex === 0 ? 1 : 0 }}
-                        transition={{ duration: 0.3 }}
-                    />
+                        animate={{
+                            opacity: hoveredIndex === 0 ? 0.6 : 0,
+                        }}
+                        transition={{
+                            duration: 0.18,
+                            ease: [0.2, 0.8, 0.2, 1],
+                        }}
+                    >
+                        [fallback_image]
+                    </motion.div>
+                </motion.div>
+            )}
 
-                    <img
-                        src={project.thumbnail}
-                        alt={project.title}
-                        loading="lazy"
-                        className="preview-image"
-                    />
+            {/* Work Mode: Holographic Metadata Panel */}
+            {isWorkMode && (
+                <motion.div
+                    className="holographic-panel"
+                    variants={getHolographicVariants(0, hoverPattern)}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                >
+                    <div className="holo-edge"></div>
+                    <div className="holo-content">
+                        <div className="holo-metadata">
+                            <span className="holo-label">[status]</span>
+                            <span className="holo-value">
+                                {project.systemMetadata?.status || "shipped"}
+                            </span>
+                        </div>
+                        {project.role && (
+                            <div className="holo-metadata">
+                                <span className="holo-label">[role]</span>
+                                <span className="holo-value">
+                                    {project.role}
+                                </span>
+                            </div>
+                        )}
+                        <div className="holo-metadata">
+                            <span className="holo-label">[preview_loaded]</span>
+                        </div>
+                    </div>
+                    <div className="scanline-overlay"></div>
                 </motion.div>
             )}
         </>
