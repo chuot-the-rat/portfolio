@@ -12,10 +12,7 @@ import "./ProjectCard.css";
 
 const ProjectCard = ({ project, onHover, onLeave, isHovered }) => {
     return (
-        <Link
-            to={`/project/${project.id}`}
-            className="project-card-link"
-        >
+        <Link to={`/project/${project.id}`} className="project-card-link">
             <motion.article
                 className="project-card"
                 onMouseEnter={onHover}
