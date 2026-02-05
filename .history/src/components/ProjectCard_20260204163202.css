@@ -1,0 +1,158 @@
+/* ==========================================================================
+   PROJECT CARD STYLES
+   Minimal, editorial design with premium hover interactions
+   ========================================================================== */
+
+.project-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  cursor: pointer;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Image Container */
+.project-card-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-bg-secondary);
+}
+
+.project-card-image-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.project-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover Images - Reveal on hover */
+.project-card-hover-images {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+.project-card-hover-image {
+  width: 120px;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
+}
+
+.project-card-hover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay */
+.project-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+}
+
+/* Content */
+.project-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.project-card-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.project-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.project-card-category,
+.project-card-year {
+  font-weight: 400;
+}
+
+.project-card-separator {
+  opacity: 0.5;
+}
+
+/* Hover Arrow Indicator */
+.project-card-arrow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .project-card {
+    gap: var(--space-3);
+  }
+  
+  .project-card-image-container {
+    aspect-ratio: 4 / 3;
+  }
+  
+  .project-card-hover-images {
+    display: none; /* Hide hover images on mobile */
+  }
+  
+  .project-card-title {
+    font-size: var(--font-size-base);
+  }
+  
+  .project-card-meta {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .project-card {
+    transform: none !important;
+  }
+  
+  .project-card-image-wrapper,
+  .project-card-hover-image,
+  .project-card-overlay {
+    transform: none !important;
+  }
+}
