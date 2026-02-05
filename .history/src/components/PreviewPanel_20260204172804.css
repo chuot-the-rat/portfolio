@@ -1,0 +1,54 @@
+/* ==========================================================================
+   FREE-FLOATING MEDIA - Jackie Hu Style
+   Media sits directly in whitespace - no containers, boxes, or backgrounds
+   ========================================================================== */
+
+/* Media floats freely - no container styling */
+.preview-media-float {
+    will-change: transform, opacity;
+    pointer-events: none; /* Let clicks pass through to cards */
+}
+
+/* Images and Videos - Bold Editorial Artifacts */
+.preview-image,
+.preview-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.08);
+    transition:
+        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.preview-media-float:hover .preview-image,
+.preview-media-float:hover .preview-video {
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.16),
+        0 6px 24px rgba(0, 0, 0, 0.12);
+    transform: scale(1.02) translateY(-4px);
+}
+
+.preview-video {
+    object-fit: cover;
+}
+
+/* Responsive - Hide on smaller screens */
+@media (max-width: 1024px) {
+    .preview-media-float {
+        display: none;
+    }
+}
+
+/* Accessibility - Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .preview-media-float,
+    .preview-image,
+    .preview-video {
+        transition: none !important;
+        animation: none !important;
+    }
+}
