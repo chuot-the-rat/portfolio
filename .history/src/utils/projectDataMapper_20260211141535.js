@@ -311,9 +311,7 @@ export const getAllProjects = () => {
         return [];
     }
 
-    return caseStudiesData.case_studies.map((cs, i) =>
-        mapCaseStudyToProject(cs, i),
-    );
+    return caseStudiesData.case_studies.map(mapCaseStudyToProject);
 };
 
 /**
@@ -325,12 +323,8 @@ export const getProjectById = (id) => {
         return null;
     }
 
-    const caseStudyIndex = caseStudiesData.case_studies.findIndex(
+    const caseStudy = caseStudiesData.case_studies.find(
         (cs) => cs.id === id || cs.slug === id,
     );
-    const caseStudy =
-        caseStudyIndex >= 0
-            ? caseStudiesData.case_studies[caseStudyIndex]
-            : null;
-    return caseStudy ? mapCaseStudyToProject(caseStudy, caseStudyIndex) : null;
+    return caseStudy ? mapCaseStudyToProject(caseStudy) : null;
 };
