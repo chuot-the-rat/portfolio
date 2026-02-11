@@ -51,10 +51,22 @@
     height: auto;
     display: block;
     border-radius: 0;
+    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Chaos mode preview images — soft rounded edges, no hard outlines */
+.mode-chaos .preview-image,
+.mode-chaos .preview-video {
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+/* Work/clean mode preview images — sharp technical look */
+.mode-work .preview-image,
+.mode-work .preview-video {
     box-shadow:
         0 0 0 1px rgba(0, 0, 0, 0.08),
         0 8px 24px rgba(0, 0, 0, 0.12);
-    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .preview-media-reveal:hover .preview-image,
@@ -108,29 +120,19 @@
 
 /* Mode-Specific Preview Interactions */
 
-/* CLEAN MODE - Original smooth hover with lift and overlay */
-.mode-clean .preview-media-reveal {
-    display: block;
-}
-
-.mode-clean .preview-media-reveal:hover .preview-image,
-.mode-clean .preview-media-reveal:hover .preview-video {
-    transform: scale(1.03);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mode-clean .preview-state-label {
-    display: none;
-}
-
-/* CHAOS MODE - Exaggerated hover with slight rotation */
+/* CHAOS MODE - Original smooth hover with lift and overlay */
 .mode-chaos .preview-media-reveal {
     display: block;
 }
 
 .mode-chaos .preview-media-reveal:hover .preview-image,
 .mode-chaos .preview-media-reveal:hover .preview-video {
-    transform: scale(1.04) rotate(0.5deg);
+    transform: scale(1.03);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-chaos .preview-state-label {
+    display: none;
 }
 
 /* WORK MODE - NO side-reveal media (holographic panels only) */

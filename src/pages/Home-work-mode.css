@@ -127,20 +127,14 @@
     user-select: none;
 }
 
-/* Clean/Chaos modes - hide terminal hero */
-.mode-clean .hero-content-terminal,
-.mode-clean .hero-ctas-terminal,
+/* Chaos mode - hide terminal hero */
 .mode-chaos .hero-content-terminal,
 .mode-chaos .hero-ctas-terminal {
     display: none;
 }
 
-.mode-clean .hero-content-default,
-.mode-clean .hero-ctas-default,
-.mode-chaos .hero-content-default,
-.mode-chaos .hero-ctas-default {
+.mode-chaos .hero-content-default {
     display: grid;
-    display: flex;
 }
 
 /* Responsive */
@@ -210,8 +204,8 @@
     margin-left: 0.5rem;
 }
 
-/* Hide default projects, show terminal list */
-.mode-work .projects-list-default {
+/* Hide default projects (explorer), show terminal list */
+.mode-work .projects-explorer-default {
     display: none;
 }
 
@@ -331,22 +325,18 @@
 }
 
 /* Hide default projects header in all non-work modes */
-.mode-clean .home-projects-header-terminal,
 .mode-chaos .home-projects-header-terminal {
     display: none;
 }
 
-.mode-clean .home-projects-header-default,
 .mode-chaos .home-projects-header-default {
     display: flex;
 }
 
-.mode-clean .projects-list-terminal,
 .mode-chaos .projects-list-terminal {
     display: none;
 }
 
-.mode-clean .projects-list-default,
 .mode-chaos .projects-list-default {
     display: flex;
 }
@@ -406,65 +396,11 @@
 }
 
 /* ==========================================================================
-   WORK MODE - Other System Sections (Previous styles)
+   WORK MODE - Other System Sections
    ========================================================================== */
-
-/* Hero Section - System Header */
-.mode-work .hero-section::before {
-    content: "[system_interface]";
-    display: block;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--color-system-label);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 1rem;
-    opacity: 0.6;
-}
-
-.mode-work .hero-section {
-    border-left: 2px solid var(--color-border);
-    padding-left: 2rem;
-}
-
-.mode-work .hero-title {
-    font-weight: 700;
-    letter-spacing: -0.04em;
-}
-
-.mode-work .hero-description {
-    color: var(--color-text-secondary);
-    max-width: 42rem;
-}
-
-/* Projects Section - Work Index */
-.mode-work .projects-section::before {
-    content: "[selected_work]";
-    display: block;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--color-system-label);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 1.5rem;
-    opacity: 0.6;
-}
-
-.mode-work .projects-section {
-    border-top: 1px solid var(--color-border);
-    padding-top: 3rem;
-}
 
 .mode-work .section-title {
     font-weight: 700;
     font-size: 1.5rem;
     letter-spacing: -0.03em;
-}
-
-.mode-work .section-eyebrow {
-    color: var(--color-system-label);
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    font-weight: 700;
 }

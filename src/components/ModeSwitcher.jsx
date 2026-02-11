@@ -1,5 +1,5 @@
 import { useMode, MODES } from "../context/ModeContext";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import "./ModeSwitcher.css";
 import "./ModeSwitcher-work-mode.css";
 
@@ -8,15 +8,14 @@ const ModeSwitcher = () => {
 
     const modes = [
         {
-            id: MODES.CLEAN,
-            label: "Clean",
+            id: MODES.CHAOS,
+            label: "Chaos",
             description: "Minimal precision",
         },
-        { id: MODES.CHAOS, label: "Chaos", description: "Playful asymmetry" },
         {
             id: MODES.WORK,
             label: "Work",
-            description: "Cyber-editorial system",
+            description: "Modern dark mode",
         },
     ];
 

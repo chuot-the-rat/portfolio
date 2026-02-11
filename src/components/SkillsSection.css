@@ -147,6 +147,9 @@
     animation-delay: var(--skill-delay, 0ms);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: default;
+    position: relative;
+    overflow: visible;
+    z-index: 1;
 }
 
 .skills-section.visible .skill-item {
@@ -330,12 +333,12 @@
     transform: translateX(8px) rotate(0.3deg) !important;
 }
 
-/* CLEAN MODE - No underlines, minimal hover */
-.mode-clean .skill-name::after {
+/* CHAOS MODE - No underlines, minimal hover */
+.mode-chaos .skill-name::after {
     display: none;
 }
 
-.mode-clean .skill-item:hover {
+.mode-chaos .skill-item:hover {
     padding-left: 0;
     border-bottom-color: transparent;
 }
@@ -1148,5 +1151,53 @@
 
     .nano-grid {
         background-size: 20px 20px;
+    }
+}
+
+/* ─── Chaos Mode overlay overrides ───
+   Adapt Work‑Mode cyan overlays to the light editorial palette */
+.skills-section:not(.skills-work-mode) .skill-terminal-label {
+    background: rgba(33, 33, 33, 0.92);
+    border-color: rgba(33, 33, 33, 0.35);
+    color: #fff;
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.18),
+        0 0 0 1px rgba(33, 33, 33, 0.08);
+    backdrop-filter: blur(6px);
+    top: -34px;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+}
+
+.skills-section:not(.skills-work-mode) .label-cursor {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.skills-section:not(.skills-work-mode) .skill-ascii-animation {
+    color: var(--color-text-tertiary, #a8a29e);
+    text-shadow: none;
+    right: -40px;
+    font-size: 0.8rem;
+}
+
+.skills-section:not(.skills-work-mode) .skill-code-snippet {
+    color: var(--color-text-tertiary, #a8a29e);
+    text-shadow: none;
+    font-size: 0.65rem;
+    bottom: -24px;
+}
+
+/* Raise z-index on hovered skill-item so overlay floats above siblings */
+.skills-section:not(.skills-work-mode) .skill-item.hovered {
+    z-index: 10;
+}
+
+/* Hide overlays on small screens in Chaos Mode */
+@media (max-width: 640px) {
+    .skills-section:not(.skills-work-mode) .skill-terminal-label,
+    .skills-section:not(.skills-work-mode) .skill-ascii-animation,
+    .skills-section:not(.skills-work-mode) .skill-code-snippet {
+        display: none;
     }
 }

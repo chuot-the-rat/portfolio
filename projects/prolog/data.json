@@ -1,19 +1,22 @@
 {
     "title": "ProLog",
-    "category": "Web Platform",
+    "category": "Mobile App",
     "year": "2025",
-    "tagline": "Apprenticeship Journey Companion",
-    "previewLayout": "web",
-    "role": "UI/UX Designer & Front-end Developer",
-    "timeline": "Semester-long academic project",
-    "team": "Designers, Developers, Researchers",
-    "tools": ["Figma", "Adobe Illustrator", "Framer"],
+    "tagline": "A journey companion for neurodivergent apprentices",
+    "subtitle": "A journey companion for neurodivergent apprentices",
+    "summary": "A centralized apprenticeship companion helping neurodivergent apprentices track progress, reduce cognitive overload, and build confidence through clear visualization and structured tools.",
+    "previewLayout": "mobile",
+    "role": "Developer & Researcher",
+    "timeline": "4 months",
+    "team": "4 team members",
+    "tools": ["Figma", "FigJam", "React Native", "JavaScript", "Miro", "Google Forms", "Notion", "GitHub"],
     "links": {
-        "live": "https://prolog.framer.website/"
+        "live": "https://prolog.framer.website/",
+        "figma": "https://www.figma.com/file/prolog"
     },
     "overview": {
         "title": "Overview",
-        "description": "ProLog is a digital platform that helps apprentices track their skills, competencies, and milestones toward certification. Its goal is to make apprenticeship journeys clear, structured, and motivating. The platform consolidates fragmented tools into one accessible solution, providing visual progress tracking and encouraging language to keep users engaged throughout their learning journey.",
+        "description": "Apprenticeship can take over 6,000 hours. That's years of work, spread across job sites, classrooms, and bureaucratic systems—often without a clear sense of whether you're on track.\n\nEarly in our research, we kept hearing the same thing: confusion was pushing people out. Not inability. Not lack of motivation. Just confusion about where they stood and what came next.\n\nWe wanted to build something that answered one question clearly: Where am I right now?",
         "images": [
             {
                 "src": "projects/prolog/images/overview.svg",
@@ -21,9 +24,19 @@
             }
         ]
     },
+    "problem": {
+        "title": "The Problem",
+        "description": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind.",
+        "images": [
+            {
+                "src": "projects/prolog/images/problem.svg",
+                "alt": "Problem statement"
+            }
+        ]
+    },
     "research": {
         "title": "Research & Insights",
-        "description": "We conducted interviews with apprentices and educators, surveys to understand challenges, and competitive analysis of existing tools. Key findings: Visual progress is preferred over text-heavy instructions. Mobile access is critical for on-the-go tracking. Encouraging, clear language increases engagement and motivation. Apprentices face fragmented information and unclear pathways, making it difficult to track progress, hours, and required competencies.",
+        "description": "We conducted policy and documentation review (SkilledTradesBC), stakeholder conversations with industry partners, persona development based on lived experience, and team reflection sessions (our team included neurodivergent members).\n\nKey findings: Progress tracking is scattered across multiple platforms with no single source of truth. Official systems are desktop-first and difficult to use on job sites. Discrepancies between employer-logged and self-logged hours create anxiety. Neurodivergent users experience amplified cognitive load from inconsistent interfaces.\n\nWe didn't have access to a large participant pool, so we leaned into what we did have: our own team's lived experience, publicly available documentation, and honest conversations with stakeholders.",
         "images": [
             {
                 "src": "projects/prolog/images/problem.svg",
@@ -31,27 +44,56 @@
             }
         ]
     },
+    "challenges": {
+        "title": "Early Challenges",
+        "description": "This project started too big. We wanted to fix financial stress, employer communication, exam preparation, and progress tracking—all at once. Our advisor encouraged broad exploration, which felt productive at first but eventually led to paralysis.\n\nIt wasn't until we accepted that we couldn't solve everything that the project started moving. Narrowing our focus to neurodivergent apprentices gave us permission to go deeper instead of wider.",
+        "pivots": [
+            {
+                "from": "Solving all apprenticeship problems",
+                "to": "Supporting neurodivergent apprentices specifically",
+                "reason": "A narrower scope allowed us to design with real empathy instead of generic assumptions"
+            }
+        ]
+    },
     "lofi": {
-        "title": "Lo-Fi Concepts & Early Design",
-        "description": "Wireframes focused on dashboard structure, progress visualization, and simple flows. Early feedback highlighted the need for clarity and whitespace. We explored modular cards and minimal screens for digestible content, testing different approaches to displaying competencies and milestones in a way that felt achievable rather than overwhelming.",
+        "title": "Lo-Fi Exploration",
+        "description": "Our early sketches were deliberately rough. We weren't trying to make things look good—we were trying to understand what information mattered most and how quickly someone could find it.\n\nThe dashboard concept emerged early. We kept asking ourselves: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else was secondary.",
         "images": []
     },
     "iterations": {
-        "title": "Iterations & Refinements",
-        "description": "Through multiple iteration cycles, we refined the platform based on user feedback. Visual Pathway: Added a clear, step-by-step progress tracker to show journey completion. Reduced Cognitive Load: Broke info into sections, used modular cards for easier scanning. Motivational Language: Refined copy to encourage engagement and celebrate achievements.",
+        "title": "High-Fidelity Designs",
+        "description": "The high-fidelity designs prioritized calm. We chose soft colors, generous spacing, and typography that wouldn't feel clinical or overwhelming.\n\nThe dashboard became the emotional center of the app. Instead of hiding progress behind menus, we made it the first thing users see. Hours completed, hours remaining, competencies achieved—all visible at a glance.",
         "improvements": [
-            "Added visual pathway for clear step-by-step progress tracking",
-            "Reduced cognitive load with modular card design",
-            "Refined motivational language to encourage engagement",
-            "Improved mobile accessibility for on-the-go tracking",
-            "Enhanced whitespace and editorial layout for clarity"
+            "Prioritized calm through soft colors and generous spacing",
+            "Made dashboard the emotional center with immediate progress visibility",
+            "Used clear typography to avoid clinical or overwhelming feel",
+            "Designed for offline-first architecture for job site use",
+            "Created discrepancy detection for hour tracking"
         ],
         "images": []
     },
     "solution": {
         "title": "Final Solution",
-        "description": "Editorial layout with hero, benefits panels, feature modules, team section, and contact CTA. Hover previews and floating media maintain Jackie Hu-style editorial feel. Clean typography, spacing, and negative space highlight content hierarchy. The platform provides apprentices with clear visibility into their progress, required competencies, and next steps toward certification.",
-        "layout": "web",
+        "description": "ProLog provides four core features: a Progress Dashboard that acts as a GPS for the apprenticeship journey, an Hours Discrepancy Detector that compares user-logged hours against official records, a Financial Resources Hub with links to grants and funding programs, and AI Practice Quizzes that generate unique practice questions based on trade competencies.",
+        "layout": "mobile",
+        "features": [
+            {
+                "title": "Progress Dashboard",
+                "description": "A centralized view of hours completed, hours remaining, competencies achieved, and certification progress. No digging required—the answer to 'where am I?' is always visible."
+            },
+            {
+                "title": "Hours Discrepancy Detector",
+                "description": "Compares user-logged hours against official records and flags mismatches. Users can document discrepancies and generate reports for their employers."
+            },
+            {
+                "title": "Financial Resources Hub",
+                "description": "Links to grants, funding programs, and itemized cost breakdowns for apprenticeship expenses."
+            },
+            {
+                "title": "AI Practice Quizzes",
+                "description": "Generates unique practice questions based on trade competencies. Designed to build confidence before official exams."
+            }
+        ],
         "images": [
             {
                 "src": "projects/prolog/images/solution-main.svg",
@@ -71,15 +113,58 @@
             }
         ]
     },
+    "validation": {
+        "title": "Validation & Testing",
+        "description": "We tested the prototype with a small group and heard something we didn't expect: relief. Users described the dashboard as a 'GPS for my apprenticeship.' They appreciated that they didn't have to hunt for information—it was just there. The hours tracker resonated especially strongly. One participant said they'd never realized they could document discrepancies themselves.",
+        "quotes": [
+            {
+                "text": "It's like a GPS for my apprenticeship.",
+                "author": "Test participant"
+            },
+            {
+                "text": "I never realized I could document discrepancies myself.",
+                "author": "Test participant"
+            }
+        ]
+    },
+    "learnings": {
+        "title": "What I Learned",
+        "insights": [
+            {
+                "title": "Clarity is an emotional outcome",
+                "description": "When users said they felt 'relieved,' they were responding to design decisions—not just information architecture."
+            },
+            {
+                "title": "Scope control is a design skill",
+                "description": "Saying no to good ideas was harder than coming up with them."
+            },
+            {
+                "title": "Progress visualization restores motivation",
+                "description": "Seeing how far you've come matters as much as knowing what's next."
+            },
+            {
+                "title": "Qualitative feedback is valid",
+                "description": "In student work, we don't always have access to large sample sizes. That doesn't make insights less real."
+            }
+        ]
+    },
+    "nextSteps": {
+        "title": "Next Steps",
+        "items": [
+            "Pursue data partnerships with SkilledTradesBC to enable real-time syncing",
+            "Expand accessibility features including screen reader optimization and high-contrast modes",
+            "Develop offline-friendly experiences for use on job sites with limited connectivity"
+        ]
+    },
     "designProcess": [
         {
             "phase": "Research & Discovery",
             "title": "Understanding Users",
             "duration": "3 weeks",
             "activities": [
-                "Apprentice interviews",
-                "Educator surveys",
-                "Competitive analysis"
+                "Policy and documentation review",
+                "Stakeholder conversations",
+                "Persona development"
             ]
         },
         {
@@ -98,6 +183,22 @@
             "duration": "4 weeks",
             "activities": [
                 "UI design",
+                "High-fidelity prototypes",
+                "Accessibility testing"
+            ]
+        },
+        {
+            "phase": "Development",
+            "title": "Building the Product",
+            "duration": "6 weeks",
+            "activities": [
+                "React Native development",
+                "Offline-first architecture",
+                "User testing"
+            ]
+        }
+    ]
+}
                 "Modular components",
                 "Editorial layout"
             ]

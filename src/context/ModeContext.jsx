@@ -3,7 +3,6 @@ import { createContext, useContext, useState, useEffect } from "react";
 const ModeContext = createContext();
 
 export const MODES = {
-    CLEAN: "clean",
     CHAOS: "chaos",
     WORK: "work",
 };
@@ -12,7 +11,7 @@ export const ModeProvider = ({ children }) => {
     const [mode, setMode] = useState(() => {
         // Load from localStorage if available
         const saved = localStorage.getItem("portfolioMode");
-        return saved || MODES.CLEAN; // CLEAN is now the default
+        return saved || MODES.CHAOS; // Chaos is the default
     });
 
     useEffect(() => {
@@ -24,7 +23,8 @@ export const ModeProvider = ({ children }) => {
     }, [mode]);
 
     const cycleMode = () => {
-        const modes = [MODES.CLEAN, MODES.CHAOS, MODES.WORK];
+        const modes = [MODES.CHAOS, MODES.WORK];
+        const currentIndex = modes.indexOf(mode);
         const nextIndex = (currentIndex + 1) % modes.length;
         setMode(modes[nextIndex]);
     };

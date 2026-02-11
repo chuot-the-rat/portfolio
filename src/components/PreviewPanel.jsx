@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useMode, MODES } from "../context/ModeContext";
 import "./PreviewPanel.css";
 
@@ -15,7 +15,7 @@ import "./PreviewPanel.css";
  * - Duration: 200-250ms
  * - Easing: cubic-bezier(0.25, 0.8, 0.25, 1) for sci-fi snap
  *
- * Clean/Chaos Modes: Original side-reveal system
+ * Chaos Mode: Original side-reveal system
  * - Sharp clipped masks and motion
  * - Smooth transitions
  * - Technical easing

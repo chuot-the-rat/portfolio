@@ -21,7 +21,6 @@ const educationData = [
 ];
 
 export default function EducationSection({ variant = "timeline" }) {
-    const [expandedId, setExpandedId] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
     const prefersReducedMotion = useRef(
@@ -47,10 +46,6 @@ export default function EducationSection({ variant = "timeline" }) {
         return () => observer.disconnect();
     }, []);
 
-    const toggleExpand = (id) => {
-        setExpandedId(expandedId === id ? null : id);
-    };
-
     return (
         <section
             ref={sectionRef}
@@ -70,7 +65,7 @@ export default function EducationSection({ variant = "timeline" }) {
                 {educationData.map((item, index) => (
                     <article
                         key={item.id}
-                        className={`education-entry ${expandedId === item.id ? "expanded" : ""}`}
+                        className={`education-entry`}
                         style={{
                             "--entry-delay": prefersReducedMotion.current
                                 ? "0ms"
