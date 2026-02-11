@@ -6,6 +6,7 @@ import {
     AnimatePresence,
     useMotionValueEvent,
 } from "framer-motion";
+import ScrollHighlightText from "./ScrollHighlightText";
 import "./ClaritySubtractionScene.css";
 
 /* ─────────────────────────────────────────────
@@ -60,6 +61,7 @@ const ClaritySubtractionScene = ({ data }) => {
         ctaLabel,
         annotation_phases,
         caption,
+        highlight_caption,
     } = data;
 
     /* Derive pills from before.chips */
@@ -89,6 +91,7 @@ const ClaritySubtractionScene = ({ data }) => {
             ctaText={ctaText}
             phases={phases}
             caption={caption}
+            highlightCaption={highlight_caption}
         />
     );
 };
@@ -103,6 +106,7 @@ const ClaritySubtractionSceneInner = ({
     ctaText,
     phases,
     caption,
+    highlightCaption,
 }) => {
     const sceneRef = useRef(null);
     const [phase, setPhase] = useState(0);
@@ -269,8 +273,19 @@ const ClaritySubtractionSceneInner = ({
                         </AnimatePresence>
                     </div>
 
-                    {/* Optional caption */}
-                    {caption && <p className="css-caption">{caption}</p>}
+                    {/* Optional caption — with scroll highlight if available */}
+                    {highlightCaption ? (
+                        <ScrollHighlightText
+                            mode="stepped"
+                            accent="auto"
+                            className="css-caption"
+                            offset={["start 0.6", "end 0.2"]}
+                        >
+                            {highlightCaption}
+                        </ScrollHighlightText>
+                    ) : (
+                        caption && <p className="css-caption">{caption}</p>
+                    )}
                 </motion.div>
             </div>
         </section>

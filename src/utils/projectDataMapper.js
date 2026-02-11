@@ -23,8 +23,10 @@ const extractImages = (section) => {
 /**
  * Maps a case study from the centralized JSON to the format expected by ProjectDetail and Home components
  * Preserves the full data structure for comprehensive rendering
+ * @param {object} caseStudy - raw case study object
+ * @param {number} index - 0-based position in the case_studies array
  */
-export const mapCaseStudyToProject = (caseStudy) => {
+export const mapCaseStudyToProject = (caseStudy, index = 0) => {
     if (!caseStudy) return null;
 
     const { sections } = caseStudy;
@@ -47,6 +49,7 @@ export const mapCaseStudyToProject = (caseStudy) => {
         // Core metadata
         id: caseStudy.id,
         slug: caseStudy.slug,
+        caseIndex: index + 1, // 1-based case study index for micro-index system
         title: caseStudy.title,
         tagline: caseStudy.subtitle || caseStudy.summary,
         subtitle: caseStudy.subtitle,
@@ -308,7 +311,9 @@ export const getAllProjects = () => {
         return [];
     }
 
-    return caseStudiesData.case_studies.map(mapCaseStudyToProject);
+    return caseStudiesData.case_studies.map((cs, i) =>
+        mapCaseStudyToProject(cs, i),
+    );
 };
 
 /**
@@ -320,8 +325,12 @@ export const getProjectById = (id) => {
         return null;
     }
 
-    const caseStudy = caseStudiesData.case_studies.find(
+    const caseStudyIndex = caseStudiesData.case_studies.findIndex(
         (cs) => cs.id === id || cs.slug === id,
     );
-    return caseStudy ? mapCaseStudyToProject(caseStudy) : null;
+    const caseStudy =
+        caseStudyIndex >= 0
+            ? caseStudiesData.case_studies[caseStudyIndex]
+            : null;
+    return caseStudy ? mapCaseStudyToProject(caseStudy, caseStudyIndex) : null;
 };
