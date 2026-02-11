@@ -1,0 +1,23 @@
+{
+    "id": "midnight-posters",
+    "title": "Midnight Sky Poster Series",
+    "subtitle": "Abstract editorial illustrations exploring depth and atmosphere",
+    "category": "Illustration",
+    "year": "2023",
+    "format": "compact",
+    "description": "A series of abstract poster designs exploring nocturnal atmospheres through layered gradients and geometric forms. Created using Adobe Illustrator and After Effects, each piece experiments with depth perception and ambient color theory to evoke a sense of stillness and contemplation.",
+    "heroImage": {
+        "src": "projects/midnight-posters/images/hero.png",
+        "alt": "Midnight Sky abstract poster with layered blue gradients"
+    },
+    "links": {
+        "dribbble": "https://dribbble.com/shots/midnight-posters",
+        "behance": "https://behance.net/gallery/midnight-sky"
+    },
+    "hoverImages": [
+        "projects/midnight-posters/images/poster-1.png",
+        "projects/midnight-posters/images/poster-2.png",
+        "projects/midnight-posters/images/poster-3.png",
+        "projects/midnight-posters/images/process.png"
+    ]
+}

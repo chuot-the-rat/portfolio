@@ -1,15 +1,22 @@
 {
     "title": "SideQuest",
-    "category": "UI/UX",
-    "year": "2024",
-    "tagline": "Gamified MEETUPS for adventurers",
-    "role": "UI/UX Designer",
-    "timeline": "10 weeks",
-    "team": "3 Designers, 3 Developers",
-    "tools": ["Figma", "Sketch", "InVision", "HTML/CSS", "JavaScript"],
+    "category": "Activity Discovery Web App",
+    "year": "2025",
+    "tagline": "Turning impulse into adventure",
+    "subtitle": "Turning impulse into adventure",
+    "summary": "A web app that gamifies spontaneity by helping young adults discover and complete random local activities through a quest-based interface.",
+    "previewLayout": "mobile",
+    "role": "Solo Designer & UX Researcher",
+    "timeline": "3 months",
+    "team": "2 team members (1 developer, 1 designer)",
+    "tools": ["Figma", "FigJam", "Google Forms", "Maze", "Notion"],
+    "links": {
+        "figma": "https://www.figma.com/file/sidequest",
+        "prototype": "https://www.figma.com/proto/sidequest"
+    },
     "overview": {
         "title": "Overview",
-        "description": "Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales.",
+        "description": "Ever had one of those Sundays where you're staring at your phone, scrolling for ideas, and nothing sounds good? You want to do something. You just don't know what.\n\nSideQuest was designed for that exact moment. It's not a directory. It's not a list of recommendations. It's a randomized push to try something unexpected—framed like a video game quest to make it feel playful instead of overwhelming.",
         "images": [
             {
                 "src": "projects/sidequest/images/overview.svg",
@@ -18,8 +25,8 @@
         ]
     },
     "problem": {
-        "title": "Understanding the Gap",
-        "description": "Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. Nullam mauris orci, aliquet et, iaculis et, viverra vitae, ligula. Nulla ut felis in purus aliquam imperdiet. Maecenas aliquet mollis lectus. Vivamus consectetuer hendrerit lacus. Cras non dolor.",
+        "title": "The Problem",
+        "description": "Traditional activity apps (Yelp, Google Maps, etc.) assume you know what you're looking for. But what about when you don't? What about when the goal isn't optimization—it's inspiration?\n\nYoung adults (especially those new to a city) face decision fatigue. Too many options. Too much browsing. No sense of urgency or fun.",
         "images": [
             {
                 "src": "projects/sidequest/images/problem.svg",
@@ -27,16 +34,76 @@
             }
         ]
     },
-    "objectives": [
-        "Vivamus id enim. Phasellus neque orci, porta a, aliquet quis",
-        "Pede purus, aliquet quis, euismod ac, fermentum vel, mauris",
-        "Integer gravida mauris et tellus. Nulla dapibus dolor vel est",
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros"
-    ],
+    "research": {
+        "title": "Research & Framing",
+        "description": "We surveyed 30+ young adults about how they find and decide on activities. The data showed that most people spend more time browsing than doing. They wanted novelty, but searching felt like work.\n\nKey insight: What if instead of presenting 100 options, we just gave them one? A random quest. Accept it or skip it. No browsing. No comparisons. Just commitment or rejection.",
+        "images": [
+            {
+                "src": "projects/sidequest/images/research.svg",
+                "alt": "Research findings"
+            }
+        ]
+    },
+    "challenges": {
+        "title": "Early Challenges & Pivots",
+        "description": "We tested several interaction models before landing on the quest-based approach.",
+        "pivots": [
+            {
+                "from": "Browse-based directory with filters",
+                "to": "Single randomized quest at a time",
+                "reason": "Users got paralyzed by choice. A single option created urgency and playfulness."
+            },
+            {
+                "from": "Serious UI with location pins and ratings",
+                "to": "Game-inspired UI with XP, levels, and rewards",
+                "reason": "The serious UI felt like Yelp. Gamification made participation feel voluntary and fun."
+            },
+            {
+                "from": "Pre-planned activity sets",
+                "to": "Random generation based on time, location, and budget",
+                "reason": "Users wanted variety. Handpicked lists felt stale after a few uses."
+            }
+        ]
+    },
+    "lofi": {
+        "title": "Lo‑Fi Wireframes",
+        "description": "The lo-fi phase was all about testing the core loop: tap to generate a quest, see activity details, accept or skip, repeat.\n\nWe sketched various card layouts, tested different information hierarchies, and explored how much detail to show upfront vs. after acceptance. The goal was frictionless exploration with minimal cognitive load.",
+        "images": []
+    },
+    "iterations": {
+        "title": "High-Fidelity Designs",
+        "description": "The final visuals leaned into gaming aesthetics: bold colors, rounded shapes, progress bars, and reward animations. The interface was designed to feel responsive and alive—every tap had weight and feedback.\n\nWe iterated on micro-interactions (card flips, XP fills, level-up animations) to reinforce the sense of progression. Visual delight wasn't decoration—it was motivation.",
+        "improvements": [
+            "Added XP bars and level progression to create long-term engagement",
+            "Introduced 'skip' and 'accept' swipe gestures for mobile-first interactions",
+            "Refined card layouts to prioritize activity type, time commitment, and proximity",
+            "Added emoji-based visual tags for quick activity scanning",
+            "Emphasized micro-animations for quest acceptance and completion"
+        ],
+        "images": []
+    },
     "solution": {
-        "title": "Design Solution",
-        "description": "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst.",
+        "title": "Final Solution",
+        "description": "SideQuest generates one random activity at a time based on your location, available time, and budget. Accept it and it becomes your active quest. Complete it and earn XP. Skip it and get a new one. No browsing. No overthinking.",
         "layout": "mobile",
+        "features": [
+            {
+                "title": "Randomized Quest Generation",
+                "description": "Activities are randomly assigned based on contextual filters. Users don't choose—they react. This removes decision fatigue."
+            },
+            {
+                "title": "XP & Progression System",
+                "description": "Completing quests earns XP. Leveling up unlocks badges and stats. Gamification creates habit loops."
+            },
+            {
+                "title": "Time & Budget Filters",
+                "description": "Quick settings let users adjust how much time and money they're willing to commit without leaving the quest screen."
+            },
+            {
+                "title": "Skip or Accept Interactions",
+                "description": "Simple binary choice. No infinite scrolling. Users commit or move on."
+            }
+        ],
         "images": [
             {
                 "src": "projects/sidequest/images/solution-main.svg",
@@ -44,68 +111,94 @@
             },
             {
                 "src": "projects/sidequest/images/solution-1.svg",
-                "alt": "Screen 1"
+                "alt": "Solution detail 1"
             },
             {
                 "src": "projects/sidequest/images/solution-2.svg",
-                "alt": "Screen 2"
+                "alt": "Solution detail 2"
             },
             {
                 "src": "projects/sidequest/images/solution-3.svg",
-                "alt": "Screen 3"
+                "alt": "Solution detail 3"
+            }
+        ]
+    },
+    "validation": {
+        "title": "Validation & User Testing",
+        "description": "Beta testers consistently mentioned two things: it felt low-pressure, and it got them out the door. One user said they accepted a quest to visit a farmers market they'd walked past for months but never entered. Another mentioned that the timer added just enough urgency to override their usual indecision.",
+        "quotes": [
+            {
+                "text": "I liked that I couldn't overthink it. I just hit accept and went.",
+                "author": "Beta tester"
             },
             {
-                "src": "projects/sidequest/images/solution-4.svg",
-                "alt": "Screen 4"
+                "text": "The XP system made me want to keep going. I didn't expect that.",
+                "author": "Beta tester"
             }
+        ]
+    },
+    "learnings": {
+        "title": "What I Learned",
+        "insights": [
+            {
+                "title": "Randomness creates commitment",
+                "description": "When users don't have to choose, they feel less responsible—and more willing to try something new."
+            },
+            {
+                "title": "Gamification drives behavior change",
+                "description": "XP and levels weren't just decorative. They created small dopamine loops that encouraged repeat usage."
+            },
+            {
+                "title": "Constraint is clarity",
+                "description": "Limiting to one quest at a time reduced cognitive load and increased action."
+            }
+        ]
+    },
+    "nextSteps": {
+        "title": "Next Steps",
+        "items": [
+            "Add social features—friends can challenge each other to complete specific quests",
+            "Expand quest categories beyond activities (e.g., food challenges, cultural experiences)",
+            "Build backend logic for smarter randomization based on user history and preferences",
+            "Test group quest mode for shared adventures"
         ]
     },
     "designProcess": [
         {
-            "phase": "Discovery",
-            "title": "Discovery Phase",
+            "phase": "Research & Discovery",
+            "title": "Understanding Spontaneity",
             "duration": "2 weeks",
             "activities": [
-                "User research",
-                "Market analysis",
-                "Stakeholder interviews"
+                "User surveys",
+                "Behavioral interviews",
+                "Competitor analysis"
             ]
         },
         {
             "phase": "Concept Development",
-            "title": "Ideation Phase",
-            "duration": "3 weeks",
-            "activities": ["Brainstorming", "Wireframing", "Concept testing"]
-        },
-        {
-            "phase": "Design Iteration",
-            "title": "Design Phase",
-            "duration": "3 weeks",
-            "activities": ["Visual design", "Prototyping", "User testing"]
-        },
-        {
-            "phase": "Implementation",
-            "title": "Development Phase",
+            "title": "Defining the Quest Model",
             "duration": "2 weeks",
-            "activities": ["Handoff", "QA testing", "Launch preparation"]
+            "activities": ["Wireframing", "User flows", "Interaction testing"]
+        },
+        {
+            "phase": "Visual Design",
+            "title": "Gamifying the Experience",
+            "duration": "3 weeks",
+            "activities": [
+                "UI design",
+                "Animation prototyping",
+                "Design system creation"
+            ]
+        },
+        {
+            "phase": "Testing & Iteration",
+            "title": "Validation",
+            "duration": "2 weeks",
+            "activities": [
+                "Beta testing",
+                "Feedback analysis",
+                "Final refinements"
+            ]
         }
-    ],
-    "outcomes": {
-        "title": "Results & Impact",
-        "description": "Mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.",
-        "metrics": [
-            {
-                "value": "58%",
-                "label": "Improvement in user retention"
-            },
-            {
-                "value": "95%",
-                "label": "Task success rate"
-            },
-            {
-                "value": "2.7x",
-                "label": "Increase in conversions"
-            }
-        ]
-    }
+    ]
 }

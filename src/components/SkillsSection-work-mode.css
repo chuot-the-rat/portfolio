@@ -1,0 +1,89 @@
+/* WORK MODE - Cyber System Skills Module */
+
+.mode-work .skills-section::before {
+    content: '[technical_capabilities]';
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-system-label);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+}
+
+.mode-work .skills-section {
+    border-top: 1px solid var(--color-border);
+    padding-top: 3rem;
+}
+
+.mode-work .skills-title {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.mode-work .skills-eyebrow {
+    color: var(--color-system-label);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+}
+
+/* Skill cards - system modules */
+.mode-work .skill-card {
+    background: var(--color-module-bg);
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+    transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-work .skill-card:hover {
+    border-color: var(--color-accent);
+}
+
+.mode-work .skill-category {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-system-label);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+}
+
+.mode-work .skill-list {
+    list-style: none;
+    padding: 0;
+}
+
+.mode-work .skill-item {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    padding: 0.375rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-work .skill-item:last-child {
+    border-bottom: none;
+}
+
+.mode-work .skill-item:hover {
+    color: var(--color-accent);
+    padding-left: 0.5rem;
+}
+
+.mode-work .skill-item::before {
+    content: '>';
+    margin-right: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-work .skill-item:hover::before {
+    opacity: 1;
+}
