@@ -1,0 +1,215 @@
+/* ==========================================================================
+   CASE STUDY TOC + PROGRESS
+   Notion-style table of contents with integrated scroll progress.
+   Desktop: sticky sidebar in two-column layout.
+   Mobile: compact sticky bar.
+   ========================================================================== */
+
+/* ─── Desktop TOC sidebar ─── */
+.toc {
+    position: sticky;
+    top: var(--space-16);
+    align-self: start;
+    padding-left: var(--space-8);
+    border-left: 1px solid var(--color-border);
+    min-width: 180px;
+    max-width: 220px;
+}
+
+.toc-heading {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+}
+
+/* Progress rail — runs behind the list */
+.toc-rail {
+    position: absolute;
+    left: -1px; /* overlap the border-left */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.toc-rail-fill {
+    width: 100%;
+    background: var(--color-accent);
+    border-radius: 1px;
+    transition: height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── TOC list ─── */
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.toc-item {
+    margin: 0;
+    padding: 0;
+}
+
+/* ─── TOC link (button styled as text) ─── */
+.toc-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-2) 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.toc-link:hover .toc-text {
+    color: var(--color-text);
+}
+
+/* Dot marker */
+.toc-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-border);
+    flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Label text */
+.toc-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    line-height: 1.4;
+    transition: all 0.2s ease;
+    font-weight: 400;
+}
+
+/* ── Active state ── */
+.toc-link--active .toc-dot {
+    background: var(--color-accent);
+    width: 7px;
+    height: 7px;
+}
+
+.toc-link--active .toc-text {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+/* Active indicator bar on the left border */
+.toc-link--active::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--space-8) - 1px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 18px;
+    background: var(--color-accent);
+    border-radius: 1px;
+}
+
+/* ─── Mobile: hidden on desktop ─── */
+.toc-mobile {
+    display: none;
+}
+
+/* ==========================================================================
+   TWO-COLUMN LAYOUT — added to ProjectDetail
+   ========================================================================== */
+.project-content-layout {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: var(--space-12);
+    align-items: start;
+}
+
+/* Content stays in the left column */
+.project-content-main {
+    min-width: 0; /* prevent grid blowout */
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1100px) {
+    /* Narrower sidebar */
+    .project-content-layout {
+        grid-template-columns: 1fr 180px;
+        gap: var(--space-6);
+    }
+
+    .toc {
+        min-width: 140px;
+        max-width: 180px;
+        padding-left: var(--space-6);
+    }
+}
+
+@media (max-width: 900px) {
+    /* Collapse to single column, hide desktop TOC */
+    .project-content-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .toc {
+        display: none;
+    }
+
+    /* Show mobile bar */
+    .toc-mobile {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: var(--color-bg);
+        padding: var(--space-3) var(--gutter);
+        margin: 0 calc(-1 * var(--gutter));
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .toc-mobile-dots {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .toc-mobile-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--color-border);
+        transition: all 0.3s ease;
+    }
+
+    .toc-mobile-dot--active {
+        background: var(--color-accent);
+        width: 7px;
+        height: 7px;
+    }
+
+    .toc-mobile-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-text);
+        font-weight: 600;
+        white-space: nowrap;
+    }
+}

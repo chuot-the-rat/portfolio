@@ -1,0 +1,176 @@
+/* ==========================================================================
+   PIVOT DIAGRAM — Figma-Panel Cards
+   Clean surfaces, selection-highlight accent, subtle motion.
+   Scoped to pivots inside the Challenges section.
+   ========================================================================== */
+
+.pvt-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+}
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+.pvt-card {
+    position: relative;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: var(--space-6);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition:
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+    overflow: hidden;
+}
+
+.pvt-card:hover {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    border-color: color-mix(in srgb, var(--color-border) 100%, var(--color-accent) 18%);
+}
+
+/* ─── Selection accent bar (top edge) ─── */
+.pvt-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transform-origin: left center;
+}
+
+/* ==========================================================================
+   STATES ROW  (FROM → chevron → TO)
+   ========================================================================== */
+.pvt-states {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-5);
+}
+
+.pvt-state {
+    flex: 1;
+    min-width: 0;
+}
+
+/* FROM — muted */
+.pvt-state--from .pvt-value {
+    color: var(--color-text-secondary);
+}
+
+/* TO — emphasized */
+.pvt-state--to {
+    position: relative;
+}
+
+.pvt-state--to .pvt-value {
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.pvt-card:hover .pvt-state--to .pvt-value {
+    color: var(--color-accent);
+}
+
+/* ─── Labels ─── */
+.pvt-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-1);
+    line-height: 1;
+}
+
+.pvt-value {
+    font-size: var(--font-size-sm);
+    line-height: 1.55;
+    margin: 0;
+    color: var(--color-text);
+}
+
+/* ─── Subtle underline on TO value ─── */
+.pvt-underline {
+    display: block;
+    height: 1px;
+    margin-top: 3px;
+    background: var(--color-accent);
+    opacity: 0.35;
+    transform-origin: left center;
+}
+
+/* ─── Chevron ─── */
+.pvt-chevron {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: var(--color-text-tertiary);
+    opacity: 0.4;
+    padding-top: 18px; /* align with text baselines */
+}
+
+/* ==========================================================================
+   DIVIDER
+   ========================================================================== */
+.pvt-divider {
+    border: none;
+    height: 1px;
+    background: var(--color-border);
+    opacity: 0.45;
+    margin: var(--space-4) 0;
+}
+
+/* ==========================================================================
+   WHY
+   ========================================================================== */
+.pvt-why {
+    padding: 0;
+}
+
+.pvt-why-text {
+    font-size: var(--font-size-sm);
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* ==========================================================================
+   DARK THEME
+   ========================================================================== */
+[data-theme="dark"] .pvt-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .pvt-card:hover {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 640px) {
+    .pvt-list {
+        gap: var(--space-5);
+    }
+
+    .pvt-card {
+        padding: var(--space-5);
+    }
+
+    .pvt-states {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .pvt-chevron {
+        padding-top: 0;
+        transform: rotate(90deg);
+        align-self: center;
+    }
+}

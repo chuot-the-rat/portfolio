@@ -1,0 +1,200 @@
+/* ==========================================================================
+   WEIGHT LIFTED PIVOT — Before/After simplification visual
+   ========================================================================== */
+
+.weight-lifted {
+    margin-top: var(--space-20);
+    padding: var(--space-12) 0 var(--space-4);
+}
+
+/* Principle label — centered, restrained, new-chapter feel */
+.weight-lifted-principle {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-text-tertiary);
+    opacity: 0.6;
+    margin-bottom: var(--space-4);
+    text-align: center;
+}
+
+/* Title */
+.weight-lifted-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    margin-bottom: var(--space-12);
+    max-width: 520px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==========================================================================
+   COMPARISON LAYOUT — equal columns, generous gap
+   ========================================================================== */
+.weight-lifted-comparison {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--space-10);
+    align-items: start;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.weight-lifted-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+/* Before column — compact feel */
+.weight-lifted-before {
+    padding: var(--space-4);
+}
+
+/* After column — generous, airy */
+.weight-lifted-after {
+    padding: var(--space-6) var(--space-8);
+}
+
+/* Column labels */
+.weight-lifted-col-label {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-3);
+    font-weight: 500;
+}
+
+/* Items container */
+.weight-lifted-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+/* ==========================================================================
+   CHIPS — the visual units
+   ========================================================================== */
+.weight-lifted-chip {
+    display: inline-block;
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    line-height: 1.4;
+    transition: opacity 0.2s ease;
+}
+
+/* Removed (before) chips — muted, dense, tight padding */
+.weight-lifted-chip--removed {
+    padding: var(--space-1) var(--space-3);
+    background-color: var(--color-border);
+    color: var(--color-text-tertiary);
+    text-decoration: line-through;
+    text-decoration-color: var(--color-text-tertiary);
+    text-decoration-thickness: 1px;
+    opacity: 0.5;
+    font-size: var(--font-size-xs);
+}
+
+/* Primary surviving chip — prominent CTA */
+.weight-lifted-chip--primary {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    padding: var(--space-4) var(--space-6);
+    letter-spacing: -0.01em;
+}
+
+/* Secondary supporting chips — subtle but present */
+.weight-lifted-chip--secondary {
+    padding: var(--space-2) var(--space-4);
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+}
+
+/* ==========================================================================
+   ARROW DIVIDER
+   ========================================================================== */
+.weight-lifted-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: var(--space-10);
+    color: var(--color-text-tertiary);
+    opacity: 0.35;
+}
+
+/* ==========================================================================
+   CAPTION — confident takeaway
+   ========================================================================== */
+.weight-lifted-caption {
+    margin-top: var(--space-12);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    max-width: 520px;
+    font-weight: 600;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: -0.005em;
+}
+
+/* ==========================================================================
+   RESPONSIVE — stack on mobile
+   ========================================================================== */
+@media (max-width: 640px) {
+    .weight-lifted {
+        margin-top: var(--space-16);
+        padding: var(--space-8) 0 var(--space-2);
+    }
+
+    .weight-lifted-title {
+        text-align: left;
+        margin-left: 0;
+    }
+
+    .weight-lifted-comparison {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .weight-lifted-before {
+        padding: var(--space-3);
+    }
+
+    .weight-lifted-after {
+        padding: var(--space-4) var(--space-5);
+    }
+
+    .weight-lifted-arrow {
+        padding-top: 0;
+        transform: rotate(90deg);
+    }
+
+    .weight-lifted-arrow svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .weight-lifted-caption {
+        text-align: left;
+        margin-left: 0;
+        margin-top: var(--space-8);
+        font-size: var(--font-size-base);
+    }
+
+    .weight-lifted-principle {
+        text-align: left;
+    }
+}
+        height: 20px;
+    }
+}

@@ -1,0 +1,177 @@
+/* ==========================================================================
+   WEIGHT LIFTED — Block 3: Before / After comparison
+   Left-aligned, consistent with Blocks 1 & 2.
+   ========================================================================== */
+
+.wl {
+    margin-top: var(--space-16);
+}
+
+/* ─── Label ─── */
+.wl-label {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-tertiary);
+    opacity: 0.55;
+    margin-bottom: var(--space-3);
+}
+
+/* ─── Title ─── */
+.wl-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    margin-bottom: var(--space-12);
+    max-width: 480px;
+}
+
+/* ==========================================================================
+   COMPARISON GRID — clean 2-column
+   ========================================================================== */
+.wl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    align-items: stretch;
+    width: 100%;
+    max-width: 880px;
+}
+
+/* ─── Side containers (cards) ─── */
+.wl-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    border-radius: 8px;
+    min-height: 160px;
+}
+
+.wl-side--before {
+    padding: var(--space-5) var(--space-5);
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+}
+
+.wl-side--after {
+    padding: var(--space-6) var(--space-6);
+    background-color: transparent;
+}
+
+/* ─── Side labels ─── */
+.wl-side-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    opacity: 0.5;
+    margin-bottom: var(--space-3);
+    font-weight: 500;
+}
+
+/* Small inline arrow icon next to After label */
+.wl-arrow-icon {
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+/* ─── Pill container ─── */
+.wl-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+/* ==========================================================================
+   PILLS
+   ========================================================================== */
+.wl-pill {
+    display: inline-block;
+    border-radius: 5px;
+    line-height: 1.4;
+}
+
+/* Before pills — small, readable but dense */
+.wl-pill--muted {
+    padding: 3px var(--space-3);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--color-border);
+    opacity: 0.7;
+}
+
+/* After primary — strong, accent, noticeably larger */
+.wl-pill--primary {
+    padding: var(--space-4) var(--space-6);
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    letter-spacing: -0.01em;
+    border-radius: 6px;
+}
+
+/* After secondary — light, readable */
+.wl-pill--secondary {
+    padding: var(--space-1) var(--space-3);
+    background-color: transparent;
+    color: var(--color-text-tertiary);
+    border: 1px solid var(--color-border);
+    font-size: 11px;
+    opacity: 0.55;
+}
+
+/* ==========================================================================
+   CAPTION — takeaway sentence
+   ========================================================================== */
+.wl-caption {
+    margin-top: var(--space-14);
+    font-size: var(--font-size-base);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    max-width: 480px;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 640px) {
+    .wl {
+        margin-top: var(--space-12);
+    }
+
+    .wl-title {
+        margin-bottom: var(--space-8);
+    }
+
+    .wl-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .wl-side {
+        min-height: auto;
+    }
+
+    .wl-side--before {
+        padding: var(--space-4);
+    }
+
+    .wl-side--after {
+        padding: var(--space-4) var(--space-5);
+    }
+
+    .wl-caption {
+        margin-top: var(--space-8);
+    }
+}

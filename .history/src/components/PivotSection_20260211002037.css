@@ -1,0 +1,194 @@
+/* ==========================================================================
+   PIVOT SECTION — ProcessTimeline + FeatureGraveyard
+   Restrained, editorial styling consistent with portfolio theme
+   ========================================================================== */
+
+/* Wrapper — generous vertical rhythm between conceptual blocks */
+.pivot-section-block {
+    margin-top: var(--space-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+}
+
+/* ─────────────────────────────────────────────
+   PROCESS TIMELINE
+   ───────────────────────────────────────────── */
+.process-timeline-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    width: 100%;
+    max-width: 640px;
+    position: relative;
+    padding-bottom: var(--space-10);
+}
+
+/* Subtle divider below the timeline */
+.process-timeline-divider {
+    width: 100%;
+    max-width: 640px;
+    height: 1px;
+    background: var(--color-border);
+    opacity: 0.4;
+    margin-top: var(--space-2);
+}
+
+.process-timeline-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 0 var(--space-2);
+}
+
+/* Dot — small for inactive, slightly larger for highlighted */
+.process-timeline-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-border);
+    opacity: 0.45;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: all 0.25s ease;
+}
+
+.process-timeline-step.is-highlighted .process-timeline-dot {
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 0 5px rgba(33, 33, 33, 0.08);
+}
+
+[data-theme="dark"]
+    .process-timeline-step.is-highlighted
+    .process-timeline-dot {
+    box-shadow: 0 0 0 5px rgba(250, 250, 250, 0.1);
+}
+
+/* Connector line between dots */
+.process-timeline-connector {
+    position: absolute;
+    top: 4px;
+    left: calc(50% + 4px);
+    width: calc(100% - 8px);
+    height: 1px;
+    background-color: var(--color-border);
+    opacity: 0.35;
+}
+
+.process-timeline-step.is-highlighted .process-timeline-connector {
+    top: 6px;
+}
+
+/* Label */
+.process-timeline-label {
+    margin-top: var(--space-4);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    opacity: 0.5;
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 400;
+    transition: all 0.25s ease;
+}
+
+.process-timeline-step.is-highlighted .process-timeline-label {
+    color: var(--color-text);
+    font-weight: 600;
+    opacity: 1;
+    letter-spacing: 0.06em;
+}
+
+/* Responsive — stack vertically on mobile */
+@media (max-width: 600px) {
+    .process-timeline-track {
+        flex-direction: column;
+        gap: var(--space-5);
+        padding-bottom: var(--space-6);
+    }
+
+    .process-timeline-step {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-4);
+        padding: 0;
+    }
+
+    .process-timeline-connector {
+        top: 8px;
+        left: 4px;
+        width: 1px;
+        height: calc(100% + var(--space-5));
+    }
+
+    .process-timeline-step.is-highlighted .process-timeline-connector {
+        top: 12px;
+        left: 6px;
+    }
+
+    .process-timeline-label {
+        margin-top: 0;
+        text-align: left;
+    }
+}
+
+/* ─────────────────────────────────────────────
+   FEATURE GRAVEYARD
+   ───────────────────────────────────────────── */
+.feature-graveyard {
+    max-width: 640px;
+}
+
+.feature-graveyard-heading {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin-bottom: var(--space-8);
+}
+
+.feature-graveyard-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-bottom: var(--space-12);
+}
+
+.feature-graveyard-item {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    color: var(--color-text-tertiary);
+    opacity: 0.55;
+    padding-left: var(--space-5);
+    position: relative;
+    text-decoration: line-through;
+    text-decoration-color: var(--color-border);
+    text-decoration-thickness: 1px;
+}
+
+.feature-graveyard-item::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-text-tertiary);
+    opacity: 0.4;
+    text-decoration: none;
+}
+
+.feature-graveyard-reflection {
+    font-size: var(--font-size-base);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    max-width: 560px;
+    padding-top: var(--space-2);
+}

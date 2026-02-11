@@ -1,0 +1,473 @@
+/* ==========================================================================
+   CASE STUDY TOC + PROGRESS
+   Notion-style table of contents with smooth rAF scroll progress,
+   micro-motion transitions, and CSS-only abstract glyph icons.
+   Desktop: sticky sidebar in two-column layout.
+   Mobile: compact sticky bar.
+   ========================================================================== */
+
+/* ─── Desktop TOC sidebar ─── */
+.toc {
+    position: sticky;
+    top: var(--space-16);
+    align-self: start;
+    padding-left: var(--space-8);
+    border-left: 1px solid var(--color-border);
+    min-width: 180px;
+    max-width: 220px;
+}
+
+.toc-heading {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+}
+
+/* Progress rail — runs behind the list, height set by rAF (no CSS transition) */
+.toc-rail {
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.toc-rail-fill {
+    width: 100%;
+    background: var(--color-accent);
+    border-radius: 1px;
+    /* No CSS transition — rAF drives smooth, continuous height updates */
+}
+
+/* ─── TOC list ─── */
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.toc-item {
+    margin: 0;
+    padding: 0;
+}
+
+/* ─── TOC link (button styled as text) ─── */
+.toc-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-2) 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+
+    /* Micro-motion: inactive state */
+    opacity: 0.55;
+    transform: translateX(0);
+    transition:
+        opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+        color 0.2s ease;
+}
+
+.toc-link:hover {
+    opacity: 0.85;
+}
+
+.toc-link:hover .toc-text {
+    color: var(--color-text);
+}
+
+/* ── Active state — micro-motion slide-in ── */
+.toc-link--active {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+.toc-link--active .toc-text {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+/* Active indicator bar on the left border */
+.toc-link--active::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--space-8) - 1px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 18px;
+    background: var(--color-accent);
+    border-radius: 1px;
+    animation: toc-bar-in 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes toc-bar-in {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 18px;
+        opacity: 1;
+    }
+}
+
+/* Leaving state — brief nudge back */
+.toc-link--leaving {
+    opacity: 0.55;
+    transform: translateX(0);
+}
+
+/* Label text */
+.toc-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    line-height: 1.4;
+    transition: color 0.2s ease;
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   CSS-ONLY ABSTRACT GLYPH ICONS
+   Small (14×14) shapes drawn with borders, box-shadow, and pseudo-elements.
+   data-type attribute selects the shape.
+   ========================================================================== */
+.toc-glyph {
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    transition: opacity 0.25s ease;
+}
+
+/* Inactive glyphs are faint */
+.toc-link .toc-glyph {
+    opacity: 0.45;
+}
+
+.toc-link--active .toc-glyph {
+    opacity: 1;
+}
+
+/* ── Default: small filled circle ── */
+.toc-glyph::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.toc-glyph[data-type="default"]::before {
+    top: 4px;
+    left: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* ── Overview: bulleted list lines ── */
+.toc-glyph[data-type="overview"]::before {
+    top: 2px;
+    left: 0;
+    width: 14px;
+    height: 2px;
+    background: currentColor;
+    box-shadow:
+        0 4px 0 currentColor,
+        0 8px 0 currentColor;
+    border-radius: 1px;
+}
+
+/* ── Research: 3×3 dot grid ── */
+.toc-glyph[data-type="research"]::before {
+    top: 2px;
+    left: 2px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow:
+        4px 0 0 currentColor,
+        8px 0 0 currentColor,
+        0 4px 0 currentColor,
+        4px 4px 0 currentColor,
+        8px 4px 0 currentColor,
+        0 8px 0 currentColor,
+        4px 8px 0 currentColor,
+        8px 8px 0 currentColor;
+}
+
+/* ── Pivot / Challenges: two angled chevrons ── */
+.toc-glyph[data-type="pivot"]::before,
+.toc-glyph[data-type="pivot"]::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+}
+
+.toc-glyph[data-type="pivot"]::before {
+    top: 3px;
+    left: 1px;
+}
+
+.toc-glyph[data-type="pivot"]::after {
+    top: 3px;
+    left: 6px;
+}
+
+/* ── Lo-Fi: wireframe square with inner grid ── */
+.toc-glyph[data-type="lofi"]::before {
+    top: 1px;
+    left: 1px;
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid currentColor;
+    border-radius: 1px;
+    background: transparent;
+}
+
+.toc-glyph[data-type="lofi"]::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 1px;
+    width: 12px;
+    height: 0;
+    border-top: 1.5px solid currentColor;
+}
+
+/* ── Hi-Fi / Iterations: rounded rect with inner accent line ── */
+.toc-glyph[data-type="hifi"]::before {
+    top: 1px;
+    left: 1px;
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid currentColor;
+    border-radius: 3px;
+    background: transparent;
+}
+
+.toc-glyph[data-type="hifi"]::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 4px;
+    width: 6px;
+    height: 0;
+    border-top: 1.5px solid currentColor;
+    border-radius: 1px;
+}
+
+/* ── Solution: diamond shape ── */
+.toc-glyph[data-type="solution"]::before {
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transform-origin: center;
+    background: transparent;
+}
+
+/* ── Validation / Testing: check mark ── */
+.toc-glyph[data-type="validation"]::before {
+    top: 4px;
+    left: 2px;
+    width: 5px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(40deg);
+    background: transparent;
+}
+
+/* ── Learning: open book / angled lines ── */
+.toc-glyph[data-type="learning"]::before {
+    top: 3px;
+    left: 2px;
+    width: 5px;
+    height: 8px;
+    border-left: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: skewX(-8deg);
+    background: transparent;
+}
+
+.toc-glyph[data-type="learning"]::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 7px;
+    width: 5px;
+    height: 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: skewX(8deg);
+    background: transparent;
+}
+
+/* ── Outcome / Impact: star-ish burst (rotated square overlay) ── */
+.toc-glyph[data-type="outcome"]::before {
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: 1px;
+}
+
+.toc-glyph[data-type="outcome"]::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: 1px;
+    transform: rotate(45deg);
+}
+
+/* ── Final / Prototype: play triangle ── */
+.toc-glyph[data-type="final"]::before {
+    top: 2px;
+    left: 3px;
+    width: 0;
+    height: 0;
+    border-left: 9px solid currentColor;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    background: transparent;
+}
+
+/* ── Next Steps: arrow right ── */
+.toc-glyph[data-type="next"]::before {
+    top: 3px;
+    left: 1px;
+    width: 10px;
+    height: 0;
+    border-top: 1.5px solid currentColor;
+}
+
+.toc-glyph[data-type="next"]::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 7px;
+    width: 5px;
+    height: 5px;
+    border-right: 1.5px solid currentColor;
+    border-top: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    background: transparent;
+}
+
+/* ─── Mobile: hidden on desktop ─── */
+.toc-mobile {
+    display: none;
+}
+
+/* ==========================================================================
+   TWO-COLUMN LAYOUT — added to ProjectDetail
+   ========================================================================== */
+.project-content-layout {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: var(--space-12);
+    align-items: start;
+}
+
+/* Content stays in the left column */
+.project-content-main {
+    min-width: 0; /* prevent grid blowout */
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1100px) {
+    .project-content-layout {
+        grid-template-columns: 1fr 180px;
+        gap: var(--space-6);
+    }
+
+    .toc {
+        min-width: 140px;
+        max-width: 180px;
+        padding-left: var(--space-6);
+    }
+}
+
+@media (max-width: 900px) {
+    .project-content-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .toc {
+        display: none;
+    }
+
+    /* Show mobile bar */
+    .toc-mobile {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: var(--color-bg);
+        padding: var(--space-3) var(--gutter);
+        margin: 0 calc(-1 * var(--gutter));
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .toc-mobile-dots {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .toc-mobile-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--color-border);
+        transition: all 0.3s ease;
+    }
+
+    .toc-mobile-dot--active {
+        background: var(--color-accent);
+        width: 7px;
+        height: 7px;
+    }
+
+    .toc-mobile-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-text);
+        font-weight: 600;
+        white-space: nowrap;
+    }
+}

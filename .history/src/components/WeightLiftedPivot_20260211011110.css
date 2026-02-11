@@ -1,0 +1,547 @@
+/* ==========================================================================
+   WEIGHT LIFTED — Before / After comparison
+   Supports 4 modes: pills, side-by-side, stacked, slider
+   ========================================================================== */
+
+/* ─── BASE CONTAINER ─── */
+.wl {
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-24);
+}
+
+/* ─── Shared label (section micro-label) ─── */
+.wl-label {
+    display: block;
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-4);
+    font-weight: 500;
+}
+
+/* ─── Shared title ─── */
+.wl-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: var(--space-8);
+    max-width: 900px;
+}
+
+/* ─── Shared caption / takeaway ─── */
+.wl-caption {
+    margin-top: var(--space-8);
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    max-width: 900px;
+}
+
+/* ─── Arrow icon (reused across modes) ─── */
+.wl-arrow-icon {
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   PLACEHOLDER — wireframe-style box when no screenshot exists yet.
+   Communicates the concept with pills inside a dashed frame.
+   ========================================================================== */
+.wl-ph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    min-height: 240px;
+    width: 100%;
+    border: 1.5px dashed var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg-secondary);
+    padding: var(--space-8);
+}
+
+.wl-ph--before {
+    opacity: 0.6;
+    filter: grayscale(0.5);
+}
+
+.wl-ph-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+}
+
+.wl-ph-pill {
+    padding: 3px var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+}
+
+.wl-ph--before .wl-ph-pill {
+    text-decoration: line-through;
+    text-decoration-color: var(--color-border);
+}
+
+.wl-ph-hint {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    opacity: 0.6;
+    margin-top: var(--space-2);
+}
+
+/* ==========================================================================
+   MODE: PILLS — original layout, fallback when no images or displayMode
+   ========================================================================== */
+.wl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+    width: 100%;
+    max-width: 900px;
+}
+
+.wl-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.wl-side-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-3);
+    font-weight: 500;
+}
+
+.wl-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.wl-pill {
+    display: inline-block;
+    border-radius: 5px;
+    line-height: 1.4;
+}
+
+.wl-pill--muted {
+    padding: 3px var(--space-3);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--color-border);
+    opacity: 0.7;
+}
+
+.wl-pill--primary {
+    padding: var(--space-4) var(--space-6);
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    letter-spacing: -0.01em;
+    border-radius: 6px;
+}
+
+.wl-pill--secondary {
+    padding: var(--space-1) var(--space-3);
+    background-color: transparent;
+    color: var(--color-text-tertiary);
+    border: 1px solid var(--color-border);
+    font-size: 11px;
+    opacity: 0.55;
+}
+
+/* ==========================================================================
+   MODE A: SIDE-BY-SIDE
+   Two columns: muted before | vivid after. Pills as captions below.
+   The contrast between desaturated and full-color does the talking.
+   ========================================================================== */
+.wl-sbs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    max-width: 900px;
+    width: 100%;
+}
+
+.wl-sbs-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.wl-sbs-tag {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-bottom: var(--space-3);
+}
+
+/* Image frames */
+.wl-sbs-frame {
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-bg-secondary);
+}
+
+.wl-sbs-frame--muted {
+    filter: grayscale(0.65) brightness(1.05);
+    opacity: 0.7;
+    border: 1px solid var(--color-border);
+}
+
+.wl-sbs-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Caption bullets below each image */
+.wl-sbs-captions {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.wl-sbs-caption {
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    padding-left: var(--space-3);
+    position: relative;
+}
+
+.wl-sbs-caption::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--color-text-tertiary);
+}
+
+.wl-sbs-caption--muted {
+    text-decoration: line-through;
+    text-decoration-color: var(--color-border);
+    opacity: 0.6;
+}
+
+.wl-sbs-caption--primary {
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    opacity: 1;
+}
+
+.wl-sbs-caption--secondary {
+    opacity: 0.6;
+}
+
+/* ==========================================================================
+   MODE B: STACKED
+   Vertical: Before block → animated divider → After block.
+   Scroll-reveal transformation. Works naturally on mobile.
+   ========================================================================== */
+.wl-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 900px;
+    width: 100%;
+}
+
+.wl-stack-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.wl-stack-tag {
+    display: block;
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-bottom: var(--space-3);
+}
+
+/* Image frames */
+.wl-stack-frame {
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-bg-secondary);
+}
+
+.wl-stack-frame--muted {
+    filter: grayscale(0.6) brightness(1.05);
+    opacity: 0.75;
+    border: 1px solid var(--color-border);
+}
+
+.wl-stack-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.wl-stack-summary {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    color: var(--color-text-tertiary);
+    margin-top: var(--space-3);
+    margin-bottom: 0;
+}
+
+.wl-stack-summary--primary {
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: var(--font-size-base);
+}
+
+/* Divider between Before and After — draws itself on scroll */
+.wl-stack-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-6) 0;
+    transform-origin: left center;
+}
+
+.wl-stack-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+}
+
+.wl-stack-divider-arrow {
+    color: var(--color-text-tertiary);
+    flex-shrink: 0;
+    opacity: 0.5;
+}
+
+/* ==========================================================================
+   MODE C: OVERLAY SLIDER
+   Interactive before/after with draggable vertical divider.
+   Most "show don't tell" — users physically reveal the change.
+   ========================================================================== */
+.wl-slider {
+    max-width: 900px;
+    width: 100%;
+}
+
+.wl-slider-box {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+    background: var(--color-bg-secondary);
+}
+
+/* Both layers stacked */
+.wl-slider-layer {
+    width: 100%;
+}
+
+.wl-slider-layer img,
+.wl-slider-layer .wl-ph {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Before = static base layer */
+.wl-slider-layer--before {
+    position: relative;
+}
+
+.wl-slider-layer--before img {
+    filter: grayscale(0.6) brightness(1.05);
+}
+
+/* After = overlaid on top, clipped via clip-path */
+.wl-slider-layer--after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    will-change: clip-path;
+}
+
+/* Labels pinned inside the slider */
+.wl-slider-tag {
+    position: absolute;
+    bottom: var(--space-4);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+.wl-slider-tag--left {
+    left: var(--space-4);
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+}
+
+.wl-slider-tag--right {
+    right: var(--space-4);
+    background: var(--color-accent);
+    color: var(--color-bg);
+}
+
+/* Vertical divider line */
+.wl-slider-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #fff;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 2;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Circular drag handle in the center */
+.wl-slider-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    pointer-events: auto;
+    cursor: ew-resize;
+    animation: wl-pulse 2.5s ease-in-out 1s 3;
+}
+
+@keyframes wl-pulse {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+}
+
+/* Accessible range input — invisible but functional */
+.wl-slider-range {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 3;
+    margin: 0;
+}
+
+/* Caption row below the slider */
+.wl-slider-captions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-4);
+    padding: 0 var(--space-2);
+}
+
+.wl-slider-cap {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    max-width: 45%;
+}
+
+.wl-slider-cap--primary {
+    text-align: right;
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 640px) {
+    .wl {
+        margin-top: var(--space-12);
+    }
+
+    .wl-title {
+        margin-bottom: var(--space-8);
+    }
+
+    /* Pills grid → single column */
+    .wl-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    /* Side-by-side → stacks vertically on mobile */
+    .wl-sbs {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+    }
+
+    /* Reduce placeholder height */
+    .wl-ph {
+        min-height: 180px;
+    }
+
+    .wl-caption {
+        margin-top: var(--space-8);
+    }
+
+    /* Slider captions stack */
+    .wl-slider-captions {
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .wl-slider-cap {
+        max-width: 100%;
+    }
+
+    .wl-slider-cap--primary {
+        text-align: left;
+    }
+}

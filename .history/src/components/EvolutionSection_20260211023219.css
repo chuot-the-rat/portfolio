@@ -1,0 +1,181 @@
+/* ==========================================================================
+   EVOLUTION SECTION — "Where It Evolves"
+   Flow-block diagram with stacked-surface depth, chip labels,
+   vertical connectors, and floating utility pill.
+   Product-UI inspired. All classes scoped to evo-*.
+   ========================================================================== */
+
+/* ─── Flow container ─── */
+.evo-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: var(--space-10);
+    max-width: 780px;
+}
+
+/* ─── Step wrapper (block + connector) ─── */
+.evo-step {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* ─── Vertical connector line ─── */
+.evo-connector {
+    width: 1px;
+    height: 28px;
+    margin-left: 32px;
+    background: var(--color-border);
+}
+
+/* ─── Block (the main card) ─── */
+.evo-block {
+    position: relative;
+    width: 100%;
+    padding: var(--space-6) var(--space-8);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    z-index: 2;
+    transition:
+        box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.evo-block:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.06),
+        0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* ─── Stacked surface layers ─── */
+.evo-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    pointer-events: none;
+}
+
+.evo-layer--1 {
+    z-index: -1;
+    transform: translate(3px, 3px);
+    opacity: 0.5;
+}
+
+.evo-layer--2 {
+    z-index: -2;
+    transform: translate(6px, 6px);
+    opacity: 0.25;
+}
+
+/* ─── Floating utility pill ─── */
+.evo-pill {
+    position: absolute;
+    top: -10px;
+    right: var(--space-6);
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border-radius: 20px;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.12),
+        0 0 0 2px var(--color-bg);
+    z-index: 3;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+/* ─── Chip tag label ─── */
+.evo-chip {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin-bottom: var(--space-3);
+    line-height: 1.4;
+}
+
+/* ─── Typography ─── */
+.evo-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 var(--space-2) 0;
+    line-height: 1.35;
+}
+
+.evo-outcome {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ─── Impact area ─── */
+.evo-impact-wrap {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+}
+
+.evo-impact-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-1);
+}
+
+.evo-impact {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 600px) {
+    .evo-flow {
+        max-width: 100%;
+    }
+
+    .evo-block {
+        padding: var(--space-5) var(--space-5);
+        border-radius: 12px;
+    }
+
+    .evo-layer {
+        border-radius: 12px;
+    }
+
+    .evo-connector {
+        height: 20px;
+        margin-left: 24px;
+    }
+
+    .evo-pill {
+        right: var(--space-4);
+    }
+
+    .evo-title {
+        font-size: var(--font-size-base);
+    }
+}
