@@ -1,0 +1,306 @@
+/* ==========================================================================
+   PIVOT CARDS — Before/After with imagery, strike-through, selection handles
+   Scoped: all classes prefixed pvt-
+   ========================================================================== */
+
+.pvt-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+}
+
+/* ==========================================================================
+   CARD — two-column Before / After
+   ========================================================================== */
+.pvt-card {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: var(--space-7, 28px);
+    background: var(--color-bg);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
+    padding: var(--space-7, 28px);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 4px 14px rgba(0, 0, 0, 0.025);
+    transition:
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+    overflow: hidden;
+}
+
+.pvt-card:hover {
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.04),
+        0 8px 24px rgba(0, 0, 0, 0.055);
+    border-color: rgba(0, 0, 0, 0.09);
+}
+
+/* ==========================================================================
+   SIDE — shared column styles
+   ========================================================================== */
+.pvt-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+}
+
+/* ==========================================================================
+   FRAME PLACEHOLDER (grey SVG thumbnail)
+   ========================================================================== */
+.pvt-frame {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-bg-secondary, #f5f5f5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pvt-frame-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.pvt-frame-bg {
+    color: var(--color-bg-secondary, #f5f5f5);
+}
+
+/* Before thumbnail — slightly smaller presence */
+.pvt-frame--before {
+    max-width: 220px;
+}
+
+/* After thumbnail — more prominent */
+.pvt-frame--after {
+    max-width: none;
+}
+
+/* ─── Frame label chip ─── */
+.pvt-frame-chip {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+    padding: 2px 6px;
+    line-height: 1.2;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   BEFORE SIDE — "retired" state
+   ========================================================================== */
+
+/* "Previously: …" text — readable size */
+.pvt-prev-text {
+    font-size: var(--font-size-sm);
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+    position: relative;
+}
+
+/* Inner span needed for the pseudo-element strike positioning */
+.pvt-prev-inner {
+    position: relative;
+    display: inline;
+}
+
+/*
+   IMPORTANT: Animated strike-through uses a pseudo-element, NOT text-decoration.
+   The line draws left→right on scroll reveal.
+*/
+.pvt-prev-inner::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: var(--color-text-tertiary);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s;
+}
+
+/* When card is revealed → strike draws in */
+.pvt-side--before.is-retired .pvt-prev-inner::after {
+    transform: scaleX(1);
+}
+
+/* After strike completes, dim the Before side */
+.pvt-side--before.is-retired {
+    transition: opacity 0.4s ease 0.65s;
+    opacity: 0.6;
+}
+
+/* ==========================================================================
+   AFTER SIDE — "selected" state
+   ========================================================================== */
+.pvt-after-wrap {
+    position: relative;
+    border-radius: 8px;
+    overflow: visible;
+}
+
+/* Selection outline — clips in from left */
+.pvt-after-wrap::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border: 1.5px solid var(--color-accent);
+    border-radius: 10px;
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transition:
+        clip-path 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) 0.35s,
+        opacity 0.2s ease 0.3s;
+    pointer-events: none;
+}
+
+.pvt-after-wrap.is-selected::before {
+    opacity: 0.5;
+    clip-path: inset(0 0 0 0);
+}
+
+/* ─── Selection handles — tiny corner ticks ─── */
+.pvt-handle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-color: var(--color-accent);
+    border-style: solid;
+    border-width: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.25s ease 0.6s;
+    z-index: 1;
+}
+
+.pvt-after-wrap.is-selected .pvt-handle {
+    opacity: 0.55;
+}
+
+.pvt-handle--tl {
+    top: -4px;
+    left: -4px;
+    border-top-width: 1.5px;
+    border-left-width: 1.5px;
+    border-radius: 2px 0 0 0;
+}
+
+.pvt-handle--tr {
+    top: -4px;
+    right: -4px;
+    border-top-width: 1.5px;
+    border-right-width: 1.5px;
+    border-radius: 0 2px 0 0;
+}
+
+.pvt-handle--bl {
+    bottom: -4px;
+    left: -4px;
+    border-bottom-width: 1.5px;
+    border-left-width: 1.5px;
+    border-radius: 0 0 0 2px;
+}
+
+.pvt-handle--br {
+    bottom: -4px;
+    right: -4px;
+    border-bottom-width: 1.5px;
+    border-right-width: 1.5px;
+    border-radius: 0 0 2px 0;
+}
+
+/* Handles fade out after a beat — brief "selected" flash */
+.pvt-after-wrap.is-selected .pvt-handle {
+    animation: pvt-handle-flash 1.8s ease 0.6s forwards;
+}
+
+@keyframes pvt-handle-flash {
+    0%   { opacity: 0; }
+    15%  { opacity: 0.6; }
+    60%  { opacity: 0.55; }
+    100% { opacity: 0.2; }
+}
+
+/* ==========================================================================
+   TEXT — TO headline + WHY
+   ========================================================================== */
+.pvt-to-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+    margin: var(--space-2) 0 0 0;
+}
+
+.pvt-why {
+    font-size: var(--font-size-sm);
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* ==========================================================================
+   DARK THEME
+   ========================================================================== */
+[data-theme="dark"] .pvt-card {
+    background: var(--color-bg-secondary, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.15),
+        0 4px 14px rgba(0, 0, 0, 0.10);
+}
+
+[data-theme="dark"] .pvt-card:hover {
+    border-color: rgba(255, 255, 255, 0.09);
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.18),
+        0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+[data-theme="dark"] .pvt-frame {
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .pvt-frame-chip {
+    background: var(--color-bg-secondary, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .pvt-prev-inner::after {
+    background: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 700px) {
+    .pvt-stack {
+        gap: var(--space-6);
+    }
+
+    .pvt-card {
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+        padding: var(--space-5);
+        border-radius: 12px;
+    }
+
+    .pvt-frame--before {
+        max-width: none;
+    }
+}

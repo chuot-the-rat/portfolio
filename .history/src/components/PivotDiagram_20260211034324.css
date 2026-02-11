@@ -1,0 +1,278 @@
+/* ==========================================================================
+   PIVOT CARDS — Interactive Frame Swap (Click to Replace)
+   Figma-style frame toggle: click to compare Before / After.
+   Default state: AFTER shown. No scroll triggers. No strike-through.
+   Scoped: all classes prefixed pvt-
+   ========================================================================== */
+
+/* ── Stack ── */
+.pvt-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10, 40px);
+    margin-top: var(--space-8);
+}
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+.pvt-card {
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   FRAME VIEWPORT — clickable, holds both layers
+   ========================================================================== */
+.pvt-viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1.5px solid rgba(0, 0, 0, 0.06);
+    background: var(--color-bg-secondary, #f5f5f5);
+    margin-bottom: var(--space-5, 20px);
+    /* Reset button defaults */
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    appearance: none;
+    outline: none;
+    /* Micro-interaction: subtle press + lift */
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.35s ease;
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.03),
+        0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* Hover lift (desktop) */
+.pvt-viewport:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.05),
+        0 8px 28px rgba(0, 0, 0, 0.07);
+}
+
+/* Active press: subtle scale-down for tactile feel */
+.pvt-viewport:active {
+    transform: translateY(-2px) scale(0.985);
+    transition-duration: 0.1s;
+}
+
+/* Focus ring for keyboard users */
+.pvt-viewport:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+/* Accent border when AFTER is active */
+.pvt-viewport[data-after] {
+    border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
+    animation: pvt-border-settle 0.8s ease-out forwards;
+}
+
+.pvt-viewport:not([data-after]) {
+    border-color: rgba(0, 0, 0, 0.08);
+    animation: none;
+}
+
+@keyframes pvt-border-settle {
+    0% {
+        box-shadow:
+            0 1px 3px rgba(0, 0, 0, 0.03),
+            0 4px 16px rgba(0, 0, 0, 0.04),
+            0 0 0 0 color-mix(in srgb, var(--color-accent) 0%, transparent);
+    }
+    35% {
+        box-shadow:
+            0 1px 3px rgba(0, 0, 0, 0.03),
+            0 4px 16px rgba(0, 0, 0, 0.04),
+            0 0 0 6px color-mix(in srgb, var(--color-accent) 8%, transparent);
+    }
+    100% {
+        box-shadow:
+            0 1px 3px rgba(0, 0, 0, 0.03),
+            0 4px 16px rgba(0, 0, 0, 0.04),
+            0 0 0 1px color-mix(in srgb, var(--color-accent) 18%, transparent);
+    }
+}
+
+/* ==========================================================================
+   FRAME LAYERS — stacked via absolute positioning
+   ========================================================================== */
+.pvt-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+/* Before layer: slight desaturation when visible */
+.pvt-layer--before {
+    z-index: 1;
+    filter: grayscale(0.2);
+}
+
+/* After layer: crisp, on top */
+.pvt-layer--after {
+    z-index: 2;
+}
+
+/* SVG thumbnails */
+.pvt-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.pvt-svg-bg {
+    fill: var(--color-bg-secondary, #f5f5f5);
+}
+
+.pvt-cta {
+    fill: var(--color-accent);
+}
+
+/* ==========================================================================
+   TOGGLE INDICATOR — top-right corner
+   ========================================================================== */
+.pvt-indicator {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    z-index: 5;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    line-height: 1;
+}
+
+.pvt-viewport:hover .pvt-indicator {
+    opacity: 0.85;
+}
+
+/* ==========================================================================
+   TEXT BLOCK — below frame, swaps with active state
+   ========================================================================== */
+.pvt-text {
+    padding: 0 var(--space-1, 4px);
+    min-height: 80px;
+}
+
+.pvt-title {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 650;
+    line-height: 1.35;
+    color: var(--color-text);
+    letter-spacing: -0.015em;
+    margin: 0 0 var(--space-2, 8px) 0;
+}
+
+.pvt-desc {
+    font-size: clamp(1rem, 1.1vw, 1.1rem);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 620px;
+}
+
+/* ==========================================================================
+   DARK THEME
+   ========================================================================== */
+[data-theme="dark"] .pvt-viewport {
+    background: var(--color-bg-secondary, #1a1a1a);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.15),
+        0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .pvt-viewport:hover {
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        0 8px 28px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="dark"] .pvt-viewport[data-after] {
+    border-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
+
+[data-theme="dark"] .pvt-viewport:not([data-after]) {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .pvt-svg-bg {
+    fill: var(--color-bg-secondary, #1a1a1a);
+}
+
+[data-theme="dark"] .pvt-layer--before {
+    filter: grayscale(0.15);
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .pvt-viewport,
+    .pvt-layer,
+    .pvt-indicator {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .pvt-viewport:hover {
+        transform: none;
+    }
+
+    .pvt-viewport:active {
+        transform: none;
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 768px) {
+    .pvt-stack {
+        gap: var(--space-8);
+    }
+
+    .pvt-viewport {
+        aspect-ratio: 4 / 3;
+        border-radius: 12px;
+    }
+
+    .pvt-viewport:hover {
+        transform: none;
+    }
+
+    .pvt-viewport:active {
+        transform: scale(0.985);
+    }
+
+    .pvt-indicator {
+        top: 10px;
+        right: 10px;
+        font-size: 0.7rem;
+    }
+
+    .pvt-title {
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+    }
+}

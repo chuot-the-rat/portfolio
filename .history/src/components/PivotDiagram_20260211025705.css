@@ -1,0 +1,189 @@
+/* ==========================================================================
+   FIGMA-PANEL PIVOT CARDS
+   Soft lifted surfaces, selection-strip accent, two-column states.
+   All classes prefixed fpv- to avoid collisions.
+   ========================================================================== */
+
+/* ─── Stack ─── */
+.fpv-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+}
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+.fpv-card {
+    position: relative;
+    background: var(--color-bg);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
+    padding: var(--space-7, 28px) var(--space-7, 28px) var(--space-6);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 4px 12px rgba(0, 0, 0, 0.03);
+    transition:
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+    overflow: hidden;
+}
+
+.fpv-card:hover {
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.04),
+        0 8px 24px rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.10);
+}
+
+/* ─── Dark theme ─── */
+[data-theme="dark"] .fpv-card {
+    background: var(--color-bg-secondary, #1e1e1e);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+[data-theme="dark"] .fpv-card:hover {
+    border-color: rgba(255, 255, 255, 0.10);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* ==========================================================================
+   SELECTION STRIP — left edge accent
+   ========================================================================== */
+.fpv-select-strip {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    bottom: 8px;
+    width: 2.5px;
+    border-radius: 0 2px 2px 0;
+    background: var(--color-accent);
+    transform-origin: center top;
+    opacity: 0.7;
+}
+
+.fpv-card:hover .fpv-select-strip {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   TWO-COLUMN LAYOUT  (FROM  ·chevron·  TO)
+   ========================================================================== */
+.fpv-columns {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--space-5, 20px);
+    align-items: start;
+}
+
+/* ─── Arrow / chevron ─── */
+.fpv-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px; /* align with body text */
+    color: var(--color-text-tertiary);
+    opacity: 0.35;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   TAGS & BODY TEXT
+   ========================================================================== */
+.fpv-tag {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    margin-bottom: 6px;
+    line-height: 1;
+}
+
+.fpv-body {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* FROM — slightly muted */
+.fpv-col--from .fpv-body {
+    color: var(--color-text-secondary);
+}
+
+/* TO — emphasized */
+.fpv-body--emphasis {
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.fpv-card:hover .fpv-body--emphasis {
+    color: var(--color-accent);
+}
+
+/* WHY — lighter */
+.fpv-body--muted {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* ==========================================================================
+   REASON (WHY) — sits below columns
+   ========================================================================== */
+.fpv-reason {
+    margin-top: var(--space-5, 20px);
+    padding-top: var(--space-4, 16px);
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .fpv-reason {
+    border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 640px) {
+    .fpv-stack {
+        gap: var(--space-5);
+    }
+
+    .fpv-card {
+        padding: var(--space-5) var(--space-5) var(--space-4);
+        border-radius: 12px;
+    }
+
+    .fpv-columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .fpv-col--from {
+        padding-bottom: var(--space-3);
+    }
+
+    .fpv-arrow {
+        padding-top: 0;
+        justify-content: center;
+        transform: rotate(90deg);
+        padding: var(--space-1) 0;
+        opacity: 0.25;
+    }
+
+    .fpv-col--to {
+        padding-top: var(--space-3);
+    }
+
+    .fpv-reason {
+        margin-top: var(--space-4);
+        padding-top: var(--space-3);
+    }
+}

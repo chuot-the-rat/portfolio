@@ -1,0 +1,253 @@
+/* ==========================================================================
+   WORK MODE - Terminal-Style Hero / System Console
+   Modern editorial system interface, not retro cosplay
+   ========================================================================== */
+
+/* Hide default hero, show terminal hero */
+.mode-work .hero-content-default,
+.mode-work .hero-ctas-default {
+    display: none;
+}
+
+.mode-work .hero-content-terminal,
+.mode-work .hero-ctas-terminal {
+    display: block;
+}
+
+/* Terminal Hero Container */
+.mode-work .home-hero {
+    background: #0a0a0a;
+    background: linear-gradient(135deg, #0f0f0f 0%, #0a0a0a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+    margin-bottom: clamp(4rem, 8vw, 8rem);
+    margin-top: -2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-work .home-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+}
+
+/* Terminal Lines */
+.terminal-line {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: clamp(0.9rem, 1.5vw, 1.125rem);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.02em;
+}
+
+.terminal-prompt {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.terminal-text {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+}
+
+.terminal-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    min-width: 90px;
+    display: inline-block;
+}
+
+.terminal-value {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+}
+
+/* Blinking cursor */
+.terminal-cursor {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: clamp(0.9rem, 1.5vw, 1.125rem);
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 0.25rem;
+    display: inline-block;
+}
+
+/* Terminal CTAs - Command-style links */
+.hero-ctas-terminal {
+    display: flex;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    align-items: center;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    flex-wrap: wrap;
+}
+
+.terminal-cta-link {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    position: relative;
+    padding: 0.125rem 0;
+    transition: all 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+    letter-spacing: 0.02em;
+}
+
+.terminal-cta-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.terminal-cta-link:hover {
+    color: rgba(255, 255, 255, 1);
+    transform: translateX(3px);
+}
+
+.terminal-cta-link:hover::after {
+    transform: scaleX(1);
+}
+
+.terminal-separator {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.3);
+    user-select: none;
+}
+
+/* Clean/Chaos modes - hide terminal hero */
+.mode-clean .hero-content-terminal,
+.mode-clean .hero-ctas-terminal,
+.mode-chaos .hero-content-terminal,
+.mode-chaos .hero-ctas-terminal {
+    display: none;
+}
+
+.mode-clean .hero-content-default,
+.mode-clean .hero-ctas-default,
+.mode-chaos .hero-content-default,
+.mode-chaos .hero-ctas-default {
+    display: grid;
+    display: flex;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mode-work .home-hero {
+        padding: 2rem 1.5rem;
+        margin-top: 0;
+    }
+
+    .terminal-line {
+        font-size: 0.8125rem;
+    }
+
+    .terminal-label {
+        min-width: 70px;
+    }
+
+    .hero-ctas-terminal {
+        gap: 0.75rem;
+    }
+
+    .terminal-cta-link {
+        font-size: 0.75rem;
+    }
+}
+
+/* Accessibility - Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .terminal-cursor {
+        animation: none !important;
+        opacity: 0.7 !important;
+    }
+
+    .terminal-cta-link {
+        transition: none !important;
+    }
+
+    .terminal-cta-link:hover {
+        transform: none !important;
+    }
+}
+
+/* ==========================================================================
+   WORK MODE - Other System Sections
+   ========================================================================== */
+
+/* Hero Section - System Header */
+.mode-work .hero-section::before {
+    content: '[system_interface]';
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-system-label);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.mode-work .hero-section {
+    border-left: 2px solid var(--color-border);
+    padding-left: 2rem;
+}
+
+.mode-work .hero-title {
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.mode-work .hero-description {
+    color: var(--color-text-secondary);
+    max-width: 42rem;
+}
+
+/* Projects Section - Work Index */
+.mode-work .projects-section::before {
+    content: '[selected_work]';
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-system-label);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+}
+
+.mode-work .projects-section {
+    border-top: 1px solid var(--color-border);
+    padding-top: 3rem;
+}
+
+.mode-work .section-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+}
+
+.mode-work .section-eyebrow {
+    color: var(--color-system-label);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+}

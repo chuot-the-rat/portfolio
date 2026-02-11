@@ -1,0 +1,864 @@
+{
+    "meta": {
+        "version": "2.0",
+        "author": "Leana Le",
+        "site": "leanale.com",
+        "last_updated": "2025-02",
+        "purpose": "Portfolio case studies with prototype-aware content",
+        "notes": "All projects are student projects. No fabricated metrics. Prototypes appear after their referenced sections."
+    },
+    "case_studies": [
+        {
+            "id": "prolog",
+            "slug": "prolog",
+            "title": "ProLog",
+            "subtitle": "A journey companion for neurodivergent apprentices",
+            "summary": "A centralized apprenticeship companion helping neurodivergent apprentices track progress, reduce cognitive overload, and build confidence through clear visualization and structured tools.",
+            "project_type": "Mobile application",
+            "status": "completed",
+            "year": "2025",
+            "duration": "4 months",
+            "context": "School project in collaboration with ConnectHER at BCIT",
+            "team_size": 8,
+            "role": ["Developer", "Researcher"],
+            "responsibilities": [
+                "Led technical implementation and prototyping",
+                "Conducted policy and documentation research",
+                "Contributed to persona development"
+            ],
+            "tools_used": {
+                "design": ["Figma", "FigJam", "Adobe Illustrator"],
+                "development": ["React Native", "JavaScript"],
+                "research": ["Trello", "Google Forms", "Notion"],
+                "other": ["GitHub", "VS Code"]
+            },
+            "media": {
+                "thumbnail": "/projects/prolog/thumbnail.png",
+                "icon": "/projects/prolog/icon.svg",
+                "hero_image": "/projects/prolog/hero.png",
+                "og_image": "/projects/prolog/og-image.png"
+            },
+            "sections": {
+                "hook": {
+                    "content": "Apprenticeship can take over 6,000 hours. That's years of work, spread across job sites, classrooms, and bureaucratic systems—often without a clear sense of whether you're on track.\n\nEarly in our research, we kept hearing the same thing: confusion was pushing people out. Not inability. Not lack of motivation. Just confusion about where they stood and what came next.\n\nWe wanted to build something that answered one question clearly: Where am I right now?"
+                },
+                "problem_framing": {
+                    "content": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind."
+                },
+                "research_process": {
+                    "methods": [
+                        "Policy and documentation review (SkilledTradesBC)",
+                        "Stakeholder conversations with industry partners",
+                        "Persona development based on lived experience",
+                        "Team reflection sessions (our team included neurodivergent members)"
+                    ],
+                    "key_findings": [
+                        "Progress tracking is scattered across multiple platforms with no single source of truth",
+                        "Official systems are desktop-first and difficult to use on job sites",
+                        "Discrepancies between employer-logged and self-logged hours create anxiety",
+                        "Neurodivergent users experience amplified cognitive load from inconsistent interfaces"
+                    ],
+                    "participant_count": null,
+                    "reflection": "We didn't have access to a large participant pool, so we leaned into what we did have: our own team's lived experience, publicly available documentation, and honest conversations with stakeholders. This shaped a more empathetic, if narrower, understanding of the problem."
+                },
+                "early_challenges": {
+                    "content": "This project started too big.\n\nWe wanted to fix financial stress, employer communication, exam preparation, and progress tracking—all at once. Our advisor encouraged broad exploration, which felt productive at first but eventually led to paralysis.\n\nIt wasn't until we accepted that we couldn't solve everything that the project started moving. Narrowing our focus to neurodivergent apprentices gave us permission to go deeper instead of wider."
+                },
+                "pivots": [
+                    {
+                        "from": "Solving all apprenticeship problems",
+                        "to": "Supporting neurodivergent apprentices specifically",
+                        "reason": "A narrower scope allowed us to design with real empathy instead of generic assumptions. We could make decisions based on specific needs rather than trying to please everyone."
+                    }
+                ],
+                "pivot": {
+                    "timelineSteps": [
+                        "Research",
+                        "Overexpansion",
+                        "Realization",
+                        "Refocus",
+                        "Build"
+                    ],
+                    "highlightedStep": "Realization",
+                    "removedFeatures": [
+                        "Financial planning tools and budget calculators",
+                        "Employer communication portal",
+                        "Full exam preparation suite",
+                        "Social features and community forums"
+                    ],
+                    "reflection": "Cutting these features wasn't giving up—it was choosing depth over breadth. Each one was a good idea on its own, but together they diluted the product into something generic.",
+                    "weightLifted": {
+                        "title": "From 6 problem spaces to 1 clear focus",
+                        "displayMode": "side-by-side",
+                        "principleLabel": "Less but better",
+                        "beforeItems": [
+                            "Financial planning",
+                            "Employer portal",
+                            "Exam prep suite",
+                            "Community forums",
+                            "Calendar management",
+                            "Generic apprentice tools"
+                        ],
+                        "afterPrimary": "Neurodivergent apprentice support",
+                        "afterSecondary": [
+                            "Progress tracking",
+                            "Hour logging",
+                            "Next-step prompts"
+                        ],
+                        "caption": "Every feature we removed made space for the ones that actually mattered. Depth over breadth turned a generic tool into something personal."
+                    }
+                },
+                "lofi_phase": {
+                    "content": "Our early sketches were deliberately rough. We weren't trying to make things look good—we were trying to understand what information mattered most and how quickly someone could find it.\n\nThe dashboard concept emerged early. We kept asking ourselves: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else was secondary.",
+                    "images": [
+                        {
+                            "src": "/projects/prolog/lofi-1.png",
+                            "alt": "Early dashboard wireframe sketches",
+                            "caption": "Initial explorations of progress visualization"
+                        },
+                        {
+                            "src": "/projects/prolog/lofi-2.png",
+                            "alt": "Hours tracking flow wireframes",
+                            "caption": "Mapping the hour logging experience"
+                        }
+                    ]
+                },
+                "hifi_phase": {
+                    "content": "The high-fidelity designs prioritized calm. We chose soft colors, generous spacing, and typography that wouldn't feel clinical or overwhelming.\n\nThe dashboard became the emotional center of the app. Instead of hiding progress behind menus, we made it the first thing users see. Hours completed, hours remaining, competencies achieved—all visible at a glance.\n\nTry scrolling through the dashboard below. Notice how the most important information stays anchored at the top, while details reveal themselves as you explore.",
+                    "images": [
+                        {
+                            "src": "/projects/prolog/hifi-1.png",
+                            "alt": "Final dashboard design",
+                            "caption": "The dashboard provides immediate progress visibility"
+                        },
+                        {
+                            "src": "/projects/prolog/hifi-2.png",
+                            "alt": "Hours tracker interface",
+                            "caption": "Discrepancy detection and logging"
+                        },
+                        {
+                            "src": "/projects/prolog/hifi-3.png",
+                            "alt": "Quiz preparation screen",
+                            "caption": "AI-generated practice questions"
+                        }
+                    ],
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/prolog-hifi-dashboard",
+                        "embed_url": "",
+                        "description": "Explore the dashboard experience. Pay attention to how progress is communicated without requiring any taps.",
+                        "type": "figma"
+                    }
+                },
+                "development": {
+                    "content": "As the developer on this project, I had to keep myself honest. It's easy to design features that sound impressive but would require complex backend infrastructure we couldn't build.\n\nData syncing with official systems? Not feasible without partnerships we didn't have. AI-generated quizzes? Possible, but only if we scoped them carefully.\n\nEvery feature was evaluated against a simple question: can we actually build this responsibly?",
+                    "technical_decisions": [
+                        "Chose React Native for cross-platform efficiency",
+                        "Designed offline-first architecture for job site use",
+                        "Scoped AI features to avoid overpromising"
+                    ],
+                    "constraints": [
+                        "No access to official SkilledTradesBC APIs",
+                        "Limited timeline for backend development",
+                        "Team learning curve with mobile development"
+                    ]
+                },
+                "feature_breakdown": {
+                    "intro": "Each feature was designed to reduce one specific point of friction. Click through the prototype below to see how they work together.",
+                    "features": [
+                        {
+                            "id": "dashboard",
+                            "title": "Progress Dashboard",
+                            "description": "A centralized view of hours completed, hours remaining, competencies achieved, and certification progress. No digging required—the answer to 'where am I?' is always visible.",
+                            "why": "Apprentices told us they often felt lost in their journey. The dashboard acts as a GPS, providing constant orientation.",
+                            "image": "/projects/prolog/feature-dashboard.png"
+                        },
+                        {
+                            "id": "hours_tracker",
+                            "title": "Hours Discrepancy Detector",
+                            "description": "Compares user-logged hours against official records and flags mismatches. Users can document discrepancies and generate reports for their employers.",
+                            "why": "Hour discrepancies are stressful and common. Rather than fixing the problem, we gave users tools to advocate for themselves.",
+                            "image": "/projects/prolog/feature-hours.png"
+                        },
+                        {
+                            "id": "financial_resources",
+                            "title": "Financial Resources Hub",
+                            "description": "Links to grants, funding programs, and itemized cost breakdowns for apprenticeship expenses.",
+                            "why": "Financial stress came up repeatedly in research. We couldn't solve it, but we could make information easier to find.",
+                            "image": "/projects/prolog/feature-financial.png"
+                        },
+                        {
+                            "id": "ai_competency_quiz",
+                            "title": "AI Practice Quizzes",
+                            "description": "Generates unique practice questions based on trade competencies. Designed to build confidence before official exams.",
+                            "why": "Many apprentices feel unprepared for certification exams. Low-stakes practice helps reduce that anxiety.",
+                            "image": "/projects/prolog/feature-quiz.png"
+                        }
+                    ],
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/prolog-features",
+                        "embed_url": "",
+                        "description": "Walk through each feature. Start with the dashboard, then explore the hours tracker and quiz flow.",
+                        "type": "figma"
+                    }
+                },
+                "validation": {
+                    "content": "We tested the prototype with a small group and heard something we didn't expect: relief.\n\nUsers described the dashboard as a 'GPS for my apprenticeship.' They appreciated that they didn't have to hunt for information—it was just there.\n\nThe hours tracker resonated especially strongly. One participant said they'd never realized they could document discrepancies themselves.\n\nThese weren't metrics we could quantify, but they felt meaningful.",
+                    "method": "Moderated usability testing",
+                    "participant_count": null,
+                    "key_quotes": [
+                        {
+                            "quote": "It's like a GPS for my apprenticeship.",
+                            "attribution": "Test participant"
+                        },
+                        {
+                            "quote": "I never realized I could document discrepancies myself.",
+                            "attribution": "Test participant"
+                        }
+                    ],
+                    "outcomes": [
+                        "Users reported feeling relieved by progress visibility",
+                        "Hours tracker addressed a previously unmet need",
+                        "Dashboard-first approach validated"
+                    ]
+                },
+                "what_i_learned": [
+                    {
+                        "insight": "Clarity is an emotional outcome",
+                        "reflection": "When users said they felt 'relieved,' they were responding to design decisions—not just information architecture."
+                    },
+                    {
+                        "insight": "Scope control is a design skill",
+                        "reflection": "Saying no to good ideas was harder than coming up with them."
+                    },
+                    {
+                        "insight": "Progress visualization restores motivation",
+                        "reflection": "Seeing how far you've come matters as much as knowing what's next."
+                    },
+                    {
+                        "insight": "Qualitative feedback is valid",
+                        "reflection": "In student work, we don't always have access to large sample sizes. That doesn't make insights less real."
+                    }
+                ],
+                "next_steps": [
+                    {
+                        "item": "Pursue data partnerships with SkilledTradesBC to enable real-time syncing",
+                        "priority": "high"
+                    },
+                    {
+                        "item": "Expand accessibility features including screen reader optimization and high-contrast modes",
+                        "priority": "medium"
+                    },
+                    {
+                        "item": "Develop offline-friendly experiences for use on job sites with limited connectivity",
+                        "priority": "medium"
+                    }
+                ],
+                "final_experience": {
+                    "intro": "The prototype below represents the complete flow we envisioned—from opening the app to checking progress, logging hours, and preparing for exams.\n\nAs you explore, notice how each screen tries to answer a question before you have to ask it.",
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/prolog-final",
+                        "embed_url": "",
+                        "description": "Click through the full experience. Start from the dashboard and follow the natural flow.",
+                        "type": "figma"
+                    }
+                }
+            },
+            "links": {
+                "live": "",
+                "github": "",
+                "figma": "https://www.figma.com/file/prolog",
+                "case_study_pdf": ""
+            },
+            "tags": [
+                "mobile",
+                "accessibility",
+                "neurodivergent",
+                "apprenticeship",
+                "progress-tracking"
+            ],
+            "featured": true,
+            "order": 1
+        },
+        {
+            "id": "inklink",
+            "slug": "inklink",
+            "title": "InkLink",
+            "subtitle": "Breaking writer's block through collaboration",
+            "summary": "A chain-writing platform that reduces writer's block by turning writing into a shared, low-pressure activity where users contribute one passage at a time.",
+            "project_type": "Collaborative writing app",
+            "status": "completed",
+            "year": "2025",
+            "duration": "4 months",
+            "context": "School project",
+            "team_size": 8,
+            "role": ["Researcher", "UI/UX Designer"],
+            "responsibilities": [
+                "Led user research and concept validation",
+                "Designed high-fidelity interfaces",
+                "Conducted usability testing"
+            ],
+            "tools_used": {
+                "design": ["Figma", "FigJam"],
+                "development": [],
+                "research": ["Google Forms", "Notion"],
+                "other": []
+            },
+            "media": {
+                "thumbnail": "/projects/inklink/thumbnail.png",
+                "icon": "/projects/inklink/icon.svg",
+                "hero_image": "/projects/inklink/hero.png",
+                "og_image": "/projects/inklink/og-image.png"
+            },
+            "sections": {
+                "hook": {
+                    "content": "Everyone has a story they never finished.\n\nMaybe it's a novel that stalled at chapter three. Maybe it's a screenplay that never made it past the outline. The ideas were there—the momentum wasn't.\n\nInkLink started with a simple question: what if writing didn't have to be a solo activity? What if the pressure of finishing was replaced by the fun of contributing?"
+                },
+                "problem_framing": {
+                    "content": "Writer's block isn't usually about running out of ideas. It's about pressure.\n\nThe blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nWe wanted to design an experience that removed those barriers—not by making writing easier, but by making it shared."
+                },
+                "research_process": {
+                    "methods": [
+                        "Peer surveys with amateur and hobbyist writers",
+                        "Usability testing on early concepts",
+                        "Concept validation sessions to gauge interest"
+                    ],
+                    "key_findings": [
+                        "Most creative writing happens on desktop or tablet—not mobile phones",
+                        "Dense, text-heavy layouts discourage reading and contribution",
+                        "New concepts require gentle onboarding; users won't explore without guidance"
+                    ],
+                    "participant_count": null,
+                    "reflection": "Our initial assumption was that mobile-first would work. Research quickly proved us wrong. Writers wanted screen real estate. They wanted to see the story unfold."
+                },
+                "early_challenges": {
+                    "content": ""
+                },
+                "pivots": [
+                    {
+                        "from": "Mobile-first design",
+                        "to": "Tablet-first design",
+                        "reason": "Writers consistently preferred larger screens. Mobile felt cramped for both reading and contributing."
+                    },
+                    {
+                        "from": "Newspaper-style multi-column UI",
+                        "to": "Clean, minimal single-column layout",
+                        "reason": "The newspaper aesthetic looked interesting but hurt readability. Hierarchy got lost in the visual noise."
+                    },
+                    {
+                        "from": "Feature-heavy homepage with multiple entry points",
+                        "to": "Single clear call-to-action",
+                        "reason": "Users were overwhelmed by options. One clear path reduced hesitation."
+                    }
+                ],
+                "pivot": {
+                    "timelineSteps": [
+                        "Research",
+                        "Visual Exploration",
+                        "Realization",
+                        "Simplification",
+                        "Build"
+                    ],
+                    "highlightedStep": "Realization",
+                    "removedFeatures": [
+                        "Branching narrative paths",
+                        "Real-time collaborative editing",
+                        "Newspaper-style multi-column layout",
+                        "Multiple homepage entry points and discovery filters"
+                    ],
+                    "reflection": "Every feature we removed made the core experience stronger. InkLink became better by doing less.",
+                    "weightLifted": {
+                        "title": "From a feature-heavy homepage to a single clear action",
+                        "displayMode": "slider",
+                        "principleLabel": "Clarity through subtraction",
+                        "beforeItems": [
+                            "Branching narratives",
+                            "Real-time editing",
+                            "Newspaper layout",
+                            "Multiple entry points",
+                            "Discovery filters",
+                            "Genre browsing"
+                        ],
+                        "afterPrimary": "Read. Write. Pass it on.",
+                        "afterSecondary": [
+                            "Story chain view",
+                            "Simple contribution flow"
+                        ],
+                        "caption": "The homepage had six ways to start. Users chose none. One clear call-to-action made them choose every time."
+                    }
+                },
+                "lofi_phase": {
+                    "content": "Our lo-fi work focused on one core interaction: contributing to a story.\n\nWe sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic—we needed to test logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
+                    "images": [
+                        {
+                            "src": "/projects/inklink/lofi-1.png",
+                            "alt": "Story chain wireframe",
+                            "caption": "Early exploration of the contribution flow"
+                        },
+                        {
+                            "src": "/projects/inklink/lofi-2.png",
+                            "alt": "Turn-taking wireframe",
+                            "caption": "Mapping turn order and notifications"
+                        }
+                    ]
+                },
+                "hifi_phase": {
+                    "content": "The high-fidelity designs leaned into typography and whitespace. We wanted the words to breathe.\n\nColor was used sparingly—mostly to indicate interactive elements and turn status. The writing itself stayed neutral, letting each contributor's voice come through without visual interference.\n\nScroll through the reading experience below. Notice how the interface disappears when you're focused on the story.",
+                    "images": [
+                        {
+                            "src": "/projects/inklink/hifi-1.png",
+                            "alt": "Story reading view",
+                            "caption": "Clean reading experience with minimal UI"
+                        },
+                        {
+                            "src": "/projects/inklink/hifi-2.png",
+                            "alt": "Contribution editor",
+                            "caption": "Writing interface with previous context visible"
+                        }
+                    ],
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/inklink-hifi-reading",
+                        "embed_url": "",
+                        "description": "Experience the reading flow. Tap a story to open it, then scroll through contributions.",
+                        "type": "figma"
+                    }
+                },
+                "development": {
+                    "content": "This project was design-focused, but we kept implementation in mind throughout. Real-time collaboration features were scoped out early—they would have required backend complexity beyond our timeline.\n\nInstead, we designed for asynchronous contribution. Turn-based writing actually fit the concept better: it gave each contributor time to think.",
+                    "technical_decisions": [
+                        "Designed for asynchronous rather than real-time collaboration",
+                        "Prioritized tablet-first responsive design",
+                        "Scoped out complex features like branching narratives"
+                    ],
+                    "constraints": [
+                        "Limited development resources on team",
+                        "Real-time sync would require significant backend work",
+                        "Needed to support multiple device sizes"
+                    ]
+                },
+                "feature_breakdown": {
+                    "intro": "InkLink has three core modes of engagement. Explore them in the prototype below.",
+                    "features": [
+                        {
+                            "id": "public_projects",
+                            "title": "Public Story Chains",
+                            "description": "Open stories that anyone can contribute to. Writers join, add a passage, and pass the story forward.",
+                            "why": "Low barrier to entry. No commitment required—just jump in and write.",
+                            "image": "/projects/inklink/feature-public.png"
+                        },
+                        {
+                            "id": "private_projects",
+                            "title": "Private Writing Circles",
+                            "description": "Invite-only spaces for friends or writing groups. Turn order is set by the creator.",
+                            "why": "Some writers want collaboration without strangers. Private circles offer that control.",
+                            "image": "/projects/inklink/feature-private.png"
+                        },
+                        {
+                            "id": "timed_turns",
+                            "title": "Timed Contributions",
+                            "description": "Optional time limits encourage momentum. If a turn expires, the next writer can step in.",
+                            "why": "Deadlines reduce overthinking. A 24-hour window is long enough to be fair, short enough to keep stories moving.",
+                            "image": "/projects/inklink/feature-timed.png"
+                        }
+                    ],
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/inklink-features",
+                        "embed_url": "",
+                        "description": "Start a new story, invite a friend, or join an existing chain. Follow the prompts to see each flow.",
+                        "type": "figma"
+                    }
+                },
+                "validation": {
+                    "content": "Testers described InkLink as 'fun'—which felt like a win.\n\nThe reduced pressure was noticeable. Users said they felt less precious about their contributions because they knew someone else would build on them.\n\nOne tester mentioned that the time limit actually helped: 'I stopped trying to make it perfect because I knew I only had a day.'",
+                    "method": "Moderated usability testing",
+                    "participant_count": null,
+                    "key_quotes": [
+                        {
+                            "quote": "I stopped trying to make it perfect because I knew I only had a day.",
+                            "attribution": "Test participant"
+                        }
+                    ],
+                    "outcomes": [
+                        "Users described the experience as 'fun'",
+                        "Reduced pressure led to less perfectionism",
+                        "Time limits helped rather than hurt the experience"
+                    ]
+                },
+                "what_i_learned": [
+                    {
+                        "insight": "Creativity benefits from constraints",
+                        "reflection": "Limiting options (one clear CTA, timed turns) reduced friction instead of adding it."
+                    },
+                    {
+                        "insight": "Visual clarity beats thematic styling",
+                        "reflection": "The newspaper aesthetic was fun but counterproductive."
+                    },
+                    {
+                        "insight": "Reducing features can increase engagement",
+                        "reflection": "We cut more than we added—and the product got better."
+                    }
+                ],
+                "next_steps": [
+                    {
+                        "item": "Add saved drafts so writers can step away mid-contribution",
+                        "priority": "high"
+                    },
+                    {
+                        "item": "Improve accessibility with keyboard navigation and screen reader support",
+                        "priority": "medium"
+                    },
+                    {
+                        "item": "Design better onboarding for first-time users unfamiliar with chain writing",
+                        "priority": "medium"
+                    }
+                ],
+                "final_experience": {
+                    "intro": "The prototype below shows the complete InkLink experience—from discovering a story to making your first contribution.\n\nPay attention to how little stands between you and writing. That was intentional.",
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/inklink-final",
+                        "embed_url": "",
+                        "description": "Click through the full flow. Find a story, read what others have written, and add your own passage.",
+                        "type": "figma"
+                    }
+                }
+            },
+            "links": {
+                "live": "",
+                "github": "",
+                "figma": "https://www.figma.com/file/inklink",
+                "case_study_pdf": ""
+            },
+            "tags": [
+                "collaboration",
+                "writing",
+                "creativity",
+                "tablet-first",
+                "async"
+            ],
+            "featured": true,
+            "order": 2
+        },
+        {
+            "id": "sidequest",
+            "slug": "sidequest",
+            "title": "SideQuest",
+            "subtitle": "Turning boredom into micro-adventures",
+            "summary": "A web app that helps users discover small, low-commitment activities to break routine, reframing free time as an opportunity rather than a void to fill.",
+            "project_type": "Web application",
+            "status": "completed",
+            "year": "2024",
+            "duration": "4 months",
+            "context": "School project",
+            "team_size": 3,
+            "role": ["Researcher", "UI/UX Designer", "Developer"],
+            "responsibilities": [
+                "Led end-to-end design process",
+                "Conducted user research and testing",
+                "Built functional prototype"
+            ],
+            "tools_used": {
+                "design": ["Figma", "FigJam", "Illustrator"],
+                "development": ["React", "JavaScript", "CSS"],
+                "research": ["Google Forms", "Notion"],
+                "other": ["GitHub", "VS Code", "Vercel"]
+            },
+            "media": {
+                "thumbnail": "/projects/sidequest/thumbnail.png",
+                "icon": "/projects/sidequest/icon.svg",
+                "hero_image": "/projects/sidequest/hero.png",
+                "og_image": "/projects/sidequest/og-image.png"
+            },
+            "sections": {
+                "hook": {
+                    "content": "You have a free afternoon. Nothing planned. No obligations.\n\nSo you open your phone, scroll through options, and thirty minutes later you're still on the couch—paralyzed by choice, defaulting to nothing.\n\nSideQuest was designed for that moment. Not to give you more options, but to give you one good one."
+                },
+                "problem_framing": {
+                    "content": "Boredom isn't really about having nothing to do. It's about having too much to choose from and not enough motivation to pick.\n\nEvery app promises endless possibilities. But endless possibilities require endless decisions. And decisions are exhausting.\n\nWe wanted to flip that model. Instead of showing users everything they could do, we'd suggest one thing they might enjoy—and make it easy to say yes."
+                },
+                "research_process": {
+                    "methods": [
+                        "Persona creation based on peer interviews",
+                        "Usability testing with paper prototypes",
+                        "Competitive analysis of activity discovery apps"
+                    ],
+                    "key_findings": [
+                        "Users want low-pressure activities that don't require planning",
+                        "Choice overload causes hesitation and often leads to inaction",
+                        "Guided suggestions outperform open-ended discovery"
+                    ],
+                    "participant_count": null,
+                    "reflection": "We assumed people wanted more options. They didn't. They wanted someone—or something—to just tell them what to do."
+                },
+                "early_challenges": {
+                    "content": ""
+                },
+                "pivots": [
+                    {
+                        "from": "Dense filters and category lists",
+                        "to": "Lightweight 'quests' with minimal filtering",
+                        "reason": "Every filter we added made users less likely to act. Simplicity won."
+                    }
+                ],
+                "pivot": {
+                    "timelineSteps": [
+                        "Research",
+                        "Overbuilding",
+                        "Realization",
+                        "Refocus",
+                        "Build"
+                    ],
+                    "highlightedStep": "Realization",
+                    "removedFeatures": [
+                        "Location-based filtering",
+                        "Duration and cost filters",
+                        "Category browsing and tag system",
+                        "User accounts and saved preferences"
+                    ],
+                    "reflection": "We kept asking 'what if we add one more filter?' until we realized every filter was another reason not to act. The best feature was removing features.",
+                    "weightLifted": {
+                        "title": "From 5 filters to 1 button",
+                        "displayMode": "stacked",
+                        "principleLabel": "Action over options",
+                        "beforeItems": [
+                            "Location filter",
+                            "Duration filter",
+                            "Cost filter",
+                            "Category browser",
+                            "Tag system"
+                        ],
+                        "afterPrimary": "Give me a quest",
+                        "afterSecondary": ["Surprise-based discovery"],
+                        "caption": "Every filter was another reason not to act. One button removed every excuse."
+                    }
+                },
+                "lofi_phase": {
+                    "content": "Our early wireframes had too many buttons.\n\nFilters for location, duration, cost, category—all logical, all counterproductive. Users would hover over options without committing to any of them.\n\nWe stripped it back. One primary action: 'Give me a quest.' Everything else became optional.",
+                    "images": [
+                        {
+                            "src": "/projects/sidequest/lofi-1.png",
+                            "alt": "Early wireframe with filters",
+                            "caption": "Initial designs with too many options"
+                        }
+                    ]
+                },
+                "hifi_phase": {
+                    "content": "The high-fidelity designs introduced a mascot—a small character that guides users through the experience without feeling childish.\n\nWe used playful language ('quest' instead of 'activity') and warm colors to make the app feel inviting rather than utilitarian. The goal was to lower emotional resistance.\n\nTap the button below to receive a quest. Notice how little friction there is between wanting to do something and seeing a suggestion.",
+                    "images": [
+                        {
+                            "src": "/projects/sidequest/hifi-1.png",
+                            "alt": "Home screen with mascot",
+                            "caption": "The mascot welcomes users with a single clear action"
+                        },
+                        {
+                            "src": "/projects/sidequest/hifi-2.png",
+                            "alt": "Quest card",
+                            "caption": "Quest suggestions are simple and actionable"
+                        },
+                        {
+                            "src": "/projects/sidequest/hifi-3.png",
+                            "alt": "Quest details",
+                            "caption": "Just enough information to get started"
+                        },
+                        {
+                            "src": "/projects/sidequest/hifi-4.png",
+                            "alt": "Completion screen",
+                            "caption": "Celebrating small wins"
+                        }
+                    ],
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/sidequest-hifi-quest",
+                        "embed_url": "",
+                        "description": "Tap 'Give me a quest' and see what happens. Try refreshing for a different suggestion.",
+                        "type": "figma"
+                    }
+                },
+                "development": {
+                    "content": "I built this project as well as designed it, which meant every feature had to survive implementation.\n\nSome ideas that looked great in Figma didn't survive contact with code. Others became simpler during development—and often better for it.\n\nThe constraint of being both designer and developer forced honesty about what was actually possible.",
+                    "technical_decisions": [
+                        "Built with React for component reusability",
+                        "Kept quest data local to avoid backend complexity",
+                        "Prioritized fast load times and immediate interaction"
+                    ],
+                    "constraints": [
+                        "Solo development meant limited feature scope",
+                        "No backend meant static quest database",
+                        "Needed to work well on both mobile and desktop"
+                    ]
+                },
+                "feature_breakdown": {
+                    "intro": "SideQuest has three core elements. Explore each in the prototype below.",
+                    "features": [
+                        {
+                            "id": "quests",
+                            "title": "Quest Suggestions",
+                            "description": "Small, low-commitment activities framed as optional adventures. Each quest includes a title, brief description, and estimated time.",
+                            "why": "The word 'quest' makes mundane activities feel more interesting. Framing matters.",
+                            "image": "/projects/sidequest/feature-quests.png"
+                        },
+                        {
+                            "id": "mascot",
+                            "title": "Friendly Guide",
+                            "description": "A small mascot character that appears throughout the experience, offering encouragement without being intrusive.",
+                            "why": "The mascot adds warmth and personality. It makes the app feel less like a tool and more like a companion.",
+                            "image": "/projects/sidequest/feature-mascot.png"
+                        },
+                        {
+                            "id": "guided_flows",
+                            "title": "Quick Start Flow",
+                            "description": "Users can get a quest in two taps. No account required, no preferences to set up first.",
+                            "why": "Every step between 'I'm bored' and 'here's something to do' is a chance for users to give up. We minimized steps.",
+                            "image": "/projects/sidequest/feature-flow.png"
+                        }
+                    ],
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/sidequest-features",
+                        "embed_url": "",
+                        "description": "Start from the home screen. Get a quest, save it for later, or ask for something different.",
+                        "type": "figma"
+                    }
+                },
+                "validation": {
+                    "content": "Users responded to the playfulness more than we expected.\n\nThe word 'quest' made people smile. The mascot got positive comments. The low-pressure framing worked—users said they felt more willing to try things because the stakes felt low.\n\nOne tester put it simply: 'It's like having a friend who always has ideas.'",
+                    "method": "Moderated usability testing",
+                    "participant_count": null,
+                    "key_quotes": [
+                        {
+                            "quote": "It's like having a friend who always has ideas.",
+                            "attribution": "Test participant"
+                        }
+                    ],
+                    "outcomes": [
+                        "Playful language ('quest') increased engagement",
+                        "Mascot received positive feedback",
+                        "Low-pressure framing encouraged action"
+                    ]
+                },
+                "what_i_learned": [
+                    {
+                        "insight": "Momentum beats choice",
+                        "reflection": "Getting users to act once is more valuable than giving them ten options."
+                    },
+                    {
+                        "insight": "Design should reduce hesitation",
+                        "reflection": "Every element either builds confidence or creates doubt. There's no neutral."
+                    },
+                    {
+                        "insight": "Research, design, and code inform each other",
+                        "reflection": "Being involved in all three made each one stronger."
+                    }
+                ],
+                "next_steps": [
+                    {
+                        "item": "Add personalization based on past quest completions",
+                        "priority": "high"
+                    },
+                    {
+                        "item": "Enable location-aware suggestions for nearby activities",
+                        "priority": "medium"
+                    },
+                    {
+                        "item": "Explore social features—sharing quests with friends",
+                        "priority": "low"
+                    }
+                ],
+                "final_experience": {
+                    "intro": "The prototype below represents the full SideQuest experience—from opening the app to completing your first quest.\n\nNotice how the design tries to get out of your way. The goal is momentum, not exploration.",
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/sidequest-final",
+                        "embed_url": "",
+                        "description": "Start fresh. Get a quest, see the details, and mark it complete. The whole flow takes under a minute.",
+                        "type": "figma"
+                    }
+                }
+            },
+            "links": {
+                "live": "",
+                "github": "",
+                "figma": "https://www.figma.com/file/sidequest",
+                "case_study_pdf": ""
+            },
+            "tags": [
+                "web-app",
+                "gamification",
+                "decision-making",
+                "playful",
+                "solo-project"
+            ],
+            "featured": true,
+            "order": 3
+        }
+    ],
+    "schema": {
+        "version": "2.0",
+        "required_fields": [
+            "id",
+            "slug",
+            "title",
+            "subtitle",
+            "summary",
+            "project_type",
+            "year",
+            "role",
+            "sections"
+        ],
+        "section_structure": {
+            "hook": { "type": "object", "fields": ["content"] },
+            "problem_framing": { "type": "object", "fields": ["content"] },
+            "research_process": {
+                "type": "object",
+                "fields": [
+                    "methods",
+                    "key_findings",
+                    "participant_count",
+                    "reflection"
+                ]
+            },
+            "early_challenges": { "type": "object", "fields": ["content"] },
+            "pivots": {
+                "type": "array",
+                "item_fields": ["from", "to", "reason"]
+            },
+            "lofi_phase": { "type": "object", "fields": ["content", "images"] },
+            "hifi_phase": {
+                "type": "object",
+                "fields": ["content", "images", "prototype"]
+            },
+            "development": {
+                "type": "object",
+                "fields": ["content", "technical_decisions", "constraints"]
+            },
+            "feature_breakdown": {
+                "type": "object",
+                "fields": ["intro", "features", "prototype"]
+            },
+            "validation": {
+                "type": "object",
+                "fields": [
+                    "content",
+                    "method",
+                    "participant_count",
+                    "key_quotes",
+                    "outcomes"
+                ]
+            },
+            "what_i_learned": {
+                "type": "array",
+                "item_fields": ["insight", "reflection"]
+            },
+            "next_steps": {
+                "type": "array",
+                "item_fields": ["item", "priority"]
+            },
+            "final_experience": {
+                "type": "object",
+                "fields": ["intro", "prototype"]
+            }
+        },
+        "image_structure": {
+            "fields": ["src", "alt", "caption"],
+            "path_format": "/projects/{project_id}/{filename}"
+        },
+        "prototype_structure": {
+            "fields": ["url", "embed_url", "description", "type"]
+        }
+    }
+}

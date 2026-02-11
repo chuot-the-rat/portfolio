@@ -1,0 +1,130 @@
+{
+    "title": "InkLink",
+    "category": "Mobile App",
+    "year": "2025",
+    "tagline": "Collaborative Creative Writing Platform",
+    "previewLayout": "mobile",
+    "role": "UI/UX Designer & Front-end Developer",
+    "timeline": "8–12 weeks",
+    "team": "Designers, Illustrators, Developers",
+    "tools": ["Figma", "Adobe Illustrator", "Framer"],
+    "links": {
+        "live": "https://inklink.framer.website/",
+        "prototype": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup"
+    },
+    "overview": {
+        "title": "Overview",
+        "description": "InkLink is a platform for collaborative storytelling, enabling writers to extend, remix, and contribute to shared narratives. Our goal was to create an experience that is social, playful, and editorial, supporting participation without overwhelming users. This project was team-based, with contributions across design, illustration, and front-end development.",
+        "images": [
+            {
+                "src": "projects/inklink/images/overview.svg",
+                "alt": "InkLink overview"
+            }
+        ]
+    },
+    "research": {
+        "title": "Research & Ideation",
+        "description": "We began by understanding the audience: competitive analysis of existing writing tools, surveys with writers and creative communities, and workshop sessions to identify needs and pain points. Key insight: Writers wanted inspiration and connectivity, not just a blank canvas. Lo‑fi sketches and user journeys in Figma mapped early flows for story creation, contribution, and exploration.",
+        "images": [
+            {
+                "src": "projects/inklink/images/problem.svg",
+                "alt": "Research findings and early concepts"
+            }
+        ]
+    },
+    "lofi": {
+        "title": "Lo‑Fi Exploration & Early Concepts",
+        "description": "Wireframed navigation, story discovery, and contribution screens. Tested interaction logic with peers. Feedback highlighted confusion around entry points and contribution actions. Iteration: Simplified the flow so exploration is the default state and designed progressive reveal interactions to guide users.",
+        "images": []
+    },
+    "iterations": {
+        "title": "Iterations & Refinements",
+        "description": "Story Entry Clarity: Highlighted CTAs for joining stories with motion and scale. Hover Previews / Spatial Layout: Removed containers; visuals float in whitespace for editorial impact. Motion Refinement: Retuned animations for snappy, ease-in/ease-out pop-out interactions.",
+        "improvements": [
+            "Highlighted CTAs for joining stories with motion and scale",
+            "Removed containers; visuals float in whitespace",
+            "Retuned animations for snappy ease-in/ease-out interactions",
+            "Progressive reveal interactions to guide users"
+        ],
+        "images": []
+    },
+    "solution": {
+        "title": "Final Solution",
+        "description": "Editorial layout: asymmetry, whitespace, and modular sections. Interactive hover previews: images/videos float freely, with snappy motion. Team visuals: give personality and emphasize collaboration. Built in Framer, using Figma and Illustrator assets.",
+        "layout": "mobile",
+        "images": [
+            {
+                "src": "projects/inklink/images/solution-main.svg",
+                "alt": "Main solution"
+            },
+            {
+                "src": "projects/inklink/images/solution-1.svg",
+                "alt": "Solution detail 1"
+            },
+            {
+                "src": "projects/inklink/images/solution-2.svg",
+                "alt": "Solution detail 2"
+            },
+            {
+                "src": "projects/inklink/images/solution-3.svg",
+                "alt": "Solution detail 3"
+            },
+            {
+                "src": "projects/inklink/images/solution-4.svg",
+                "alt": "Solution detail 4"
+            }
+        ]
+    },
+    "designProcess": [
+        {
+            "phase": "Research & Discovery",
+            "title": "Understanding Users",
+            "duration": "2 weeks",
+            "activities": [
+                "User interviews",
+                "Competitive analysis",
+                "Market research"
+            ]
+        },
+        {
+            "phase": "Ideation & Wireframing",
+            "title": "Exploring Solutions",
+            "duration": "2 weeks",
+            "activities": ["Sketching", "Wireframing", "User flows"]
+        },
+        {
+            "phase": "Visual Design",
+            "title": "Creating Interface",
+            "duration": "2 weeks",
+            "activities": [
+                "UI design",
+                "Design system",
+                "High-fidelity mockups"
+            ]
+        },
+        {
+            "phase": "Prototyping & Testing",
+            "title": "Validating Design",
+            "duration": "2 weeks",
+            "activities": ["Prototyping", "User testing", "Iteration"]
+        }
+    ],
+    "outcomes": {
+        "title": "Impact & Lessons Learned",
+        "description": "Successfully communicates collaborative creativity. Balances expressive visuals with usability. Shows strong team collaboration and iterative design process. Lessons Learned: Motion supports storytelling, not just decoration. Negative space and editorial layout enhance readability. Iterations from lo-fi to high-fi are essential for clarity and polish.",
+        "metrics": [
+            {
+                "value": "Social",
+                "label": "Collaborative experience"
+            },
+            {
+                "value": "Playful",
+                "label": "Interactive hover previews"
+            },
+            {
+                "value": "Editorial",
+                "label": "Asymmetric layout"
+            }
+        ]
+    }
+}
