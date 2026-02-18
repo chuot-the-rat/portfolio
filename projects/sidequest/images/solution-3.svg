@@ -1,5 +1,0 @@
-<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="800" height="600" fill="#fdf2f8"/>
-  <polygon points="400,120 600,420 200,420" fill="#ec4899" opacity="0.2"/>
-  <text x="400" y="310" font-family="Arial, sans-serif" font-size="32" fill="#ec4899" text-anchor="middle" font-weight="bold">Screen 3</text>
-</svg>

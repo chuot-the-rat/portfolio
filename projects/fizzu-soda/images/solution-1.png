@@ -1,6 +1,0 @@
-<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="300" rx="32" fill="#FF8C42"/>
-  <rect x="120" y="60" width="160" height="180" rx="32" fill="#FFF3E0" stroke="#FFD180" stroke-width="6"/>
-  <text x="200" y="120" text-anchor="middle" fill="#FF8C42" font-size="28" font-family="'Rubik',sans-serif">Ponzu Zing</text>
-  <text x="200" y="170" text-anchor="middle" fill="#FFD180" font-size="18" font-family="'Rubik',sans-serif">Orange/Yellow</text>
-</svg>
