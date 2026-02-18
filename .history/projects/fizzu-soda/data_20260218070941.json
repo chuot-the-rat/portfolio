@@ -1,0 +1,53 @@
+{
+    "id": "fizzu-soda",
+    "title": "FIZZU Soda",
+    "category": "Packaging Design",
+    "year": "2025",
+    "tagline": "Bold, unexpected flavours brought to life through playful, graphic packaging that stands out on shelf",
+    "role": "Concept, Illustration, Packaging Design",
+    "timeline": "2025",
+    "team": "Solo Project",
+    "tools": ["Adobe Illustrator", "Adobe Photoshop"],
+    "overview": {
+        "title": "What's in the Can",
+        "description": "FIZZU is a concept soda brand designed for the adventurous, featuring bold, graphic packaging and unexpected flavour combinations. The project explores how playful design can create shelf impact and communicate a sense of fun.",
+        "images": [
+            {
+                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment_06_Kewpie.jpg",
+                "alt": "FIZZU Soda — Kewpie Mayo flavour can design"
+            },
+            {
+                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment_06_Yuzu.jpg",
+                "alt": "FIZZU Soda — Yuzu flavour can design"
+            },
+            {
+                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Ginger.jpg",
+                "alt": "FIZZU Soda — Ginger flavour can design"
+            }
+        ]
+    },
+    "solution": {
+        "title": "What Came Out of the Can",
+        "description": "Three unique can designs were created, each with a distinct colour palette and graphic motif to represent its flavour. The packaging system is flexible, allowing for future flavour additions.",
+        "images": [
+            {
+                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Mockup_Kewpie.png",
+                "alt": "FIZZU Kewpie Mayo mockup"
+            },
+            {
+                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Mockup_Yuzu.png",
+                "alt": "FIZZU Yuzu mockup"
+            },
+            {
+                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Mockup_Ginger.png",
+                "alt": "FIZZU Ginger mockup"
+            }
+        ]
+    },
+
+    "styleGuide": {
+        "title": "Brand DNA",
+        "description": "A flexible system of colours, shapes, and typography ensures brand consistency across future flavours and packaging formats.",
+        "images": []
+    }
+}

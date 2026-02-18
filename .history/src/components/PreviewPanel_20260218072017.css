@@ -1,0 +1,374 @@
+/* ==========================================================================
+   PREVIEW PANEL - Scattered Overlapping Image System
+   Shows 3-5 randomly selected project images on hover
+   ========================================================================== */
+
+/* Scattered card — each image in a slightly rotated, overlapping card */
+.preview-scatter-card {
+    will-change: transform, opacity;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.preview-scatter-img-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-bg-secondary, #fafafa);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.preview-scatter-card:hover .preview-scatter-img-wrap {
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+    transform: scale(1.03);
+}
+
+.preview-scatter-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive - Hide on tablet and below */
+@media (max-width: 1024px) {
+    .preview-scatter-card {
+        display: none;
+    }
+}
+
+/* Accessibility - Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .preview-scatter-card,
+    .preview-scatter-img-wrap {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ==========================================================================
+   LEGACY SIDE-REVEAL MEDIA (kept for Work Mode holographic panels)
+   ========================================================================== */
+
+/* Media reveals with horizontal slide and clip - Clean/Chaos Modes */
+.preview-media-reveal {
+    will-change: transform, opacity, clip-path;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    transition: none;
+}
+
+/* Hide preview media in Work Mode (holographic panels take over) */
+.mode-work .preview-media-reveal {
+    display: none;
+}
+
+/* Hard edge mask container */
+.preview-mask-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* System state label - technical indicator */
+.preview-state-label {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 0.6875rem;
+    font-family: "Courier New", monospace;
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.25rem 0.75rem;
+    pointer-events: none;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+}
+
+/* Images and Videos - Clean Technical Artifacts */
+.preview-image,
+.preview-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Chaos mode preview images — soft rounded edges, no hard outlines */
+.mode-chaos .preview-image,
+.mode-chaos .preview-video {
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+/* Work/clean mode preview images — sharp technical look */
+.mode-work .preview-image,
+.mode-work .preview-video {
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.08),
+        0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.preview-media-reveal:hover .preview-image,
+.preview-media-reveal:hover .preview-video {
+    transform: scale(1.01);
+}
+
+.preview-video {
+    object-fit: cover;
+}
+
+/* Pattern-specific hover behaviors */
+.preview-media-reveal.pattern-a:hover .preview-image,
+.preview-media-reveal.pattern-a:hover .preview-video {
+    transform: scale(1.03) translateX(8px);
+}
+
+.preview-media-reveal.pattern-b:hover .preview-image,
+.preview-media-reveal.pattern-b:hover .preview-video {
+    transform: scale(1.02) translateY(-4px);
+}
+
+.preview-media-reveal.pattern-c:hover .preview-image,
+.preview-media-reveal.pattern-c:hover .preview-video {
+    transform: translateY(-12px);
+}
+
+.preview-media-reveal.pattern-d:hover .preview-video {
+    /* Video already playing */
+    transform: none;
+}
+
+/* Responsive - Hide on tablet and below */
+@media (max-width: 1024px) {
+    .preview-media-reveal {
+        display: none;
+    }
+}
+
+/* Accessibility - Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .preview-media-reveal,
+    .preview-image,
+    .preview-video,
+    .preview-state-label {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+    }
+}
+
+/* Mode-Specific Preview Interactions */
+
+/* CHAOS MODE - Original smooth hover with lift and overlay */
+.mode-chaos .preview-media-reveal {
+    display: block;
+}
+
+.mode-chaos .preview-media-reveal:hover .preview-image,
+.mode-chaos .preview-media-reveal:hover .preview-video {
+    transform: scale(1.03);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-chaos .preview-state-label {
+    display: none;
+}
+
+/* WORK MODE - NO side-reveal media (holographic panels only) */
+.mode-work .preview-media-reveal {
+    display: none !important;
+}
+
+.mode-work .preview-state-label {
+    display: none !important;
+}
+
+/* ==========================================================================
+   WORK MODE: HOLOGRAPHIC POPUP PANELS - Sci-Fi Interface
+   Floating holographic metadata with cyan glow, oscillation, scanlines
+   ========================================================================== */
+
+/* Holographic panel - only visible in Work Mode */
+.holographic-panel {
+    display: none; /* Hidden by default */
+}
+
+.mode-work .holographic-panel {
+    display: block;
+    position: absolute;
+    top: 100px;
+    right: 80px;
+    width: 320px;
+    min-height: 180px;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 255, 255, 0.08) 0%,
+        rgba(0, 200, 255, 0.12) 50%,
+        rgba(0, 255, 255, 0.06) 100%
+    );
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 255, 255, 0.35);
+    padding: 1.5rem;
+    z-index: 100;
+    pointer-events: none;
+    will-change: transform, opacity;
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 12px),
+        calc(100% - 12px) 100%,
+        0 100%
+    );
+
+    /* Floating animation */
+    animation: holo-float 3s ease-in-out infinite;
+
+    /* Holographic glow */
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.3),
+        0 0 40px rgba(0, 255, 255, 0.15),
+        inset 0 0 20px rgba(0, 255, 255, 0.05);
+}
+
+/* Edge accent line */
+.holo-edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 255, 255, 0.8) 50%,
+        transparent 100%
+    );
+    animation: edge-sweep 2s ease-in-out infinite;
+}
+
+/* Content container */
+.holo-content {
+    position: relative;
+    z-index: 2;
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Metadata rows */
+.holo-metadata {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    align-items: baseline;
+}
+
+.holo-label {
+    color: rgba(0, 255, 255, 0.9);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+    min-width: 80px;
+}
+
+.holo-value {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+/* Scanline overlay effect */
+.scanline-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 255, 255, 0.03) 2px,
+        rgba(0, 255, 255, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+/* Floating oscillation animation */
+@keyframes holo-float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Edge sweep animation */
+@keyframes edge-sweep {
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Glow pulse animation */
+.mode-work .holographic-panel {
+    animation:
+        holo-float 3s ease-in-out infinite,
+        holo-glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes holo-glow-pulse {
+    0%,
+    100% {
+        box-shadow:
+            0 0 20px rgba(0, 255, 255, 0.25),
+            0 0 40px rgba(0, 255, 255, 0.12),
+            inset 0 0 20px rgba(0, 255, 255, 0.05);
+    }
+    50% {
+        box-shadow:
+            0 0 30px rgba(0, 255, 255, 0.4),
+            0 0 60px rgba(0, 255, 255, 0.2),
+            inset 0 0 30px rgba(0, 255, 255, 0.08);
+    }
+}
+
+/* Responsive - hide holographic panel on tablet and below */
+@media (max-width: 1024px) {
+    .mode-work .holographic-panel {
+        display: none;
+    }
+}
+
+/* Reduced motion - disable all animations */
+@media (prefers-reduced-motion: reduce) {
+    .mode-work .holographic-panel {
+        animation: none !important;
+    }
+
+    .holo-edge,
+    .scanline-overlay {
+        animation: none !important;
+    }
+}

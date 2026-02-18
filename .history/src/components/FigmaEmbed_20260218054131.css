@@ -1,0 +1,230 @@
+/* ==========================================================================
+   FIGMA EMBED — Lazy-loaded iframe with skeleton + caption
+   Scoped: all classes prefixed fe-
+   ========================================================================== */
+
+/* ── Wrapper ── */
+.fe-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin-top: var(--space-6, 24px);
+    margin-bottom: var(--space-4, 16px);
+}
+
+/* ── Viewport — holds iframe + skeleton ── */
+.fe-viewport {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-bg-secondary, #f5f5f5);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.03),
+        0 4px 16px rgba(0, 0, 0, 0.04);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.3s ease;
+}
+
+.fe-viewport:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.05),
+        0 8px 28px rgba(0, 0, 0, 0.07);
+}
+
+/* Prototype variant — taller, narrower, centered */
+.fe-viewport--proto {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* ── Iframe ── */
+.fe-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.fe-iframe--ready {
+    opacity: 1;
+}
+
+/* ── Skeleton loader ── */
+.fe-skeleton {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 2;
+}
+
+.fe-skeleton-pulse {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.04) 0%,
+        rgba(0, 0, 0, 0.08) 50%,
+        rgba(0, 0, 0, 0.04) 100%
+    );
+    background-size: 200% 200%;
+    animation: fe-pulse 1.6s ease-in-out infinite;
+}
+
+.fe-skeleton-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--color-text-tertiary, #999);
+    opacity: 0.6;
+}
+
+@keyframes fe-pulse {
+    0%,
+    100% {
+        background-position: 0% 50%;
+        opacity: 0.5;
+    }
+    50% {
+        background-position: 100% 50%;
+        opacity: 1;
+    }
+}
+
+/* ── Footer: caption + prototype link ── */
+.fe-footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4, 16px);
+    padding: var(--space-3, 12px) var(--space-1, 4px) 0;
+}
+
+.fe-caption {
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    line-height: 1.5;
+    color: var(--color-text-tertiary, #888);
+    margin: 0;
+    flex: 1;
+}
+
+.fe-proto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-accent, #4A6CF7);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+}
+
+.fe-proto-link:hover {
+    opacity: 0.75;
+}
+
+.fe-proto-link-text {
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.fe-proto-link:hover .fe-proto-link-text {
+    border-color: currentColor;
+}
+
+.fe-proto-link-icon {
+    transition: transform 0.2s ease;
+}
+
+.fe-proto-link:hover .fe-proto-link-icon {
+    transform: translate(1px, -1px);
+}
+
+/* ==========================================================================
+   DARK THEME
+   ========================================================================== */
+[data-theme="dark"] .fe-viewport {
+    background: var(--color-bg-secondary, #1a1a1a);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.15),
+        0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .fe-viewport:hover {
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        0 8px 28px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="dark"] .fe-skeleton-pulse {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+    background-size: 200% 200%;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .fe-iframe,
+    .fe-skeleton,
+    .fe-proto-link-icon {
+        transition: none !important;
+    }
+
+    .fe-skeleton-pulse {
+        animation: none !important;
+        opacity: 0.6;
+    }
+
+    .fe-viewport {
+        transition: none !important;
+        transform: none !important;
+    }
+
+    .fe-viewport:hover {
+        transform: none !important;
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 768px) {
+    .fe-viewport {
+        border-radius: 10px;
+    }
+
+    .fe-viewport--proto {
+        max-width: 100%;
+    }
+
+    .fe-footer {
+        flex-direction: column;
+        gap: var(--space-2, 8px);
+    }
+
+    .fe-viewport:hover {
+        transform: none;
+        box-shadow:
+            0 1px 3px rgba(0, 0, 0, 0.03),
+            0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+}
