@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./ProjectLayout.css";
@@ -234,196 +234,267 @@ const ProjectLayout = () => {
             {/* ── Content Sections ── */}
             <div className="pl-content">
                 <div className="container">
-                    {/* Overview */}
-                    {project.overview && (
-                        <PLSection
-                            label={`01 — ${project.overview.title || "Overview"}`}
-                            title={project.overview.title}
-                            description={project.overview.description}
-                        />
-                    )}
-
-                    {/* Objectives */}
-                    {project.objectives && project.objectives.length > 0 && (
-                        <motion.section
-                            className="pl-section"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <span className="section-label">Objectives</span>
-                            <ul className="pl-objectives">
-                                {project.objectives.map((obj, i) => (
-                                    <motion.li
-                                        key={i}
-                                        className="pl-objective-item"
-                                        initial={{ opacity: 0, x: -10 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{
-                                            duration: 0.4,
-                                            delay: i * 0.08,
-                                        }}
-                                    >
-                                        <span className="objective-icon">
-                                            {i + 1}
-                                        </span>
-                                        <span className="objective-text">
-                                            {obj}
-                                        </span>
-                                    </motion.li>
-                                ))}
-                            </ul>
-                        </motion.section>
-                    )}
-
-                    {/* Challenge / Problem */}
-                    {project.problem && (
-                        <PLSection
-                            label={`02 — ${project.problem.title || "The Challenge"}`}
-                            title={project.problem.title}
-                            description={project.problem.description}
-                            images={project.problem.images}
-                            resolveImage={resolveImage}
-                            onImageClick={setLightboxImage}
-                        />
-                    )}
-
-                    {/* Design Process Timeline */}
-                    {project.designProcess &&
-                        project.designProcess.length > 0 && (
-                            <motion.section
-                                className="pl-section"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.6 }}
-                            >
-                                <span className="section-label">
-                                    03 — Can to Concept
-                                </span>
-                                <div className="pl-process-timeline">
-                                    {project.designProcess.map((phase, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="pl-process-step"
-                                            initial={{ opacity: 0, y: 20 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{
-                                                duration: 0.5,
-                                                delay: i * 0.1,
-                                            }}
-                                        >
-                                            <div className="pl-process-number">
-                                                {String(i + 1).padStart(2, "0")}
-                                            </div>
-                                            <div className="pl-process-info">
-                                                <h3 className="pl-process-title">
-                                                    {phase.title}
-                                                </h3>
-                                                {phase.duration && (
-                                                    <span className="pl-process-duration">
-                                                        {phase.duration}
-                                                    </span>
-                                                )}
-                                                {phase.activities && (
-                                                    <div className="pl-process-activities">
-                                                        {phase.activities.map(
-                                                            (act, j) => (
-                                                                <span
-                                                                    key={j}
-                                                                    className="pl-activity-tag"
-                                                                >
-                                                                    {act}
-                                                                </span>
-                                                            ),
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </motion.section>
-                        )}
-
-                    {/* Style Guide / Design System */}
-                    {project.styleGuide && (
-                        <PLSection
-                            label={`04 — ${project.styleGuide.title || "Design System"}`}
-                            title={project.styleGuide.title}
-                            description={project.styleGuide.description}
-                            images={project.styleGuide.images}
-                            resolveImage={resolveImage}
-                            onImageClick={setLightboxImage}
-                        />
-                    )}
-
-                    {/* Solution */}
-                    {project.solution && (
-                        <PLSection
-                            label={`05 — ${project.solution.title || "Solution"}`}
-                            title={project.solution.title}
-                            description={project.solution.description}
-                            images={project.solution.images}
-                            resolveImage={resolveImage}
-                            onImageClick={setLightboxImage}
-                        />
-                    )}
-
-                    {/* Outcomes / Results */}
-                    {project.outcomes && (
-                        <motion.section
-                            className="pl-section"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <span className="section-label">{`06 — ${project.outcomes.title || "Results"}`}</span>
-                            <h2 className="section-title">
-                                {project.outcomes.title}
-                            </h2>
-                            <p className="section-description">
-                                {project.outcomes.description}
-                            </p>
-                            {project.outcomes.metrics &&
-                                project.outcomes.metrics.length > 0 && (
-                                    <div className="pl-metrics-grid">
-                                        {project.outcomes.metrics.map(
-                                            (m, i) => (
-                                                <motion.div
-                                                    key={i}
-                                                    className="pl-metric-card"
-                                                    initial={{
-                                                        opacity: 0,
-                                                        scale: 0.95,
-                                                    }}
-                                                    whileInView={{
-                                                        opacity: 1,
-                                                        scale: 1,
-                                                    }}
-                                                    viewport={{ once: true }}
-                                                    transition={{
-                                                        duration: 0.4,
-                                                        delay: i * 0.1,
-                                                    }}
-                                                >
-                                                    <span className="pl-metric-value">
-                                                        {m.value}
-                                                    </span>
-                                                    <span className="pl-metric-label">
-                                                        {m.label}
-                                                    </span>
-                                                </motion.div>
-                                            ),
-                                        )}
-                                    </div>
+                    {(() => {
+                        let sn = 0;
+                        const next = () => String(++sn).padStart(2, "0");
+                        return (
+                            <>
+                                {/* Overview */}
+                                {project.overview && (
+                                    <PLSection
+                                        label={`${next()} — ${project.overview.title || "Overview"}`}
+                                        title={project.overview.title}
+                                        description={
+                                            project.overview.description
+                                        }
+                                    />
                                 )}
-                        </motion.section>
-                    )}
+
+                                {/* Objectives */}
+                                {project.objectives &&
+                                    project.objectives.length > 0 && (
+                                        <motion.section
+                                            className="pl-section"
+                                            initial={{ opacity: 0, y: 30 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{
+                                                once: true,
+                                                margin: "-100px",
+                                            }}
+                                            transition={{ duration: 0.6 }}
+                                        >
+                                            <span className="section-label">
+                                                Objectives
+                                            </span>
+                                            <ul className="pl-objectives">
+                                                {project.objectives.map(
+                                                    (obj, i) => (
+                                                        <motion.li
+                                                            key={i}
+                                                            className="pl-objective-item"
+                                                            initial={{
+                                                                opacity: 0,
+                                                                x: -10,
+                                                            }}
+                                                            whileInView={{
+                                                                opacity: 1,
+                                                                x: 0,
+                                                            }}
+                                                            viewport={{
+                                                                once: true,
+                                                            }}
+                                                            transition={{
+                                                                duration: 0.4,
+                                                                delay: i * 0.08,
+                                                            }}
+                                                        >
+                                                            <span className="objective-icon">
+                                                                {i + 1}
+                                                            </span>
+                                                            <span className="objective-text">
+                                                                {obj}
+                                                            </span>
+                                                        </motion.li>
+                                                    ),
+                                                )}
+                                            </ul>
+                                        </motion.section>
+                                    )}
+
+                                {/* Challenge / Problem */}
+                                {project.problem && (
+                                    <PLSection
+                                        label={`${next()} — ${project.problem.title || "The Challenge"}`}
+                                        title={project.problem.title}
+                                        description={
+                                            project.problem.description
+                                        }
+                                        images={project.problem.images}
+                                        colorPalette={
+                                            project.problem.colorPalette
+                                        }
+                                        resolveImage={resolveImage}
+                                        onImageClick={setLightboxImage}
+                                    />
+                                )}
+
+                                {/* Design Process Timeline */}
+                                {project.designProcess &&
+                                    project.designProcess.length > 0 && (
+                                        <motion.section
+                                            className="pl-section"
+                                            initial={{ opacity: 0, y: 30 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{
+                                                once: true,
+                                                margin: "-100px",
+                                            }}
+                                            transition={{ duration: 0.6 }}
+                                        >
+                                            <span className="section-label">
+                                                {next()} — Can to Concept
+                                            </span>
+                                            <div className="pl-process-timeline">
+                                                {project.designProcess.map(
+                                                    (phase, i) => (
+                                                        <motion.div
+                                                            key={i}
+                                                            className="pl-process-step"
+                                                            initial={{
+                                                                opacity: 0,
+                                                                y: 20,
+                                                            }}
+                                                            whileInView={{
+                                                                opacity: 1,
+                                                                y: 0,
+                                                            }}
+                                                            viewport={{
+                                                                once: true,
+                                                            }}
+                                                            transition={{
+                                                                duration: 0.5,
+                                                                delay: i * 0.1,
+                                                            }}
+                                                        >
+                                                            <div className="pl-process-number">
+                                                                {String(
+                                                                    i + 1,
+                                                                ).padStart(
+                                                                    2,
+                                                                    "0",
+                                                                )}
+                                                            </div>
+                                                            <div className="pl-process-info">
+                                                                <h3 className="pl-process-title">
+                                                                    {
+                                                                        phase.title
+                                                                    }
+                                                                </h3>
+                                                                {phase.duration && (
+                                                                    <span className="pl-process-duration">
+                                                                        {
+                                                                            phase.duration
+                                                                        }
+                                                                    </span>
+                                                                )}
+                                                                {phase.activities && (
+                                                                    <div className="pl-process-activities">
+                                                                        {phase.activities.map(
+                                                                            (
+                                                                                act,
+                                                                                j,
+                                                                            ) => (
+                                                                                <span
+                                                                                    key={
+                                                                                        j
+                                                                                    }
+                                                                                    className="pl-activity-tag"
+                                                                                >
+                                                                                    {
+                                                                                        act
+                                                                                    }
+                                                                                </span>
+                                                                            ),
+                                                                        )}
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </motion.div>
+                                                    ),
+                                                )}
+                                            </div>
+                                        </motion.section>
+                                    )}
+
+                                {/* Style Guide / Design System */}
+                                {project.styleGuide && (
+                                    <PLSection
+                                        label={`${next()} — ${project.styleGuide.title || "Design System"}`}
+                                        title={project.styleGuide.title}
+                                        description={
+                                            project.styleGuide.description
+                                        }
+                                        images={project.styleGuide.images}
+                                        resolveImage={resolveImage}
+                                        onImageClick={setLightboxImage}
+                                    />
+                                )}
+
+                                {/* Solution */}
+                                {project.solution && (
+                                    <PLSection
+                                        label={`${next()} — ${project.solution.title || "Solution"}`}
+                                        title={project.solution.title}
+                                        description={
+                                            project.solution.description
+                                        }
+                                        images={project.solution.images}
+                                        resolveImage={resolveImage}
+                                        onImageClick={setLightboxImage}
+                                    />
+                                )}
+
+                                {/* Outcomes / Results */}
+                                {project.outcomes && (
+                                    <motion.section
+                                        className="pl-section"
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{
+                                            once: true,
+                                            margin: "-100px",
+                                        }}
+                                        transition={{ duration: 0.6 }}
+                                    >
+                                        <span className="section-label">{`${next()} — ${project.outcomes.title || "Results"}`}</span>
+                                        <h2 className="section-title">
+                                            {project.outcomes.title}
+                                        </h2>
+                                        <p className="section-description">
+                                            {project.outcomes.description}
+                                        </p>
+                                        {project.outcomes.metrics &&
+                                            project.outcomes.metrics.length >
+                                                0 && (
+                                                <div className="pl-metrics-grid">
+                                                    {project.outcomes.metrics.map(
+                                                        (m, i) => (
+                                                            <motion.div
+                                                                key={i}
+                                                                className="pl-metric-card"
+                                                                initial={{
+                                                                    opacity: 0,
+                                                                    scale: 0.95,
+                                                                }}
+                                                                whileInView={{
+                                                                    opacity: 1,
+                                                                    scale: 1,
+                                                                }}
+                                                                viewport={{
+                                                                    once: true,
+                                                                }}
+                                                                transition={{
+                                                                    duration: 0.4,
+                                                                    delay:
+                                                                        i * 0.1,
+                                                                }}
+                                                            >
+                                                                <span className="pl-metric-value">
+                                                                    {m.value}
+                                                                </span>
+                                                                <span className="pl-metric-label">
+                                                                    {m.label}
+                                                                </span>
+                                                            </motion.div>
+                                                        ),
+                                                    )}
+                                                </div>
+                                            )}
+                                    </motion.section>
+                                )}
+                            </>
+                        );
+                    })()}
                 </div>
             </div>
 
@@ -517,41 +588,166 @@ const PLSection = ({
     title,
     description,
     images,
+    colorPalette,
     resolveImage,
     onImageClick,
-}) => (
-    <motion.section
-        className="pl-section"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-    >
-        {label && <span className="section-label">{label}</span>}
-        {title && <h2 className="section-title">{title}</h2>}
-        {description && <p className="section-description">{description}</p>}
-        {images && images.length > 0 && (
-            <div className="pl-section-images">
-                {images.map((img, i) => (
-                    <motion.div
-                        key={i}
-                        className="pl-section-image"
-                        whileHover={{ scale: 1.01 }}
-                        transition={{ duration: 0.3 }}
-                        onClick={() =>
-                            onImageClick?.(resolveImage?.(img.src) || img.src)
-                        }
-                    >
-                        <img
-                            src={resolveImage ? resolveImage(img.src) : img.src}
-                            alt={img.alt || title || "Project image"}
-                            loading="lazy"
-                        />
-                    </motion.div>
-                ))}
-            </div>
-        )}
-    </motion.section>
-);
+}) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    const prev = () =>
+        setCurrentSlide((s) => (s === 0 ? images.length - 1 : s - 1));
+    const next = () =>
+        setCurrentSlide((s) => (s === images.length - 1 ? 0 : s + 1));
+
+    return (
+        <motion.section
+            className="pl-section"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+        >
+            {label && <span className="section-label">{label}</span>}
+            {title && <h2 className="section-title">{title}</h2>}
+            {description && (
+                <p className="section-description">{description}</p>
+            )}
+            {colorPalette && colorPalette.length > 0 && (
+                <div className="color-palette-bento">
+                    {colorPalette.map((color, i) => (
+                        <motion.div
+                            key={i}
+                            className="color-swatch"
+                            style={{ backgroundColor: color }}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: i * 0.06 }}
+                            whileHover={{
+                                scale: 1.05,
+                                transition: { duration: 0.2 },
+                            }}
+                        >
+                            <span className="color-hex">{color}</span>
+                        </motion.div>
+                    ))}
+                </div>
+            )}
+            {images && images.length > 0 && images.length <= 2 && (
+                <div className="pl-section-images">
+                    {images.map((img, i) => (
+                        <motion.div
+                            key={i}
+                            className="pl-section-image"
+                            whileHover={{ scale: 1.01 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={() =>
+                                onImageClick?.(
+                                    resolveImage?.(img.src) || img.src,
+                                )
+                            }
+                        >
+                            <img
+                                src={
+                                    resolveImage
+                                        ? resolveImage(img.src)
+                                        : img.src
+                                }
+                                alt={img.alt || title || "Project image"}
+                                loading="lazy"
+                            />
+                        </motion.div>
+                    ))}
+                </div>
+            )}
+            {images &&
+                images.length > 2 &&
+                (() => {
+                    const img = images[currentSlide];
+                    const src = resolveImage ? resolveImage(img.src) : img.src;
+                    return (
+                        <div className="image-carousel">
+                            <div
+                                className="carousel-viewport"
+                                onClick={() => onImageClick?.(src)}
+                            >
+                                <AnimatePresence mode="wait">
+                                    <motion.img
+                                        key={currentSlide}
+                                        src={src}
+                                        alt={
+                                            img.alt || title || "Project image"
+                                        }
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                    />
+                                </AnimatePresence>
+                            </div>
+                            <div className="carousel-controls">
+                                <button
+                                    className="carousel-btn"
+                                    onClick={prev}
+                                    aria-label="Previous image"
+                                >
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M12 4L6 10l6 6"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+                                <span className="carousel-counter">
+                                    {currentSlide + 1} / {images.length}
+                                </span>
+                                <button
+                                    className="carousel-btn"
+                                    onClick={next}
+                                    aria-label="Next image"
+                                >
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M8 4l6 6-6 6"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                            {img.caption && (
+                                <p className="image-caption">{img.caption}</p>
+                            )}
+                            <div className="carousel-dots">
+                                {images.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        className={`carousel-dot ${i === currentSlide ? "active" : ""}`}
+                                        onClick={() => setCurrentSlide(i)}
+                                        aria-label={`Go to image ${i + 1}`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    );
+                })()}
+        </motion.section>
+    );
+};
 
 export default ProjectLayout;

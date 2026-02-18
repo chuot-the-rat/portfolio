@@ -1,6 +1,0 @@
-<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="800" fill="#fef2f2"/>
-  <rect x="100" y="100" width="1000" height="600" rx="20" fill="#dc2626" opacity="0.1"/>
-  <text x="600" y="400" font-family="Arial, sans-serif" font-size="48" fill="#dc2626" text-anchor="middle" font-weight="bold">Problem</text>
-  <text x="600" y="460" font-family="Arial, sans-serif" font-size="24" fill="#64748b" text-anchor="middle">Understanding the Gap</text>
-</svg>

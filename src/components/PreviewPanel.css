@@ -1,7 +1,66 @@
 /* ==========================================================================
-   TECHNICAL SIDE-REVEAL MEDIA - Mode-Specific System
-   Clean/Chaos: Sharp horizontal motion with clipped masks
-   Work: Holographic popups (defined separately below)
+   PREVIEW PANEL - Scattered Overlapping Image System
+   Shows 3-5 randomly selected project images on hover
+   ========================================================================== */
+
+/* Scatter container — fills the preview window */
+.preview-scatter-container {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    overflow: visible;
+}
+
+/* Scattered card — each image in a slightly rotated, overlapping card */
+.preview-scatter-card {
+    will-change: transform, opacity;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.preview-scatter-img-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-bg-secondary, #fafafa);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.preview-scatter-card:hover .preview-scatter-img-wrap {
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+    transform: scale(1.03);
+}
+
+.preview-scatter-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive - Hide on tablet and below */
+@media (max-width: 1024px) {
+    .preview-scatter-card {
+        display: none;
+    }
+}
+
+/* Accessibility - Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .preview-scatter-card,
+    .preview-scatter-img-wrap {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ==========================================================================
+   LEGACY SIDE-REVEAL MEDIA (kept for Work Mode holographic panels)
    ========================================================================== */
 
 /* Media reveals with horizontal slide and clip - Clean/Chaos Modes */
