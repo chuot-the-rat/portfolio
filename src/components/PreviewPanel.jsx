@@ -47,93 +47,95 @@ const PreviewPanel = ({ project, hoverPattern = "pattern-a" }) => {
             {previewMedia.length > 0 ? (
                 <div className="preview-scatter-container">
                     {previewMedia.map((media, index) => {
-                      const pos = scatterPositions[index];
-                      if (!pos) return null;
+                        const pos = scatterPositions[index];
+                        if (!pos) return null;
 
-                      return (
-                          <motion.div
-                              key={`${project.id}-${index}`}
-                              className="preview-scatter-card"
-                              initial={{
-                                  opacity: 0,
-                                  y: 30,
-                                  rotate: pos.rotate - 4,
-                                  scale: 0.9,
-                              }}
-                              animate={{
-                                  opacity: 1,
-                                  y: 0,
-                                  rotate: pos.rotate,
-                                  scale: 1,
-                              }}
-                              exit={{
-                                  opacity: 0,
-                                  y: -20,
-                                  scale: 0.92,
-                              }}
-                              transition={{
-                                  duration: 0.3,
-                                  delay: index * 0.05,
-                                  ease: [0.2, 0.8, 0.2, 1],
-                              }}
-                              onMouseEnter={() => setHoveredIndex(index)}
-                              onMouseLeave={() => setHoveredIndex(null)}
-                              style={{
-                                  position: "absolute",
-                                  top: pos.top,
-                                  left: pos.left,
-                                  width: pos.width,
-                                  zIndex:
-                                      hoveredIndex === index ? 30 : pos.zIndex,
-                              }}
-                          >
-                              <div className="preview-scatter-img-wrap">
-                                  <img
-                                      src={media.src || media}
-                                      alt={
-                                          media.alt ||
-                                          `${project.title} preview ${index + 1}`
-                                      }
-                                      loading="lazy"
-                                      className="preview-scatter-img"
-                                  />
-                              </div>
-                          </motion.div>
-                      );
-                  })}
+                        return (
+                            <motion.div
+                                key={`${project.id}-${index}`}
+                                className="preview-scatter-card"
+                                initial={{
+                                    opacity: 0,
+                                    y: 30,
+                                    rotate: pos.rotate - 4,
+                                    scale: 0.9,
+                                }}
+                                animate={{
+                                    opacity: 1,
+                                    y: 0,
+                                    rotate: pos.rotate,
+                                    scale: 1,
+                                }}
+                                exit={{
+                                    opacity: 0,
+                                    y: -20,
+                                    scale: 0.92,
+                                }}
+                                transition={{
+                                    duration: 0.3,
+                                    delay: index * 0.05,
+                                    ease: [0.2, 0.8, 0.2, 1],
+                                }}
+                                onMouseEnter={() => setHoveredIndex(index)}
+                                onMouseLeave={() => setHoveredIndex(null)}
+                                style={{
+                                    position: "absolute",
+                                    top: pos.top,
+                                    left: pos.left,
+                                    width: pos.width,
+                                    zIndex:
+                                        hoveredIndex === index
+                                            ? 30
+                                            : pos.zIndex,
+                                }}
+                            >
+                                <div className="preview-scatter-img-wrap">
+                                    <img
+                                        src={media.src || media}
+                                        alt={
+                                            media.alt ||
+                                            `${project.title} preview ${index + 1}`
+                                        }
+                                        loading="lazy"
+                                        className="preview-scatter-img"
+                                    />
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             ) : (
                 // Fallback: Single thumbnail
                 project.thumbnail && (
-                      <div className="preview-scatter-container">
-                          <motion.div
-                              className="preview-scatter-card"
-                              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                              animate={{ opacity: 1, y: 0, scale: 1 }}
-                              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                              transition={{
-                                  duration: 0.25,
-                                  ease: [0.2, 0.8, 0.2, 1],
-                              }}
-                              style={{
-                                  position: "absolute",
-                                  top: "40px",
-                                  left: "40px",
-                                  width: "320px",
-                                  zIndex: 10,
-                              }}
-                          >
-                              <div className="preview-scatter-img-wrap">
-                                  <img
-                                      src={project.thumbnail}
-                                      alt={project.title}
-                                      loading="lazy"
-                                      className="preview-scatter-img"
-                                  />
-                              </div>
-                          </motion.div>
-                      </div>
-                  )
+                    <div className="preview-scatter-container">
+                        <motion.div
+                            className="preview-scatter-card"
+                            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                            transition={{
+                                duration: 0.25,
+                                ease: [0.2, 0.8, 0.2, 1],
+                            }}
+                            style={{
+                                position: "absolute",
+                                top: "40px",
+                                left: "40px",
+                                width: "320px",
+                                zIndex: 10,
+                            }}
+                        >
+                            <div className="preview-scatter-img-wrap">
+                                <img
+                                    src={project.thumbnail}
+                                    alt={project.title}
+                                    loading="lazy"
+                                    className="preview-scatter-img"
+                                />
+                            </div>
+                        </motion.div>
+                    </div>
+                )
             )}
 
             {/* Work Mode: Holographic Metadata Panel */}
