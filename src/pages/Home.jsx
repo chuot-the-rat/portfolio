@@ -443,38 +443,103 @@ const Home = () => {
             fetch("/projects.json")
                 .then((res) => res.json())
                 .then(async (projectsList) => {
-                    // Build case-study cards by merging with projects.json metadata
-                    const caseStudyCards = caseStudyProjects.map(
-                        (caseStudyProject, index) => {
-                            const projectMeta =
-                                projectsList.find(
-                                    (p) => p.id === caseStudyProject.id,
-                                ) || {};
+                    // Helper: collect all images from a project's data.json
+                    const collectAllImages = (data) => {
+                        const imgs = [];
+                        const sections = [
+                            "overview",
+                            "problem",
+                            "solution",
+                            "research",
+                            "personas",
+                            "userFlows",
+                            "hifi",
+                            "prototype",
+                            "styleGuide",
+                            "iterations",
+                        ];
+                        for (const key of sections) {
+                            const sec = data[key];
+                            if (!sec) continue;
+                            if (Array.isArray(sec.images)) {
+                                sec.images.forEach((img) => imgs.push(img));
+                            }
+                            // hifi screens with individual images
+                            if (Array.isArray(sec.screens)) {
+                                sec.screens.forEach((s) => {
+                                    if (s.image)
+                                        imgs.push({
+                                            src: s.image,
+                                            alt: s.name,
+                                        });
+                                });
+                            }
+                        }
+                        return imgs.filter((img) => img && img.src);
+                    };
 
-                            return {
-                                ...projectMeta,
-                                ...caseStudyProject,
-                                hoverPattern:
-                                    hoverPatterns[index % hoverPatterns.length],
-                                systemMetadata: projectMetadata[
-                                    caseStudyProject.id
-                                ] || {
-                                    status: "active",
-                                    role: "ui/ux",
-                                    symbol: `<${caseStudyProject.title} />`,
-                                },
-                                hoverImages: [
-                                    ...(caseStudyProject.solution?.images?.slice(
-                                        1,
-                                        3,
-                                    ) || []),
-                                    ...(caseStudyProject.overview?.images?.slice(
-                                        1,
-                                        2,
-                                    ) || []),
-                                ].filter(Boolean),
-                            };
-                        },
+                    // Shuffle helper
+                    const shuffle = (arr) => {
+                        const a = [...arr];
+                        for (let i = a.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [a[i], a[j]] = [a[j], a[i]];
+                        }
+                        return a;
+                    };
+
+                    // Build case-study cards by merging with projects.json metadata
+                    // Also fetch supplemental data.json for real images
+                    const caseStudyCards = await Promise.all(
+                        caseStudyProjects.map(
+                            async (caseStudyProject, index) => {
+                                const projectMeta =
+                                    projectsList.find(
+                                        (p) => p.id === caseStudyProject.id,
+                                    ) || {};
+
+                                // Fetch supplemental data.json for real image paths
+                                let realImages = [];
+                                try {
+                                    const supRes = await fetch(
+                                        `/projects/${caseStudyProject.id}/data.json`,
+                                    );
+                                    if (supRes.ok) {
+                                        const supData = await supRes.json();
+                                        realImages = collectAllImages(supData);
+                                    }
+                                } catch {
+                                    // No supplemental data — use mapper data
+                                }
+
+                                // Fall back to mapper images if no supplemental data
+                                if (realImages.length === 0) {
+                                    realImages = [
+                                        ...(caseStudyProject.solution?.images ||
+                                            []),
+                                        ...(caseStudyProject.overview?.images ||
+                                            []),
+                                    ].filter((img) => img && img.src);
+                                }
+
+                                return {
+                                    ...projectMeta,
+                                    ...caseStudyProject,
+                                    hoverPattern:
+                                        hoverPatterns[
+                                            index % hoverPatterns.length
+                                        ],
+                                    systemMetadata: projectMetadata[
+                                        caseStudyProject.id
+                                    ] || {
+                                        status: "active",
+                                        role: "ui/ux",
+                                        symbol: `<${caseStudyProject.title} />`,
+                                    },
+                                    allImages: realImages,
+                                };
+                            },
+                        ),
                     );
 
                     // Build standalone project cards from their own data.json files
@@ -505,12 +570,11 @@ const Home = () => {
                                         role: "design",
                                         symbol: `<${data.title || entry.title} />`,
                                     },
-                                    hoverImages: [
+                                    allImages: [
                                         ...(data.overview?.images || []),
                                         ...(data.solution?.images || []),
-                                    ]
-                                        .slice(0, 3)
-                                        .filter(Boolean),
+                                        ...(data.styleGuide?.images || []),
+                                    ].filter((img) => img && img.src),
                                 };
                             } catch {
                                 return null;
@@ -539,16 +603,10 @@ const Home = () => {
                                 role: "ui/ux",
                                 symbol: `<${caseStudyProject.title} />`,
                             },
-                            hoverImages: [
-                                ...(caseStudyProject.solution?.images?.slice(
-                                    1,
-                                    3,
-                                ) || []),
-                                ...(caseStudyProject.overview?.images?.slice(
-                                    1,
-                                    2,
-                                ) || []),
-                            ].filter(Boolean),
+                            allImages: [
+                                ...(caseStudyProject.solution?.images || []),
+                                ...(caseStudyProject.overview?.images || []),
+                            ].filter((img) => img && img.src),
                         }),
                     );
                     setProjects(projectsWithData);
@@ -641,11 +699,35 @@ const Home = () => {
                                                         project.id,
                                                     )}
                                                     className="folder-item-link"
-                                                    onMouseEnter={() =>
-                                                        setHoveredProject(
-                                                            project,
-                                                        )
-                                                    }
+                                                    onMouseEnter={() => {
+                                                        // Re-shuffle images on each hover
+                                                        const imgs =
+                                                            project.allImages ||
+                                                            [];
+                                                        const shuffled = [
+                                                            ...imgs,
+                                                        ].sort(
+                                                            () =>
+                                                                Math.random() -
+                                                                0.5,
+                                                        );
+                                                        const count = Math.min(
+                                                            3 +
+                                                                Math.floor(
+                                                                    Math.random() *
+                                                                        3,
+                                                                ),
+                                                            shuffled.length,
+                                                        ); // 3-5
+                                                        setHoveredProject({
+                                                            ...project,
+                                                            hoverImages:
+                                                                shuffled.slice(
+                                                                    0,
+                                                                    count,
+                                                                ),
+                                                        });
+                                                    }}
                                                     onMouseLeave={() =>
                                                         setHoveredProject(null)
                                                     }

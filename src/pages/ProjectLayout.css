@@ -122,6 +122,87 @@
     display: block;
 }
 
+/* ── Image Carousel (3+ images) ── */
+.image-carousel {
+    margin-top: var(--space-8);
+}
+
+.carousel-viewport {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-bg-secondary);
+    cursor: pointer;
+}
+
+.carousel-viewport img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+}
+
+.carousel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border, #e0e0e0);
+    background: var(--color-bg, #fff);
+    color: var(--color-text, #1a1a1a);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--color-bg-secondary, #f5f5f5);
+    border-color: var(--color-text-secondary, #666);
+}
+
+.carousel-counter {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary, #666);
+    font-variant-numeric: tabular-nums;
+    min-width: 48px;
+    text-align: center;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border, #e0e0e0);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.carousel-dot.active {
+    background: var(--color-text, #1a1a1a);
+    border-color: var(--color-text, #1a1a1a);
+}
+
+.carousel-dot:hover:not(.active) {
+    background: var(--color-text-tertiary, #999);
+}
+
 /* ─────────────────────────────────────────────
    OBJECTIVES
    ───────────────────────────────────────────── */

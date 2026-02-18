@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { getProjectById } from "../utils/projectDataMapper";
@@ -13,6 +13,7 @@ import {
     FigLabel,
 } from "../components/MicroIndex";
 import EvolutionSection from "../components/EvolutionSection";
+import FigmaEmbed from "../components/FigmaEmbed";
 import "./ProjectDetail.css";
 
 const ProjectDetail = () => {
@@ -30,8 +31,45 @@ const ProjectDetail = () => {
                 navigate("/");
                 return;
             }
-            setProject(projectData);
-            setLoading(false);
+
+            // Try to fetch supplemental data (rich sections from local data.json)
+            fetch(`/projects/${id}/data.json`)
+                .then((res) => (res.ok ? res.json() : null))
+                .then((localData) => {
+                    if (localData) {
+                        const merged = { ...projectData };
+                        // Merge supplemental sections that don't exist in the mapper
+                        const extras = [
+                            "personas",
+                            "userFlows",
+                            "informationArchitecture",
+                            "styleGuide",
+                            "hifi",
+                            "prototype",
+                            "userTesting",
+                            "finalPresentation",
+                            "embeds",
+                        ];
+                        for (const key of extras) {
+                            if (localData[key]) merged[key] = localData[key];
+                        }
+                        // Merge iterations rounds if present in local data
+                        if (localData.iterations?.rounds) {
+                            merged.iterations = {
+                                ...merged.iterations,
+                                ...localData.iterations,
+                            };
+                        }
+                        setProject(merged);
+                    } else {
+                        setProject(projectData);
+                    }
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setProject(projectData);
+                    setLoading(false);
+                });
         } catch (error) {
             console.error("Error loading project:", error);
             navigate("/");
@@ -104,37 +142,72 @@ const ProjectDetail = () => {
 
                     <p className="project-hero-tagline">{project.tagline}</p>
 
-                    {/* Header CTA - Live Site Link */}
-                    {project.links?.live && (
-                        <motion.a
-                            href={project.links.live}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="project-cta-link"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: 0.3 }}
-                            whileHover={{
-                                y: -2,
-                                transition: { duration: 0.2 },
-                            }}
-                        >
-                            <span>Visit Live Site</span>
-                            <svg
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                fill="none"
-                            >
-                                <path
-                                    d="M6 3h7v7M13 3L3 13"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </motion.a>
+                    {/* Header CTAs */}
+                    {(project.links?.live || project.links?.prototype) && (
+                        <div className="project-hero-ctas">
+                            {project.links?.live && (
+                                <motion.a
+                                    href={project.links.live}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="project-cta-link"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4, delay: 0.3 }}
+                                    whileHover={{
+                                        y: -2,
+                                        transition: { duration: 0.2 },
+                                    }}
+                                >
+                                    <span>Visit Live Site</span>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M6 3h7v7M13 3L3 13"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </motion.a>
+                            )}
+                            {project.links?.prototype && (
+                                <motion.a
+                                    href={project.links.prototype}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="project-cta-link secondary"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4, delay: 0.4 }}
+                                    whileHover={{
+                                        y: -2,
+                                        transition: { duration: 0.2 },
+                                    }}
+                                >
+                                    <span>Try Prototype</span>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M4 2l10 6-10 6V2z"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </motion.a>
+                            )}
+                        </div>
                     )}
 
                     <div className="project-meta-grid">
@@ -422,6 +495,387 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
+            {/* ── Personas ── */}
+            {project.personas &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section personas-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Personas"
+                            />
+                            <h2 className="section-title">
+                                {project.personas.title}
+                            </h2>
+                            <SectionTag
+                                sectionIndex={s}
+                                version="2.0"
+                            />
+                            <p className="section-description">
+                                {project.personas.description}
+                            </p>
+
+                            {project.personas.prototypeLink && (
+                                <FigmaEmbed
+                                    linkOnly
+                                    caption="View full personas in Figma"
+                                    prototypeLink={
+                                        project.personas.prototypeLink
+                                    }
+                                />
+                            )}
+
+                            {project.personas.images?.length > 0 &&
+                                project.personas.images.map((img, i) => (
+                                    <div
+                                        key={i}
+                                        className="persona-image"
+                                        style={{ position: "relative" }}
+                                    >
+                                        <FigLabel index={nextImage()} />
+                                        <img
+                                            src={img.src}
+                                            alt={img.alt}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                ))}
+                        </motion.section>
+                    );
+                })()}
+
+            {/* ── User Flows ── */}
+            {project.userFlows &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section userflows-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="User Flows"
+                            />
+                            <h2 className="section-title">
+                                {project.userFlows.title}
+                            </h2>
+                            <SectionTag
+                                sectionIndex={s}
+                                version="2.0"
+                            />
+                            <p className="section-description">
+                                {project.userFlows.description}
+                            </p>
+
+                            {project.userFlows.flows?.length > 0 && (
+                                <div className="flows-list">
+                                    {project.userFlows.flows.map((flow, i) => (
+                                        <motion.div
+                                            key={i}
+                                            className="flow-card"
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{
+                                                opacity: 1,
+                                                y: 0,
+                                            }}
+                                            viewport={{ once: true }}
+                                            transition={{
+                                                duration: 0.5,
+                                                delay: i * 0.1,
+                                            }}
+                                        >
+                                            <h3 className="flow-name">
+                                                {flow.name}
+                                            </h3>
+                                            {flow.description && (
+                                                <p className="flow-description">
+                                                    {flow.description}
+                                                </p>
+                                            )}
+                                            {flow.steps?.length > 0 && (
+                                                <div className="flow-steps">
+                                                    {flow.steps.map(
+                                                        (step, j) => (
+                                                            <span
+                                                                key={j}
+                                                                className="flow-step"
+                                                            >
+                                                                {step}
+                                                                {j <
+                                                                    flow.steps
+                                                                        .length -
+                                                                        1 && (
+                                                                    <span className="flow-arrow">
+                                                                        →
+                                                                    </span>
+                                                                )}
+                                                            </span>
+                                                        ),
+                                                    )}
+                                                </div>
+                                            )}
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            )}
+
+                            {project.userFlows.images?.length > 0 && (
+                                <ImageGallery
+                                    images={project.userFlows.images}
+                                    startIndex={imageNum}
+                                    onCount={(n) => {
+                                        imageNum += n;
+                                    }}
+                                />
+                            )}
+                        </motion.section>
+                    );
+                })()}
+
+            {/* ── Information Architecture ── */}
+            {project.informationArchitecture &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <IndexedSection
+                            caseIndex={ci}
+                            sectionIndex={s}
+                            name="IA"
+                            title={project.informationArchitecture.title}
+                            description={
+                                project.informationArchitecture.description
+                            }
+                            images={project.informationArchitecture.images}
+                            imageStartIndex={imageNum}
+                            onImageCount={(n) => {
+                                imageNum += n;
+                            }}
+                        />
+                    );
+                })()}
+
+            {/* Lo-Fi Exploration */}
+            {project.lofi &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <IndexedSection
+                            caseIndex={ci}
+                            sectionIndex={s}
+                            name="Lo-Fi Exploration"
+                            title={project.lofi.title}
+                            description={project.lofi.description}
+                            images={project.lofi.images}
+                            imageStartIndex={imageNum}
+                            onImageCount={(n) => {
+                                imageNum += n;
+                            }}
+                        />
+                    );
+                })()}
+
+            {/* ── Style Guide ── */}
+            {project.styleGuide &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section styleguide-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Style Guide"
+                            />
+                            <h2 className="section-title">
+                                {project.styleGuide.title}
+                            </h2>
+                            <SectionTag
+                                sectionIndex={s}
+                                version="2.0"
+                            />
+                            <p className="section-description">
+                                {project.styleGuide.description}
+                            </p>
+
+                            {project.styleGuide.embed && (
+                                <FigmaEmbed
+                                    src={project.styleGuide.embed.src}
+                                    title={project.styleGuide.embed.title}
+                                    type="figma-design"
+                                    caption="Typography, color palette, and component library"
+                                />
+                            )}
+
+                            {project.styleGuide.principles?.length > 0 && (
+                                <div className="styleguide-principles">
+                                    <h3 className="subsection-title">
+                                        Design Principles
+                                    </h3>
+                                    <div className="principles-grid">
+                                        {project.styleGuide.principles.map(
+                                            (p, i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    className="principle-card"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: 20,
+                                                    }}
+                                                    whileInView={{
+                                                        opacity: 1,
+                                                        y: 0,
+                                                    }}
+                                                    viewport={{ once: true }}
+                                                    transition={{
+                                                        duration: 0.5,
+                                                        delay: i * 0.1,
+                                                    }}
+                                                >
+                                                    <h4 className="principle-name">
+                                                        {p.name}
+                                                    </h4>
+                                                    <p className="principle-description">
+                                                        {p.description}
+                                                    </p>
+                                                </motion.div>
+                                            ),
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {project.styleGuide.typography && (
+                                <div className="styleguide-typography">
+                                    <h3 className="subsection-title">
+                                        Typography
+                                    </h3>
+                                    {project.styleGuide.typography.scale
+                                        ?.length > 0 && (
+                                        <div className="type-scale">
+                                            {project.styleGuide.typography.scale.map(
+                                                (t, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="type-scale-row"
+                                                    >
+                                                        <span className="type-scale-name">
+                                                            {t.name}
+                                                        </span>
+                                                        <span className="type-scale-size">
+                                                            {t.size} /{" "}
+                                                            {t.weight}
+                                                        </span>
+                                                    </div>
+                                                ),
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {project.styleGuide.colors && (
+                                <div className="styleguide-colors">
+                                    <h3 className="subsection-title">
+                                        Color Palette
+                                    </h3>
+                                    <div className="color-swatches">
+                                        {Object.values(
+                                            project.styleGuide.colors,
+                                        ).map((color, i) => (
+                                            <div
+                                                key={i}
+                                                className="color-swatch"
+                                            >
+                                                <div
+                                                    className="color-swatch-preview"
+                                                    style={{
+                                                        backgroundColor:
+                                                            color.hex,
+                                                    }}
+                                                />
+                                                <span className="color-swatch-name">
+                                                    {color.name}
+                                                </span>
+                                                <span className="color-swatch-hex">
+                                                    {color.hex}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {project.styleGuide.components?.length > 0 && (
+                                <div className="styleguide-components">
+                                    <h3 className="subsection-title">
+                                        Components
+                                    </h3>
+                                    <div className="components-list">
+                                        {project.styleGuide.components.map(
+                                            (comp, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="component-item"
+                                                >
+                                                    <h4 className="component-name">
+                                                        {comp.name}
+                                                    </h4>
+                                                    <p className="component-desc">
+                                                        {comp.description}
+                                                    </p>
+                                                    {comp.variants?.length >
+                                                        0 && (
+                                                        <div className="component-variants">
+                                                            {comp.variants.map(
+                                                                (v, j) => (
+                                                                    <span
+                                                                        key={j}
+                                                                        className="variant-tag"
+                                                                    >
+                                                                        {v}
+                                                                    </span>
+                                                                ),
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ),
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {project.styleGuide.images?.length > 0 && (
+                                <ImageGallery
+                                    images={project.styleGuide.images}
+                                    startIndex={imageNum}
+                                    onCount={(n) => {
+                                        imageNum += n;
+                                    }}
+                                />
+                            )}
+                        </motion.section>
+                    );
+                })()}
+
             {/* Challenges & Pivots */}
             {project.challenges &&
                 (() => {
@@ -472,23 +926,266 @@ const ProjectContentMain = ({ project }) => {
                 <WeightLiftedPivot {...project.pivot.weightLifted} />
             )}
 
-            {/* Lo-Fi Exploration */}
-            {project.lofi &&
+            {/* Iterations & Refinements (supports both improvements and rounds) */}
+            {project.iterations &&
                 (() => {
                     const s = nextSection();
                     return (
-                        <IndexedSection
-                            caseIndex={ci}
-                            sectionIndex={s}
-                            name="Lo-Fi Exploration"
-                            title={project.lofi.title}
-                            description={project.lofi.description}
-                            images={project.lofi.images}
-                            imageStartIndex={imageNum}
-                            onImageCount={(n) => {
-                                imageNum += n;
-                            }}
-                        />
+                        <motion.section
+                            className="project-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Iterations"
+                            />
+                            <h2 className="section-title">
+                                {project.iterations.title}
+                            </h2>
+                            <SectionTag
+                                sectionIndex={s}
+                                version="2.1"
+                            />
+                            <p className="section-description">
+                                {project.iterations.description}
+                            </p>
+
+                            {/* Rounds-based iterations (from local data) */}
+                            {project.iterations.rounds?.length > 0 && (
+                                <div className="iteration-rounds">
+                                    {project.iterations.rounds.map(
+                                        (round, i) => (
+                                            <motion.div
+                                                key={i}
+                                                className="iteration-round"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{
+                                                    opacity: 1,
+                                                    y: 0,
+                                                }}
+                                                viewport={{ once: true }}
+                                                transition={{
+                                                    duration: 0.5,
+                                                    delay: i * 0.1,
+                                                }}
+                                            >
+                                                <h3 className="round-title">
+                                                    Round {round.round}
+                                                    {round.focus && (
+                                                        <span className="round-focus">
+                                                            {" "}
+                                                            — {round.focus}
+                                                        </span>
+                                                    )}
+                                                </h3>
+                                                {round.findings?.length > 0 && (
+                                                    <div className="round-findings">
+                                                        <h4 className="round-sub-label">
+                                                            Findings
+                                                        </h4>
+                                                        <ul className="findings-list">
+                                                            {round.findings.map(
+                                                                (f, j) => (
+                                                                    <li
+                                                                        key={j}
+                                                                        className="finding-item"
+                                                                    >
+                                                                        <span className="finding-icon">
+                                                                            →
+                                                                        </span>
+                                                                        <span>
+                                                                            {f}
+                                                                        </span>
+                                                                    </li>
+                                                                ),
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                )}
+                                                {round.changes?.length > 0 && (
+                                                    <div className="round-changes">
+                                                        <h4 className="round-sub-label">
+                                                            Changes Made
+                                                        </h4>
+                                                        <ul className="objectives-list">
+                                                            {round.changes.map(
+                                                                (c, j) => (
+                                                                    <li
+                                                                        key={j}
+                                                                        className="objective-item"
+                                                                    >
+                                                                        <span className="objective-icon">
+                                                                            ✓
+                                                                        </span>
+                                                                        <span className="objective-text">
+                                                                            {c}
+                                                                        </span>
+                                                                    </li>
+                                                                ),
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                )}
+                                            </motion.div>
+                                        ),
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Legacy improvements list */}
+                            {!project.iterations.rounds &&
+                                project.iterations.improvements && (
+                                    <ul className="objectives-list">
+                                        {project.iterations.improvements.map(
+                                            (imp, i) => (
+                                                <motion.li
+                                                    key={i}
+                                                    className="objective-item"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        x: -20,
+                                                    }}
+                                                    whileInView={{
+                                                        opacity: 1,
+                                                        x: 0,
+                                                    }}
+                                                    viewport={{ once: true }}
+                                                    transition={{
+                                                        duration: 0.4,
+                                                        delay: i * 0.1,
+                                                    }}
+                                                >
+                                                    <span className="objective-icon">
+                                                        ✓
+                                                    </span>
+                                                    <span className="objective-text">
+                                                        {imp}
+                                                    </span>
+                                                </motion.li>
+                                            ),
+                                        )}
+                                    </ul>
+                                )}
+
+                            {project.iterations.images?.length > 0 && (
+                                <ImageGallery
+                                    images={project.iterations.images}
+                                    startIndex={imageNum}
+                                    onCount={(n) => {
+                                        imageNum += n;
+                                    }}
+                                />
+                            )}
+                            {project.iterations.prototype && (
+                                <PrototypeEmbed
+                                    prototype={project.iterations.prototype}
+                                />
+                            )}
+                        </motion.section>
+                    );
+                })()}
+
+            {/* ── High-Fidelity Mockups ── */}
+            {project.hifi &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section hifi-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Hi-Fi"
+                            />
+                            <h2 className="section-title">
+                                {project.hifi.title}
+                            </h2>
+                            <SectionTag
+                                sectionIndex={s}
+                                version="2.0"
+                            />
+                            <p className="section-description">
+                                {project.hifi.description}
+                            </p>
+
+                            {project.hifi.embed && (
+                                <FigmaEmbed
+                                    src={project.hifi.embed.src}
+                                    title={project.hifi.embed.title}
+                                    type="figma-design"
+                                />
+                            )}
+
+                            {project.hifi.screens?.length > 0 && (
+                                <div className="hifi-screens accordion-group">
+                                    {project.hifi.screens.map((screen, i) => (
+                                        <HifiAccordion
+                                            key={i}
+                                            screen={screen}
+                                            index={i}
+                                            figIndex={nextImage()}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+
+                            {project.hifi.improvements?.length > 0 && (
+                                <div className="hifi-improvements">
+                                    <h3 className="subsection-title">
+                                        Key Improvements
+                                    </h3>
+                                    <ul className="objectives-list">
+                                        {project.hifi.improvements.map(
+                                            (imp, i) => (
+                                                <motion.li
+                                                    key={i}
+                                                    className="objective-item"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        x: -20,
+                                                    }}
+                                                    whileInView={{
+                                                        opacity: 1,
+                                                        x: 0,
+                                                    }}
+                                                    viewport={{ once: true }}
+                                                    transition={{
+                                                        duration: 0.4,
+                                                        delay: i * 0.1,
+                                                    }}
+                                                >
+                                                    <span className="objective-icon">
+                                                        ✓
+                                                    </span>
+                                                    <span className="objective-text">
+                                                        {imp}
+                                                    </span>
+                                                </motion.li>
+                                            ),
+                                        )}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {project.hifi.images?.length > 0 && (
+                                <ImageGallery
+                                    images={project.hifi.images}
+                                    startIndex={imageNum}
+                                    onCount={(n) => {
+                                        imageNum += n;
+                                    }}
+                                />
+                            )}
+                        </motion.section>
                     );
                 })()}
 
@@ -580,13 +1277,13 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* Iterations & Refinements */}
-            {project.iterations &&
+            {/* ── Interactive Prototype ── */}
+            {project.prototype &&
                 (() => {
                     const s = nextSection();
                     return (
                         <motion.section
-                            className="project-section"
+                            className="project-section prototype-section"
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
@@ -595,59 +1292,343 @@ const ProjectContentMain = ({ project }) => {
                             <SectionIndex
                                 caseIndex={ci}
                                 sectionIndex={s}
-                                title="Iterations"
+                                title="Prototype"
                             />
                             <h2 className="section-title">
-                                {project.iterations.title}
+                                {project.prototype.title}
                             </h2>
                             <SectionTag
                                 sectionIndex={s}
-                                version="2.1"
+                                version="2.0"
                             />
                             <p className="section-description">
-                                {project.iterations.description}
+                                {project.prototype.description}
                             </p>
-                            {project.iterations.improvements && (
-                                <ul className="objectives-list">
-                                    {project.iterations.improvements.map(
-                                        (imp, i) => (
-                                            <motion.li
-                                                key={i}
-                                                className="objective-item"
-                                                initial={{ opacity: 0, x: -20 }}
-                                                whileInView={{
-                                                    opacity: 1,
-                                                    x: 0,
-                                                }}
-                                                viewport={{ once: true }}
-                                                transition={{
-                                                    duration: 0.4,
-                                                    delay: i * 0.1,
-                                                }}
-                                            >
-                                                <span className="objective-icon">
-                                                    ✓
-                                                </span>
-                                                <span className="objective-text">
-                                                    {imp}
-                                                </span>
-                                            </motion.li>
-                                        ),
-                                    )}
-                                </ul>
+
+                            {project.prototype.link && (
+                                <FigmaEmbed
+                                    linkOnly
+                                    caption="Try the interactive prototype"
+                                    prototypeLink={project.prototype.link}
+                                />
                             )}
-                            {project.iterations.images?.length > 0 && (
+
+                            {project.prototype.flows?.length > 0 && (
+                                <div className="prototype-flows">
+                                    <h3 className="subsection-title">
+                                        Core Flows
+                                    </h3>
+                                    <ul className="objectives-list">
+                                        {project.prototype.flows.map(
+                                            (flow, i) => (
+                                                <motion.li
+                                                    key={i}
+                                                    className="objective-item"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        x: -20,
+                                                    }}
+                                                    whileInView={{
+                                                        opacity: 1,
+                                                        x: 0,
+                                                    }}
+                                                    viewport={{ once: true }}
+                                                    transition={{
+                                                        duration: 0.4,
+                                                        delay: i * 0.1,
+                                                    }}
+                                                >
+                                                    <span className="objective-icon">
+                                                        →
+                                                    </span>
+                                                    <span className="objective-text">
+                                                        {flow}
+                                                    </span>
+                                                </motion.li>
+                                            ),
+                                        )}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {project.prototype.images?.length > 0 && (
                                 <ImageGallery
-                                    images={project.iterations.images}
+                                    images={project.prototype.images}
                                     startIndex={imageNum}
                                     onCount={(n) => {
                                         imageNum += n;
                                     }}
                                 />
                             )}
-                            {project.iterations.prototype && (
-                                <PrototypeEmbed
-                                    prototype={project.iterations.prototype}
+                        </motion.section>
+                    );
+                })()}
+
+            {/* ── Usability Testing ── */}
+            {project.userTesting &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section usability-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Testing"
+                            />
+                            <h2 className="section-title">
+                                {project.userTesting.title}
+                            </h2>
+                            <SectionTag
+                                sectionIndex={s}
+                                version="2.0"
+                            />
+                            <p className="section-description">
+                                {project.userTesting.description}
+                            </p>
+
+                            {/* Test report links */}
+                            {project.userTesting.reportLinks && (
+                                <div className="test-report-links">
+                                    {project.userTesting.reportLinks.lofi && (
+                                        <FigmaEmbed
+                                            linkOnly
+                                            caption="Lo-fi usability test report"
+                                            prototypeLink={
+                                                project.userTesting.reportLinks
+                                                    .lofi
+                                            }
+                                        />
+                                    )}
+                                    {project.userTesting.reportLinks.hifi && (
+                                        <FigmaEmbed
+                                            linkOnly
+                                            caption="Hi-fi usability test report"
+                                            prototypeLink={
+                                                project.userTesting.reportLinks
+                                                    .hifi
+                                            }
+                                        />
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Testing rounds */}
+                            {project.userTesting.rounds?.length > 0 && (
+                                <div className="testing-rounds">
+                                    {project.userTesting.rounds.map(
+                                        (round, i) => (
+                                            <motion.div
+                                                key={i}
+                                                className="testing-round"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{
+                                                    opacity: 1,
+                                                    y: 0,
+                                                }}
+                                                viewport={{ once: true }}
+                                                transition={{
+                                                    duration: 0.5,
+                                                    delay: i * 0.15,
+                                                }}
+                                            >
+                                                <h3 className="round-title">
+                                                    Round {round.round}
+                                                    {round.stage && (
+                                                        <span className="round-focus">
+                                                            {" "}
+                                                            — {round.stage}
+                                                        </span>
+                                                    )}
+                                                </h3>
+                                                <div className="round-meta">
+                                                    {round.participants && (
+                                                        <span>
+                                                            {round.participants}{" "}
+                                                            participants
+                                                        </span>
+                                                    )}
+                                                    {round.tool && (
+                                                        <span>
+                                                            {round.tool}
+                                                        </span>
+                                                    )}
+                                                    {round.taskCompletionRate && (
+                                                        <span>
+                                                            Completion:{" "}
+                                                            {
+                                                                round.taskCompletionRate
+                                                            }
+                                                        </span>
+                                                    )}
+                                                </div>
+
+                                                {round.tasks?.length > 0 && (
+                                                    <div className="round-tasks">
+                                                        <h4 className="round-sub-label">
+                                                            Tasks
+                                                        </h4>
+                                                        <ul className="objectives-list">
+                                                            {round.tasks.map(
+                                                                (t, j) => (
+                                                                    <li
+                                                                        key={j}
+                                                                        className="objective-item"
+                                                                    >
+                                                                        <span className="objective-icon">
+                                                                            →
+                                                                        </span>
+                                                                        <span className="objective-text">
+                                                                            {t}
+                                                                        </span>
+                                                                    </li>
+                                                                ),
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                )}
+
+                                                {round.findings?.length > 0 && (
+                                                    <div className="round-findings">
+                                                        <h4 className="round-sub-label">
+                                                            Findings
+                                                        </h4>
+                                                        <div className="findings-table">
+                                                            {round.findings.map(
+                                                                (f, j) => (
+                                                                    <div
+                                                                        key={j}
+                                                                        className="finding-row"
+                                                                    >
+                                                                        <span
+                                                                            className={`finding-severity finding-severity--${f.severity}`}
+                                                                        >
+                                                                            {
+                                                                                f.severity
+                                                                            }
+                                                                        </span>
+                                                                        <div className="finding-detail">
+                                                                            <p className="finding-text">
+                                                                                {
+                                                                                    f.finding
+                                                                                }
+                                                                            </p>
+                                                                            {f.change && (
+                                                                                <p className="finding-change">
+                                                                                    →{" "}
+                                                                                    {
+                                                                                        f.change
+                                                                                    }
+                                                                                </p>
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                ),
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </motion.div>
+                                        ),
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Metrics summary */}
+                            {project.userTesting.metrics && (
+                                <div className="testing-metrics">
+                                    <h3 className="subsection-title">
+                                        Results
+                                    </h3>
+                                    <div className="metrics-row">
+                                        {Object.entries(
+                                            project.userTesting.metrics,
+                                        ).map(([key, value], i) => (
+                                            <motion.div
+                                                key={key}
+                                                className="metric-card"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{
+                                                    opacity: 1,
+                                                    y: 0,
+                                                }}
+                                                viewport={{ once: true }}
+                                                transition={{
+                                                    duration: 0.5,
+                                                    delay: i * 0.1,
+                                                }}
+                                            >
+                                                <div className="metric-value">
+                                                    {value}
+                                                </div>
+                                                <div className="metric-label">
+                                                    {key.replace(
+                                                        /([A-Z])/g,
+                                                        " $1",
+                                                    )}
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {project.userTesting.images?.length > 0 && (
+                                <ImageGallery
+                                    images={project.userTesting.images}
+                                    startIndex={imageNum}
+                                    onCount={(n) => {
+                                        imageNum += n;
+                                    }}
+                                />
+                            )}
+                        </motion.section>
+                    );
+                })()}
+
+            {/* ── Final Presentation ── */}
+            {project.finalPresentation &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section presentation-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Presentation"
+                            />
+                            <h2 className="section-title">
+                                {project.finalPresentation.title}
+                            </h2>
+                            <SectionTag
+                                sectionIndex={s}
+                                version="2.0"
+                            />
+                            {project.finalPresentation.description && (
+                                <p className="section-description">
+                                    {project.finalPresentation.description}
+                                </p>
+                            )}
+
+                            {project.finalPresentation.embed && (
+                                <FigmaEmbed
+                                    src={project.finalPresentation.embed.src}
+                                    title={
+                                        project.finalPresentation.embed.title
+                                    }
+                                    type="figma-slides"
+                                    caption="Complete design journey from research to final solution"
                                 />
                             )}
                         </motion.section>
@@ -1049,58 +2030,231 @@ const ProjectContentMain = ({ project }) => {
 };
 
 // Reusable Image Gallery Component with FIG.XX labels
+// Shows all images stacked for ≤2 images; slideshow carousel for 3+
 const ImageGallery = ({ images, startIndex = 0, onCount }) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
     if (!images || images.length === 0) return null;
 
     // Report image count to parent for counter tracking
     if (onCount) onCount(images.length);
 
-    return (
-        <div className="section-images">
-            {images.map((img, index) => (
-                <motion.div
-                    key={index}
-                    className="section-image"
-                    initial={{
-                        opacity: 0,
-                        y: 40,
-                        rotate: index % 2 === 0 ? -1 : 1,
-                    }}
-                    whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{
-                        duration: 0.7,
-                        delay: index * 0.12,
-                        ease: [0.16, 1, 0.3, 1],
-                    }}
-                    whileHover={{
-                        scale: 1.01,
-                        rotate: index % 2 === 0 ? 0.5 : -0.5,
-                        transition: {
-                            duration: 0.4,
-                            ease: [0.16, 1, 0.3, 1],
-                        },
-                    }}
-                >
-                    <FigLabel index={startIndex + index + 1} />
+    // ≤2 images: render stacked (original behavior)
+    if (images.length <= 2) {
+        return (
+            <div className="section-images">
+                {images.map((img, index) => (
                     <motion.div
-                        className="section-image-overlay"
-                        initial={{ opacity: 0 }}
-                        whileHover={{
-                            opacity: 1,
-                            transition: { duration: 0.3 },
+                        key={index}
+                        className="section-image"
+                        initial={{
+                            opacity: 0,
+                            y: 40,
+                            rotate: index % 2 === 0 ? -1 : 1,
                         }}
-                    />
-                    <img
+                        whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{
+                            duration: 0.7,
+                            delay: index * 0.12,
+                            ease: [0.16, 1, 0.3, 1],
+                        }}
+                        whileHover={{
+                            scale: 1.01,
+                            rotate: index % 2 === 0 ? 0.5 : -0.5,
+                            transition: {
+                                duration: 0.4,
+                                ease: [0.16, 1, 0.3, 1],
+                            },
+                        }}
+                    >
+                        <FigLabel index={startIndex + index + 1} />
+                        <motion.div
+                            className="section-image-overlay"
+                            initial={{ opacity: 0 }}
+                            whileHover={{
+                                opacity: 1,
+                                transition: { duration: 0.3 },
+                            }}
+                        />
+                        <img
+                            src={img.src}
+                            alt={img.alt}
+                        />
+                        {img.caption && (
+                            <p className="image-caption">{img.caption}</p>
+                        )}
+                    </motion.div>
+                ))}
+            </div>
+        );
+    }
+
+    // 3+ images: clickthrough slideshow
+    const prev = () =>
+        setCurrentSlide((s) => (s === 0 ? images.length - 1 : s - 1));
+    const next = () =>
+        setCurrentSlide((s) => (s === images.length - 1 ? 0 : s + 1));
+    const img = images[currentSlide];
+
+    return (
+        <motion.div
+            className="image-carousel"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+        >
+            <div className="carousel-viewport">
+                <FigLabel index={startIndex + currentSlide + 1} />
+                <AnimatePresence mode="wait">
+                    <motion.img
+                        key={currentSlide}
                         src={img.src}
                         alt={img.alt}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
                     />
-                    {img.caption && (
-                        <p className="image-caption">{img.caption}</p>
-                    )}
-                </motion.div>
-            ))}
-        </div>
+                </AnimatePresence>
+            </div>
+
+            <div className="carousel-controls">
+                <button
+                    className="carousel-btn"
+                    onClick={prev}
+                    aria-label="Previous image"
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                    >
+                        <path
+                            d="M12 4L6 10l6 6"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </button>
+
+                <span className="carousel-counter">
+                    {currentSlide + 1} / {images.length}
+                </span>
+
+                <button
+                    className="carousel-btn"
+                    onClick={next}
+                    aria-label="Next image"
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                    >
+                        <path
+                            d="M8 4l6 6-6 6"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+
+            {img.caption && <p className="image-caption">{img.caption}</p>}
+
+            {/* Dot indicators */}
+            <div className="carousel-dots">
+                {images.map((_, i) => (
+                    <button
+                        key={i}
+                        className={`carousel-dot ${i === currentSlide ? "active" : ""}`}
+                        onClick={() => setCurrentSlide(i)}
+                        aria-label={`Go to image ${i + 1}`}
+                    />
+                ))}
+            </div>
+        </motion.div>
+    );
+};
+
+// Accordion item for Hi-Fi screens — click name to reveal image
+const HifiAccordion = ({ screen, index, figIndex }) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <motion.div
+            className={`accordion-item ${open ? "accordion-open" : ""}`}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.06 }}
+        >
+            <button
+                className="accordion-trigger"
+                onClick={() => setOpen(!open)}
+                aria-expanded={open}
+            >
+                <span className="accordion-label">{screen.name}</span>
+                <motion.span
+                    className="accordion-chevron"
+                    animate={{ rotate: open ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                >
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                    >
+                        <path
+                            d="M4 6l4 4 4-4"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </motion.span>
+            </button>
+
+            <AnimatePresence initial={false}>
+                {open && (
+                    <motion.div
+                        className="accordion-body"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <div className="accordion-content">
+                            {screen.description && (
+                                <p className="accordion-desc">
+                                    {screen.description}
+                                </p>
+                            )}
+                            {screen.image && (
+                                <div className="hifi-screen-image">
+                                    <FigLabel index={figIndex} />
+                                    <img
+                                        src={screen.image}
+                                        alt={screen.name}
+                                        loading="lazy"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     );
 };
 

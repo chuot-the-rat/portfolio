@@ -1,5 +1,0 @@
-<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="800" height="600" fill="#eff6ff"/>
-  <circle cx="400" cy="300" r="120" fill="#0ea5e9" opacity="0.2"/>
-  <text x="400" y="310" font-family="Arial, sans-serif" font-size="32" fill="#0ea5e9" text-anchor="middle" font-weight="bold">Detail 1</text>
-</svg>

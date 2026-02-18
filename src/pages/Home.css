@@ -470,6 +470,13 @@
     max-width: 100%;
 }
 
+/* Scatter container fills the preview body */
+.preview-window-content .preview-scatter-container {
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+}
+
 .preview-window-content .preview-image,
 .preview-window-content .preview-video {
     width: 100%;
