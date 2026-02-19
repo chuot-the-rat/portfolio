@@ -1,6 +1,0 @@
-<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="300" rx="32" fill="#FFF3E0"/>
-  <rect x="60" y="80" width="280" height="60" rx="12" fill="#FFD180" stroke="#FF8C42" stroke-width="4"/>
-  <text x="200" y="120" text-anchor="middle" fill="#FF8C42" font-size="22" font-family="'Rubik',sans-serif">Dieline Constraint</text>
-  <text x="200" y="160" text-anchor="middle" fill="#bbb" font-size="16" font-family="'Rubik',sans-serif">Compliance, Nutrition, Barcode</text>
-</svg>
