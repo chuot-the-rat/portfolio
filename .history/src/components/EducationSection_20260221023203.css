@@ -282,7 +282,8 @@
 .education-timeline-marker {
     display: none;
 }
-.education-content {
+
+.education-section.compact .education-content {
     padding: 1.5rem;
     background: var(--bg-primary, #fafaf9);
     border-radius: 12px;

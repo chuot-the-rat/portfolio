@@ -241,6 +241,9 @@
 }
 
 /* Alternative Compact Variant for Sidebar */
+.skills-section.compact {
+    padding: 0;
+}
 
 .skills-section.compact .skills-header {
     margin-bottom: 1.5rem;
@@ -292,75 +295,6 @@
     padding-left: 1rem;
     background: var(--accent, #212121);
     border-color: var(--accent, #212121);
-}
-
-.skills-section.compact .skill-item:hover .skill-name {
-    color: white;
-}
-
-.skills-section.compact .skill-name::after {
-    display: none;
-}
-
-.skills-section.compact .skill-level {
-    display: none;
-}
-
-/* Mode-Specific Skills Styles */
-.skills-title {
-    font-family: var(--font-display);
-    font-weight: 600;
-}
-
-.skills-category-label {
-    font-family: var(--font-display);
-    font-weight: 600;
-}
-
-/* CHAOS MODE - Random skill shifts */
-.mode-chaos .skill-item:nth-child(odd) {
-    transform: translateX(2px);
-}
-
-.mode-chaos .skill-item:nth-child(even) {
-    transform: translateX(-2px);
-}
-
-.mode-chaos .skill-item:hover {
-    transform: translateX(8px) rotate(0.3deg) !important;
-}
-
-/* CHAOS MODE - No underlines, minimal hover */
-.mode-chaos .skill-name::after {
-    display: none;
-}
-
-.mode-chaos .skill-item:hover {
-    padding-left: 0;
-    border-bottom-color: transparent;
-}
-
-/* WORK MODE - Flat Neon Cyber Aesthetic */
-.mode-work .skills-section {
-    background: transparent;
-}
-
-.mode-work .skill-item:hover {
-    background-color: rgba(212, 165, 116, 0.05);
-    padding-left: var(--space-3);
-}
-
-.mode-work .skill-name::after {
-    background: var(--color-accent);
-}
-
-.mode-work .skills-category-label {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-border);
-}
-
-/* ==========================================================================
-   WORK MODE: HOLOGRAPHIC SKILLS INDEX - Sci-Fi/Cyber Aesthetic
    Advanced floating panels with parallax depth, ripple effects, background fx
    ========================================================================== */
 

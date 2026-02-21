@@ -261,28 +261,30 @@
     margin-bottom: 1.5rem;
 }
 
-.education-title {
+.education-section.compact .education-title {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-secondary, #57534e);
     font-weight: 600;
 }
-.education-eyebrow,
-.education-description {
+
+.education-section.compact .education-eyebrow,
+.education-section.compact .education-description {
     display: none;
 }
 
-.education-entry {
+.education-section.compact .education-entry {
     grid-template-columns: 1fr;
     gap: 0;
     padding-bottom: 1.5rem;
 }
 
-.education-timeline-marker {
+.education-section.compact .education-timeline-marker {
     display: none;
 }
-.education-content {
+
+.education-section.compact .education-content {
     padding: 1.5rem;
     background: var(--bg-primary, #fafaf9);
     border-radius: 12px;
