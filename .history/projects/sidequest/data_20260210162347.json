@@ -7,9 +7,9 @@
     "summary": "A web app that gamifies spontaneity by helping young adults discover and complete random local activities through a quest-based interface.",
     "previewLayout": "mobile",
     "role": "Solo Designer & UX Researcher",
-    "timeline": "4 months",
-    "team": "3 team members",
-    "tools": ["Figma", "FigJam", "Google Forms", "VScode", "Notion"],
+    "timeline": "3 months",
+    "team": "2 team members (1 developer, 1 designer)",
+    "tools": ["Figma", "FigJam", "Google Forms", "Maze", "Notion"],
     "links": {
         "figma": "https://www.figma.com/file/sidequest",
         "prototype": "https://www.figma.com/proto/sidequest"
