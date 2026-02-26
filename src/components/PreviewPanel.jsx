@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useState, useMemo } from "react";
-import { useMode, MODES } from "../context/ModeContext";
 import "./PreviewPanel.css";
 
 /**
@@ -12,8 +11,6 @@ import "./PreviewPanel.css";
 
 const PreviewPanel = ({ project, hoverPattern = "pattern-a" }) => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
-    const { mode } = useMode();
-    const isWorkMode = mode === MODES.WORK;
 
     // Use pre-shuffled hoverImages (re-shuffled on each hover in Home.jsx)
     const previewMedia = (project.hoverImages || []).filter(Boolean);
@@ -136,39 +133,6 @@ const PreviewPanel = ({ project, hoverPattern = "pattern-a" }) => {
                         </motion.div>
                     </div>
                 )
-            )}
-
-            {/* Work Mode: Holographic Metadata Panel */}
-            {isWorkMode && (
-                <motion.div
-                    className="holographic-panel"
-                    initial={{ opacity: 0, x: 80, scale: 0.95 }}
-                    animate={{ opacity: 0.95, x: 0, scale: 1.02 }}
-                    exit={{ opacity: 0, x: 40, scale: 0.98 }}
-                    transition={{ duration: 0.22, ease: [0.25, 0.8, 0.25, 1] }}
-                >
-                    <div className="holo-edge"></div>
-                    <div className="holo-content">
-                        <div className="holo-metadata">
-                            <span className="holo-label">[status]</span>
-                            <span className="holo-value">
-                                {project.systemMetadata?.status || "shipped"}
-                            </span>
-                        </div>
-                        {project.role && (
-                            <div className="holo-metadata">
-                                <span className="holo-label">[role]</span>
-                                <span className="holo-value">
-                                    {project.role}
-                                </span>
-                            </div>
-                        )}
-                        <div className="holo-metadata">
-                            <span className="holo-label">[preview_loaded]</span>
-                        </div>
-                    </div>
-                    <div className="scanline-overlay"></div>
-                </motion.div>
             )}
         </>
     );
