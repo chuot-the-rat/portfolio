@@ -14,7 +14,7 @@ import ProjectLayout from "./pages/ProjectLayout";
 import "./styles/App.css";
 
 /** IDs of standalone (non-case-study) projects that use their own data.json */
-export const STANDALONE_PROJECT_IDS = ["fizzu-soda"];
+export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap"];
 
 function App() {
     return (

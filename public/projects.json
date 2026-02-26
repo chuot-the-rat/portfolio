@@ -30,5 +30,13 @@
         "title": "FIZZU Soda Can Series",
         "category": "Packaging Design",
         "year": "2025"
+    },
+    {
+        "id": "sap",
+        "folder": "projects/sap",
+        "thumbnail": "projects/sap/SVG/logo.svg",
+        "title": "Super Auto Pets Motion Graphics",
+        "category": "Motion Graphics",
+        "year": "2025"
     }
 ]
