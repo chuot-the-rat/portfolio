@@ -315,45 +315,6 @@ function HeroSection() {
                     <span className="terminal-prompt">&gt;</span>
                     <span className="terminal-text"> leana_le — portfolio</span>
                 </motion.div>
-                <motion.div
-                    className="terminal-line"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.15, delay: 0.08 }}
-                >
-                    <span className="terminal-label">status:</span>
-                    <span className="terminal-value"> active</span>
-                </motion.div>
-                <motion.div
-                    className="terminal-line"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.15, delay: 0.16 }}
-                >
-                    <span className="terminal-label">mode:</span>
-                    <span className="terminal-value"> work</span>
-                </motion.div>
-                <motion.div
-                    className="terminal-line"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.15, delay: 0.24 }}
-                >
-                    <span className="terminal-label">stack:</span>
-                    <span className="terminal-value">
-                        {" "}
-                        ui / ux / motion / front-end
-                    </span>
-                </motion.div>
-                <motion.div
-                    className="terminal-line"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.15, delay: 0.32 }}
-                >
-                    <span className="terminal-label">location:</span>
-                    <span className="terminal-value"> vancouver_ca</span>
-                </motion.div>
                 <motion.span
                     className="terminal-cursor"
                     initial={{ opacity: 0 }}
