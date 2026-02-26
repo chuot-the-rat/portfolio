@@ -63,155 +63,6 @@ const asciiScripts = {
     Notion: { code: "notes.sync();", ascii: "dots", level: "v3.0" },
 };
 
-// Work Mode: Skills organized in 4 columns with category headers and code snippets
-const skillsDataWorkMode = {
-    columns: [
-        {
-            id: "ui-ux",
-            header: "UI/UX",
-            skills: [
-                {
-                    name: "Figma",
-                    symbol: "<>",
-                    level: "v3.0",
-                    code: "design.create();",
-                    ascii: "arrows",
-                },
-                {
-                    name: "Prototyping",
-                    symbol: "[]",
-                    level: "v3.0",
-                    code: "proto.build();",
-                    ascii: "loading",
-                },
-                {
-                    name: "User Research",
-                    symbol: "[]",
-                    level: "v2.0",
-                    code: "user.study();",
-                    ascii: "cube",
-                },
-                {
-                    name: "Wireframing",
-                    symbol: "[]",
-                    level: "v3.0",
-                    code: "sketch.wireframe();",
-                    ascii: "brackets",
-                },
-                {
-                    name: "Design Systems",
-                    symbol: "[]",
-                    level: "v1.0",
-                    code: "sys.organize();",
-                    ascii: "dots",
-                },
-            ],
-        },
-        {
-            id: "front-end",
-            header: "FRONT-END",
-            skills: [
-                {
-                    name: "HTML/CSS",
-                    symbol: "<>",
-                    level: "v3.0",
-                    code: "<div>style</div>",
-                    ascii: "arrows",
-                },
-                {
-                    name: "React",
-                    symbol: "<>",
-                    level: "v1.0",
-                    code: "render(<App />);",
-                    ascii: "cube",
-                },
-                {
-                    name: "JavaScript",
-                    symbol: "{}",
-                    level: "v1.0",
-                    code: "()=>{code()}",
-                    ascii: "loading",
-                },
-                {
-                    name: "Git/GitHub",
-                    symbol: "{}",
-                    level: "v1.0",
-                    code: "git.commit();",
-                    ascii: "brackets",
-                },
-            ],
-        },
-        {
-            id: "motion",
-            header: "MOTION",
-            skills: [
-                {
-                    name: "After Effects",
-                    symbol: "<>",
-                    level: "beta",
-                    code: "anim.keyframe();",
-                    ascii: "arrows",
-                },
-                {
-                    name: "Framer",
-                    symbol: "<>",
-                    level: "v2.0",
-                    code: "motion.animate();",
-                    ascii: "cube",
-                },
-                {
-                    name: "Typography",
-                    symbol: "_",
-                    level: "v3.0",
-                    code: "font.setStyle();",
-                    ascii: "loading",
-                },
-                {
-                    name: "Color Theory",
-                    symbol: "_",
-                    level: "v3.0",
-                    code: "color.harmonize();",
-                    ascii: "dots",
-                },
-            ],
-        },
-        {
-            id: "tools",
-            header: "TOOLSET",
-            skills: [
-                {
-                    name: "Illustrator",
-                    symbol: "<>",
-                    level: "v2.0",
-                    code: "vector.draw();",
-                    ascii: "arrows",
-                },
-                {
-                    name: "VS Code",
-                    symbol: "<>",
-                    level: "v3.0",
-                    code: "editor.code();",
-                    ascii: "cube",
-                },
-                {
-                    name: "Notion",
-                    symbol: "<>",
-                    level: "v3.0",
-                    code: "notes.sync();",
-                    ascii: "loading",
-                },
-                {
-                    name: "Accessibility",
-                    symbol: "*",
-                    level: "v1.0",
-                    code: "a11y.check();",
-                    ascii: "brackets",
-                },
-            ],
-        },
-    ],
-};
-
 // Chaos Mode: Original categorized data
 const skillsData = {
     design: {
@@ -263,11 +114,9 @@ const skillsData = {
 export default function SkillsSection({ variant = "grid" }) {
     const [hoveredSkill, setHoveredSkill] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
-    const [terminalLabel, setTerminalLabel] = useState("");
-    const [ripplePosition, setRipplePosition] = useState({ x: 0, y: 0 });
-    const [showRipple, setShowRipple] = useState(false);
     const [asciiFrame, setAsciiFrame] = useState(0);
     const [currentAsciiType, setCurrentAsciiType] = useState(null);
+    const [terminalLabel, setTerminalLabel] = useState("");
     const sectionRef = useRef(null);
     const asciiInterval = useRef(null);
     const prefersReducedMotion = useRef(
@@ -293,80 +142,6 @@ export default function SkillsSection({ variant = "grid" }) {
         return () => observer.disconnect();
     }, []);
 
-    const handleMouseEnter = (skill, event) => {
-        if (!prefersReducedMotion.current) {
-            if (isWorkMode) {
-                setHoveredSkill(skill.name);
-                setCurrentAsciiType(skill.ascii);
-                setAsciiFrame(0);
-
-                // Start ASCII animation loop
-                if (asciiInterval.current) clearInterval(asciiInterval.current);
-                asciiInterval.current = setInterval(() => {
-                    setAsciiFrame((prev) => {
-                        const frames =
-                            asciiAnimations[skill.ascii] ||
-                            asciiAnimations.arrows;
-                        return (prev + 1) % frames.length;
-                    });
-                }, 150); // 150ms per frame
-
-                // Enhanced terminal info
-                const levelText = skill.level.toUpperCase();
-                setTerminalLabel(`[${levelText}] SYSTEM_LOADED`);
-
-                // Ripple effect
-                if (event && event.currentTarget) {
-                    const rect = event.currentTarget.getBoundingClientRect();
-                    setRipplePosition({
-                        x: event.clientX - rect.left,
-                        y: event.clientY - rect.top,
-                    });
-                    setShowRipple(true);
-                    setTimeout(() => setShowRipple(false), 600);
-                }
-            } else {
-                const skillName =
-                    typeof skill === "string" ? skill : skill.name || skill;
-                setHoveredSkill(skillName);
-
-                // Look up overlay data from asciiScripts
-                const script = asciiScripts[skillName];
-                if (script) {
-                    setCurrentAsciiType(script.ascii);
-                    setAsciiFrame(0);
-                    setTerminalLabel(
-                        `[${(script.level || "v1.0").toUpperCase()}] SYSTEM_LOADED`,
-                    );
-
-                    if (asciiInterval.current)
-                        clearInterval(asciiInterval.current);
-                    asciiInterval.current = setInterval(() => {
-                        setAsciiFrame((prev) => {
-                            const frames =
-                                asciiAnimations[script.ascii] ||
-                                asciiAnimations.arrows;
-                            return (prev + 1) % frames.length;
-                        });
-                    }, 150);
-                }
-            }
-        }
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredSkill(null);
-        setTerminalLabel("");
-        setShowRipple(false);
-        setCurrentAsciiType(null);
-        setAsciiFrame(0);
-        if (asciiInterval.current) {
-            clearInterval(asciiInterval.current);
-            asciiInterval.current = null;
-        }
-    };
-
-    // Cleanup on unmount
     useEffect(() => {
         return () => {
             if (asciiInterval.current) {
@@ -374,6 +149,44 @@ export default function SkillsSection({ variant = "grid" }) {
             }
         };
     }, []);
+
+    const handleMouseEnter = (skill) => {
+        const skillName =
+            typeof skill === "string" ? skill : skill.name || skill;
+        setHoveredSkill(skillName);
+
+        if (!prefersReducedMotion.current) {
+            const script = asciiScripts[skillName];
+            if (script) {
+                setCurrentAsciiType(script.ascii);
+                setAsciiFrame(0);
+                setTerminalLabel(
+                    `[${(script.level || "v1.0").toUpperCase()}] SYSTEM_LOADED`,
+                );
+
+                if (asciiInterval.current) clearInterval(asciiInterval.current);
+                asciiInterval.current = setInterval(() => {
+                    setAsciiFrame((prev) => {
+                        const frames =
+                            asciiAnimations[script.ascii] ||
+                            asciiAnimations.arrows;
+                        return (prev + 1) % frames.length;
+                    });
+                }, 150);
+            }
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredSkill(null);
+        setTerminalLabel("");
+        setCurrentAsciiType(null);
+        setAsciiFrame(0);
+        if (asciiInterval.current) {
+            clearInterval(asciiInterval.current);
+            asciiInterval.current = null;
+        }
+    };
 
     // Clean/Chaos Mode: Original Grid Layout
     return (
@@ -435,7 +248,7 @@ export default function SkillsSection({ variant = "grid" }) {
                                                 {skill.name}
                                             </span>
 
-                                            {/* Floating overlay — same pattern as Work Mode */}
+                                            {/* Hover overlay with animations and code snippets */}
                                             {isHovered && script && (
                                                 <>
                                                     {/* Terminal label */}

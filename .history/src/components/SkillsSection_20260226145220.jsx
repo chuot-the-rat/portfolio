@@ -2,67 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "./SkillsSection.css";
 
-// ASCII Animation sequences for hover overlays
-const asciiAnimations = {
-    arrows: ["→", "→ →", "→ → →"],
-    loading: ["[    ]", "[=   ]", "[==  ]", "[=== ]", "[====]"],
-    cube: ["[□]", "[◧]", "[■]", "[◨]", "[□]"],
-    brackets: ["[ ]", "[< >]", "[{ }]", "[< >]", "[ ]"],
-    dots: [".", "..", "..."],
-};
-
-// Skill overlay data mapped by skill name
-const asciiScripts = {
-    "User Research": { code: "user.study();", ascii: "cube", level: "v2.0" },
-    Wireframing: {
-        code: "sketch.wireframe();",
-        ascii: "brackets",
-        level: "v3.0",
-    },
-    Prototyping: { code: "proto.build();", ascii: "loading", level: "v3.0" },
-    "User Testing": { code: "test.observe();", ascii: "dots", level: "v1.0" },
-    "User Flows": { code: "flow.map();", ascii: "arrows", level: "v2.0" },
-    "Journey Mapping": {
-        code: "journey.trace();",
-        ascii: "arrows",
-        level: "v1.0",
-    },
-    Figma: { code: "design.create();", ascii: "arrows", level: "v3.0" },
-    Typography: { code: "font.setStyle();", ascii: "dots", level: "v3.0" },
-    "Color Theory": {
-        code: "color.harmonize();",
-        ascii: "cube",
-        level: "v3.0",
-    },
-    Accessibility: { code: "a11y.check();", ascii: "brackets", level: "v1.0" },
-    "Responsive Design": {
-        code: "layout.adapt();",
-        ascii: "loading",
-        level: "v2.0",
-    },
-    "Design Systems": { code: "sys.organize();", ascii: "cube", level: "v1.0" },
-    "HTML/CSS": { code: "<div>style</div>", ascii: "arrows", level: "v3.0" },
-    JavaScript: { code: "()=>{code()}", ascii: "loading", level: "v1.0" },
-    React: { code: "render(<App />);", ascii: "cube", level: "v1.0" },
-    "Next.js": { code: "next.build();", ascii: "loading", level: "beta" },
-    Python: { code: "python.run();", ascii: "dots", level: "v1.0" },
-    "Git/GitHub": { code: "git.commit();", ascii: "brackets", level: "v1.0" },
-    "Adobe Illustrator": {
-        code: "vector.draw();",
-        ascii: "arrows",
-        level: "v2.0",
-    },
-    Photoshop: { code: "px.edit();", ascii: "loading", level: "v1.0" },
-    "After Effects": {
-        code: "anim.keyframe();",
-        ascii: "arrows",
-        level: "beta",
-    },
-    Framer: { code: "motion.animate();", ascii: "cube", level: "v1.0" },
-    "VS Code": { code: "editor.code();", ascii: "loading", level: "v3.0" },
-    Notion: { code: "notes.sync();", ascii: "dots", level: "v3.0" },
-};
-
 // Work Mode: Skills organized in 4 columns with category headers and code snippets
 const skillsDataWorkMode = {
     columns: [

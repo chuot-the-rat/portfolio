@@ -599,7 +599,7 @@ const Home = () => {
                             </p>
                         </motion.div>
 
-                        {/* Projects Header */}
+                        {/* Terminal Projects Header (Work mode only) */}
                         <motion.div
                             className="home-projects-header home-projects-header-terminal"
                             initial={{ opacity: 0 }}

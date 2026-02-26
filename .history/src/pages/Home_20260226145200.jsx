@@ -304,7 +304,7 @@ function HeroSection() {
                 </div>
             </div>
 
-            {/* Hero Content */}
+            {/* Terminal Hero (Work mode only) */}
             <div className="hero-content hero-content-terminal">
                 <motion.div
                     className="terminal-line"
@@ -599,7 +599,7 @@ const Home = () => {
                             </p>
                         </motion.div>
 
-                        {/* Projects Header */}
+                        {/* Terminal Projects Header (Work mode only) */}
                         <motion.div
                             className="home-projects-header home-projects-header-terminal"
                             initial={{ opacity: 0 }}

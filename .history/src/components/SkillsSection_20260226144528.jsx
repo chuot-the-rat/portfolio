@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "./SkillsSection.css";
 
-// ASCII Animation sequences for hover overlays
+// ASCII Animation sequences for hover
 const asciiAnimations = {
     arrows: ["→", "→ →", "→ → →"],
     loading: ["[    ]", "[=   ]", "[==  ]", "[=== ]", "[====]"],
@@ -11,7 +11,10 @@ const asciiAnimations = {
     dots: [".", "..", "..."],
 };
 
-// Skill overlay data mapped by skill name
+/* ─────────────────────────────────────────────
+   Per-skill overlay scripts (Chaos mode)
+   Reuses asciiAnimations frame sequences
+   ───────────────────────────────────────────── */
 const asciiScripts = {
     "User Research": { code: "user.study();", ascii: "cube", level: "v2.0" },
     Wireframing: {

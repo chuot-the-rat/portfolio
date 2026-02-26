@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "./SkillsSection.css";
 
-// ASCII Animation sequences for hover overlays
+// ASCII Animation sequences for hover
 const asciiAnimations = {
     arrows: ["→", "→ →", "→ → →"],
     loading: ["[    ]", "[=   ]", "[==  ]", "[=== ]", "[====]"],
@@ -11,7 +11,10 @@ const asciiAnimations = {
     dots: [".", "..", "..."],
 };
 
-// Skill overlay data mapped by skill name
+/* ─────────────────────────────────────────────
+   Per-skill overlay scripts (Chaos mode)
+   Reuses asciiAnimations frame sequences
+   ───────────────────────────────────────────── */
 const asciiScripts = {
     "User Research": { code: "user.study();", ascii: "cube", level: "v2.0" },
     Wireframing: {
@@ -270,6 +273,8 @@ export default function SkillsSection({ variant = "grid" }) {
     const [currentAsciiType, setCurrentAsciiType] = useState(null);
     const sectionRef = useRef(null);
     const asciiInterval = useRef(null);
+    const { mode } = useMode();
+    const isWorkMode = mode === MODES.WORK;
     const prefersReducedMotion = useRef(
         typeof window !== "undefined" &&
             window.matchMedia("(prefers-reduced-motion: reduce)").matches,
@@ -374,6 +379,278 @@ export default function SkillsSection({ variant = "grid" }) {
             }
         };
     }, []);
+
+    // Work Mode: Holographic System Index
+    if (isWorkMode) {
+        return (
+            <section
+                ref={sectionRef}
+                className={`skills-section skills-work-mode ${isVisible ? "visible" : ""}`}
+                aria-label="Skills"
+            >
+                {/* Background effects layer */}
+                <div className="holo-background">
+                    <div className="scanlines"></div>
+                    <div className="code-stream"></div>
+                    <div className="nano-grid"></div>
+                    <div className="noise-overlay"></div>
+                </div>
+
+                <header className="skills-header-work">
+                    <span className="terminal-prompt">&gt;_</span>
+                    <h2 className="skills-title-work">system_modules.list()</h2>
+                    <div className="terminal-cursor"></div>
+                </header>
+
+                <div className="skills-column-grid">
+                    {skillsDataWorkMode.columns.map((column, columnIndex) => {
+                        const symbolMap = {
+                            "[]": "[",
+                            "<>": "<",
+                            "{}": "{",
+                            _: "_",
+                            "*": "*",
+                        };
+                        const endMap = {
+                            "[]": "]",
+                            "<>": ">",
+                            "{}": "}",
+                            _: "_",
+                            "*": "*",
+                        };
+
+                        return (
+                            <motion.div
+                                key={column.id}
+                                className="skill-column"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.4,
+                                    delay: columnIndex * 0.08,
+                                    ease: [0.25, 0.8, 0.25, 1],
+                                }}
+                            >
+                                {/* Column Header */}
+                                <motion.h3
+                                    className="skill-column-header"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{
+                                        duration: 0.3,
+                                        delay: columnIndex * 0.08 + 0.1,
+                                    }}
+                                >
+                                    {column.header}
+                                </motion.h3>
+
+                                {/* Skill Items */}
+                                <div className="skill-list">
+                                    {column.skills.map((skill, skillIndex) => (
+                                        <motion.div
+                                            key={skill.name}
+                                            className={`skill-holo-item ${hoveredSkill === skill.name ? "hovered glitch-active" : ""}`}
+                                            style={{
+                                                "--skill-index": skillIndex,
+                                                "--float-delay": `${(columnIndex * 5 + skillIndex) * 0.15}s`,
+                                            }}
+                                            initial={{
+                                                opacity: 0,
+                                                scale: 0.95,
+                                            }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{
+                                                duration: 0.3,
+                                                delay:
+                                                    columnIndex * 0.08 +
+                                                    skillIndex * 0.04,
+                                                ease: [0.25, 0.8, 0.25, 1],
+                                            }}
+                                            onMouseEnter={(e) =>
+                                                handleMouseEnter(skill, e)
+                                            }
+                                            onMouseLeave={handleMouseLeave}
+                                        >
+                                            {/* Holographic glow layers */}
+                                            <div className="holo-glow-inner"></div>
+                                            <div className="holo-glow-outer"></div>
+
+                                            {/* Scanline overlay on panel */}
+                                            <div className="skill-scanlines"></div>
+
+                                            {/* Symbol with glitch on hover */}
+                                            <motion.span
+                                                className="skill-symbol-start"
+                                                animate={{
+                                                    rotate:
+                                                        hoveredSkill ===
+                                                        skill.name
+                                                            ? [0, -2, 2, 0]
+                                                            : 0,
+                                                    x:
+                                                        hoveredSkill ===
+                                                        skill.name
+                                                            ? [0, -1, 1, 0]
+                                                            : 0,
+                                                }}
+                                                transition={{
+                                                    duration: 0.18,
+                                                    ease: [0.25, 0.8, 0.25, 1],
+                                                }}
+                                            >
+                                                {symbolMap[skill.symbol] || "["}
+                                            </motion.span>
+
+                                            {/* Skill name with character glitch */}
+                                            <motion.span
+                                                className="skill-name-holo"
+                                                animate={{
+                                                    x:
+                                                        hoveredSkill ===
+                                                        skill.name
+                                                            ? [0, -1, 1, -1, 0]
+                                                            : 0,
+                                                }}
+                                                transition={{
+                                                    duration: 0.15,
+                                                    ease: [0.25, 0.8, 0.25, 1],
+                                                }}
+                                            >
+                                                {skill.name}
+                                            </motion.span>
+
+                                            <motion.span
+                                                className="skill-symbol-end"
+                                                animate={{
+                                                    rotate:
+                                                        hoveredSkill ===
+                                                        skill.name
+                                                            ? [0, 2, -2, 0]
+                                                            : 0,
+                                                    x:
+                                                        hoveredSkill ===
+                                                        skill.name
+                                                            ? [0, 1, -1, 0]
+                                                            : 0,
+                                                }}
+                                                transition={{
+                                                    duration: 0.18,
+                                                    ease: [0.25, 0.8, 0.25, 1],
+                                                }}
+                                            >
+                                                {endMap[skill.symbol] || "]"}
+                                            </motion.span>
+
+                                            {/* ASCII Animation on hover */}
+                                            {hoveredSkill === skill.name &&
+                                                currentAsciiType && (
+                                                    <motion.div
+                                                        className="skill-ascii-animation"
+                                                        initial={{
+                                                            opacity: 0,
+                                                            scale: 0.8,
+                                                        }}
+                                                        animate={{
+                                                            opacity: 1,
+                                                            scale: 1,
+                                                        }}
+                                                        exit={{
+                                                            opacity: 0,
+                                                            scale: 0.8,
+                                                        }}
+                                                        transition={{
+                                                            duration: 0.15,
+                                                        }}
+                                                    >
+                                                        {asciiAnimations[
+                                                            currentAsciiType
+                                                        ]?.[asciiFrame] || "→"}
+                                                    </motion.div>
+                                                )}
+
+                                            {/* Code Snippet on hover */}
+                                            {hoveredSkill === skill.name && (
+                                                <motion.div
+                                                    className="skill-code-snippet"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: 5,
+                                                    }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        y: 0,
+                                                    }}
+                                                    exit={{ opacity: 0, y: 5 }}
+                                                    transition={{
+                                                        duration: 0.2,
+                                                        delay: 0.05,
+                                                    }}
+                                                >
+                                                    {skill.code}
+                                                </motion.div>
+                                            )}
+
+                                            {/* Terminal label */}
+                                            {hoveredSkill === skill.name && (
+                                                <motion.div
+                                                    className="skill-terminal-label"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: -8,
+                                                        scale: 0.9,
+                                                    }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        y: 0,
+                                                        scale: 1,
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.22,
+                                                        ease: [
+                                                            0.25, 0.8, 0.25, 1,
+                                                        ],
+                                                    }}
+                                                >
+                                                    <div className="label-text">
+                                                        {terminalLabel}
+                                                    </div>
+                                                    <div className="label-cursor"></div>
+                                                </motion.div>
+                                            )}
+
+                                            {/* Ripple effect */}
+                                            {showRipple &&
+                                                hoveredSkill === skill.name && (
+                                                    <motion.div
+                                                        className="skill-ripple"
+                                                        style={{
+                                                            left: ripplePosition.x,
+                                                            top: ripplePosition.y,
+                                                        }}
+                                                        initial={{
+                                                            scale: 0,
+                                                            opacity: 0.6,
+                                                        }}
+                                                        animate={{
+                                                            scale: 3,
+                                                            opacity: 0,
+                                                        }}
+                                                        transition={{
+                                                            duration: 0.6,
+                                                            ease: "easeOut",
+                                                        }}
+                                                    />
+                                                )}
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
+            </section>
+        );
+    }
 
     // Clean/Chaos Mode: Original Grid Layout
     return (

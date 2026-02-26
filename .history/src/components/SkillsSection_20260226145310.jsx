@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "./SkillsSection.css";
 
-// ASCII Animation sequences for hover overlays
+// ASCII Animation sequences for hover
 const asciiAnimations = {
     arrows: ["→", "→ →", "→ → →"],
     loading: ["[    ]", "[=   ]", "[==  ]", "[=== ]", "[====]"],
@@ -11,7 +11,10 @@ const asciiAnimations = {
     dots: [".", "..", "..."],
 };
 
-// Skill overlay data mapped by skill name
+/* ─────────────────────────────────────────────
+   Per-skill overlay scripts (Chaos mode)
+   Reuses asciiAnimations frame sequences
+   ───────────────────────────────────────────── */
 const asciiScripts = {
     "User Research": { code: "user.study();", ascii: "cube", level: "v2.0" },
     Wireframing: {
@@ -263,17 +266,7 @@ const skillsData = {
 export default function SkillsSection({ variant = "grid" }) {
     const [hoveredSkill, setHoveredSkill] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
-    const [terminalLabel, setTerminalLabel] = useState("");
-    const [ripplePosition, setRipplePosition] = useState({ x: 0, y: 0 });
-    const [showRipple, setShowRipple] = useState(false);
-    const [asciiFrame, setAsciiFrame] = useState(0);
-    const [currentAsciiType, setCurrentAsciiType] = useState(null);
     const sectionRef = useRef(null);
-    const asciiInterval = useRef(null);
-    const prefersReducedMotion = useRef(
-        typeof window !== "undefined" &&
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    );
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -293,87 +286,15 @@ export default function SkillsSection({ variant = "grid" }) {
         return () => observer.disconnect();
     }, []);
 
-    const handleMouseEnter = (skill, event) => {
-        if (!prefersReducedMotion.current) {
-            if (isWorkMode) {
-                setHoveredSkill(skill.name);
-                setCurrentAsciiType(skill.ascii);
-                setAsciiFrame(0);
-
-                // Start ASCII animation loop
-                if (asciiInterval.current) clearInterval(asciiInterval.current);
-                asciiInterval.current = setInterval(() => {
-                    setAsciiFrame((prev) => {
-                        const frames =
-                            asciiAnimations[skill.ascii] ||
-                            asciiAnimations.arrows;
-                        return (prev + 1) % frames.length;
-                    });
-                }, 150); // 150ms per frame
-
-                // Enhanced terminal info
-                const levelText = skill.level.toUpperCase();
-                setTerminalLabel(`[${levelText}] SYSTEM_LOADED`);
-
-                // Ripple effect
-                if (event && event.currentTarget) {
-                    const rect = event.currentTarget.getBoundingClientRect();
-                    setRipplePosition({
-                        x: event.clientX - rect.left,
-                        y: event.clientY - rect.top,
-                    });
-                    setShowRipple(true);
-                    setTimeout(() => setShowRipple(false), 600);
-                }
-            } else {
-                const skillName =
-                    typeof skill === "string" ? skill : skill.name || skill;
-                setHoveredSkill(skillName);
-
-                // Look up overlay data from asciiScripts
-                const script = asciiScripts[skillName];
-                if (script) {
-                    setCurrentAsciiType(script.ascii);
-                    setAsciiFrame(0);
-                    setTerminalLabel(
-                        `[${(script.level || "v1.0").toUpperCase()}] SYSTEM_LOADED`,
-                    );
-
-                    if (asciiInterval.current)
-                        clearInterval(asciiInterval.current);
-                    asciiInterval.current = setInterval(() => {
-                        setAsciiFrame((prev) => {
-                            const frames =
-                                asciiAnimations[script.ascii] ||
-                                asciiAnimations.arrows;
-                            return (prev + 1) % frames.length;
-                        });
-                    }, 150);
-                }
-            }
-        }
+    const handleMouseEnter = (skill) => {
+        const skillName =
+            typeof skill === "string" ? skill : skill.name || skill;
+        setHoveredSkill(skillName);
     };
 
     const handleMouseLeave = () => {
         setHoveredSkill(null);
-        setTerminalLabel("");
-        setShowRipple(false);
-        setCurrentAsciiType(null);
-        setAsciiFrame(0);
-        if (asciiInterval.current) {
-            clearInterval(asciiInterval.current);
-            asciiInterval.current = null;
-        }
     };
-
-    // Cleanup on unmount
-    useEffect(() => {
-        return () => {
-            if (asciiInterval.current) {
-                clearInterval(asciiInterval.current);
-            }
-        };
-    }, []);
 
     // Clean/Chaos Mode: Original Grid Layout
     return (
