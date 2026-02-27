@@ -216,6 +216,23 @@ const ProjectLayout = () => {
                 </div>
             </motion.section>
 
+            {/* ── Project Video (if present) ── */}
+            {project.video && (
+                <motion.div
+                    className="pl-hero-video"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.25 }}
+                >
+                    <video
+                        src={resolveImage(project.video.src)}
+                        alt={project.video.alt || "Project animation"}
+                        controls
+                        autoPlay={project.video.autoplay || false}
+                    />
+                </motion.div>
+            )}
+
             {/* ── Hero Image (full-bleed) ── */}
             {project.overview?.images?.[0] && (
                 <motion.div
