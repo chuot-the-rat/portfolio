@@ -257,39 +257,32 @@
     border-color: var(--accent, #212121);
 }
 
-/* Compact Variant for Sidebar */
-.education-section.compact {
-    padding: 0;
-}
-
-.education-section.compact .education-header {
+.education-header {
     margin-bottom: 1.5rem;
 }
 
-.education-section.compact .education-title {
+.education-title {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-secondary, #57534e);
     font-weight: 600;
 }
-
-.education-section.compact .education-eyebrow,
-.education-section.compact .education-description {
+.education-eyebrow,
+.education-description {
     display: none;
 }
 
-.education-section.compact .education-entry {
+.education-entry {
     grid-template-columns: 1fr;
     gap: 0;
     padding-bottom: 1.5rem;
 }
 
-.education-section.compact .education-timeline-marker {
+.education-timeline-marker {
     display: none;
 }
-
-.education-section.compact .education-content {
+.education-content {
     padding: 1.5rem;
     background: var(--bg-primary, #fafaf9);
     border-radius: 12px;

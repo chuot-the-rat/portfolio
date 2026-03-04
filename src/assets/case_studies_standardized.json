@@ -64,8 +64,7 @@
                         "Discrepancies between employer-logged and self-logged hours create anxiety",
                         "Neurodivergent users experience amplified cognitive load from inconsistent interfaces"
                     ],
-                    "participant_count": null,
-                    "reflection": "We didn't have access to a large participant pool, so we leaned into what we did have: our own team's lived experience, publicly available documentation, and honest conversations with stakeholders. This shaped a more empathetic, if narrower, understanding of the problem."
+                    "participant_count": null
                 },
                 "early_challenges": {
                     "content": "This project started too big.\n\nWe wanted to fix financial stress, employer communication, exam preparation, and progress tracking—all at once. Our advisor encouraged broad exploration, which felt productive at first but eventually led to paralysis.\n\nIt wasn't until we accepted that we couldn't solve everything that the project started moving. Narrowing our focus to neurodivergent apprentices gave us permission to go deeper instead of wider."
@@ -92,7 +91,7 @@
                         "Full exam preparation suite",
                         "Social features and community forums"
                     ],
-                    "reflection": "Cutting these features wasn't giving up—it was choosing depth over breadth. Each one was a good idea on its own, but together they diluted the product into something generic.",
+
                     "weightLifted": {
                         "title": "From 6 problem spaces to 1 clear focus",
                         "displayMode": "side-by-side",
@@ -246,19 +245,9 @@
                     }
                 },
                 "validation": {
-                    "content": "We tested the prototype with a small group and heard something we didn't expect: relief.\n\nUsers described the dashboard as a 'GPS for my apprenticeship.' They appreciated that they didn't have to hunt for information—it was just there.\n\nThe hours tracker resonated especially strongly. One participant said they'd never realized they could document discrepancies themselves.\n\nThese weren't metrics we could quantify, but they felt meaningful.",
+                    "content": "We tested the prototype with a small group. Users appreciated that they didn't have to hunt for information—it was just there. The hours tracker resonated strongly, addressing a previously unmet need.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
-                    "key_quotes": [
-                        {
-                            "quote": "It's like a GPS for my apprenticeship.",
-                            "attribution": "Test participant"
-                        },
-                        {
-                            "quote": "I never realized I could document discrepancies myself.",
-                            "attribution": "Test participant"
-                        }
-                    ],
                     "outcomes": [
                         "Users reported feeling relieved by progress visibility",
                         "Hours tracker addressed a previously unmet need",
@@ -377,8 +366,7 @@
                         "Dense, text-heavy layouts discourage reading and contribution",
                         "New concepts require gentle onboarding; users won't explore without guidance"
                     ],
-                    "participant_count": null,
-                    "reflection": "Our initial assumption was that mobile-first would work. Research quickly proved us wrong. Writers wanted screen real estate. They wanted to see the story unfold."
+                    "participant_count": null
                 },
                 "early_challenges": {
                     "content": ""
@@ -415,7 +403,7 @@
                         "Newspaper-style multi-column layout",
                         "Multiple homepage entry points and discovery filters"
                     ],
-                    "reflection": "Every feature we removed made the core experience stronger. InkLink became better by doing less.",
+
                     "weightLifted": {
                         "title": "From a feature-heavy homepage to a single clear action",
                         "displayMode": "slider",
@@ -556,15 +544,9 @@
                     }
                 },
                 "validation": {
-                    "content": "Testers described InkLink as 'fun'—which felt like a win.\n\nThe reduced pressure was noticeable. Users said they felt less precious about their contributions because they knew someone else would build on them.\n\nOne tester mentioned that the time limit actually helped: 'I stopped trying to make it perfect because I knew I only had a day.'",
+                    "content": "Testers described InkLink as 'fun.' The reduced pressure was noticeable. Users felt less precious about their contributions because they knew someone else would build on them. The time limits helped keep the experience moving.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
-                    "key_quotes": [
-                        {
-                            "quote": "I stopped trying to make it perfect because I knew I only had a day.",
-                            "attribution": "Test participant"
-                        }
-                    ],
                     "outcomes": [
                         "Users described the experience as 'fun'",
                         "Reduced pressure led to less perfectionism",
@@ -679,8 +661,7 @@
                         "Choice overload causes hesitation and often leads to inaction",
                         "Guided suggestions outperform open-ended discovery"
                     ],
-                    "participant_count": null,
-                    "reflection": "We assumed people wanted more options. They didn't. They wanted someone—or something—to just tell them what to do."
+                    "participant_count": null
                 },
                 "early_challenges": {
                     "content": ""
@@ -707,7 +688,7 @@
                         "Category browsing and tag system",
                         "User accounts and saved preferences"
                     ],
-                    "reflection": "We kept asking 'what if we add one more filter?' until we realized every filter was another reason not to act. The best feature was removing features.",
+
                     "weightLifted": {
                         "title": "From 5 filters to 1 button",
                         "displayMode": "stacked",
@@ -848,15 +829,9 @@
                     }
                 },
                 "validation": {
-                    "content": "Users responded to the playfulness more than we expected.\n\nThe word 'quest' made people smile. The mascot got positive comments. The low-pressure framing worked—users said they felt more willing to try things because the stakes felt low.\n\nOne tester put it simply: 'It's like having a friend who always has ideas.'",
+                    "content": "Users responded to the playfulness. The word 'quest' made people smile. The mascot got positive comments. The low-pressure framing worked—users felt more willing to try things because the stakes felt low.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
-                    "key_quotes": [
-                        {
-                            "quote": "It's like having a friend who always has ideas.",
-                            "attribution": "Test participant"
-                        }
-                    ],
                     "outcomes": [
                         "Playful language ('quest') increased engagement",
                         "Mascot received positive feedback",

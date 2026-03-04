@@ -182,11 +182,7 @@
    Compact index-style list with system metadata
    ========================================================================== */
 
-/* Hide default header, show terminal header */
-.mode-work .home-projects-header-default {
-    display: none;
-}
-
+/* Terminal header styles */
 .mode-work .home-projects-header-terminal {
     display: block;
     font-family: "Courier New", "Consolas", monospace;
@@ -324,15 +320,7 @@
     transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Hide default projects header in all non-work modes */
-.mode-chaos .home-projects-header-terminal {
-    display: none;
-}
-
-.mode-chaos .home-projects-header-default {
-    display: flex;
-}
-
+/* Hide terminal projects in chaos mode */
 .mode-chaos .projects-list-terminal {
     display: none;
 }

@@ -76,6 +76,15 @@ const ProjectLayout = () => {
         addImages(project.solution);
         addImages(project.styleGuide);
 
+        // Also include images from custom sections array
+        if (project.sections && Array.isArray(project.sections)) {
+            project.sections.forEach((section) => {
+                if (section.images) {
+                    section.images.forEach((img) => imgs.push(img));
+                }
+            });
+        }
+
         // Also include any loose gallery field
         if (project.gallery) {
             project.gallery.forEach((img) => imgs.push(img));
@@ -216,17 +225,19 @@ const ProjectLayout = () => {
                 </div>
             </motion.section>
 
-            {/* ── Hero Image (full-bleed) ── */}
-            {project.overview?.images?.[0] && (
+            {/* ── Project Video (if present) ── */}
+            {project.video && (
                 <motion.div
-                    className="pl-hero-image"
+                    className="pl-hero-video"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.25 }}
                 >
-                    <img
-                        src={resolveImage(project.overview.images[0].src)}
-                        alt={project.overview.images[0].alt || project.title}
+                    <video
+                        src={resolveImage(project.video.src)}
+                        alt={project.video.alt || "Project animation"}
+                        controls
+                        autoPlay={project.video.autoplay || false}
                     />
                 </motion.div>
             )}
@@ -492,6 +503,124 @@ const ProjectLayout = () => {
                                             )}
                                     </motion.section>
                                 )}
+
+                                {/* Custom Sections Array — for flexible gallery layouts */}
+                                {project.sections &&
+                                    Array.isArray(project.sections) &&
+                                    project.sections.map((section, idx) => {
+                                        if (section.type === "text") {
+                                            return (
+                                                <motion.section
+                                                    key={section.id}
+                                                    className="pl-section"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: 30,
+                                                    }}
+                                                    whileInView={{
+                                                        opacity: 1,
+                                                        y: 0,
+                                                    }}
+                                                    viewport={{
+                                                        once: true,
+                                                        margin: "-100px",
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.6,
+                                                    }}
+                                                >
+                                                    <span className="section-label">{`${next()} — ${section.title}`}</span>
+                                                    <h2 className="section-title">
+                                                        {section.title}
+                                                    </h2>
+                                                    <p className="section-description">
+                                                        {section.content}
+                                                    </p>
+                                                </motion.section>
+                                            );
+                                        }
+
+                                        if (section.type === "gallery") {
+                                            const gridClass =
+                                                section.gridVariant || "medium";
+                                            return (
+                                                <motion.section
+                                                    key={section.id}
+                                                    className="pl-section"
+                                                    initial={{
+                                                        opacity: 0,
+                                                        y: 30,
+                                                    }}
+                                                    whileInView={{
+                                                        opacity: 1,
+                                                        y: 0,
+                                                    }}
+                                                    viewport={{
+                                                        once: true,
+                                                        margin: "-100px",
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.6,
+                                                    }}
+                                                >
+                                                    <span className="section-label">{`${next()} — ${section.title}`}</span>
+                                                    <h2 className="section-title">
+                                                        {section.title}
+                                                    </h2>
+                                                    <div
+                                                        className={`pl-bento-grid ${gridClass}`}
+                                                    >
+                                                        {section.images &&
+                                                            section.images.map(
+                                                                (img, i) => (
+                                                                    <motion.div
+                                                                        key={i}
+                                                                        className="pl-bento-item"
+                                                                        initial={{
+                                                                            opacity: 0,
+                                                                            scale: 0.95,
+                                                                        }}
+                                                                        whileInView={{
+                                                                            opacity: 1,
+                                                                            scale: 1,
+                                                                        }}
+                                                                        viewport={{
+                                                                            once: true,
+                                                                        }}
+                                                                        transition={{
+                                                                            duration: 0.4,
+                                                                            delay:
+                                                                                i *
+                                                                                0.05,
+                                                                        }}
+                                                                        onClick={() =>
+                                                                            setLightboxImage(
+                                                                                resolveImage(
+                                                                                    img.src,
+                                                                                ),
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        <img
+                                                                            src={resolveImage(
+                                                                                img.src,
+                                                                            )}
+                                                                            alt={
+                                                                                img.alt ||
+                                                                                section.title
+                                                                            }
+                                                                            loading="lazy"
+                                                                        />
+                                                                    </motion.div>
+                                                                ),
+                                                            )}
+                                                    </div>
+                                                </motion.section>
+                                            );
+                                        }
+
+                                        return null;
+                                    })}
                             </>
                         );
                     })()}

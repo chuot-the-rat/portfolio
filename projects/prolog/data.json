@@ -9,7 +9,7 @@
     "role": "Developer & Researcher",
     "timeline": "4 months",
     "team": "4 team members",
-    "tools": ["Figma", "FigJam", "React Native", "JavaScript", "Miro", "Google Forms", "Notion", "GitHub"],
+    "tools": ["Figma", "FigJam", "React Native", "JavaScript", "Framer", "Google Forms", "Notion", "GitHub", "VScode"],
     "links": {
         "live": "https://prolog.framer.website/",
         "figma": "https://www.figma.com/file/prolog"
@@ -156,64 +156,58 @@
             "Develop offline-friendly experiences for use on job sites with limited connectivity"
         ]
     },
-    "designProcess": [
-        {
-            "phase": "Research & Discovery",
-            "title": "Understanding Users",
-            "duration": "3 weeks",
-            "activities": [
-                "Policy and documentation review",
-                "Stakeholder conversations",
-                "Persona development"
-            ]
-        },
-        {
-            "phase": "Ideation & Wireframing",
-            "title": "Exploring Solutions",
-            "duration": "3 weeks",
-            "activities": [
-                "Dashboard wireframes",
-                "User flows",
-                "Progress visualization"
-            ]
-        },
-        {
-            "phase": "Visual Design",
-            "title": "Creating Interface",
-            "duration": "4 weeks",
-            "activities": [
-                "UI design",
-                "High-fidelity prototypes",
-                "Accessibility testing"
-            ]
-        },
-        {
-            "phase": "Development",
-            "title": "Building the Product",
-            "duration": "6 weeks",
-            "activities": [
-                "React Native development",
-                "Offline-first architecture",
-                "User testing"
-            ]
-        }
-    ]
-}
-                "Modular components",
-                "Editorial layout"
-            ]
-        },
-        {
-            "phase": "Prototyping & Testing",
-            "title": "Validating Design",
-            "duration": "2 weeks",
-            "activities": [
-                "Interactive prototyping",
-                "User testing",
-                "Iteration"
-            ]
-        }
-    ],
+"designProcess": [
+    {
+        "phase": "Research & Discovery",
+        "title": "Understanding Users",
+        "duration": "3 weeks",
+        "activities": [
+            "Policy and documentation review",
+            "Stakeholder conversations",
+            "Persona development"
+        ]
+    },
+    {
+        "phase": "Ideation & Wireframing",
+        "title": "Exploring Solutions",
+        "duration": "3 weeks",
+        "activities": [
+            "Dashboard wireframes",
+            "User flows",
+            "Progress visualization"
+        ]
+    },
+    {
+        "phase": "Visual Design",
+        "title": "Creating Interface",
+        "duration": "4 weeks",
+        "activities": [
+            "UI design",
+            "High-fidelity prototypes",
+            "Accessibility testing"
+        ]
+    },
+    {
+        "phase": "Development",
+        "title": "Building the Product",
+        "duration": "6 weeks",
+        "activities": [
+            "React Native development",
+            "Offline-first architecture",
+            "User testing"
+        ]
+    },
+    {
+        "phase": "Prototyping & Testing",
+        "title": "Validating Design",
+        "duration": "2 weeks",
+        "activities": [
+            "Interactive prototyping",
+            "User testing",
+            "Iteration"
+        ]
+    }
+],
     "outcomes": {
         "title": "Impact & Reflection",
         "description": "Apprentices can quickly understand progress and next steps. Modular design allows future expansion to additional trades and certifications. Collaboration strengthened by research and iterative design process. Editorial layout and visual progress tracking increase engagement and motivation. Lessons learned: Visual progress indicators are essential for user motivation. Clear language reduces confusion. Whitespace and editorial design improve content hierarchy and readability.",

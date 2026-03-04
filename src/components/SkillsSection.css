@@ -241,9 +241,6 @@
 }
 
 /* Alternative Compact Variant for Sidebar */
-.skills-section.compact {
-    padding: 0;
-}
 
 .skills-section.compact .skills-header {
     margin-bottom: 1.5rem;
