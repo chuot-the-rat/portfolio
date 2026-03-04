@@ -24,6 +24,12 @@
                 "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Ginger.jpg",
                 "alt": "FIZZU Soda — Ginger flavour can design"
             },
+        ]
+    },
+    "solution": {
+        "title": "What Came Out of the Can",
+        "description": "Three unique can designs were created, each with a distinct colour palette and graphic motif to represent its flavour. The packaging system is flexible, allowing for future flavour additions.",
+        "images": [
             {
                 "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Mockup_Kewpie.png",
                 "alt": "FIZZU Kewpie Mayo mockup"

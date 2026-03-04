@@ -23,19 +23,8 @@
             {
                 "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Ginger.jpg",
                 "alt": "FIZZU Soda — Ginger flavour can design"
-            },
-            {
-                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Mockup_Kewpie.png",
-                "alt": "FIZZU Kewpie Mayo mockup"
-            },
-            {
-                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Mockup_Yuzu.png",
-                "alt": "FIZZU Yuzu mockup"
-            },
-            {
-                "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Mockup_Ginger.png",
-                "alt": "FIZZU Ginger mockup"
             }
         ]
     }
+
 }

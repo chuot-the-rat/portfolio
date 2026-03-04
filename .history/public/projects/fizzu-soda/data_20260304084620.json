@@ -23,8 +23,10 @@
             {
                 "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Ginger.jpg",
                 "alt": "FIZZU Soda — Ginger flavour can design"
-            },
-            {
+            }
+        ]
+    },
+    "solution": {[
                 "src": "/projects/fizzu-soda/images/Leana_Le_Assignment06_Mockup_Kewpie.png",
                 "alt": "FIZZU Kewpie Mayo mockup"
             },
@@ -37,5 +39,10 @@
                 "alt": "FIZZU Ginger mockup"
             }
         ]
+    },
+    "styleGuide": {
+        "title": "Brand DNA",
+        "description": "A flexible system of colours, shapes, and typography ensures brand consistency across future flavours and packaging formats.",
+        "images": []
     }
 }

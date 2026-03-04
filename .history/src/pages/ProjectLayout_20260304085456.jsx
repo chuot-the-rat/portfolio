@@ -542,7 +542,8 @@ const ProjectLayout = () => {
 
                                         if (section.type === "gallery") {
                                             const gridClass =
-                                                section.gridVariant || "medium";
+                                                section.gridVariant ||
+                                                "medium";
                                             return (
                                                 <motion.section
                                                     key={section.id}
@@ -589,16 +590,16 @@ const ProjectLayout = () => {
                                                                         }}
                                                                         transition={{
                                                                             duration: 0.4,
-                                                                            delay:
-                                                                                i *
+                                                                            delay: i *
                                                                                 0.05,
                                                                         }}
-                                                                        onClick={() =>
-                                                                            setLightboxImage(
-                                                                                resolveImage(
-                                                                                    img.src,
-                                                                                ),
-                                                                            )
+                                                                        onClick={
+                                                                            () =>
+                                                                                setLightboxImage(
+                                                                                    resolveImage(
+                                                                                        img.src,
+                                                                                    ),
+                                                                                )
                                                                         }
                                                                     >
                                                                         <img
@@ -606,7 +607,8 @@ const ProjectLayout = () => {
                                                                                 img.src,
                                                                             )}
                                                                             alt={
-                                                                                img.alt ||
+                                                                                img
+                                                                                    .alt ||
                                                                                 section.title
                                                                             }
                                                                             loading="lazy"

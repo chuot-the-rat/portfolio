@@ -245,9 +245,19 @@
                     }
                 },
                 "validation": {
-                    "content": "We tested the prototype with a small group. Users appreciated that they didn't have to hunt for information—it was just there. The hours tracker resonated strongly, addressing a previously unmet need.",
+                    "content": "We tested the prototype with a small group and heard something we didn't expect: relief.\n\nUsers described the dashboard as a 'GPS for my apprenticeship.' They appreciated that they didn't have to hunt for information—it was just there.\n\nThe hours tracker resonated especially strongly. One participant said they'd never realized they could document discrepancies themselves.\n\nThese weren't metrics we could quantify, but they felt meaningful.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
+                    "key_quotes": [
+                        {
+                            "quote": "It's like a GPS for my apprenticeship.",
+                            "attribution": "Test participant"
+                        },
+                        {
+                            "quote": "I never realized I could document discrepancies myself.",
+                            "attribution": "Test participant"
+                        }
+                    ],
                     "outcomes": [
                         "Users reported feeling relieved by progress visibility",
                         "Hours tracker addressed a previously unmet need",
@@ -544,9 +554,15 @@
                     }
                 },
                 "validation": {
-                    "content": "Testers described InkLink as 'fun.' The reduced pressure was noticeable. Users felt less precious about their contributions because they knew someone else would build on them. The time limits helped keep the experience moving.",
+                    "content": "Testers described InkLink as 'fun'—which felt like a win.\n\nThe reduced pressure was noticeable. Users said they felt less precious about their contributions because they knew someone else would build on them.\n\nOne tester mentioned that the time limit actually helped: 'I stopped trying to make it perfect because I knew I only had a day.'",
                     "method": "Moderated usability testing",
                     "participant_count": null,
+                    "key_quotes": [
+                        {
+                            "quote": "I stopped trying to make it perfect because I knew I only had a day.",
+                            "attribution": "Test participant"
+                        }
+                    ],
                     "outcomes": [
                         "Users described the experience as 'fun'",
                         "Reduced pressure led to less perfectionism",
@@ -829,9 +845,15 @@
                     }
                 },
                 "validation": {
-                    "content": "Users responded to the playfulness. The word 'quest' made people smile. The mascot got positive comments. The low-pressure framing worked—users felt more willing to try things because the stakes felt low.",
+                    "content": "Users responded to the playfulness more than we expected.\n\nThe word 'quest' made people smile. The mascot got positive comments. The low-pressure framing worked—users said they felt more willing to try things because the stakes felt low.\n\nOne tester put it simply: 'It's like having a friend who always has ideas.'",
                     "method": "Moderated usability testing",
                     "participant_count": null,
+                    "key_quotes": [
+                        {
+                            "quote": "It's like having a friend who always has ideas.",
+                            "attribution": "Test participant"
+                        }
+                    ],
                     "outcomes": [
                         "Playful language ('quest') increased engagement",
                         "Mascot received positive feedback",

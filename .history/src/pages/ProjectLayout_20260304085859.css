@@ -251,9 +251,7 @@
     overflow: hidden;
     background-color: var(--color-bg-secondary);
     cursor: pointer;
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pl-bento-item:hover {

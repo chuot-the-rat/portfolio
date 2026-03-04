@@ -222,53 +222,6 @@
 }
 
 /* ─────────────────────────────────────────────
-   BENTO GRID — Multi-image gallery layouts
-   ───────────────────────────────────────────── */
-.pl-bento-grid {
-    display: grid;
-    gap: var(--space-4);
-    margin-top: var(--space-8);
-}
-
-/* Small grid: 4-5 items per row */
-.pl-bento-grid.small {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-}
-
-/* Medium grid: 3-4 items per row */
-.pl-bento-grid.medium {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-}
-
-/* Large grid: 2-3 items per row */
-.pl-bento-grid.large {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-}
-
-.pl-bento-item {
-    aspect-ratio: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: var(--color-bg-secondary);
-    cursor: pointer;
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.pl-bento-item:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-}
-
-.pl-bento-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
-/* ─────────────────────────────────────────────
    OBJECTIVES
    ───────────────────────────────────────────── */
 .pl-objectives {
@@ -526,18 +479,6 @@
 
     .pl-gallery-grid .pl-gallery-item:first-child {
         grid-column: 1;
-    }
-
-    .pl-bento-grid.small {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    }
-
-    .pl-bento-grid.medium {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    }
-
-    .pl-bento-grid.large {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 
     .pl-process-timeline {

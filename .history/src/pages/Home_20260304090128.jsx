@@ -544,7 +544,7 @@ const Home = () => {
                         className="home-projects"
                         id="projects"
                     >
-                        {/* Projects Header */}
+                            {/* Projects Header */}
                         <motion.div
                             className="home-projects-header home-projects-header-terminal"
                             initial={{ opacity: 0 }}
