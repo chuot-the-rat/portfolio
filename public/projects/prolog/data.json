@@ -9,7 +9,17 @@
     "role": "Developer & Researcher",
     "timeline": "4 months",
     "team": "4 team members",
-    "tools": ["Figma", "FigJam", "React Native", "JavaScript", "Framer", "Google Forms", "Notion", "GitHub", "VScode"],
+    "tools": [
+        "Figma",
+        "FigJam",
+        "React Native",
+        "JavaScript",
+        "Framer",
+        "Google Forms",
+        "Notion",
+        "GitHub",
+        "VScode"
+    ],
     "links": {
         "live": "https://prolog.framer.website/",
         "figma": "https://www.figma.com/file/prolog"
