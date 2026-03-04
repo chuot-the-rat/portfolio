@@ -63,12 +63,22 @@
     opacity: 0.7;
 }
 
+/* Title with CTAs Header */
+.project-hero-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-8);
+    margin-bottom: var(--space-6);
+}
+
 .project-hero-title {
     font-size: var(--font-size-3xl);
     font-weight: 600;
     letter-spacing: -0.03em;
-    margin-bottom: var(--space-6);
+    margin-bottom: 0;
     max-width: 800px;
+    flex: 1;
 }
 
 .project-hero-tagline {
@@ -83,7 +93,8 @@
 .project-hero-ctas {
     display: flex;
     gap: var(--space-3);
-    margin-bottom: var(--space-12);
+    margin-bottom: 0;
+    flex-shrink: 0;
 }
 
 /* Header CTA Link - Editorial Style */
@@ -230,7 +241,7 @@
 
 .section-image img {
     width: 100%;
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
     display: block;
 }
@@ -408,6 +419,7 @@
 
 .persona-image img {
     width: 100%;
+    max-width: 500px;
     height: auto;
     display: block;
     border-radius: 12px;
@@ -695,17 +707,18 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-4);
 }
 
 .method-item,
 .finding-item {
     display: flex;
     align-items: flex-start;
-    gap: var(--space-2);
+    gap: var(--space-3);
     font-size: var(--font-size-base);
     line-height: 1.6;
     color: var(--color-text-secondary);
+    padding: var(--space-4) 0;
 }
 
 .finding-icon {
@@ -740,17 +753,18 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-4);
 }
 
 .decision-item,
 .constraint-item {
     display: flex;
     align-items: flex-start;
-    gap: var(--space-2);
+    gap: var(--space-3);
     font-size: var(--font-size-base);
     line-height: 1.6;
     color: var(--color-text-secondary);
+    padding: var(--space-3) 0;
 }
 
 .decision-icon {
@@ -778,6 +792,7 @@
 
 .feature-image img {
     width: 100%;
+    max-width: 600px;
     height: auto;
     display: block;
 }
@@ -923,6 +938,12 @@
         padding: var(--space-12) 0;
     }
 
+    .project-hero-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-4);
+    }
+
     .project-hero-title {
         font-size: var(--font-size-2xl);
     }
@@ -934,6 +955,7 @@
     .project-hero-ctas {
         flex-direction: column;
         align-items: stretch;
+        width: 100%;
     }
 
     .project-cta-link {
