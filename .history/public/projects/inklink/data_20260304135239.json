@@ -123,7 +123,7 @@
 
     "personas": {
         "title": "User Personas",
-        "description": "Two primary personas emerged from the research, representing the core users InkLink would serve.",
+        "description": "From our research, two primary personas emerged representing the core users InkLink would serve.",
         "prototypeLink": "https://www.figma.com/proto/s29HtOUroxbZHq5k6TaVUu/User-Persona--DUE-MAR-19-?node-id=0-1&t=rd4q9KUwzRbmCiLM-1",
         "images": [
             {
@@ -195,7 +195,7 @@
 
     "lofi": {
         "title": "Lo‑Fi Exploration",
-        "description": "Lo-fi exploration focused on one core interaction: contributing to a story. Different approaches to showing story history, handling turn-taking, and branching narratives were sketched. The visuals were intentionally basic—the priority was testing logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
+        "description": "Our lo-fi work focused on one core interaction: contributing to a story. We sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic—we needed to test logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
         "explorations": [
             {
                 "name": "Story Reading View",
@@ -519,7 +519,7 @@
 
     "finalPresentation": {
         "title": "Final Presentation",
-        "description": "The final presentation walks through the complete design journey—from initial research findings through pivots, iterations, and the final solution. Presented as a Figma slide deck.",
+        "description": "Our final presentation walks through the complete design journey—from initial research findings through pivots, iterations, and the final solution. Presented as a Figma slide deck.",
         "embed": {
             "type": "figma-slides",
             "src": "https://embed.figma.com/slides/4WHXBWm1HrsucoLezSzMFP/InkLink-final-presentation?node-id=43-1172&embed-host=share",
