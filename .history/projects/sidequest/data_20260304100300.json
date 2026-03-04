@@ -138,19 +138,19 @@
         ]
     },
     "learnings": {
-        \"title\": \"Key Insights\",
-        \"insights\": [
+        "title": "What I Learned",
+        "insights": [
             {
-                \"title\": \"Randomness reduces decision friction\",
-                \"description\": \"When choice is removed, users experience lower psychological resistance and greater willingness to experiment. Binary accept/skip mechanics proved more effective than browse-based models.\"
+                "title": "Randomness creates commitment",
+                "description": "When users don't have to choose, they feel less responsible—and more willing to try something new."
             },
             {
-                \"title\": \"Gamification mechanics drive repeated engagement\",
-                \"description\": \"XP systems and progression mechanics functioned as behavioral reinforcement, not decoration. Reward structures created measurable increases in repeat usage.\"
+                "title": "Gamification drives behavior change",
+                "description": "XP and levels weren't just decorative. They created small dopamine loops that encouraged repeat usage."
             },
             {
-                \"title\": \"Constraint enables action\",
-                \"description\": \"Limiting available options (one quest at a time) paradoxically increased cognitive throughput and action completion rates versus unlimited browse scenarios.\"
+                "title": "Constraint is clarity",
+                "description": "Limiting to one quest at a time reduced cognitive load and increased action."
             }
         ]
     },

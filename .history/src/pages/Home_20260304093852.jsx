@@ -10,7 +10,7 @@ import PreviewPanel from "../components/PreviewPanel";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import BracketCycler from "../components/BracketCycler";
-import PixelLoopCanvas from "../components/PixelLoopCanvas";
+import FluidBackgroundCanvas from "../components/FluidBackgroundCanvas";
 import "./Home.css";
 import "../components/SectionLayout.css";
 

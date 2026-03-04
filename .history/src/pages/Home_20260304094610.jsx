@@ -10,7 +10,7 @@ import PreviewPanel from "../components/PreviewPanel";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import BracketCycler from "../components/BracketCycler";
-import PixelLoopCanvas from "../components/PixelLoopCanvas";
+import AsciiOrchidCanvas from "../components/AsciiOrchidCanvas";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
@@ -190,9 +190,9 @@ function HeroSection() {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Pixel loop background animation */}
+            {/* Elegant ASCII orchid flowers - flowing, organic, premium aesthetic */}
             <div className="hero-bg-layer">
-                <PixelLoopCanvas />
+                <AsciiOrchidCanvas />
             </div>
 
             {/* Default Hero Content (Clean/Chaos modes) */}
