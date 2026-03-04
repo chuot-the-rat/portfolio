@@ -365,44 +365,7 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* Final Experience/Prototype */}
-            {project.finalExperience &&
-                (() => {
-                    const s = nextSection();
-                    return (
-                        <motion.section
-                            className="project-section final-experience-section"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <SectionIndex
-                                caseIndex={ci}
-                                sectionIndex={s}
-                                title="Final Experience"
-                            />
-                            <h2 className="section-title">
-                                Complete Prototype
-                            </h2>
-                            <SectionTag sectionIndex={s} />
-                            {project.finalExperience.intro && (
-                                <p className="section-description">
-                                    {project.finalExperience.intro}
-                                </p>
-                            )}
-                            {project.finalExperience.prototype && (
-                                <PrototypeEmbed
-                                    prototype={
-                                        project.finalExperience.prototype
-                                    }
-                                />
-                            )}
-                        </motion.section>
-                    );
-                })()}
-
-            {/* Research */}}
+            {/* Research */}
             {project.research &&
                 (() => {
                     const s = nextSection();
@@ -1884,6 +1847,42 @@ const ProjectContentMain = ({ project }) => {
                 <EvolutionSection evolution={project.evolution} />
             )}
 
+            {/* Final Experience/Prototype */}
+            {project.finalExperience &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section final-experience-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Final Experience"
+                            />
+                            <h2 className="section-title">
+                                Complete Prototype
+                            </h2>
+                            <SectionTag sectionIndex={s} />
+                            {project.finalExperience.intro && (
+                                <p className="section-description">
+                                    {project.finalExperience.intro}
+                                </p>
+                            )}
+                            {project.finalExperience.prototype && (
+                                <PrototypeEmbed
+                                    prototype={
+                                        project.finalExperience.prototype
+                                    }
+                                />
+                            )}
+                        </motion.section>
+                    );
+                })()}
 
             {/* Impact */}
             {project.outcomes &&

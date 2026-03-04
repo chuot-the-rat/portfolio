@@ -588,7 +588,7 @@
 
     "prototype": {
         "title": "Interactive Prototype",
-        "description": "A fully interactive Figma prototype was created covering the three core flows: browsing and joining a public chain, starting a new story, and managing a private writing circle. This prototype was used for all usability testing sessions.",
+        "description": "A fully interactive Figma prototype was created covering the three core flows: browsing and joining a public chain, starting a new story, and managing a private writing circle. This prototype was used for all usability testing sessions."
         "link": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=2173-14511&p=f&t=3MqWcWHBQIkqxCbQ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3770&show-proto-sidebar=1",
         "flows": [
             "Browse → Read story → Claim turn → Write → Submit",
@@ -600,7 +600,7 @@
 
     "userTesting": {
         "title": "Usability Testing",
-        "description": "Two rounds of moderated usability testing were conducted—one on mid-fidelity wireframes and one on the final high-fidelity prototype. Sessions were conducted remotely via Zoom with screen sharing. Task completion was tracked through Maze.",
+        "description": "Two rounds of moderated usability testing were conducted—one on mid-fidelity wireframes and one on the final high-fidelity prototype. Sessions were conducted remotely via Zoom with screen sharing. Task completion was tracked through Maze."
         "reportLinks": {
             "lofi": "https://www.figma.com/proto/Ir2RPiW50x0kZPvnXoyzTx/Lo-fi-Usability-Test-Report?node-id=0-1&t=2P1dG9iPdn1BpTdU-1",
             "hifi": "https://www.figma.com/proto/nrat14I5Mu3CmYdCec6VBQ/Hi-fi-Usability-Test-Report?node-id=0-1&t=ygaW6ASjQBDJ4XJQ-1"
