@@ -544,22 +544,6 @@ const Home = () => {
                         className="home-projects"
                         id="projects"
                     >
-                        {/* Default Projects Header (Clean/Chaos modes) */}
-                        <motion.div
-                            className="home-projects-header home-projects-header-default"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                        >
-                            <h2 className="home-section-title">
-                                Selected Work
-                            </h2>
-                            <p className="home-section-subtitle">
-                                {projects.length}{" "}
-                                {projects.length === 1 ? "project" : "projects"}
-                            </p>
-                        </motion.div>
-
                         {/* Projects Header */}
                         <motion.div
                             className="home-projects-header home-projects-header-terminal"

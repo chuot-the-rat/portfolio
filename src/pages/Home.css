@@ -201,34 +201,8 @@
 }
 
 /* Terminal projects hidden by default */
-.home-projects-header-terminal,
 .projects-list-terminal {
     display: none;
-}
-
-.home-projects-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: clamp(4rem, 8vw, 8rem);
-    padding-bottom: var(--space-6);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.home-section-title {
-    font-size: 0.6875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--color-text-tertiary);
-}
-
-.home-section-subtitle {
-    font-size: 0.6875rem;
-    color: var(--color-text-tertiary);
-    font-weight: 400;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.05em;
 }
 
 /* Projects Container - Explorer Layout */
