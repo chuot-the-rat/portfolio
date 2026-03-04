@@ -938,12 +938,6 @@
         padding: var(--space-12) 0;
     }
 
-    .project-hero-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-4);
-    }
-
     .project-hero-title {
         font-size: var(--font-size-2xl);
     }
@@ -955,7 +949,6 @@
     .project-hero-ctas {
         flex-direction: column;
         align-items: stretch;
-        width: 100%;
     }
 
     .project-cta-link {
