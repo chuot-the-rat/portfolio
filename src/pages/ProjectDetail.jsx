@@ -138,13 +138,13 @@ const ProjectDetail = () => {
                         <span className="project-year">{project.year}</span>
                     </div>
 
-                    <h1 className="project-hero-title">{project.title}</h1>
+                    {/* Title with CTAs */}
+                    <div className="project-hero-header">
+                        <h1 className="project-hero-title">{project.title}</h1>
 
-                    <p className="project-hero-tagline">{project.tagline}</p>
-
-                    {/* Header CTAs */}
-                    {(project.links?.live || project.links?.prototype) && (
-                        <div className="project-hero-ctas">
+                        {/* Header CTAs */}
+                        {(project.links?.live || project.links?.prototype) && (
+                            <div className="project-hero-ctas">
                             {project.links?.live && (
                                 <motion.a
                                     href={project.links.live}
@@ -207,8 +207,11 @@ const ProjectDetail = () => {
                                     </svg>
                                 </motion.a>
                             )}
-                        </div>
-                    )}
+                            </div>
+                        )}
+                    </div>
+
+                    <p className="project-hero-tagline">{project.tagline}</p>
 
                     <div className="project-meta-grid">
                         <div className="project-meta-item">
@@ -362,7 +365,44 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* Research */}
+            {/* Final Experience/Prototype */}
+            {project.finalExperience &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section final-experience-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Final Experience"
+                            />
+                            <h2 className="section-title">
+                                Complete Prototype
+                            </h2>
+                            <SectionTag sectionIndex={s} />
+                            {project.finalExperience.intro && (
+                                <p className="section-description">
+                                    {project.finalExperience.intro}
+                                </p>
+                            )}
+                            {project.finalExperience.prototype && (
+                                <PrototypeEmbed
+                                    prototype={
+                                        project.finalExperience.prototype
+                                    }
+                                />
+                            )}
+                        </motion.section>
+                    );
+                })()}
+
+            {/* Research */}}
             {project.research &&
                 (() => {
                     const s = nextSection();
@@ -1277,93 +1317,6 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* ── Interactive Prototype ── */}
-            {project.prototype &&
-                (() => {
-                    const s = nextSection();
-                    return (
-                        <motion.section
-                            className="project-section prototype-section"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <SectionIndex
-                                caseIndex={ci}
-                                sectionIndex={s}
-                                title="Prototype"
-                            />
-                            <h2 className="section-title">
-                                {project.prototype.title}
-                            </h2>
-                            <SectionTag
-                                sectionIndex={s}
-                                version="2.0"
-                            />
-                            <p className="section-description">
-                                {project.prototype.description}
-                            </p>
-
-                            {project.prototype.link && (
-                                <FigmaEmbed
-                                    linkOnly
-                                    caption="Try the interactive prototype"
-                                    prototypeLink={project.prototype.link}
-                                />
-                            )}
-
-                            {project.prototype.flows?.length > 0 && (
-                                <div className="prototype-flows">
-                                    <h3 className="subsection-title">
-                                        Core Flows
-                                    </h3>
-                                    <ul className="objectives-list">
-                                        {project.prototype.flows.map(
-                                            (flow, i) => (
-                                                <motion.li
-                                                    key={i}
-                                                    className="objective-item"
-                                                    initial={{
-                                                        opacity: 0,
-                                                        x: -20,
-                                                    }}
-                                                    whileInView={{
-                                                        opacity: 1,
-                                                        x: 0,
-                                                    }}
-                                                    viewport={{ once: true }}
-                                                    transition={{
-                                                        duration: 0.4,
-                                                        delay: i * 0.1,
-                                                    }}
-                                                >
-                                                    <span className="objective-icon">
-                                                        →
-                                                    </span>
-                                                    <span className="objective-text">
-                                                        {flow}
-                                                    </span>
-                                                </motion.li>
-                                            ),
-                                        )}
-                                    </ul>
-                                </div>
-                            )}
-
-                            {project.prototype.images?.length > 0 && (
-                                <ImageGallery
-                                    images={project.prototype.images}
-                                    startIndex={imageNum}
-                                    onCount={(n) => {
-                                        imageNum += n;
-                                    }}
-                                />
-                            )}
-                        </motion.section>
-                    );
-                })()}
-
             {/* ── Usability Testing ── */}
             {project.userTesting &&
                 (() => {
@@ -1931,42 +1884,6 @@ const ProjectContentMain = ({ project }) => {
                 <EvolutionSection evolution={project.evolution} />
             )}
 
-            {/* Final Experience/Prototype */}
-            {project.finalExperience &&
-                (() => {
-                    const s = nextSection();
-                    return (
-                        <motion.section
-                            className="project-section final-experience-section"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <SectionIndex
-                                caseIndex={ci}
-                                sectionIndex={s}
-                                title="Final Experience"
-                            />
-                            <h2 className="section-title">
-                                Complete Prototype
-                            </h2>
-                            <SectionTag sectionIndex={s} />
-                            {project.finalExperience.intro && (
-                                <p className="section-description">
-                                    {project.finalExperience.intro}
-                                </p>
-                            )}
-                            {project.finalExperience.prototype && (
-                                <PrototypeEmbed
-                                    prototype={
-                                        project.finalExperience.prototype
-                                    }
-                                />
-                            )}
-                        </motion.section>
-                    );
-                })()}
 
             {/* Impact */}
             {project.outcomes &&
