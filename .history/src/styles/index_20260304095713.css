@@ -57,15 +57,15 @@
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
     /* ──────────────────────────────────────────────────────────────
-       ANIMATION COMPONENTS: PixelLoopCanvas & BracketCycler
+       ANIMATION COMPONENTS: BitmapFlowerCanvas & BracketCycler
        ────────────────────────────────────────────────────────────── */
 
-    /* ─ PixelLoopCanvas tuning ─ */
-    --hero-accent-opacity: 0.055; /* base transparency of pixel grid */
-    --hero-accent-sat: 0.12; /* desaturation multiplier (0–1) */
-    --hero-accent-stroke: 0.55; /* twinkle square stroke opacity */
-    --hero-accent-cell: 14; /* pixel grid cell size in px */
-    --hero-accent-duration: 8000; /* freeze time in ms */
+    /* ─ BitmapFlowerCanvas tuning ─ */
+    --flower-primary: #e5e7eb; /* light grey for petals */
+    --flower-secondary: #9ca3af; /* medium grey for stems/leaves */
+    --flower-accent: #374151; /* dark grey for centers */
+    --flower-opacity: 0.7; /* overall visibility (0.5–0.85) */
+    --flower-animation-speed: 5000; /* ms per animation cycle */
 
     /* ─ BracketCycler tuning ─ */
     --bc-text: var(--color-text); /* base name color */

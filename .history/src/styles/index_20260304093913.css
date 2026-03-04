@@ -57,15 +57,18 @@
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
     /* ──────────────────────────────────────────────────────────────
-       ANIMATION COMPONENTS: PixelLoopCanvas & BracketCycler
+       ANIMATION COMPONENTS: FluidBackgroundCanvas & BracketCycler
        ────────────────────────────────────────────────────────────── */
 
-    /* ─ PixelLoopCanvas tuning ─ */
-    --hero-accent-opacity: 0.055; /* base transparency of pixel grid */
-    --hero-accent-sat: 0.12; /* desaturation multiplier (0–1) */
-    --hero-accent-stroke: 0.55; /* twinkle square stroke opacity */
-    --hero-accent-cell: 14; /* pixel grid cell size in px */
-    --hero-accent-duration: 8000; /* freeze time in ms */
+    /* ─ FluidBackgroundCanvas tuning ─ */
+    --fluid-opacity: 0.6; /* background opacity (0–1) */
+    --fluid-speed: 1; /* animation speed multiplier (0.5–3) */
+    --fluid-intensity: 1; /* particle movement intensity (0.5–2) */
+    --fluid-particle-count: 50; /* number of floating particles (20–100) */
+    --fluid-color-1: hsl(220, 80%, 50%); /* primary gradient color (blue) */
+    --fluid-color-2: hsl(280, 70%, 55%); /* secondary - color transitions (purple) */
+    --fluid-color-3: hsl(180, 60%, 50%); /* tertiary - accent color (cyan) */
+    --fluid-glow: 0.3; /* particle glow intensity (0–1) */
 
     /* ─ BracketCycler tuning ─ */
     --bc-text: var(--color-text); /* base name color */

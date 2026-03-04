@@ -10,7 +10,6 @@ import PreviewPanel from "../components/PreviewPanel";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import BracketCycler from "../components/BracketCycler";
-import PixelLoopCanvas from "../components/PixelLoopCanvas";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
@@ -190,11 +189,6 @@ function HeroSection() {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Pixel loop background animation */}
-            <div className="hero-bg-layer">
-                <PixelLoopCanvas />
-            </div>
-
             {/* Default Hero Content (Clean/Chaos modes) */}
             <div className="hero-content hero-content-default">
                 <div className="hero-left">
@@ -241,15 +235,9 @@ function HeroSection() {
                             baseText="leanale"
                             primaryTokens={[".com", "003@gmail.com"]}
                             burstTokens={[
-                                "ux",
-                                "ui",
-                                "react",
-                                "motion",
-                                "figma",
-                                "design",
-                                "code",
-                                "available",
-                                "burnaby",
+                                "ux", "ui", "react", "motion",
+                                "figma", "design", "code",
+                                "available", "burnaby"
                             ]}
                         />
                     </motion.div>

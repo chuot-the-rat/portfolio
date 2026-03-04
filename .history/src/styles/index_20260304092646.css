@@ -61,21 +61,21 @@
        ────────────────────────────────────────────────────────────── */
 
     /* ─ PixelLoopCanvas tuning ─ */
-    --hero-accent-opacity: 0.055; /* base transparency of pixel grid */
-    --hero-accent-sat: 0.12; /* desaturation multiplier (0–1) */
-    --hero-accent-stroke: 0.55; /* twinkle square stroke opacity */
-    --hero-accent-cell: 14; /* pixel grid cell size in px */
-    --hero-accent-duration: 8000; /* freeze time in ms */
+    --hero-accent-opacity: 0.055;  /* base transparency of pixel grid */
+    --hero-accent-sat: 0.12;       /* desaturation multiplier (0–1) */
+    --hero-accent-stroke: 0.55;    /* twinkle square stroke opacity */
+    --hero-accent-cell: 14;        /* pixel grid cell size in px */
+    --hero-accent-duration: 8000;  /* freeze time in ms */
 
     /* ─ BracketCycler tuning ─ */
-    --bc-text: var(--color-text); /* base name color */
+    --bc-text: var(--color-text);              /* base name color */
     --bc-bracket: var(--color-text-tertiary); /* [ ] bracket color */
-    --bc-token: var(--color-text); /* token text color */
-    --bc-scramble: var(--color-text-tertiary); /* scramble animation color */
-    --bc-font: ui-monospace, "SF Mono", "Monaco", Consolas, monospace;
-    --bc-enter-ms: 200ms; /* token enter animation duration */
-    --bc-enter-y: 5px; /* token enter Y-offset */
-    --bracket-opacity: 0.4; /* [ ] bracket opacity */
+    --bc-token: var(--color-text);            /* token text color */
+    --bc-scramble: var(--color-text-tertiary);/* scramble animation color */
+    --bc-font: ui-monospace, 'SF Mono', 'Monaco', Consolas, monospace;
+    --bc-enter-ms: 200ms;          /* token enter animation duration */
+    --bc-enter-y: 5px;             /* token enter Y-offset */
+    --bracket-opacity: 0.4;        /* [ ] bracket opacity */
     --cycler-freeze-ms: 999999999; /* essentially never freezes - cycles forever */
 }
 

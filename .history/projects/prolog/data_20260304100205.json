@@ -131,20 +131,20 @@
         "title": "Key Insights",
         "insights": [
             {
-                "title": "Clarity functions as an emotional design outcome",
-                "description": "User reports of feeling 'relieved' correlated with specific design decisions about information hierarchy and visual presentation, not merely information architecture."
+                \"title\": \"Clarity functions as an emotional design outcome\",
+                \"description\": \"User reports of feeling 'relieved' correlated with specific design decisions about information hierarchy and visual presentation, not merely information architecture.\"
             },
             {
-                "title": "Scope constraint improves design quality",
-                "description": "Restricting feature scope to a single user population enabled deeper, more empathetic design work."
+                \"title\": \"Scope constraint improves design quality\",
+                \"description\": \"Restricting feature scope to a single user population enabled deeper, more empathetic design work.\"
             },
             {
-                "title": "Progress visualization drives motivation",
-                "description": "Visualizing distance already traveled proved equally important as showing what steps remain."
+                \"title\": \"Progress visualization drives motivation\",
+                \"description\": \"Visualizing distance already traveled proved equally important as showing what steps remain.\"
             },
             {
-                "title": "Qualitative research provides valid insights",
-                "description": "Lived experience and small-sample qualitative feedback generated insights of equal validity to large-scale quantitative studies."
+                \"title\": \"Qualitative research provides valid insights\",
+                \"description\": \"Lived experience and small-sample qualitative feedback generated insights of equal validity to large-scale quantitative studies.\"
             }
         ]
     },

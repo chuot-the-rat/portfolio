@@ -46,7 +46,7 @@
     },
     "challenges": {
         "title": "Early Challenges",
-        "description": "Initial project scope proved overly broad. The ambition to address financial stress, employer communication, exam preparation, and progress tracking simultaneously created design paralysis.\n\nNarrowing the focus to neurodivergent apprentices specifically proved transformative. This constraint allowed deeper empathy-driven design rather than generic solutions.",,
+        "description": "This project started too big. We wanted to fix financial stress, employer communication, exam preparation, and progress tracking—all at once. Our advisor encouraged broad exploration, which felt productive at first but eventually led to paralysis.\n\nIt wasn't until we accepted that we couldn't solve everything that the project started moving. Narrowing our focus to neurodivergent apprentices gave us permission to go deeper instead of wider.",
         "pivots": [
             {
                 "from": "Solving all apprenticeship problems",
@@ -57,12 +57,12 @@
     },
     "lofi": {
         "title": "Lo-Fi Exploration",
-        "description": "Early sketches prioritized understanding information hierarchy and scanning speed. The question driving the exploration was: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts emerged as core elements. All other information served as secondary context.",,
+        "description": "Our early sketches were deliberately rough. We weren't trying to make things look good—we were trying to understand what information mattered most and how quickly someone could find it.\n\nThe dashboard concept emerged early. We kept asking ourselves: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else was secondary.",
         "images": []
     },
     "iterations": {
         "title": "High-Fidelity Designs",
-        "description": "High-fidelity designs emphasized a calming aesthetic. Soft colors, generous spacing, and typography designed to avoid clinical or overwhelming presentation formed the visual foundation.\n\nThe dashboard functioned as the emotional center of the application. Progress information—hours completed, hours remaining, competencies achieved—was made immediately visible rather than hidden behind navigation layers.",,
+        "description": "The high-fidelity designs prioritized calm. We chose soft colors, generous spacing, and typography that wouldn't feel clinical or overwhelming.\n\nThe dashboard became the emotional center of the app. Instead of hiding progress behind menus, we made it the first thing users see. Hours completed, hours remaining, competencies achieved—all visible at a glance.",
         "improvements": [
             "Prioritized calm through soft colors and generous spacing",
             "Made dashboard the emotional center with immediate progress visibility",
@@ -128,23 +128,23 @@
         ]
     },
     "learnings": {
-        "title": "Key Insights",
+        "title": "What I Learned",
         "insights": [
             {
-                "title": "Clarity functions as an emotional design outcome",
-                "description": "User reports of feeling 'relieved' correlated with specific design decisions about information hierarchy and visual presentation, not merely information architecture."
+                "title": "Clarity is an emotional outcome",
+                "description": "When users said they felt 'relieved,' they were responding to design decisions—not just information architecture."
             },
             {
-                "title": "Scope constraint improves design quality",
-                "description": "Restricting feature scope to a single user population enabled deeper, more empathetic design work."
+                "title": "Scope control is a design skill",
+                "description": "Saying no to good ideas was harder than coming up with them."
             },
             {
-                "title": "Progress visualization drives motivation",
-                "description": "Visualizing distance already traveled proved equally important as showing what steps remain."
+                "title": "Progress visualization restores motivation",
+                "description": "Seeing how far you've come matters as much as knowing what's next."
             },
             {
-                "title": "Qualitative research provides valid insights",
-                "description": "Lived experience and small-sample qualitative feedback generated insights of equal validity to large-scale quantitative studies."
+                "title": "Qualitative feedback is valid",
+                "description": "In student work, we don't always have access to large sample sizes. That doesn't make insights less real."
             }
         ]
     },

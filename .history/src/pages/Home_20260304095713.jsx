@@ -10,7 +10,7 @@ import PreviewPanel from "../components/PreviewPanel";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import BracketCycler from "../components/BracketCycler";
-import PixelLoopCanvas from "../components/PixelLoopCanvas";
+import BitmapFlowerCanvas from "../components/BitmapFlowerCanvas";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
@@ -190,9 +190,9 @@ function HeroSection() {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Pixel loop background animation */}
+            {/* Animated bitmap-style flowers - flowing botanical animation */}
             <div className="hero-bg-layer">
-                <PixelLoopCanvas />
+                <BitmapFlowerCanvas />
             </div>
 
             {/* Default Hero Content (Clean/Chaos modes) */}
