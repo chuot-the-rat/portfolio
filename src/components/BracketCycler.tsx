@@ -125,14 +125,16 @@ export default function BracketCycler({
     className = "",
 }: BracketCyclerProps) {
     const reduced = useReducedMotion();
-    
+
     // Debug logging
     useEffect(() => {
         console.log("BracketCycler mounted - reduced motion:", reduced);
     }, [reduced]);
 
     if (reduced) {
-        console.log("BracketCycler: showing static version (prefers-reduced-motion enabled)");
+        console.log(
+            "BracketCycler: showing static version (prefers-reduced-motion enabled)",
+        );
         return (
             <StaticVersion
                 baseText={baseText}
@@ -351,7 +353,7 @@ function AnimatedVersion({
         if (primaryTokens.length === 0) return;
         let alive = true;
         const t0 = Date.now();
-        
+
         console.log("BracketCycler animation loop starting");
         console.log("Primary tokens:", primaryTokens);
         console.log("Burst tokens:", burstTokens);
@@ -366,7 +368,7 @@ function AnimatedVersion({
                 const pIdx = primaryIdxRef.current % primaryTokens.length;
                 const primary = primaryTokens[pIdx];
                 primaryIdxRef.current++;
-                
+
                 console.log("Swapping to primary:", primary);
 
                 const isEmail = primary.includes("@");
@@ -391,8 +393,13 @@ function AnimatedVersion({
                     const picks = [...burstTokens]
                         .sort(() => Math.random() - 0.5)
                         .slice(0, count);
-                    
-                    console.log("Burst phase - showing", count, "tokens:", picks);
+
+                    console.log(
+                        "Burst phase - showing",
+                        count,
+                        "tokens:",
+                        picks,
+                    );
 
                     for (const burst of picks) {
                         if (!alive || frozenRef.current) break;
