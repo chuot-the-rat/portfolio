@@ -195,7 +195,7 @@
 
     "lofi": {
         "title": "Lo‑Fi Exploration",
-        "description": "Lo-fi exploration focused on one core interaction: contributing to a story. Different approaches to showing story history, handling turn-taking, and branching narratives were sketched. The visuals were intentionally basic—the priority was testing logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
+        "description": "Our lo-fi work focused on one core interaction: contributing to a story. We sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic—we needed to test logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
         "explorations": [
             {
                 "name": "Story Reading View",

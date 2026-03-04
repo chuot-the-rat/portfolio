@@ -115,7 +115,7 @@
     },
     "validation": {
         "title": "Validation & Testing",
-        "description": "The prototype was tested with a small group, yielding unexpected feedback: relief. Users described the dashboard as a 'GPS for my apprenticeship.' They appreciated that they didn't have to hunt for information—it was just there. The hours tracker resonated especially strongly. One participant noted they'd never realized they could document discrepancies themselves.",
+        "description": "We tested the prototype with a small group and heard something we didn't expect: relief. Users described the dashboard as a 'GPS for my apprenticeship.' They appreciated that they didn't have to hunt for information—it was just there. The hours tracker resonated especially strongly. One participant said they'd never realized they could document discrepancies themselves.",
         "quotes": [
             {
                 "text": "It's like a GPS for my apprenticeship.",
