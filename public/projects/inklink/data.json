@@ -62,7 +62,7 @@
 
     "research": {
         "title": "Research & Discovery",
-        "description": "We conducted peer surveys with amateur and hobbyist writers, usability testing on early concepts, and concept validation sessions to gauge interest in chain-based collaborative writing.",
+        "description": "Peer surveys were conducted with amateur and hobbyist writers, usability testing was performed on early concepts, and concept validation sessions explored interest in chain-based collaborative writing.",
         "methods": [
             {
                 "name": "Peer Surveys",
@@ -139,7 +139,7 @@
 
     "userFlows": {
         "title": "User Flows",
-        "description": "We mapped out the core user journeys to ensure the experience from landing to contributing felt intuitive and low-friction. Three primary flows guided our design decisions.",
+        "description": "The core user journeys were mapped to ensure the experience from landing to contributing felt intuitive and low-friction. Three primary flows guided the design decisions.",
         "flows": [
             {
                 "name": "Join & Contribute to a Public Chain",
@@ -189,13 +189,13 @@
 
     "informationArchitecture": {
         "title": "Information Architecture",
-        "description": "We structured InkLink's navigation around three core activities: discovering stories, contributing to chains, and managing your writing. The IA went through two revisions based on card sorting exercises with test participants.",
+        "description": "InkLink's navigation was structured around three core activities: discovering stories, contributing to chains, and managing writing. The IA went through two revisions based on card sorting exercises with test participants.",
         "images": []
     },
 
     "lofi": {
         "title": "Lo‑Fi Exploration",
-        "description": "Our lo-fi work focused on one core interaction: contributing to a story. We sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic—we needed to test logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
+        "description": "Lo-fi exploration focused on one core interaction: contributing to a story. Different approaches to showing story history, handling turn-taking, and branching narratives were sketched. The visuals were intentionally basic—the priority was testing logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
         "explorations": [
             {
                 "name": "Story Reading View",
@@ -232,7 +232,7 @@
 
     "styleGuide": {
         "title": "Style Guide & Design System",
-        "description": "InkLink's visual identity balances warmth and clarity. We wanted the interface to feel inviting—like opening a favorite notebook—while staying clean enough that the writing itself takes center stage. Color is used sparingly, mostly to indicate interactive elements and turn status.",
+        "description": "InkLink's visual identity balances warmth and clarity. The interface was designed to feel inviting—like opening a favorite notebook—while staying clean enough that the writing itself takes center stage. Color is used sparingly, mostly to indicate interactive elements and turn status.",
         "embed": {
             "type": "figma-design",
             "src": "https://embed.figma.com/design/ZoL7NWftUWpfKbSBIPg6Gn/InkLink-Style-Guide?node-id=0-1&embed-host=share",
@@ -268,7 +268,7 @@
 
     "challenges": {
         "title": "Early Challenges & Pivots",
-        "description": "We made three major pivots based on user feedback and testing. Each one felt like a step backward at the time, but ended up pushing the design forward.",
+        "description": "Three major pivots emerged based on user feedback and testing. Each one felt like a step backward at the time, but ended up pushing the design forward.",
         "pivots": [
             {
                 "from": "Mobile-first design",
@@ -293,12 +293,12 @@
             "AI writing suggestions (users wanted human collaboration, not AI assistance)",
             "Comment threads on individual passages (simplified to reactions only)"
         ],
-        "reflection": "Every feature we removed made the core experience stronger. We learned that for a creative tool, less truly is more—constraint breeds creativity."
+        "reflection": "Every removed feature made the core experience stronger. For a creative tool, less truly is more—constraint breeds creativity."
     },
 
     "iterations": {
         "title": "Mid-Fidelity Iterations",
-        "description": "Between wireframes and final designs, we ran two rounds of mid-fidelity testing to validate layout decisions and interaction patterns. These iterations caught several usability issues before we invested in visual polish.",
+        "description": "Between wireframes and final designs, two rounds of mid-fidelity testing were conducted to validate layout decisions and interaction patterns. These iterations caught several usability issues before visual polish was invested in.",
         "rounds": [
             {
                 "round": 1,
@@ -339,7 +339,7 @@
 
     "hifi": {
         "title": "High-Fidelity Mockups",
-        "description": "The high-fidelity designs leaned into typography and whitespace. We wanted the words to breathe. Color was used sparingly—mostly to indicate interactive elements and turn status. The writing itself stayed neutral, letting each contributor's voice come through without visual interference.",
+        "description": "The high-fidelity designs leaned into typography and whitespace. Words were given space to breathe. Color was used sparingly—mostly to indicate interactive elements and turn status. The writing itself stayed neutral, letting each contributor's voice come through without visual interference.",
         "embed": {
             "type": "figma-design",
             "src": "https://embed.figma.com/design/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=0-1&embed-host=share",
@@ -433,7 +433,7 @@
 
     "prototype": {
         "title": "Interactive Prototype",
-        "description": "We built a fully interactive Figma prototype covering the three core flows: browsing and joining a public chain, starting a new story, and managing a private writing circle. The prototype was used for all usability testing sessions.",
+        "description": "A fully interactive Figma prototype was built covering the three core flows: browsing and joining a public chain, starting a new story, and managing a private writing circle. The prototype was used for all usability testing sessions.",
         "link": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=2173-14511&p=f&t=3MqWcWHBQIkqxCbQ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3770&show-proto-sidebar=1",
         "flows": [
             "Browse → Read story → Claim turn → Write → Submit",
@@ -445,7 +445,7 @@
 
     "userTesting": {
         "title": "Usability Testing",
-        "description": "We conducted two rounds of moderated usability testing—once on mid-fidelity wireframes and once on the final high-fidelity prototype. Sessions were conducted remotely via Zoom with screen sharing, and task completion was tracked through Maze.",
+        "description": "Two rounds of moderated usability testing were conducted—once on mid-fidelity wireframes and once on the final high-fidelity prototype. Sessions were conducted remotely via Zoom with screen sharing, and task completion was tracked through Maze.",
         "reportLinks": {
             "lofi": "https://www.figma.com/proto/Ir2RPiW50x0kZPvnXoyzTx/Lo-fi-Usability-Test-Report?node-id=0-1&t=2P1dG9iPdn1BpTdU-1",
             "hifi": "https://www.figma.com/proto/nrat14I5Mu3CmYdCec6VBQ/Hi-fi-Usability-Test-Report?node-id=0-1&t=ygaW6ASjQBDJ4XJQ-1"
@@ -641,11 +641,11 @@
             },
             {
                 "title": "Reducing features can increase engagement",
-                "description": "We cut more than we added—and the product got better. Every removed feature simplified the mental model for users."
+                "description": "More was cut than added—and the product improved. Every removed feature simplified the mental model for users."
             },
             {
                 "title": "Test assumptions early and cheaply",
-                "description": "Our mobile-first assumption would have cost weeks if we hadn't tested it with lo-fi wireframes first. Low-cost validation saved us from expensive pivots."
+                "description": "The mobile-first assumption would have cost weeks if it hadn't been tested with lo-fi wireframes first. Low-cost validation prevented expensive pivots."
             },
             {
                 "title": "Onboarding is part of the product, not separate from it",
