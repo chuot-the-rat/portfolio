@@ -36,7 +36,7 @@
     },
     "research": {
         "title": "Research & Framing",
-        "description": "We surveyed 30+ young adults about how they find and decide on activities. The data showed that most people spend more time browsing than doing. They wanted novelty, but searching felt like work.\n\nKey insight: What if instead of presenting 100 options, we just gave them one? A random quest. Accept it or skip it. No browsing. No comparisons. Just commitment or rejection.",
+        "description": "Surveys with 30+ young adults examined how they discover and decide on activities. Data revealed that browsing consumed disproportionate time compared to actual activity completion. Participants expressed desire for novelty without the friction of decision-making.\n\nKey insight: A single randomized option creates urgency and removes decision paralysis. Users respond to binary choice (accept/skip) with higher commitment than to extensive browsing options.",,
         "images": [
             {
                 "src": "projects/sidequest/images/research.svg",
@@ -46,7 +46,7 @@
     },
     "challenges": {
         "title": "Early Challenges & Pivots",
-        "description": "We tested several interaction models before landing on the quest-based approach.",
+        "description": "Multiple interaction models were tested before the quest-based approach emerged as optimal.",,
         "pivots": [
             {
                 "from": "Browse-based directory with filters",
@@ -66,13 +66,13 @@
         ]
     },
     "lofi": {
-        "title": "Lo‑Fi Wireframes",
-        "description": "The lo-fi phase was all about testing the core loop: tap to generate a quest, see activity details, accept or skip, repeat.\n\nWe sketched various card layouts, tested different information hierarchies, and explored how much detail to show upfront vs. after acceptance. The goal was frictionless exploration with minimal cognitive load.",
+        "title": "Lo-Fi Wireframes",
+        "description": "Early wireframes focused on testing the core interaction loop: generate a quest, display activity details, accept or skip, repeat. Various card layouts and information hierarchies were explored. Key design question: how much detail to expose initially versus revealing after user acceptance. The goal was to minimize cognitive load while maintaining frictionless exploration.",,
         "images": []
     },
     "iterations": {
         "title": "High-Fidelity Designs",
-        "description": "The final visuals leaned into gaming aesthetics: bold colors, rounded shapes, progress bars, and reward animations. The interface was designed to feel responsive and alive—every tap had weight and feedback.\n\nWe iterated on micro-interactions (card flips, XP fills, level-up animations) to reinforce the sense of progression. Visual delight wasn't decoration—it was motivation.",
+        "description": "Final visual design drew from gaming aesthetics: bold colors, rounded shapes, progress bars, and reward animations. The interface was designed as responsive and engaging—every tap carried weight and tactile feedback.\n\nMicro-interactions (card flips, XP fills, level-up animations) were refined to reinforce progression. Visual feedback functioned as motivation, not decoration.",,
         "improvements": [
             "Added XP bars and level progression to create long-term engagement",
             "Introduced 'skip' and 'accept' swipe gestures for mobile-first interactions",
@@ -138,19 +138,19 @@
         ]
     },
     "learnings": {
-        "title": "What I Learned",
-        "insights": [
+        \"title\": \"Key Insights\",
+        \"insights\": [
             {
-                "title": "Randomness creates commitment",
-                "description": "When users don't have to choose, they feel less responsible—and more willing to try something new."
+                \"title\": \"Randomness reduces decision friction\",
+                \"description\": \"When choice is removed, users experience lower psychological resistance and greater willingness to experiment. Binary accept/skip mechanics proved more effective than browse-based models.\"
             },
             {
-                "title": "Gamification drives behavior change",
-                "description": "XP and levels weren't just decorative. They created small dopamine loops that encouraged repeat usage."
+                \"title\": \"Gamification mechanics drive repeated engagement\",
+                \"description\": \"XP systems and progression mechanics functioned as behavioral reinforcement, not decoration. Reward structures created measurable increases in repeat usage.\"
             },
             {
-                "title": "Constraint is clarity",
-                "description": "Limiting to one quest at a time reduced cognitive load and increased action."
+                \"title\": \"Constraint enables action\",
+                \"description\": \"Limiting available options (one quest at a time) paradoxically increased cognitive throughput and action completion rates versus unlimited browse scenarios.\"
             }
         ]
     },

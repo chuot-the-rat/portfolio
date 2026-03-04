@@ -46,7 +46,7 @@
 
     "problem": {
         "title": "The Problem",
-        "description": "Writer's block isn't usually about running out of ideas. It's about pressure. The blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nExisting tools like Google Docs and Notion support collaboration, but they're built for productivity—not creative play. Writers need something that removes friction, not something that adds a toolbar.\n\nWe wanted to design an experience that removed those barriers—not by making writing easier, but by making it shared.",
+        "description": "Writer's block isn't usually about running out of ideas. It's about pressure. The blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nExisting tools like Google Docs and Notion support collaboration, but they're built for productivity—not creative play. Writers need something that removes friction, not something that adds a toolbar.\n\nThe design challenge centered on removing these barriers—not by making writing easier, but by making it shared.",
         "keyInsights": [
             "72% of surveyed hobbyist writers reported experiencing writer's block at least once a month",
             "Most collaborative tools are designed for productivity, not creative expression",
@@ -123,7 +123,7 @@
 
     "personas": {
         "title": "User Personas",
-        "description": "From our research, two primary personas emerged representing the core users InkLink would serve.",
+        "description": "Research identified two primary personas representing the core users InkLink would serve.",
         "prototypeLink": "https://www.figma.com/proto/s29HtOUroxbZHq5k6TaVUu/User-Persona--DUE-MAR-19-?node-id=0-1&t=rd4q9KUwzRbmCiLM-1",
         "images": [
             {
@@ -139,7 +139,7 @@
 
     "userFlows": {
         "title": "User Flows",
-        "description": "We mapped out the core user journeys to ensure the experience from landing to contributing felt intuitive and low-friction. Three primary flows guided our design decisions.",
+        "description": "Core user journeys were mapped to ensure the experience from landing to contributing felt intuitive and low-friction. Three primary flows guided the design.",
         "flows": [
             {
                 "name": "Join & Contribute to a Public Chain",
@@ -189,13 +189,13 @@
 
     "informationArchitecture": {
         "title": "Information Architecture",
-        "description": "We structured InkLink's navigation around three core activities: discovering stories, contributing to chains, and managing your writing. The IA went through two revisions based on card sorting exercises with test participants.",
+        "description": "InkLink's navigation was structured around three core activities: discovering stories, contributing to chains, and managing writing. Card sorting exercises with test participants informed two revisions of the IA.",
         "images": []
     },
 
     "lofi": {
         "title": "Lo‑Fi Exploration",
-        "description": "Our lo-fi work focused on one core interaction: contributing to a story. We sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic—we needed to test logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
+        "description": "Lo-fi exploration focused on one core interaction: contributing to a story. Different approaches were sketched for showing story history, handling turn-taking, and branching narratives. Visuals were intentionally basic to test logic rather than aesthetics.\n\nThis exploration revealed a simple chain pattern: read what came before, add your piece, pass it on.",
         "explorations": [
             {
                 "name": "Story Reading View",
@@ -423,7 +423,7 @@
 
     "challenges": {
         "title": "Early Challenges & Pivots",
-        "description": "We made three major pivots based on user feedback and testing. Each one felt like a step backward at the time, but ended up pushing the design forward.",
+        "description": "Three major pivots emerged from user feedback and testing. Each initially appeared to be a step backward, but ultimately advanced the design.",
         "pivots": [
             {
                 "from": "Mobile-first design",
@@ -448,12 +448,12 @@
             "AI writing suggestions (users wanted human collaboration, not AI assistance)",
             "Comment threads on individual passages (simplified to reactions only)"
         ],
-        "reflection": "Every feature we removed made the core experience stronger. We learned that for a creative tool, less truly is more—constraint breeds creativity."
+        "reflection": "Every feature that was removed strengthened the core experience. The process revealed that for a creative tool, constraint breeds creativity."
     },
 
     "iterations": {
         "title": "Mid-Fidelity Iterations",
-        "description": "Between wireframes and final designs, we ran two rounds of mid-fidelity testing to validate layout decisions and interaction patterns. These iterations caught several usability issues before we invested in visual polish.",
+        "description": "Two rounds of mid-fidelity testing were conducted between wireframes and final designs to validate layout decisions and interaction patterns. These iterations identified usability issues before investment in visual polish."
         "rounds": [
             {
                 "round": 1,
@@ -588,7 +588,7 @@
 
     "prototype": {
         "title": "Interactive Prototype",
-        "description": "We built a fully interactive Figma prototype covering the three core flows: browsing and joining a public chain, starting a new story, and managing a private writing circle. The prototype was used for all usability testing sessions.",
+        "description": "A fully interactive Figma prototype was created covering the three core flows: browsing and joining a public chain, starting a new story, and managing a private writing circle. This prototype was used for all usability testing sessions."
         "link": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=2173-14511&p=f&t=3MqWcWHBQIkqxCbQ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3770&show-proto-sidebar=1",
         "flows": [
             "Browse → Read story → Claim turn → Write → Submit",
@@ -600,7 +600,7 @@
 
     "userTesting": {
         "title": "Usability Testing",
-        "description": "We conducted two rounds of moderated usability testing—once on mid-fidelity wireframes and once on the final high-fidelity prototype. Sessions were conducted remotely via Zoom with screen sharing, and task completion was tracked through Maze.",
+        "description": "Two rounds of moderated usability testing were conducted—one on mid-fidelity wireframes and one on the final high-fidelity prototype. Sessions were conducted remotely via Zoom with screen sharing. Task completion was tracked through Maze."
         "reportLinks": {
             "lofi": "https://www.figma.com/proto/Ir2RPiW50x0kZPvnXoyzTx/Lo-fi-Usability-Test-Report?node-id=0-1&t=2P1dG9iPdn1BpTdU-1",
             "hifi": "https://www.figma.com/proto/nrat14I5Mu3CmYdCec6VBQ/Hi-fi-Usability-Test-Report?node-id=0-1&t=ygaW6ASjQBDJ4XJQ-1"
@@ -679,7 +679,7 @@
 
     "finalPresentation": {
         "title": "Final Presentation",
-        "description": "Our final presentation walks through the complete design journey—from initial research findings through pivots, iterations, and the final solution. Presented as a Figma slide deck.",
+        "description": "The final presentation documents the complete design journey—from initial research findings through pivots, iterations, and the final solution. Presented as a Figma slide deck."
         "embed": {
             "type": "figma-slides",
             "src": "https://embed.figma.com/slides/4WHXBWm1HrsucoLezSzMFP/InkLink-final-presentation?node-id=43-1172&embed-host=share",
@@ -749,7 +749,7 @@
 
     "validation": {
         "title": "Validation & Results",
-        "description": "Across both testing rounds, the feedback consistently highlighted that InkLink made writing feel approachable and fun. The reduced pressure was noticeable—users said they felt less precious about their contributions because they knew someone else would build on them.",
+        "description": "Feedback across both testing rounds consistently indicated that InkLink made writing feel approachable and fun. The reduced pressure was evident—users reported feeling less precious about their contributions because they knew someone else would build on them."
         "quotes": [
             {
                 "text": "I stopped trying to make it perfect because I knew I only had a day.",
@@ -789,30 +789,30 @@
     },
 
     "learnings": {
-        "title": "What I Learned",
+        "title": "Key Insights",
         "insights": [
             {
                 "title": "Creativity benefits from constraints",
-                "description": "Limiting options (one clear CTA, timed turns, word limits) reduced friction instead of adding it. Writers felt freed, not restricted."
+                "description": "Limiting options (one clear CTA, timed turns, word limits) reduced friction instead of adding it. The interface allowed writers to focus freely rather than feel restricted."
             },
             {
                 "title": "Visual clarity beats thematic styling",
-                "description": "The newspaper aesthetic was fun but counterproductive. Clean, minimal design let the content—the writing itself—be the hero."
+                "description": "The newspaper aesthetic appeared visually interesting but reduced usability. Clean, minimal design allowed content—the writing itself—to be the focal point."
             },
             {
                 "title": "Reducing features can increase engagement",
-                "description": "We cut more than we added—and the product got better. Every removed feature simplified the mental model for users."
+                "description": "Feature reduction resulted in a stronger product. Every removed feature simplified the mental model for users."
             },
             {
-                "title": "Test assumptions early and cheaply",
-                "description": "Our mobile-first assumption would have cost weeks if we hadn't tested it with lo-fi wireframes first. Low-cost validation saved us from expensive pivots."
+                "title": "Early validation prevents costly pivots",
+                "description": "Testing the mobile-first assumption with lo-fi wireframes early on prevented weeks of development effort and expensive revisions."
             },
             {
-                "title": "Onboarding is part of the product, not separate from it",
-                "description": "The interactive sample story wasn't just a tutorial—it was the most effective way to communicate InkLink's value proposition."
+                "title": "Onboarding is integral to product experience",
+                "description": "The interactive sample story functioned as more than a tutorial—it became the primary mechanism for communicating InkLink's value proposition."
             }
         ]
-    },
+    }
 
     "nextSteps": {
         "title": "Next Steps",
