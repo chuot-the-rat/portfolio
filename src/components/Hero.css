@@ -1,0 +1,183 @@
+/* ══════════════════════════════════════════════════════════════════
+   HERO SECTION STYLING
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* ── Canvas background layer ────────────────────────────────────────── */
+
+.hero__canvas-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* ── Content layer (above canvas) ────────────────────────────────────── */
+
+.hero__content {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-12) var(--space-4);
+    text-align: center;
+}
+
+/* ── Main headline ────────────────────────────────────────────────────── */
+
+.hero__headline {
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-8);
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* ── Bracket cycler wrapper ─────────────────────────────────────────── */
+
+.hero__cycler-wrapper {
+    margin: var(--space-8) 0;
+    font-size: 1.3em;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.hero__bracket-cycler {
+    font-family: var(--bc-font, ui-monospace, "SF Mono", Consolas, monospace);
+    font-size: 0.85em;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+/* ── Tagline ────────────────────────────────────────────────────────── */
+
+.hero__tagline {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin: var(--space-8) 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+/* ── CTA Button ─────────────────────────────────────────────────────── */
+
+.hero__cta {
+    margin-top: var(--space-12);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-text);
+    background-color: transparent;
+    border: 1px solid var(--color-text);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all var(--duration-base) var(--ease-smooth);
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.hero__cta:hover {
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero__cta:active {
+    transform: translateY(0);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 80vh;
+    }
+
+    .hero__headline {
+        font-size: var(--font-size-4xl);
+        margin-bottom: var(--space-6);
+    }
+
+    .hero__cycler-wrapper {
+        font-size: 1.1em;
+        margin: var(--space-6) 0;
+    }
+
+    .hero__tagline {
+        font-size: var(--font-size-base);
+        margin: var(--space-6) 0;
+    }
+
+    .hero__cta {
+        margin-top: var(--space-8);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__headline {
+        font-size: var(--font-size-3xl);
+    }
+
+    .hero__cycler-wrapper {
+        font-size: 1em;
+    }
+
+    .hero__tagline {
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* ── Animation: fadeInUp ────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Dark mode support ──────────────────────────────────────────────── */
+
+[data-theme="dark"] .hero__cta {
+    color: var(--color-text);
+    border-color: var(--color-text);
+}
+
+[data-theme="dark"] .hero__cta:hover {
+    background-color: var(--color-text);
+    color: var(--color-bg);
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__headline,
+    .hero__cycler-wrapper,
+    .hero__tagline,
+    .hero__cta {
+        animation: none;
+    }
+
+    .hero__cta {
+        transition: none;
+    }
+}
