@@ -235,15 +235,9 @@ function HeroSection() {
                             baseText="leanale"
                             primaryTokens={[".com", "003@gmail.com"]}
                             burstTokens={[
-                                "ux",
-                                "ui",
-                                "react",
-                                "motion",
-                                "figma",
-                                "design",
-                                "code",
-                                "available",
-                                "burnaby",
+                                "ux", "ui", "react", "motion",
+                                "figma", "design", "code",
+                                "available", "burnaby"
                             ]}
                         />
                     </motion.div>

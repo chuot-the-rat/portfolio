@@ -9,7 +9,6 @@ import {
 import PreviewPanel from "../components/PreviewPanel";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
-import BracketCycler from "../components/BracketCycler";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
@@ -216,37 +215,6 @@ function HeroSection() {
                             </motion.span>
                         ))}
                     </h1>
-
-                    <motion.div
-                        className="hero-bracket-cycler"
-                        initial={
-                            prefersReducedMotion.current
-                                ? {}
-                                : { opacity: 0, y: 10 }
-                        }
-                        animate={showName ? { opacity: 1, y: 0 } : {}}
-                        transition={{
-                            duration: 0.5,
-                            delay: nameDuration / 1000 + 0.1,
-                            ease: [0.4, 0, 0.2, 1],
-                        }}
-                    >
-                        <BracketCycler
-                            baseText="leanale"
-                            primaryTokens={[".com", "003@gmail.com"]}
-                            burstTokens={[
-                                "ux",
-                                "ui",
-                                "react",
-                                "motion",
-                                "figma",
-                                "design",
-                                "code",
-                                "available",
-                                "burnaby",
-                            ]}
-                        />
-                    </motion.div>
 
                     <motion.p
                         className="home-hero-subtitle"
