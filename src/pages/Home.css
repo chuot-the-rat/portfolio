@@ -77,6 +77,15 @@
     font-weight: 300;
 }
 
+.hero-bracket-cycler {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-family: var(--bc-font, ui-monospace, "SF Mono", Consolas, monospace);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0.5rem 0;
+    will-change: opacity;
+}
+
 /* Right column — system label + CTA + links */
 .hero-right {
     display: flex;
