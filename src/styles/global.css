@@ -9,6 +9,7 @@
 /* Import design system modules */
 @import "./variables.css";
 @import "./typography.css";
+@import "./energy.css";
 
 /* ──────────────────────────────────────────────────────────────────────
    2. RESET & BASE STYLES

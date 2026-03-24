@@ -37,7 +37,7 @@ export default function Projects() {
     const [projects, setProjects] = useState([]);
     // Track if data is still loading
     const [loading, setLoading] = useState(true);
-    // Track which project is being hovered (optional: for de-emphasis effect)
+    // Track which project is being hovered (for hover dominance effect)
     const [hoveredProject, setHoveredProject] = useState(null);
 
     useEffect(() => {
@@ -49,16 +49,13 @@ export default function Projects() {
             fetch("/projects.json")
                 .then((res) => res.json())
                 .then(async (projectsList) => {
-                    // ─── LOAD CASE STUDIES ───
                     // Merge case study data with project metadata
                     const caseStudyCards = await Promise.all(
                         caseStudyProjects.map(async (project, index) => {
-                            // Look up this project in the master list
                             const projectMeta =
                                 projectsList.find((p) => p.id === project.id) ||
                                 {};
 
-                            // Combine case study data with extra metadata
                             return {
                                 ...projectMeta,
                                 ...project,
@@ -66,8 +63,7 @@ export default function Projects() {
                         }),
                     );
 
-                    // ─── LOAD STANDALONE PROJECTS ───
-                    // Find projects that aren't case studies (have their own data.json)
+                    // Find projects that aren't case studies
                     const standaloneEntries = projectsList.filter((p) =>
                         isStandaloneProject(p.id),
                     );
@@ -76,27 +72,22 @@ export default function Projects() {
                     const standaloneCards = await Promise.all(
                         standaloneEntries.map(async (entry) => {
                             try {
-                                // Try to fetch this project's data file
                                 const res = await fetch(
                                     `/projects/${entry.id}/data.json`,
                                 );
-                                // If file doesn't exist, skip it
                                 if (!res.ok) return null;
                                 const data = await res.json();
-                                // Merge with project list metadata
                                 return {
                                     ...entry,
                                     ...data,
                                 };
                             } catch {
-                                // If fetch fails, skip this project
                                 return null;
                             }
                         }),
                     );
 
-                    // ─── COMBINE & DISPLAY ───
-                    // Merge case studies + standalone projects (filter out nulls)
+                    // Merge case studies + standalone projects
                     setProjects([
                         ...caseStudyCards,
                         ...standaloneCards.filter(Boolean),
@@ -104,10 +95,9 @@ export default function Projects() {
                     setLoading(false);
                 })
                 .catch((error) => {
-                    // If projects.json fetch fails, fall back to just case studies
                     console.error("Error loading projects.json:", error);
                     const projectsWithData = caseStudyProjects.map(
-                        (project, index) => ({
+                        (project) => ({
                             ...project,
                         }),
                     );
@@ -118,119 +108,122 @@ export default function Projects() {
             console.error("Error loading projects:", error);
             setLoading(false);
         }
-    }, []); // Empty dependency = run once on mount
+    }, []);
 
     return (
         <div className="projects-page">
             <main className="projects-main">
-                {/* ─── HERO SECTION ─── title + count */}
-                <motion.section
-                    className="projects-hero"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="projects-title">Selected Work</h1>
-                    {/* Show count of projects (single vs plural) */}
-                    <p className="projects-subtitle">
-                        {projects.length}{" "}
-                        {projects.length === 1 ? "project" : "projects"}
-                    </p>
-                </motion.section>
-
-                {/* ─── LOADING STATE ─── show spinner while data loads */}
-                {loading ? (
-                    <div className="projects-loading">
+                <section className="section">
+                    <div className="container--wide stack stack--tight">
+                        {/* Header with kicker label */}
                         <motion.div
-                            className="loading-spinner"
-                            // Rotate infinitely
-                            animate={{ rotate: 360 }}
-                            transition={{
-                                duration: 1,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
-                        />
+                            className="stack"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <div className="kicker">Selected Work</div>
+                            <h1 className="projects-title">
+                                {projects.length}{" "}
+                                {projects.length === 1
+                                    ? "project"
+                                    : "projects"}
+                            </h1>
+                            <p className="projects-subtitle">
+                                Curated case studies and design work
+                            </p>
+                        </motion.div>
+
+                        {/* Loading state */}
+                        {loading ? (
+                            <div className="projects-loading">
+                                <motion.div
+                                    className="loading-spinner"
+                                    animate={{ rotate: 360 }}
+                                    transition={{
+                                        duration: 1,
+                                        repeat: Infinity,
+                                        ease: "linear",
+                                    }}
+                                />
+                            </div>
+                        ) : (
+                            // Work list with energy layer hover dominance
+                            <div className="workList">
+                                {projects.map((project, index) => (
+                                    <motion.article
+                                        key={project.id}
+                                        className="workItem"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            duration: 0.5,
+                                            delay: 0.08 * index,
+                                            ease: [0.4, 0, 0.2, 1],
+                                        }}
+                                        onMouseEnter={() =>
+                                            setHoveredProject(project)
+                                        }
+                                        onMouseLeave={() =>
+                                            setHoveredProject(null)
+                                        }
+                                        tabIndex={0}
+                                        onFocus={() =>
+                                            setHoveredProject(project)
+                                        }
+                                        onBlur={() =>
+                                            setHoveredProject(null)
+                                        }
+                                    >
+                                        <Link
+                                            to={getProjectPath(project.id)}
+                                            className="workRow"
+                                        >
+                                            {/* Project title */}
+                                            <div className="workTitle">
+                                                {project.title}
+                                            </div>
+
+                                            {/* Project metadata */}
+                                            <div className="workMeta">
+                                                {project.category && (
+                                                    <>
+                                                        <span>
+                                                            {project.category}
+                                                        </span>
+                                                        {project.year && (
+                                                            <>
+                                                                <span>
+                                                                    {" "}
+                                                                    ·{" "}
+                                                                </span>
+                                                                <span>
+                                                                    {project.year}
+                                                                </span>
+                                                            </>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
+                                        </Link>
+
+                                        {/* Preview image fades in on hover */}
+                                        {project.previewImage && (
+                                            <div className="workPreview">
+                                                <img
+                                                    src={
+                                                        project.previewImage
+                                                    }
+                                                    alt={`${project.title} preview`}
+                                                />
+                                            </div>
+                                        )}
+                                    </motion.article>
+                                ))}
+                            </div>
+                        )}
                     </div>
-                ) : (
-                    // ─── PROJECTS GRID ─── render all projects
-                    <section className="projects-grid">
-                        {projects.map((project, index) => (
-                            <motion.div
-                                key={project.id}
-                                className="project-card"
-                                // Fade in cards one by one as they render
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                    duration: 0.5,
-                                    delay: 0.08 * index, // Stagger by index
-                                    ease: [0.4, 0, 0.2, 1], // Smooth easing
-                                }}
-                                // Track which project is hovered (optional de-emphasis)
-                                onMouseEnter={() => setHoveredProject(project)}
-                                onMouseLeave={() => setHoveredProject(null)}
-                            >
-                                <Link
-                                    to={getProjectPath(project.id)}
-                                    className="project-card-link"
-                                >
-                                    {/* ─── CARD HEADER ─── title + subtitle */}
-                                    <div className="project-card-header">
-                                        <h3 className="project-card-title">
-                                            {project.title}
-                                        </h3>
-                                        {/* Subtitle or tagline, whichever exists */}
-                                        {(project.subtitle ||
-                                            project.tagline) && (
-                                            <p className="project-card-subtitle">
-                                                {project.subtitle ||
-                                                    project.tagline}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    {/* ─── CARD METADATA ─── category + year */}
-                                    <div className="project-card-meta">
-                                        {project.category && (
-                                            <>
-                                                <span className="project-meta-item">
-                                                    {project.category}
-                                                </span>
-                                                {/* Separator dot */}
-                                                <span className="project-meta-dot">
-                                                    ·
-                                                </span>
-                                            </>
-                                        )}
-                                        {project.year && (
-                                            <span className="project-meta-item">
-                                                {project.year}
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    {/* ─── HIGHLIGHT LAYER ─── optional visual effect on hover */}
-                                    {hoveredProject?.id === project.id && (
-                                        <motion.div
-                                            className="project-card-highlight"
-                                            layoutId="project-highlight"
-                                            // Fade in/out smoothly
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            transition={{
-                                                type: "spring",
-                                                stiffness: 300,
-                                                damping: 30,
-                                            }}
-                                        />
-                                    )}
-                                </Link>
-                            </motion.div>
-                        ))}
-                    </section>
-                )}
+                </section>
             </main>
         </div>
     );
