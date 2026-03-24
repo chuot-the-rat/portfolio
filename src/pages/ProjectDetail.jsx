@@ -403,7 +403,7 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* Research */}}
+            {/* Research */}
             {project.research &&
                 (() => {
                     const s = nextSection();
