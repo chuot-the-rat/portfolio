@@ -57,7 +57,7 @@ export const ModeProvider = ({ children }) => {
         // Apply mode class to body tag for global CSS targeting
         // CSS rules can then use: body.mode-chaos { ... } or body.mode-work { ... }
         document.body.className = `mode-${mode}`;
-    }, [mode]);  // Re-run this effect whenever mode changes
+    }, [mode]); // Re-run this effect whenever mode changes
 
     /**
      * Cycle to the next mode.
@@ -66,7 +66,7 @@ export const ModeProvider = ({ children }) => {
     const cycleMode = () => {
         const modes = [MODES.CHAOS, MODES.WORK];
         const currentIndex = modes.indexOf(mode);
-        const nextIndex = (currentIndex + 1) % modes.length;  // Wrap around to 0 after last mode
+        const nextIndex = (currentIndex + 1) % modes.length; // Wrap around to 0 after last mode
         setMode(modes[nextIndex]);
     };
 
