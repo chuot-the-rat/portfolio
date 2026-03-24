@@ -13,7 +13,7 @@
 }
 
 .resume-main {
-    max-width: 1000px;
+    max-width: var(--max-width-narrow);
     margin: 0 auto;
     padding: var(--section-spacing-base) var(--space-8);
 }
@@ -21,21 +21,22 @@
 /* ─── HERO SECTION ─── */
 .resume-hero {
     text-align: center;
-    margin-bottom: var(--section-spacing-base);
+    margin-bottom: var(--section-spacing-lg);
 }
 
 .resume-title {
     font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-bold);
+    font-weight: 600;
     margin-bottom: var(--space-4);
     color: var(--color-text);
     line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .resume-subtitle {
     font-size: var(--font-size-lg);
     color: var(--color-text-secondary);
-    font-weight: var(--font-weight-normal);
+    font-weight: 400;
     line-height: var(--line-height-relaxed);
 }
 
@@ -43,7 +44,7 @@
 .resume-embed-container {
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-md);
+    border-radius: var(--radius-lg);
     padding: var(--space-8);
     margin-bottom: var(--section-spacing-md);
     overflow: hidden;
@@ -56,7 +57,7 @@
     padding-bottom: 141.42%; /* 8.5:12 aspect ratio for Letter size */
     height: 0;
     overflow: hidden;
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--radius-base);
     background-color: var(--color-bg-secondary);
 }
 
@@ -88,13 +89,14 @@
     align-items: center;
     justify-content: center;
     padding: var(--space-4) var(--space-8);
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--radius-base);
     font-size: var(--font-size-base);
-    font-weight: var(--font-weight-medium);
+    font-weight: 500;
     text-decoration: none;
     transition: all var(--duration-base) var(--ease-smooth);
     cursor: pointer;
     white-space: nowrap;
+    outline-offset: var(--focus-offset);
 }
 
 /* Primary button (Open in New Tab) */
@@ -124,15 +126,14 @@
 }
 
 /* ─── FOCUS STATES (Accessibility) ─── */
-.resume-btn:focus {
-    outline: none;
-    box-shadow: var(--focus-ring);
+.resume-btn:focus-visible {
+    outline: var(--focus-ring);
 }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
     .resume-main {
-        padding: var(--section-spacing-md) var(--space-6);
+        padding: var(--section-spacing-sm) var(--space-6);
     }
 
     .resume-title {
@@ -145,7 +146,7 @@
 
     .resume-embed-container {
         padding: var(--space-6);
-        margin-bottom: var(--section-spacing-md);
+        margin-bottom: var(--section-spacing-sm);
     }
 
     .resume-buttons {
@@ -159,11 +160,9 @@
 }
 
 /* ─── DARK MODE SUPPORT ─── */
-@media (prefers-color-scheme: dark) {
-    .resume-btn--primary:hover {
-        background-color: var(--color-text);
-        color: var(--color-bg);
-    }
+[data-theme="dark"] .resume-btn--primary:hover {
+    background-color: var(--color-text);
+    color: var(--color-bg);
 }
 
 /* ─── REDUCED MOTION ─── */

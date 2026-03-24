@@ -1,130 +1,247 @@
-/* About Page Styles */
+/* ==========================================================================
+   ABOUT PAGE STYLES - Dynamic Composition with Visual Grouping
+   Break away from simple vertical layout into intentional sections
+   ========================================================================== */
 
 .about {
     display: flex;
     min-height: calc(100vh - 70px);
+    background-color: var(--color-bg);
 }
 
 .about-main {
     width: 100%;
-    padding: clamp(2rem, 6vw, 4rem);
-    max-width: 1200px;
+    padding: clamp(var(--space-12), 6vw, var(--section-spacing-base));
+    max-width: var(--max-width);
     margin: 0 auto;
 }
 
+/* ──────────────────────────────────────────────────────────────────────
+   HERO SECTION - Establish Page Visual Identity
+   ────────────────────────────────────────────────────────────────────── */
+
 .about-hero {
-    margin-bottom: clamp(3rem, 8vw, 6rem);
+    margin-bottom: clamp(
+        var(--section-spacing-sm),
+        8vw,
+        var(--section-spacing-base)
+    );
     text-align: center;
+    padding-bottom: var(--section-spacing-base);
+    border-bottom: 1px solid var(--color-border);
+    transition: border-color var(--duration-base) var(--ease-smooth);
 }
 
 .about-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(var(--font-size-2xl), 6vw, var(--font-size-4xl));
     font-weight: 700;
-    color: #1c1917;
-    margin-bottom: 1rem;
-    letter-spacing: -1px;
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .about-subtitle {
-    font-size: clamp(1reg, 2vw, 1.5rem);
-    color: #57534e;
+    font-size: clamp(var(--font-size-base), 2vw, var(--font-size-lg));
+    color: var(--color-text-secondary);
     font-weight: 400;
+    line-height: var(--line-height-relaxed);
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+   CONTENT SECTION - Intentional Grouping with Better Layout
+   ────────────────────────────────────────────────────────────────────── */
 
 .about-content {
-    margin-bottom: clamp(3rem, 8vw, 6rem);
+    margin-bottom: clamp(
+        var(--section-spacing-sm),
+        8vw,
+        var(--section-spacing-base)
+    );
 }
 
+/* Main grid: 2-column on desktop with offset grouping */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 4vw, 4rem);
-    margin-bottom: 2rem;
+    gap: clamp(var(--space-12), 4vw, var(--space-16));
+    margin-bottom: var(--space-8);
 }
 
+/* Left column: primary content */
 .about-col {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--space-6);
+}
+
+/* Right column: offset and highlighted */
+.about-col:nth-child(2) {
+    padding-top: var(--space-8);
 }
 
 .about-section-title {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 600;
-    color: #1c1917;
+    font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
+    font-weight: 700;
+    color: var(--color-text);
     margin: 0;
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .about-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #57534e;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
     margin: 0;
+    max-width: 520px;
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+   CALLOUT SECTION - Visually Distinct Group
+   ────────────────────────────────────────────────────────────────────── */
+
+.about-callout {
+    padding: var(--space-12);
+    margin: var(--section-spacing-base) 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-bg);
+    transition:
+        all var(--duration-base) var(--ease-smooth);
+}
+
+.about-callout:hover {
+    border-color: var(--color-text-secondary);
+    background-color: var(--color-bg-secondary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.about-callout-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-3);
+    margin-top: 0;
+}
+
+.about-callout-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: var(--line-height-relaxed);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   CALL-TO-ACTION SECTION - STRENGTHENED (Main Focus)
+   ────────────────────────────────────────────────────────────────────── */
 
 .about-cta {
     text-align: center;
-    padding: clamp(2rem, 4vw, 3rem);
-    border: 1px solid #e7e5e4;
-    border-radius: 8px;
-    background: #ffffff;
+    padding: clamp(var(--space-12), 4vw, var(--space-16));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-bg);
+    transition:
+        border-color var(--duration-base) var(--ease-smooth),
+        background-color var(--duration-base) var(--ease-smooth),
+        box-shadow var(--duration-base) var(--ease-smooth);
+    margin-top: clamp(var(--section-spacing-sm), 6vw, var(--section-spacing-base));
+}
+
+.about-cta:hover {
+    border-color: var(--color-text-secondary);
+    background-color: var(--color-bg-secondary);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .about-cta-title {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 600;
-    color: #1c1917;
-    margin-bottom: 1rem;
+    font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .about-cta-text {
-    font-size: 1rem;
-    color: #57534e;
-    margin-bottom: 2rem;
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-8);
+    line-height: var(--line-height-relaxed);
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* ──────────────────────────────────────────────────────────────────────
+   CTA LINKS - Powerful Interactive Elements
+   ────────────────────────────────────────────────────────────────────── */
+
 .about-cta-links {
     display: flex;
-    gap: 1.5rem;
+    gap: var(--space-6);
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .about-link {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #212121;
-    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-accent);
+    color: var(--color-bg);
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: var(--radius-base);
     font-weight: 500;
-    transition: all 0.3s ease;
+    font-size: var(--font-size-sm);
+    transition:
+        background-color var(--duration-base) var(--ease-smooth),
+        transform 200ms var(--ease-smooth),
+        box-shadow var(--duration-base) var(--ease-smooth);
+    outline-offset: var(--focus-offset);
 }
 
 .about-link:hover {
-    background: #1c1917;
-    transform: translate(4px, 0);
+    background-color: var(--color-text);
+    transform: translateX(6px) translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.about-link:focus-visible {
+    outline: var(--focus-ring);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   RESPONSIVE
+   ────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
+    }
+
+    .about-col:nth-child(2) {
+        padding-top: 0;
+    }
 }
 
 @media (max-width: 768px) {
     .about-main {
-        padding: clamp(1.5rem, 4vw, 2rem);
+        padding: clamp(var(--space-6), 4vw, var(--space-8));
     }
 
     .about-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: var(--space-8);
     }
 
     .about-cta-links {
         flex-direction: column;
+        gap: var(--space-4);
     }
 
     .about-link {
         width: 100%;
-        text-align: center;
+        justify-content: center;
     }
 }

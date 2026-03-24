@@ -2,131 +2,13 @@
    GLOBAL DESIGN SYSTEM - ENHANCED
    Minimal, Editorial, Intentional Portfolio Foundation
    Inspired by Jackie Hu (interaction-rich) + Sharleen Wang (structured)
+
+   ARCHITECTURE: This file imports specialized CSS modules for scalability
    ========================================================================== */
 
-/* ──────────────────────────────────────────────────────────────────────
-   1. TOKENS & VARIABLES (Enhanced)
-   ────────────────────────────────────────────────────────────────────── */
-
-:root {
-    /* ─ Colors ─ */
-    --color-bg: #ffffff;
-    --color-bg-secondary: #fafafa;
-    --color-text: #1a1a1a;
-    --color-text-secondary: #737373;
-    --color-text-tertiary: #a3a3a3;
-    --color-border: #e5e5e5;
-    --color-accent: #212121;
-
-    /* ─ Font Stack ─ */
-    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    --font-mono: ui-monospace, "SF Mono", "Monaco", Consolas, monospace;
-
-    /* ─ Typography Scale ─ */
-    --font-size-xs: 0.6875rem;   /* 11px */
-    --font-size-sm: 0.875rem;    /* 14px */
-    --font-size-base: 1rem;      /* 16px */
-    --font-size-lg: 1.125rem;    /* 18px */
-    --font-size-xl: 1.5rem;      /* 24px */
-    --font-size-2xl: 2rem;       /* 32px */
-    --font-size-3xl: 2.5rem;     /* 40px */
-    --font-size-4xl: 3rem;       /* 48px */
-    --font-size-5xl: 4rem;       /* 64px */
-
-    /* ─ Line Heights ─ */
-    --line-height-tight: 1.2;
-    --line-height-normal: 1.6;
-    --line-height-relaxed: 1.8;
-
-    /* ─ Letter Spacing ─ */
-    --letter-spacing-tight: -0.02em;
-    --letter-spacing-normal: 0;
-    --letter-spacing-tracking: 0.1em;
-
-    /* ─ Spacing Scale (4px base) ─ */
-    --space-1: 0.25rem;   /* 4px */
-    --space-2: 0.5rem;    /* 8px */
-    --space-3: 0.75rem;   /* 12px */
-    --space-4: 1rem;      /* 16px */
-    --space-6: 1.5rem;    /* 24px */
-    --space-8: 2rem;      /* 32px */
-    --space-12: 3rem;     /* 48px */
-    --space-16: 4rem;     /* 64px */
-    --space-20: 5rem;     /* 80px */
-    --space-24: 6rem;     /* 96px */
-    --space-32: 8rem;     /* 128px */
-
-    /* ─ Section Spacing Rhythm ─ */
-    --section-spacing-sm: var(--space-12);    /* 48px */
-    --section-spacing-base: var(--space-16);  /* 64px */
-    --section-spacing-lg: var(--space-24);    /* 96px */
-
-    /* ─ Layout ─ */
-    --max-width: 1280px;
-    --max-width-narrow: 900px;
-    --max-width-wide: 1400px;
-    --gutter: var(--space-6);
-    --gutter-mobile: var(--space-4);
-
-    /* ─ Border Radius ─ */
-    --radius-sm: 4px;
-    --radius-base: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
-    --radius-full: 999px;
-
-    /* ─ Transitions & Motion ─ */
-    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-
-    --duration-extra-fast: 100ms;
-    --duration-fast: 200ms;
-    --duration-base: 300ms;
-    --duration-slow: 500ms;
-    --duration-slower: 800ms;
-
-    /* ─ Shadows ─ */
-    --shadow-none: none;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
-
-    /* ─ Focus Ring ─ */
-    --focus-color: var(--color-text);
-    --focus-offset: 2px;
-    --focus-ring: 2px solid var(--focus-color);
-
-    /* ─ Animation Components Tokens ─ */
-    --hero-accent-opacity: 0.055;
-    --hero-accent-sat: 0.12;
-    --hero-accent-stroke: 0.55;
-    --hero-accent-cell: 14;
-    --hero-accent-duration: 8000;
-
-    --bc-text: var(--color-text);
-    --bc-bracket: var(--color-text-tertiary);
-    --bc-token: var(--color-text);
-    --bc-scramble: var(--color-text-tertiary);
-    --bc-font: var(--font-mono);
-    --bc-enter-ms: 200ms;
-    --bc-enter-y: 5px;
-    --bracket-opacity: 0.4;
-    --cycler-freeze-ms: 999999999;
-}
-
-/* Dark Mode */
-[data-theme="dark"] {
-    --color-bg: #0a0a0a;
-    --color-bg-secondary: #171717;
-    --color-text: #fafafa;
-    --color-text-secondary: #a3a3a3;
-    --color-text-tertiary: #737373;
-    --color-border: #262626;
-    --color-accent: #fafafa;
-}
+/* Import design system modules */
+@import "./variables.css";
+@import "./typography.css";
 
 /* ──────────────────────────────────────────────────────────────────────
    2. RESET & BASE STYLES
@@ -171,147 +53,6 @@ body {
     }
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   3. TYPOGRAPHY HIERARCHY
-   ────────────────────────────────────────────────────────────────────── */
-
-/* Headings Base */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 600;
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-    margin-bottom: var(--space-4);
-}
-
-/* H1 - Page Hero */
-h1 {
-    font-size: var(--font-size-3xl);
-}
-
-/* H2 - Section Title */
-h2 {
-    font-size: var(--font-size-2xl);
-}
-
-/* H3 - Subsection */
-h3 {
-    font-size: var(--font-size-xl);
-}
-
-/* H4 - Small Title */
-h4 {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-}
-
-/* H5, H6 - Metadata / Labels */
-h5,
-h6 {
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-tracking);
-    color: var(--color-text-tertiary);
-}
-
-/* Paragraph */
-p {
-    line-height: var(--line-height-relaxed);
-    margin-bottom: var(--space-4);
-}
-
-p:last-child {
-    margin-bottom: 0;
-}
-
-/* Links */
-a {
-    color: inherit;
-    text-decoration: none;
-    transition: opacity var(--duration-fast) var(--ease-smooth);
-    outline-offset: var(--focus-offset);
-}
-
-a:hover {
-    opacity: 0.7;
-}
-
-a:focus-visible {
-    outline: var(--focus-ring);
-}
-
-/* Strong / Bold */
-strong,
-b {
-    font-weight: 600;
-}
-
-/* Emphasis / Italic */
-em,
-i {
-    font-style: italic;
-}
-
-/* Code */
-code {
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-    background-color: var(--color-bg-secondary);
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--radius-sm);
-}
-
-/* Pre / Code Blocks */
-pre {
-    background-color: var(--color-bg-secondary);
-    padding: var(--space-4);
-    border-radius: var(--radius-lg);
-    overflow-x: auto;
-    margin-bottom: var(--space-4);
-}
-
-pre code {
-    background: none;
-    padding: 0;
-}
-
-/* Lists */
-ul,
-ol {
-    margin-bottom: var(--space-4);
-    padding-left: var(--space-6);
-}
-
-ul,
-ol {
-    list-style-position: outside;
-}
-
-li {
-    margin-bottom: var(--space-2);
-    line-height: var(--line-height-relaxed);
-}
-
-/* Blockquote */
-blockquote {
-    padding-left: var(--space-4);
-    border-left: 3px solid var(--color-accent);
-    margin: var(--space-4) 0;
-    font-style: italic;
-    color: var(--color-text-secondary);
-}
-
-/* Horizontal Rule */
-hr {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin: var(--space-8) 0;
-}
 
 /* ──────────────────────────────────────────────────────────────────────
    4. INTERACTIVE STATES
@@ -355,14 +96,15 @@ select {
 
 /* Container - Main Content Wrapper */
 .container {
+    width: 100%;
     max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
 }
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 var(--gutter-mobile);
+        padding-inline: var(--gutter-mobile);
     }
 }
 
@@ -468,6 +210,30 @@ section {
     font-size: var(--font-size-base);
 }
 
+/* ─ Refined Button Class (Editorial) ─ */
+/* For high-emphasis CTAs and navigation that feel designed */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: calc(var(--space-fluid-xs) + 0.10rem) var(--space-fluid-s);
+    border-radius: 999px; /* pill: "object" feel */
+    font-family: var(--font-mono);
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    transition:
+        transform var(--dur-2) var(--ease-out-quad),
+        box-shadow var(--dur-2) var(--ease-out-quad),
+        opacity var(--dur-2) var(--ease-out-quad);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
 /* ─ Badge / Label System ─ */
 
 .badge {
@@ -487,6 +253,51 @@ section {
     background-color: var(--color-accent);
     color: var(--color-bg);
     border-color: var(--color-accent);
+}
+
+/* ─ Label Typography: Editorial UI (Jackie-like) ─ */
+/* Wide-tracked metadata labels for "designed" energy */
+
+.meta,
+.kicker,
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+    line-height: var(--line-height-snug);
+    opacity: 0.78;
+}
+
+/* Tighter tracking for tags/buttons */
+.micro {
+    font-family: var(--font-mono);
+    font-size: 0.80em;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    opacity: 0.80;
+}
+
+/* ─ Layout Primitives: Vertical Rhythm ─ */
+
+/* Stack: vertical spacing rhythm (Every Layout pattern) */
+.stack > * + * {
+    margin-top: var(--space-fluid-m);
+}
+
+.stack-tight > * + * {
+    margin-top: var(--space-fluid-s);
+}
+
+.stack-loose > * + * {
+    margin-top: var(--space-fluid-l);
+}
+
+/* Prose: editorial reading width for case studies, about pages */
+.prose {
+    max-width: 68ch;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* ─ Card System ─ */
