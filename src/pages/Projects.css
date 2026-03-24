@@ -1,35 +1,63 @@
-/* Projects Page Styles */
+/* ==========================================================================
+   PROJECTS PAGE - REFINED INTERACTIVE LAYOUT
+   Jackie Hu + Sharleen Wang Inspired
+
+   Interactive but intentional project presentation:
+   - Strong hierarchy through spacing and typography
+   - Refined hover states with subtle reveals
+   - Clean structure with precise metadata
+   - Smooth, controlled transitions
+   ========================================================================== */
+
+/* ──────────────────────────────────────────────────────────────────────
+   PAGE SHELL
+   ────────────────────────────────────────────────────────────────────── */
 
 .projects-page {
     display: flex;
     min-height: calc(100vh - 70px);
+    background-color: var(--color-bg);
 }
 
 .projects-main {
     width: 100%;
-    padding: clamp(2rem, 6vw, 4rem);
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
+    padding: var(--section-spacing-base) var(--gutter);
 }
 
+@media (max-width: 768px) {
+    .projects-main {
+        padding: var(--section-spacing-sm) var(--gutter-mobile);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   HERO / PAGE HEADER
+   ────────────────────────────────────────────────────────────────────── */
+
 .projects-hero {
-    margin-bottom: clamp(3rem, 8vw, 6rem);
+    margin-bottom: var(--section-spacing-lg);
     text-align: center;
 }
 
 .projects-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 700;
-    color: #1c1917;
-    margin-bottom: 1rem;
-    letter-spacing: -1px;
+    font-size: var(--font-size-4xl);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .projects-subtitle {
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    color: #57534e;
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
     font-weight: 400;
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+   LOADING STATE
+   ────────────────────────────────────────────────────────────────────── */
 
 .projects-loading {
     display: flex;
@@ -41,80 +69,192 @@
 .loading-spinner {
     width: 40px;
     height: 40px;
-    border: 2px solid #e7e5e4;
-    border-top-color: #212121;
-    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    border-top-color: var(--color-accent);
+    border-radius: var(--radius-full);
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+   PROJECTS GRID - Main Layout System
+   ────────────────────────────────────────────────────────────────────── */
 
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+    gap: var(--space-12);
+    width: 100%;
 }
+
+/* Grid should feel more spacious on larger screens */
+@media (min-width: 1200px) {
+    .projects-grid {
+        gap: var(--space-16);
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   PROJECT CARD CONTAINER
+   ────────────────────────────────────────────────────────────────────── */
 
 .project-card {
     position: relative;
     height: 100%;
 }
 
+/* ──────────────────────────────────────────────────────────────────────
+   PROJECT CARD LINK - Interactive States
+   ────────────────────────────────────────────────────────────────────── */
+
 .project-card-link {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: clamp(1.5rem, 3vw, 2rem);
-    background: #ffffff;
-    border: 1px solid #e7e5e4;
-    border-radius: 8px;
+    padding: var(--space-8);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     text-decoration: none;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+
+    /* Smooth transitions for all state changes */
+    transition:
+        background-color var(--duration-base) var(--ease-smooth),
+        border-color var(--duration-base) var(--ease-smooth),
+        box-shadow var(--duration-base) var(--ease-smooth),
+        transform var(--duration-base) var(--ease-smooth);
 }
 
-.project-card-link:hover {
-    border-color: #212121;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+/* ─ Default State (minimal, calm) ─ */
+.project-card-link {
+    background-color: var(--color-bg);
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-none);
 }
+
+/* ─ Hover State (refined elevation + focus) ─ */
+.project-card-link:hover {
+    background-color: var(--color-bg);
+    border-color: var(--color-text-tertiary);
+    box-shadow: var(--shadow-md);
+
+    /* Subtle lift without being aggressive */
+    transform: translateY(-2px);
+}
+
+/* ─ Active/Focus State ─ */
+.project-card-link:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   TEXT HIERARCHY - Header
+   ────────────────────────────────────────────────────────────────────── */
 
 .project-card-header {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-3);
     margin-bottom: auto;
+    transition:
+        opacity var(--duration-base) var(--ease-smooth),
+        color var(--duration-base) var(--ease-smooth);
 }
 
+/* ─ Project Title - Primary Focus ─ */
 .project-card-title {
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-size: var(--font-size-xl);
     font-weight: 600;
-    color: #1c1917;
+    color: var(--color-text);
     margin: 0;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+
+    transition:
+        color var(--duration-base) var(--ease-smooth),
+        opacity var(--duration-base) var(--ease-smooth);
 }
 
-.project-card-subtitle {
-    font-size: 0.95rem;
-    color: #57534e;
-    line-height: 1.5;
-    margin: 0;
+/* Enhanced on hover */
+.project-card-link:hover .project-card-title {
+    color: var(--color-accent);
 }
+
+/* ─ Project Subtitle / Tagline - Supporting Text ─ */
+.project-card-subtitle {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    margin: 0;
+
+    transition:
+        color var(--duration-base) var(--ease-smooth),
+        opacity var(--duration-base) var(--ease-smooth);
+}
+
+/* Subtle enhancement on hover */
+.project-card-link:hover .project-card-subtitle {
+    color: var(--color-text-secondary);
+    opacity: 0.85;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   METADATA ROW - Year, Category, Info
+   ────────────────────────────────────────────────────────────────────── */
 
 .project-card-meta {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e7e5e4;
-    font-size: 0.85rem;
-    color: #616161;
+    gap: var(--space-3);
+    margin-top: auto;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-tracking);
+    font-weight: 500;
+
+    transition:
+        border-color var(--duration-base) var(--ease-smooth),
+        color var(--duration-base) var(--ease-smooth);
 }
 
+/* Border becomes more visible on hover */
+.project-card-link:hover .project-card-meta {
+    border-top-color: var(--color-text-tertiary);
+    color: var(--color-text-secondary);
+}
+
+/* ─ Individual Metadata Item ─ */
 .project-meta-item {
     display: inline-block;
 }
 
+/* ─ Metadata Divider Dot ─ */
 .project-meta-dot {
-    color: #c9c5c0;
+    color: var(--color-border);
+    font-weight: 300;
+
+    transition: color var(--duration-base) var(--ease-smooth);
 }
+
+.project-card-link:hover .project-meta-dot {
+    color: var(--color-text-tertiary);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   HIGHLIGHT LAYER - Reveals on Hover
+   ────────────────────────────────────────────────────────────────────── */
 
 .project-card-highlight {
     position: absolute;
@@ -122,17 +262,110 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(33, 33, 33, 0.02);
+    background-color: rgba(0, 0, 0, 0.02);
     pointer-events: none;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
+
+    transition:
+        background-color var(--duration-base) var(--ease-smooth),
+        opacity var(--duration-base) var(--ease-smooth);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   DE-EMPHASIS SYSTEM
+   When one project is hovered, others should feel de-emphasized
+   This is handled via Framer Motion in JSX, but CSS provides the foundation
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Optional: Add a muted class for use with JavaScript */
+.project-card.is-muted .project-card-link {
+    opacity: 0.6;
+    border-color: var(--color-border);
+}
+
+.project-card.is-muted .project-card-link:hover {
+    opacity: 0.75;
+    transform: none;
+}
+
+.project-card.is-active .project-card-link {
+    border-color: var(--color-text-tertiary);
+    box-shadow: var(--shadow-md);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   RESPONSIVE BEHAVIOR - Tablet
+   ────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    .project-card-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .project-card-link {
+        padding: var(--space-6);
+    }
 }
 
 @media (max-width: 768px) {
-    .projects-main {
-        padding: clamp(1.5rem, 4vw, 2rem);
-    }
-
     .projects-grid {
         grid-template-columns: 1fr;
     }
+
+    .project-card-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .project-card-link {
+        padding: var(--space-6);
+    }
+
+    /* On mobile, hover state is less pronounced */
+    .project-card-link:active {
+        background-color: var(--color-bg-secondary);
+        border-color: var(--color-text-tertiary);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   ACCESSIBILITY
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .project-card-link,
+    .project-card-title,
+    .project-card-subtitle,
+    .project-card-meta,
+    .project-meta-dot,
+    .project-card-highlight {
+        transition: none;
+    }
+
+    .project-card-link:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: more) {
+    .project-card-link {
+        border-width: 2px;
+    }
+
+    .project-card-link:hover {
+        border-width: 2px;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   DARK MODE
+   ────────────────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] .project-card-link {
+    background-color: var(--color-bg);
+}
+
+[data-theme="dark"] .project-card-link:hover {
+    background-color: var(--color-bg);
 }

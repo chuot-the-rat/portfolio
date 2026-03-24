@@ -1,40 +1,48 @@
-/* src/components/Navigation.css */
+/* Navigation Bar - Using Global Design Tokens */
 
 .navbar {
-    background-color: #fafaf9;
-    border-bottom: 1px solid #e7e5e4;
+    background-color: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: all var(--duration-base) var(--ease-smooth);
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 var(--gutter);
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 70px;
 }
 
+/* Logo */
 .nav-logo {
-    font-size: 1.8rem;
+    font-size: var(--font-size-2xl);
     font-weight: 600;
-    color: #1c1917;
+    color: var(--color-text);
     text-decoration: none;
-    transition: color 0.3s ease;
-    letter-spacing: -0.5px;
+    letter-spacing: var(--letter-spacing-tight);
+    transition: opacity var(--duration-fast) var(--ease-smooth);
+    outline-offset: var(--focus-offset);
 }
 
 .nav-logo:hover {
-    color: #616161;
+    opacity: 0.7;
 }
 
+.nav-logo:focus-visible {
+    outline: var(--focus-ring);
+}
+
+/* Menu */
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: var(--space-8);
     margin: 0;
     padding: 0;
 }
@@ -43,42 +51,49 @@
     margin: 0;
 }
 
+/* Links */
 .nav-link {
     text-decoration: none;
-    color: #57534e;
+    color: var(--color-text-secondary);
     font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.5rem 0;
+    font-size: var(--font-size-sm);
+    padding: var(--space-2) 0;
     border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
+    transition: all var(--duration-fast) var(--ease-smooth);
+    outline-offset: var(--focus-offset);
 }
 
 .nav-link:hover {
-    color: #1c1917;
-    border-bottom-color: #212121;
+    color: var(--color-text);
+    border-bottom-color: var(--color-accent);
+}
+
+.nav-link:focus-visible {
+    outline: var(--focus-ring);
 }
 
 .nav-link.active {
-    color: #1c1917;
-    border-bottom-color: #212121;
+    color: var(--color-text);
+    border-bottom-color: var(--color-accent);
     font-weight: 600;
 }
 
+/* Mobile */
 @media (max-width: 768px) {
     .nav-container {
-        padding: 0 1.5rem;
+        padding: 0 var(--gutter-mobile);
     }
 
     .nav-menu {
-        gap: 1rem;
+        gap: var(--space-6);
     }
 
     .nav-logo {
-        font-size: 1.4rem;
+        font-size: var(--font-size-xl);
     }
 
     .nav-link {
-        font-size: 0.9rem;
-        padding: 0.25rem 0;
+        font-size: var(--font-size-xs);
+        padding: var(--space-1) 0;
     }
 }

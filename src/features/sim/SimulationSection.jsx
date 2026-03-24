@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import { SimulationProvider } from './SimulationProvider.jsx';
 import SimulationPanel from './SimulationPanel.jsx';
 import OutcomeSummary from './OutcomeSummary.jsx';
+import './SimulationSandbox.css';
 
 export default function SimulationSection({ caseIndex, sectionIndex }) {
     const sectionId = `${caseIndex}.${String(sectionIndex).padStart(2, '0')}`;

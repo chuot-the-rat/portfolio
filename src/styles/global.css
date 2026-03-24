@@ -1,0 +1,944 @@
+/* ==========================================================================
+   GLOBAL DESIGN SYSTEM - ENHANCED
+   Minimal, Editorial, Intentional Portfolio Foundation
+   Inspired by Jackie Hu (interaction-rich) + Sharleen Wang (structured)
+   ========================================================================== */
+
+/* ──────────────────────────────────────────────────────────────────────
+   1. TOKENS & VARIABLES (Enhanced)
+   ────────────────────────────────────────────────────────────────────── */
+
+:root {
+    /* ─ Colors ─ */
+    --color-bg: #ffffff;
+    --color-bg-secondary: #fafafa;
+    --color-text: #1a1a1a;
+    --color-text-secondary: #737373;
+    --color-text-tertiary: #a3a3a3;
+    --color-border: #e5e5e5;
+    --color-accent: #212121;
+
+    /* ─ Font Stack ─ */
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Monaco", Consolas, monospace;
+
+    /* ─ Typography Scale ─ */
+    --font-size-xs: 0.6875rem;   /* 11px */
+    --font-size-sm: 0.875rem;    /* 14px */
+    --font-size-base: 1rem;      /* 16px */
+    --font-size-lg: 1.125rem;    /* 18px */
+    --font-size-xl: 1.5rem;      /* 24px */
+    --font-size-2xl: 2rem;       /* 32px */
+    --font-size-3xl: 2.5rem;     /* 40px */
+    --font-size-4xl: 3rem;       /* 48px */
+    --font-size-5xl: 4rem;       /* 64px */
+
+    /* ─ Line Heights ─ */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.6;
+    --line-height-relaxed: 1.8;
+
+    /* ─ Letter Spacing ─ */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-tracking: 0.1em;
+
+    /* ─ Spacing Scale (4px base) ─ */
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-12: 3rem;     /* 48px */
+    --space-16: 4rem;     /* 64px */
+    --space-20: 5rem;     /* 80px */
+    --space-24: 6rem;     /* 96px */
+    --space-32: 8rem;     /* 128px */
+
+    /* ─ Section Spacing Rhythm ─ */
+    --section-spacing-sm: var(--space-12);    /* 48px */
+    --section-spacing-base: var(--space-16);  /* 64px */
+    --section-spacing-lg: var(--space-24);    /* 96px */
+
+    /* ─ Layout ─ */
+    --max-width: 1280px;
+    --max-width-narrow: 900px;
+    --max-width-wide: 1400px;
+    --gutter: var(--space-6);
+    --gutter-mobile: var(--space-4);
+
+    /* ─ Border Radius ─ */
+    --radius-sm: 4px;
+    --radius-base: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 999px;
+
+    /* ─ Transitions & Motion ─ */
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+    --duration-extra-fast: 100ms;
+    --duration-fast: 200ms;
+    --duration-base: 300ms;
+    --duration-slow: 500ms;
+    --duration-slower: 800ms;
+
+    /* ─ Shadows ─ */
+    --shadow-none: none;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
+
+    /* ─ Focus Ring ─ */
+    --focus-color: var(--color-text);
+    --focus-offset: 2px;
+    --focus-ring: 2px solid var(--focus-color);
+
+    /* ─ Animation Components Tokens ─ */
+    --hero-accent-opacity: 0.055;
+    --hero-accent-sat: 0.12;
+    --hero-accent-stroke: 0.55;
+    --hero-accent-cell: 14;
+    --hero-accent-duration: 8000;
+
+    --bc-text: var(--color-text);
+    --bc-bracket: var(--color-text-tertiary);
+    --bc-token: var(--color-text);
+    --bc-scramble: var(--color-text-tertiary);
+    --bc-font: var(--font-mono);
+    --bc-enter-ms: 200ms;
+    --bc-enter-y: 5px;
+    --bracket-opacity: 0.4;
+    --cycler-freeze-ms: 999999999;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    --color-bg: #0a0a0a;
+    --color-bg-secondary: #171717;
+    --color-text: #fafafa;
+    --color-text-secondary: #a3a3a3;
+    --color-text-tertiary: #737373;
+    --color-border: #262626;
+    --color-accent: #fafafa;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   2. RESET & BASE STYLES
+   ────────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    transition:
+        background-color var(--duration-base) var(--ease-smooth),
+        color var(--duration-base) var(--ease-smooth);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   3. TYPOGRAPHY HIERARCHY
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Headings Base */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: var(--space-4);
+}
+
+/* H1 - Page Hero */
+h1 {
+    font-size: var(--font-size-3xl);
+}
+
+/* H2 - Section Title */
+h2 {
+    font-size: var(--font-size-2xl);
+}
+
+/* H3 - Subsection */
+h3 {
+    font-size: var(--font-size-xl);
+}
+
+/* H4 - Small Title */
+h4 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+/* H5, H6 - Metadata / Labels */
+h5,
+h6 {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-tracking);
+    color: var(--color-text-tertiary);
+}
+
+/* Paragraph */
+p {
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-4);
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Links */
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity var(--duration-fast) var(--ease-smooth);
+    outline-offset: var(--focus-offset);
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+a:focus-visible {
+    outline: var(--focus-ring);
+}
+
+/* Strong / Bold */
+strong,
+b {
+    font-weight: 600;
+}
+
+/* Emphasis / Italic */
+em,
+i {
+    font-style: italic;
+}
+
+/* Code */
+code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background-color: var(--color-bg-secondary);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+}
+
+/* Pre / Code Blocks */
+pre {
+    background-color: var(--color-bg-secondary);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    margin-bottom: var(--space-4);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* Lists */
+ul,
+ol {
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-6);
+}
+
+ul,
+ol {
+    list-style-position: outside;
+}
+
+li {
+    margin-bottom: var(--space-2);
+    line-height: var(--line-height-relaxed);
+}
+
+/* Blockquote */
+blockquote {
+    padding-left: var(--space-4);
+    border-left: 3px solid var(--color-accent);
+    margin: var(--space-4) 0;
+    font-style: italic;
+    color: var(--color-text-secondary);
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--space-8) 0;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   4. INTERACTIVE STATES
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Focus Visible - Keyboard Navigation */
+:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+/* Button Base */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+button:disabled,
+input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Input Base */
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   5. LAYOUT UTILITIES
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Container - Main Content Wrapper */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--gutter-mobile);
+    }
+}
+
+/* Container Variants */
+.container--narrow {
+    max-width: var(--max-width-narrow);
+}
+
+.container--wide {
+    max-width: var(--max-width-wide);
+}
+
+.container--full {
+    max-width: 100%;
+}
+
+.container--no-gutter {
+    padding: 0;
+}
+
+/* Section Base */
+section {
+    margin-bottom: var(--section-spacing-base);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   6. REUSABLE COMPONENT PATTERNS
+   ────────────────────────────────────────────────────────────────────── */
+
+/* ─ Button System ─ */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text);
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-smooth);
+    outline-offset: var(--focus-offset);
+}
+
+.button:hover {
+    border-color: var(--color-text);
+    box-shadow: var(--shadow-md);
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+.button:focus-visible {
+    outline: var(--focus-ring);
+}
+
+/* Button Variants */
+.button--primary {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+}
+
+.button--primary:hover {
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+    box-shadow: var(--shadow-lg);
+}
+
+.button--secondary {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border);
+}
+
+.button--secondary:hover {
+    background-color: var(--color-border);
+    border-color: var(--color-text-secondary);
+}
+
+.button--ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--color-text);
+}
+
+.button--ghost:hover {
+    background-color: var(--color-bg-secondary);
+    box-shadow: none;
+}
+
+.button--sm {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-xs);
+}
+
+.button--lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--font-size-base);
+}
+
+/* ─ Badge / Label System ─ */
+
+.badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-tracking);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+}
+
+.badge--accent {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+}
+
+/* ─ Card System ─ */
+
+.card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.card:hover {
+    border-color: var(--color-text-tertiary);
+    box-shadow: var(--shadow-md);
+}
+
+.card--elevated {
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+}
+
+.card--elevated:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.card--compact {
+    padding: var(--space-4);
+}
+
+/* ─ Grid System ─ */
+
+.grid {
+    display: grid;
+    gap: var(--space-8);
+}
+
+.grid--2col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--auto {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (max-width: 768px) {
+    .grid--2col,
+    .grid--3col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─ Flex Utilities ─ */
+
+.flex {
+    display: flex;
+}
+
+.flex--center {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex--between {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex--gap {
+    gap: var(--space-4);
+}
+
+.flex--gap-lg {
+    gap: var(--space-8);
+}
+
+/* ─ Stack Utilities ─ */
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.stack--tight {
+    gap: var(--space-2);
+}
+
+.stack--loose {
+    gap: var(--space-8);
+}
+
+/* ─ Text Utilities ─ */
+
+.text-muted {
+    color: var(--color-text-secondary);
+}
+
+.text-subtle {
+    color: var(--color-text-tertiary);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-sm {
+    font-size: var(--font-size-sm);
+}
+
+.text-xs {
+    font-size: var(--font-size-xs);
+}
+
+.text-lg {
+    font-size: var(--font-size-lg);
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-tracking);
+}
+
+.text-tracking {
+    letter-spacing: var(--letter-spacing-tracking);
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+/* ─ Spacing Utilities ─ */
+
+.mb-0 { margin-bottom: 0; }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+
+.mt-0 { margin-top: 0; }
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+/* ─ Display Utilities ─ */
+
+.hidden {
+    display: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ─ Visibility Utilities ─ */
+
+.invisible {
+    visibility: hidden;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   7. LAYOUT PATTERNS
+   ────────────────────────────────────────────────────────────────────── */
+
+/* ─ Hero Section Pattern ─ */
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-16) var(--gutter);
+    text-align: center;
+}
+
+/* ─ Page Section Pattern ─ */
+
+.page-section {
+    padding: var(--section-spacing-base) 0;
+}
+
+.page-section--lg {
+    padding: var(--section-spacing-lg) 0;
+}
+
+.page-section--sm {
+    padding: var(--section-spacing-sm) 0;
+}
+
+.page-section--header {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.page-section--footer {
+    border-top: 1px solid var(--color-border);
+}
+
+/* ─ Two Column Layout ─ */
+
+.layout-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .layout-2col {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+}
+
+/* ─ Sidebar Layout ─ */
+
+.layout-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--space-12);
+    align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
+    .layout-sidebar {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+}
+
+/* ─ Full Width Section ─ */
+
+.section-full-bleed {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
+    padding-top: var(--section-spacing-base);
+    padding-bottom: var(--section-spacing-base);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   8. DIVIDER & BORDER PATTERNS
+   ────────────────────────────────────────────────────────────────────── */
+
+.divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: var(--section-spacing-base) 0;
+}
+
+.divider--fade {
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--color-border) 20%,
+        var(--color-border) 80%,
+        transparent 100%
+    );
+}
+
+.divider--short {
+    width: 60px;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: var(--space-6) 0;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   9. ANIMATION & MOTION
+   ────────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Scroll Reveal Pattern */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity var(--duration-slow) var(--ease-smooth),
+        transform var(--duration-slow) var(--ease-smooth);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   10. RESPONSIVE UTILITIES
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Hide on Mobile */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none;
+    }
+
+    /* Adjust spacing on mobile */
+    section {
+        margin-bottom: var(--section-spacing-sm);
+    }
+
+    .container {
+        padding: 0 var(--gutter-mobile);
+    }
+}
+
+/* Hide on Desktop */
+@media (min-width: 769px) {
+    .hide-desktop {
+        display: none;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   11. ACCESSIBILITY
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .scroll-reveal {
+        transition: none;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: more) {
+    .button,
+    .card,
+    .badge {
+        border-width: 2px;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   12. DARK MODE ADJUSTMENTS
+   ────────────────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] .card {
+    background-color: var(--color-bg);
+}
+
+[data-theme="dark"] .badge {
+    background-color: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .button--secondary {
+    background-color: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] blockquote {
+    border-left-color: var(--color-accent);
+}
