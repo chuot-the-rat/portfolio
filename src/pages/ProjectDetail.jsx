@@ -14,6 +14,7 @@ import {
 } from "../components/MicroIndex";
 import EvolutionSection from "../components/EvolutionSection";
 import FigmaEmbed from "../components/FigmaEmbed";
+import SimulationSection from "../features/sim/SimulationSection";
 import "./ProjectDetail.css";
 
 const ProjectDetail = () => {
@@ -1942,6 +1943,14 @@ const ProjectContentMain = ({ project }) => {
                         </motion.section>
                     );
                 })()}
+
+            {/* ── Simulation Mode (InkLink only) ── */}
+            {project.id === "inklink" && (
+                <SimulationSection
+                    caseIndex={ci}
+                    sectionIndex={nextSection()}
+                />
+            )}
         </div>
     );
 };
