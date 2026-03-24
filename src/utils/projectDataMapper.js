@@ -392,10 +392,6 @@ export const getProjectById = (id) => {
     // Transform and return (includes the case study index for numbering)
     return caseStudy ? mapCaseStudyToProject(caseStudy, caseStudyIndex) : null;
 };
-
-    return {
-        // Core metadata
-        id: caseStudy.id,
         slug: caseStudy.slug,
         caseIndex: index + 1, // 1-based case study index for micro-index system
         title: caseStudy.title,
