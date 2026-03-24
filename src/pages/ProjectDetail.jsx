@@ -146,68 +146,74 @@ const ProjectDetail = () => {
                         {/* Header CTAs */}
                         {(project.links?.live || project.links?.prototype) && (
                             <div className="project-hero-ctas">
-                            {project.links?.live && (
-                                <motion.a
-                                    href={project.links.live}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="project-cta-link"
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.4, delay: 0.3 }}
-                                    whileHover={{
-                                        y: -2,
-                                        transition: { duration: 0.2 },
-                                    }}
-                                >
-                                    <span>Visit Live Site</span>
-                                    <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 16 16"
-                                        fill="none"
+                                {project.links?.live && (
+                                    <motion.a
+                                        href={project.links.live}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="project-cta-link"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            duration: 0.4,
+                                            delay: 0.3,
+                                        }}
+                                        whileHover={{
+                                            y: -2,
+                                            transition: { duration: 0.2 },
+                                        }}
                                     >
-                                        <path
-                                            d="M6 3h7v7M13 3L3 13"
-                                            stroke="currentColor"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </motion.a>
-                            )}
-                            {project.links?.prototype && (
-                                <motion.a
-                                    href={project.links.prototype}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="project-cta-link secondary"
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.4, delay: 0.4 }}
-                                    whileHover={{
-                                        y: -2,
-                                        transition: { duration: 0.2 },
-                                    }}
-                                >
-                                    <span>Try Prototype</span>
-                                    <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 16 16"
-                                        fill="none"
+                                        <span>Visit Live Site</span>
+                                        <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 16 16"
+                                            fill="none"
+                                        >
+                                            <path
+                                                d="M6 3h7v7M13 3L3 13"
+                                                stroke="currentColor"
+                                                strokeWidth="1.5"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
+                                    </motion.a>
+                                )}
+                                {project.links?.prototype && (
+                                    <motion.a
+                                        href={project.links.prototype}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="project-cta-link secondary"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            duration: 0.4,
+                                            delay: 0.4,
+                                        }}
+                                        whileHover={{
+                                            y: -2,
+                                            transition: { duration: 0.2 },
+                                        }}
                                     >
-                                        <path
-                                            d="M4 2l10 6-10 6V2z"
-                                            stroke="currentColor"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </motion.a>
-                            )}
+                                        <span>Try Prototype</span>
+                                        <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 16 16"
+                                            fill="none"
+                                        >
+                                            <path
+                                                d="M4 2l10 6-10 6V2z"
+                                                stroke="currentColor"
+                                                strokeWidth="1.5"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
+                                    </motion.a>
+                                )}
                             </div>
                         )}
                     </div>
@@ -1884,7 +1890,6 @@ const ProjectContentMain = ({ project }) => {
             {project.evolution && (
                 <EvolutionSection evolution={project.evolution} />
             )}
-
 
             {/* Impact */}
             {project.outcomes &&
