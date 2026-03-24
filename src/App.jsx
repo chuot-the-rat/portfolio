@@ -13,6 +13,7 @@
  * - /projects/:id: Individual case study detail page
  * - /design/:slug: Standalone design projects (each has own data.json)
  * - /about: About page
+ * - /resume: Resume page with embedded Adobe InDesign
  * - *: 404 catch-all for unknown routes
  *
  * Project types tracked here:
@@ -27,6 +28,7 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
 
 // Project detail pages (existing)
@@ -67,6 +69,11 @@ function App() {
                 <Route
                     path="/about"
                     element={<About />}
+                />
+
+                <Route
+                    path="/resume"
+                    element={<Resume />}
                 />
 
                 {/* ─── CASE STUDY PROJECTS ─── */}
