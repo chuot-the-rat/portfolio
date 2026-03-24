@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# History and documentation tracking files
+.history/
+.claude/
+*_COMPLETE.md
+*_SUMMARY.md
+*_LOG.md
+*_GUIDE.md
+*_REFERENCE.md
+*_REFACTOR.md
+*_TOKENS.md
+deep-research-report.md
+PUNCHUP.md
