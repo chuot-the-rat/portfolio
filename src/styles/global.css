@@ -53,7 +53,6 @@ body {
     }
 }
 
-
 /* ──────────────────────────────────────────────────────────────────────
    4. INTERACTIVE STATES
    ────────────────────────────────────────────────────────────────────── */
@@ -217,7 +216,7 @@ section {
     display: inline-flex;
     align-items: center;
     gap: 0.55em;
-    padding: calc(var(--space-fluid-xs) + 0.10rem) var(--space-fluid-s);
+    padding: calc(var(--space-fluid-xs) + 0.1rem) var(--space-fluid-s);
     border-radius: 999px; /* pill: "object" feel */
     font-family: var(--font-mono);
     letter-spacing: var(--letter-spacing-micro);
@@ -272,10 +271,10 @@ section {
 /* Tighter tracking for tags/buttons */
 .micro {
     font-family: var(--font-mono);
-    font-size: 0.80em;
+    font-size: 0.8em;
     letter-spacing: var(--letter-spacing-micro);
     text-transform: uppercase;
-    opacity: 0.80;
+    opacity: 0.8;
 }
 
 /* ─ Layout Primitives: Vertical Rhythm ─ */
@@ -443,21 +442,47 @@ section {
 
 /* ─ Spacing Utilities ─ */
 
-.mb-0 { margin-bottom: 0; }
-.mb-2 { margin-bottom: var(--space-2); }
-.mb-4 { margin-bottom: var(--space-4); }
-.mb-6 { margin-bottom: var(--space-6); }
-.mb-8 { margin-bottom: var(--space-8); }
+.mb-0 {
+    margin-bottom: 0;
+}
+.mb-2 {
+    margin-bottom: var(--space-2);
+}
+.mb-4 {
+    margin-bottom: var(--space-4);
+}
+.mb-6 {
+    margin-bottom: var(--space-6);
+}
+.mb-8 {
+    margin-bottom: var(--space-8);
+}
 
-.mt-0 { margin-top: 0; }
-.mt-2 { margin-top: var(--space-2); }
-.mt-4 { margin-top: var(--space-4); }
-.mt-6 { margin-top: var(--space-6); }
-.mt-8 { margin-top: var(--space-8); }
+.mt-0 {
+    margin-top: 0;
+}
+.mt-2 {
+    margin-top: var(--space-2);
+}
+.mt-4 {
+    margin-top: var(--space-4);
+}
+.mt-6 {
+    margin-top: var(--space-6);
+}
+.mt-8 {
+    margin-top: var(--space-8);
+}
 
-.gap-4 { gap: var(--space-4); }
-.gap-6 { gap: var(--space-6); }
-.gap-8 { gap: var(--space-8); }
+.gap-4 {
+    gap: var(--space-4);
+}
+.gap-6 {
+    gap: var(--space-6);
+}
+.gap-8 {
+    gap: var(--space-8);
+}
 
 /* ─ Display Utilities ─ */
 

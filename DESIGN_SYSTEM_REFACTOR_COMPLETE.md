@@ -7,6 +7,7 @@ Successfully implemented **STEP 3 & 4** of the hard design system enforcement:
 ### STEP 3: Created Dedicated CSS Files ✅
 
 **1. `/src/styles/variables.css` (14KB)**
+
 - Complete CSS custom properties extraction
 - **COLOR TOKENS:** Background, text, borders, accent colors
 - **FONT STACKS:** Three-voice system (body/display/mono)
@@ -19,6 +20,7 @@ Successfully implemented **STEP 3 & 4** of the hard design system enforcement:
 - **DARK MODE:** Complete color overrides in `[data-theme="dark"]`
 
 **2. `/src/styles/typography.css` (12KB)**
+
 - Complete typographic hierarchy (h1–h6)
 - **HEADING HIERARCHY:** h1/h2 use display font (Georgia); h3+ use sans
 - **BODY TEXT:** Paragraph styling with optimal line-height
@@ -31,11 +33,12 @@ Successfully implemented **STEP 3 & 4** of the hard design system enforcement:
 - **DARK MODE:** Code block and blockquote adjustments
 
 **3. Updated `/src/styles/global.css` (19KB)**
+
 - Added imports at top:
-  ```css
-  @import "./variables.css";
-  @import "./typography.css";
-  ```
+    ```css
+    @import "./variables.css";
+    @import "./typography.css";
+    ```
 - Removed duplicate token definitions (moved to variables.css)
 - Removed duplicate typography rules (moved to typography.css)
 - Retained all layout utilities, component patterns, animations
@@ -45,6 +48,7 @@ Successfully implemented **STEP 3 & 4** of the hard design system enforcement:
 ### STEP 4: Systematically Replaced Hardcoded Values ✅
 
 **`/src/pages/Home.css` - 10 replacements:**
+
 - `--hero-system-label` font from "Courier New" → `var(--font-mono)`
 - `--hero-system-label` size from `0.6875rem` → `var(--font-size-xs)`
 - `--hero-primary-cta` padding from `1rem 2rem` → `var(--space-4) var(--space-8)`
@@ -67,11 +71,13 @@ Successfully implemented **STEP 3 & 4** of the hard design system enforcement:
 - `.footer-link` font-size from `0.8125rem` → `var(--font-size-sm)`
 
 **`/src/pages/Projects.css` - 3 replacements:**
+
 - `.project-card-link:hover` box-shadow from `0 8px 20px...` → `var(--shadow-lg)`
 - `.project-card.is-active` box-shadow from `0 8px 20px...` → `var(--shadow-lg)`
 - `[data-theme="dark"] .project-card-link:hover` box-shadow from rgba(255,255,255...) → `var(--shadow-lg)`
 
 **`/src/pages/ProjectDetail.css`**
+
 - Already well-structured with proper tokens (no hardcoded px values to fix)
 
 ---
@@ -106,25 +112,30 @@ Imported in:
 ## Design System Tokens Reference
 
 ### Typography
+
 - **Display Font**: `var(--font-display)` = Georgia serif (h1, h2)
 - **Body Font**: `var(--font-sans)` = Inter sans-serif (default)
 - **Mono Font**: `var(--font-mono)` = SF Mono monospace (code, labels)
 
 ### Spacing
+
 - **Fixed**: `--space-1` through `--space-32` (4px base)
 - **Fluid**: `--space-fluid-2xs` through `--space-fluid-2xl` (Utopia clamp)
 - **Sections**: `--section-spacing-sm/base/lg` (48px–96px)
 
 ### Colors
+
 - **Background**: `--color-bg` (white), `--color-bg-secondary` (off-white)
 - **Text**: `--color-text` (primary), `--color-text-secondary`, `--color-text-tertiary`
 - **Accents**: `--color-accent` (dark gray), `--color-border`
 
 ### Motion
+
 - **Easing**: `--ease-smooth`, `--ease-out-quad` (snappy, Jackie-approved)
 - **Duration**: `--dur-1` (120ms), `--dur-2` (220ms), `--dur-3` (360ms)
 
 ### Shadows
+
 - `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-xl` (elevation)
 
 ---
@@ -152,22 +163,24 @@ Imported in:
 ## How to Use the Design System
 
 **For CSS developers:**
+
 ```css
 /* Use tokens, never hardcode */
 .button {
-    padding: var(--space-4) var(--space-8);        /* ✅ Good */
-    font-size: var(--font-size-sm);                /* ✅ Good */
-    background: var(--color-accent);               /* ✅ Good */
+    padding: var(--space-4) var(--space-8); /* ✅ Good */
+    font-size: var(--font-size-sm); /* ✅ Good */
+    background: var(--color-accent); /* ✅ Good */
 }
 
 .button:hover {
-    box-shadow: var(--shadow-lg);                  /* ✅ Good */
-    transform: translateY(-2px);                   /* ✅ Good */
-    transition: all var(--dur-2) var(--ease-out-quad);  /* ✅ Good */
+    box-shadow: var(--shadow-lg); /* ✅ Good */
+    transform: translateY(-2px); /* ✅ Good */
+    transition: all var(--dur-2) var(--ease-out-quad); /* ✅ Good */
 }
 ```
 
 **For React developers:**
+
 ```jsx
 // Apply semantic classes instead of inline styles
 <h1>Hero Title</h1>           {/* Uses h1 { font-family: var(--font-display); } */}
@@ -191,8 +204,8 @@ Imported in:
 ## Next Steps (When Ready)
 
 Run step 5 to rewrite components with full code outputs:
+
 ```bash
 npm run dev  # Start dev server
 npm run build  # Verify production build
 ```
-

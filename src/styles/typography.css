@@ -206,10 +206,10 @@ hr {
 /* Tighter tracking for tags, buttons, and compact labels */
 .micro {
     font-family: var(--font-mono);
-    font-size: 0.80em;
+    font-size: 0.8em;
     letter-spacing: var(--letter-spacing-micro);
     text-transform: uppercase;
-    opacity: 0.80;
+    opacity: 0.8;
 }
 
 /* ──────────────────────────────────────────────────────────────────────

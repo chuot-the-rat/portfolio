@@ -28,14 +28,15 @@ Your portfolio's design system has been strategically upgraded from **clean but 
 **What:** Three distinct font roles that create editorial hierarchy
 
 ```css
---font-body: "Inter", system-ui, sans-serif;      /* Neutral, readable */
---font-display: "Georgia", ui-serif, serif;       /* Distinctive, high-attention */
---font-mono: ui-monospace, "SF Mono", ...;        /* Technical, metadata */
+--font-body: "Inter", system-ui, sans-serif; /* Neutral, readable */
+--font-display: "Georgia", ui-serif, serif; /* Distinctive, high-attention */
+--font-mono: ui-monospace, "SF Mono", ...; /* Technical, metadata */
 ```
 
 **Why:** Matches the research finding that Jackie's portfolio uses "mono + display pairing" for character. Your body stays interpolar Inter; headers now use Georgia (distinctive serif); metadata uses mono.
 
 **Applied to:**
+
 - `h1, h2` now use `--font-display` (serif for editorial feel)
 - `h3` stays `--font-sans` (body hierarchy)
 - Metadata/labels use `--font-mono` (technical UI signal)
@@ -46,12 +47,12 @@ Your portfolio's design system has been strategically upgraded from **clean but 
 
 ```css
 --space-fluid-2xs: clamp(0.25rem, 0.15vw + 0.22rem, 0.35rem);
---space-fluid-xs:  clamp(0.50rem, 0.30vw + 0.42rem, 0.70rem);
---space-fluid-s:   clamp(0.75rem, 0.55vw + 0.62rem, 1.05rem);
---space-fluid-m:   clamp(1.00rem, 0.85vw + 0.75rem, 1.50rem);
---space-fluid-l:   clamp(1.50rem, 1.40vw + 1.05rem, 2.25rem);
---space-fluid-xl:  clamp(2.00rem, 2.20vw + 1.25rem, 3.25rem);
---space-fluid-2xl: clamp(3.00rem, 3.60vw + 1.60rem, 5.00rem);
+--space-fluid-xs: clamp(0.5rem, 0.3vw + 0.42rem, 0.7rem);
+--space-fluid-s: clamp(0.75rem, 0.55vw + 0.62rem, 1.05rem);
+--space-fluid-m: clamp(1rem, 0.85vw + 0.75rem, 1.5rem);
+--space-fluid-l: clamp(1.5rem, 1.4vw + 1.05rem, 2.25rem);
+--space-fluid-xl: clamp(2rem, 2.2vw + 1.25rem, 3.25rem);
+--space-fluid-2xl: clamp(3rem, 3.6vw + 1.6rem, 5rem);
 ```
 
 **Why:** Implements the Utopia "fluid space palette" pattern from the research. Desktop gets generous spacing; mobile stays readable. No `@media` breakpoints needed for these.
@@ -63,8 +64,8 @@ Your portfolio's design system has been strategically upgraded from **clean but 
 **What:** Two new tracking levels for labels and UI
 
 ```css
---letter-spacing-label: 0.22em;   /* Wide "P r o d u c t D e s i g n" energy */
---letter-spacing-micro: 0.12em;   /* Buttons, tags */
+--letter-spacing-label: 0.22em; /* Wide "P r o d u c t D e s i g n" energy */
+--letter-spacing-micro: 0.12em; /* Buttons, tags */
 ```
 
 **Why:** Research identifies Jackie's use of "spaced letters for identity labels" as a key design signal. Wide tracking creates "UI affordance" that something is metadata/secondary.
@@ -74,10 +75,10 @@ Your portfolio's design system has been strategically upgraded from **clean but 
 **What:** More precise easing curves and durations for snappy, intentional motion
 
 ```css
---ease-out-quad: cubic-bezier(0.16, 1, 0.3, 1);  /* Snappy, playful */
---dur-1: 120ms;   /* Quick feedback */
---dur-2: 220ms;   /* Standard interaction */
---dur-3: 360ms;   /* Reveal/preview */
+--ease-out-quad: cubic-bezier(0.16, 1, 0.3, 1); /* Snappy, playful */
+--dur-1: 120ms; /* Quick feedback */
+--dur-2: 220ms; /* Standard interaction */
+--dur-3: 360ms; /* Reveal/preview */
 ```
 
 **Why:** Research emphasizes "motion as reinforcement" not "animation for animation's sake". Shorter durations (120ms/220ms) create snappier feel vs your previous 300ms baseline.
@@ -87,8 +88,8 @@ Your portfolio's design system has been strategically upgraded from **clean but 
 **What:** Fluid container padding + editorial reading width
 
 ```css
---container-max: 72rem;                          /* 1152px */
---container-pad: clamp(1rem, 3.5vw, 2.5rem);    /* Responsive padding */
+--container-max: 72rem; /* 1152px */
+--container-pad: clamp(1rem, 3.5vw, 2.5rem); /* Responsive padding */
 ```
 
 **Why:** Editorial containers have specific optimal reading width. Combined with fluid padding, layouts feel spacious on desktop, tight but readable on mobile.
@@ -98,9 +99,21 @@ Your portfolio's design system has been strategically upgraded from **clean but 
 **What:** Updated heading styles to use display font and stronger weights
 
 ```css
-h1 { font-family: var(--font-display); font-size: var(--font-size-3xl); font-weight: 700; }
-h2 { font-family: var(--font-display); font-size: var(--font-size-2xl); font-weight: 600; }
-h3 { font-family: var(--font-sans);    font-size: var(--font-size-xl);  font-weight: 700; }
+h1 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+}
+h2 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+}
+h3 {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
 ```
 
 **Why:** H1/H2 now visually distinctive (serif display font). H3 stays sans but increased weight. Creates clear hierarchy without overusing fonts.
@@ -109,12 +122,15 @@ h3 { font-family: var(--font-sans);    font-size: var(--font-size-xl);  font-wei
 
 **Before:** Plain links, opacity hover only
 **After:**
+
 ```css
 a {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.18em;
-    transition: text-decoration-thickness var(--dur-2) var(--ease-out-quad), ...;
+    transition:
+        text-decoration-thickness var(--dur-2) var(--ease-out-quad),
+        ...;
 }
 
 a:hover {
@@ -129,16 +145,18 @@ a:hover {
 **What:** Reusable semantic classes for metadata styling
 
 ```css
-.meta, .kicker, .eyebrow {
+.meta,
+.kicker,
+.eyebrow {
     font-family: var(--font-mono);
     font-size: var(--font-size-sm);
-    letter-spacing: var(--letter-spacing-label);   /* Wide tracking */
+    letter-spacing: var(--letter-spacing-label); /* Wide tracking */
     text-transform: uppercase;
     opacity: 0.78;
 }
 
 .micro {
-    letter-spacing: var(--letter-spacing-micro);   /* Tighter */
+    letter-spacing: var(--letter-spacing-micro); /* Tighter */
 }
 ```
 
@@ -150,12 +168,20 @@ a:hover {
 
 ```css
 /* Vertical rhythm stacking */
-.stack > * + * { margin-top: var(--space-fluid-m); }
-.stack-tight > * + * { margin-top: var(--space-fluid-s); }
-.stack-loose > * + * { margin-top: var(--space-fluid-l); }
+.stack > * + * {
+    margin-top: var(--space-fluid-m);
+}
+.stack-tight > * + * {
+    margin-top: var(--space-fluid-s);
+}
+.stack-loose > * + * {
+    margin-top: var(--space-fluid-l);
+}
 
 /* Editorial reading width */
-.prose { max-width: 68ch; }
+.prose {
+    max-width: 68ch;
+}
 ```
 
 **Why:** Implements Every Layout's "Stack" pattern. Ensures consistent vertical rhythm without manual spacing. `.prose` for case studies/about pages (65-75 characters is proven optimal reading width).
@@ -167,12 +193,14 @@ a:hover {
 ```css
 .btn {
     display: inline-flex;
-    padding: calc(var(--space-fluid-xs) + 0.10rem) var(--space-fluid-s);
-    border-radius: 999px;  /* Pill: "object" feel */
+    padding: calc(var(--space-fluid-xs) + 0.1rem) var(--space-fluid-s);
+    border-radius: 999px; /* Pill: "object" feel */
     font-family: var(--font-mono);
     letter-spacing: var(--letter-spacing-micro);
     text-transform: uppercase;
-    transition: transform var(--dur-2) var(--ease-out-quad), ...;
+    transition:
+        transform var(--dur-2) var(--ease-out-quad),
+        ...;
 }
 
 .btn:hover {
@@ -193,7 +221,10 @@ a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
 }
 ```
 
@@ -220,7 +251,9 @@ a:hover {
 
 /* Mobile: don't punish touch users */
 @media (max-width: 768px) {
-    .projects-grid:hover .project-card-link { opacity: 1; }
+    .projects-grid:hover .project-card-link {
+        opacity: 1;
+    }
 }
 ```
 
@@ -229,6 +262,7 @@ a:hover {
 ### 2.2 Combined with Existing Hover States
 
 The de-emphasis layer sits ON TOP of your existing hover states:
+
 - De-emphasized cards still show color/border/shadow on individual hover (just faded)
 - Featured card when hovered: full opacity + original hover effects (most prominent)
 
@@ -266,7 +300,7 @@ Design Tokens
 
 ### PRESERVED
 
-✅ Existing color system (--color-*)
+✅ Existing color system (--color-\*)
 ✅ Fixed spacing scale (--space-1 through --space-32)
 ✅ All motion and animations (Framer Motion)
 ✅ Component structure (no JSX changes)
@@ -294,6 +328,7 @@ Design Tokens
 ## How to Use the New System
 
 ### Typography
+
 ```html
 <!-- Body text -->
 <p>Regular paragraph text...</p>
@@ -310,37 +345,44 @@ Design Tokens
 ```
 
 ### Spacing & Layout
+
 ```html
 <!-- Vertical rhythm -->
 <div class="stack">
-  <h2>Section</h2>
-  <p>Content...</p>
-  <p>More content...</p>
+    <h2>Section</h2>
+    <p>Content...</p>
+    <p>More content...</p>
 </div>
 
 <!-- Editorial reading width -->
 <article class="prose">
-  <p>Long-form case study content...</p>
+    <p>Long-form case study content...</p>
 </article>
 
 <!-- Responsive container -->
 <div class="container">
-  <div class="stack">
-    <!-- Content -->
-  </div>
+    <div class="stack">
+        <!-- Content -->
+    </div>
 </div>
 ```
 
 ### Buttons
+
 ```html
 <!-- Refined CTA button -->
-<a href="/projects" class="btn">Explore Work</a>
+<a
+    href="/projects"
+    class="btn"
+    >Explore Work</a
+>
 
 <!-- Or traditional button -->
 <button class="btn">Action</button>
 ```
 
 ### Links
+
 ```html
 <!-- Links automatically get designed underlines + hover -->
 <a href="/about">Learn more about me</a>
@@ -351,18 +393,21 @@ Design Tokens
 ## Responsive Behavior
 
 ### Desktop (1200px+)
+
 - Fluid spacing: generous breathing room
 - Hover dominance: projects grid dims non-hovered cards
 - Display font: prominent on headings
 - Container: wide, airy
 
 ### Tablet (768-1200px)
+
 - Fluid spacing: moderate breathing
 - Hover dominance: still active
 - Reading width: containers adjust
 - Type scale: responsive via clamp()
 
 ### Mobile (<768px)
+
 - Fluid spacing: tight but readable
 - Hover dominance: DISABLED (touch users)
 - Type scale: smaller but readable
@@ -419,11 +464,11 @@ But **you don't need these now**. The CSS foundation is solid and clean. Enhance
 
 ## Files Changed & Status
 
-| File | Changes | Status |
-|------|---------|--------|
-| `src/styles/global.css` | +170 lines (typography roles, fluid spacing, label classes, layout primitives, refined buttons) | ✅ Complete |
-| `src/pages/Projects.css` | +15 lines (hover dominance pattern, mobile override) | ✅ Complete |
-| Build | 489 modules, 3.28s | ✅ Successful |
+| File                     | Changes                                                                                         | Status        |
+| ------------------------ | ----------------------------------------------------------------------------------------------- | ------------- |
+| `src/styles/global.css`  | +170 lines (typography roles, fluid spacing, label classes, layout primitives, refined buttons) | ✅ Complete   |
+| `src/pages/Projects.css` | +15 lines (hover dominance pattern, mobile override)                                            | ✅ Complete   |
+| Build                    | 489 modules, 3.28s                                                                              | ✅ Successful |
 
 ---
 

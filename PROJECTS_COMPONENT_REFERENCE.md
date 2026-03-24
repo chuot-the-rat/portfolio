@@ -6,6 +6,7 @@
 **Styling:** `/src/pages/Projects.css` (493 lines)
 
 The Projects component demonstrates:
+
 1. **Hover Dominance Pattern** (non-hovered cards fade to 38% opacity)
 2. **Asymmetrical Grid** (featured projects are larger)
 3. **Strong Visual Hierarchy** (shadows, lifts, typography strengthening)
@@ -16,11 +17,13 @@ The Projects component demonstrates:
 ## Data Loading Flow
 
 ### Step 1: Get Case Studies
+
 ```javascript
-const caseStudyProjects = getAllProjects();  // From centralized mapper
+const caseStudyProjects = getAllProjects(); // From centralized mapper
 ```
 
 ### Step 2: Fetch Master Projects List
+
 ```javascript
 fetch("/projects.json")
     .then((res) => res.json())
@@ -28,16 +31,18 @@ fetch("/projects.json")
 ```
 
 ### Step 3: Merge Case Studies with Metadata
+
 ```javascript
 const caseStudyCards = await Promise.all(
     caseStudyProjects.map(async (project) => {
         const projectMeta = projectsList.find((p) => p.id === project.id) || {};
-        return { ...projectMeta, ...project };  // Combine data
-    })
+        return { ...projectMeta, ...project }; // Combine data
+    }),
 );
 ```
 
 ### Step 4: Load Standalone Projects
+
 ```javascript
 const standaloneCards = await Promise.all(
     standaloneEntries.map(async (entry) => {
@@ -45,16 +50,14 @@ const standaloneCards = await Promise.all(
         if (!res.ok) return null;
         const data = await res.json();
         return { ...entry, ...data };
-    })
+    }),
 );
 ```
 
 ### Step 5: Combine & Display
+
 ```javascript
-setProjects([
-    ...caseStudyCards,
-    ...standaloneCards.filter(Boolean),
-]);
+setProjects([...caseStudyCards, ...standaloneCards.filter(Boolean)]);
 ```
 
 ---
@@ -62,8 +65,10 @@ setProjects([
 ## JSX Structure
 
 ### Hero Section
+
 ```jsx
-<motion.section className="projects-hero"
+<motion.section
+    className="projects-hero"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
@@ -76,9 +81,10 @@ setProjects([
 ```
 
 **CSS:**
+
 ```css
 .projects-title {
-    font-size: var(--font-size-4xl);        /* 48px */
+    font-size: var(--font-size-4xl); /* 48px */
     font-weight: 700;
     color: var(--color-text);
     margin-bottom: var(--space-6);
@@ -97,27 +103,29 @@ setProjects([
 ---
 
 ### Loading State
+
 ```jsx
-{loading ? (
-    <div className="projects-loading">
-        <motion.div
-            className="loading-spinner"
-            animate={{ rotate: 360 }}
-            transition={{
-                duration: 1,
-                repeat: Infinity,
-                ease: "linear",
-            }}
-        />
-    </div>
-) : (
-    <section className="projects-grid">
-        {/* Grid renders here */}
-    </section>
-)}
+{
+    loading ? (
+        <div className="projects-loading">
+            <motion.div
+                className="loading-spinner"
+                animate={{ rotate: 360 }}
+                transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    ease: "linear",
+                }}
+            />
+        </div>
+    ) : (
+        <section className="projects-grid">{/* Grid renders here */}</section>
+    );
+}
 ```
 
 **CSS:**
+
 ```css
 .projects-loading {
     display: flex;
@@ -141,10 +149,14 @@ setProjects([
 ### Projects Grid Layout
 
 #### Grid Container
+
 ```jsx
 <section className="projects-grid">
     {projects.map((project, index) => (
-        <motion.div key={project.id} className="project-card">
+        <motion.div
+            key={project.id}
+            className="project-card"
+        >
             {/* Card content */}
         </motion.div>
     ))}
@@ -152,28 +164,30 @@ setProjects([
 ```
 
 **CSS:**
+
 ```css
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-16);                   /* 64px gap */
+    gap: var(--space-16); /* 64px gap */
     width: 100%;
     margin-top: var(--section-spacing-lg);
 }
 ```
 
 #### Asymmetrical Sizing
+
 ```css
 /* Featured project (first) — LARGE */
 .project-card:first-child {
     grid-column: 1 / 2;
-    grid-row: span 2;                       /* Takes 2 vertical spaces */
+    grid-row: span 2; /* Takes 2 vertical spaces */
 }
 
 /* Third project — also featured */
 .project-card:nth-child(3) {
     grid-column: 2;
-    grid-row: 1 / 3;                        /* Takes 2 vertical spaces */
+    grid-row: 1 / 3; /* Takes 2 vertical spaces */
 }
 
 /* Larger screens get 3-column layout */
@@ -183,8 +197,8 @@ setProjects([
     }
 
     .project-card:first-child {
-        grid-column: span 2;                /* Spans 2 columns */
-        grid-row: span 2;                   /* Spans 2 rows */
+        grid-column: span 2; /* Spans 2 columns */
+        grid-row: span 2; /* Spans 2 rows */
     }
 }
 ```
@@ -194,6 +208,7 @@ setProjects([
 ### Individual Project Card
 
 #### Card Container
+
 ```jsx
 <motion.div
     key={project.id}
@@ -211,19 +226,24 @@ setProjects([
 ```
 
 #### Card Link
+
 ```jsx
-<Link to={getProjectPath(project.id)} className="project-card-link">
+<Link
+    to={getProjectPath(project.id)}
+    className="project-card-link"
+>
     {/* Card content */}
 </Link>
 ```
 
 **CSS:**
+
 ```css
 .project-card-link {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: var(--space-8);                /* 32px padding */
+    padding: var(--space-8); /* 32px padding */
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -247,21 +267,20 @@ setProjects([
 
 /* Hover state — STRONG elevation */
 .project-card-link:hover {
-    background-color: var(--color-bg-secondary);  /* White → off-white */
-    border-color: var(--color-text-secondary);    /* Darker border */
-    box-shadow: var(--shadow-lg);                 /* Strong shadow */
-    transform: translateY(-4px);                  /* Lift up */
+    background-color: var(--color-bg-secondary); /* White → off-white */
+    border-color: var(--color-text-secondary); /* Darker border */
+    box-shadow: var(--shadow-lg); /* Strong shadow */
+    transform: translateY(-4px); /* Lift up */
 }
 ```
 
 ---
 
 ### Card Header (Title + Subtitle)
+
 ```jsx
 <div className="project-card-header">
-    <h3 className="project-card-title">
-        {project.title}
-    </h3>
+    <h3 className="project-card-title">{project.title}</h3>
     {(project.subtitle || project.tagline) && (
         <p className="project-card-subtitle">
             {project.subtitle || project.tagline}
@@ -271,16 +290,17 @@ setProjects([
 ```
 
 **CSS:**
+
 ```css
 .project-card-header {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);                    /* 16px gap */
-    margin-bottom: auto;                    /* Push metadata to bottom */
+    gap: var(--space-4); /* 16px gap */
+    margin-bottom: auto; /* Push metadata to bottom */
 }
 
 .project-card-title {
-    font-size: var(--font-size-xl);         /* 24px */
+    font-size: var(--font-size-xl); /* 24px */
     font-weight: 600;
     color: var(--color-text);
     margin: 0;
@@ -296,7 +316,7 @@ setProjects([
 /* Title strengthens on hover */
 .project-card-link:hover .project-card-title {
     color: var(--color-accent);
-    font-weight: 700;                       /* 600 → 700 */
+    font-weight: 700; /* 600 → 700 */
 }
 
 /* Featured project titles are larger */
@@ -309,7 +329,7 @@ setProjects([
 }
 
 .project-card-subtitle {
-    font-size: var(--font-size-base);       /* 16px */
+    font-size: var(--font-size-base); /* 16px */
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
     margin: 0;
@@ -320,7 +340,7 @@ setProjects([
 }
 
 .project-card-link:hover .project-card-subtitle {
-    color: var(--color-text);               /* Darkens on hover */
+    color: var(--color-text); /* Darkens on hover */
     opacity: 0.9;
 }
 ```
@@ -328,34 +348,30 @@ setProjects([
 ---
 
 ### Card Metadata (Category · Year)
+
 ```jsx
 <div className="project-card-meta">
     {project.category && (
         <>
-            <span className="project-meta-item">
-                {project.category}
-            </span>
+            <span className="project-meta-item">{project.category}</span>
             <span className="project-meta-dot">·</span>
         </>
     )}
-    {project.year && (
-        <span className="project-meta-item">
-            {project.year}
-        </span>
-    )}
+    {project.year && <span className="project-meta-item">{project.year}</span>}
 </div>
 ```
 
 **CSS:**
+
 ```css
 .project-card-meta {
     display: flex;
     align-items: center;
-    gap: var(--space-4);                    /* 16px gap */
-    margin-top: auto;                       /* Push to bottom */
-    padding-top: var(--space-6);            /* 24px top */
+    gap: var(--space-4); /* 16px gap */
+    margin-top: auto; /* Push to bottom */
+    padding-top: var(--space-6); /* 24px top */
     border-top: 1px solid var(--color-border);
-    font-size: var(--font-size-xs);         /* 11px */
+    font-size: var(--font-size-xs); /* 11px */
     color: var(--color-text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -390,26 +406,28 @@ setProjects([
 ### How It Works
 
 **In CSS:**
+
 ```css
 /* All cards fade when grid is hovered */
 .projects-grid:hover .project-card-link {
-    opacity: 0.38;                          /* De-emphasize */
+    opacity: 0.38; /* De-emphasize */
 }
 
 /* Except the card being hovered becomes "the object" */
 .project-card:hover .project-card-link {
-    opacity: 1;                             /* Re-emphasize */
+    opacity: 1; /* Re-emphasize */
 }
 
 /* Mobile: don't punish touch users */
 @media (max-width: 768px) {
     .projects-grid:hover .project-card-link {
-        opacity: 1;                         /* All stay visible */
+        opacity: 1; /* All stay visible */
     }
 }
 ```
 
 **In JSX:**
+
 ```jsx
 onMouseEnter={() => setHoveredProject(project)}    /* Track hovered */
 onMouseLeave={() => setHoveredProject(null)}       /* Clear on leave */
@@ -421,6 +439,7 @@ onMouseLeave={() => setHoveredProject(null)}       /* Clear on leave */
 ```
 
 ### Visual Result
+
 - **Grid hover:** All cards fade to 38% opacity (ghosted)
 - **Card hover within grid:** Hovered card returns to 100% opacity
 - **Card hover alone:** Standard hover effects apply
@@ -431,6 +450,7 @@ onMouseLeave={() => setHoveredProject(null)}       /* Clear on leave */
 ## Responsive Behavior
 
 ### Tablet (max-width: 1024px)
+
 ```css
 .projects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -438,18 +458,19 @@ onMouseLeave={() => setHoveredProject(null)}       /* Clear on leave */
 ```
 
 ### Mobile (max-width: 768px)
+
 ```css
 .projects-grid {
-    grid-template-columns: 1fr;             /* Stack all cards */
-    gap: var(--space-12);                   /* Slightly tighter */
+    grid-template-columns: 1fr; /* Stack all cards */
+    gap: var(--space-12); /* Slightly tighter */
 }
 
 .project-card-title {
-    font-size: var(--font-size-lg);         /* Smaller on mobile */
+    font-size: var(--font-size-lg); /* Smaller on mobile */
 }
 
 .project-card-link {
-    padding: var(--space-6);                /* Tighter padding */
+    padding: var(--space-6); /* Tighter padding */
 }
 ```
 
@@ -457,22 +478,23 @@ onMouseLeave={() => setHoveredProject(null)}       /* Clear on leave */
 
 ## Design System Integration
 
-| Element | Token Used | Purpose |
-|---------|------------|---------|
-| **Grid gap** | `var(--space-16)` | Generous breathing room |
-| **Card padding** | `var(--space-8)` | Consistent internal spacing |
-| **Card border** | `var(--color-border)` | Subtle definition |
-| **Title font** | `var(--font-size-xl)` | Clear hierarchy |
-| **Metadata font** | `var(--font-size-xs)` | Secondary information |
-| **Hover shadow** | `var(--shadow-lg)` | Elevation feedback |
-| **Transitions** | `var(--duration-base)` | Consistent timing |
-| **Easing** | `var(--ease-smooth)` | Professional motion |
+| Element           | Token Used             | Purpose                     |
+| ----------------- | ---------------------- | --------------------------- |
+| **Grid gap**      | `var(--space-16)`      | Generous breathing room     |
+| **Card padding**  | `var(--space-8)`       | Consistent internal spacing |
+| **Card border**   | `var(--color-border)`  | Subtle definition           |
+| **Title font**    | `var(--font-size-xl)`  | Clear hierarchy             |
+| **Metadata font** | `var(--font-size-xs)`  | Secondary information       |
+| **Hover shadow**  | `var(--shadow-lg)`     | Elevation feedback          |
+| **Transitions**   | `var(--duration-base)` | Consistent timing           |
+| **Easing**        | `var(--ease-smooth)`   | Professional motion         |
 
 ---
 
 ## Current Status ✅
 
 ✅ **Projects grid is fully optimized:**
+
 - Hover dominance pattern working perfectly
 - Asymmetrical grid creates visual interest
 - Strong hover states provide feedback

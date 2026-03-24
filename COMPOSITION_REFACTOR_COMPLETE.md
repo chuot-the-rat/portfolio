@@ -12,6 +12,7 @@
 Your portfolio has been transformed from **uniform and template-like** to **dynamic, expressive, and intentionally composed**. This goes beyond hover states and micro-interactions into actual **layout structure changes** that create visual hierarchy, asymmetry, and editorial intentionality.
 
 The refactoring introduces:
+
 - ✨ **Asymmetrical grid layouts** (not everything equally sized)
 - ✨ **Featured projects** (first and third items get special treatment)
 - ✨ **Visual grouping** (sections feel intentional, not auto-generated)
@@ -26,11 +27,13 @@ The refactoring introduces:
 ### The Big Change: Asymmetrical Magazine Grid
 
 **Before:** All project cards same size in uniform auto-fill grid
+
 ```css
 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 ```
 
 **After:** Featured projects are LARGE, creating strong visual hierarchy
+
 ```css
 /* Desktop (1200px+): 3-column with featured items */
 grid-template-columns: repeat(3, 1fr);
@@ -55,6 +58,7 @@ grid-template-columns: repeat(3, 1fr);
 ```
 
 **Visual Result:**
+
 ```
 ┌─────────────────────┐
 │   FEATURED #1       │  ┌──────────┐
@@ -86,6 +90,7 @@ grid-template-columns: repeat(3, 1fr);
 ```
 
 **Impact:**
+
 - First project immediately feels like the hero
 - Third project creates secondary focus point
 - Rest are supplementary (not competing for attention)
@@ -95,18 +100,20 @@ grid-template-columns: repeat(3, 1fr);
 
 ```css
 /* Desktop: 80px gap (was 64px) */
-gap: var(--space-20);  /* Extra breathing room */
+gap: var(--space-20); /* Extra breathing room */
 
 /* Tablet: Still generous 64px */
 gap: var(--space-16);
 ```
 
 **Why this matters:**
+
 - Larger gaps signal importance (editorial, not product listing)
 - Negative space creates visual elegance
 - Featured projects "pop" out more clearly
 
 ### Summary: Projects Page Now Feels Like...
+
 - Magazine spread with featured article
 - Gallery with clear visual hierarchy
 - Intentional curation, not auto-generated catalog
@@ -123,30 +130,31 @@ The left-pane project list (folder view) now has much better visual feedback:
 ```css
 /* Hover state improvements */
 .folder-item:hover {
-    background: rgba(0, 0, 0, 0.04);          /* More visible bg */
-    border-bottom-color: var(--color-border);  /* Border stays visible */
+    background: rgba(0, 0, 0, 0.04); /* More visible bg */
+    border-bottom-color: var(--color-border); /* Border stays visible */
 }
 
 .folder-item:hover .folder-tab-label {
-    color: var(--color-accent);  /* Title changes color */
+    color: var(--color-accent); /* Title changes color */
 }
 
 .folder-item:hover .folder-meta {
-    color: var(--color-text-secondary);  /* Metadata highlights */
+    color: var(--color-text-secondary); /* Metadata highlights */
 }
 
 /* Active state: much stronger */
 .folder-active .folder-tab-label {
     color: var(--color-accent);
-    font-weight: 700;  /* Gets bolder */
+    font-weight: 700; /* Gets bolder */
 }
 
 .folder-active .folder-meta {
-    color: var(--color-accent);  /* Matches label color */
+    color: var(--color-accent); /* Matches label color */
 }
 ```
 
 **Impact:**
+
 - Folder items feel more interactive
 - Active selection is crystal clear
 - Hover creates anticipation
@@ -155,6 +163,7 @@ The left-pane project list (folder view) now has much better visual feedback:
 ### Preview Window
 
 Already enhanced with stronger shadow and better visual presence:
+
 ```css
 box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 ```
@@ -166,9 +175,11 @@ The preview panel is now a clear focal point (not background noise).
 ## 3. ABOUT PAGE - MAJOR COMPOSITION CHANGE ✅
 
 ### Before
+
 Boring 2-column vertical layout with everything at same visual weight.
 
 ### After
+
 Intentional grouping with visual hierarchy and offset composition.
 
 ### Layout Structure
@@ -189,11 +200,12 @@ Intentional grouping with visual hierarchy and offset composition.
 
 /* Right column: padded top for visual offset */
 .about-col:nth-child(2) {
-    padding-top: var(--space-8);  /* Creates depth */
+    padding-top: var(--space-8); /* Creates depth */
 }
 ```
 
 **Visual Result:**
+
 ```
 LEFT COLUMN          RIGHT COLUMN
 Title                   (offset down)
@@ -230,7 +242,7 @@ This allows you to highlight key information (e.g., "Currently looking for...")
 
 ```css
 .about-section-title {
-    font-weight: 700;  /* 600 → 700 */
+    font-weight: 700; /* 600 → 700 */
 }
 ```
 
@@ -240,7 +252,11 @@ Creates stronger visual hierarchy and makes sections feel intentional.
 
 ```css
 .about-cta {
-    margin-top: clamp(var(--section-spacing-sm), 6vw, var(--section-spacing-base));
+    margin-top: clamp(
+        var(--section-spacing-sm),
+        6vw,
+        var(--section-spacing-base)
+    );
 
     /* Much stronger hover */
     transition: all var(--duration-base) var(--ease-smooth);
@@ -249,7 +265,7 @@ Creates stronger visual hierarchy and makes sections feel intentional.
 .about-cta:hover {
     border-color: var(--color-text-secondary);
     background-color: var(--color-bg-secondary);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);  /* Strong elevation */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Strong elevation */
 }
 ```
 
@@ -259,8 +275,8 @@ This is now a clear focal point that invites interaction.
 
 ```css
 .about-link:hover {
-    transform: translateX(6px) translateY(-2px);  /* Diagonal lift */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);     /* Strong shadow */
+    transform: translateX(6px) translateY(-2px); /* Diagonal lift */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Strong shadow */
 }
 ```
 
@@ -276,7 +292,7 @@ Buttons feel premium and interactive.
     }
 
     .about-col:nth-child(2) {
-        padding-top: 0;  /* Remove offset on single column */
+        padding-top: 0; /* Remove offset on single column */
     }
 }
 ```
@@ -286,24 +302,28 @@ Buttons feel premium and interactive.
 ## Design Philosophy Now Evident
 
 ### ✨ Expressive, Not Template-Like
+
 - Layouts break uniform patterns
 - Featured items clearly prioritized
 - Asymmetry creates interest
 - Spacing is intentional (not auto-generated)
 
 ### ✨ Interactive, Not Static
+
 - Hover states provide clear feedback
 - Color changes, shadows, lifts signal responsiveness
 - De-emphasis system (muted cards when hovering) creates focus
 - Motion reinforces hierarchy
 
 ### ✨ Editorial, Not Corporate
+
 - Featured projects treated like magazine spreads
 - Grouping and offsets create depth
 - Typography hierarchy is strong and clear
 - Breathing room signals importance
 
 ### ✨ Intentional, Not Accidental
+
 - Every element has a visual purpose
 - Composition supports the content
 - Hierarchy guides the eye
@@ -314,16 +334,19 @@ Buttons feel premium and interactive.
 ## Responsive Behavior
 
 ### Desktop (1200px+)
+
 - Projects: 3-column with 2 featured
 - About: 2-column with offset
 - Maximum visual composition
 
 ### Tablet (768px-1024px)
+
 - Projects: 2-column with 1 featured
 - About: Stack to 1 column
 - Maintains hierarchy at smaller scale
 
 ### Mobile (< 768px)
+
 - Projects: Single column
 - About: Single column
 - Full-width responsive
@@ -333,17 +356,20 @@ Buttons feel premium and interactive.
 ## What Remained Unchanged
 
 ### ✅ Component Structure
+
 - No JSX changes needed
 - Class names identical
 - All components render same markup
 
 ### ✅ Accessibility
+
 - Focus states preserved perfectly
 - Reduced motion support maintained
 - High contrast mode still works
 - Dark mode fully functional
 
 ### ✅ Design System
+
 - All tokens still active
 - Colors, spacing, motion consistent
 - No hard-coded values
@@ -353,34 +379,37 @@ Buttons feel premium and interactive.
 
 ## Before & After: Composition
 
-| Aspect | Before | After | Impact |
-|--------|--------|-------|--------|
-| **Projects Grid** | Uniform auto-fill | Asymmetrical (2 featured) | Clear visual hierarchy |
-| **Featured Project** | None (all equal) | 2x2 + 3rd item featured | Projects feel curated |
-| **Title Scaling** | All same size | Featured larger | Hierarchy through typography |
-| **About Layout** | Plain 2-col + CTA | Grouped sections + offset | Feels designed |
-| **About Callout** | N/A | New highlight section | Emphasize important info |
-| **Folder Hover** | Basic bg change | Color + weight changes | More interactive feel |
-| **CTA Interaction** | Weak hover | Strong elevation + bg reveal | Clear focal point |
-| **Overall Feel** | Clean, safe, boring | Expressive, designed, alive | Premium & intentional |
+| Aspect               | Before              | After                        | Impact                       |
+| -------------------- | ------------------- | ---------------------------- | ---------------------------- |
+| **Projects Grid**    | Uniform auto-fill   | Asymmetrical (2 featured)    | Clear visual hierarchy       |
+| **Featured Project** | None (all equal)    | 2x2 + 3rd item featured      | Projects feel curated        |
+| **Title Scaling**    | All same size       | Featured larger              | Hierarchy through typography |
+| **About Layout**     | Plain 2-col + CTA   | Grouped sections + offset    | Feels designed               |
+| **About Callout**    | N/A                 | New highlight section        | Emphasize important info     |
+| **Folder Hover**     | Basic bg change     | Color + weight changes       | More interactive feel        |
+| **CTA Interaction**  | Weak hover          | Strong elevation + bg reveal | Clear focal point            |
+| **Overall Feel**     | Clean, safe, boring | Expressive, designed, alive  | Premium & intentional        |
 
 ---
 
 ## Code Quality
 
 ### CSS Organization
+
 - Clear section comments
 - Logical grouping (hero, grid, cards, etc.)
 - Responsive breakpoints at component level
 - No duplication or dead code
 
 ### Performance
+
 - No JavaScript bloat
 - CSS-only changes (instant rendering)
 - Transitions use hardware acceleration properties
 - Minimal paint/layout thrashing
 
 ### Maintainability
+
 - Uses design tokens throughout
 - Comments explain why/when for clarity
 - Responsive logic clear and modular
@@ -402,38 +431,41 @@ Buttons feel premium and interactive.
 ## Files Modified
 
 1. **src/pages/Projects.css**
-   - Asymmetrical grid with featured items
-   - Title scaling for hierarchy
-   - Enhanced hover/interactive states
+    - Asymmetrical grid with featured items
+    - Title scaling for hierarchy
+    - Enhanced hover/interactive states
 
 2. **src/pages/Home.css**
-   - Stronger folder item interactions
-   - Better color/weight changes on hover/active
-   - Preview window shadow enhancement
+    - Stronger folder item interactions
+    - Better color/weight changes on hover/active
+    - Preview window shadow enhancement
 
 3. **src/pages/About.css**
-   - Offset 2-column layout
-   - New callout section styling
-   - Stronger CTA visual presence
-   - Typography hierarchy improvements
+    - Offset 2-column layout
+    - New callout section styling
+    - Stronger CTA visual presence
+    - Typography hierarchy improvements
 
 ---
 
 ## How It Feels Now
 
 ### Projects Page
+
 - Magazine-like presentation
 - Featured project immediately catches eye
 - Other projects feel supplementary
 - Browsing feels exploratory, not overwhelming
 
 ### Home Page
+
 - Project list feels more interactive
 - Active selection is unmistakable
 - Preview panel is center of attention
 - Selecting projects feels satisfying
 
 ### About Page
+
 - Not a wall of text anymore
 - Visual grouping creates structure
 - CTA section invites interaction
@@ -446,6 +478,7 @@ Buttons feel premium and interactive.
 Your portfolio has evolved from **"clean but generic"** to **"intentional and designed."**
 
 The composition now:
+
 - ✨ Creates visual hierarchy (not everything equal)
 - ✨ Guides the eye (featured items clear)
 - ✨ Feels interactive (strong hover feedback)
@@ -453,6 +486,7 @@ The composition now:
 - ✨ Feels professional (controlled, not chaotic)
 
 This is what **Jackie Hu's portfolio energy** looks like translated into your design system:
+
 - Expressive layout ✓
 - Strong composition ✓
 - Interactive presentation ✓
@@ -464,12 +498,14 @@ This is what **Jackie Hu's portfolio energy** looks like translated into your de
 ## Next Steps (Optional)
 
 ### If You Want Even More Dynamism:
+
 1. Add image reveal transitions on project cards (Framer Motion)
 2. Stagger fade-in animations for off-screen elements
 3. Add parallax to preview window on scroll
 4. Create subtle micro-interactions on link hovers
 
 ### If You Want to Push Further:
+
 1. Animated background patterns (subtle, not chaotic)
 2. Dynamic color feedback on interaction
 3. Scroll-triggered animations

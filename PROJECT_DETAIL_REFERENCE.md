@@ -6,6 +6,7 @@
 **Styling:** `/src/pages/ProjectDetail.css` (500+ lines)
 
 The ProjectDetail component demonstrates:
+
 1. **Editorial Case Study Layout** (hero + content flow)
 2. **Micro-Index System** (section numbering + scroll progress)
 3. **Responsive Content** (images, embeds, sections)
@@ -33,9 +34,15 @@ useEffect(() => {
 
                     // Merge supplemental sections
                     const extras = [
-                        "personas", "userFlows", "informationArchitecture",
-                        "styleGuide", "hifi", "prototype", "userTesting",
-                        "finalPresentation", "embeds"
+                        "personas",
+                        "userFlows",
+                        "informationArchitecture",
+                        "styleGuide",
+                        "hifi",
+                        "prototype",
+                        "userTesting",
+                        "finalPresentation",
+                        "embeds",
                     ];
 
                     for (const key of extras) {
@@ -46,7 +53,7 @@ useEffect(() => {
                     if (localData.iterations?.rounds) {
                         merged.iterations = {
                             ...merged.iterations,
-                            ...localData.iterations
+                            ...localData.iterations,
                         };
                     }
 
@@ -68,6 +75,7 @@ useEffect(() => {
 ```
 
 **What This Does:**
+
 - ✅ Loads centralized case study data
 - ✅ Attempts to load supplemental data.json
 - ✅ Merges data gracefully (fallback to just centralized data)
@@ -78,6 +86,7 @@ useEffect(() => {
 ## Main JSX Structure
 
 ### Back Button
+
 ```jsx
 <motion.div
     className="project-detail-back"
@@ -85,7 +94,10 @@ useEffect(() => {
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.4 }}
 >
-    <Link to="/" className="back-button">
+    <Link
+        to="/"
+        className="back-button"
+    >
         <svg>...(arrow icon)</svg>
         <span>Back</span>
     </Link>
@@ -97,6 +109,7 @@ useEffect(() => {
 ### Hero Section
 
 #### Hero Title & CTAs
+
 ```jsx
 <motion.section className="project-hero" ...>
     <div className="container">
@@ -188,6 +201,7 @@ useEffect(() => {
 ```
 
 **CSS:**
+
 ```css
 .project-hero {
     padding: var(--section-spacing-base) 0;
@@ -196,7 +210,7 @@ useEffect(() => {
 }
 
 .project-hero-title {
-    font-size: var(--font-size-3xl);              /* 40px */
+    font-size: var(--font-size-3xl); /* 40px */
     font-weight: 600;
     letter-spacing: var(--letter-spacing-tight);
     margin: 0;
@@ -255,8 +269,12 @@ useEffect(() => {
 ### Content Area
 
 #### Main Content Container
+
 ```jsx
-<div className="project-content" ref={contentRef}>
+<div
+    className="project-content"
+    ref={contentRef}
+>
     <div className="container">
         <div className="project-content-layout">
             <ProjectContentMain project={project} />
@@ -267,6 +285,7 @@ useEffect(() => {
 ```
 
 **CSS:**
+
 ```css
 .project-content {
     padding-top: var(--section-spacing-base);
@@ -317,7 +336,9 @@ const ProjectContentMain = ({ project }) => {
                     description={project.overview.description}
                     images={project.overview.images}
                     imageStartIndex={imageNum}
-                    onImageCount={(n) => { imageNum += n; }}
+                    onImageCount={(n) => {
+                        imageNum += n;
+                    }}
                 />
             )}
 
@@ -346,6 +367,7 @@ const ProjectContentMain = ({ project }) => {
 ```
 
 **Micro-Index System:**
+
 - **Case Index (ci):** Which case study (1, 2, 3, etc.)
 - **Section Index (sectionNum):** Which section within case (1, 2, 3, etc.)
 - **Image Index (imageNum):** Which image within section (1, 2, 3, etc.)
@@ -356,6 +378,7 @@ const ProjectContentMain = ({ project }) => {
 ## Section Styling
 
 ### Section Base
+
 ```css
 .project-section {
     margin-bottom: var(--section-spacing-base);
@@ -368,6 +391,7 @@ const ProjectContentMain = ({ project }) => {
 ```
 
 ### Section Title with Animations
+
 ```jsx
 <motion.section
     className="project-section"
@@ -379,6 +403,7 @@ const ProjectContentMain = ({ project }) => {
 ```
 
 **CSS:**
+
 ```css
 .section-title {
     font-size: var(--font-size-2xl);
@@ -427,42 +452,47 @@ const ProjectContentMain = ({ project }) => {
 
 ## Design System Integration
 
-| Element | Token Used | Purpose |
-|---------|------------|---------|
-| **Hero title** | `var(--font-size-3xl)` | Primary hierarchy |
-| **Section title** | `var(--font-size-2xl)` | Secondary hierarchy |
-| **Body text** | `var(--font-size-lg)` | Comfortable reading |
-| **Meta labels** | `var(--font-size-xs)` | Technical metadata |
-| **Section spacing** | `var(--section-spacing-base)` | Consistent rhythm |
-| **Container max** | `var(--max-width-narrow)` | Editorial reading width |
-| **Shadows** | `var(--shadow-md/lg)` | Elevation feedback |
-| **Transitions** | `var(--duration-base)` | Smooth animations |
+| Element             | Token Used                    | Purpose                 |
+| ------------------- | ----------------------------- | ----------------------- |
+| **Hero title**      | `var(--font-size-3xl)`        | Primary hierarchy       |
+| **Section title**   | `var(--font-size-2xl)`        | Secondary hierarchy     |
+| **Body text**       | `var(--font-size-lg)`         | Comfortable reading     |
+| **Meta labels**     | `var(--font-size-xs)`         | Technical metadata      |
+| **Section spacing** | `var(--section-spacing-base)` | Consistent rhythm       |
+| **Container max**   | `var(--max-width-narrow)`     | Editorial reading width |
+| **Shadows**         | `var(--shadow-md/lg)`         | Elevation feedback      |
+| **Transitions**     | `var(--duration-base)`        | Smooth animations       |
 
 ---
 
 ## Key Features
 
 ✅ **Micro-Index System:**
+
 - Auto-incrementing section & image numbering
 - Visual indexing (e.g., "1.1 Overview", "FIG.01")
 - Scroll progress sidebar
 
 ✅ **Editorial Layout:**
+
 - Generous spacing between sections
 - Optimal reading width (max-width-narrow)
 - Clear visual hierarchy
 
 ✅ **Responsive Design:**
+
 - Desktop: Hero + CTAs side-by-side
 - Tablet/Mobile: Stacked layout
 - Images scale smoothly
 
 ✅ **Animation:**
+
 - Scroll-triggered reveals (whileInView)
 - Smooth image hover effects
 - Staggered entrance animations
 
 ✅ **Accessibility:**
+
 - Semantic HTML (h1, h2, h3)
 - Color contrast maintained
 - Focus states via global.css
@@ -472,6 +502,7 @@ const ProjectContentMain = ({ project }) => {
 ## Current Status ✅
 
 ✅ **ProjectDetail is fully optimized:**
+
 - All tokens applied to typography and spacing
 - Editorial layout with proper hierarchy
 - Design system consistent throughout
