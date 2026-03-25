@@ -50,6 +50,7 @@ const ProjectDetail = () => {
                             "userTesting",
                             "finalPresentation",
                             "embeds",
+                            "video",
                         ];
                         for (const key of extras) {
                             if (localData[key]) merged[key] = localData[key];
@@ -352,6 +353,35 @@ const ProjectContentMain = ({ project }) => {
 
     return (
         <div className="project-content-main">
+            {/* Promo Video */}
+            {project.video?.embedUrl && (
+                <motion.section
+                    className="project-section video-section"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <div
+                        className="fe-viewport"
+                        style={{ aspectRatio: "16 / 9" }}
+                    >
+                        <iframe
+                            className="fe-iframe fe-iframe--ready"
+                            src={project.video.embedUrl}
+                            title={project.video.title || "Project video"}
+                            allowFullScreen
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        />
+                    </div>
+                    {project.video.caption && (
+                        <div className="fe-footer">
+                            <p className="fe-caption">{project.video.caption}</p>
+                        </div>
+                    )}
+                </motion.section>
+            )}
+
             {/* Overview */}
             {project.overview &&
                 (() => {
@@ -390,7 +420,7 @@ const ProjectContentMain = ({ project }) => {
                                 title="Final Experience"
                             />
                             <h2 className="section-title">
-                                Complete Prototype
+                                Final Presentation
                             </h2>
                             <SectionTag sectionIndex={s} />
                             {project.finalExperience.intro && (
@@ -515,6 +545,15 @@ const ProjectContentMain = ({ project }) => {
                                     onCount={(n) => {
                                         imageNum += n;
                                     }}
+                                />
+                            )}
+
+                            {project.research.embed && (
+                                <FigmaEmbed
+                                    src={project.research.embed.src}
+                                    title={project.research.embed.title}
+                                    type="figma-slides"
+                                    caption={project.research.embed.caption}
                                 />
                             )}
                         </motion.section>
@@ -719,18 +758,54 @@ const ProjectContentMain = ({ project }) => {
                 (() => {
                     const s = nextSection();
                     return (
-                        <IndexedSection
-                            caseIndex={ci}
-                            sectionIndex={s}
-                            name="Lo-Fi Exploration"
-                            title={project.lofi.title}
-                            description={project.lofi.description}
-                            images={project.lofi.images}
-                            imageStartIndex={imageNum}
-                            onImageCount={(n) => {
-                                imageNum += n;
-                            }}
-                        />
+                        <motion.section
+                            className="project-section"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Lo-Fi Exploration"
+                            />
+                            <h2 className="section-title">
+                                {project.lofi.title}
+                            </h2>
+                            <SectionTag sectionIndex={s} version="2.0" />
+                            <p className="section-description">
+                                {project.lofi.description}
+                            </p>
+
+                            {project.lofi.images?.length > 0 && (
+                                <ImageGallery
+                                    images={project.lofi.images}
+                                    startIndex={imageNum}
+                                    onCount={(n) => {
+                                        imageNum += n;
+                                    }}
+                                />
+                            )}
+
+                            {project.lofi.prototype?.embed_url && (
+                                <FigmaEmbed
+                                    src={project.lofi.prototype.embed_url}
+                                    title="Low-Fidelity Prototype"
+                                    type="figma-design"
+                                    caption={project.lofi.prototype.description}
+                                />
+                            )}
+
+                            {project.lofi.midfiEmbed && (
+                                <FigmaEmbed
+                                    src={project.lofi.midfiEmbed.src}
+                                    title={project.lofi.midfiEmbed.title || "Mid-Fidelity Wireframes"}
+                                    type="figma-design"
+                                    caption={project.lofi.midfiEmbed.caption}
+                                />
+                            )}
+                        </motion.section>
                     );
                 })()}
 
@@ -1826,6 +1901,15 @@ const ProjectContentMain = ({ project }) => {
                                         )}
                                     </ul>
                                 </div>
+                            )}
+
+                            {project.validation.embed && (
+                                <FigmaEmbed
+                                    src={project.validation.embed.src}
+                                    title={project.validation.embed.title}
+                                    type="figma-slides"
+                                    caption={project.validation.embed.caption}
+                                />
                             )}
                         </motion.section>
                     );

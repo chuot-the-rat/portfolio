@@ -170,6 +170,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   participantCount: sections.research_process.participant_count,
                   reflection: sections.research_process.reflection,
                   images: extractImages(sections.research_process),
+                  embed: sections.research_process.embed || null,
               }
             : null,
 
@@ -212,9 +213,11 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
 
         lofi: sections?.lofi_phase
             ? {
-                  title: "Lo‑Fi Exploration",
+                  title: sections.lofi_phase.title || "Lo‑Fi Exploration",
                   description: sections.lofi_phase.content,
                   images: extractImages(sections.lofi_phase),
+                  prototype: sections.lofi_phase.prototype || null,
+                  midfiEmbed: sections.lofi_phase.midfi_embed || null,
               }
             : null,
 
@@ -274,6 +277,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                       sections.validation.participant_quotes ||
                       [],
                   outcomes: sections.validation.outcomes || [],
+                  embed: sections.validation.embed || null,
               }
             : null,
 

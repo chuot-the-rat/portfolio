@@ -152,6 +152,7 @@
                     }
                 },
                 "lofi_phase": {
+                    "title": "Wireframes",
                     "content": "Our early sketches were deliberately rough. We weren't trying to make things look good—we were trying to understand what information mattered most and how quickly someone could find it.\n\nThe dashboard concept emerged early. We kept asking ourselves: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else was secondary.",
                     "images": [
                         {
@@ -164,10 +165,20 @@
                             "alt": "Hours tracking flow wireframes",
                             "caption": "Mapping the hour logging experience"
                         }
-                    ]
+                    ],
+                    "prototype": {
+                        "embed_url": "https://embed.figma.com/design/Cecvl0e5QYbiQFfLpmHEEJ/Wireframe--Old---Copy-?node-id=69-2&embed-host=share",
+                        "description": "Early lo-fidelity wireframes exploring layout, information hierarchy, and the core dashboard interaction.",
+                        "type": "figma"
+                    },
+                    "midfi_embed": {
+                        "src": "https://embed.figma.com/design/Cecvl0e5QYbiQFfLpmHEEJ/Wireframe--Old---Copy-?node-id=1157-8496&embed-host=share",
+                        "title": "Mid-Fidelity Wireframes",
+                        "caption": "Refined mid-fidelity screens showing improved structure and interaction patterns before the final visual pass"
+                    }
                 },
                 "hifi_phase": {
-                    "content": "The high-fidelity designs prioritized calm. We chose soft colors, generous spacing, and typography that wouldn't feel clinical or overwhelming.\n\nThe dashboard became the emotional center of the app. Instead of hiding progress behind menus, we made it the first thing users see. Hours completed, hours remaining, competencies achieved—all visible at a glance.\n\nTry scrolling through the dashboard below. Notice how the most important information stays anchored at the top, while details reveal themselves as you explore.",
+                    "content": "The high-fidelity designs prioritized calm. We chose soft colors, generous spacing, and typography that wouldn't feel clinical or overwhelming.\n\nThe dashboard became the emotional center of the app. Instead of hiding progress behind menus, we made it the first thing users see. Hours completed, hours remaining, competencies achieved—all visible at a glance.\n\nBrowse the high-fidelity wireframes below to see every screen and interaction state in the final design.",
                     "images": [
                         {
                             "src": "/projects/prolog/hifi-1.png",
@@ -186,9 +197,9 @@
                         }
                     ],
                     "prototype": {
-                        "url": "https://www.figma.com/proto/prolog-hifi-dashboard",
-                        "embed_url": "",
-                        "description": "Explore the dashboard experience. Pay attention to how progress is communicated without requiring any taps.",
+                        "url": "",
+                        "embed_url": "https://embed.figma.com/design/WS68LlLF4uqajPd1BcADqH/HiFi-WireFrames--Copy-?node-id=2332-2031&embed-host=share",
+                        "description": "Browse the complete high-fidelity wireframes — every screen, component, and state in the final design.",
                         "type": "figma"
                     }
                 },
@@ -661,7 +672,12 @@
                         "Choice overload causes hesitation and often leads to inaction",
                         "Guided suggestions outperform open-ended discovery"
                     ],
-                    "participant_count": null
+                    "participant_count": null,
+                    "embed": {
+                        "src": "https://embed.figma.com/proto/dGcxuj9q9y5ajPjYoTii20/App-Flows--Copy-?node-id=1-105&p=f&viewport=422%2C9%2C0.1&scaling=contain&content-scaling=fixed&starting-point-node-id=1%3A105&page-id=0%3A1&embed-host=share",
+                        "title": "App Flows",
+                        "caption": "User flow diagrams mapping the core quest discovery journey from idle browsing to quest completion"
+                    }
                 },
                 "early_challenges": {
                     "content": ""
@@ -750,10 +766,15 @@
                             "alt": "Early wireframe with filters",
                             "caption": "Initial designs with too many options"
                         }
-                    ]
+                    ],
+                    "prototype": {
+                        "embed_url": "https://embed.figma.com/proto/8oS5TfdW5ILKt6gPnNkuBf/Low-Fid--Copy-?node-id=188-1978&p=f&viewport=677%2C140%2C0.11&scaling=scale-down&content-scaling=fixed&starting-point-node-id=188%3A1968&show-proto-sidebar=1&page-id=188%3A754&embed-host=share",
+                        "description": "Explore the low-fidelity wireframes. Notice how many options cluttered the screen before we stripped back to a single action.",
+                        "type": "figma"
+                    }
                 },
                 "hifi_phase": {
-                    "content": "The high-fidelity designs introduced a mascot—a small character that guides users through the experience without feeling childish.\n\nWe used playful language ('quest' instead of 'activity') and warm colors to make the app feel inviting rather than utilitarian. The goal was to lower emotional resistance.\n\nTap the button below to receive a quest. Notice how little friction there is between wanting to do something and seeing a suggestion.",
+                    "content": "The high-fidelity designs introduced a mascot—a small character that guides users through the experience without feeling childish.\n\nWe used playful language ('quest' instead of 'activity') and warm colors to make the app feel inviting rather than utilitarian. The goal was to lower emotional resistance.\n\nBrowse the mockups below to see every screen and state in the final design.",
                     "images": [
                         {
                             "src": "/projects/sidequest/hifi-1.png",
@@ -777,9 +798,9 @@
                         }
                     ],
                     "prototype": {
-                        "url": "https://www.figma.com/proto/sidequest-hifi-quest",
-                        "embed_url": "",
-                        "description": "Tap 'Give me a quest' and see what happens. Try refreshing for a different suggestion.",
+                        "url": "",
+                        "embed_url": "https://embed.figma.com/design/rnR9P5RZZOpw7zyji8mAVL/Hifi-Mockups--Copy-?node-id=2003-3156&embed-host=share",
+                        "description": "Browse the complete high-fidelity mockups — every screen, component, and interaction state.",
                         "type": "figma"
                     }
                 },
@@ -836,7 +857,12 @@
                         "Playful language ('quest') increased engagement",
                         "Mascot received positive feedback",
                         "Low-pressure framing encouraged action"
-                    ]
+                    ],
+                    "embed": {
+                        "src": "https://embed.figma.com/proto/A4EiDTstNofWUbiKhAbhHY/SideQuest-A6-UsabilityReport--Copy-?node-id=96-5355&p=f&viewport=293%2C208%2C0.05&scaling=contain&content-scaling=fixed&starting-point-node-id=96%3A5355&page-id=0%3A1&embed-host=share",
+                        "title": "Usability Testing Report",
+                        "caption": "Full usability report documenting test scenarios, participant findings, and design recommendations"
+                    }
                 },
                 "what_i_learned": [
                     {
@@ -873,11 +899,11 @@
                     }
                 ],
                 "final_experience": {
-                    "intro": "The prototype below represents the full SideQuest experience—from opening the app to completing your first quest.\n\nNotice how the design tries to get out of your way. The goal is momentum, not exploration.",
+                    "intro": "The presentation below walks through the full SideQuest project—from research and early wireframes to the final high-fidelity solution.\n\nIt covers the key design decisions, what we tested, and what we learned.",
                     "prototype": {
-                        "url": "https://www.figma.com/proto/sidequest-final",
-                        "embed_url": "",
-                        "description": "Start fresh. Get a quest, see the details, and mark it complete. The whole flow takes under a minute.",
+                        "url": "",
+                        "embed_url": "https://embed.figma.com/slides/MPKZPeksKSJlwFRxYMoctc/Presentation--Copy-?node-id=96-4670&embed-host=share",
+                        "description": "Full project presentation covering research, process, and final solution.",
                         "type": "figma"
                     }
                 }
