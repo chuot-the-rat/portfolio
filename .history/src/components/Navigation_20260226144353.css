@@ -1,0 +1,84 @@
+/* src/components/Navigation.css */
+
+.navbar {
+    background-color: #fafaf9;
+    border-bottom: 1px solid #e7e5e4;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1c1917;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    letter-spacing: -0.5px;
+}
+
+.nav-logo:hover {
+    color: #616161;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #57534e;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #1c1917;
+    border-bottom-color: #212121;
+}
+
+.nav-link.active {
+    color: #1c1917;
+    border-bottom-color: #212121;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+
+    .nav-menu {
+        gap: 1rem;
+    }
+
+    .nav-logo {
+        font-size: 1.4rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 0.25rem 0;
+    }
+}

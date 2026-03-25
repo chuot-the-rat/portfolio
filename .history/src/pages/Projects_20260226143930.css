@@ -1,0 +1,138 @@
+/* Projects Page Styles */
+
+.projects-page {
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+
+.projects-main {
+  width: 100%;
+  padding: clamp(2rem, 6vw, 4rem);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-hero {
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+  text-align: center;
+}
+
+.projects-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: #1c1917;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.projects-subtitle {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: #57534e;
+  font-weight: 400;
+}
+
+.projects-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e7e5e4;
+  border-top-color: #212121;
+  border-radius: 50%;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.project-card {
+  position: relative;
+  height: 100%;
+}
+
+.project-card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card-link:hover {
+  border-color: #212121;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.project-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: auto;
+}
+
+.project-card-title {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: #1c1917;
+  margin: 0;
+}
+
+.project-card-subtitle {
+  font-size: 0.95rem;
+  color: #57534e;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.project-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e7e5e4;
+  font-size: 0.85rem;
+  color: #616161;
+}
+
+.project-meta-item {
+  display: inline-block;
+}
+
+.project-meta-dot {
+  color: #c9c5c0;
+}
+
+.project-card-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(33, 33, 33, 0.02);
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .projects-main {
+    padding: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
