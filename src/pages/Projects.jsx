@@ -151,9 +151,8 @@ export default function Projects() {
                             // Work list with energy layer hover dominance
                             <div className="workList">
                                 {projects.map((project, index) => (
-                                    <motion.article
+                                    <motion.div
                                         key={project.id}
-                                        className="workItem"
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{
@@ -161,6 +160,9 @@ export default function Projects() {
                                             delay: 0.08 * index,
                                             ease: [0.4, 0, 0.2, 1],
                                         }}
+                                    >
+                                    <article
+                                        className="workItem"
                                         onMouseEnter={() =>
                                             setHoveredProject(project)
                                         }
@@ -218,7 +220,8 @@ export default function Projects() {
                                                 />
                                             </div>
                                         )}
-                                    </motion.article>
+                                    </article>
+                                    </motion.div>
                                 ))}
                             </div>
                         )}

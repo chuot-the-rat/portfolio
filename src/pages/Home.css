@@ -86,10 +86,10 @@
 
 .home-hero-subtitle {
     font-size: clamp(1rem, 1.5vw, 1.125rem);
-    line-height: 1.8;
+    line-height: 1.7;
     color: var(--color-text-secondary);
     max-width: 480px;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .hero-bracket-cycler {
@@ -119,7 +119,7 @@
     white-space: nowrap;
 }
 
-/* Primary CTA - STRENGTHENED */
+/* Primary CTA */
 .hero-primary-cta {
     display: inline-flex;
     align-items: center;
@@ -128,17 +128,19 @@
     min-width: 280px;
     background-color: var(--color-accent, #212121);
     color: var(--color-bg, #fff);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    letter-spacing: 0.01em;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 400;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
     text-decoration: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     border: none;
     box-shadow: var(--shadow-sm);
     transition:
-        box-shadow var(--duration-base) var(--ease-smooth),
-        transform var(--duration-base) var(--ease-smooth),
-        background-color var(--duration-base) var(--ease-smooth);
+        box-shadow var(--dur-2) var(--ease-out-quad),
+        transform var(--dur-2) var(--ease-out-quad),
+        background-color var(--dur-2) var(--ease-out-quad);
     cursor: pointer;
     white-space: nowrap;
     align-self: flex-start;
@@ -187,15 +189,18 @@
 }
 
 .hero-inline-link {
-    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
     font-weight: 400;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
     color: var(--color-text-secondary);
     text-decoration: none;
     position: relative;
     padding: 0.25rem 0;
     transition:
-        color var(--duration-base) var(--ease-smooth),
-        transform 200ms var(--ease-smooth);
+        color var(--dur-2) var(--ease-out-quad),
+        transform var(--dur-2) var(--ease-out-quad);
 }
 
 .hero-inline-link::after {

@@ -1,37 +1,39 @@
-/* Navigation Bar - Using Global Design Tokens */
+/* Navigation Bar - Editorial, Jackie-informed */
 
 .navbar {
-    background-color: var(--color-bg-secondary);
+    background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
     z-index: 100;
-    transition: all var(--duration-base) var(--ease-smooth);
+    transition: background-color var(--duration-base) var(--ease-smooth),
+                border-color var(--duration-base) var(--ease-smooth);
 }
 
 .nav-container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 var(--gutter);
+    padding: 0 var(--container-pad);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 56px;
 }
 
-/* Logo */
+/* Logo — display font, editorial weight */
 .nav-logo {
-    font-size: var(--font-size-2xl);
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-size: var(--font-size-base);
+    font-weight: 700;
     color: var(--color-text);
     text-decoration: none;
     letter-spacing: var(--letter-spacing-tight);
-    transition: opacity var(--duration-fast) var(--ease-smooth);
+    transition: opacity var(--dur-2) var(--ease-out-quad);
     outline-offset: var(--focus-offset);
 }
 
 .nav-logo:hover {
-    opacity: 0.7;
+    opacity: 0.55;
 }
 
 .nav-logo:focus-visible {
@@ -51,21 +53,27 @@
     margin: 0;
 }
 
-/* Links */
+/* Links — mono labels with tracking, Jackie editorial energy */
 .nav-link {
     text-decoration: none;
     color: var(--color-text-secondary);
-    font-weight: 500;
-    font-size: var(--font-size-sm);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
     padding: var(--space-2) 0;
-    border-bottom: 2px solid transparent;
-    transition: all var(--duration-fast) var(--ease-smooth);
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-2) var(--ease-out-quad),
+                border-color var(--dur-2) var(--ease-out-quad),
+                opacity var(--dur-2) var(--ease-out-quad);
     outline-offset: var(--focus-offset);
 }
 
 .nav-link:hover {
     color: var(--color-text);
-    border-bottom-color: var(--color-accent);
+    border-bottom-color: currentColor;
+    opacity: 1;
 }
 
 .nav-link:focus-visible {
@@ -74,26 +82,21 @@
 
 .nav-link.active {
     color: var(--color-text);
-    border-bottom-color: var(--color-accent);
-    font-weight: 600;
+    border-bottom-color: currentColor;
 }
 
 /* Mobile */
 @media (max-width: 768px) {
     .nav-container {
         padding: 0 var(--gutter-mobile);
+        height: 52px;
     }
 
     .nav-menu {
         gap: var(--space-6);
     }
 
-    .nav-logo {
-        font-size: var(--font-size-xl);
-    }
-
     .nav-link {
-        font-size: var(--font-size-xs);
-        padding: var(--space-1) 0;
+        font-size: 0.625rem;
     }
 }

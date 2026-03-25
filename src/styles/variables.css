@@ -25,11 +25,11 @@
         "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
         sans-serif;
 
-    /* Code/UI: Technical, monospace */
-    --font-mono: ui-monospace, "SF Mono", "Monaco", Consolas, monospace;
+    /* Code/UI: Technical, monospace — IBM Plex Mono for editorial label energy */
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", "Monaco", Consolas, monospace;
 
-    /* Display: Distinctive, high-attention serif for h1/h2 */
-    --font-display: "Georgia", ui-serif, serif;
+    /* Display: Syne — loaded, distinctive, high-attention for h1/h2/hero */
+    --font-display: "Syne", system-ui, sans-serif;
 
     /* ─────────────────────────────────────────────────────────────────
        TYPOGRAPHY SCALE
