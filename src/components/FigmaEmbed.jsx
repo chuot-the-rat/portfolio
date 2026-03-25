@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./FigmaEmbed.css";
 
@@ -24,7 +24,29 @@ const FigmaEmbed = ({
 }) => {
     const [loaded, setLoaded] = useState(false);
     const [inView, setInView] = useState(false);
+    const [expanded, setExpanded] = useState(false);
     const wrapperRef = useRef(null);
+
+    /* ── Close modal on Escape ── */
+    const handleKeyDown = useCallback(
+        (e) => {
+            if (e.key === "Escape" && expanded) setExpanded(false);
+        },
+        [expanded],
+    );
+
+    useEffect(() => {
+        if (expanded) {
+            document.addEventListener("keydown", handleKeyDown);
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+            document.body.style.overflow = "";
+        };
+    }, [expanded, handleKeyDown]);
 
     /* ── Lazy-load: only mount iframe when near viewport ── */
     useEffect(() => {
@@ -129,6 +151,20 @@ const FigmaEmbed = ({
                             onLoad={() => setLoaded(true)}
                         />
                     )}
+
+                    {/* Expand button — appears on hover */}
+                    {loaded && (
+                        <button
+                            className="fe-expand-btn"
+                            onClick={() => setExpanded(true)}
+                            aria-label="Expand to full screen"
+                            title="Expand"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M10 2h4v4M6 14H2v-4M14 2l-5 5M2 14l5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                        </button>
+                    )}
                 </div>
             )}
 
@@ -138,6 +174,50 @@ const FigmaEmbed = ({
                     <p className="fe-caption">{caption}</p>
                 </div>
             )}
+
+            {/* ── Expanded modal ── */}
+            <AnimatePresence>
+                {expanded && (
+                    <motion.div
+                        className="fe-modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        onClick={() => setExpanded(false)}
+                    >
+                        <motion.div
+                            className="fe-modal-inner"
+                            initial={{ scale: 0.96, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.96, opacity: 0 }}
+                            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="fe-modal-toolbar">
+                                <span className="fe-modal-title">{title}</span>
+                                <button
+                                    className="fe-modal-close"
+                                    onClick={() => setExpanded(false)}
+                                    aria-label="Close"
+                                >
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className="fe-modal-frame">
+                                <iframe
+                                    src={src}
+                                    title={title}
+                                    allowFullScreen
+                                    className="fe-modal-iframe"
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 };
