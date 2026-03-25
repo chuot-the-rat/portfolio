@@ -1,0 +1,177 @@
+/**
+ * Resume.css
+ * Minimal styling for Resume page.
+ * Uses design tokens from global.css for consistency.
+ */
+
+/* ─── PAGE CONTAINER ─── */
+.resume {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+.resume-main {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: var(--section-spacing-base) var(--space-8);
+}
+
+/* ─── HERO SECTION ─── */
+.resume-hero {
+    text-align: center;
+    margin-bottom: var(--section-spacing-lg);
+}
+
+.resume-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.resume-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    line-height: var(--line-height-relaxed);
+}
+
+/* ─── EMBEDDED RESUME VIEWER ─── */
+.resume-embed-container {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    margin-bottom: var(--section-spacing-md);
+    overflow: hidden;
+}
+
+/* Responsive iframe wrapper (maintains aspect ratio) */
+.resume-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 141.42%; /* 8.5:12 aspect ratio for Letter size */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-base);
+    background-color: var(--color-bg-secondary);
+}
+
+.resume-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ─── ACTION BUTTONS ─── */
+.resume-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resume-buttons {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.resume-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-base);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--duration-base) var(--ease-smooth);
+    cursor: pointer;
+    white-space: nowrap;
+    outline-offset: var(--focus-offset);
+}
+
+/* Primary button (Open in New Tab) */
+.resume-btn--primary {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border: 2px solid var(--color-text);
+}
+
+.resume-btn--primary:hover {
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    transform: translateY(-2px);
+}
+
+/* Secondary button (Download PDF) */
+.resume-btn--secondary {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+}
+
+.resume-btn--secondary:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-tertiary);
+    transform: translateY(-2px);
+}
+
+/* ─── FOCUS STATES (Accessibility) ─── */
+.resume-btn:focus-visible {
+    outline: var(--focus-ring);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+    .resume-main {
+        padding: var(--section-spacing-sm) var(--space-6);
+    }
+
+    .resume-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .resume-subtitle {
+        font-size: var(--font-size-base);
+    }
+
+    .resume-embed-container {
+        padding: var(--space-6);
+        margin-bottom: var(--section-spacing-sm);
+    }
+
+    .resume-buttons {
+        gap: var(--space-4);
+    }
+
+    .resume-btn {
+        padding: var(--space-3) var(--space-6);
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* ─── DARK MODE SUPPORT ─── */
+[data-theme="dark"] .resume-btn--primary:hover {
+    background-color: var(--color-text);
+    color: var(--color-bg);
+}
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+    .resume-btn {
+        transition: none;
+    }
+
+    .resume-btn:hover {
+        transform: none;
+    }
+}

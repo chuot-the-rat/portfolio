@@ -1,35 +1,74 @@
-/* Projects Page Styles */
+/* ==========================================================================
+   PROJECTS PAGE - INTENTIONAL INTERACTIVE LAYOUT
+   Premium, editorial presentation with strong visual hierarchy and
+   refined micro-interactions that match Simulation section polish
+
+   Design principles:
+   - Strong, noticeable hover states that reveal and lift
+   - Background reveals on interaction (transparency → secondary color)
+   - Typography that strengthens with engagement
+   - Generous spacing creates breathing room and importance
+   - Clear visual rhythm through consistent spacing scale
+   - Micro-interactions feel intentional and controlled
+   ========================================================================== */
+
+/* ──────────────────────────────────────────────────────────────────────
+   PAGE SHELL
+   ────────────────────────────────────────────────────────────────────── */
 
 .projects-page {
     display: flex;
     min-height: calc(100vh - 70px);
+    background-color: var(--color-bg);
 }
 
 .projects-main {
     width: 100%;
-    padding: clamp(2rem, 6vw, 4rem);
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
+    padding: var(--section-spacing-base) var(--gutter);
 }
 
+@media (max-width: 768px) {
+    .projects-main {
+        padding: var(--section-spacing-sm) var(--gutter-mobile);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   HERO / PAGE HEADER - Strengthened Presence
+   ────────────────────────────────────────────────────────────────────── */
+
 .projects-hero {
-    margin-bottom: clamp(3rem, 8vw, 6rem);
+    margin-bottom: var(--section-spacing-lg);
     text-align: center;
+    padding-bottom: var(--section-spacing-base);
+    border-bottom: 1px solid var(--color-border);
+    transition: border-color var(--duration-base) var(--ease-smooth);
 }
 
 .projects-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: var(--font-size-4xl);
     font-weight: 700;
-    color: #1c1917;
-    margin-bottom: 1rem;
-    letter-spacing: -1px;
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+    letter-spacing: var(--letter-spacing-tight);
+    font-family: var(--font-sans);
 }
 
 .projects-subtitle {
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    color: #57534e;
-    font-weight: 400;
+    font-size: var(--font-size-base);
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0;
+    transition: color var(--duration-base) var(--ease-smooth);
 }
+
+/* ──────────────────────────────────────────────────────────────────────
+   LOADING STATE
+   ────────────────────────────────────────────────────────────────────── */
 
 .projects-loading {
     display: flex;
@@ -41,80 +80,298 @@
 .loading-spinner {
     width: 40px;
     height: 40px;
-    border: 2px solid #e7e5e4;
-    border-top-color: #212121;
-    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    border-top-color: var(--color-accent);
+    border-radius: var(--radius-full);
+    animation: spin 1s linear infinite;
 }
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   PROJECTS GRID - Dynamic, Asymmetrical Layout + Hover Dominance
+   Featured project larger, rest in varied grid
+   Creates visual hierarchy and editorial feel
+   Implements "Jackie Hu" hover dominance: non-hovered items soften
+   ────────────────────────────────────────────────────────────────────── */
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-16);
+    width: 100%;
+    margin-top: var(--section-spacing-lg);
 }
+
+/* HOVER DOMINANCE PATTERN:
+   When grid is hovered, all cards soften (de-emphasis).
+   When a specific card is hovered, it becomes prominent (emphasis).
+   This creates "Jackie Hu" interaction energy. */
+
+/* All cards fade when grid is hovered */
+.projects-grid:hover .project-card-link {
+    opacity: 0.38;
+}
+
+/* Except the card being hovered becomes "the object" */
+.project-card:hover .project-card-link {
+    opacity: 1;
+}
+
+/* Featured project (first card) — LARGE */
+.project-card:first-child {
+    grid-column: 1 / 2;
+    grid-row: span 2;
+}
+
+/* Third project (if exists) — also featured sizing */
+.project-card:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1 / 3;
+}
+
+/* Larger screens get 3-column layout for more dynamic composition */
+@media (min-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-20);
+    }
+
+    .project-card:first-child {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .project-card:nth-child(3) {
+        grid-column: 3;
+        grid-row: 1 / 3;
+    }
+}
+
+/* Tablet: 2-column with first featured */
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-16);
+    }
+
+    .project-card:nth-child(3) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+}
+
+/* Mobile: Stack all */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
+        margin-top: var(--section-spacing-base);
+    }
+
+    .project-card:first-child {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .project-card:nth-child(3) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    /* Mobile: Don't punish touch users with de-emphasis */
+    .projects-grid:hover .project-card-link {
+        opacity: 1;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   PROJECT CARD CONTAINER
+   ────────────────────────────────────────────────────────────────────── */
 
 .project-card {
     position: relative;
     height: 100%;
 }
 
+/* ──────────────────────────────────────────────────────────────────────
+   PROJECT CARD LINK - STRONG Interactive States
+   Much more impactful than before with:
+   - Background color reveals (white → light gray)
+   - Stronger shadow elevation (+4px lift)
+   - Typography strengthening (font-weight increase)
+   - Border darkening for emphasis
+   ────────────────────────────────────────────────────────────────────── */
+
 .project-card-link {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: clamp(1.5rem, 3vw, 2rem);
-    background: #ffffff;
-    border: 1px solid #e7e5e4;
-    border-radius: 8px;
+    padding: var(--space-8);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     text-decoration: none;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+
+    /* Smooth transitions for all state changes - extended list for more properties */
+    transition:
+        background-color var(--duration-base) var(--ease-smooth),
+        border-color var(--duration-base) var(--ease-smooth),
+        box-shadow var(--duration-base) var(--ease-smooth),
+        transform var(--duration-base) var(--ease-smooth),
+        opacity var(--duration-base) var(--ease-smooth);
 }
 
-.project-card-link:hover {
-    border-color: #212121;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+/* ─ Default State (clean, minimal) ─ */
+.project-card-link {
+    background-color: var(--color-bg);
+    border-color: var(--color-border);
+    box-shadow: none;
 }
+
+/* ─ Hover State (STRONG elevation + focus) ─
+   This is the key change: much more noticeable interaction */
+.project-card-link:hover {
+    /* Background reveals (white → off-white) */
+    background-color: var(--color-bg-secondary);
+
+    /* Border darkens significantly */
+    border-color: var(--color-text-secondary);
+
+    /* STRONG shadow elevation - matching Simulation section quality */
+    box-shadow: var(--shadow-lg);
+
+    /* More noticeable lift (+4px vs +2px) */
+    transform: translateY(-4px);
+}
+
+/* ─ Active/Focus State ─ */
+.project-card-link:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   TEXT HIERARCHY - Header with Stronger Typography
+   ────────────────────────────────────────────────────────────────────── */
 
 .project-card-header {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-4);
     margin-bottom: auto;
+    transition:
+        opacity var(--duration-base) var(--ease-smooth),
+        color var(--duration-base) var(--ease-smooth);
 }
 
+/* ─ Project Title - Primary Focus with Typography Strengthening ─ */
 .project-card-title {
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-size: var(--font-size-xl);
     font-weight: 600;
-    color: #1c1917;
+    color: var(--color-text);
     margin: 0;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+
+    transition:
+        color var(--duration-base) var(--ease-smooth),
+        font-weight 150ms var(--ease-smooth),
+        opacity var(--duration-base) var(--ease-smooth);
 }
 
-.project-card-subtitle {
-    font-size: 0.95rem;
-    color: #57534e;
-    line-height: 1.5;
-    margin: 0;
+/* STRENGTHENED on hover - becomes bolder */
+.project-card-link:hover .project-card-title {
+    color: var(--color-accent);
+    font-weight: 700;
 }
+
+/* Featured project (first) - much larger title */
+.project-card:first-child .project-card-title {
+    font-size: clamp(var(--font-size-xl), 2.5vw, var(--font-size-3xl));
+}
+
+/* Third project - featured but smaller than first */
+.project-card:nth-child(3) .project-card-title {
+    font-size: clamp(var(--font-size-lg), 1.8vw, var(--font-size-2xl));
+}
+
+/* ─ Project Subtitle / Tagline - Supporting Text ─ */
+.project-card-subtitle {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    margin: 0;
+
+    transition:
+        color var(--duration-base) var(--ease-smooth),
+        opacity var(--duration-base) var(--ease-smooth);
+}
+
+/* Enhanced on hover */
+.project-card-link:hover .project-card-subtitle {
+    color: var(--color-text);
+    opacity: 0.9;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   METADATA ROW - Year, Category, Info (with Prominent Styling)
+   ────────────────────────────────────────────────────────────────────── */
 
 .project-card-meta {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e7e5e4;
-    font-size: 0.85rem;
-    color: #616161;
+    gap: var(--space-4);
+    margin-top: auto;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+
+    transition:
+        border-color var(--duration-base) var(--ease-smooth),
+        color var(--duration-base) var(--ease-smooth);
 }
 
+/* Border becomes darker and more visible on hover */
+.project-card-link:hover .project-card-meta {
+    border-top-color: var(--color-text-secondary);
+    color: var(--color-text-secondary);
+}
+
+/* ─ Individual Metadata Item ─ */
 .project-meta-item {
     display: inline-block;
 }
 
+/* ─ Metadata Divider Dot ─ */
 .project-meta-dot {
-    color: #c9c5c0;
+    color: var(--color-border);
+    font-weight: 300;
+
+    transition: color var(--duration-base) var(--ease-smooth);
 }
+
+.project-card-link:hover .project-meta-dot {
+    color: var(--color-text-secondary);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   HIGHLIGHT LAYER - Subtle Visual Effect
+   ────────────────────────────────────────────────────────────────────── */
 
 .project-card-highlight {
     position: absolute;
@@ -122,17 +379,115 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(33, 33, 33, 0.02);
+    background-color: transparent;
     pointer-events: none;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
+
+    transition:
+        background-color var(--duration-base) var(--ease-smooth),
+        opacity var(--duration-base) var(--ease-smooth);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   DE-EMPHASIS SYSTEM
+   When one project is hovered, others should feel de-emphasized
+   This is handled via Framer Motion in JSX, but CSS provides the foundation
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Optional: Add a muted class for use with JavaScript */
+.project-card.is-muted .project-card-link {
+    opacity: 0.55;
+    border-color: var(--color-border);
+}
+
+.project-card.is-muted .project-card-link:hover {
+    opacity: 0.7;
+    transform: none;
+    background-color: var(--color-bg);
+    box-shadow: none;
+}
+
+.project-card.is-active .project-card-link {
+    border-color: var(--color-text-secondary);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   RESPONSIVE BEHAVIOR - Tablet
+   ────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    .project-card-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .project-card-link {
+        padding: var(--space-6);
+    }
 }
 
 @media (max-width: 768px) {
-    .projects-main {
-        padding: clamp(1.5rem, 4vw, 2rem);
-    }
-
     .projects-grid {
         grid-template-columns: 1fr;
     }
+
+    .project-card-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .project-card-link {
+        padding: var(--space-6);
+    }
+
+    /* On mobile, background reveal is more subtle - no need for aggressive shadow */
+    .project-card-link:active {
+        background-color: var(--color-bg-secondary);
+        border-color: var(--color-text-tertiary);
+        transform: translateY(-2px);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   ACCESSIBILITY
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .project-card-link,
+    .project-card-title,
+    .project-card-subtitle,
+    .project-card-meta,
+    .project-meta-dot,
+    .project-card-highlight {
+        transition: none;
+    }
+
+    .project-card-link:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode - stronger emphasis */
+@media (prefers-contrast: more) {
+    .project-card-link {
+        border-width: 2px;
+    }
+
+    .project-card-link:hover {
+        border-width: 2px;
+        border-color: var(--color-text);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   DARK MODE
+   ────────────────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] .project-card-link {
+    background-color: var(--color-bg);
+}
+
+[data-theme="dark"] .project-card-link:hover {
+    background-color: var(--color-bg-secondary);
+    box-shadow: var(--shadow-lg);
 }
