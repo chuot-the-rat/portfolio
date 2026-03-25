@@ -1,3 +1,27 @@
+/**
+ * Projects.jsx
+ * Main projects/work page showing all case studies and design projects.
+ *
+ * What it does:
+ * - Loads project data (both case studies and standalone projects)
+ * - Renders a grid of project cards with title, subtitle, category, year
+ * - Tracks which project is hovered (for optional de-emphasis effect)
+ * - Shows loading spinner while data fetches
+ * - Uses Framer Motion for card entrance animations
+ *
+ * How the data loads:
+ * 1. getAllProjects() gets case studies from centralized JSON
+ * 2. Fetches projects.json to get metadata for all projects
+ * 3. For standalone projects, also fetches /projects/:id/data.json
+ * 4. Merges all data together into single list
+ * 5. Displays combined grid
+ *
+ * Links work correctly:
+ * - Case studies go to /projects/:id
+ * - Standalone projects go to /design/:id
+ * (getProjectPath() handles routing automatically)
+ */
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -9,17 +33,23 @@ import {
 import "./Projects.css";
 
 export default function Projects() {
+    // State for projects list
     const [projects, setProjects] = useState([]);
+    // Track if data is still loading
     const [loading, setLoading] = useState(true);
+    // Track which project is being hovered (for hover dominance effect)
     const [hoveredProject, setHoveredProject] = useState(null);
 
     useEffect(() => {
         try {
+            // Get case studies from centralized mapper utility
             const caseStudyProjects = getAllProjects();
 
+            // Fetch master projects list metadata
             fetch("/projects.json")
                 .then((res) => res.json())
                 .then(async (projectsList) => {
+                    // Merge case study data with project metadata
                     const caseStudyCards = await Promise.all(
                         caseStudyProjects.map(async (project, index) => {
                             const projectMeta =
@@ -33,10 +63,12 @@ export default function Projects() {
                         }),
                     );
 
+                    // Find projects that aren't case studies
                     const standaloneEntries = projectsList.filter((p) =>
                         isStandaloneProject(p.id),
                     );
 
+                    // Fetch data.json for each standalone project
                     const standaloneCards = await Promise.all(
                         standaloneEntries.map(async (entry) => {
                             try {
@@ -55,6 +87,7 @@ export default function Projects() {
                         }),
                     );
 
+                    // Merge case studies + standalone projects
                     setProjects([
                         ...caseStudyCards,
                         ...standaloneCards.filter(Boolean),
@@ -64,7 +97,7 @@ export default function Projects() {
                 .catch((error) => {
                     console.error("Error loading projects.json:", error);
                     const projectsWithData = caseStudyProjects.map(
-                        (project, index) => ({
+                        (project) => ({
                             ...project,
                         }),
                     );
@@ -80,101 +113,117 @@ export default function Projects() {
     return (
         <div className="projects-page">
             <main className="projects-main">
-                <motion.section
-                    className="projects-hero"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="projects-title">Selected Work</h1>
-                    <p className="projects-subtitle">
-                        {projects.length}{" "}
-                        {projects.length === 1 ? "project" : "projects"}
-                    </p>
-                </motion.section>
-
-                {loading ? (
-                    <div className="projects-loading">
+                <section className="section">
+                    <div className="container--wide stack stack--tight">
+                        {/* Header with kicker label */}
                         <motion.div
-                            className="loading-spinner"
-                            animate={{ rotate: 360 }}
-                            transition={{
-                                duration: 1,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
-                        />
+                            className="stack"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <div className="kicker">Selected Work</div>
+                            <h1 className="projects-title">
+                                {projects.length}{" "}
+                                {projects.length === 1
+                                    ? "project"
+                                    : "projects"}
+                            </h1>
+                            <p className="projects-subtitle">
+                                Curated case studies and design work
+                            </p>
+                        </motion.div>
+
+                        {/* Loading state */}
+                        {loading ? (
+                            <div className="projects-loading">
+                                <motion.div
+                                    className="loading-spinner"
+                                    animate={{ rotate: 360 }}
+                                    transition={{
+                                        duration: 1,
+                                        repeat: Infinity,
+                                        ease: "linear",
+                                    }}
+                                />
+                            </div>
+                        ) : (
+                            // Work list with energy layer hover dominance
+                            <div className="workList">
+                                {projects.map((project, index) => (
+                                    <motion.article
+                                        key={project.id}
+                                        className="workItem"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            duration: 0.5,
+                                            delay: 0.08 * index,
+                                            ease: [0.4, 0, 0.2, 1],
+                                        }}
+                                        onMouseEnter={() =>
+                                            setHoveredProject(project)
+                                        }
+                                        onMouseLeave={() =>
+                                            setHoveredProject(null)
+                                        }
+                                        tabIndex={0}
+                                        onFocus={() =>
+                                            setHoveredProject(project)
+                                        }
+                                        onBlur={() =>
+                                            setHoveredProject(null)
+                                        }
+                                    >
+                                        <Link
+                                            to={getProjectPath(project.id)}
+                                            className="workRow"
+                                        >
+                                            {/* Project title */}
+                                            <div className="workTitle">
+                                                {project.title}
+                                            </div>
+
+                                            {/* Project metadata */}
+                                            <div className="workMeta">
+                                                {project.category && (
+                                                    <>
+                                                        <span>
+                                                            {project.category}
+                                                        </span>
+                                                        {project.year && (
+                                                            <>
+                                                                <span>
+                                                                    {" "}
+                                                                    ·{" "}
+                                                                </span>
+                                                                <span>
+                                                                    {project.year}
+                                                                </span>
+                                                            </>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
+                                        </Link>
+
+                                        {/* Preview image fades in on hover */}
+                                        {project.previewImage && (
+                                            <div className="workPreview">
+                                                <img
+                                                    src={
+                                                        project.previewImage
+                                                    }
+                                                    alt={`${project.title} preview`}
+                                                />
+                                            </div>
+                                        )}
+                                    </motion.article>
+                                ))}
+                            </div>
+                        )}
                     </div>
-                ) : (
-                    <section className="projects-grid">
-                        {projects.map((project, index) => (
-                            <motion.div
-                                key={project.id}
-                                className="project-card"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                    duration: 0.5,
-                                    delay: 0.08 * index,
-                                    ease: [0.4, 0, 0.2, 1],
-                                }}
-                                onMouseEnter={() => setHoveredProject(project)}
-                                onMouseLeave={() => setHoveredProject(null)}
-                            >
-                                <Link
-                                    to={getProjectPath(project.id)}
-                                    className="project-card-link"
-                                >
-                                    <div className="project-card-header">
-                                        <h3 className="project-card-title">
-                                            {project.title}
-                                        </h3>
-                                        {(project.subtitle ||
-                                            project.tagline) && (
-                                            <p className="project-card-subtitle">
-                                                {project.subtitle ||
-                                                    project.tagline}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    <div className="project-card-meta">
-                                        {project.category && (
-                                            <>
-                                                <span className="project-meta-item">
-                                                    {project.category}
-                                                </span>
-                                                <span className="project-meta-dot">
-                                                    ·
-                                                </span>
-                                            </>
-                                        )}
-                                        {project.year && (
-                                            <span className="project-meta-item">
-                                                {project.year}
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    {hoveredProject?.id === project.id && (
-                                        <motion.div
-                                            className="project-card-highlight"
-                                            layoutId="project-highlight"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            transition={{
-                                                type: "spring",
-                                                stiffness: 300,
-                                                damping: 30,
-                                            }}
-                                        />
-                                    )}
-                                </Link>
-                            </motion.div>
-                        ))}
-                    </section>
-                )}
+                </section>
             </main>
         </div>
     );

@@ -1,3 +1,22 @@
+/**
+ * projectDataMapper.js
+ * Utilities for loading and transforming project data.
+ *
+ * This file handles:
+ * - Loading case studies from the centralized JSON file
+ * - Identifying standalone vs case study projects
+ * - Transforming raw case study data into app-friendly format
+ * - Building correct links for different project types
+ *
+ * Two project types:
+ * 1. Case studies: Live in /projects/:id, share structure, defined in database
+ * 2. Standalone projects: Live in /design/:id, self-contained data.json files
+ *
+ * Data source:
+ * - Case studies come from case_studies_standardized.json (imported at top)
+ * - Standalone IDs are listed in STANDALONE_PROJECT_IDS from App.jsx
+ */
+
 // Utility to map case_studies_standardized.json structure to the format expected by UI components
 import caseStudiesData from "../assets/case_studies_standardized.json";
 import { STANDALONE_PROJECT_IDS } from "../App";
@@ -5,38 +24,61 @@ import { STANDALONE_PROJECT_IDS } from "../App";
 /** IDs that live under /design/:slug instead of /projects/:id */
 export { STANDALONE_PROJECT_IDS };
 
-/** Check if a project ID is standalone (uses its own data.json, not case study format) */
+/**
+ * Check if a project is a standalone (self-contained) project.
+ * Standalone projects aren't case studies and live in their own /design/:id route.
+ * @param {string} id - Project ID to check
+ * @returns {boolean} True if this is a standalone project
+ */
 export const isStandaloneProject = (id) => STANDALONE_PROJECT_IDS.includes(id);
 
-/** Build the correct link path for a project */
+/**
+ * Get the correct link path for any project.
+ * Automatically routes to correct URL based on project type.
+ * @param {string} id - Project ID
+ * @returns {string} URL path (/projects/:id or /design/:id)
+ */
 export const getProjectPath = (id) =>
     isStandaloneProject(id) ? `/design/${id}` : `/projects/${id}`;
 
 /**
- * Helper to extract images from section data
+ * Helper to extract images from section data.
+ * Different sections store images in different properties.
+ * @param {object} section - Section object that may contain images
+ * @returns {array} Array of image URLs or empty array if none found
  */
 const extractImages = (section) => {
     if (!section) return [];
+    // Try different property names common across case studies
     return section.images || section.visuals || [];
 };
 
 /**
- * Maps a case study from the centralized JSON to the format expected by ProjectDetail and Home components
- * Preserves the full data structure for comprehensive rendering
- * @param {object} caseStudy - raw case study object
+ * Maps a raw case study from the JSON into the format UI components expect.
+ * This is the main transformation function — handles data shape differences.
+ *
+ * Why this is needed:
+ * - Raw JSON has deep nested sections with varied property names
+ * - UI components expect flat properties (project.problem, project.solution, etc.)
+ * - This function bridges the gap, preserving all data while restructuring
+ *
+ * @param {object} caseStudy - Raw case study object from JSON
  * @param {number} index - 0-based position in the case_studies array
+ * @returns {object} Transformed project object ready for UI
  */
 export const mapCaseStudyToProject = (caseStudy, index = 0) => {
     if (!caseStudy) return null;
 
     const { sections } = caseStudy;
 
+    // ─── TOOLS TRANSFORMATION ───
     // Keep tools_used as categorized object AND create flattened array
     const toolsFlat = caseStudy.tools_used
         ? Object.values(caseStudy.tools_used).flat()
         : [];
 
-    // Determine preview layout from project type if not specified
+    // ─── PREVIEW LAYOUT DETECTION ───
+    // Determine how to display preview based on project type
     const getPreviewLayout = () => {
         if (caseStudy.preview_layout) return caseStudy.preview_layout;
         const type = caseStudy.project_type?.toLowerCase() || "";
@@ -45,8 +87,9 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         return "tablet";
     };
 
+    // Return transformed object with all properties UI components need
     return {
-        // Core metadata
+        // ─── CORE METADATA ───
         id: caseStudy.id,
         slug: caseStudy.slug,
         caseIndex: index + 1, // 1-based case study index for micro-index system
@@ -60,28 +103,28 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         context: caseStudy.context,
         teamSize: caseStudy.team_size,
 
-        // Role data (preserve array and create string)
+        // ─── ROLE DATA ─── preserve both array and string formats
         roleArray: caseStudy.role || [],
         role: Array.isArray(caseStudy.role)
             ? caseStudy.role.join(", ")
             : caseStudy.role,
         responsibilities: caseStudy.responsibilities || [],
 
-        // Tools (both formats)
+        // ─── TOOLS ─── provide both categorized and flat arrays
         toolsCategories: caseStudy.tools_used || {},
         tools: toolsFlat,
 
-        // Media
+        // ─── LINKS & MEDIA ───
         media: caseStudy.media || {},
-
-        // Links
         links: caseStudy.links || {},
 
-        // Legacy fields for compatibility
+        // ─── LEGACY FIELDS ─── for backwards compatibility with older component code
         timeline: caseStudy.duration,
         team: `${caseStudy.team_size} team members`,
 
-        // Map sections to expected format (preserve full data structure)
+        // ─── SECTION TRANSFORMATIONS ───
+        // Convert nested section structure to flat project properties
+        // Each property corresponds to a section of the case study
         overview: sections?.hook
             ? {
                   title: "Overview",
@@ -105,6 +148,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                       const process = sections.research_process;
                       let desc = process.content || "";
 
+                      // Append key findings if they exist
                       if (
                           process.key_findings &&
                           process.key_findings.length > 0
@@ -114,6 +158,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                               process.key_findings.join(" ");
                       }
 
+                      // Append reflection if it exists
                       if (process.reflection) {
                           desc += "\n\n" + process.reflection;
                       }
@@ -142,7 +187,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   }
                 : null,
 
-        // Structured pivot data for ProcessTimeline + FeatureGraveyard
+        // ─── PIVOT DATA ─── structured for ProcessTimeline + FeatureGraveyard
         pivot: sections?.pivot
             ? {
                   timelineSteps: sections.pivot.timelineSteps || [],
@@ -295,7 +340,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
               }
             : null,
 
-        // Additional metadata
+        // ─── DISPLAY SETTINGS ───
         previewLayout: getPreviewLayout(),
         status: caseStudy.status,
         featured: caseStudy.featured,
@@ -303,7 +348,10 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
 };
 
 /**
- * Gets all case studies and maps them to project format
+ * Gets all case studies and maps them to project format.
+ * Use this to load the full project list.
+ *
+ * @returns {array} Array of transformed project objects
  */
 export const getAllProjects = () => {
     if (!caseStudiesData?.case_studies) {
@@ -311,13 +359,18 @@ export const getAllProjects = () => {
         return [];
     }
 
+    // Map each case study with its index (for micro-index numbering)
     return caseStudiesData.case_studies.map((cs, i) =>
         mapCaseStudyToProject(cs, i),
     );
 };
 
 /**
- * Gets a single project by ID
+ * Gets a single project by ID or slug.
+ * Use this when loading a specific project detail page.
+ *
+ * @param {string} id - Project ID or slug to look up
+ * @returns {object|null} Transformed project object or null if not found
  */
 export const getProjectById = (id) => {
     if (!caseStudiesData?.case_studies) {
@@ -325,12 +378,17 @@ export const getProjectById = (id) => {
         return null;
     }
 
+    // Find the case study by matching either id or slug
     const caseStudyIndex = caseStudiesData.case_studies.findIndex(
         (cs) => cs.id === id || cs.slug === id,
     );
+
+    // Get the case study (or null if not found)
     const caseStudy =
         caseStudyIndex >= 0
             ? caseStudiesData.case_studies[caseStudyIndex]
             : null;
+
+    // Transform and return (includes the case study index for numbering)
     return caseStudy ? mapCaseStudyToProject(caseStudy, caseStudyIndex) : null;
 };

@@ -1,0 +1,781 @@
+/* ==========================================================================
+   GLOBAL DESIGN SYSTEM - ENHANCED
+   Minimal, Editorial, Intentional Portfolio Foundation
+   Inspired by Jackie Hu (interaction-rich) + Sharleen Wang (structured)
+
+   ARCHITECTURE: This file imports specialized CSS modules for scalability
+   ========================================================================== */
+
+/* Import design system modules */
+@import "./variables.css";
+@import "./typography.css";
+@import "./energy.css";
+
+/* ──────────────────────────────────────────────────────────────────────
+   2. RESET & BASE STYLES
+   ────────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    transition:
+        background-color var(--duration-base) var(--ease-smooth),
+        color var(--duration-base) var(--ease-smooth);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   4. INTERACTIVE STATES
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Focus Visible - Keyboard Navigation */
+:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+/* Button Base */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+button:disabled,
+input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Input Base */
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   5. LAYOUT UTILITIES
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Container - Main Content Wrapper */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-inline: var(--gutter-mobile);
+    }
+}
+
+/* Container Variants */
+.container--narrow {
+    max-width: var(--max-width-narrow);
+}
+
+.container--wide {
+    max-width: var(--max-width-wide);
+}
+
+.container--full {
+    max-width: 100%;
+}
+
+.container--no-gutter {
+    padding: 0;
+}
+
+/* Section Base */
+section {
+    margin-bottom: var(--section-spacing-base);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   6. REUSABLE COMPONENT PATTERNS
+   ────────────────────────────────────────────────────────────────────── */
+
+/* ─ Button System ─ */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text);
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-smooth);
+    outline-offset: var(--focus-offset);
+}
+
+.button:hover {
+    border-color: var(--color-text);
+    box-shadow: var(--shadow-md);
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+.button:focus-visible {
+    outline: var(--focus-ring);
+}
+
+/* Button Variants */
+.button--primary {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+}
+
+.button--primary:hover {
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+    box-shadow: var(--shadow-lg);
+}
+
+.button--secondary {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border);
+}
+
+.button--secondary:hover {
+    background-color: var(--color-border);
+    border-color: var(--color-text-secondary);
+}
+
+.button--ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--color-text);
+}
+
+.button--ghost:hover {
+    background-color: var(--color-bg-secondary);
+    box-shadow: none;
+}
+
+.button--sm {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-xs);
+}
+
+.button--lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--font-size-base);
+}
+
+/* ─ Refined Button Class (Editorial) ─ */
+/* For high-emphasis CTAs and navigation that feel designed */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: calc(var(--space-fluid-xs) + 0.1rem) var(--space-fluid-s);
+    border-radius: 999px; /* pill: "object" feel */
+    font-family: var(--font-mono);
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    transition:
+        transform var(--dur-2) var(--ease-out-quad),
+        box-shadow var(--dur-2) var(--ease-out-quad),
+        opacity var(--dur-2) var(--ease-out-quad);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* ─ Badge / Label System ─ */
+
+.badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-tracking);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+}
+
+.badge--accent {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+}
+
+/* ─ Label Typography: Editorial UI (Jackie-like) ─ */
+/* Wide-tracked metadata labels for "designed" energy */
+
+.meta,
+.kicker,
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+    line-height: var(--line-height-snug);
+    opacity: 0.78;
+}
+
+/* Tighter tracking for tags/buttons */
+.micro {
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* ─ Layout Primitives: Vertical Rhythm ─ */
+
+/* Stack: vertical spacing rhythm (Every Layout pattern) */
+.stack > * + * {
+    margin-top: var(--space-fluid-m);
+}
+
+.stack-tight > * + * {
+    margin-top: var(--space-fluid-s);
+}
+
+.stack-loose > * + * {
+    margin-top: var(--space-fluid-l);
+}
+
+/* Prose: editorial reading width for case studies, about pages */
+.prose {
+    max-width: 68ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ─ Card System ─ */
+
+.card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.card:hover {
+    border-color: var(--color-text-tertiary);
+    box-shadow: var(--shadow-md);
+}
+
+.card--elevated {
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+}
+
+.card--elevated:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.card--compact {
+    padding: var(--space-4);
+}
+
+/* ─ Grid System ─ */
+
+.grid {
+    display: grid;
+    gap: var(--space-8);
+}
+
+.grid--2col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--auto {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (max-width: 768px) {
+    .grid--2col,
+    .grid--3col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─ Flex Utilities ─ */
+
+.flex {
+    display: flex;
+}
+
+.flex--center {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex--between {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex--gap {
+    gap: var(--space-4);
+}
+
+.flex--gap-lg {
+    gap: var(--space-8);
+}
+
+/* ─ Stack Utilities ─ */
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.stack--tight {
+    gap: var(--space-2);
+}
+
+.stack--loose {
+    gap: var(--space-8);
+}
+
+/* ─ Text Utilities ─ */
+
+.text-muted {
+    color: var(--color-text-secondary);
+}
+
+.text-subtle {
+    color: var(--color-text-tertiary);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-sm {
+    font-size: var(--font-size-sm);
+}
+
+.text-xs {
+    font-size: var(--font-size-xs);
+}
+
+.text-lg {
+    font-size: var(--font-size-lg);
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-tracking);
+}
+
+.text-tracking {
+    letter-spacing: var(--letter-spacing-tracking);
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+/* ─ Spacing Utilities ─ */
+
+.mb-0 {
+    margin-bottom: 0;
+}
+.mb-2 {
+    margin-bottom: var(--space-2);
+}
+.mb-4 {
+    margin-bottom: var(--space-4);
+}
+.mb-6 {
+    margin-bottom: var(--space-6);
+}
+.mb-8 {
+    margin-bottom: var(--space-8);
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+.mt-2 {
+    margin-top: var(--space-2);
+}
+.mt-4 {
+    margin-top: var(--space-4);
+}
+.mt-6 {
+    margin-top: var(--space-6);
+}
+.mt-8 {
+    margin-top: var(--space-8);
+}
+
+.gap-4 {
+    gap: var(--space-4);
+}
+.gap-6 {
+    gap: var(--space-6);
+}
+.gap-8 {
+    gap: var(--space-8);
+}
+
+/* ─ Display Utilities ─ */
+
+.hidden {
+    display: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ─ Visibility Utilities ─ */
+
+.invisible {
+    visibility: hidden;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   7. LAYOUT PATTERNS
+   ────────────────────────────────────────────────────────────────────── */
+
+/* ─ Hero Section Pattern ─ */
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-16) var(--gutter);
+    text-align: center;
+}
+
+/* ─ Page Section Pattern ─ */
+
+.page-section {
+    padding: var(--section-spacing-base) 0;
+}
+
+.page-section--lg {
+    padding: var(--section-spacing-lg) 0;
+}
+
+.page-section--sm {
+    padding: var(--section-spacing-sm) 0;
+}
+
+.page-section--header {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.page-section--footer {
+    border-top: 1px solid var(--color-border);
+}
+
+/* ─ Two Column Layout ─ */
+
+.layout-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .layout-2col {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+}
+
+/* ─ Sidebar Layout ─ */
+
+.layout-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--space-12);
+    align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
+    .layout-sidebar {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+}
+
+/* ─ Full Width Section ─ */
+
+.section-full-bleed {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
+    padding-top: var(--section-spacing-base);
+    padding-bottom: var(--section-spacing-base);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   8. DIVIDER & BORDER PATTERNS
+   ────────────────────────────────────────────────────────────────────── */
+
+.divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: var(--section-spacing-base) 0;
+}
+
+.divider--fade {
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--color-border) 20%,
+        var(--color-border) 80%,
+        transparent 100%
+    );
+}
+
+.divider--short {
+    width: 60px;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: var(--space-6) 0;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   9. ANIMATION & MOTION
+   ────────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Scroll Reveal Pattern */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity var(--duration-slow) var(--ease-smooth),
+        transform var(--duration-slow) var(--ease-smooth);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   10. RESPONSIVE UTILITIES
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Hide on Mobile */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none;
+    }
+
+    /* Adjust spacing on mobile */
+    section {
+        margin-bottom: var(--section-spacing-sm);
+    }
+
+    .container {
+        padding: 0 var(--gutter-mobile);
+    }
+}
+
+/* Hide on Desktop */
+@media (min-width: 769px) {
+    .hide-desktop {
+        display: none;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   11. ACCESSIBILITY
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .scroll-reveal {
+        transition: none;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: more) {
+    .button,
+    .card,
+    .badge {
+        border-width: 2px;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   12. DARK MODE ADJUSTMENTS
+   ────────────────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] .card {
+    background-color: var(--color-bg);
+}
+
+[data-theme="dark"] .badge {
+    background-color: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .button--secondary {
+    background-color: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] blockquote {
+    border-left-color: var(--color-accent);
+}
