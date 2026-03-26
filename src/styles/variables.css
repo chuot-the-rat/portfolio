@@ -28,8 +28,8 @@
     /* Code/UI: Technical, monospace */
     --font-mono: ui-monospace, "SF Mono", "Monaco", Consolas, monospace;
 
-    /* Display: Distinctive, high-attention serif for h1/h2 */
-    --font-display: "Georgia", ui-serif, serif;
+    /* Display: Same as sans — no serif */
+    --font-display: var(--font-sans);
 
     /* ─────────────────────────────────────────────────────────────────
        TYPOGRAPHY SCALE

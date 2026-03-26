@@ -142,10 +142,16 @@ a, button, [role="button"] {
 }
 
 .workItem {
-  border-radius: 16px;
-  border: 1px solid color-mix(in oklab, currentColor 12%, transparent);
-  padding: var(--space-m);
+  border-radius: 0;
+  border: none;
+  border-top: 1px solid color-mix(in oklab, currentColor 10%, transparent);
+  padding: var(--space-l) 0;
   transform: translateY(0);
+  transition: opacity var(--dur-ui) var(--ease-out-premium);
+}
+
+.workItem:last-child {
+  border-bottom: 1px solid color-mix(in oklab, currentColor 10%, transparent);
 }
 
 .workRow {
@@ -157,24 +163,26 @@ a, button, [role="button"] {
 }
 
 .workTitle {
-  font-size: var(--text-lg);
+  font-size: var(--h3);
   line-height: 1.2;
   letter-spacing: var(--track-title);
+  transition: opacity var(--dur-ui) var(--ease-out-premium);
 }
 
 .workMeta {
   font-size: var(--text-sm);
-  opacity: 0.7;
+  opacity: 0.55;
   white-space: nowrap;
+  letter-spacing: 0.06em;
 }
 
 .workPreview {
   margin-top: var(--space-s);
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
 
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(6px);
   transition: opacity var(--dur-slow) var(--ease-out-premium),
               transform var(--dur-slow) var(--ease-out-premium);
 }
@@ -183,7 +191,6 @@ a, button, [role="button"] {
 .workList:hover .workItem { opacity: var(--hover-dim); }
 .workList:hover .workItem:hover {
   opacity: 1;
-  transform: translateY(var(--lift));
 }
 .workList:hover .workItem:hover .workPreview {
   opacity: 1;
@@ -193,7 +200,6 @@ a, button, [role="button"] {
 /* Keyboard parity via :focus-within */
 .workItem:focus-within {
   opacity: 1;
-  transform: translateY(var(--lift));
 }
 .workItem:focus-within .workPreview {
   opacity: 1;

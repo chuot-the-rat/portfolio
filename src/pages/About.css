@@ -1,6 +1,6 @@
 /* ==========================================================================
-   ABOUT PAGE STYLES - Dynamic Composition with Visual Grouping
-   Break away from simple vertical layout into intentional sections
+   ABOUT PAGE
+   Editorial single-column layout — generous whitespace, indexed sections
    ========================================================================== */
 
 .about {
@@ -11,237 +11,108 @@
 
 .about-main {
     width: 100%;
-    padding: clamp(var(--space-12), 6vw, var(--section-spacing-base));
     max-width: var(--max-width);
     margin: 0 auto;
+    padding: clamp(4rem, 10vw, 8rem) var(--gutter) clamp(4rem, 8vw, 6rem);
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   HERO SECTION - Establish Page Visual Identity
-   ────────────────────────────────────────────────────────────────────── */
+/* ── Opening statement ── */
 
-.about-hero {
-    margin-bottom: clamp(
-        var(--section-spacing-sm),
-        8vw,
-        var(--section-spacing-base)
-    );
-    text-align: center;
-    padding-bottom: var(--section-spacing-base);
+.about-statement-wrap {
+    padding-bottom: clamp(3rem, 7vw, 5rem);
     border-bottom: 1px solid var(--color-border);
-    transition: border-color var(--duration-base) var(--ease-smooth);
+    margin-bottom: clamp(3rem, 7vw, 5rem);
 }
 
-.about-title {
-    font-size: clamp(var(--font-size-2xl), 6vw, var(--font-size-4xl));
-    font-weight: 700;
+.about-statement {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     color: var(--color-text);
-    margin-bottom: var(--space-4);
-    letter-spacing: var(--letter-spacing-tight);
+    max-width: 820px;
+    margin: 0;
 }
 
-.about-subtitle {
-    font-size: clamp(var(--font-size-base), 2vw, var(--font-size-lg));
-    color: var(--color-text-secondary);
-    font-weight: 400;
-    line-height: var(--line-height-relaxed);
-}
+/* ── Body ── */
 
-/* ──────────────────────────────────────────────────────────────────────
-   CONTENT SECTION - Intentional Grouping with Better Layout
-   ────────────────────────────────────────────────────────────────────── */
-
-.about-content {
-    margin-bottom: clamp(
-        var(--section-spacing-sm),
-        8vw,
-        var(--section-spacing-base)
-    );
-}
-
-/* Main grid: 2-column on desktop with offset grouping */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(var(--space-12), 4vw, var(--space-16));
-    margin-bottom: var(--space-8);
-}
-
-/* Left column: primary content */
-.about-col {
+.about-body {
     display: flex;
     flex-direction: column;
+    gap: clamp(3rem, 7vw, 5rem);
+}
+
+/* ── Indexed section ── */
+
+.about-section {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
     gap: var(--space-6);
+    align-items: start;
 }
 
-/* Right column: offset and highlighted */
-.about-col:nth-child(2) {
-    padding-top: var(--space-8);
+.about-index {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    padding-top: 0.35em; /* optical align with first text line */
+    white-space: nowrap;
 }
 
-.about-section-title {
-    font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
-    font-weight: 700;
-    color: var(--color-text);
-    margin: 0;
-    letter-spacing: var(--letter-spacing-tight);
+.about-section-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 640px;
 }
 
 .about-text {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
+    font-size: clamp(1rem, 1.1vw, 1.0625rem);
+    line-height: 1.75;
     color: var(--color-text-secondary);
     margin: 0;
-    max-width: 520px;
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   CALLOUT SECTION - Visually Distinct Group
-   ────────────────────────────────────────────────────────────────────── */
+/* ── Contact ── */
 
-.about-callout {
-    padding: var(--space-12);
-    margin: var(--section-spacing-base) 0;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background-color: var(--color-bg);
-    transition:
-        all var(--duration-base) var(--ease-smooth);
+.about-contact {
+    padding-top: clamp(2rem, 5vw, 3.5rem);
+    border-top: 1px solid var(--color-border);
 }
 
-.about-callout:hover {
-    border-color: var(--color-text-secondary);
-    background-color: var(--color-bg-secondary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-}
-
-.about-callout-title {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: var(--space-3);
-    margin-top: 0;
-}
-
-.about-callout-text {
-    font-size: var(--font-size-sm);
+.about-contact-text {
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.6;
     color: var(--color-text-secondary);
     margin: 0;
-    line-height: var(--line-height-relaxed);
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   CALL-TO-ACTION SECTION - STRENGTHENED (Main Focus)
-   ────────────────────────────────────────────────────────────────────── */
-
-.about-cta {
-    text-align: center;
-    padding: clamp(var(--space-12), 4vw, var(--space-16));
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background-color: var(--color-bg);
-    transition:
-        border-color var(--duration-base) var(--ease-smooth),
-        background-color var(--duration-base) var(--ease-smooth),
-        box-shadow var(--duration-base) var(--ease-smooth);
-    margin-top: clamp(var(--section-spacing-sm), 6vw, var(--section-spacing-base));
-}
-
-.about-cta:hover {
-    border-color: var(--color-text-secondary);
-    background-color: var(--color-bg-secondary);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
-.about-cta-title {
-    font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
-    font-weight: 700;
+.about-contact-link {
     color: var(--color-text);
-    margin-bottom: var(--space-4);
-    letter-spacing: var(--letter-spacing-tight);
-}
-
-.about-cta-text {
-    font-size: var(--font-size-base);
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-8);
-    line-height: var(--line-height-relaxed);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* ──────────────────────────────────────────────────────────────────────
-   CTA LINKS - Powerful Interactive Elements
-   ────────────────────────────────────────────────────────────────────── */
-
-.about-cta-links {
-    display: flex;
-    gap: var(--space-6);
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.about-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-6);
-    background-color: var(--color-accent);
-    color: var(--color-bg);
-    text-decoration: none;
-    border-radius: var(--radius-base);
-    font-weight: 500;
-    font-size: var(--font-size-sm);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, var(--color-text) 35%, transparent);
     transition:
-        background-color var(--duration-base) var(--ease-smooth),
-        transform 200ms var(--ease-smooth),
-        box-shadow var(--duration-base) var(--ease-smooth);
-    outline-offset: var(--focus-offset);
+        text-decoration-color 200ms ease,
+        color 200ms ease;
 }
 
-.about-link:hover {
-    background-color: var(--color-text);
-    transform: translateX(6px) translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+.about-contact-link:hover {
+    color: var(--color-text);
+    text-decoration-color: var(--color-text);
 }
 
-.about-link:focus-visible {
-    outline: var(--focus-ring);
-}
+/* ── Responsive ── */
 
-/* ──────────────────────────────────────────────────────────────────────
-   RESPONSIVE
-   ────────────────────────────────────────────────────────────────────── */
-
-@media (max-width: 1024px) {
-    .about-grid {
+@media (max-width: 640px) {
+    .about-section {
         grid-template-columns: 1fr;
-        gap: var(--space-12);
+        gap: var(--space-2);
     }
 
-    .about-col:nth-child(2) {
+    .about-index {
         padding-top: 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .about-main {
-        padding: clamp(var(--space-6), 4vw, var(--space-8));
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-8);
-    }
-
-    .about-cta-links {
-        flex-direction: column;
-        gap: var(--space-4);
-    }
-
-    .about-link {
-        width: 100%;
-        justify-content: center;
     }
 }
