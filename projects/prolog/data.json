@@ -41,7 +41,7 @@
     },
     "research": {
         "title": "Research & Insights",
-        "description": "Policy and documentation review (SkilledTradesBC), stakeholder conversations with industry partners, persona development based on lived experience, and team reflection sessions (informed by neurodivergent team members) formed the research foundation.\n\nKey findings revealed: Progress tracking is scattered across multiple platforms with no single source of truth. Official systems are desktop-first and difficult to use on job sites. Discrepancies between employer-logged and self-logged hours create anxiety. Neurodivergent users experience amplified cognitive load from inconsistent interfaces.\n\nDue to limited participant access, the research leaned on available strengths: lived experience from team members, publicly available documentation, and stakeholder conversations.",,
+        "description": "Policy and documentation review (SkilledTradesBC), stakeholder conversations with industry partners, persona development based on lived experience, and team reflection sessions (informed by neurodivergent team members) formed the research foundation.\n\nKey findings revealed: Progress tracking is scattered across multiple platforms with no single source of truth. Official systems are desktop-first and difficult to use on job sites. Discrepancies between employer-logged and self-logged hours create anxiety. Neurodivergent users experience amplified cognitive load from inconsistent interfaces.\n\nDue to limited participant access, the research leaned on available strengths: lived experience from team members, publicly available documentation, and stakeholder conversations.",
         "images": [
             {
                 "src": "projects/prolog/images/problem.svg",
@@ -51,7 +51,7 @@
     },
     "challenges": {
         "title": "Early Challenges",
-        "description": "Initial project scope proved overly broad. The ambition to address financial stress, employer communication, exam preparation, and progress tracking simultaneously created design paralysis.\n\nNarrowing the focus to neurodivergent apprentices specifically proved transformative. This constraint allowed deeper empathy-driven design rather than generic solutions.",,
+        "description": "Initial project scope proved overly broad. The ambition to address financial stress, employer communication, exam preparation, and progress tracking simultaneously created design paralysis.\n\nNarrowing the focus to neurodivergent apprentices specifically proved transformative. This constraint allowed deeper empathy-driven design rather than generic solutions.",
         "pivots": [
             {
                 "from": "Solving all apprenticeship problems",
@@ -62,12 +62,12 @@
     },
     "lofi": {
         "title": "Lo-Fi Exploration",
-        "description": "Early sketches prioritized understanding information hierarchy and scanning speed. The question driving the exploration was: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts emerged as core elements. All other information served as secondary context.",,
+        "description": "Early sketches prioritized understanding information hierarchy and scanning speed. The question driving the exploration was: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts emerged as core elements. All other information served as secondary context.",
         "images": []
     },
     "iterations": {
         "title": "High-Fidelity Designs",
-        "description": "High-fidelity designs emphasized a calming aesthetic. Soft colors, generous spacing, and typography designed to avoid clinical or overwhelming presentation formed the visual foundation.\n\nThe dashboard functioned as the emotional center of the application. Progress information—hours completed, hours remaining, competencies achieved—was made immediately visible rather than hidden behind navigation layers.",,
+        "description": "High-fidelity designs emphasized a calming aesthetic. Soft colors, generous spacing, and typography designed to avoid clinical or overwhelming presentation formed the visual foundation.\n\nThe dashboard functioned as the emotional center of the application. Progress information—hours completed, hours remaining, competencies achieved—was made immediately visible rather than hidden behind navigation layers.",
         "improvements": [
             "Prioritized calm through soft colors and generous spacing",
             "Made dashboard the emotional center with immediate progress visibility",

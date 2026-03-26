@@ -1,4 +1,9 @@
 {
+    "video": {
+        "embedUrl": "https://www.youtube.com/embed/vWXMGQpBQfs",
+        "title": "ProLog Promo Video",
+        "caption": "A walkthrough of the ProLog apprenticeship companion app"
+    },
     "title": "ProLog",
     "category": "Mobile App",
     "year": "2025",
