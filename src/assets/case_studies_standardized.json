@@ -477,12 +477,12 @@
                     "content": "Our lo-fi work focused on one core interaction: contributing to a story.\n\nWe sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic—we needed to test logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
                     "images": [
                         {
-                            "src": "/projects/inklink/lofi-1.png",
+                            "src": "/projects/inklink/images/Editor-lofi.svg",
                             "alt": "Story chain wireframe",
                             "caption": "Early exploration of the contribution flow"
                         },
                         {
-                            "src": "/projects/inklink/lofi-2.png",
+                            "src": "/projects/inklink/images/Home-lofi.svg",
                             "alt": "Turn-taking wireframe",
                             "caption": "Mapping turn order and notifications"
                         }
@@ -492,12 +492,12 @@
                     "content": "The high-fidelity designs leaned into typography and whitespace. We wanted the words to breathe.\n\nColor was used sparingly—mostly to indicate interactive elements and turn status. The writing itself stayed neutral, letting each contributor's voice come through without visual interference.\n\nScroll through the reading experience below. Notice how the interface disappears when you're focused on the story.",
                     "images": [
                         {
-                            "src": "/projects/inklink/hifi-1.png",
+                            "src": "/projects/inklink/images/Home.svg",
                             "alt": "Story reading view",
                             "caption": "Clean reading experience with minimal UI"
                         },
                         {
-                            "src": "/projects/inklink/hifi-2.png",
+                            "src": "/projects/inklink/images/Editor-1.svg",
                             "alt": "Contribution editor",
                             "caption": "Writing interface with previous context visible"
                         }
@@ -530,21 +530,21 @@
                             "title": "Public Story Chains",
                             "description": "Open stories that anyone can contribute to. Writers join, add a passage, and pass the story forward.",
                             "why": "Low barrier to entry. No commitment required—just jump in and write.",
-                            "image": "/projects/inklink/feature-public.png"
+                            "image": "/projects/inklink/images/Editor (public).svg"
                         },
                         {
                             "id": "private_projects",
                             "title": "Private Writing Circles",
                             "description": "Invite-only spaces for friends or writing groups. Turn order is set by the creator.",
                             "why": "Some writers want collaboration without strangers. Private circles offer that control.",
-                            "image": "/projects/inklink/feature-private.png"
+                            "image": "/projects/inklink/images/New Private Story.svg"
                         },
                         {
                             "id": "timed_turns",
                             "title": "Timed Contributions",
                             "description": "Optional time limits encourage momentum. If a turn expires, the next writer can step in.",
                             "why": "Deadlines reduce overthinking. A 24-hour window is long enough to be fair, short enough to keep stories moving.",
-                            "image": "/projects/inklink/feature-timed.png"
+                            "image": "/projects/inklink/images/Choose ink to continue from.svg"
                         }
                     ],
                     "prototype": {
