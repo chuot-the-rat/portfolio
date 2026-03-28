@@ -57,7 +57,7 @@
 
 html {
   /* WCAG 2.4.11 technique: helps keep focused elements visible with sticky headers */
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 4rem;
 }
 
 body {

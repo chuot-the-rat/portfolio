@@ -779,3 +779,13 @@ section {
 [data-theme="dark"] blockquote {
     border-left-color: var(--color-accent);
 }
+
+/* ── Section index label: editorial mono number prefix (01 —, 02 —) ── */
+.section-index {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    white-space: nowrap;
+}

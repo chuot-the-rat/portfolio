@@ -91,7 +91,7 @@
 
     --section-spacing-sm: var(--space-12); /* 48px: compact sections */
     --section-spacing-base: var(--space-16); /* 64px: standard sections */
-    --section-spacing-lg: var(--space-24); /* 96px: hero/major sections */
+    --section-spacing-lg: var(--space-32); /* 128px: hero/major sections */
 
     /* ─────────────────────────────────────────────────────────────────
        FLUID SPACING PALETTE (Utopia-inspired)

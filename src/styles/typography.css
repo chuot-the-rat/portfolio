@@ -21,17 +21,17 @@ h6 {
     margin-bottom: var(--space-4);
 }
 
-/* H1 - Page Hero: Distinctive serif display font, maximum prominence */
+/* H1 - Page Hero */
 h1 {
     font-family: var(--font-display);
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-4xl);
     font-weight: 700;
 }
 
-/* H2 - Section Title: Also display font, secondary hierarchy */
+/* H2 - Section Title */
 h2 {
     font-family: var(--font-display);
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
     font-weight: 600;
 }
 
