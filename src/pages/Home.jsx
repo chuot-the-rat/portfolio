@@ -9,7 +9,7 @@ import {
 import PreviewPanel from "../components/PreviewPanel";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
-import BracketCycler from "../components/BracketCycler";
+import ScrapbookHero from "../components/ScrapbookHero";
 import Marquee from "../components/Marquee";
 import "./Home.css";
 import "../components/SectionLayout.css";
@@ -567,11 +567,11 @@ const Home = () => {
 
     return (
         <div className="home">
+            {/* Scrapbook hero — full width, outside container */}
+            <ScrapbookHero />
+
             <main className="home-main">
                 <div className="container">
-                    {/* Hero Section — System Activated + Magnetic Field */}
-                    <HeroSection />
-
                     {/* Projects Grid */}
                     <section
                         className="home-projects"
@@ -579,20 +579,12 @@ const Home = () => {
                     >
                         {/* Projects Header */}
                         <motion.div
-                            className="home-projects-header home-projects-header-terminal"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.15, delay: 0 }}
+                            className="home-projects-header"
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
                         >
-                            <span className="terminal-prompt">&gt;</span>
-                            <span className="terminal-text">
-                                {" "}
-                                projects_index
-                            </span>
-                            <span className="terminal-count">
-                                {" "}
-                                [{projects.length} entries]
-                            </span>
+                            <span className="kicker">Selected Work</span>
                         </motion.div>
 
                         {loading ? (

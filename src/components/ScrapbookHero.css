@@ -1,0 +1,337 @@
+/* ============================================================
+   SCRAPBOOK HERO
+   Editorial layout + draggable sticker cards
+   ============================================================ */
+
+.scrap-hero {
+    position: relative;
+    min-height: calc(100vh - 56px);
+    padding: var(--space-24) var(--gutter) var(--space-16);
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+}
+
+/* ── Text block ── */
+
+.scrap-text {
+    position: relative;
+    z-index: 1;
+    max-width: 52%;
+    padding-bottom: var(--space-4);
+}
+
+.scrap-name {
+    font-size: clamp(3.5rem, 8.5vw, 7.5rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
+    color: var(--color-text);
+    margin: 0 0 var(--space-5) 0;
+}
+
+.scrap-role {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--space-8) 0;
+}
+
+.scrap-links {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+}
+
+.scrap-link {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+.scrap-link:hover {
+    color: var(--color-text);
+}
+
+/* ============================================================
+   STICKER BASE
+   ============================================================ */
+
+.scrap-sticker {
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    will-change: transform;
+}
+
+/* ============================================================
+   STAMP — oval dashed red, availability
+   ============================================================ */
+
+.sticker-stamp {
+    top: 14%;
+    right: 9%;
+    width: 116px;
+    height: 116px;
+}
+
+.stamp-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1.5px dashed #C13D3D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 16px;
+    color: #C13D3D;
+}
+
+.stamp-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #C13D3D;
+    flex-shrink: 0;
+    margin-bottom: 2px;
+}
+
+.stamp-main {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.stamp-sub {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    opacity: 0.55;
+    margin: 0;
+}
+
+/* ============================================================
+   LOCATION CARD — white card, washi tape
+   ============================================================ */
+
+.sticker-location {
+    top: 40%;
+    right: 5%;
+    width: 138px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+}
+
+.card-tape {
+    height: 13px;
+    width: 100%;
+}
+
+.card-tape--tan {
+    background: #D4BE9A;
+    opacity: 0.85;
+}
+
+.card-body {
+    padding: 8px 12px 14px;
+}
+
+.loc-city {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin: 0 0 3px;
+    line-height: 1.15;
+}
+
+.loc-region {
+    font-family: var(--font-mono);
+    font-size: 0.575rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 0;
+}
+
+/* ============================================================
+   POLAROID — project showcase
+   ============================================================ */
+
+.sticker-polaroid {
+    bottom: 18%;
+    right: 11%;
+    width: 154px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    box-shadow: 3px 5px 18px rgba(0, 0, 0, 0.09);
+    padding: 10px 10px 22px;
+}
+
+.polaroid-image {
+    width: 100%;
+    height: 116px;
+    background-color: #1C1C1E;
+    background-image: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.1) 1px,
+        transparent 1px
+    );
+    background-size: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.polaroid-project-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.polaroid-caption {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ============================================================
+   TICKET — BCIT credential, perforated edges
+   ============================================================ */
+
+.sticker-ticket {
+    top: 60%;
+    right: 32%;
+    width: 128px;
+    background: #fff;
+    border: 1.5px dashed var(--color-border);
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.06);
+    padding: 14px 16px 12px;
+}
+
+.ticket-school {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--color-text);
+    margin: 0 0 4px;
+    line-height: 1;
+}
+
+.ticket-program {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0 0 10px;
+    line-height: 1.6;
+}
+
+.ticket-divider {
+    height: 1px;
+    background: repeating-linear-gradient(
+        to right,
+        var(--color-border) 0px,
+        var(--color-border) 4px,
+        transparent 4px,
+        transparent 8px
+    );
+    margin-bottom: 8px;
+}
+
+.ticket-year {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 0;
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+    .sticker-location,
+    .sticker-polaroid,
+    .sticker-ticket {
+        background: #1a1a1a;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .loc-city,
+    .ticket-school {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .card-tape--tan {
+        background: #8a7560;
+    }
+
+    .polaroid-image {
+        background-color: #111;
+    }
+}
+
+/* ============================================================
+   MOBILE — hide stickers, simplified layout
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .scrap-hero {
+        min-height: 70vh;
+        align-items: flex-start;
+        padding-top: var(--space-16);
+    }
+
+    .scrap-text {
+        max-width: 100%;
+    }
+
+    .scrap-name {
+        font-size: clamp(2.8rem, 12vw, 4rem);
+    }
+
+    .sticker-stamp,
+    .sticker-location,
+    .sticker-polaroid,
+    .sticker-ticket {
+        display: none;
+    }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .scrap-sticker {
+        animation: none !important;
+        transition: none !important;
+    }
+}
