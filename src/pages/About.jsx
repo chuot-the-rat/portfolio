@@ -33,16 +33,16 @@ export default function About() {
                         <span className="about-index">01 —</span>
                         <div className="about-section-content">
                             <p className="about-text">
-                                I'm Leana, a UI/UX designer and front-end developer based in
-                                Vancouver. I'm currently completing my Diploma in Digital Design
-                                &amp; Development at BCIT, where I spend equal time thinking about
-                                how things should work and how they should look.
+                                I'm Leana — a UI/UX designer and front-end developer based in
+                                Vancouver, completing my Diploma in Digital Design &amp; Development
+                                at BCIT. I spend equal time thinking about how things should work
+                                and how they should look, which usually means the answer is both.
                             </p>
                             <p className="about-text">
                                 My background spans UX research, interface design, and front-end
-                                implementation — which means I can take a problem from whiteboard
-                                sketch to shipped product without losing the design intent along
-                                the way.
+                                implementation. I can take a problem from a whiteboard sketch to a
+                                shipped product without losing the design intent along the way —
+                                because I've been in the room for every step.
                             </p>
                         </div>
                     </section>
@@ -51,16 +51,30 @@ export default function About() {
                         <span className="about-index">02 —</span>
                         <div className="about-section-content">
                             <p className="about-text">
-                                I'm drawn to the moment where visual design and code meet — where
-                                a well-chosen transition makes an interface feel alive, or a
-                                single typographic decision changes how a page reads. I believe
-                                the best products are the ones where nobody notices the design,
-                                because it just works.
+                                I'm drawn to the seam where visual design and code meet. A
+                                well-timed transition that makes an interface feel alive. A
+                                typographic decision that changes how a whole page reads. The
+                                best products are the ones where the design disappears — where
+                                users just move through it without friction.
                             </p>
                             <p className="about-text">
-                                Outside of work I'm into motion graphics, building side projects,
-                                and finding excuses to learn new tools. I'm always open to
-                                interesting problems.
+                                I think the most interesting design problems are the ones that
+                                look simple on the surface. Getting a user to act, feel less
+                                anxious, or find something they didn't know they needed — those
+                                are harder than they appear and more satisfying to solve.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section className="about-section">
+                        <span className="about-index">03 —</span>
+                        <div className="about-section-content">
+                            <p className="about-text">
+                                Outside of school projects, I make motion graphics, build things
+                                to see if they're possible, and look for design patterns in
+                                places that aren't software. I'm currently looking for
+                                opportunities where design and development overlap — roles where
+                                I can contribute to both sides of the conversation.
                             </p>
                         </div>
                     </section>
@@ -68,12 +82,12 @@ export default function About() {
                     {/* Contact */}
                     <section className="about-contact">
                         <p className="about-contact-text">
-                            Want to work together?{" "}
+                            If that sounds useful to you,{" "}
                             <a
                                 href="mailto:leanale003@gmail.com"
                                 className="about-contact-link"
                             >
-                                Send me an email
+                                send me an email
                             </a>{" "}
                             or{" "}
                             <a
@@ -82,7 +96,7 @@ export default function About() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                connect on LinkedIn
+                                find me on LinkedIn
                             </a>
                             .
                         </p>
