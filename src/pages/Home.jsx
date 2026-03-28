@@ -10,6 +10,7 @@ import PreviewPanel from "../components/PreviewPanel";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import BracketCycler from "../components/BracketCycler";
+import Marquee from "../components/Marquee";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
@@ -818,9 +819,23 @@ const Home = () => {
                 </div>
             </main>
 
+            {/* Marquee strip */}
+            <Marquee />
+
             {/* Footer */}
             <footer className="home-footer">
                 <div className="container">
+                    {/* Footer CTA */}
+                    <div className="footer-cta">
+                        <p className="footer-cta-label">Get in touch</p>
+                        <a
+                            href="mailto:leanale003@gmail.com"
+                            className="footer-cta-link"
+                        >
+                            Let's work together
+                        </a>
+                    </div>
+
                     <div className="footer-content">
                         <div className="footer-links">
                             <a

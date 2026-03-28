@@ -179,6 +179,11 @@ export default function Projects() {
                                             to={getProjectPath(project.id)}
                                             className="workRow"
                                         >
+                                            {/* Index number */}
+                                            <div className="workIndex">
+                                                {String(index + 1).padStart(2, "0")}
+                                            </div>
+
                                             {/* Project title */}
                                             <div className="workTitle">
                                                 {project.title}

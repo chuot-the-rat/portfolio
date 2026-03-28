@@ -23,6 +23,7 @@
 
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import CursorFollower from "./components/CursorFollower";
 
 // Pages
 import Home from "./pages/Home";
@@ -52,6 +53,7 @@ export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap"];
 function App() {
     return (
         <div className="app">
+            <CursorFollower />
             {/* Navigation bar appears on all pages */}
             <Navigation />
 

@@ -156,10 +156,24 @@ a, button, [role="button"] {
 
 .workRow {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 3rem 1fr auto;
   gap: var(--space-s);
   align-items: baseline;
   text-decoration: none;
+}
+
+.workIndex {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-sm);
+  color: currentColor;
+  opacity: 0.28;
+  letter-spacing: 0.04em;
+  transition: opacity var(--dur-ui) var(--ease-out-premium);
+}
+
+.workItem:hover .workIndex,
+.workItem:focus-within .workIndex {
+  opacity: 0.55;
 }
 
 .workTitle {
