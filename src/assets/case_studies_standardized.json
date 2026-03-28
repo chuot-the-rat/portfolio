@@ -59,10 +59,10 @@
                         "Team reflection sessions (our team included neurodivergent members)"
                     ],
                     "key_findings": [
-                        "Progress tracking is scattered across multiple platforms with no single source of truth",
-                        "Official systems are desktop-first and difficult to use on job sites",
-                        "Discrepancies between employer-logged and self-logged hours create anxiety",
-                        "Neurodivergent users experience amplified cognitive load from inconsistent interfaces"
+                        "Hours, competencies, and certifications live on three separate platforms that don't talk to each other — apprentices were manually cross-referencing systems just to know where they stood",
+                        "The official SkilledTradesBC portal is desktop-only, which means it's useless on job sites where the actual work happens",
+                        "Hours discrepancies aren't just administrative errors — apprentices described the uncertainty as a source of real dread, especially before employer check-ins",
+                        "For neurodivergent apprentices, inconsistent UI patterns and unclear next steps aren't annoying — they're a cognitive tax paid on every login"
                     ],
                     "participant_count": null
                 },
@@ -256,31 +256,31 @@
                     }
                 },
                 "validation": {
-                    "content": "We tested the prototype with a small group. Users appreciated that they didn't have to hunt for information—it was just there. The hours tracker resonated strongly, addressing a previously unmet need.",
+                    "content": "One tester paused on the dashboard and went quiet for a moment. Then they said: \"I wish I had this when I started.\" That was the validation we needed — not a usability metric, just that reaction. The hours tracker hit hardest. Several users described a specific frustration we hadn't fully anticipated: not knowing whether to trust their own records. Seeing both logged and official hours side by side, with discrepancies flagged clearly, visibly relieved that tension.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Users reported feeling relieved by progress visibility",
-                        "Hours tracker addressed a previously unmet need",
-                        "Dashboard-first approach validated"
+                        "One tester said they wished this existed when they started — that response, more than anything else, told us we'd found the right problem",
+                        "The hours discrepancy tracker addressed something users hadn't known to ask for — seeing both sets of records side by side removed a specific, recurring anxiety",
+                        "Dashboard-first structure validated: users found their progress without being prompted, within the first few seconds of opening the app"
                     ]
                 },
                 "what_i_learned": [
                     {
                         "insight": "Clarity is an emotional outcome",
-                        "reflection": "When users said they felt 'relieved,' they were responding to design decisions—not just information architecture."
+                        "reflection": "When users said they felt 'relieved,' they weren't reacting to the information itself — they were reacting to not having to search for it. Design decisions, not data, produced that feeling."
                     },
                     {
                         "insight": "Scope control is a design skill",
-                        "reflection": "Saying no to good ideas was harder than coming up with them."
+                        "reflection": "Saying no to good ideas was harder than coming up with them. We had six problem spaces and had to choose one. That choice — not the features we built — was the most important design decision we made."
                     },
                     {
                         "insight": "Progress visualization restores motivation",
-                        "reflection": "Seeing how far you've come matters as much as knowing what's next."
+                        "reflection": "In testing, the moment users saw their hour count and percentage complete, their posture changed. They sat up. That's not a small thing — the app was working before they'd tapped anything."
                     },
                     {
                         "insight": "Qualitative feedback is valid",
-                        "reflection": "In student work, we don't always have access to large sample sizes. That doesn't make insights less real."
+                        "reflection": "We had a small sample and no statistical significance. But when someone pauses and says 'I wish I had this' — that's signal. Don't wait for n=100 to trust what you're seeing."
                     }
                 ],
                 "next_steps": [
@@ -373,14 +373,14 @@
                         "Concept validation sessions to gauge interest"
                     ],
                     "key_findings": [
-                        "Most creative writing happens on desktop or tablet—not mobile phones",
-                        "Dense, text-heavy layouts discourage reading and contribution",
-                        "New concepts require gentle onboarding; users won't explore without guidance"
+                        "Writers reach for larger screens — not because of preference, but because reading someone else's passage on a phone felt claustrophobic in testing",
+                        "Dense layouts killed the impulse to contribute — testers scrolled through full stories without stopping to write because the page felt too full to enter",
+                        "Without a single worked example, users assumed chain writing was complicated — one demonstration of how a turn worked was enough to unlock confidence"
                     ],
                     "participant_count": null
                 },
                 "early_challenges": {
-                    "content": ""
+                    "content": "Our first instinct was to build a better writing editor.\n\nWe designed an interface with rich formatting, version history, and real-time sync. It looked impressive in Figma. Then someone in our group asked a question we couldn't answer: 'What makes this different from just emailing a Google Doc back and forth?'\n\nWe'd been so focused on the tool that we'd missed the problem. Writers didn't need a better editor — they needed the weight of authorship lifted. Once we understood that, we stopped designing features and started designing permission."
                 },
                 "pivots": [
                     {
@@ -555,27 +555,27 @@
                     }
                 },
                 "validation": {
-                    "content": "Testers described InkLink as 'fun.' The reduced pressure was noticeable. Users felt less precious about their contributions because they knew someone else would build on them. The time limits helped keep the experience moving.",
+                    "content": "One tester laughed out loud mid-session — they'd just read an unexpected plot twist from a previous contributor and couldn't believe where the story had gone. That moment told us more than any task completion metric. InkLink worked when it surprised people, not just when it functioned correctly.\n\nThe reduced pressure showed up in behavior, not just words. Contributions came faster. Writers edited themselves less. One person said: 'I don't feel like I have to be good — I just have to not ruin it.' That tension — between accountability and freedom — was exactly the feeling we'd been designing toward.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Users described the experience as 'fun'",
-                        "Reduced pressure led to less perfectionism",
-                        "Time limits helped rather than hurt the experience"
+                        "One tester laughed out loud reading a plot twist from a previous contributor — the experience worked when it surprised people, not just when it ran correctly",
+                        "Writers edited themselves less and contributed faster — reduced individual ownership removed the perfectionism that kills first drafts",
+                        "Time limits helped: one person said deadlines gave them 'permission to just write something' rather than holding out for the perfect line"
                     ]
                 },
                 "what_i_learned": [
                     {
                         "insight": "Creativity benefits from constraints",
-                        "reflection": "Limiting options (one clear CTA, timed turns) reduced friction instead of adding it."
+                        "reflection": "Limiting options — one clear CTA, timed turns, single-column reading — reduced friction instead of adding it. Each constraint removed a decision writers would have otherwise agonized over."
                     },
                     {
                         "insight": "Visual clarity beats thematic styling",
-                        "reflection": "The newspaper aesthetic was fun but counterproductive."
+                        "reflection": "The newspaper layout looked striking in mockups. In testing, one person spent two minutes scanning before saying 'I don't know what I'm supposed to click.' We stripped it to a single column that afternoon and never looked back."
                     },
                     {
                         "insight": "Reducing features can increase engagement",
-                        "reflection": "We cut more than we added—and the product got better."
+                        "reflection": "The homepage had six ways to start. Users chose none. We cut it to one and they started every time. That's the only A/B test we needed."
                     }
                 ],
                 "next_steps": [
@@ -680,13 +680,23 @@
                     }
                 },
                 "early_challenges": {
-                    "content": ""
+                    "content": "The first version of SideQuest was a discovery app.\n\nUsers could filter by location, duration, cost, and category. There was a search bar. There was a 'For You' feed. It looked like a smaller, friendlier Yelp — and it had exactly the same problem: too much to decide before you did anything.\n\nI only realized this during paper prototype testing, when someone pushed the prototype aside and said: 'Can you just pick something for me?' That line became the product."
                 },
                 "pivots": [
                     {
-                        "from": "Dense filters and category lists",
-                        "to": "Lightweight 'quests' with minimal filtering",
-                        "reason": "Every filter we added made users less likely to act. Simplicity won."
+                        "from": "Discovery feed with filters",
+                        "to": "Single 'Give me a quest' button",
+                        "reason": "Every filter was another reason not to act. Removing them entirely wasn't a design compromise — it was the design."
+                    },
+                    {
+                        "from": "Neutral 'activity' language",
+                        "to": "'Quest' framing throughout",
+                        "reason": "Calling something a quest changed how users described it to each other. A walk became an exploration. The word did real work."
+                    },
+                    {
+                        "from": "Utility-style visual design",
+                        "to": "Warm palette and mascot guide",
+                        "reason": "The app wasn't solving a logistics problem — it was solving an emotional one. The design needed to feel like it was on your side."
                     }
                 ],
                 "pivot": {
@@ -850,13 +860,13 @@
                     }
                 },
                 "validation": {
-                    "content": "Users responded to the playfulness. The word 'quest' made people smile. The mascot got positive comments. The low-pressure framing worked—users felt more willing to try things because the stakes felt low.",
+                    "content": "One tester finished a quest, came back to the home screen, and immediately pressed 'Give me another.' No hesitation. That was the behavior we'd been designing for — not careful browsing, but automatic return.\n\nThe word 'quest' did more than we expected. People described the same activities differently when they called them quests. A walk to a new coffee shop became an exploration. A library trip became a mission. Framing isn't cosmetic — it changes how people relate to an action before they've taken it.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Playful language ('quest') increased engagement",
-                        "Mascot received positive feedback",
-                        "Low-pressure framing encouraged action"
+                        "One tester immediately pressed 'Give me another' after completing a quest — the return behavior we were designing for happened naturally",
+                        "Quest framing changed how users described activities out loud — the same walk to a café became 'an exploration' when labeled as a quest",
+                        "Low-pressure framing worked: users said they felt more willing to try something because 'it's not a big commitment — it's just a quest'"
                     ],
                     "embed": {
                         "src": "https://embed.figma.com/proto/A4EiDTstNofWUbiKhAbhHY/SideQuest-A6-UsabilityReport--Copy-?node-id=96-5355&p=f&viewport=293%2C208%2C0.05&scaling=contain&content-scaling=fixed&starting-point-node-id=96%3A5355&page-id=0%3A1&embed-host=share",
@@ -867,15 +877,15 @@
                 "what_i_learned": [
                     {
                         "insight": "Momentum beats choice",
-                        "reflection": "Getting users to act once is more valuable than giving them ten options."
+                        "reflection": "Getting a user to act once is worth more than giving them ten options. The first quest was always the hardest. After that, they came back on their own."
                     },
                     {
                         "insight": "Design should reduce hesitation",
-                        "reflection": "Every element either builds confidence or creates doubt. There's no neutral."
+                        "reflection": "Every element either builds confidence or creates doubt. The completion screen proved this — when I added a small celebratory message after finishing a quest, users came back for more. When I removed it to 'keep things minimal,' they didn't. There's no neutral design decision."
                     },
                     {
                         "insight": "Research, design, and code inform each other",
-                        "reflection": "Being involved in all three made each one stronger."
+                        "reflection": "Being the researcher, designer, and developer on the same project meant I could catch problems that handoffs usually miss. A finding in testing changed a design in Figma that afternoon. A constraint in code removed a feature the next morning. The loop was tight — and the product was better for it."
                     }
                 ],
                 "next_steps": [
