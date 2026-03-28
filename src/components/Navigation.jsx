@@ -15,43 +15,34 @@
  * - Helps with navigation and orientation
  */
 
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import navItems from "../data/navItems";
 import "./Navigation.css";
 
 export default function Navigation() {
-    // Get current URL path — tells us which page user is viewing
     const location = useLocation();
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 48);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
     return (
-        <nav className="navbar">
+        <nav className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
             <div className="nav-container">
-                {/* ─── LOGO/HOME LINK ─── */}
-                {/* Clicking this takes you back to home from anywhere */}
-                <Link
-                    to="/"
-                    className="nav-logo"
-                >
+                <Link to="/" className="nav-logo">
                     Leana Le
                 </Link>
 
-                {/* ─── NAV MENU ─── */}
-                {/* Render each navigation item from data/navItems.js */}
                 <ul className="nav-menu">
                     {navItems.map((item) => (
-                        <li
-                            key={item.path}
-                            className="nav-item"
-                        >
+                        <li key={item.path} className="nav-item">
                             <Link
                                 to={item.path}
-                                // Add "active" class if this link matches current page
-                                // CSS uses this to highlight the active link
-                                className={`nav-link ${
-                                    location.pathname === item.path
-                                        ? "active"
-                                        : ""
-                                }`}
+                                className={`nav-link${location.pathname === item.path ? " active" : ""}`}
                             >
                                 {item.label}
                             </Link>
@@ -62,3 +53,4 @@ export default function Navigation() {
         </nav>
     );
 }
+
