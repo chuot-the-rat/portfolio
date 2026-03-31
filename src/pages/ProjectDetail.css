@@ -1040,6 +1040,20 @@
     outline: var(--focus-ring);
 }
 
+/* ─ Hero Image ─ */
+.project-hero-image {
+    margin: var(--space-12) 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--color-bg-secondary);
+}
+
+.project-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* ──────────────────────────────────────────────────────────────────────
    IMAGE CAPTION
    ────────────────────────────────────────────────────────────────────── */

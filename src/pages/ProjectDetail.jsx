@@ -221,6 +221,17 @@ const ProjectDetail = () => {
 
                     <p className="project-hero-tagline">{project.tagline}</p>
 
+                    {/* Hero Image */}
+                    {project.media?.hero_image && (
+                        <div className="project-hero-image">
+                            <img
+                                src={project.media.hero_image}
+                                alt={`${project.title} hero`}
+                                loading="eager"
+                            />
+                        </div>
+                    )}
+
                     <div className="project-meta-grid">
                         <div className="project-meta-item">
                             <span className="meta-label">Role</span>
@@ -248,76 +259,13 @@ const ProjectDetail = () => {
                         )}
                     </div>
 
-                    {/* Responsibilities */}
-                    {project.responsibilities &&
-                        project.responsibilities.length > 0 && (
-                            <div className="project-responsibilities">
-                                <span className="meta-label">
-                                    Key Responsibilities
-                                </span>
-                                <ul className="responsibilities-list">
-                                    {project.responsibilities.map(
-                                        (resp, index) => (
-                                            <li
-                                                key={index}
-                                                className="responsibility-item"
-                                            >
-                                                {resp}
-                                            </li>
-                                        ),
-                                    )}
-                                </ul>
-                            </div>
-                        )}
-
-                    {/* Tools - Categorized */}
-                    {project.toolsCategories &&
-                        Object.keys(project.toolsCategories).length > 0 && (
-                            <div className="project-tools-categorized">
-                                {Object.entries(project.toolsCategories).map(
-                                    ([category, tools]) =>
-                                        tools && tools.length > 0 ? (
-                                            <div
-                                                key={category}
-                                                className="tools-category"
-                                            >
-                                                <span className="tools-category-label">
-                                                    {category}
-                                                </span>
-                                                <div className="tools-category-items">
-                                                    {tools.map(
-                                                        (tool, index) => (
-                                                            <span
-                                                                key={index}
-                                                                className="tool-tag"
-                                                            >
-                                                                {tool}
-                                                            </span>
-                                                        ),
-                                                    )}
-                                                </div>
-                                            </div>
-                                        ) : null,
-                                )}
-                            </div>
-                        )}
-
-                    {/* Legacy tools display */}
-                    {(!project.toolsCategories ||
-                        Object.keys(project.toolsCategories).length === 0) &&
-                        project.tools &&
-                        project.tools.length > 0 && (
-                            <div className="project-tools">
-                                {project.tools.map((tool, index) => (
-                                    <span
-                                        key={index}
-                                        className="tool-tag"
-                                    >
-                                        {tool}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
+                    {/* Tools — flat comma-separated list */}
+                    {project.tools && project.tools.length > 0 && (
+                        <div className="project-meta-item project-tools-flat">
+                            <span className="meta-label">Tools</span>
+                            <span className="meta-value">{project.tools.join(" · ")}</span>
+                        </div>
+                    )}
                 </div>
             </motion.section>
 
@@ -327,11 +275,7 @@ const ProjectDetail = () => {
                 ref={contentRef}
             >
                 <div className="container">
-                    <div className="project-content-layout">
-                        <ProjectContentMain project={project} />
-                        {/* Micro-index scroll progress sidebar */}
-                        <ScrollProgress contentRef={contentRef} />
-                    </div>
+                    <ProjectContentMain project={project} />
                 </div>
             </div>
         </div>
