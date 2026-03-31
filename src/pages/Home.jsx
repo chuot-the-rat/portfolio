@@ -7,8 +7,6 @@ import {
     isStandaloneProject,
 } from "../utils/projectDataMapper";
 import PreviewPanel from "../components/PreviewPanel";
-import SkillsSection from "../components/SkillsSection";
-import EducationSection from "../components/EducationSection";
 import ScrapbookHero from "../components/ScrapbookHero";
 import Marquee from "../components/Marquee";
 import "./Home.css";
@@ -803,11 +801,6 @@ const Home = () => {
                         )}
                     </section>
 
-                    {/* Skills Section */}
-                    <SkillsSection variant="grid" />
-
-                    {/* Education Section */}
-                    <EducationSection variant="timeline" />
                 </div>
             </main>
 

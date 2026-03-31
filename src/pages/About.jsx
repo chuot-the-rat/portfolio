@@ -79,6 +79,27 @@ export default function About() {
                         </div>
                     </section>
 
+                    <section className="about-section">
+                        <span className="about-index">04 —</span>
+                        <div className="about-section-content">
+                            <p className="about-text">
+                                Figma · User Research · Prototyping · Wireframing ·
+                                Design Systems · HTML/CSS · JavaScript · React ·
+                                After Effects · Framer · Illustrator · Git
+                            </p>
+                        </div>
+                    </section>
+
+                    <section className="about-section">
+                        <span className="about-index">05 —</span>
+                        <div className="about-section-content">
+                            <p className="about-text">
+                                Digital Design &amp; Development, Diploma —{" "}
+                                British Columbia Institute of Technology · 2024–2026
+                            </p>
+                        </div>
+                    </section>
+
                     {/* Contact */}
                     <section className="about-contact">
                         <p className="about-contact-text">
