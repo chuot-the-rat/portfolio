@@ -21,7 +21,8 @@
  * - Standalone: Self-contained projects, route to /design/:id
  */
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "./components/Navigation";
 import CursorFollower from "./components/CursorFollower";
 
@@ -51,14 +52,22 @@ import "./styles/App.css";
 export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap"];
 
 function App() {
+    const location = useLocation();
+
     return (
         <div className="app">
             <CursorFollower />
-            {/* Navigation bar appears on all pages */}
             <Navigation />
 
-            {/* Route definitions — determines which page renders based on URL */}
-            <Routes>
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={location.pathname}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                >
+            <Routes location={location}>
                 {/* ─── PRIMARY ROUTES ─── */}
                 <Route
                     path="/"
@@ -92,13 +101,10 @@ function App() {
                     element={<ProjectLayout />}
                 />
 
-                {/* ─── 404 CATCH-ALL ─── */}
-                {/* Must be last — matches any route not caught above */}
-                <Route
-                    path="*"
-                    element={<NotFound />}
-                />
+                <Route path="*" element={<NotFound />} />
             </Routes>
+                </motion.div>
+            </AnimatePresence>
         </div>
     );
 }

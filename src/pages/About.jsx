@@ -18,7 +18,7 @@ export default function About() {
                     {...fadeUp}
                 >
                     <p className="about-statement">
-                        I design things that are easy to use and hard to forget.
+                        I design and build — from research to shipped code, without losing the intent.
                     </p>
                 </motion.div>
 
