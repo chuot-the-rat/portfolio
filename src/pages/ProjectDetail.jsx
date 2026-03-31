@@ -137,6 +137,7 @@ const ProjectDetail = () => {
                 <div className="container">
                     <div className="project-hero-meta">
                         <span className="project-tag">{project.category}</span>
+                        <span>·</span>
                         <span className="project-year">{project.year}</span>
                     </div>
 
