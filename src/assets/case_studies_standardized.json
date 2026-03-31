@@ -386,9 +386,6 @@
         "hook": {
           "content": "Everyone has a story they never finished.\n\nMaybe it's a novel that stalled at chapter three. Maybe it's a screenplay that never made it past the outline. The ideas were there\u2014the momentum wasn't.\n\nInkLink started with a simple question: what if writing didn't have to be a solo activity? What if the pressure of finishing was replaced by the fun of contributing?"
         },
-        "problem_framing": {
-          "content": "Writer's block isn't usually about running out of ideas. It's about pressure.\n\nThe blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nWe wanted to design an experience that removed those barriers\u2014not by making writing easier, but by making it shared."
-        },
         "research_process": {
           "methods": [
             "Peer surveys with amateur and hobbyist writers",
@@ -533,19 +530,6 @@
             "type": "figma"
           }
         },
-        "development": {
-          "content": "This project was design-focused, but we kept implementation in mind throughout. Real-time collaboration features were scoped out early\u2014they would have required backend complexity beyond our timeline.\n\nInstead, we designed for asynchronous contribution. Turn-based writing actually fit the concept better: it gave each contributor time to think.",
-          "technical_decisions": [
-            "Designed for asynchronous rather than real-time collaboration",
-            "Prioritized tablet-first responsive design",
-            "Scoped out complex features like branching narratives"
-          ],
-          "constraints": [
-            "Limited development resources on team",
-            "Real-time sync would require significant backend work",
-            "Needed to support multiple device sizes"
-          ]
-        },
         "feature_breakdown": {
           "intro": "InkLink has three core modes of engagement. Explore them in the prototype below.",
           "features": [
@@ -600,26 +584,6 @@
           {
             "insight": "Reducing features can increase engagement",
             "reflection": "The homepage had six ways to start. Users chose none. We cut it to one and they started every time. That's the only A/B test we needed."
-          }
-        ],
-        "next_steps": [
-          {
-            "title": "Saved Drafts",
-            "tag": "Flow",
-            "outcome": "Writers can step away mid-thought and return without losing momentum.",
-            "impact": "Respects the creative process \u2014 not every contribution happens in one sitting."
-          },
-          {
-            "title": "Keyboard-First Navigation",
-            "tag": "Accessibility",
-            "outcome": "Full keyboard and screen reader support across the writing flow.",
-            "impact": "The collaborative experience opens up to every kind of writer."
-          },
-          {
-            "title": "Guided First Contribution",
-            "tag": "Onboarding",
-            "outcome": "New users understand chain writing through doing, not reading.",
-            "impact": "Lowers the barrier from curious visitor to active contributor."
           }
         ],
         "final_experience": {
