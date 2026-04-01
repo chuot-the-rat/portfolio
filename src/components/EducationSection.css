@@ -166,12 +166,12 @@
 }
 
 .education-status.in-progress {
-    background: rgba(33, 33, 33, 0.08);
+    background: rgba(var(--color-text), 0.08);
     color: var(--accent, #212121);
 }
 
 .education-status.completed {
-    background: rgba(87, 83, 78, 0.08);
+    background: var(--color-accent-secondary);
     color: var(--text-secondary, #57534e);
 }
 
@@ -372,7 +372,7 @@
 }
 
 .mode-work .education-entry {
-    background: rgba(255, 249, 240, 0.3);
+    background: var(--color-brand-tan);
     border-radius: 12px;
     padding: var(--space-6);
 }
@@ -382,6 +382,6 @@
 }
 
 .mode-work .education-entry:hover {
-    background: rgba(255, 249, 240, 0.5);
-    box-shadow: 0 4px 12px rgba(212, 165, 116, 0.1);
+    background: rgba(253, 249, 240, 0.7);
+    box-shadow: 0 4px 12px var(--color-brand-warm);
 }

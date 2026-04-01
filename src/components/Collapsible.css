@@ -1,0 +1,256 @@
+/* ─────────────────────────────────────────────────────────────────
+   COLLAPSIBLE — Expandable section for case study details
+   ───────────────────────────────────────────────────────────────── */
+
+.collapsible {
+    border: 1px solid var(--color-border, rgba(0, 0, 0, 0.08));
+    border-radius: 8px;
+    background: transparent;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.is-open {
+        background: rgba(0, 0, 0, 0.02);
+        border-color: var(--color-border, rgba(0, 0, 0, 0.12));
+    }
+}
+
+/* ─ Trigger button ─ */
+.collapsible-trigger {
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+
+    /* Remove default button styles */
+    &:active {
+        outline: none;
+    }
+
+    /* Focus state for keyboard nav */
+    &:focus-visible {
+        outline: 2px solid var(--color-accent, #000);
+        outline-offset: -2px;
+    }
+
+    /* Hover bg */
+    &:hover {
+        background: rgba(0, 0, 0, 0.03);
+    }
+
+    .collapsible.is-open & {
+        background: rgba(0, 0, 0, 0.04);
+    }
+}
+
+/* ─ Header layout ─ */
+.collapsible-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.collapsible-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+/* ─ Title ─ */
+.collapsible-title {
+    margin: 0;
+    font-size: 1.0625rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: -0.25px;
+    color: var(--color-text-primary, #000);
+}
+
+/* ─ Subtitle (optional) ─ */
+.collapsible-subtitle {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary, rgba(0, 0, 0, 0.65));
+    font-weight: 400;
+}
+
+/* ─ Chevron indicator ─ */
+.collapsible-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary, rgba(0, 0, 0, 0.65));
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    svg {
+        width: 100%;
+        height: 100%;
+        stroke: currentColor;
+    }
+
+    .collapsible-trigger:hover & {
+        color: var(--color-text-primary, #000);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}
+
+/* ─ Content section ─ */
+.collapsible-content {
+    padding: 0 1.5rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary, rgba(0, 0, 0, 0.7));
+
+    /* Typography in content */
+    h4,
+    h5,
+    h6 {
+        margin: 1.5rem 0 0.75rem;
+        font-weight: 600;
+        color: var(--color-text-primary, #000);
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    p {
+        margin: 0 0 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    ul,
+    ol {
+        margin: 0 0 1rem;
+        padding-left: 1.5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    strong {
+        font-weight: 600;
+        color: var(--color-text-primary, #000);
+    }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    .collapsible-trigger {
+        padding: 1rem 1.25rem;
+    }
+
+    .collapsible-title {
+        font-size: 1rem;
+    }
+
+    .collapsible-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .collapsible-content {
+        padding: 0 1.25rem 1.25rem;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DARK MODE
+   ════════════════════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+    .collapsible {
+        border-color: rgba(255, 255, 255, 0.1);
+
+        &.is-open {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+    }
+
+    .collapsible-trigger {
+        &:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .collapsible.is-open & {
+            background: rgba(255, 255, 255, 0.08);
+        }
+    }
+
+    .collapsible-title {
+        color: #fff;
+    }
+
+    .collapsible-subtitle {
+        color: rgba(255, 255, 255, 0.65);
+    }
+
+    .collapsible-chevron {
+        color: rgba(255, 255, 255, 0.65);
+
+        .collapsible-trigger:hover & {
+            color: #fff;
+        }
+    }
+
+    .collapsible-content {
+        color: rgba(255, 255, 255, 0.7);
+
+        h4,
+        h5,
+        h6 {
+            color: #fff;
+        }
+
+        strong {
+            color: #fff;
+        }
+    }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    .collapsible-trigger {
+        &:hover {
+            background: transparent;
+        }
+    }
+
+    .collapsible {
+        &.is-open {
+            transition: none;
+        }
+    }
+}

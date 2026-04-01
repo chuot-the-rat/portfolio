@@ -19,9 +19,7 @@
     overflow: hidden;
     background: var(--color-bg-secondary, #f5f5f5);
     border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.03),
-        0 4px 16px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-multi-layer);
     transition:
         transform 0.25s ease,
         box-shadow 0.3s ease;
@@ -29,9 +27,7 @@
 
 .fe-viewport:hover {
     transform: translateY(-4px);
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.05),
-        0 8px 28px rgba(0, 0, 0, 0.07);
+    box-shadow: var(--shadow-hover);
 }
 
 /* Prototype variant — taller, narrower, centered */
@@ -97,7 +93,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-modal);
 }
 
 .fe-modal-toolbar {

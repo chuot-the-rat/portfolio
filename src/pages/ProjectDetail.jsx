@@ -6,6 +6,7 @@ import PivotSection from "../components/PivotSection";
 import PivotDiagram from "../components/PivotDiagram";
 import WeightLiftedPivot from "../components/WeightLiftedPivot";
 import ClaritySubtractionScene from "../components/ClaritySubtractionScene";
+import Collapsible from "../components/Collapsible";
 import {
     SectionIndex,
     SectionTag,
@@ -1750,7 +1751,6 @@ const ProjectContentMain = ({ project }) => {
                                         (feature, i) => (
                                             <motion.div
                                                 key={feature.id || i}
-                                                className="feature-item"
                                                 initial={{ opacity: 0, y: 20 }}
                                                 whileInView={{
                                                     opacity: 1,
@@ -1762,29 +1762,37 @@ const ProjectContentMain = ({ project }) => {
                                                     delay: i * 0.1,
                                                 }}
                                             >
-                                                <h3 className="feature-title">
-                                                    {feature.title}
-                                                </h3>
-                                                <p className="feature-description">
-                                                    {feature.description}
-                                                </p>
-                                                {feature.why && (
-                                                    <p className="feature-why">
-                                                        <strong>Why:</strong>{" "}
-                                                        {feature.why}
-                                                    </p>
-                                                )}
-                                                {feature.image && (
-                                                    <div className="feature-image">
-                                                        <FigLabel
-                                                            index={nextImage()}
-                                                        />
-                                                        <img
-                                                            src={feature.image}
-                                                            alt={feature.title}
-                                                        />
-                                                    </div>
-                                                )}
+                                                <Collapsible
+                                                    title={feature.title}
+                                                    subtitle={
+                                                        feature.description
+                                                    }
+                                                >
+                                                    {feature.why && (
+                                                        <p>
+                                                            <strong>
+                                                                Why this
+                                                                approach:
+                                                            </strong>{" "}
+                                                            {feature.why}
+                                                        </p>
+                                                    )}
+                                                    {feature.image && (
+                                                        <div className="feature-image">
+                                                            <FigLabel
+                                                                index={nextImage()}
+                                                            />
+                                                            <img
+                                                                src={
+                                                                    feature.image
+                                                                }
+                                                                alt={
+                                                                    feature.title
+                                                                }
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </Collapsible>
                                             </motion.div>
                                         ),
                                     )}
@@ -1943,7 +1951,6 @@ const ProjectContentMain = ({ project }) => {
                                         (insight, i) => (
                                             <motion.div
                                                 key={i}
-                                                className="insight-item"
                                                 initial={{ opacity: 0, y: 20 }}
                                                 whileInView={{
                                                     opacity: 1,
@@ -1955,12 +1962,17 @@ const ProjectContentMain = ({ project }) => {
                                                     delay: i * 0.1,
                                                 }}
                                             >
-                                                <h3 className="insight-title">
-                                                    {insight.title}
-                                                </h3>
-                                                <p className="insight-description">
-                                                    {insight.description}
-                                                </p>
+                                                <Collapsible
+                                                    title={insight.insight}
+                                                    subtitle={
+                                                        insight.title
+                                                    }
+                                                >
+                                                    <p>
+                                                        {insight.reflection ||
+                                                            insight.description}
+                                                    </p>
+                                                </Collapsible>
                                             </motion.div>
                                         ),
                                     )}

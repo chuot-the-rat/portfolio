@@ -16,6 +16,11 @@
     --color-border: #e5e5e5;
     --color-accent: #212121;
 
+    /* Brand color tokens for reusable warm tones */
+    --color-brand-tan: rgba(253, 249, 240, 1);
+    --color-brand-warm: rgba(212, 165, 116, 0.1);
+    --color-accent-secondary: rgba(87, 83, 78, 0.08);
+
     /* ─────────────────────────────────────────────────────────────────
        FONT STACKS (Three-Voice System)
        ───────────────────────────────────────────────────────────────── */
@@ -72,10 +77,12 @@
        Fixed spacing for predictable layouts
        ───────────────────────────────────────────────────────────────── */
 
+    --space-0: 2px; /* Micro spacing */
     --space-1: 0.25rem; /* 4px */
     --space-2: 0.5rem; /* 8px */
     --space-3: 0.75rem; /* 12px */
     --space-4: 1rem; /* 16px */
+    --space-5: 1.25rem; /* 20px */
     --space-6: 1.5rem; /* 24px */
     --space-8: 2rem; /* 32px */
     --space-12: 3rem; /* 48px */
@@ -135,37 +142,43 @@
        Cubic-bezier functions for consistent animation feel
        ───────────────────────────────────────────────────────────────── */
 
-    /* Standard easing: smooth, professional motion */
+    /* Material Design standard: smooth, professional motion — USE THIS as default */
     --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Spring easing: playful, bouncy entrance */
+    /* Premium/snappy: quick, decisive — for emphasis and premium feel */
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Spring easing: playful, bouncy entrance — use sparingly for delight */
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    /* Linear-in easing: starts slow */
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-
-    /* Linear-out easing: finishes fast */
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-
-    /* Snappy: quick, decisive, Jackie-inspired (research-backed) */
-    --ease-out-quad: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Entrance: optimized for content reveals — slight ease-in-out */
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
     /* ─────────────────────────────────────────────────────────────────
        MOTION DURATIONS
        Timing values for transitions and animations
+       Consolidation strategy: All durations now follow dur-1/dur-2/dur-3 pattern
        ───────────────────────────────────────────────────────────────── */
 
-    /* Legacy (used in some components) */
-    --duration-extra-fast: 100ms;
-    --duration-fast: 200ms;
-    --duration-base: 300ms;
-    --duration-slow: 500ms;
-    --duration-slower: 800ms;
+    /* STANDARD MOTION PALETTE (preferred) */
+    --dur-1: 120ms; /* Instant feedback: interactive elements, micro-interactions */
+    --dur-2: 220ms; /* Standard: button hovers, card reveals, page transitions */
+    --dur-3: 360ms; /* Reveal: section reveals, entrance animations, modals */
 
-    /* Modern (shorter, snappier - research-backed for better UX) */
-    --dur-1: 120ms; /* Quick feedback */
-    --dur-2: 220ms; /* Standard interaction */
-    --dur-3: 360ms; /* Reveal/preview */
+    /* EXTENDED DURATIONS */
+    --dur-slow: 500ms; /* Careful: used for deliberate, observed animations */
+    --dur-slower: 800ms; /* Extra deliberate: hero entrance, major transitions */
+
+    /* SPECIAL DURATIONS */
+    --dur-instant: 0ms; /* No animation (use in dark mode resets) */
+    --dur-extra-fast: 100ms; /* Spinner, loading indicators */
+
+    /* DEPRECATED (kept for backward compatibility—migrate to dur-1/dur-2/dur-3) */
+    --duration-extra-fast: var(--dur-extra-fast); /* 100ms */
+    --duration-fast: var(--dur-1); /* 120ms → use --dur-1 */
+    --duration-base: var(--dur-2); /* 220ms → use --dur-2 */
+    --duration-slow: var(--dur-slow); /* 500ms */
+    --duration-slower: var(--dur-slower); /* 800ms */
 
     /* ─────────────────────────────────────────────────────────────────
        SHADOW SYSTEM
@@ -177,6 +190,13 @@
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
+
+    /* Extended shadows for specific use cases */
+    --shadow-lift: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.3);
+    --shadow-inset-soft: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-multi-layer: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
 
     /* ─────────────────────────────────────────────────────────────────
        FOCUS & KEYBOARD NAVIGATION

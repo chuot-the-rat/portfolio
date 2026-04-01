@@ -1,0 +1,152 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOTION & ANIMATION ARCHITECTURE
+   Comprehensive guide for consistent animation system across portfolio
+
+   Key Principles:
+   - Default to --ease-smooth (Material Design) for professional feel
+   - Use --dur-1, --dur-2, --dur-3 for all new animations
+   - Respect prefers-reduced-motion universally
+   - Match motion speed to user context (faster for interactions, slower for reveals)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   INPUT/INTERACTION ANIMATIONS (--dur-1: 120ms, --ease-smooth)
+   
+   Usage: Button hovers, toggle states, click feedback, form field focus
+   Rule: Instant, subtle feedback to user actions
+   Example: 
+     transition: color var(--dur-1) var(--ease-smooth);
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   STANDARD TRANSITIONS (--dur-2: 220ms, --ease-smooth)
+   
+   Usage: Page navigation, card reveals, hover state elevation, modal open
+   Rule: Default duration for most animations. Feels "snappy" but not rushed
+   Example:
+     transition: all var(--dur-2) var(--ease-smooth);
+     height var(--dur-2) var(--ease-smooth),
+     opacity var(--dur-2) var(--ease-smooth)
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   ENTRANCE/REVEAL ANIMATIONS (--dur-3: 360ms, --ease-smooth)
+   
+   Usage: Hero text reveal, section slides, in-view animations, image fades
+   Rule: Observable but not slow. Conveys intentionality, not delay
+   Framer Motion:
+     initial={{ opacity: 0, y: 20 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ duration: 0.36, ease: [0.4, 0, 0.2, 1] }}
+   CSS:
+     animation-duration: var(--dur-3);
+     animation-timing-function: var(--ease-smooth);
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PREMIUM/ACCENT ANIMATIONS (--dur-2: 220ms, --ease-premium)
+   
+   Usage: Logo animations, signature UI elements, delight moments
+   Rule: Quick and decisive. "This is intentional design."
+   Example:
+     transition: transform var(--dur-2) var(--ease-premium);
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   DELIBERATE/SLOW ANIMATIONS (--dur-slow: 500ms, --ease-smooth)
+   
+   Usage: Careful reveals, time-based explanations, tutorial sequences
+   Rule: Use rarely. Feels intentional but never feels like a delay
+   Example:
+     transition: opacity var(--dur-slow) var(--ease-smooth);
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   CONTINUOUS LOOPS (custom durations: 1s–40s)
+   
+   Usage: Marquee scroll, bracket-code typing, loading spinners
+   Rule: Use @keyframes with custom durations. Not subject to dur-1/2/3 rule
+   Examples:
+     - --dur-extra-fast (100ms): spinners, pulsing indicators
+     - 1s–4s: breathing animations, subtle loops
+     - 8s–40s: marquee, hero background animations
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ═════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   All animations MUST respect motion preferences
+   ═════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Reset all animations to instant/no-animation */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Framer Motion components: handled in component-level CSS */
+    /* e.g., in Home.css, ProjectDetail.css, etc. */
+}
+
+/* ═════════════════════════════════════════════════════════════════════════
+   STAGGER PATTERNS (Framer Motion)
+   Use consistent stagger delays for list animations
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Standard stagger: 0.1s between items (quick reveal) */
+/* Usage: Project lists, feature cards, learning insights
+   transition={{ duration: 0.5, delay: i * 0.1 }} */
+
+/* Dense stagger: 0.08s between items (rapid reveal) */
+/* Usage: Tight lists, taxonomy arrays */
+
+/* Slow stagger: 0.15–0.2s between items (deliberate reveal) */
+/* Usage: Hero text, step-by-step tutorials */
+
+/* ═════════════════════════════════════════════════════════════════════════
+   EASING REFERENCE
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/*
+  --ease-smooth [0.4, 0, 0.2, 1] — DEFAULT
+    Material Design standard
+    Professional, predictable, universal feel
+    Use for: All standard transitions, page changes, reveals
+
+  --ease-premium [0.16, 1, 0.3, 1] — ACCENT
+    Fast start, slight overshoot, lands crisply
+    "Premium" or "intentional" feel
+    Use for: Logo motion, signature UI, emphasis
+    Sparingly: 20% of animations or less
+
+  --ease-spring [0.34, 1.56, 0.64, 1] — PLAYFUL
+    Bouncy, elastic feel (overshoot ~56%)
+    Delight and surprise
+    Use for: Rare moments, Easter eggs, celebratory animations
+    Very sparingly: <5% of animations
+*/
+
+/* ═════════════════════════════════════════════════════════════════════════
+   CHECKLIST FOR NEW ANIMATIONS
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/*
+  ✅ Before committing:
+  
+  1. Did I use --dur-1, --dur-2, or --dur-3? (not custom durations)
+  2. Did I use --ease-smooth? (or --ease-premium with justification)
+  3. Is the animation visible in 220ms? (not arbitrary)
+  4. Does prefers-reduced-motion: reduce disable it?
+  5. Is motion tied to user action, or intrusive?
+  
+  ❌ Avoid:
+  - Durations under 80ms (feels broken)
+  - Durations over 600ms without reason (feels like lag)
+  - Multiple simultaneous staggered lists (confusing)
+  - Easing other than --ease-smooth/--ease-premium (unsanctioned)
+  - Animations that ignore prefers-reduced-motion
+*/

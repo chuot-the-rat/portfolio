@@ -6,7 +6,7 @@ import {
     getProjectPath,
     isStandaloneProject,
 } from "../utils/projectDataMapper";
-import PreviewPanel from "../components/PreviewPanel";
+import ProjectList from "../components/ProjectList";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import ScrapbookHero from "../components/ScrapbookHero";
@@ -397,10 +397,6 @@ function HeroSection() {
 const Home = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [hoveredProject, setHoveredProject] = useState(null);
-
-    // Assign hover patterns to projects
-    const hoverPatterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
 
     useEffect(() => {
         try {
@@ -493,10 +489,6 @@ const Home = () => {
                                 return {
                                     ...projectMeta,
                                     ...caseStudyProject,
-                                    hoverPattern:
-                                        hoverPatterns[
-                                            index % hoverPatterns.length
-                                        ],
                                     allImages: realImages,
                                 };
                             },
@@ -520,10 +512,6 @@ const Home = () => {
                                 return {
                                     ...entry,
                                     ...data,
-                                    hoverPattern:
-                                        hoverPatterns[
-                                            idx % hoverPatterns.length
-                                        ],
                                     allImages: [
                                         ...(data.overview?.images || []),
                                         ...(data.solution?.images || []),
@@ -546,10 +534,8 @@ const Home = () => {
                     console.error("Error loading projects.json:", error);
                     // Fall back to just case study data
                     const projectsWithData = caseStudyProjects.map(
-                        (caseStudyProject, index) => ({
+                        (caseStudyProject) => ({
                             ...caseStudyProject,
-                            hoverPattern:
-                                hoverPatterns[index % hoverPatterns.length],
                             allImages: [
                                 ...(caseStudyProject.solution?.images || []),
                                 ...(caseStudyProject.overview?.images || []),
@@ -601,204 +587,7 @@ const Home = () => {
                             </div>
                         ) : (
                             <div className="projects-container">
-                                {/* Folder Explorer (Clean/Chaos modes) */}
-                                <div className="projects-explorer projects-explorer-default">
-                                    {/* Left pane — folder list */}
-                                    <div className="projects-folders">
-                                        {projects.map((project, index) => (
-                                            <motion.div
-                                                key={project.id}
-                                                initial={{ opacity: 0, y: 20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{
-                                                    duration: 0.5,
-                                                    delay: 0.08 * index,
-                                                    ease: [0.4, 0, 0.2, 1],
-                                                }}
-                                            >
-                                                <Link
-                                                    to={getProjectPath(
-                                                        project.id,
-                                                    )}
-                                                    className="folder-item-link"
-                                                    onMouseEnter={() => {
-                                                        // Re-shuffle images on each hover
-                                                        const imgs =
-                                                            project.allImages ||
-                                                            [];
-                                                        const shuffled = [
-                                                            ...imgs,
-                                                        ].sort(
-                                                            () =>
-                                                                Math.random() -
-                                                                0.5,
-                                                        );
-                                                        const count = Math.min(
-                                                            3 +
-                                                                Math.floor(
-                                                                    Math.random() *
-                                                                        3,
-                                                                ),
-                                                            shuffled.length,
-                                                        ); // 3-5
-                                                        setHoveredProject({
-                                                            ...project,
-                                                            hoverImages:
-                                                                shuffled.slice(
-                                                                    0,
-                                                                    count,
-                                                                ),
-                                                        });
-                                                    }}
-                                                    onMouseLeave={() =>
-                                                        setHoveredProject(null)
-                                                    }
-                                                >
-                                                    <motion.div
-                                                        className={`folder-item${hoveredProject?.id === project.id ? " folder-active" : ""}${hoveredProject !== null && hoveredProject?.id !== project.id ? " folder-dimmed" : ""}`}
-                                                        animate={{
-                                                            y:
-                                                                hoveredProject?.id ===
-                                                                project.id
-                                                                    ? -2
-                                                                    : 0,
-                                                        }}
-                                                        transition={{
-                                                            duration: 0.22,
-                                                            ease: [
-                                                                0.4, 0, 0.2, 1,
-                                                            ],
-                                                        }}
-                                                    >
-                                                        <div className="folder-tab">
-                                                            <span className="folder-tab-label">
-                                                                {project.title}
-                                                            </span>
-                                                        </div>
-                                                        <div className="folder-body">
-                                                            <div className="folder-meta">
-                                                                <span className="folder-category">
-                                                                    {
-                                                                        project.category
-                                                                    }
-                                                                </span>
-                                                                <span className="folder-dot">
-                                                                    ·
-                                                                </span>
-                                                                <span className="folder-year">
-                                                                    {
-                                                                        project.year
-                                                                    }
-                                                                </span>
-                                                                <span className="folder-index">
-                                                                    {String(
-                                                                        index +
-                                                                            1,
-                                                                    ).padStart(
-                                                                        2,
-                                                                        "0",
-                                                                    )}{" "}
-                                                                    /{" "}
-                                                                    {String(
-                                                                        projects.length,
-                                                                    ).padStart(
-                                                                        2,
-                                                                        "0",
-                                                                    )}
-                                                                </span>
-                                                            </div>
-                                                            {(project.subtitle ||
-                                                                project.tagline) && (
-                                                                <p className="folder-description">
-                                                                    {project.subtitle ||
-                                                                        project.tagline}
-                                                                </p>
-                                                            )}
-                                                        </div>
-                                                    </motion.div>
-                                                </Link>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-
-                                    {/* Right pane — preview window */}
-                                    <div className="projects-preview">
-                                        <div className="preview-window">
-                                            <div className="preview-window-bar">
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-title">
-                                                    {hoveredProject
-                                                        ? hoveredProject.title
-                                                        : "Preview"}
-                                                </span>
-                                            </div>
-                                            <div className="preview-window-body">
-                                                <AnimatePresence mode="wait">
-                                                    {hoveredProject ? (
-                                                        <motion.div
-                                                            key={
-                                                                hoveredProject.id
-                                                            }
-                                                            className="preview-window-content"
-                                                            initial={{
-                                                                opacity: 0,
-                                                                y: 8,
-                                                            }}
-                                                            animate={{
-                                                                opacity: 1,
-                                                                y: 0,
-                                                            }}
-                                                            exit={{
-                                                                opacity: 0,
-                                                                y: -6,
-                                                            }}
-                                                            transition={{
-                                                                duration: 0.22,
-                                                                ease: [
-                                                                    0.4, 0, 0.2,
-                                                                    1,
-                                                                ],
-                                                            }}
-                                                        >
-                                                            <PreviewPanel
-                                                                project={
-                                                                    hoveredProject
-                                                                }
-                                                                hoverPattern={
-                                                                    hoveredProject.hoverPattern
-                                                                }
-                                                            />
-                                                        </motion.div>
-                                                    ) : (
-                                                        <motion.div
-                                                            className="preview-empty"
-                                                            initial={{
-                                                                opacity: 0,
-                                                            }}
-                                                            animate={{
-                                                                opacity: 1,
-                                                            }}
-                                                            exit={{
-                                                                opacity: 0,
-                                                            }}
-                                                            transition={{
-                                                                duration: 0.2,
-                                                            }}
-                                                        >
-                                                            <div className="preview-empty-grid" />
-                                                            <span className="preview-empty-text">
-                                                                Hover a folder
-                                                                to preview
-                                                            </span>
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ProjectList projects={projects} />
                             </div>
                         )}
                     </section>

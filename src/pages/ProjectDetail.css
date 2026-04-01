@@ -621,45 +621,17 @@
 
 /* ─ Features / Solution List ─ */
 .features-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
     margin: var(--space-12) 0;
 }
 
 .feature-item {
-    padding: var(--space-8);
-    background-color: transparent;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    transition: all var(--duration-base) var(--ease-smooth);
+    /* Collapsible component now handles styling */
 }
 
-.feature-item:hover {
-    border-color: var(--color-text-tertiary);
-    background-color: var(--color-bg-secondary);
-    box-shadow: var(--shadow-sm);
-}
-
-.feature-title {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    margin-bottom: var(--space-4);
-    color: var(--color-text);
-}
-
-.feature-description {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-text-secondary);
-}
-
-.feature-why {
-    margin-top: var(--space-4);
-    font-size: var(--font-size-sm);
-    font-style: italic;
-    color: var(--color-text-tertiary);
-}
+/* Remove old feature-title/description styles — Collapsible handles them */
 
 .feature-image {
     margin-top: var(--space-6);
@@ -720,36 +692,15 @@
 .insights-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
+    gap: var(--space-6);
     margin: var(--space-12) 0;
 }
 
 .insight-item {
-    padding: var(--space-8);
-    background-color: transparent;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    transition: all var(--duration-base) var(--ease-smooth);
+    /* Collapsible component now handles styling */
 }
 
-.insight-item:hover {
-    border-color: var(--color-text-tertiary);
-    background-color: var(--color-bg-secondary);
-    transform: translateX(4px);
-}
-
-.insight-title {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    margin-bottom: var(--space-3);
-    color: var(--color-text);
-}
-
-.insight-description {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-text-secondary);
-}
+/* Remove old insight-title/description styles — Collapsible handles them */
 
 /* ─ Next Steps ─ */
 .next-steps-list {

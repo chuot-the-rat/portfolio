@@ -49,14 +49,13 @@
                     "content": "Apprenticeship can take over 6,000 hours. That's years of work, spread across job sites, classrooms, and bureaucratic systems—often without a clear sense of whether you're on track.\n\nEarly in our research, we kept hearing the same thing: confusion was pushing people out. Not inability. Not lack of motivation. Just confusion about where they stood and what came next.\n\nWe wanted to build something that answered one question clearly: Where am I right now?"
                 },
                 "problem_framing": {
-                    "content": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind."
+                    "content": "The apprenticeship system fragments critical information across three platforms. Hours, competencies, certifications—all siloed.\n\nFor neurodivergent apprentices navigating executive function challenges, information overload, and time blindness, fragmentation becomes a genuine barrier to completion."
                 },
                 "research_process": {
                     "methods": [
                         "Policy and documentation review (SkilledTradesBC)",
                         "Stakeholder conversations with industry partners",
-                        "Persona development based on lived experience",
-                        "Team reflection sessions (our team included neurodivergent members)"
+                        "Persona development based on lived experience"
                     ],
                     "key_findings": [
                         "Hours, competencies, and certifications live on three separate platforms that don't talk to each other — apprentices were manually cross-referencing systems just to know where they stood",
@@ -67,13 +66,13 @@
                     "participant_count": null
                 },
                 "early_challenges": {
-                    "content": "This project started too big.\n\nWe wanted to fix financial stress, employer communication, exam preparation, and progress tracking—all at once. Our advisor encouraged broad exploration, which felt productive at first but eventually led to paralysis.\n\nIt wasn't until we accepted that we couldn't solve everything that the project started moving. Narrowing our focus to neurodivergent apprentices gave us permission to go deeper instead of wider."
+                    "content": "Scope creep: financial stress, employer communication, exam prep, progress tracking all at once. Paralysis.\n\nNarrowing to neurodivergent apprentices unlocked depth. One audience, one need. Everything else became clear."
                 },
                 "pivots": [
                     {
                         "from": "Solving all apprenticeship problems",
                         "to": "Supporting neurodivergent apprentices specifically",
-                        "reason": "A narrower scope allowed us to design with real empathy instead of generic assumptions. We could make decisions based on specific needs rather than trying to please everyone."
+                        "reason": "Depth over breadth. Designing for one audience meant decisions became clear instead of compromised."
                     }
                 ],
                 "pivot": {
@@ -136,7 +135,7 @@
                             },
                             "p1": {
                                 "label": "Subtraction",
-                                "text": "We cut every feature that diluted the product into something generic."
+                                "text": "Cut every feature that diluted the product into something generic."
                             },
                             "p2": {
                                 "label": "Compression",
@@ -147,13 +146,13 @@
                                 "text": "Depth over breadth turned a generic tool into something personal."
                             }
                         },
-                        "caption": "Every feature we removed made space for the ones that actually mattered.",
-                        "highlight_caption": "Every [[feature we removed]] made space for the ones that [[actually mattered]]. [[Depth over breadth]] turned a generic tool into something [[personal]]."
+                        "caption": "Every feature removed made space for what mattered.",
+                        "highlight_caption": "Every [[feature removed]] made space for the ones that [[mattered]]. [[Depth over breadth]] turned generic into [[personal]]."
                     }
                 },
                 "lofi_phase": {
                     "title": "Wireframes",
-                    "content": "Our early sketches were deliberately rough. We weren't trying to make things look good—we were trying to understand what information mattered most and how quickly someone could find it.\n\nThe dashboard concept emerged early. We kept asking ourselves: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else was secondary.",
+                    "content": "Early sketches focused on clarity, not aesthetics. What information matters most? How quickly can someone find it?\n\nDashboard emerged as central: progress bars, hour counts, next-step prompts. First three seconds must answer 'Where am I?'",
                     "images": [
                         {
                             "src": "/projects/prolog/lofi-1.png",
@@ -178,7 +177,7 @@
                     }
                 },
                 "hifi_phase": {
-                    "content": "The high-fidelity designs prioritized calm. We chose soft colors, generous spacing, and typography that wouldn't feel clinical or overwhelming.\n\nThe dashboard became the emotional center of the app. Instead of hiding progress behind menus, we made it the first thing users see. Hours completed, hours remaining, competencies achieved—all visible at a glance.\n\nBrowse the high-fidelity wireframes below to see every screen and interaction state in the final design.",
+                    "content": "Design prioritizes calm: soft colors, generous spacing, clear typography. Dashboard becomes the entry point. Hours completed, hours remaining, competencies achieved—all visible at a glance, not buried in menus.",
                     "images": [
                         {
                             "src": "/projects/prolog/hifi-1.png",
@@ -204,7 +203,7 @@
                     }
                 },
                 "development": {
-                    "content": "As the developer on this project, I had to keep myself honest. It's easy to design features that sound impressive but would require complex backend infrastructure we couldn't build.\n\nData syncing with official systems? Not feasible without partnerships we didn't have. AI-generated quizzes? Possible, but only if we scoped them carefully.\n\nEvery feature was evaluated against a simple question: can we actually build this responsibly?",
+                    "content": "Every feature evaluated against one question: can this be built responsibly? Data syncing and AI features scoped carefully against realistic constraints.",
                     "technical_decisions": [
                         "Chose React Native for cross-platform efficiency",
                         "Designed offline-first architecture for job site use",
@@ -217,34 +216,34 @@
                     ]
                 },
                 "feature_breakdown": {
-                    "intro": "Each feature was designed to reduce one specific point of friction. Click through the prototype below to see how they work together.",
+                    "intro": "Four core features, each targeting a specific friction point.",
                     "features": [
                         {
                             "id": "dashboard",
                             "title": "Progress Dashboard",
                             "description": "A centralized view of hours completed, hours remaining, competencies achieved, and certification progress. No digging required—the answer to 'where am I?' is always visible.",
-                            "why": "Apprentices told us they often felt lost in their journey. The dashboard acts as a GPS, providing constant orientation.",
+                            "why": "Provides constant orientation. A GPS for the apprenticeship journey.",
                             "image": "/projects/prolog/feature-dashboard.png"
                         },
                         {
                             "id": "hours_tracker",
                             "title": "Hours Discrepancy Detector",
                             "description": "Compares user-logged hours against official records and flags mismatches. Users can document discrepancies and generate reports for their employers.",
-                            "why": "Hour discrepancies are stressful and common. Rather than fixing the problem, we gave users tools to advocate for themselves.",
+                            "why": "Hours discrepancies create real anxiety. Tools to document and advocate for oneself.",
                             "image": "/projects/prolog/feature-hours.png"
                         },
                         {
                             "id": "financial_resources",
                             "title": "Financial Resources Hub",
                             "description": "Links to grants, funding programs, and itemized cost breakdowns for apprenticeship expenses.",
-                            "why": "Financial stress came up repeatedly in research. We couldn't solve it, but we could make information easier to find.",
+                            "why": "Financial information centralized, not scattered across platforms.",
                             "image": "/projects/prolog/feature-financial.png"
                         },
                         {
                             "id": "ai_competency_quiz",
                             "title": "AI Practice Quizzes",
                             "description": "Generates unique practice questions based on trade competencies. Designed to build confidence before official exams.",
-                            "why": "Many apprentices feel unprepared for certification exams. Low-stakes practice helps reduce that anxiety.",
+                            "why": "Low-stakes practice builds exam confidence.",
                             "image": "/projects/prolog/feature-quiz.png"
                         }
                     ],
@@ -256,19 +255,16 @@
                     }
                 },
                 "validation": {
-                    "content": "One tester paused on the dashboard and went quiet for a moment. Then they said: \"I wish I had this when I started.\" That was the validation we needed — not a usability metric, just that reaction. The hours tracker hit hardest. Several users described a specific frustration we hadn't fully anticipated: not knowing whether to trust their own records. Seeing both logged and official hours side by side, with discrepancies flagged clearly, visibly relieved that tension.",
-                    "method": "Moderated usability testing",
+                    "content": "The design centers on one principle: clarity removes friction. Progress tracking becomes the entry point. Hours discrepancies are surfaced, not hidden.",
+                    "method": null,
                     "participant_count": null,
-                    "outcomes": [
-                        "One tester said they wished this existed when they started — that response, more than anything else, told us we'd found the right problem",
-                        "The hours discrepancy tracker addressed something users hadn't known to ask for — seeing both sets of records side by side removed a specific, recurring anxiety",
-                        "Dashboard-first structure validated: users found their progress without being prompted, within the first few seconds of opening the app"
-                    ]
+                    "outcomes": []
+
                 },
                 "what_i_learned": [
                     {
                         "insight": "Clarity is an emotional outcome",
-                        "reflection": "When users said they felt 'relieved,' they weren't reacting to the information itself — they were reacting to not having to search for it. Design decisions, not data, produced that feeling."
+                        "reflection": "Information alone doesn't create relief. Visibility—removing the need to search—is what produces confidence."
                     },
                     {
                         "insight": "Scope control is a design skill",
@@ -276,11 +272,7 @@
                     },
                     {
                         "insight": "Progress visualization restores motivation",
-                        "reflection": "In testing, the moment users saw their hour count and percentage complete, their posture changed. They sat up. That's not a small thing — the app was working before they'd tapped anything."
-                    },
-                    {
-                        "insight": "Qualitative feedback is valid",
-                        "reflection": "We had a small sample and no statistical significance. But when someone pauses and says 'I wish I had this' — that's signal. Don't wait for n=100 to trust what you're seeing."
+                        "reflection": "Showing incomplete hours and remaining work creates urgency and clarity. The dashboard is the entry point, not a secondary screen."
                     }
                 ],
                 "next_steps": [
@@ -364,7 +356,7 @@
                     "content": "Everyone has a story they never finished.\n\nMaybe it's a novel that stalled at chapter three. Maybe it's a screenplay that never made it past the outline. The ideas were there—the momentum wasn't.\n\nInkLink started with a simple question: what if writing didn't have to be a solo activity? What if the pressure of finishing was replaced by the fun of contributing?"
                 },
                 "problem_framing": {
-                    "content": "Writer's block isn't usually about running out of ideas. It's about pressure.\n\nThe blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nWe wanted to design an experience that removed those barriers—not by making writing easier, but by making it shared."
+                    "content": "Writer's block isn't about running out of ideas. It's about pressure. The blank page. Perfectionism. The weight of solo responsibility.\n\nSharing that weight removes the block."
                 },
                 "research_process": {
                     "methods": [
@@ -373,14 +365,14 @@
                         "Concept validation sessions to gauge interest"
                     ],
                     "key_findings": [
-                        "Writers reach for larger screens — not because of preference, but because reading someone else's passage on a phone felt claustrophobic in testing",
-                        "Dense layouts killed the impulse to contribute — testers scrolled through full stories without stopping to write because the page felt too full to enter",
-                        "Without a single worked example, users assumed chain writing was complicated — one demonstration of how a turn worked was enough to unlock confidence"
+                        "Large screens required, not preference. Reading on mobile felt claustrophobic.",
+                        "Dense layouts killed contribution momentum. People scrolled without stopping to write.",
+                        "One worked example unlocked confidence. Demonstration, not explanation."
                     ],
                     "participant_count": null
                 },
                 "early_challenges": {
-                    "content": "Our first instinct was to build a better writing editor.\n\nWe designed an interface with rich formatting, version history, and real-time sync. It looked impressive in Figma. Then someone in our group asked a question we couldn't answer: 'What makes this different from just emailing a Google Doc back and forth?'\n\nWe'd been so focused on the tool that we'd missed the problem. Writers didn't need a better editor — they needed the weight of authorship lifted. Once we understood that, we stopped designing features and started designing permission."
+                    "content": "First instinct: build a better editor. Rich formatting, version history, real-time sync.\n\nThen: 'Why not just email a Google Doc?'\n\nWriters didn't need a tool—they needed permission to share authorship. That insight rewired everything."
                 },
                 "pivots": [
                     {
@@ -391,12 +383,12 @@
                     {
                         "from": "Newspaper-style multi-column UI",
                         "to": "Clean, minimal single-column layout",
-                        "reason": "The newspaper aesthetic looked interesting but hurt readability. Hierarchy got lost in the visual noise."
+                        "reason": "Clear single-column reading lets story carry attention, not interface."
                     },
                     {
                         "from": "Feature-heavy homepage with multiple entry points",
                         "to": "Single clear call-to-action",
-                        "reason": "Users were overwhelmed by options. One clear path reduced hesitation."
+                        "reason": "One clear action reduced hesitation. Six options led to choosing none."
                     }
                 ],
                 "pivot": {
@@ -458,23 +450,23 @@
                             },
                             "p1": {
                                 "label": "Subtraction",
-                                "text": "We removed competing actions so one choice could lead."
+                                "text": "Removed competing actions so one choice could lead."
                             },
                             "p2": {
                                 "label": "Compression",
-                                "text": "Layout collapsed into a single path—less scanning, more momentum."
+                                "text": "Layout collapsed into single path—less scanning, more momentum."
                             },
                             "p3": {
                                 "label": "Focus",
                                 "text": "One clear call-to-action reduced hesitation."
                             }
                         },
-                        "caption": "The homepage had six ways to start. Users chose none. One clear CTA made them choose every time.",
-                        "highlight_caption": "The homepage had [[six ways to start]]. Users chose [[none]]. One [[clear call-to-action]] made them choose [[every time]]."
+                        "caption": "One CTA beat six options.",
+                        "highlight_caption": "Homepage had [[six ways to start]]. Users chose [[none]]. One [[clear call-to-action]] made them choose [[every time]]."
                     }
                 },
                 "lofi_phase": {
-                    "content": "Our lo-fi work focused on one core interaction: contributing to a story.\n\nWe sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic—we needed to test logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
+                    "content": "Lo-fi work focused on contribution: how to show story history, handle turn-taking, and reward brevity.\n\nSimple pattern emerged: read what came before, add your piece, pass it forward.",
                     "images": [
                         {
                             "src": "/projects/inklink/images/Editor-lofi.svg",
@@ -489,7 +481,7 @@
                     ]
                 },
                 "hifi_phase": {
-                    "content": "The high-fidelity designs leaned into typography and whitespace. We wanted the words to breathe.\n\nColor was used sparingly—mostly to indicate interactive elements and turn status. The writing itself stayed neutral, letting each contributor's voice come through without visual interference.\n\nScroll through the reading experience below. Notice how the interface disappears when you're focused on the story.",
+                    "content": "High-fidelity designs leaned into typography and whitespace. Color used sparingly to indicate action and turn status. Writing itself stayed neutral, letting each voice come through.",
                     "images": [
                         {
                             "src": "/projects/inklink/images/Home.svg",
@@ -523,20 +515,20 @@
                     ]
                 },
                 "feature_breakdown": {
-                    "intro": "InkLink has three core modes of engagement. Explore them in the prototype below.",
+                    "intro": "Three core modes of engagement.",
                     "features": [
                         {
                             "id": "public_projects",
                             "title": "Public Story Chains",
                             "description": "Open stories that anyone can contribute to. Writers join, add a passage, and pass the story forward.",
-                            "why": "Low barrier to entry. No commitment required—just jump in and write.",
+                            "why": "Low barrier to entry. No commitment—just jump in.",
                             "image": "/projects/inklink/images/Editor (public).svg"
                         },
                         {
                             "id": "private_projects",
                             "title": "Private Writing Circles",
                             "description": "Invite-only spaces for friends or writing groups. Turn order is set by the creator.",
-                            "why": "Some writers want collaboration without strangers. Private circles offer that control.",
+                            "why": "Control without strangers. Invite-only boundaries.",
                             "image": "/projects/inklink/images/New Private Story.svg"
                         },
                         {
@@ -555,14 +547,11 @@
                     }
                 },
                 "validation": {
-                    "content": "One tester laughed out loud mid-session — they'd just read an unexpected plot twist from a previous contributor and couldn't believe where the story had gone. That moment told us more than any task completion metric. InkLink worked when it surprised people, not just when it functioned correctly.\n\nThe reduced pressure showed up in behavior, not just words. Contributions came faster. Writers edited themselves less. One person said: 'I don't feel like I have to be good — I just have to not ruin it.' That tension — between accountability and freedom — was exactly the feeling we'd been designing toward.",
-                    "method": "Moderated usability testing",
+                    "content": "The design removes individual ownership. When writing is shared across multiple contributors, perfectionism loses its grip. Contributions become spontaneous, not labored.",
+                    "method": null,
                     "participant_count": null,
-                    "outcomes": [
-                        "One tester laughed out loud reading a plot twist from a previous contributor — the experience worked when it surprised people, not just when it ran correctly",
-                        "Writers edited themselves less and contributed faster — reduced individual ownership removed the perfectionism that kills first drafts",
-                        "Time limits helped: one person said deadlines gave them 'permission to just write something' rather than holding out for the perfect line"
-                    ]
+                    "outcomes": []
+
                 },
                 "what_i_learned": [
                     {
@@ -571,7 +560,7 @@
                     },
                     {
                         "insight": "Visual clarity beats thematic styling",
-                        "reflection": "The newspaper layout looked striking in mockups. In testing, one person spent two minutes scanning before saying 'I don't know what I'm supposed to click.' We stripped it to a single column that afternoon and never looked back."
+                        "reflection": "Striking layouts create friction. A clear single-column reading experience lets the story carry attention, not the interface."
                     },
                     {
                         "insight": "Reducing features can increase engagement",
@@ -659,7 +648,7 @@
                     "content": "You have a free afternoon. Nothing planned. No obligations.\n\nSo you open your phone, scroll through options, and thirty minutes later you're still on the couch—paralyzed by choice, defaulting to nothing.\n\nSideQuest was designed for that moment. Not to give you more options, but to give you one good one."
                 },
                 "problem_framing": {
-                    "content": "Boredom isn't really about having nothing to do. It's about having too much to choose from and not enough motivation to pick.\n\nEvery app promises endless possibilities. But endless possibilities require endless decisions. And decisions are exhausting.\n\nWe wanted to flip that model. Instead of showing users everything they could do, we'd suggest one thing they might enjoy—and make it easy to say yes."
+                    "content": "Boredom isn't about having nothing to do. It's about choosing what to do.\n\nEndless options create endless paralysis.\n\nFlip the model: one suggested thing beats everything you could do."
                 },
                 "research_process": {
                     "methods": [
@@ -668,9 +657,9 @@
                         "Competitive analysis of activity discovery apps"
                     ],
                     "key_findings": [
-                        "Users want low-pressure activities that don't require planning",
-                        "Choice overload causes hesitation and often leads to inaction",
-                        "Guided suggestions outperform open-ended discovery"
+                        "Users seek low-pressure activities that require zero planning.",
+                        "Choice overload causes paralysis and inaction.",
+                        "Guided suggestions beat open-ended discovery."
                     ],
                     "participant_count": null,
                     "embed": {
@@ -680,23 +669,23 @@
                     }
                 },
                 "early_challenges": {
-                    "content": "The first version of SideQuest was a discovery app.\n\nUsers could filter by location, duration, cost, and category. There was a search bar. There was a 'For You' feed. It looked like a smaller, friendlier Yelp — and it had exactly the same problem: too much to decide before you did anything.\n\nI only realized this during paper prototype testing, when someone pushed the prototype aside and said: 'Can you just pick something for me?' That line became the product."
+                    "content": "The first version was a discovery app: filters for location, duration, cost, category. Search bar. 'For You' feed. It was Yelp—but friendlier, with the same problem.\n\nToo many options to choose from prevented action. The concept needed to flip: suggest one thing instead of everything."
                 },
                 "pivots": [
                     {
                         "from": "Discovery feed with filters",
                         "to": "Single 'Give me a quest' button",
-                        "reason": "Every filter was another reason not to act. Removing them entirely wasn't a design compromise — it was the design."
+                        "reason": "Removing choice removes friction. One button, one option, one moment of decision."
                     },
                     {
                         "from": "Neutral 'activity' language",
                         "to": "'Quest' framing throughout",
-                        "reason": "Calling something a quest changed how users described it to each other. A walk became an exploration. The word did real work."
+                        "reason": "Framing changes how users relate to an activity before they commit."
                     },
                     {
                         "from": "Utility-style visual design",
                         "to": "Warm palette and mascot guide",
-                        "reason": "The app wasn't solving a logistics problem — it was solving an emotional one. The design needed to feel like it was on your side."
+                        "reason": "Warm design signals companionship, not logistics solving."
                     }
                 ],
                 "pivot": {
@@ -769,7 +758,7 @@
                     }
                 },
                 "lofi_phase": {
-                    "content": "Our early wireframes had too many buttons.\n\nFilters for location, duration, cost, category—all logical, all counterproductive. Users would hover over options without committing to any of them.\n\nWe stripped it back. One primary action: 'Give me a quest.' Everything else became optional.",
+                    "content": "Early wireframes had too many buttons. Filters for location, duration, cost, category—all counterproductive. Users hovered without committing.\n\nStripped back to one action: 'Give me a quest.' Everything else became optional.",
                     "images": [
                         {
                             "src": "/projects/sidequest/lofi-1.png",
@@ -784,7 +773,7 @@
                     }
                 },
                 "hifi_phase": {
-                    "content": "The high-fidelity designs introduced a mascot—a small character that guides users through the experience without feeling childish.\n\nWe used playful language ('quest' instead of 'activity') and warm colors to make the app feel inviting rather than utilitarian. The goal was to lower emotional resistance.\n\nBrowse the mockups below to see every screen and state in the final design.",
+                    "content": "High-fidelity designs introduced a mascot that guides without feeling childish. Playful language ('quest' not 'activity') and warm colors reduce emotional resistance.",
                     "images": [
                         {
                             "src": "/projects/sidequest/hifi-1.png",
@@ -815,7 +804,7 @@
                     }
                 },
                 "development": {
-                    "content": "I built this project as well as designed it, which meant every feature had to survive implementation.\n\nSome ideas that looked great in Figma didn't survive contact with code. Others became simpler during development—and often better for it.\n\nThe constraint of being both designer and developer forced honesty about what was actually possible.",
+                    "content": "Being researcher, designer, and developer meant feedback loops were tight. Testing findings changed design that afternoon. Code constraints removed features the next morning.",
                     "technical_decisions": [
                         "Built with React for component reusability",
                         "Kept quest data local to avoid backend complexity",
@@ -828,27 +817,27 @@
                     ]
                 },
                 "feature_breakdown": {
-                    "intro": "SideQuest has three core elements. Explore each in the prototype below.",
+                    "intro": "Three core elements.",
                     "features": [
                         {
                             "id": "quests",
                             "title": "Quest Suggestions",
                             "description": "Small, low-commitment activities framed as optional adventures. Each quest includes a title, brief description, and estimated time.",
-                            "why": "The word 'quest' makes mundane activities feel more interesting. Framing matters.",
+                            "why": "Low-commitment framing. Just a quest, not an obligation.",
                             "image": "/projects/sidequest/feature-quests.png"
                         },
                         {
                             "id": "mascot",
                             "title": "Friendly Guide",
                             "description": "A small mascot character that appears throughout the experience, offering encouragement without being intrusive.",
-                            "why": "The mascot adds warmth and personality. It makes the app feel less like a tool and more like a companion.",
+                            "why": "Warmth without intrusion. Personality without noise.",
                             "image": "/projects/sidequest/feature-mascot.png"
                         },
                         {
                             "id": "guided_flows",
                             "title": "Quick Start Flow",
                             "description": "Users can get a quest in two taps. No account required, no preferences to set up first.",
-                            "why": "Every step between 'I'm bored' and 'here's something to do' is a chance for users to give up. We minimized steps.",
+                            "why": "Minimized steps between boredom and action means fewer opportunities to abandon.",
                             "image": "/projects/sidequest/feature-flow.png"
                         }
                     ],
@@ -860,32 +849,19 @@
                     }
                 },
                 "validation": {
-                    "content": "One tester finished a quest, came back to the home screen, and immediately pressed 'Give me another.' No hesitation. That was the behavior we'd been designing for — not careful browsing, but automatic return.\n\nThe word 'quest' did more than we expected. People described the same activities differently when they called them quests. A walk to a new coffee shop became an exploration. A library trip became a mission. Framing isn't cosmetic — it changes how people relate to an action before they've taken it.",
-                    "method": "Moderated usability testing",
+                    "content": "The mechanic is simple: one button, one suggestion, one moment of decision. Framing matters—'quest' creates expectation of adventure, not obligation.",
+                    "method": null,
                     "participant_count": null,
-                    "outcomes": [
-                        "One tester immediately pressed 'Give me another' after completing a quest — the return behavior we were designing for happened naturally",
-                        "Quest framing changed how users described activities out loud — the same walk to a café became 'an exploration' when labeled as a quest",
-                        "Low-pressure framing worked: users said they felt more willing to try something because 'it's not a big commitment — it's just a quest'"
-                    ],
-                    "embed": {
-                        "src": "https://embed.figma.com/proto/A4EiDTstNofWUbiKhAbhHY/SideQuest-A6-UsabilityReport--Copy-?node-id=96-5355&p=f&viewport=293%2C208%2C0.05&scaling=contain&content-scaling=fixed&starting-point-node-id=96%3A5355&page-id=0%3A1&embed-host=share",
-                        "title": "Usability Testing Report",
-                        "caption": "Full usability report documenting test scenarios, participant findings, and design recommendations"
-                    }
+                    "outcomes": []
                 },
                 "what_i_learned": [
                     {
                         "insight": "Momentum beats choice",
-                        "reflection": "Getting a user to act once is worth more than giving them ten options. The first quest was always the hardest. After that, they came back on their own."
+                        "reflection": "One action is worth more than ten options. First quest hardest. After that, return is automatic."
                     },
                     {
-                        "insight": "Design should reduce hesitation",
-                        "reflection": "Every element either builds confidence or creates doubt. The completion screen proved this — when I added a small celebratory message after finishing a quest, users came back for more. When I removed it to 'keep things minimal,' they didn't. There's no neutral design decision."
-                    },
-                    {
-                        "insight": "Research, design, and code inform each other",
-                        "reflection": "Being the researcher, designer, and developer on the same project meant I could catch problems that handoffs usually miss. A finding in testing changed a design in Figma that afternoon. A constraint in code removed a feature the next morning. The loop was tight — and the product was better for it."
+                        "insight": "Design reduces hesitation",
+                        "reflection": "Every element builds or destroys confidence. Celebration is secondary—the act of choosing is the momentum."
                     }
                 ],
                 "next_steps": [
@@ -909,7 +885,7 @@
                     }
                 ],
                 "final_experience": {
-                    "intro": "The presentation below walks through the full SideQuest project—from research and early wireframes to the final high-fidelity solution.\n\nIt covers the key design decisions, what we tested, and what we learned.",
+                    "intro": "The presentation below walks through the full SideQuest project—from research and early wireframes to the final high-fidelity solution.\n\nIt covers the key design decisions and what was learned.",
                     "prototype": {
                         "url": "",
                         "embed_url": "https://embed.figma.com/slides/MPKZPeksKSJlwFRxYMoctc/Presentation--Copy-?node-id=96-4670&embed-host=share",

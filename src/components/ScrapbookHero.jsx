@@ -12,18 +12,13 @@ function Sticker({ children, className = "", rotate = 0, delay = 0 }) {
     return (
         <motion.div
             className={`scrap-sticker ${className}`}
-            drag
-            dragSnapToOrigin
-            dragElastic={0.1}
-            dragMomentum={false}
-            whileHover={{ y: -3, transition: { duration: 0.2 } }}
-            whileDrag={{ scale: 1.05, zIndex: 60, cursor: "grabbing" }}
-            initial={{ opacity: 0, scale: 0.88, y: 16 }}
+            whileHover={{ y: -2, transition: { duration: 0.2 } }}
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0, rotate }}
             transition={{
                 type: "spring",
-                stiffness: 240,
-                damping: 22,
+                stiffness: 200,
+                damping: 20,
                 delay,
             }}
         >
