@@ -291,7 +291,10 @@
 
     /* Feature-specific stagger tokens */
     --float-stagger: var(--stagger-3); /* Float/hover stagger: 150ms */
-    --skill-stagger: var(--stagger-delay, 0ms); /* Skill item reveal (CSS variable scoped per item) */
+    --skill-stagger: var(
+        --stagger-delay,
+        0ms
+    ); /* Skill item reveal (CSS variable scoped per item) */
     --item-stagger: var(--stagger-3); /* List item entrance: 150ms */
 
     /* ─────────────────────────────────────────────────────────────────
@@ -310,7 +313,8 @@
     --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
     --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.3);
     --shadow-inset-soft: inset 0 1px 3px rgba(0, 0, 0, 0.04);
-    --shadow-multi-layer: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-multi-layer:
+        0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
 
     /* ─────────────────────────────────────────────────────────────────
        DUAL SYSTEM NOTES (energy.css)

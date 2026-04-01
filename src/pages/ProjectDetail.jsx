@@ -377,7 +377,9 @@ const ProjectContentMain = ({ project }) => {
                     </div>
                     {project.video.caption && (
                         <div className="fe-footer">
-                            <p className="fe-caption">{project.video.caption}</p>
+                            <p className="fe-caption">
+                                {project.video.caption}
+                            </p>
                         </div>
                     )}
                 </motion.section>
@@ -774,7 +776,10 @@ const ProjectContentMain = ({ project }) => {
                             <h2 className="section-title">
                                 {project.lofi.title}
                             </h2>
-                            <SectionTag sectionIndex={s} version="2.0" />
+                            <SectionTag
+                                sectionIndex={s}
+                                version="2.0"
+                            />
                             <p className="section-description">
                                 {project.lofi.description}
                             </p>
@@ -801,7 +806,10 @@ const ProjectContentMain = ({ project }) => {
                             {project.lofi.midfiEmbed && (
                                 <FigmaEmbed
                                     src={project.lofi.midfiEmbed.src}
-                                    title={project.lofi.midfiEmbed.title || "Mid-Fidelity Wireframes"}
+                                    title={
+                                        project.lofi.midfiEmbed.title ||
+                                        "Mid-Fidelity Wireframes"
+                                    }
                                     type="figma-design"
                                     caption={project.lofi.midfiEmbed.caption}
                                 />
@@ -1964,9 +1972,7 @@ const ProjectContentMain = ({ project }) => {
                                             >
                                                 <Collapsible
                                                     title={insight.insight}
-                                                    subtitle={
-                                                        insight.title
-                                                    }
+                                                    subtitle={insight.title}
                                                 >
                                                     <p>
                                                         {insight.reflection ||

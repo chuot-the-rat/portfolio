@@ -496,7 +496,8 @@
 }
 
 .sim-outcome__list-item {
-    animation: listItemEnter var(--dur-300) cubic-bezier(0.4, 0, 0.2, 1) backwards;
+    animation: listItemEnter var(--dur-300) cubic-bezier(0.4, 0, 0.2, 1)
+        backwards;
     animation-delay: calc(var(--animation-order, 0) * 40ms);
 }
 

@@ -36,7 +36,10 @@ export default function ProjectList({ projects = [] }) {
             exit="hidden"
         >
             {projects.map((project) => (
-                <motion.div key={project.id} variants={itemVariants}>
+                <motion.div
+                    key={project.id}
+                    variants={itemVariants}
+                >
                     <Link
                         to={getProjectPath(project.id)}
                         className="project-card-link"

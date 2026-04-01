@@ -81,9 +81,7 @@ export default function Collapsible({
                             ease: [0.4, 0, 0.2, 1],
                         }}
                     >
-                        <div className="collapsible-content">
-                            {children}
-                        </div>
+                        <div className="collapsible-content">{children}</div>
                     </motion.div>
                 )}
             </AnimatePresence>

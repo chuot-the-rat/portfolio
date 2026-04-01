@@ -2,10 +2,22 @@ import { motion } from "framer-motion";
 import "./ScrapbookHero.css";
 
 const LINKS = [
-    { label: "Email",    href: "mailto:leanale003@gmail.com" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/leanale",       external: true },
-    { label: "GitHub",   href: "https://github.com/chuot-the-rat",       external: true },
-    { label: "Resume",   href: "/Le_Leana_Resume_NoNumber.pdf",          download: "Leana_Le_Resume.pdf" },
+    { label: "Email", href: "mailto:leanale003@gmail.com" },
+    {
+        label: "LinkedIn",
+        href: "https://linkedin.com/in/leanale",
+        external: true,
+    },
+    {
+        label: "GitHub",
+        href: "https://github.com/chuot-the-rat",
+        external: true,
+    },
+    {
+        label: "Resume",
+        href: "/Le_Leana_Resume_NoNumber.pdf",
+        download: "Leana_Le_Resume.pdf",
+    },
 ];
 
 function Sticker({ children, className = "", rotate = 0, delay = 0 }) {
@@ -63,7 +75,11 @@ export default function ScrapbookHero() {
                             href={link.href}
                             className="scrap-link"
                             target={link.external ? "_blank" : undefined}
-                            rel={link.external ? "noopener noreferrer" : undefined}
+                            rel={
+                                link.external
+                                    ? "noopener noreferrer"
+                                    : undefined
+                            }
                             download={link.download || undefined}
                         >
                             {link.label}
@@ -73,16 +89,28 @@ export default function ScrapbookHero() {
             </div>
 
             {/* ── Sticker: availability stamp ── */}
-            <Sticker className="sticker-stamp" rotate={-10} delay={0.55}>
+            <Sticker
+                className="sticker-stamp"
+                rotate={-10}
+                delay={0.55}
+            >
                 <div className="stamp-ring">
                     <span className="stamp-dot" />
-                    <p className="stamp-main">Open<br />to Work</p>
+                    <p className="stamp-main">
+                        Open
+                        <br />
+                        to Work
+                    </p>
                     <p className="stamp-sub">2025</p>
                 </div>
             </Sticker>
 
             {/* ── Sticker: location card ── */}
-            <Sticker className="sticker-location" rotate={3} delay={0.68}>
+            <Sticker
+                className="sticker-location"
+                rotate={3}
+                delay={0.68}
+            >
                 <div className="card-tape card-tape--tan" />
                 <div className="card-body">
                     <p className="loc-city">Vancouver</p>
@@ -91,7 +119,11 @@ export default function ScrapbookHero() {
             </Sticker>
 
             {/* ── Sticker: polaroid ── */}
-            <Sticker className="sticker-polaroid" rotate={-2} delay={0.82}>
+            <Sticker
+                className="sticker-polaroid"
+                rotate={-2}
+                delay={0.82}
+            >
                 <div className="polaroid-image">
                     <span className="polaroid-project-name">InkLink</span>
                 </div>
@@ -99,9 +131,17 @@ export default function ScrapbookHero() {
             </Sticker>
 
             {/* ── Sticker: school ticket ── */}
-            <Sticker className="sticker-ticket" rotate={5} delay={0.96}>
+            <Sticker
+                className="sticker-ticket"
+                rotate={5}
+                delay={0.96}
+            >
                 <p className="ticket-school">BCIT</p>
-                <p className="ticket-program">Digital Design<br />&amp; Development</p>
+                <p className="ticket-program">
+                    Digital Design
+                    <br />
+                    &amp; Development
+                </p>
                 <div className="ticket-divider" />
                 <p className="ticket-year">Class of '25</p>
             </Sticker>
