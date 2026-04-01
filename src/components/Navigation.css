@@ -80,7 +80,7 @@
     color: var(--color-text-secondary);
     text-decoration: none;
     padding: var(--space-1) 0;
-    transition: color 150ms ease;
+    transition: color var(--dur-micro) var(--ease-smooth);
     outline-offset: 4px;
 }
 

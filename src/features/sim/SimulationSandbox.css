@@ -101,7 +101,7 @@
 
 .sim-panel__hint {
     font-size: var(--font-size-sm);
-    line-height: 1.6;
+    line-height: var(--line-height-normal);
     color: var(--color-text-secondary);
     margin: 0;
 }
@@ -461,7 +461,7 @@
     gap: var(--space-3);
     align-items: flex-start;
     font-size: var(--font-size-sm);
-    line-height: 1.6;
+    line-height: var(--line-height-normal);
     color: var(--color-text-secondary);
 }
 
@@ -496,8 +496,7 @@
 }
 
 .sim-outcome__list-item {
-    animation: listItemEnter var(--dur-300) cubic-bezier(0.4, 0, 0.2, 1)
-        backwards;
+    animation: listItemEnter var(--dur-300) var(--ease-smooth) backwards;
     animation-delay: calc(var(--animation-order, 0) * 40ms);
 }
 

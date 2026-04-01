@@ -206,6 +206,9 @@
     /* Alias for premium */
     --ease-out-premium: var(--ease-premium);
 
+    /* Alias for premium (common naming convention) */
+    --ease-out-quad: var(--ease-premium);
+
     /* Spring easing: playful, bouncy entrance — use sparingly for delight */
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 

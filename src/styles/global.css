@@ -149,7 +149,7 @@ section {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-base);
     cursor: pointer;
-    transition: all var(--duration-fast) var(--ease-smooth);
+    transition: all var(--dur-1) var(--ease-smooth);
     outline-offset: var(--focus-offset);
 }
 
@@ -307,7 +307,7 @@ section {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--space-8);
-    transition: all var(--duration-base) var(--ease-smooth);
+    transition: all var(--dur-2) var(--ease-smooth);
 }
 
 .card:hover {

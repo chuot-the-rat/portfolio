@@ -219,7 +219,7 @@
 
 .fe-caption {
     font-size: clamp(0.85rem, 1vw, 0.95rem);
-    line-height: 1.5;
+    line-height: var(--line-height-normal);
     color: var(--color-text-tertiary, #888);
     margin: 0;
     flex: 1;

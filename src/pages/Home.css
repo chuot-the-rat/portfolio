@@ -69,14 +69,14 @@
     letter-spacing: -0.05em;
     margin: 0;
     color: var(--color-text);
-    line-height: 0.92;
+    line-height: 1.1;
     will-change: transform;
     transition: letter-spacing var(--dur-400) var(--ease-smooth);
 }
 
 .home-hero-subtitle {
     font-size: clamp(1rem, 1.5vw, 1.125rem);
-    line-height: 1.8;
+    line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
     max-width: 480px;
     font-weight: 300;
@@ -298,7 +298,7 @@
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--color-text);
-    line-height: 1.35;
+    line-height: var(--line-height-snug);
 }
 
 /* Folder body */
@@ -347,7 +347,7 @@
 /* Description line */
 .folder-description {
     font-size: 0.75rem;
-    line-height: 1.5;
+    line-height: var(--line-height-normal);
     color: var(--color-text-secondary);
     opacity: 0.7;
     margin: 0;
@@ -722,7 +722,7 @@
     font-size: clamp(2rem, 5vw, 4.5rem);
     font-weight: 600;
     letter-spacing: -0.02em;
-    line-height: 1.1;
+    line-height: var(--line-height-tight);
     color: var(--color-text);
     text-decoration: none;
     transition: opacity var(--dur-200) var(--ease-smooth);
@@ -829,7 +829,7 @@
 .mode-work .home-hero-subtitle {
     max-width: 580px;
     font-size: var(--font-size-sm-small);
-    line-height: 1.65;
+    line-height: var(--line-height-relaxed);
     opacity: 0.85;
 }
 

@@ -160,7 +160,7 @@
     opacity: 0.6;
     pointer-events: none;
     transition: opacity var(--dur-200) var(--ease-smooth);
-    line-height: 1;
+    line-height: 1.2;
 }
 
 .pvt-viewport:hover .pvt-indicator {
@@ -178,7 +178,7 @@
 .pvt-title {
     font-size: clamp(1.05rem, 1.3vw, 1.2rem);
     font-weight: 600;
-    line-height: 1.4;
+    line-height: var(--line-height-snug);
     color: var(--color-text);
     letter-spacing: -0.01em;
     margin: 0 0 var(--space-2, 8px) 0;
@@ -186,7 +186,7 @@
 
 .pvt-desc {
     font-size: clamp(1rem, 1.1vw, 1.1rem);
-    line-height: 1.7;
+    line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
     margin: 0;
     max-width: 620px;

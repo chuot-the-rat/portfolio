@@ -23,5 +23,5 @@
 
 .page-exit-active {
     opacity: 0;
-    transition: opacity 200ms var(--ease-smooth);
+    transition: opacity var(--dur-200) var(--ease-smooth);
 }

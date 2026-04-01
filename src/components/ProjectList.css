@@ -52,17 +52,19 @@
     height: 100%;
     cursor: pointer;
 
-    /* Subtle background on hover */
+    /* Enhanced hover feedback: clearer interactivity */
     &:hover {
-        background: var(--color-overlay-xs);
+        background: var(--color-overlay-sm);
         border-color: var(--color-overlay-lg);
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     @media (prefers-reduced-motion: reduce) {
         transition: none;
         &:hover {
             transform: none;
+            box-shadow: none;
         }
     }
 }
@@ -73,7 +75,7 @@
     align-items: center;
     gap: var(--space-2);
     font-size: var(--font-size-xs-small);
-    line-height: 1.5;
+    line-height: var(--line-height-normal);
     color: var(--color-text-secondary);
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -96,7 +98,7 @@
 .project-title {
     margin: 0;
     font-size: clamp(1.375rem, 4vw, 1.625rem);
-    line-height: 1.3;
+    line-height: var(--line-height-snug);
     font-weight: 600;
     letter-spacing: -0.5px;
     color: var(--color-text);
@@ -115,7 +117,7 @@
 .project-description {
     margin: 0;
     font-size: var(--font-size-base);
-    line-height: 1.6;
+    line-height: var(--line-height-normal);
     color: var(--color-text-secondary);
     font-weight: 400;
     letter-spacing: -0.25px;

@@ -1,0 +1,138 @@
+/* ==========================================================================
+   CURSOR FOLLOW PREVIEW - Editorial floating stack (desktop only)
+   Layered images with depth, subtle rotation, smooth spring following
+   ========================================================================== */
+
+/* Main container — fixed positioning, no pointer events */
+.cursor-follow-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 12;
+}
+
+.cursor-follow-preview-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+/* Layer stack — absolute positioning for overlap */
+.cursor-follow-layers {
+    position: relative;
+    width: 260px;
+    height: 300px;
+}
+
+.cursor-follow-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    will-change: opacity, transform;
+    pointer-events: auto;
+}
+
+/* ── Main layer (front, largest, no rotation) ── */
+.cursor-follow-layer--main {
+    z-index: 20;
+    top: 0;
+    left: 0;
+}
+
+.cursor-follow-layer--main .cursor-follow-image-wrap {
+    width: 260px;
+    height: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-bg-secondary, #fafafa);
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.16),
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s ease;
+    transform: none;
+}
+
+.cursor-follow-layer--main:hover .cursor-follow-image-wrap {
+    box-shadow:
+        0 20px 64px rgba(0, 0, 0, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Supporting layer 1 (back, slightly smaller, subtle rotation) ── */
+.cursor-follow-layer--support1 {
+    z-index: 15;
+    top: 12px;
+    left: -16px;
+    transform: rotate(-1.5deg);
+}
+
+.cursor-follow-layer--support1 .cursor-follow-image-wrap {
+    width: 240px;
+    height: 280px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--color-bg-secondary, #fafafa);
+    box-shadow:
+        0 12px 36px rgba(0, 0, 0, 0.12),
+        0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Supporting layer 2 (back, more offset, opposite rotation) ── */
+.cursor-follow-layer--support2 {
+    z-index: 10;
+    top: 24px;
+    left: 20px;
+    transform: rotate(1deg);
+}
+
+.cursor-follow-layer--support2 .cursor-follow-image-wrap {
+    width: 220px;
+    height: 260px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--color-bg-secondary, #fafafa);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+/* Image element */
+.cursor-follow-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cursor-follow-image-wrap {
+    width: 100%;
+    height: 100%;
+}
+
+/* Hide on tablet and below (desktop only) */
+@media (max-width: 1023px) {
+    .cursor-follow-preview {
+        display: none !important;
+    }
+}
+
+/* Reduced motion — disable animations, keep static */
+@media (prefers-reduced-motion: reduce) {
+    .cursor-follow-preview,
+    .cursor-follow-layer,
+    .cursor-follow-image-wrap {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .cursor-follow-layer--support1,
+    .cursor-follow-layer--support2 {
+        transform: none !important;
+    }
+}

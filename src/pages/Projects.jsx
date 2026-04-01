@@ -30,7 +30,42 @@ import {
     getProjectPath,
     isStandaloneProject,
 } from "../utils/projectDataMapper";
+import CursorFollowPreview from "../components/CursorFollowPreview";
 import "./Projects.css";
+
+/**
+ * Extract preview images from project data
+ * Tries to get images from multiple sources: hoverImages, images array, or media.images
+ */
+function getPreviewImages(project) {
+    // If hoverImages already set, use it
+    if (project.hoverImages && Array.isArray(project.hoverImages)) {
+        return project.hoverImages.slice(0, 5);
+    }
+
+    // Try to extract from media.images (case studies)
+    if (project.media?.images) {
+        return project.media.images.slice(0, 5);
+    }
+
+    // Try to extract from overview.images (standalone projects)
+    if (project.overview?.images) {
+        return project.overview.images.slice(0, 5);
+    }
+
+    // Try to extract from sections that have images array
+    if (project.sections) {
+        const allImages = [];
+        Object.values(project.sections).forEach((section) => {
+            if (section.images && Array.isArray(section.images)) {
+                allImages.push(...section.images);
+            }
+        });
+        return allImages.slice(0, 5);
+    }
+
+    return [];
+}
 
 export default function Projects() {
     // State for projects list
@@ -39,6 +74,10 @@ export default function Projects() {
     const [loading, setLoading] = useState(true);
     // Track which project is being hovered (for hover dominance effect)
     const [hoveredProject, setHoveredProject] = useState(null);
+    // Track cursor position for preview follow (desktop only)
+    const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+    // Desktop detection
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
     useEffect(() => {
         try {
@@ -88,10 +127,18 @@ export default function Projects() {
                     );
 
                     // Merge case studies + standalone projects
-                    setProjects([
+                    const allProjects = [
                         ...caseStudyCards,
                         ...standaloneCards.filter(Boolean),
-                    ]);
+                    ];
+
+                    // Extract preview images for each project
+                    const projectsWithPreviews = allProjects.map((project) => ({
+                        ...project,
+                        hoverImages: getPreviewImages(project),
+                    }));
+
+                    setProjects(projectsWithPreviews);
                     setLoading(false);
                 })
                 .catch((error) => {
@@ -99,6 +146,7 @@ export default function Projects() {
                     const projectsWithData = caseStudyProjects.map(
                         (project) => ({
                             ...project,
+                            hoverImages: getPreviewImages(project),
                         }),
                     );
                     setProjects(projectsWithData);
@@ -110,9 +158,28 @@ export default function Projects() {
         }
     }, []);
 
+    // Handle desktop resize detection
+    useEffect(() => {
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 1024);
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    // Handle mouse move for cursor-follow preview
+    const handleMouseMove = (e) => {
+        if (!isDesktop) return;
+        setCursorPos({ x: e.clientX, y: e.clientY });
+    };
+
     return (
         <div className="projects-page">
-            <main className="projects-main">
+            <main
+                className="projects-main"
+                onMouseMove={hoveredProject ? handleMouseMove : null}
+            >
                 <section className="section">
                     <div className="container--wide stack stack--tight">
                         {/* Header with kicker label */}
@@ -125,9 +192,7 @@ export default function Projects() {
                             <div className="kicker">Selected Work</div>
                             <h1 className="projects-title">
                                 {projects.length}{" "}
-                                {projects.length === 1
-                                    ? "project"
-                                    : "projects"}
+                                {projects.length === 1 ? "project" : "projects"}
                             </h1>
                             <p className="projects-subtitle">
                                 Curated case studies and design work
@@ -171,9 +236,7 @@ export default function Projects() {
                                         onFocus={() =>
                                             setHoveredProject(project)
                                         }
-                                        onBlur={() =>
-                                            setHoveredProject(null)
-                                        }
+                                        onBlur={() => setHoveredProject(null)}
                                     >
                                         <Link
                                             to={getProjectPath(project.id)}
@@ -181,7 +244,10 @@ export default function Projects() {
                                         >
                                             {/* Index number */}
                                             <div className="workIndex">
-                                                {String(index + 1).padStart(2, "0")}
+                                                {String(index + 1).padStart(
+                                                    2,
+                                                    "0",
+                                                )}
                                             </div>
 
                                             {/* Project title */}
@@ -198,12 +264,11 @@ export default function Projects() {
                                                         </span>
                                                         {project.year && (
                                                             <>
+                                                                <span> · </span>
                                                                 <span>
-                                                                    {" "}
-                                                                    ·{" "}
-                                                                </span>
-                                                                <span>
-                                                                    {project.year}
+                                                                    {
+                                                                        project.year
+                                                                    }
                                                                 </span>
                                                             </>
                                                         )}
@@ -216,9 +281,7 @@ export default function Projects() {
                                         {project.previewImage && (
                                             <div className="workPreview">
                                                 <img
-                                                    src={
-                                                        project.previewImage
-                                                    }
+                                                    src={project.previewImage}
                                                     alt={`${project.title} preview`}
                                                 />
                                             </div>
@@ -229,6 +292,14 @@ export default function Projects() {
                         )}
                     </div>
                 </section>
+
+                {/* Cursor-follow preview for hovered project */}
+                <CursorFollowPreview
+                    project={hoveredProject}
+                    cursorX={cursorPos.x}
+                    cursorY={cursorPos.y}
+                    isDesktop={isDesktop}
+                />
             </main>
         </div>
     );
