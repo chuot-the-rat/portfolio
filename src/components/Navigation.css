@@ -1,14 +1,24 @@
-/* Navigation — minimal floating bar */
+/* ============================================================
+   NAVIGATION
+   Transparent at hero top → frosted on scroll
+   ============================================================ */
 
 .navbar {
-    background-color: transparent;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: none;
     position: sticky;
     top: 0;
     z-index: 100;
-    transition: background-color var(--duration-base) var(--ease-smooth);
+    background-color: transparent;
+    transition:
+        background-color 200ms ease,
+        border-color 200ms ease;
+}
+
+/* Frosted glass appears after scrolling past hero */
+.navbar--scrolled {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .nav-container {
@@ -21,26 +31,35 @@
     height: 56px;
 }
 
-/* Logo */
+/* ── Logo — pill badge ── */
+
 .nav-logo {
-    font-size: var(--font-size-base);
-    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--color-text);
     text-decoration: none;
-    letter-spacing: 0.01em;
-    transition: opacity var(--duration-fast) var(--ease-smooth);
-    outline-offset: var(--focus-offset);
+    transition:
+        background-color 150ms ease,
+        color 150ms ease,
+        border-color 150ms ease;
+    white-space: nowrap;
 }
 
 .nav-logo:hover {
-    opacity: 0.6;
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
 }
 
-.nav-logo:focus-visible {
-    outline: var(--focus-ring);
-}
+/* ── Links ── */
 
-/* Menu */
 .nav-menu {
     display: flex;
     list-style: none;
@@ -53,22 +72,20 @@
     margin: 0;
 }
 
-/* Links */
 .nav-link {
-    text-decoration: none;
-    color: var(--color-text-secondary);
-    font-weight: 500;
+    font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    letter-spacing: 0.06em;
-    padding: var(--space-2) 0;
-    transition: opacity var(--duration-fast) var(--ease-smooth),
-                color var(--duration-fast) var(--ease-smooth);
-    outline-offset: var(--focus-offset);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    padding: var(--space-1) 0;
+    transition: color 150ms ease;
+    outline-offset: 4px;
 }
 
 .nav-link:hover {
     color: var(--color-text);
-    opacity: 0.6;
 }
 
 .nav-link:focus-visible {
@@ -77,26 +94,24 @@
 
 .nav-link.active {
     color: var(--color-text);
-    font-weight: 500;
-    opacity: 1;
 }
 
-/* Mobile */
+/* ── Dark mode ── */
+
+@media (prefers-color-scheme: dark) {
+    .navbar--scrolled {
+        background-color: rgba(10, 10, 10, 0.85);
+    }
+}
+
+/* ── Mobile ── */
+
 @media (max-width: 768px) {
     .nav-container {
         padding: 0 var(--gutter-mobile);
     }
 
     .nav-menu {
-        gap: var(--space-6);
-    }
-
-    .nav-logo {
-        font-size: var(--font-size-sm);
-    }
-
-    .nav-link {
-        font-size: var(--font-size-xs);
-        padding: var(--space-1) 0;
+        gap: var(--space-5);
     }
 }

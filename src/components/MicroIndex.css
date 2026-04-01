@@ -4,6 +4,14 @@
    All classes prefixed mi- (micro-index)
    ═══════════════════════════════════════════════════ */
 
+/* MicroIndex system — all hidden for clean editorial layout */
+.mi-section-index,
+.mi-section-meta,
+.mi-fig-label,
+.mi-scroll-progress {
+    display: none;
+}
+
 /* ─── Shared monospace base ─── */
 .mi-mono {
     font-family:

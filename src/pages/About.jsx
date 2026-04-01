@@ -18,7 +18,7 @@ export default function About() {
                     {...fadeUp}
                 >
                     <p className="about-statement">
-                        I design things that are easy to use and hard to forget.
+                        I design and build — from research to shipped code, without losing the intent.
                     </p>
                 </motion.div>
 
@@ -75,6 +75,27 @@ export default function About() {
                                 places that aren't software. I'm currently looking for
                                 opportunities where design and development overlap — roles where
                                 I can contribute to both sides of the conversation.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section className="about-section">
+                        <span className="about-index">04 —</span>
+                        <div className="about-section-content">
+                            <p className="about-text">
+                                Figma · User Research · Prototyping · Wireframing ·
+                                Design Systems · HTML/CSS · JavaScript · React ·
+                                After Effects · Framer · Illustrator · Git
+                            </p>
+                        </div>
+                    </section>
+
+                    <section className="about-section">
+                        <span className="about-index">05 —</span>
+                        <div className="about-section-content">
+                            <p className="about-text">
+                                Digital Design &amp; Development, Diploma —{" "}
+                                British Columbia Institute of Technology · 2024–2026
                             </p>
                         </div>
                     </section>
