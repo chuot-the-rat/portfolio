@@ -3,12 +3,12 @@
    ========================================================================== */
 
 .education-section {
-    padding: 6rem 0;
+    padding: var(--space-16) 0;
     opacity: 0;
     transform: translateY(30px);
     transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
+        opacity var(--duration-base) var(--ease-smooth),
+        transform var(--duration-base) var(--ease-smooth);
 }
 
 .education-section.visible {
@@ -40,7 +40,7 @@
 
 /* Header Styles */
 .education-header {
-    margin-bottom: 4rem;
+    margin-bottom: var(--space-12);
     max-width: 600px;
 }
 
@@ -49,7 +49,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--text-secondary, #57534e);
+    color: var(--color-text-secondary);
     font-weight: 600;
     margin-bottom: 0.75rem;
 }
@@ -57,14 +57,14 @@
 .education-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--text-primary, #1c1917);
+    color: var(--color-text);
     margin-bottom: 1rem;
     line-height: 1.2;
 }
 
 .education-description {
     font-size: 1.1rem;
-    color: var(--text-secondary, #57534e);
+    color: var(--color-text-secondary);
     line-height: 1.7;
 }
 
@@ -77,13 +77,13 @@
 .education-entry {
     display: grid;
     grid-template-columns: 40px 1fr;
-    gap: 2rem;
-    padding-bottom: 3rem;
+    gap: var(--space-8);
+    padding-bottom: var(--space-12);
     opacity: 0;
     transform: translateY(20px);
     transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
+        opacity 0.6s var(--ease-smooth),
+        transform 0.6s var(--ease-smooth);
     transition-delay: var(--entry-delay, 0ms);
 }
 
@@ -107,8 +107,8 @@
 .timeline-dot {
     width: 12px;
     height: 12px;
-    background: var(--bg-secondary, #ffffff);
-    border: 2px solid var(--accent, #212121);
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent);
     border-radius: 50%;
     position: relative;
     z-index: 2;
@@ -116,7 +116,7 @@
 }
 
 .education-entry:hover .timeline-dot {
-    background: var(--accent, #212121);
+    background: var(--color-accent);
     transform: scale(1.2);
 }
 
@@ -127,8 +127,8 @@
     height: calc(100% + 3rem - 16px);
     background: linear-gradient(
         to bottom,
-        var(--border, #e7e5e4) 0%,
-        var(--border, #e7e5e4) 80%,
+        var(--color-border) 0%,
+        var(--color-border) 80%,
         transparent 100%
     );
 }
@@ -145,14 +145,14 @@
 .education-meta {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
 }
 
 .education-period {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--text-secondary, #57534e);
+    color: var(--color-text-secondary);
     letter-spacing: 0.02em;
 }
 
@@ -167,25 +167,25 @@
 
 .education-status.in-progress {
     background: rgba(var(--color-text), 0.08);
-    color: var(--accent, #212121);
+    color: var(--color-accent);
 }
 
 .education-status.completed {
     background: var(--color-accent-secondary);
-    color: var(--text-secondary, #57534e);
+    color: var(--color-text-secondary);
 }
 
 .education-program {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--text-primary, #1c1917);
+    color: var(--color-text);
     line-height: 1.3;
     margin-bottom: 0.5rem;
     transition: color 0.3s ease;
 }
 
 .education-entry:hover .education-program {
-    color: var(--accent, #212121);
+    color: var(--color-accent);
 }
 
 .education-institution-row {
@@ -197,22 +197,22 @@
 
 .education-institution {
     font-size: 1rem;
-    color: var(--text-secondary, #57534e);
+    color: var(--color-text-secondary);
     font-weight: 500;
 }
 
 .education-degree {
     font-size: 0.85rem;
-    color: var(--text-secondary, #57534e);
+    color: var(--color-text-secondary);
     padding: 0.25rem 0.75rem;
-    background: var(--bg-primary, #fafaf9);
-    border: 1px solid var(--border, #e7e5e4);
-    border-radius: 4px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
 }
 
 .education-description-text {
     font-size: 1rem;
-    color: var(--text-secondary, #57534e);
+    color: var(--color-text-secondary);
     line-height: 1.7;
     margin-bottom: 1.25rem;
 }
@@ -227,7 +227,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--text-secondary, #57534e);
+    color: var(--color-text-secondary);
     font-weight: 600;
     margin-bottom: 0.75rem;
 }
@@ -243,18 +243,18 @@
 
 .highlight-item {
     font-size: 0.85rem;
-    color: var(--text-primary, #1c1917);
+    color: var(--color-text);
     padding: 0.5rem 1rem;
-    background: var(--bg-primary, #fafaf9);
-    border: 1px solid var(--border, #e7e5e4);
-    border-radius: 20px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
     transition: all 0.3s ease;
 }
 
 .highlight-item:hover {
-    background: var(--accent, #212121);
+    background: var(--color-accent);
     color: white;
-    border-color: var(--accent, #212121);
+    border-color: var(--color-accent);
 }
 
 .education-header {
@@ -284,14 +284,14 @@
 }
 .education-content {
     padding: 1.5rem;
-    background: var(--bg-primary, #fafaf9);
-    border-radius: 12px;
-    border: 1px solid var(--border, #e7e5e4);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
     transition: all 0.3s ease;
 }
 
 .education-section.compact .education-content:hover {
-    border-color: var(--accent, #212121);
+    border-color: var(--color-accent);
 }
 
 .education-section.compact .education-program {

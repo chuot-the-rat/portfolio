@@ -77,6 +77,7 @@
        Fixed spacing for predictable layouts
        ───────────────────────────────────────────────────────────────── */
 
+    --space-xs: 3px; /* Extra-small: micro spacing (3px outliers) */
     --space-0: 2px; /* Micro spacing */
     --space-1: 0.25rem; /* 4px */
     --space-2: 0.5rem; /* 8px */
@@ -199,6 +200,16 @@
     --shadow-multi-layer: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
 
     /* ─────────────────────────────────────────────────────────────────
+       DUAL SYSTEM NOTES (energy.css)
+       The energy.css file defines a separate typography & spacing system
+       (--text-sm/md/lg, --h1/h2/h3, --space-xs through --space-2xl).
+       This is intentional for "Jackie Hu" design rhythm. It does not
+       conflict with variables.css because energy.css is imported last.
+       Both systems coexist: use variables.css for component tokens,
+       use energy.css for page-level editorial rhythm and spacing.
+       ───────────────────────────────────────────────────────────────── */
+
+    /* ─────────────────────────────────────────────────────────────────
        FOCUS & KEYBOARD NAVIGATION
        Accessibility: clear indicators for keyboard users
        ───────────────────────────────────────────────────────────────── */
@@ -210,6 +221,7 @@
     /* ─────────────────────────────────────────────────────────────────
        ANIMATION COMPONENT TOKENS
        Specific tokens for complex animations (hero section, bracket-code)
+       Note: Most animations should use --dur-1/2/3 and --ease-smooth/premium
        ───────────────────────────────────────────────────────────────── */
 
     --hero-accent-opacity: 0.055;
