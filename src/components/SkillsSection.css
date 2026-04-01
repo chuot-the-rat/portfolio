@@ -70,14 +70,14 @@
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem 3rem;
+    gap: var(--space-8) var(--space-12);
 }
 
 /* Tablet: 2 columns */
 @media (max-width: 1024px) {
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 2.5rem 3rem;
+        gap: var(--space-8) var(--space-12);
     }
 }
 
@@ -85,7 +85,7 @@
 @media (max-width: 640px) {
     .skills-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: var(--space-8);
     }
 
     .skills-title {
@@ -101,7 +101,7 @@
 .skills-category {
     opacity: 0;
     transform: translateY(20px);
-    animation: skillCategoryReveal 0.6s ease forwards;
+    animation: skillCategoryReveal var(--dur-600) ease forwards;
     animation-delay: var(--stagger-delay, 0ms);
 }
 
@@ -118,14 +118,14 @@
 }
 
 .skills-category-label {
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs-alt);
     font-weight: 600;
-    color: var(--text-primary, #1c1917);
+    color: var(--color-text);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 1rem;
-    padding-bottom: 0.625rem;
-    border-bottom: 1px solid var(--border, #e7e5e4);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
 }
 
 /* Skills List */
@@ -139,11 +139,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 0;
+    padding: var(--space-3) 0;
     border-bottom: 1px solid transparent;
     opacity: 0;
     transform: translateX(-10px);
-    animation: skillItemReveal 0.4s ease forwards;
+    animation: skillItemReveal var(--dur-400) ease forwards;
     animation-delay: var(--skill-delay, 0ms);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: default;
@@ -179,11 +179,11 @@
 
 /* Skill Name */
 .skill-name {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     color: var(--text-primary, #1c1917);
     font-weight: 500;
     position: relative;
-    transition: color 0.3s ease;
+    transition: color var(--dur-2) var(--ease-smooth);
 }
 
 .skill-item:hover .skill-name {
@@ -198,7 +198,7 @@
     width: 0;
     height: 1px;
     background: var(--accent, #212121);
-    transition: width 0.3s ease;
+    transition: width var(--dur-2) var(--ease-smooth);
 }
 
 .skill-item:hover .skill-name::after {
@@ -207,11 +207,11 @@
 
 /* Skill Level Indicator */
 .skill-level {
-    font-size: 0.75rem;
+    font-size: var(--font-size-3xs);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 0.25rem 0.625rem;
-    border-radius: 4px;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
     font-weight: 500;
     opacity: 0;
     transform: translateX(10px);
@@ -226,18 +226,18 @@
 }
 
 .skill-level.advanced {
-    background: rgba(33, 33, 33, 0.08);
-    color: var(--accent, #212121);
+    background: var(--color-overlay-lg);
+    color: var(--color-accent);
 }
 
 .skill-level.intermediate {
-    background: rgba(87, 83, 78, 0.08);
-    color: var(--text-secondary, #57534e);
+    background: var(--color-accent-secondary);
+    color: var(--color-text-secondary);
 }
 
 .skill-level.learning {
-    background: rgba(231, 229, 228, 0.5);
-    color: var(--text-secondary, #57534e);
+    background: var(--color-overlay-md);
+    color: var(--color-text-secondary);
 }
 
 /* Alternative Compact Variant for Sidebar */
@@ -247,7 +247,7 @@
 }
 
 .skills-section.compact .skills-title {
-    font-size: 0.75rem;
+    font-size: var(--font-size-3xs);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-secondary, #57534e);
@@ -261,31 +261,31 @@
 
 .skills-section.compact .skills-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: var(--space-6);
 }
 
 .skills-section.compact .skills-category-label {
-    font-size: 0.85rem;
-    margin-bottom: 0.75rem;
+    font-size: var(--font-size-xs-large);
+    margin-bottom: var(--space-3);
     padding-bottom: 0;
     border-bottom: none;
 }
 
 .skills-section.compact .skill-item {
-    padding: 0.5rem 0;
+    padding: var(--space-2) 0;
 }
 
 .skills-section.compact .skills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--space-2);
 }
 
 .skills-section.compact .skill-item {
-    padding: 0.5rem 1rem;
-    background: var(--bg-primary, #fafaf9);
-    border: 1px solid var(--border, #e7e5e4);
-    border-radius: 20px;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
 }
 
 .skills-section.compact .skill-item:hover {
@@ -295,7 +295,7 @@
 }
 
 .skills-section.compact .skill-item:hover .skill-name {
-    color: white;
+    color: var(--color-text);
 }
 
 .skills-section.compact .skill-name::after {
@@ -327,7 +327,7 @@
 }
 
 .mode-chaos .skill-item:hover {
-    transform: translateX(8px) rotate(0.3deg) !important;
+    transform: translateX(8px) rotate(0.3deg);
 }
 
 /* CHAOS MODE - No underlines, minimal hover */
@@ -404,7 +404,7 @@
         rgba(0, 240, 255, 0.045) 4px
     );
     opacity: 0.6;
-    animation: scanline-drift 8s linear infinite;
+    animation: scanline-drift var(--dur-8s) linear infinite;
 }
 
 @keyframes scanline-drift {
@@ -432,7 +432,7 @@
         transparent 100%
     );
     opacity: 0.15;
-    animation: code-scroll 20s linear infinite;
+    animation: code-scroll var(--dur-20s) linear infinite;
 }
 
 @keyframes code-scroll {
@@ -467,7 +467,7 @@
     bottom: 0;
     background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="4" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
     opacity: 0.025;
-    animation: noise-flicker 0.3s steps(2) infinite;
+    animation: noise-flicker var(--dur-300) steps(2) infinite;
 }
 
 @keyframes noise-flicker {
@@ -495,7 +495,7 @@
     white-space: nowrap;
     overflow: hidden;
     opacity: 0.6;
-    animation: ascii-stream-down 25s linear infinite;
+    animation: ascii-stream-down var(--dur-25s) linear infinite;
     pointer-events: none;
     z-index: -1;
 }
@@ -514,7 +514,7 @@
     white-space: nowrap;
     overflow: hidden;
     opacity: 0.5;
-    animation: ascii-stream-down 30s linear infinite 3s;
+    animation: ascii-stream-down var(--dur-30s) linear infinite var(--dur-3s);
     pointer-events: none;
     z-index: -1;
 }
@@ -532,14 +532,14 @@
 .skills-header-work {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--space-3);
     margin-bottom: clamp(3rem, 6vw, 5rem);
     font-family: "Courier New", Consolas, monospace;
     color: rgba(255, 255, 255, 0.9);
 }
 
 .terminal-prompt {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     color: rgba(0, 240, 255, 0.8);
     font-weight: 600;
 }
@@ -556,7 +556,7 @@
     width: 10px;
     height: 20px;
     background: rgba(0, 240, 255, 0.8);
-    animation: cursor-blink 1.2s step-end infinite;
+    animation: cursor-blink var(--dur-1s) step-end infinite;
 }
 
 @keyframes cursor-blink {
@@ -574,10 +574,10 @@
 .skills-column-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 3rem 2.5rem;
+    gap: var(--space-12) var(--space-6);
     position: relative;
     z-index: 2;
-    padding: 0 1rem;
+    padding: 0 var(--space-4);
 }
 
 /* Individual Column Container */
@@ -585,13 +585,13 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-4);
 }
 
 /* Column Header - Category Labels - Flat white with neon glow */
 .skill-column-header {
     font-family: "Courier New", Consolas, monospace;
-    font-size: 0.875rem;
+    font-size: var(--font-size-xs-small);
     font-weight: 700;
     letter-spacing: 0.15em;
     color: #ffffff;
@@ -614,18 +614,18 @@
 .skill-list {
     display: flex;
     flex-direction: column;
-    gap: 0.875rem;
+    gap: var(--space-3);
 }
 
 /* Tablet: 2 columns */
 @media (max-width: 1024px) {
     .skills-column-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 2rem 1.5rem;
+        gap: var(--space-8) var(--space-6);
     }
 
     .skill-column-header {
-        font-size: 0.8125rem;
+        font-size: var(--font-size-xs-variant);
     }
 }
 
@@ -633,7 +633,7 @@
 @media (max-width: 640px) {
     .skills-column-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: var(--space-8);
     }
 
     .skills-header-work {
@@ -641,7 +641,7 @@
     }
 
     .skill-column-header {
-        font-size: 0.75rem;
+        font-size: var(--font-size-3xs);
     }
 }
 
@@ -650,19 +650,19 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1rem;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
     background: #0f0f14;
     border: 1px solid rgba(0, 240, 255, 0.18);
     font-family: "Courier New", Consolas, monospace;
     cursor: pointer;
-    transition: all 0.18s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 180ms var(--ease-smooth);
     will-change: transform, box-shadow;
     overflow: visible;
     z-index: 1;
 
     /* Floating animation with staggered delay */
-    animation: skill-float 4s ease-in-out infinite;
+    animation: skill-float var(--dur-4s) ease-in-out infinite;
     animation-delay: var(--float-delay, 0s);
 
     /* Add subtle inner glow with softer color */
@@ -687,7 +687,7 @@
     background-repeat: repeat-y;
     pointer-events: none;
     opacity: 0.5;
-    animation: scanline-move 8s linear infinite;
+    animation: scanline-move var(--dur-8s) linear infinite;
 }
 
 @keyframes scanline-move {
@@ -704,7 +704,7 @@
 .skill-holo-item.glitch-active .skill-scanlines {
     opacity: 0.8;
     background-size: 100% 3px;
-    animation: scanline-glitch 0.4s linear infinite;
+    animation: scanline-glitch var(--dur-400) linear infinite;
 }
 
 @keyframes scanline-glitch {
@@ -737,7 +737,7 @@
     bottom: 0;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.18s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: opacity 180ms var(--ease-smooth);
     z-index: -1;
 }
 
@@ -760,7 +760,7 @@
 .skill-holo-item:hover .holo-glow-outer,
 .skill-holo-item.hovered .holo-glow-outer {
     opacity: 0.8;
-    animation: glow-pulse 2s ease-in-out infinite;
+    animation: glow-pulse var(--dur-2s) ease-in-out infinite;
 }
 
 @keyframes glow-pulse {
@@ -812,7 +812,7 @@
 
 /* Accent flicker animation */
 .skill-holo-item:hover {
-    animation: accent-flicker 0.18s cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation: accent-flicker var(--dur-200) cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 @keyframes accent-flicker {
@@ -855,17 +855,17 @@
     color: rgba(0, 240, 255, 0.6);
     font-weight: 600;
     opacity: 0.5;
-    transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 220ms var(--ease-smooth);
     display: inline-block;
-    animation: symbol-oscillate 3s ease-in-out infinite;
+    animation: symbol-oscillate var(--dur-3s) ease-in-out infinite;
 }
 
 .skill-symbol-start {
-    animation-delay: 0s;
+    animation-delay: var(--stagger-0);
 }
 
 .skill-symbol-end {
-    animation-delay: 0.15s;
+    animation-delay: var(--stagger-3);
 }
 
 @keyframes symbol-oscillate {
@@ -889,7 +889,7 @@
 
 /* Skill Name - Pure white for cyber aesthetic */
 .skill-name-holo {
-    font-size: 0.9375rem;
+    font-size: var(--font-size-sm-variant);
     color: #ffffff;
     font-weight: 400;
     letter-spacing: 0.02em;
@@ -965,7 +965,7 @@
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 0.375rem;
+    gap: var(--space-1);
     padding: 0.375rem 0.875rem;
     background: rgba(0, 0, 0, 0.95);
     border: 1px solid rgba(0, 240, 255, 0.5);
@@ -990,7 +990,7 @@
     width: 6px;
     height: 12px;
     background: rgba(0, 240, 255, 0.9);
-    animation: cursor-blink 1s step-end infinite;
+    animation: cursor-blink var(--dur-1s) step-end infinite;
 }
 
 /* ASCII Animation Display */
@@ -1162,7 +1162,7 @@
         0 0 0 1px rgba(33, 33, 33, 0.08);
     backdrop-filter: blur(6px);
     top: -34px;
-    font-size: 0.65rem;
+    font-size: var(--font-size-3xs-alt);
     padding: 0.3rem 0.7rem;
     border-radius: 4px;
 }
@@ -1175,13 +1175,13 @@
     color: var(--color-text-tertiary, #a8a29e);
     text-shadow: none;
     right: -40px;
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs-alt);
 }
 
 .skills-section:not(.skills-work-mode) .skill-code-snippet {
     color: var(--color-text-tertiary, #a8a29e);
     text-shadow: none;
-    font-size: 0.65rem;
+    font-size: var(--font-size-3xs-alt);
     bottom: -24px;
 }
 

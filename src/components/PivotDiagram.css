@@ -76,7 +76,7 @@
 /* Accent border when AFTER is active */
 .pvt-viewport[data-after] {
     border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
-    animation: pvt-border-settle 0.8s ease-out forwards;
+    animation: pvt-border-settle var(--dur-600) ease-out forwards;
 }
 
 .pvt-viewport:not([data-after]) {
@@ -152,14 +152,14 @@
     top: 12px;
     right: 14px;
     z-index: 5;
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs-alt);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-text-tertiary);
     opacity: 0.6;
     pointer-events: none;
-    transition: opacity 0.2s ease;
+    transition: opacity var(--dur-200) var(--ease-smooth);
     line-height: 1;
 }
 
@@ -269,7 +269,7 @@
     .pvt-indicator {
         top: 10px;
         right: 10px;
-        font-size: 0.7rem;
+        font-size: var(--font-size-3xs-small);
     }
 
     .pvt-title {

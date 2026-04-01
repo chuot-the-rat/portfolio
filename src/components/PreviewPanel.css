@@ -19,7 +19,7 @@
 }
 
 .preview-scatter-img-wrap {
-    border-radius: 8px;
+    border-radius: var(--radius-base);
     overflow: hidden;
     background-color: var(--color-bg-secondary, #fafafa);
     box-shadow:
@@ -90,7 +90,7 @@
     position: absolute;
     bottom: 1rem;
     left: 1rem;
-    font-size: 0.6875rem;
+    font-size: var(--font-size-3xs-alt);
     font-family: "Courier New", monospace;
     letter-spacing: 0.05em;
     text-transform: lowercase;
@@ -110,13 +110,13 @@
     height: auto;
     display: block;
     border-radius: 0;
-    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform var(--dur-200) var(--ease-smooth);
 }
 
 /* Chaos mode preview images — soft rounded edges, no hard outlines */
 .mode-chaos .preview-image,
 .mode-chaos .preview-video {
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     box-shadow: none;
 }
 
@@ -179,6 +179,15 @@
 
 /* Mode-Specific Preview Interactions */
 
+/* WORK MODE - NO side-reveal media (holographic panels only) - Define FIRST so cascades don't override */
+.mode-work .preview-media-reveal {
+    display: none;
+}
+
+.mode-work .preview-state-label {
+    display: none;
+}
+
 /* CHAOS MODE - Original smooth hover with lift and overlay */
 .mode-chaos .preview-media-reveal {
     display: block;
@@ -187,20 +196,11 @@
 .mode-chaos .preview-media-reveal:hover .preview-image,
 .mode-chaos .preview-media-reveal:hover .preview-video {
     transform: scale(1.03);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--dur-350) var(--ease-smooth);
 }
 
 .mode-chaos .preview-state-label {
     display: none;
-}
-
-/* WORK MODE - NO side-reveal media (holographic panels only) */
-.mode-work .preview-media-reveal {
-    display: none !important;
-}
-
-.mode-work .preview-state-label {
-    display: none !important;
 }
 
 /* ==========================================================================
@@ -241,7 +241,7 @@
     );
 
     /* Floating animation */
-    animation: holo-float 3s ease-in-out infinite;
+    animation: holo-float var(--dur-3s) ease-in-out infinite;
 
     /* Holographic glow */
     box-shadow:
@@ -263,7 +263,7 @@
         rgba(0, 255, 255, 0.8) 50%,
         transparent 100%
     );
-    animation: edge-sweep 2s ease-in-out infinite;
+    animation: edge-sweep var(--dur-2s) ease-in-out infinite;
 }
 
 /* Content container */
@@ -271,7 +271,7 @@
     position: relative;
     z-index: 2;
     font-family: "Courier New", Consolas, monospace;
-    font-size: 0.8125rem;
+    font-size: var(--font-size-xs-variant);
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.95);
 }

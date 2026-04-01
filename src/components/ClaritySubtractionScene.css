@@ -71,7 +71,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: aspect-ratio 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: aspect-ratio var(--dur-slow) var(--ease-spring-light);
 }
 
 /* ── Nav ── */
@@ -100,7 +100,7 @@
 }
 
 .css-pill {
-    font-size: 0.65rem;
+    font-size: var(--font-size-3xs-alt);
     font-weight: 550;
     letter-spacing: 0.02em;
     color: var(--color-text-secondary);
@@ -118,7 +118,7 @@
     gap: var(--space-3);
     padding: var(--space-3) var(--space-4) var(--space-4);
     min-height: 0;
-    transition: gap 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: gap var(--dur-600) var(--ease-spring-light);
 }
 
 /* ── Sidebar ── */
@@ -128,8 +128,8 @@
     flex-direction: column;
     gap: var(--space-2);
     transition:
-        flex-basis 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.4s ease;
+        flex-basis var(--dur-slow) var(--ease-spring-light),
+        opacity var(--dur-400) var(--ease-smooth);
 }
 
 .css-sidebar-block {
@@ -153,8 +153,8 @@
     gap: var(--space-3);
     min-width: 0;
     transition:
-        max-width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-        margin 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        max-width var(--dur-slow) var(--ease-spring-light),
+        margin var(--dur-slow) var(--ease-spring-light);
 }
 
 /* Filters row */
@@ -180,7 +180,7 @@
     display: flex;
     gap: var(--space-2);
     flex: 1;
-    transition: flex-direction 0.4s ease;
+    transition: flex-direction var(--dur-400) var(--ease-smooth);
 }
 
 .css-content-block {
@@ -225,11 +225,11 @@
     opacity: var(--glow, 0);
     z-index: -1;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--dur-2) var(--ease-smooth);
 }
 
 .css-cta-label {
-    font-size: 0.7rem;
+    font-size: var(--font-size-3xs-small);
     font-weight: 650;
     letter-spacing: 0.02em;
 }

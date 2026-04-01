@@ -21,6 +21,32 @@
     --color-brand-warm: rgba(212, 165, 116, 0.1);
     --color-accent-secondary: rgba(87, 83, 78, 0.08);
 
+    /* Legacy variable name aliases (deprecated but maintained for compatibility) */
+    --color-text-primary: var(--color-text);
+    --text-primary: var(--color-text);
+    --text-secondary: var(--color-text-secondary);
+    --accent: var(--color-accent);
+    --border: var(--color-border);
+    --bg-primary: var(--color-bg);
+
+    /* Interactive state colors */
+    --color-focus: var(--color-accent);
+    --color-disabled: var(--color-text-tertiary);
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+
+    /* Opacity overlays (light mode) */
+    --color-overlay-xs: rgba(0, 0, 0, 0.02);
+    --color-overlay-sm: rgba(0, 0, 0, 0.04);
+    --color-overlay-md: rgba(0, 0, 0, 0.06);
+    --color-overlay-lg: rgba(0, 0, 0, 0.08);
+    --color-overlay-xl: rgba(0, 0, 0, 0.12);
+
+    /* Special theme colors */
+    --color-neon-cyan: rgba(0, 240, 255, 1);
+    --color-stamp-red: #c13d3d;
+
     /* ─────────────────────────────────────────────────────────────────
        FONT STACKS (Three-Voice System)
        ───────────────────────────────────────────────────────────────── */
@@ -41,6 +67,7 @@
        Fixed sizes for consistent hierarchy
        ───────────────────────────────────────────────────────────────── */
 
+    /* MAJOR SCALE (primary usage) */
     --font-size-xs: 0.6875rem; /* 11px */
     --font-size-sm: 0.875rem; /* 14px */
     --font-size-base: 1rem; /* 16px */
@@ -50,6 +77,30 @@
     --font-size-3xl: 2.5rem; /* 40px */
     --font-size-4xl: 3rem; /* 48px */
     --font-size-5xl: 4rem; /* 64px */
+
+    /* GRANULAR SCALE (for precise sizing in complex layouts) */
+    --font-size-2xs: 0.5rem; /* 8px: micro text */
+    --font-size-2xs-variant: 0.55rem; /* 8.8px: alt micro */
+    --font-size-2xs-small: 0.575rem; /* 9.2px: alt micro variant */
+    --font-size-3xs: 0.625rem; /* 10px: very small */
+    --font-size-3xs-alt: 0.65rem; /* 10.4px: variant */
+    --font-size-3xs-small: 0.7rem; /* 11.2px: small variant (close to xs) */
+    --font-size-xs-small: 0.75rem; /* 12px: mid-xs */
+    --font-size-xs-alt: 0.8rem; /* 12.8px: alt xs */
+    --font-size-xs-variant: 0.8125rem; /* 13px: precise xs variant */
+    --font-size-xs-large: 0.85rem; /* 13.6px: larger xs */
+    --font-size-sm-small: 0.9rem; /* 14.4px: between sm and base */
+    --font-size-sm-variant: 0.9375rem; /* 15px: alt sm */
+    --font-size-sm-large: 1.0625rem; /* 17px: larger sm */
+    --font-size-base-small: 1.05rem; /* 16.8px: variant base */
+    --font-size-lg-small: 1.1rem; /* 17.6px: between base and lg */
+    --font-size-lg-large: 1.25rem; /* 20px: larger lg */
+    --font-size-lg-xlarge: 1.35rem; /* 21.6px: extra large lg */
+
+    /* PIXEL-PRECISE CONVERSIONS (for legacy/design systems) */
+    --font-size-9px: 0.5625rem; /* 9px */
+    --font-size-10px: 0.625rem; /* 10px */
+    --font-size-11px: 0.6875rem; /* 11px (same as --font-size-xs) */
 
     /* ─────────────────────────────────────────────────────────────────
        LINE HEIGHT SCALE
@@ -146,14 +197,26 @@
     /* Material Design standard: smooth, professional motion — USE THIS as default */
     --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
+    /* Alias for ease-smooth (common naming convention) */
+    --ease-out: var(--ease-smooth);
+
     /* Premium/snappy: quick, decisive — for emphasis and premium feel */
     --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Alias for premium */
+    --ease-out-premium: var(--ease-premium);
 
     /* Spring easing: playful, bouncy entrance — use sparingly for delight */
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
+    /* Spring-lite: bouncy but less aggressive than full spring */
+    --ease-spring-light: cubic-bezier(0.22, 1, 0.36, 1);
+
     /* Entrance: optimized for content reveals — slight ease-in-out */
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Linear: no easing — for continuous animations like spinners */
+    --ease-linear: linear;
 
     /* ─────────────────────────────────────────────────────────────────
        MOTION DURATIONS
@@ -167,8 +230,30 @@
     --dur-3: 360ms; /* Reveal: section reveals, entrance animations, modals */
 
     /* EXTENDED DURATIONS */
+    --dur-micro: 150ms; /* Micro-interactions: fast icon/button feedback */
     --dur-slow: 500ms; /* Careful: used for deliberate, observed animations */
     --dur-slower: 800ms; /* Extra deliberate: hero entrance, major transitions */
+
+    /* ADDITIONAL TRANSITION DURATIONS (mid-range) */
+    --dur-200: 200ms; /* Token animations, quick reveals */
+    --dur-210: 210ms; /* Text highlight transitions */
+    --dur-250: 250ms; /* Link underline animations */
+    --dur-300: 300ms; /* Standard: legacy codebase alignment (prefer --dur-2 220ms instead) */
+    --dur-350: 350ms; /* Hover micro-interactions, button feedback */
+    --dur-400: 400ms; /* Page transitions, sectional reveals */
+    --dur-600: 600ms; /* Staggered entrance, medium reveals */
+
+    /* KEYFRAME ANIMATION DURATIONS (longer loops) */
+    --dur-1s: 1s; /* Spinners, loading animations */
+    --dur-1600: 1600ms; /* Skeleton loaders, pulsing effects */
+    --dur-2s: 2s; /* Subtle loops: glow, float, drift */
+    --dur-3s: 3s; /* Holographic effects, gentle floats */
+    --dur-4s: 4s; /* Manual staggered reveals */
+    --dur-8s: 8s; /* Scanline drift, code scroll */
+    --dur-20s: 20s; /* Continuous scrolls, marquees */
+    --dur-25s: 25s; /* ASCII art drift (staggered) */
+    --dur-30s: 30s; /* ASCII art drift variants */
+    --dur-40s: 40s; /* Marquee loop default */
 
     /* SPECIAL DURATIONS */
     --dur-instant: 0ms; /* No animation (use in dark mode resets) */
@@ -180,6 +265,34 @@
     --duration-base: var(--dur-2); /* 220ms → use --dur-2 */
     --duration-slow: var(--dur-slow); /* 500ms */
     --duration-slower: var(--dur-slower); /* 800ms */
+
+    /* ─────────────────────────────────────────────────────────────────
+       STAGGER DELAYS FOR SEQUENTIAL ANIMATIONS
+       Enables predictable entrance & reveal stagger patterns
+       ───────────────────────────────────────────────────────────────── */
+
+    /* Standard stagger increments (base unit: 50ms for smooth cascades) */
+    --stagger-0: 0ms; /* No delay: lead element */
+    --stagger-1: 50ms; /* First stagger interval */
+    --stagger-2: 100ms; /* Second element in sequence */
+    --stagger-3: 150ms; /* Third element (matches list item enter pattern) */
+    --stagger-4: 200ms; /* Fourth element */
+    --stagger-5: 250ms; /* Fifth element */
+    --stagger-6: 300ms; /* Sixth element */
+    --stagger-7: 350ms; /* Seventh element */
+    --stagger-8: 400ms; /* Eighth element */
+
+    /* Extended stagger for longer reveals (100ms increments) */
+    --stagger-long-1: 100ms;
+    --stagger-long-2: 200ms;
+    --stagger-long-3: 300ms;
+    --stagger-long-4: 400ms;
+    --stagger-long-5: 500ms;
+
+    /* Feature-specific stagger tokens */
+    --float-stagger: var(--stagger-3); /* Float/hover stagger: 150ms */
+    --skill-stagger: var(--stagger-delay, 0ms); /* Skill item reveal (CSS variable scoped per item) */
+    --item-stagger: var(--stagger-3); /* List item entrance: 150ms */
 
     /* ─────────────────────────────────────────────────────────────────
        SHADOW SYSTEM
@@ -253,4 +366,11 @@
     --color-text-tertiary: #737373;
     --color-border: #262626;
     --color-accent: #fafafa;
+
+    /* Dark mode overlay colors */
+    --color-overlay-xs: rgba(255, 255, 255, 0.02);
+    --color-overlay-sm: rgba(255, 255, 255, 0.04);
+    --color-overlay-md: rgba(255, 255, 255, 0.06);
+    --color-overlay-lg: rgba(255, 255, 255, 0.1);
+    --color-overlay-xl: rgba(255, 255, 255, 0.15);
 }

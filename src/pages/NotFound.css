@@ -18,7 +18,7 @@
 .not-found-content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--space-6);
 }
 
 .not-found-code {
@@ -38,7 +38,7 @@
 }
 
 .not-found-text {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     color: #57534e;
     line-height: 1.6;
     max-width: 600px;
@@ -59,7 +59,7 @@
     border-radius: 4px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all var(--dur-2) var(--ease-smooth);
 }
 
 .not-found-link.primary {
@@ -112,7 +112,7 @@
     color: #57534e;
     text-decoration: none;
     font-size: 0.9rem;
-    transition: color 0.3s ease;
+    transition: color var(--dur-2) var(--ease-smooth);
 }
 
 .not-found-nav-list a:hover {

@@ -84,9 +84,9 @@
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     background-color: var(--color-bg-secondary);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-hover);
 }
 
 /* ─────────────────────────────────────────────
@@ -103,7 +103,7 @@
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     background-color: var(--color-bg-secondary);
 }
 
@@ -128,7 +128,7 @@
 }
 
 .pl-section-image {
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     background-color: var(--color-bg-secondary);
     cursor: pointer;
@@ -147,7 +147,7 @@
 
 .carousel-viewport {
     position: relative;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     background-color: var(--color-bg-secondary);
     cursor: pointer;
@@ -178,7 +178,7 @@
     background: var(--color-bg, #fff);
     color: var(--color-text, #1a1a1a);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all var(--dur-200) var(--ease-smooth);
 }
 
 .carousel-btn:hover {
@@ -187,7 +187,7 @@
 }
 
 .carousel-counter {
-    font-size: 0.875rem;
+    font-size: var(--font-size-xs-small);
     color: var(--color-text-secondary, #666);
     font-variant-numeric: tabular-nums;
     min-width: 48px;
@@ -197,7 +197,7 @@
 .carousel-dots {
     display: flex;
     justify-content: center;
-    gap: 6px;
+    gap: var(--space-1);
     margin-top: 12px;
 }
 
@@ -209,7 +209,7 @@
     background: transparent;
     cursor: pointer;
     padding: 0;
-    transition: all 0.2s ease;
+    transition: all var(--dur-200) var(--ease-smooth);
 }
 
 .carousel-dot.active {
@@ -247,7 +247,7 @@
 
 .pl-bento-item {
     aspect-ratio: 1;
-    border-radius: 8px;
+    border-radius: var(--radius-base);
     overflow: hidden;
     background-color: var(--color-bg-secondary);
     cursor: pointer;
@@ -285,7 +285,7 @@
     gap: var(--space-3);
     padding: var(--space-4);
     background-color: var(--color-bg-secondary);
-    border-radius: 8px;
+    border-radius: var(--radius-base);
 }
 
 /* ─────────────────────────────────────────────
@@ -301,8 +301,8 @@
 .pl-process-step {
     padding: var(--space-6);
     background-color: var(--color-bg-secondary);
-    border-radius: 12px;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: var(--radius-lg);
+    transition: transform var(--dur-2) var(--ease-premium);
 }
 
 .pl-process-step:hover {
@@ -345,7 +345,7 @@
     padding: var(--space-1) var(--space-3);
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
 }
@@ -364,8 +364,8 @@
     text-align: center;
     padding: var(--space-8);
     background-color: var(--color-bg-secondary);
-    border-radius: 12px;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: var(--radius-lg);
+    transition: transform var(--dur-2) var(--ease-premium);
 }
 
 .pl-metric-card:hover {
@@ -414,11 +414,11 @@
 
 .pl-gallery-item {
     position: relative;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     background-color: var(--color-bg-secondary);
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform var(--dur-400) var(--ease-premium);
 }
 
 .pl-gallery-item:hover {
@@ -443,7 +443,7 @@
     font-size: var(--font-size-sm);
     line-height: 1.5;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--dur-2) var(--ease-smooth);
 }
 
 .pl-gallery-item:hover .pl-gallery-caption {
@@ -469,7 +469,7 @@
     max-width: 90vw;
     max-height: 90vh;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: var(--radius-base);
 }
 
 .pl-lightbox-close {
@@ -479,10 +479,10 @@
     background: none;
     border: none;
     color: #fff;
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
     cursor: pointer;
     opacity: 0.7;
-    transition: opacity 0.2s;
+    transition: opacity var(--dur-200) var(--ease-smooth);
     line-height: 1;
 }
 

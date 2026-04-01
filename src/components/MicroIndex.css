@@ -20,7 +20,7 @@
    ═══════════════════════════════════════════════════ */
 .mi-section-index {
     display: block;
-    font-size: 11px;
+    font-size: var(--font-size-11px);
     color: var(--color-text-tertiary);
     opacity: 0.65;
     margin-bottom: 6px;
@@ -39,7 +39,7 @@
 }
 
 .mi-section-tag {
-    font-size: 10px;
+    font-size: var(--font-size-10px);
     color: var(--color-text-tertiary);
     opacity: 0.55;
 }
@@ -48,7 +48,7 @@
     font-family:
         "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Cascadia Code",
         "Consolas", monospace;
-    font-size: 10px;
+    font-size: var(--font-size-10px);
     font-weight: 500;
     letter-spacing: 0.08em;
     color: var(--color-text-tertiary);
@@ -70,7 +70,7 @@
 }
 
 .mi-progress-value {
-    font-size: 11px;
+    font-size: var(--font-size-11px);
     color: var(--color-text-tertiary);
     opacity: 0.6;
     white-space: nowrap;
@@ -81,7 +81,7 @@
    ═══════════════════════════════════════════════════ */
 .mi-fig-label {
     display: block;
-    font-size: 10px;
+    font-size: var(--font-size-10px);
     color: var(--color-text-tertiary);
     opacity: 0.55;
     margin-bottom: 6px;
@@ -106,21 +106,21 @@
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
         padding: var(--space-1) var(--space-3);
-        border-radius: 4px;
+        border-radius: var(--radius-sm);
     }
 }
 
 @media (max-width: 480px) {
     .mi-section-index {
-        font-size: 10px;
+        font-size: var(--font-size-10px);
     }
 
     .mi-section-tag,
     .mi-section-version {
-        font-size: 9px;
+        font-size: var(--font-size-3xs);
     }
 
     .mi-fig-label {
-        font-size: 9px;
+        font-size: var(--font-size-3xs);
     }
 }
