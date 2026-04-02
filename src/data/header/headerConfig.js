@@ -13,7 +13,7 @@
 // ── Home page hero ───────────────────────────────────────────────────────────
 export const homeHeroConfig = {
   // HeroContainer layout preset
-  layout: "asymmetric", // "asymmetric" | "centered" | "full-left"
+  layout: "full-left", // "asymmetric" | "centered" | "full-left"
   minHeight: "90vh",
 
   // HeroText
@@ -25,15 +25,8 @@ export const homeHeroConfig = {
       "Crafting experiences that bridge research, design, and clean code.",
   },
 
-  // MediaBlock — set to null to collapse the media column entirely
-  media: {
-    src: "/assets/leana-portrait.jpg",
-    alt: "Leana Le",
-    type: "image", // "image" | "video"
-    caption: "Burnaby, BC",
-    rotation: 1.5, // degrees of editorial tilt (0 = flat, negative = left-lean)
-    aspectRatio: "4/5",
-  },
+  // MediaBlock — null until portrait asset is added
+  media: null,
 
   // FloatingTags — positions are px offsets from the HeroContainer origin
   tags: [
