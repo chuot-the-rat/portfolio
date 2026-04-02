@@ -1,21 +1,13 @@
 import { motion } from "framer-motion";
+import HeroContainer from "../components/header/HeroContainer";
+import { aboutHeroConfig } from "../data/header/headerConfig";
 import "./About.css";
 
 export default function About() {
     return (
         <div className="about">
             <main className="about-main">
-                <motion.section
-                    className="about-hero"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="about-title">About Me</h1>
-                    <p className="about-subtitle">
-                        Designer & Developer crafting digital experiences
-                    </p>
-                </motion.section>
+                <HeroContainer config={aboutHeroConfig} />
 
                 <motion.section
                     className="about-content"
