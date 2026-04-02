@@ -10,6 +10,8 @@
  */
 
 import { motion } from "framer-motion";
+import HeroContainer from "../components/header/HeroContainer";
+import { resumeHeroConfig } from "../data/header/headerConfig";
 import "./Resume.css";
 
 export default function Resume() {
@@ -21,17 +23,7 @@ export default function Resume() {
         <div className="resume">
             <main className="resume-main">
                 {/* ─── HERO SECTION ─── */}
-                <motion.section
-                    className="resume-hero"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="resume-title">Resume</h1>
-                    <p className="resume-subtitle">
-                        My experience, skills, and education
-                    </p>
-                </motion.section>
+                <HeroContainer config={resumeHeroConfig} />
 
                 {/* ─── EMBEDDED RESUME VIEWER ─── */}
                 <motion.section
