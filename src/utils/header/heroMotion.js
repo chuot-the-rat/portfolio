@@ -16,21 +16,21 @@ export const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.04, // 40ms between each child
-      delayChildren: 0.1,
+      staggerChildren: 0.06, // 60ms — slightly more deliberate, less mechanical
+      delayChildren: 0.05,
     },
   },
 };
 
 // ── Standard child ───────────────────────────────────────────────────────────
-// 20px Y rise + opacity. Used by HeroText nodes and CTAGroup.
+// 10px Y rise + opacity. Reduced travel = more restrained, editorial entrance.
 export const childVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.55,
+      duration: 0.72,
       ease: [0.16, 1, 0.3, 1],
     },
   },
@@ -39,30 +39,30 @@ export const childVariants = {
 // ── Media panel entrance ─────────────────────────────────────────────────────
 // Slides from the right + slight scale. Delayed so text leads.
 export const mediaVariants = {
-  hidden: { opacity: 0, x: 24, scale: 0.97 },
+  hidden: { opacity: 0, x: 14, scale: 0.98 },
   visible: {
     opacity: 1,
     x: 0,
     scale: 1,
     transition: {
-      duration: 0.65,
+      duration: 0.8,
       ease: [0.16, 1, 0.3, 1],
-      delay: 0.2,
+      delay: 0.35,
     },
   },
 };
 
 // ── FloatingTag entrance ─────────────────────────────────────────────────────
-// Staggered via `custom` prop (index). Pass index={i} on each FloatingTag.
+// Staggered via `custom` prop (index). Tags enter after content settles.
 export const tagVariants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 6 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
+      duration: 0.5,
       ease: [0.16, 1, 0.3, 1],
-      delay: 0.35 + i * 0.08,
+      delay: 0.55 + i * 0.1,
     },
   }),
 };
@@ -92,11 +92,12 @@ export const mediaHoverVariants = {
 };
 
 // ── CTA hover ────────────────────────────────────────────────────────────────
+// Y lift instead of scale — more editorial, less UI-component feeling.
 export const ctaHoverVariants = {
-  rest: { scale: 1 },
+  rest: { y: 0 },
   hover: {
-    scale: 1.02,
-    transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] },
+    y: -2,
+    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
   },
-  tap: { scale: 0.98 },
+  tap: { y: 0, opacity: 0.7 },
 };

@@ -29,13 +29,13 @@ export const homeHeroConfig = {
   media: null,
 
   // FloatingTags — px offsets from the HeroContainer top-left origin.
-  // Positions are tuned for full-left layout (no media panel).
-  // When layout switches back to "asymmetric", revisit these values so tags
-  // float around the media panel rather than over the text.
+  // Spread intentionally so they orbit the right side of the headline block.
+  // When switching to "asymmetric" layout, reposition tags to surround the
+  // media panel (e.g. cluster near the panel edges rather than the text).
   tags: [
-    { label: "Available", icon: "✦", initialX: 520, initialY: -14, index: 0 },
-    { label: "React",     icon: null,  initialX: 460, initialY:  72, index: 1 },
-    { label: "Burnaby",   icon: "→",   initialX: 600, initialY:  44, index: 2 },
+    { label: "Available", icon: "✦", initialX: 680, initialY: -18, index: 0 }, // upper-right
+    { label: "React",     icon: null,  initialX: 760, initialY:  86, index: 1 }, // far-right mid
+    { label: "Burnaby",   icon: "→",   initialX: 560, initialY: 160, index: 2 }, // lower-center
   ],
 
   // CTAGroup
