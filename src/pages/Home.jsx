@@ -11,6 +11,8 @@ import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import BracketCycler from "../components/BracketCycler";
 import PixelLoopCanvas from "../components/PixelLoopCanvas";
+import HeroContainer from "../components/header/HeroContainer";
+import { homeHeroConfig } from "../data/header/headerConfig";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
@@ -574,8 +576,9 @@ const Home = () => {
         <div className="home">
             <main className="home-main">
                 <div className="container">
-                    {/* Hero Section — System Activated + Magnetic Field */}
-                    <HeroSection />
+                    {/* Hero Section — new modular system
+                        To revert: replace <HeroContainer> with <HeroSection /> */}
+                    <HeroContainer config={homeHeroConfig} />
 
                     {/* Projects Grid */}
                     <section
