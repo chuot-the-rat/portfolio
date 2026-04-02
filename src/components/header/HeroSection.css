@@ -187,6 +187,15 @@
   opacity: 0.7;
 }
 
+/* ── Mobile tag row — hidden on desktop, shown on mobile ────────────────────
+   Must be hidden at base level. The .hs-tag chips inside it have
+   position: absolute which would cause them to stack at the container
+   origin if this element is allowed to render on desktop.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-tags-mobile-row {
+  display: none;
+}
+
 /* ── Floating tags ──────────────────────────────────────────────────────────
    Absolutely positioned within .hs-container (which has position: relative).
    z-index: 10 — highest within the hero section, but still below .navbar (100).
@@ -313,7 +322,7 @@
     transform: none !important;
   }
 
-  /* Wrapper added by HeroContainer on mobile to hold the static tag chips */
+  /* Mobile tag chips — re-shown as static inline row */
   .hs-tags-mobile-row {
     display: flex;
     flex-wrap: wrap;

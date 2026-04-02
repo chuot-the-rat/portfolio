@@ -10,10 +10,7 @@
  */
 
 import { motion, useReducedMotion } from "framer-motion";
-import {
-  mediaVariants,
-  mediaHoverVariants,
-} from "../../utils/header/heroMotion";
+import { mediaVariants } from "../../utils/header/heroMotion";
 
 export default function MediaBlock({
   src,
@@ -25,16 +22,18 @@ export default function MediaBlock({
 }) {
   const shouldReduceMotion = useReducedMotion();
 
+  // Entrance and hover are kept separate to avoid variant key ambiguity.
+  // whileHover uses an inline object so Framer Motion always knows the
+  // explicit rest value (y: 0) to return to on hover-exit.
   const panelProps = shouldReduceMotion
     ? {
-        // No entrance or hover animation — just appear
         style: { rotate: 0, aspectRatio },
       }
     : {
-        variants: { ...mediaVariants, ...mediaHoverVariants },
+        variants: mediaVariants,
         initial: "hidden",
         animate: "visible",
-        whileHover: "hover",
+        whileHover: { y: -4, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } },
         style: { rotate: rotation, aspectRatio },
       };
 

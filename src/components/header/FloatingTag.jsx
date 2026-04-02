@@ -10,6 +10,7 @@
  * - Entrance is staggered via the `index` prop fed into tagVariants.
  */
 
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   tagVariants,
@@ -27,6 +28,11 @@ export default function FloatingTag({
 }) {
   const shouldReduceMotion = useReducedMotion();
 
+  // Phase: "entrance" first, then switches to "idle" via onAnimationComplete.
+  // This ensures the entrance (y rise + opacity fade) fully completes before
+  // the breathing pulse begins — not both running simultaneously.
+  const [phase, setPhase] = useState("entrance");
+
   // Check at render time — sufficient for Vite/React (no SSR)
   const isMobile =
     typeof window !== "undefined" && window.innerWidth < 768;
@@ -34,19 +40,17 @@ export default function FloatingTag({
   // On mobile: the absolute tag is hidden via CSS; don't bother animating it
   if (isMobile) return null;
 
-  // Build the animate array — always show visible state, optionally add idle
-  const animateState =
-    idleMotion && !shouldReduceMotion
-      ? ["visible", "idle"]
-      : "visible";
-
   const motionProps = shouldReduceMotion
     ? { style: { opacity: 1 } }
     : {
         variants: { ...tagVariants, ...tagIdleVariants },
         custom: index,
         initial: "hidden",
-        animate: animateState,
+        animate: phase === "idle" ? "idle" : "visible",
+        onAnimationComplete: (def) => {
+          // Switch to idle loop once entrance ("visible") finishes
+          if (def === "visible" && idleMotion) setPhase("idle");
+        },
       };
 
   return (
