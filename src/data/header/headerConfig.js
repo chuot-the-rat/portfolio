@@ -98,12 +98,12 @@ export const homeHeroConfig = {
 // ── About page header ────────────────────────────────────────────────────────
 export const aboutHeroConfig = {
   layout: "full-left",
-  minHeight: "45vh",
+  minHeight: "40vh",
   text: {
     descriptor: "About",
-    headline: "Designed in the spaces between",
+    headline: "Hi! It's Leana.",
     headlineAs: "h1",
-    subline: null,
+    subline: "Designer, developer, and recovering hospitality worker.",
   },
   media: null,
   tags: [],

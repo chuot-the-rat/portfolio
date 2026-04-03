@@ -6,8 +6,6 @@ import {
     getProjectPath,
     isStandaloneProject,
 } from "../utils/projectDataMapper";
-import SkillsSection from "../components/SkillsSection";
-import EducationSection from "../components/EducationSection";
 import HeroContainer from "../components/header/HeroContainer";
 import HomeWorkList from "../components/home/HomeWorkList";
 import { homeHeroConfig } from "../data/header/headerConfig";
@@ -226,11 +224,6 @@ const Home = () => {
                         <HomeWorkList projects={projects} />
                     )}
 
-                    {/* Skills Section */}
-                    <SkillsSection variant="grid" />
-
-                    {/* Education Section */}
-                    <EducationSection variant="timeline" />
                 </div>
             </main>
 
