@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -6,10 +6,10 @@ import {
     getProjectPath,
     isStandaloneProject,
 } from "../utils/projectDataMapper";
-import PreviewPanel from "../components/PreviewPanel";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import HeroContainer from "../components/header/HeroContainer";
+import HomeWorkList from "../components/home/HomeWorkList";
 import { homeHeroConfig } from "../data/header/headerConfig";
 import "./Home.css";
 import "../components/SectionLayout.css";
@@ -17,9 +17,7 @@ import "../components/SectionLayout.css";
 const Home = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [hoveredProject, setHoveredProject] = useState(null);
 
-    // Assign hover patterns to projects
     const hoverPatterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
 
     useEffect(() => {
@@ -88,6 +86,7 @@ const Home = () => {
 
                                 // Fetch supplemental data.json for real image paths
                                 let realImages = [];
+                                let coverImage = null;
                                 try {
                                     const supRes = await fetch(
                                         `/projects/${caseStudyProject.id}/data.json`,
@@ -95,6 +94,12 @@ const Home = () => {
                                     if (supRes.ok) {
                                         const supData = await supRes.json();
                                         realImages = collectAllImages(supData);
+                                        // Prefer a finished-looking cover: hifi > solution > overview
+                                        coverImage =
+                                            supData?.hifi?.images?.[0]?.src ??
+                                            supData?.solution?.images?.[0]?.src ??
+                                            supData?.overview?.images?.[0]?.src ??
+                                            null;
                                     }
                                 } catch {
                                     // No supplemental data — use mapper data
@@ -118,6 +123,7 @@ const Home = () => {
                                             index % hoverPatterns.length
                                         ],
                                     allImages: realImages,
+                                    coverImage,
                                 };
                             },
                         ),
@@ -149,6 +155,11 @@ const Home = () => {
                                         ...(data.solution?.images || []),
                                         ...(data.styleGuide?.images || []),
                                     ].filter((img) => img && img.src),
+                                    coverImage:
+                                        data?.hifi?.images?.[0]?.src ??
+                                        data?.solution?.images?.[0]?.src ??
+                                        data?.overview?.images?.[0]?.src ??
+                                        null,
                                 };
                             } catch {
                                 return null;
@@ -193,244 +204,22 @@ const Home = () => {
                         To revert: replace <HeroContainer> with <HeroSection /> */}
                     <HeroContainer config={homeHeroConfig} />
 
-                    {/* Projects Grid */}
-                    <section
-                        className="home-projects"
-                        id="projects"
-                    >
-                        {/* Projects Header */}
-                        <motion.div
-                            className="home-projects-header home-projects-header-terminal"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.15, delay: 0 }}
-                        >
-                            <span className="terminal-prompt">&gt;</span>
-                            <span className="terminal-text">
-                                {" "}
-                                projects_index
-                            </span>
-                            <span className="terminal-count">
-                                {" "}
-                                [{projects.length} entries]
-                            </span>
-                        </motion.div>
-
-                        {loading ? (
-                            <div className="home-loading">
-                                <motion.div
-                                    className="loading-spinner"
-                                    animate={{ rotate: 360 }}
-                                    transition={{
-                                        duration: 1,
-                                        repeat: Infinity,
-                                        ease: "linear",
-                                    }}
-                                />
-                            </div>
-                        ) : (
-                            <div className="projects-container">
-                                {/* Folder Explorer (Clean/Chaos modes) */}
-                                <div className="projects-explorer projects-explorer-default">
-                                    {/* Left pane — folder list */}
-                                    <div className="projects-folders">
-                                        {projects.map((project, index) => (
-                                            <motion.div
-                                                key={project.id}
-                                                initial={{ opacity: 0, y: 20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{
-                                                    duration: 0.5,
-                                                    delay: 0.08 * index,
-                                                    ease: [0.4, 0, 0.2, 1],
-                                                }}
-                                            >
-                                                <Link
-                                                    to={getProjectPath(
-                                                        project.id,
-                                                    )}
-                                                    className="folder-item-link"
-                                                    onMouseEnter={() => {
-                                                        // Re-shuffle images on each hover
-                                                        const imgs =
-                                                            project.allImages ||
-                                                            [];
-                                                        const shuffled = [
-                                                            ...imgs,
-                                                        ].sort(
-                                                            () =>
-                                                                Math.random() -
-                                                                0.5,
-                                                        );
-                                                        const count = Math.min(
-                                                            3 +
-                                                                Math.floor(
-                                                                    Math.random() *
-                                                                        3,
-                                                                ),
-                                                            shuffled.length,
-                                                        ); // 3-5
-                                                        setHoveredProject({
-                                                            ...project,
-                                                            hoverImages:
-                                                                shuffled.slice(
-                                                                    0,
-                                                                    count,
-                                                                ),
-                                                        });
-                                                    }}
-                                                    onMouseLeave={() =>
-                                                        setHoveredProject(null)
-                                                    }
-                                                >
-                                                    <motion.div
-                                                        className={`folder-item${hoveredProject?.id === project.id ? " folder-active" : ""}${hoveredProject !== null && hoveredProject?.id !== project.id ? " folder-dimmed" : ""}`}
-                                                        animate={{
-                                                            y:
-                                                                hoveredProject?.id ===
-                                                                project.id
-                                                                    ? -2
-                                                                    : 0,
-                                                        }}
-                                                        transition={{
-                                                            duration: 0.22,
-                                                            ease: [
-                                                                0.4, 0, 0.2, 1,
-                                                            ],
-                                                        }}
-                                                    >
-                                                        <div className="folder-tab">
-                                                            <span className="folder-tab-label">
-                                                                {project.title}
-                                                            </span>
-                                                        </div>
-                                                        <div className="folder-body">
-                                                            <div className="folder-meta">
-                                                                <span className="folder-category">
-                                                                    {
-                                                                        project.category
-                                                                    }
-                                                                </span>
-                                                                <span className="folder-dot">
-                                                                    ·
-                                                                </span>
-                                                                <span className="folder-year">
-                                                                    {
-                                                                        project.year
-                                                                    }
-                                                                </span>
-                                                                <span className="folder-index">
-                                                                    {String(
-                                                                        index +
-                                                                            1,
-                                                                    ).padStart(
-                                                                        2,
-                                                                        "0",
-                                                                    )}{" "}
-                                                                    /{" "}
-                                                                    {String(
-                                                                        projects.length,
-                                                                    ).padStart(
-                                                                        2,
-                                                                        "0",
-                                                                    )}
-                                                                </span>
-                                                            </div>
-                                                            {(project.subtitle ||
-                                                                project.tagline) && (
-                                                                <p className="folder-description">
-                                                                    {project.subtitle ||
-                                                                        project.tagline}
-                                                                </p>
-                                                            )}
-                                                        </div>
-                                                    </motion.div>
-                                                </Link>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-
-                                    {/* Right pane — preview window */}
-                                    <div className="projects-preview">
-                                        <div className="preview-window">
-                                            <div className="preview-window-bar">
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-title">
-                                                    {hoveredProject
-                                                        ? hoveredProject.title
-                                                        : "Preview"}
-                                                </span>
-                                            </div>
-                                            <div className="preview-window-body">
-                                                <AnimatePresence mode="wait">
-                                                    {hoveredProject ? (
-                                                        <motion.div
-                                                            key={
-                                                                hoveredProject.id
-                                                            }
-                                                            className="preview-window-content"
-                                                            initial={{
-                                                                opacity: 0,
-                                                                y: 8,
-                                                            }}
-                                                            animate={{
-                                                                opacity: 1,
-                                                                y: 0,
-                                                            }}
-                                                            exit={{
-                                                                opacity: 0,
-                                                                y: -6,
-                                                            }}
-                                                            transition={{
-                                                                duration: 0.22,
-                                                                ease: [
-                                                                    0.4, 0, 0.2,
-                                                                    1,
-                                                                ],
-                                                            }}
-                                                        >
-                                                            <PreviewPanel
-                                                                project={
-                                                                    hoveredProject
-                                                                }
-                                                                hoverPattern={
-                                                                    hoveredProject.hoverPattern
-                                                                }
-                                                            />
-                                                        </motion.div>
-                                                    ) : (
-                                                        <motion.div
-                                                            className="preview-empty"
-                                                            initial={{
-                                                                opacity: 0,
-                                                            }}
-                                                            animate={{
-                                                                opacity: 1,
-                                                            }}
-                                                            exit={{
-                                                                opacity: 0,
-                                                            }}
-                                                            transition={{
-                                                                duration: 0.2,
-                                                            }}
-                                                        >
-                                                            <div className="preview-empty-grid" />
-                                                            <span className="preview-empty-text">
-                                                                Hover a folder
-                                                                to preview
-                                                            </span>
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </section>
+                    {/* Work list — category tabs + Sharleen-style rows */}
+                    {loading ? (
+                        <div className="home-loading">
+                            <motion.div
+                                className="loading-spinner"
+                                animate={{ rotate: 360 }}
+                                transition={{
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                }}
+                            />
+                        </div>
+                    ) : (
+                        <HomeWorkList projects={projects} />
+                    )}
 
                     {/* Skills Section */}
                     <SkillsSection variant="grid" />
