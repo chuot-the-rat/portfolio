@@ -719,43 +719,6 @@
     color: var(--color-text-tertiary);
 }
 
-/* ─ Validation Quotes ─ */
-.quotes-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
-    margin: var(--space-12) 0;
-}
-
-.validation-quote {
-    padding: var(--space-8);
-    background-color: var(--color-bg-secondary);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 0;
-    font-style: italic;
-    transition: all var(--duration-base) var(--ease-smooth);
-}
-
-.validation-quote:hover {
-    padding-left: calc(var(--space-8) + var(--space-2));
-    box-shadow: var(--shadow-sm);
-}
-
-.quote-text {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-text);
-    margin-bottom: var(--space-4);
-    font-style: italic;
-}
-
-.quote-author {
-    font-size: var(--font-size-sm);
-    font-style: normal;
-    color: var(--color-text-tertiary);
-    display: block;
-}
-
 .validation-method {
     margin-top: var(--space-4);
     font-size: var(--font-size-sm);
@@ -918,17 +881,6 @@
     font-size: var(--font-size-sm);
     color: var(--color-text-tertiary);
     font-style: italic;
-}
-
-.research-reflection {
-    margin-top: var(--space-8);
-    padding: var(--space-8);
-    background-color: var(--color-bg-secondary);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 0;
-    font-style: italic;
-    color: var(--color-text-secondary);
-    line-height: var(--line-height-relaxed);
 }
 
 /* ──────────────────────────────────────────────────────────────────────
