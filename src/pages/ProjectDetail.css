@@ -33,25 +33,24 @@
 /* ─ Back Navigation ─ */
 .project-detail-back {
     padding: 0 var(--gutter);
-    margin-bottom: var(--section-spacing-base);
+    margin-bottom: var(--space-8);
 }
 
 .back-button {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-2) var(--space-4);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    background-color: var(--color-bg-secondary);
-    border-radius: var(--radius-base);
-    transition: all var(--duration-fast) var(--ease-smooth);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-decoration: none;
+    transition: color 0.18s ease;
     outline-offset: var(--focus-offset);
 }
 
 .back-button:hover {
     color: var(--color-text);
-    background-color: var(--color-border);
 }
 
 .back-button:focus-visible {
@@ -68,12 +67,32 @@
     margin-bottom: var(--section-spacing-base);
 }
 
-/* ─ Hero Meta (Category · Year · Status) ─ */
+/* ─ Two-column inner: text left, image right ─ */
+.project-hero-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-fluid-xl);
+    margin-bottom: var(--space-12);
+}
+
+.project-hero-inner.has-media {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+}
+
+/* ─ Text column ─ */
+.project-hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ─ Hero Meta (Category · Year) ─ */
 .project-hero-meta {
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-5);
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
 }
@@ -87,115 +106,116 @@
 }
 
 .project-year {
-    opacity: 0.7;
-}
-
-/* ─ Hero Header (Title + CTAs) ─ */
-.project-hero-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-8);
-    margin-bottom: var(--space-12);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    opacity: 0.6;
 }
 
 .project-hero-title {
     font-size: var(--font-size-3xl);
-    font-weight: 600;
-    letter-spacing: var(--letter-spacing-tight);
-    margin: 0;
-    max-width: 800px;
-    flex: 1;
-    line-height: var(--line-height-tight);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-4);
+    line-height: 1.08;
 }
 
 .project-hero-tagline {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-12);
-    max-width: 700px;
+    margin: 0 0 var(--space-8);
+    max-width: 52ch;
 }
 
-/* ─ CTA Buttons ─ */
+/* ─ Meta Grid (Role, Timeline, Team, Context) ─ */
+.project-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-6) var(--space-8);
+    margin-bottom: var(--space-8);
+}
+
+.project-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.meta-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-text-tertiary);
+}
+
+.meta-value {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ─ CTAs — minimal, after meta ─ */
 .project-hero-ctas {
     display: flex;
-    gap: var(--space-3);
-    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
 }
 
 .project-cta-link {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-3) var(--space-6);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    color: var(--color-text);
-    background-color: transparent;
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    background: transparent;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-base);
-    transition: all var(--duration-fast) var(--ease-smooth);
-    cursor: pointer;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: color 0.18s ease, border-color 0.18s ease;
     outline-offset: var(--focus-offset);
 }
 
 .project-cta-link:hover {
-    border-color: var(--color-text);
-    background-color: var(--color-bg-secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    color: var(--color-text);
+    border-color: var(--color-text-secondary);
 }
 
 .project-cta-link:focus-visible {
     outline: var(--focus-ring);
 }
 
-.project-cta-link.secondary {
-    background-color: var(--color-bg-secondary);
-    border-color: transparent;
-}
-
-.project-cta-link.secondary:hover {
-    background-color: var(--color-border);
-}
-
 .project-cta-link svg {
-    opacity: 0.6;
-    transition: opacity var(--duration-fast) var(--ease-smooth);
+    opacity: 0.5;
+    flex-shrink: 0;
 }
 
 .project-cta-link:hover svg {
-    opacity: 1;
+    opacity: 0.8;
 }
 
-/* ─ Meta Grid (Role, Timeline, Team, etc) ─ */
-.project-meta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-12);
-    margin-bottom: var(--space-16);
-    max-width: 800px;
+/* ─ Hero image column ─ */
+.project-hero-media {
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--color-bg-secondary);
 }
 
-.project-meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
+.project-hero-media-img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
-.meta-label {
-    font-size: var(--font-size-xs);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-tracking);
-    color: var(--color-text-tertiary);
-    font-weight: 600;
-}
-
-.meta-value {
-    font-size: var(--font-size-base);
-    color: var(--color-text);
-    line-height: var(--line-height-relaxed);
+@media (max-width: 768px) {
+    .project-hero-inner.has-media {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ─ Tools/Stack ─ */
