@@ -1,95 +1,124 @@
 import { motion } from "framer-motion";
+import HeroContainer from "../components/header/HeroContainer";
+import SkillsSection from "../components/SkillsSection";
+import EducationSection from "../components/EducationSection";
+import { aboutHeroConfig } from "../data/header/headerConfig";
 import "./About.css";
+
+const fadeUp = {
+    initial: { opacity: 0, y: 16 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-60px" },
+    transition: { duration: 0.45 },
+};
 
 export default function About() {
     return (
         <div className="about">
             <main className="about-main">
-                <motion.section
-                    className="about-hero"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="about-title">About Me</h1>
-                    <p className="about-subtitle">
-                        Designer & Developer crafting digital experiences
-                    </p>
-                </motion.section>
+                <div className="container">
+                    <HeroContainer config={aboutHeroConfig} />
 
-                <motion.section
-                    className="about-content"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                    <div className="about-grid">
-                        <div className="about-col">
-                            <h2 className="about-section-title">Background</h2>
-                            <p className="about-text">
-                                I'm Leana, a UI/UX designer and front-end
-                                developer based in Vancouver. With a foundation
-                                in digital design and tech, I specialize in
-                                creating intuitive, accessible digital products
-                                that solve real problems.
-                            </p>
-                            <p className="about-text">
-                                Currently pursuing a Diploma in Digital Design &
-                                Development at BCIT, I combine design thinking
-                                with technical implementation to deliver
-                                cohesive user experiences.
-                            </p>
-                        </div>
+                    <div className="about-body">
 
-                        <div className="about-col">
-                            <h2 className="about-section-title">
-                                What Drives Me
-                            </h2>
-                            <p className="about-text">
-                                I'm passionate about the intersection of design
-                                and development — where visual aesthetics meet
-                                functional code. I believe great products come
-                                from understanding user needs and iterating on
-                                designs with intention.
-                            </p>
-                            <p className="about-text">
-                                When I'm not designing or coding, you'll find me
-                                exploring motion graphics, experimenting with
-                                new tools, or working on side projects that
-                                combine creativity with technology.
-                            </p>
-                        </div>
-                    </div>
-                </motion.section>
+                        {/* ── Intro ── */}
+                        <motion.div className="about-row" {...fadeUp}>
+                            <span className="about-row-label">Intro</span>
+                            <div className="about-row-content">
+                                <p className="about-para">
+                                    I spent six years working in hospitality, and what I
+                                    loved most was the craft of making someone's experience
+                                    feel easy, warm, and just right. That instinct carried
+                                    straight into design — I care about the person on the
+                                    other side of the screen the same way I cared about
+                                    every guest across the counter.
+                                </p>
+                                <p className="about-para">
+                                    Now I'm a UI/UX designer and front-end developer,
+                                    combining that people-first approach with the technical
+                                    side of building things. Currently finishing my Diploma
+                                    in Digital Design & Development at BCIT.
+                                </p>
+                            </div>
+                        </motion.div>
 
-                <motion.section
-                    className="about-cta"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                    <h2 className="about-cta-title">Let's work together</h2>
-                    <p className="about-cta-text">
-                        Interested in collaborating? Feel free to reach out via
-                        email or connect with me on LinkedIn.
-                    </p>
-                    <div className="about-cta-links">
-                        <a
-                            href="mailto:leanale003@gmail.com"
-                            className="about-link"
+                        {/* ── About Me ── */}
+                        <motion.div
+                            className="about-row"
+                            {...fadeUp}
+                            transition={{ duration: 0.45, delay: 0.06 }}
                         >
-                            Send me an email →
-                        </a>
-                        <a
-                            href="https://linkedin.com/in/leanale"
-                            className="about-link"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Connect on LinkedIn →
-                        </a>
+                            <span className="about-row-label">About Me</span>
+                            <div className="about-row-content">
+                                <p className="about-para">
+                                    When I'm not designing, I'm probably deep in a manga
+                                    arc — isekai and regression, mostly — or rebuilding my
+                                    Super Auto Pets team after an embarrassing loss. I love
+                                    making presentations far more than any normal person
+                                    should. I used to cosplay. I still consider myself a
+                                    massive geek.
+                                </p>
+                                <p className="about-para">
+                                    My friends call me Chuot — Vietnamese for mouse.
+                                    You can too.
+                                </p>
+                            </div>
+                        </motion.div>
+
                     </div>
-                </motion.section>
+
+                    {/* ── Skills ── */}
+                    <SkillsSection variant="grid" />
+
+                    {/* ── Education ── */}
+                    <EducationSection variant="timeline" />
+
+                    {/* ── Let's Talk ── */}
+                    <motion.section
+                        className="about-connect"
+                        {...fadeUp}
+                        transition={{ duration: 0.45, delay: 0.08 }}
+                    >
+                        <div className="about-connect-inner">
+                            <div className="about-connect-text">
+                                <p className="about-connect-label">Let's talk</p>
+                                <h2 className="about-connect-heading">
+                                    Want to work together?
+                                </h2>
+                                <p className="about-connect-sub">
+                                    Open to full-time roles, freelance projects, and
+                                    the occasional isekai recommendation. Reach out —
+                                    I don't bite.
+                                </p>
+                            </div>
+                            <div className="about-connect-links">
+                                <a
+                                    href="mailto:leanale003@gmail.com"
+                                    className="about-connect-link about-connect-link--primary"
+                                >
+                                    Send an email
+                                </a>
+                                <a
+                                    href="https://linkedin.com/in/leanale"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="about-connect-link"
+                                >
+                                    LinkedIn →
+                                </a>
+                                <a
+                                    href="https://github.com/chuot-the-rat"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="about-connect-link"
+                                >
+                                    GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </motion.section>
+
+                </div>
             </main>
         </div>
     );

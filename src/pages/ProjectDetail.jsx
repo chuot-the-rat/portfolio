@@ -2,10 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { getProjectById } from "../utils/projectDataMapper";
-import PivotSection from "../components/PivotSection";
 import PivotDiagram from "../components/PivotDiagram";
-import WeightLiftedPivot from "../components/WeightLiftedPivot";
-import ClaritySubtractionScene from "../components/ClaritySubtractionScene";
 import {
     SectionIndex,
     SectionTag,
@@ -95,176 +92,147 @@ const ProjectDetail = () => {
 
     if (!project) return null;
 
+    // Hero image: prefer hifi/solution screens over generic overview
+    const heroImage =
+        project.media?.hero_image ??
+        project.iterations?.images?.[0]?.src ??
+        project.overview?.images?.[0]?.src ??
+        null;
+
     return (
         <div className="project-detail">
-            {/* Back Button */}
+            {/* Back — minimal text link */}
             <motion.div
                 className="project-detail-back"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.35 }}
             >
-                <Link
-                    to="/"
-                    className="back-button"
-                >
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                    >
-                        <path
-                            d="M12 4l-8 6 8 6"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                    <span>Back</span>
+                <Link to="/" className="back-button">
+                    ← Work
                 </Link>
             </motion.div>
 
             {/* Hero */}
             <motion.section
                 className="project-hero"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             >
                 <div className="container">
-                    <div className="project-hero-meta">
-                        <span className="project-tag">{project.category}</span>
-                        <span className="project-year">{project.year}</span>
-                    </div>
+                    {/* Two-column layout: text left, image right */}
+                    <div className={`project-hero-inner${heroImage ? " has-media" : ""}`}>
 
-                    {/* Title with CTAs */}
-                    <div className="project-hero-header">
-                        <h1 className="project-hero-title">{project.title}</h1>
+                        {/* Left: text column */}
+                        <div className="project-hero-text">
+                            {/* Category + year */}
+                            <div className="project-hero-meta">
+                                <span className="project-tag">{project.category}</span>
+                                <span className="project-year">{project.year}</span>
+                            </div>
 
-                        {/* Header CTAs */}
-                        {(project.links?.live || project.links?.prototype) && (
-                            <div className="project-hero-ctas">
-                                {project.links?.live && (
-                                    <motion.a
-                                        href={project.links.live}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="project-cta-link"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{
-                                            duration: 0.4,
-                                            delay: 0.3,
-                                        }}
-                                        whileHover={{
-                                            y: -2,
-                                            transition: { duration: 0.2 },
-                                        }}
-                                    >
-                                        <span>Visit Live Site</span>
-                                        <svg
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 16 16"
-                                            fill="none"
-                                        >
-                                            <path
-                                                d="M6 3h7v7M13 3L3 13"
-                                                stroke="currentColor"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-                                    </motion.a>
+                            <h1 className="project-hero-title">{project.title}</h1>
+
+                            {project.tagline && (
+                                <p className="project-hero-tagline">{project.tagline}</p>
+                            )}
+
+                            {/* Meta grid: role / timeline / team / context */}
+                            <div className="project-meta-grid">
+                                {project.role && (
+                                    <div className="project-meta-item">
+                                        <span className="meta-label">Role</span>
+                                        <span className="meta-value">{project.role}</span>
+                                    </div>
                                 )}
-                                {project.links?.prototype && (
-                                    <motion.a
-                                        href={project.links.prototype}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="project-cta-link secondary"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{
-                                            duration: 0.4,
-                                            delay: 0.4,
-                                        }}
-                                        whileHover={{
-                                            y: -2,
-                                            transition: { duration: 0.2 },
-                                        }}
-                                    >
-                                        <span>Try Prototype</span>
-                                        <svg
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 16 16"
-                                            fill="none"
-                                        >
-                                            <path
-                                                d="M4 2l10 6-10 6V2z"
-                                                stroke="currentColor"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-                                    </motion.a>
+                                {(project.timeline || project.duration) && (
+                                    <div className="project-meta-item">
+                                        <span className="meta-label">Timeline</span>
+                                        <span className="meta-value">
+                                            {project.timeline || project.duration}
+                                        </span>
+                                    </div>
+                                )}
+                                {(project.team || project.teamSize) && (
+                                    <div className="project-meta-item">
+                                        <span className="meta-label">Team</span>
+                                        <span className="meta-value">
+                                            {project.team || `${project.teamSize} members`}
+                                        </span>
+                                    </div>
+                                )}
+                                {project.context && (
+                                    <div className="project-meta-item">
+                                        <span className="meta-label">Context</span>
+                                        <span className="meta-value">{project.context}</span>
+                                    </div>
                                 )}
                             </div>
+
+                            {/* CTAs — positioned after meta, before body */}
+                            {(project.links?.live || project.links?.prototype) && (
+                                <div className="project-hero-ctas">
+                                    {project.links?.live && (
+                                        <motion.a
+                                            href={project.links.live}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="project-cta-link"
+                                            whileHover={{ y: -1, transition: { duration: 0.2 } }}
+                                        >
+                                            <span>Live site</span>
+                                            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                                                <path d="M6 3h7v7M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </motion.a>
+                                    )}
+                                    {project.links?.prototype && (
+                                        <motion.a
+                                            href={project.links.prototype}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="project-cta-link"
+                                            whileHover={{ y: -1, transition: { duration: 0.2 } }}
+                                        >
+                                            <span>Prototype</span>
+                                            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                                                <path d="M4 2l10 6-10 6V2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </motion.a>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Right: hero image */}
+                        {heroImage && (
+                            <motion.div
+                                className="project-hero-media"
+                                initial={{ opacity: 0, x: 16 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                            >
+                                <img
+                                    src={heroImage}
+                                    alt={`${project.title} preview`}
+                                    className="project-hero-media-img"
+                                />
+                            </motion.div>
                         )}
                     </div>
 
-                    <p className="project-hero-tagline">{project.tagline}</p>
-
-                    <div className="project-meta-grid">
-                        <div className="project-meta-item">
-                            <span className="meta-label">Role</span>
-                            <span className="meta-value">{project.role}</span>
-                        </div>
-                        <div className="project-meta-item">
-                            <span className="meta-label">Timeline</span>
-                            <span className="meta-value">
-                                {project.timeline || project.duration}
-                            </span>
-                        </div>
-                        <div className="project-meta-item">
-                            <span className="meta-label">Team</span>
-                            <span className="meta-value">
-                                {project.team || `${project.teamSize} members`}
-                            </span>
-                        </div>
-                        {project.context && (
-                            <div className="project-meta-item">
-                                <span className="meta-label">Context</span>
-                                <span className="meta-value">
-                                    {project.context}
-                                </span>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Responsibilities */}
+                    {/* Responsibilities — below two-column layout */}
                     {project.responsibilities &&
                         project.responsibilities.length > 0 && (
                             <div className="project-responsibilities">
-                                <span className="meta-label">
-                                    Key Responsibilities
-                                </span>
+                                <span className="meta-label">Key Responsibilities</span>
                                 <ul className="responsibilities-list">
-                                    {project.responsibilities.map(
-                                        (resp, index) => (
-                                            <li
-                                                key={index}
-                                                className="responsibility-item"
-                                            >
-                                                {resp}
-                                            </li>
-                                        ),
-                                    )}
+                                    {project.responsibilities.map((resp, index) => (
+                                        <li key={index} className="responsibility-item">
+                                            {resp}
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         )}
@@ -379,10 +347,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section final-experience-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -416,10 +384,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section research-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -465,28 +433,12 @@ const ProjectContentMain = ({ project }) => {
                                     <ul className="findings-list">
                                         {project.research.keyFindings.map(
                                             (finding, i) => (
-                                                <motion.li
+                                                <li
                                                     key={i}
                                                     className="finding-item"
-                                                    initial={{
-                                                        opacity: 0,
-                                                        x: -20,
-                                                    }}
-                                                    whileInView={{
-                                                        opacity: 1,
-                                                        x: 0,
-                                                    }}
-                                                    viewport={{ once: true }}
-                                                    transition={{
-                                                        duration: 0.4,
-                                                        delay: i * 0.1,
-                                                    }}
                                                 >
-                                                    <span className="finding-icon">
-                                                        →
-                                                    </span>
-                                                    <span>{finding}</span>
-                                                </motion.li>
+                                                    {finding}
+                                                </li>
                                             ),
                                         )}
                                     </ul>
@@ -500,12 +452,6 @@ const ProjectContentMain = ({ project }) => {
                                     </strong>{" "}
                                     participants
                                 </p>
-                            )}
-
-                            {project.research.reflection && (
-                                <blockquote className="research-reflection">
-                                    {project.research.reflection}
-                                </blockquote>
                             )}
 
                             {project.research.images?.length > 0 && (
@@ -549,10 +495,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section personas-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -606,10 +552,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section userflows-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -741,10 +687,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section styleguide-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -930,10 +876,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section challenges-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -960,19 +906,6 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* Pivot section */}
-            <PivotSection pivot={project.pivot} />
-
-            {/* Clarity Subtraction Scene */}
-            {project.pivot?.clarityScene && (
-                <ClaritySubtractionScene data={project.pivot.clarityScene} />
-            )}
-
-            {/* Weight Lifted (fallback) */}
-            {project.pivot?.weightLifted && !project.pivot?.clarityScene && (
-                <WeightLiftedPivot {...project.pivot.weightLifted} />
-            )}
-
             {/* Iterations & Refinements (supports both improvements and rounds) */}
             {project.iterations &&
                 (() => {
@@ -980,10 +913,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1143,10 +1076,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section hifi-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1243,10 +1176,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section development-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1331,10 +1264,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section usability-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1558,10 +1491,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section presentation-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1603,10 +1536,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1648,10 +1581,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section solution-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1675,32 +1608,20 @@ const ProjectContentMain = ({ project }) => {
                                         (feature, i) => (
                                             <motion.div
                                                 key={feature.id || i}
-                                                className="feature-item"
-                                                initial={{ opacity: 0, y: 20 }}
+                                                className={`feature-item${feature.image ? " feature-item--has-media" : ""}`}
+                                                initial={{ opacity: 0, y: 16 }}
                                                 whileInView={{
                                                     opacity: 1,
                                                     y: 0,
                                                 }}
                                                 viewport={{ once: true }}
                                                 transition={{
-                                                    duration: 0.5,
-                                                    delay: i * 0.1,
+                                                    duration: 0.45,
+                                                    delay: i * 0.08,
                                                 }}
                                             >
-                                                <h3 className="feature-title">
-                                                    {feature.title}
-                                                </h3>
-                                                <p className="feature-description">
-                                                    {feature.description}
-                                                </p>
-                                                {feature.why && (
-                                                    <p className="feature-why">
-                                                        <strong>Why:</strong>{" "}
-                                                        {feature.why}
-                                                    </p>
-                                                )}
                                                 {feature.image && (
-                                                    <div className="feature-image">
+                                                    <div className="feature-media">
                                                         <FigLabel
                                                             index={nextImage()}
                                                         />
@@ -1710,6 +1631,20 @@ const ProjectContentMain = ({ project }) => {
                                                         />
                                                     </div>
                                                 )}
+                                                <div className="feature-body">
+                                                    <h3 className="feature-title">
+                                                        {feature.title}
+                                                    </h3>
+                                                    <p className="feature-description">
+                                                        {feature.description}
+                                                    </p>
+                                                    {feature.why && (
+                                                        <p className="feature-why">
+                                                            <strong>Why:</strong>{" "}
+                                                            {feature.why}
+                                                        </p>
+                                                    )}
+                                                </div>
                                             </motion.div>
                                         ),
                                     )}
@@ -1742,10 +1677,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section validation-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1770,42 +1705,6 @@ const ProjectContentMain = ({ project }) => {
                                     {project.validation.participantCount &&
                                         ` • ${project.validation.participantCount} participants`}
                                 </p>
-                            )}
-
-                            {project.validation.quotes?.length > 0 && (
-                                <div className="quotes-list">
-                                    {project.validation.quotes.map(
-                                        (quote, i) => (
-                                            <motion.blockquote
-                                                key={i}
-                                                className="validation-quote"
-                                                initial={{ opacity: 0, x: -20 }}
-                                                whileInView={{
-                                                    opacity: 1,
-                                                    x: 0,
-                                                }}
-                                                viewport={{ once: true }}
-                                                transition={{
-                                                    duration: 0.5,
-                                                    delay: i * 0.1,
-                                                }}
-                                            >
-                                                <p className="quote-text">
-                                                    "{quote.text || quote.quote}
-                                                    "
-                                                </p>
-                                                {(quote.author ||
-                                                    quote.attribution) && (
-                                                    <cite className="quote-author">
-                                                        —{" "}
-                                                        {quote.author ||
-                                                            quote.attribution}
-                                                    </cite>
-                                                )}
-                                            </motion.blockquote>
-                                        ),
-                                    )}
-                                </div>
                             )}
 
                             {project.validation.outcomes?.length > 0 && (
@@ -1838,10 +1737,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section learnings-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1898,10 +1797,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section outcomes-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}

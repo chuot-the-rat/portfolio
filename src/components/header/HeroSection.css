@@ -1,0 +1,491 @@
+/*
+ * HeroSection.css
+ * Scoped styles for the hs- (hero system) component family.
+ *
+ * Rules:
+ * - Every value uses a CSS custom property. No hardcoded colors, sizes, or fonts.
+ * - All --hs-* tokens alias existing tokens from variables.css / energy.css.
+ *   Dark mode is inherited automatically — no extra rules needed here.
+ * - This file is never imported into global.css. It is only imported by
+ *   HeroContainer.jsx, which keeps all styles scoped to that subtree.
+ * - Class prefix: hs- — guaranteed no collision with .hero*, .nav*, .home-hero*
+ */
+
+/* ── Hero-system token extensions ───────────────────────────────────────────
+   These alias existing tokens with semantic intent.
+   Edit values here — never in component JSX.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Typography — headline */
+  --hs-headline-font:     var(--font-display);
+  --hs-headline-size:     var(--h1);
+  --hs-headline-weight:   500;
+  --hs-headline-leading:  var(--lh-tight);
+  --hs-headline-tracking: var(--track-title);
+
+  /* Typography — subline */
+  --hs-subline-font:      var(--font-sans);
+  --hs-subline-size:      var(--text-lg);
+  --hs-subline-weight:    300;
+  --hs-subline-leading:   var(--lh-body);
+
+  /* Typography — descriptor (mono kicker) */
+  --hs-descriptor-font:   var(--font-mono);
+  --hs-descriptor-size:   var(--text-sm);
+  --hs-descriptor-track:  var(--track-kicker);
+
+  /* Typography — tags and CTAs */
+  --hs-tag-font:          var(--font-mono);
+  --hs-tag-size:          var(--font-size-xs);
+  --hs-tag-track:         var(--letter-spacing-micro);
+
+  /* Colors — all reference existing tokens, dark mode is free */
+  --hs-tag-bg:            var(--color-bg-secondary);
+  --hs-tag-border:        var(--color-border);
+  --hs-cta-primary-bg:    var(--color-accent);
+  --hs-cta-primary-text:  var(--color-bg);
+  --hs-cta-ghost-border:  var(--color-border);
+  --hs-cta-ghost-text:    var(--color-text);
+
+  /* Media panel */
+  --hs-media-radius:      6px;
+  --hs-media-border:      1px solid var(--color-border);
+
+  /* Layout */
+  --hs-container-pad-v:   var(--space-fluid-2xl);
+  --hs-container-gap:     var(--space-fluid-xl);
+}
+
+/* ── Container ──────────────────────────────────────────────────────────────
+   position: relative creates the stacking context for FloatingTags.
+   No z-index on the section itself — the internal ladder (1-10) stays
+   below .navbar's z-index: 100 automatically.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-container {
+  position: relative;
+  width: 100%;
+  padding-block: var(--hs-container-pad-v);
+  padding-inline: var(--container-pad);
+  overflow: visible; /* allow FloatingTags to drift slightly past edges */
+}
+
+/* ── Grid ───────────────────────────────────────────────────────────────────
+   Layout preset is driven by [data-layout] on .hs-container.
+   CSS selectors handle the column switch — no dynamic class strings needed.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-grid {
+  display: grid;
+  gap: var(--hs-container-gap);
+  align-items: start;
+  width: min(100%, var(--container-max));
+  margin-inline: auto;
+}
+
+/* Asymmetric: text dominates left (1.2), media sits right (0.8) */
+.hs-container[data-layout="asymmetric"] .hs-grid {
+  grid-template-columns: 1.2fr 0.8fr;
+}
+
+/* Centered: single narrow column, text-align center */
+.hs-container[data-layout="centered"] .hs-grid {
+  grid-template-columns: 1fr;
+  max-width: var(--max-width-narrow);
+  text-align: center;
+}
+
+/* Full-left: single full-width column, left-aligned */
+.hs-container[data-layout="full-left"] .hs-grid {
+  grid-template-columns: 1fr;
+}
+
+/* ── Text column ────────────────────────────────────────────────────────────
+   Flex column with fluid gap between descriptor / headline / subline.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.hs-text__descriptor {
+  font-family: var(--hs-descriptor-font);
+  font-size: var(--hs-descriptor-size);
+  letter-spacing: var(--hs-descriptor-track);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  opacity: 0.78;
+  line-height: 1.1;
+  display: block;
+  padding-left: var(--space-5);
+  position: relative;
+  margin-bottom: var(--space-4);
+}
+
+/* Signature detail: thin ruled line anchoring the descriptor */
+.hs-text__descriptor::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--space-3);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.hs-text__headline {
+  font-family: var(--hs-headline-font);
+  font-size: var(--hs-headline-size);
+  font-weight: var(--hs-headline-weight);
+  line-height: var(--hs-headline-leading);
+  letter-spacing: var(--hs-headline-tracking);
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* Each word in a headline array renders as its own display block */
+.hs-text__headline-word {
+  display: block;
+}
+
+.hs-text__subline {
+  font-family: var(--hs-subline-font);
+  font-size: var(--hs-subline-size);
+  font-weight: var(--hs-subline-weight);
+  line-height: var(--hs-subline-leading);
+  color: var(--color-text-secondary);
+  max-width: 42ch;
+  margin: 0;
+  margin-top: var(--space-fluid-l);
+}
+
+.hs-container[data-layout="centered"] .hs-text__subline {
+  margin-inline: auto;
+}
+
+/* ── Media column ───────────────────────────────────────────────────────────
+   Slight negative top margin breaks the horizontal grid alignment on purpose —
+   this is the editorial asymmetry. The panel sits slightly higher than the
+   text block baseline.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-media-col {
+  align-self: center;
+  margin-top: calc(-1 * var(--space-8));
+  position: relative;
+  z-index: 1;
+}
+
+.hs-media-panel {
+  border: var(--hs-media-border);
+  border-radius: var(--hs-media-radius);
+  overflow: hidden;
+  will-change: transform;
+  cursor: default;
+}
+
+.hs-media-panel img,
+.hs-media-panel video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hs-media-caption {
+  font-family: var(--hs-descriptor-font);
+  font-size: var(--hs-tag-size);
+  letter-spacing: var(--hs-descriptor-track);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-3);
+  opacity: 0.7;
+}
+
+/* ── Mobile tag row — hidden on desktop, shown on mobile ────────────────────
+   Must be hidden at base level. The .hs-tag chips inside it have
+   position: absolute which would cause them to stack at the container
+   origin if this element is allowed to render on desktop.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-tags-mobile-row {
+  display: none;
+}
+
+/* ── Floating tags ──────────────────────────────────────────────────────────
+   Absolutely positioned within .hs-container (which has position: relative).
+   z-index: 10 — highest within the hero section, but still below .navbar (100).
+   cursor: grab indicates draggability.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-tag {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--hs-tag-bg);
+  border: 1px solid var(--hs-tag-border);
+  border-radius: var(--radius-full);
+  font-family: var(--hs-tag-font);
+  font-size: var(--hs-tag-size);
+  letter-spacing: var(--hs-tag-track);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  cursor: grab;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 10;
+  touch-action: none; /* required for Framer Motion drag on touch devices */
+}
+
+.hs-tag:active {
+  cursor: grabbing;
+}
+
+.hs-tag__icon {
+  opacity: 0.6;
+  font-style: normal;
+  line-height: 1;
+}
+
+/* ── CTA group ──────────────────────────────────────────────────────────────
+   Flex row of pill buttons/links. Switches to column via data-layout="stack".
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: var(--space-fluid-xl);
+  position: relative;
+  z-index: 3;
+}
+
+.hs-cta-group[data-layout="stack"] {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hs-container[data-layout="centered"] .hs-cta-group {
+  justify-content: center;
+}
+
+.hs-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--hs-tag-font);
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--hs-tag-track);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  line-height: 1;
+  transition:
+    box-shadow var(--dur-ui) var(--ease-out-premium),
+    opacity var(--dur-ui) var(--ease-out-premium),
+    text-decoration-color var(--dur-ui) var(--ease-out-premium);
+}
+
+.hs-cta:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Primary: modest filled rectangle — grounded, not bubbly */
+.hs-cta--primary {
+  background: var(--hs-cta-primary-bg);
+  color: var(--hs-cta-primary-text);
+  padding: var(--space-3) var(--space-6);
+  border-radius: 4px;
+}
+
+.hs-cta--primary:hover {
+  box-shadow: var(--shadow-lg);
+  opacity: 0.92;
+}
+
+/* Ghost: editorial text-link with underline — no border box */
+.hs-cta--ghost {
+  background: transparent;
+  color: var(--hs-cta-ghost-text);
+  padding: var(--space-3) 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-border);
+}
+
+.hs-cta--ghost:hover {
+  text-decoration-color: var(--color-text-secondary);
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────────────
+   Below 768px:
+   - Both multi-column layouts collapse to a single column
+   - Media panel is hidden (too small to be useful at mobile widths)
+   - FloatingTags switch from absolute to static, rendering as inline chips
+     below the CTAGroup in a flex-wrap row
+   ─────────────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hs-container[data-layout="asymmetric"] .hs-grid,
+  .hs-container[data-layout="full-left"] .hs-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-fluid-l);
+  }
+
+  .hs-media-col {
+    display: none;
+  }
+
+  .hs-tag {
+    position: static;
+    /* Override any Framer Motion inline transform from drag */
+    transform: none !important;
+  }
+
+  /* Mobile tag chips — re-shown as static inline row */
+  .hs-tags-mobile-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+}
+
+/* ── Floating images ────────────────────────────────────────────────────────
+   Same structural rules as .hs-tag — absolutely positioned, z-index 8
+   (below tags at z-index 10), draggable.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-float-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 8;
+  pointer-events: none; /* decorative only */
+}
+
+.hs-float-img__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.14);
+  border: 1px solid var(--color-border);
+  pointer-events: none; /* let the wrapper handle drag */
+}
+
+/* Placeholder — shown when src is null during authoring */
+.hs-float-img--placeholder {
+  opacity: 0.45;
+}
+
+.hs-float-img__placeholder {
+  aspect-ratio: 4 / 3;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hs-float-img__placeholder-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-tertiary);
+  user-select: none;
+}
+
+/* ── Mode toggle ────────────────────────────────────────────────────────────
+   Glass pill matching the floating nav aesthetic.
+   Sits below the CTAs in the text column.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-5);
+  padding: var(--space-1);
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.hs-mode-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-full);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition:
+    background var(--dur-ui) var(--ease-out-premium),
+    color var(--dur-ui) var(--ease-out-premium);
+}
+
+.hs-mode-btn:hover {
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+}
+
+.hs-mode-btn--active {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.hs-mode-btn:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+@media (max-width: 768px) {
+  .hs-float-img {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hs-text__headline {
+    font-size: var(--font-size-2xl);
+  }
+
+  .hs-text__subline {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* ── Optional mode variations ───────────────────────────────────────────────
+   Uncomment to dim decorative elements in work mode.
+   FloatingTags feel more at home in chaos mode.
+
+body.mode-work .hs-tag {
+  opacity: 0.35;
+  pointer-events: none;
+}
+body.mode-work .hs-media-col {
+  opacity: 0.8;
+}
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Reduced motion ─────────────────────────────────────────────────────────
+   CSS fallback on top of the useReducedMotion() guard in each component.
+   ─────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hs-tag,
+  .hs-media-panel,
+  .hs-cta {
+    transition: none !important;
+  }
+}

@@ -10,6 +10,8 @@
  */
 
 import { motion } from "framer-motion";
+import HeroContainer from "../components/header/HeroContainer";
+import { resumeHeroConfig } from "../data/header/headerConfig";
 import "./Resume.css";
 
 export default function Resume() {
@@ -21,24 +23,14 @@ export default function Resume() {
         <div className="resume">
             <main className="resume-main">
                 {/* ─── HERO SECTION ─── */}
-                <motion.section
-                    className="resume-hero"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="resume-title">Resume</h1>
-                    <p className="resume-subtitle">
-                        My experience, skills, and education
-                    </p>
-                </motion.section>
+                <HeroContainer config={resumeHeroConfig} />
 
                 {/* ─── EMBEDDED RESUME VIEWER ─── */}
-                <motion.section
+                <motion.div
                     className="resume-embed-container"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    transition={{ duration: 0.45, delay: 0.2 }}
                 >
                     {/* Responsive iframe wrapper */}
                     <div className="resume-iframe-wrapper">
@@ -49,45 +41,33 @@ export default function Resume() {
                             allowFullScreen
                         />
                     </div>
-                </motion.section>
+                </motion.div>
 
                 {/* ─── ACTION BUTTONS ─── */}
-                <motion.section
+                <motion.div
                     className="resume-actions"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    transition={{ duration: 0.45, delay: 0.3 }}
                 >
                     <div className="resume-buttons">
-                        {/* Open in new tab */}
                         <a
                             href={resumeLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="resume-btn resume-btn--primary"
+                            className="resume-btn--primary"
                         >
-                            Open in New Tab
+                            Open in new tab →
                         </a>
-
-                        {/* Download PDF link */}
                         <a
-                            href={resumeLink}
-                            download
-                            className="resume-btn resume-btn--secondary"
-                            onClick={(e) => {
-                                // Open Adobe link in new tab for download option
-                                e.preventDefault();
-                                window.open(
-                                    resumeLink,
-                                    "_blank",
-                                    "noopener,noreferrer",
-                                );
-                            }}
+                            href="/Le_Leana_Resume_NoNumber.pdf"
+                            download="Leana_Le_Resume.pdf"
+                            className="resume-btn--secondary"
                         >
                             Download PDF
                         </a>
                     </div>
-                </motion.section>
+                </motion.div>
             </main>
         </div>
     );

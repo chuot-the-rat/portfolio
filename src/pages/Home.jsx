@@ -1,410 +1,22 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
     getAllProjects,
     getProjectPath,
     isStandaloneProject,
 } from "../utils/projectDataMapper";
-import PreviewPanel from "../components/PreviewPanel";
-import SkillsSection from "../components/SkillsSection";
-import EducationSection from "../components/EducationSection";
-import BracketCycler from "../components/BracketCycler";
-import PixelLoopCanvas from "../components/PixelLoopCanvas";
+import HeroContainer from "../components/header/HeroContainer";
+import HomeWorkList from "../components/home/HomeWorkList";
+import { homeHeroConfig } from "../data/header/headerConfig";
 import "./Home.css";
 import "../components/SectionLayout.css";
-
-/* ══════════════════════════════════════════════════════════════════
-   HERO SECTION — System Activated + Magnetic Field
-   Type-in intro · Magnetic cursor · CTA text mutation
-   ══════════════════════════════════════════════════════════════════ */
-
-const HERO_NAME = "Leana Le";
-const CTA_DEFAULT = "Let's Build Something  \u2192";
-const CTA_MUTATED = "> initiating_collaboration()";
-const INLINE_LINKS = [
-    { label: "Email", href: "mailto:leanale003@gmail.com" },
-    {
-        label: "LinkedIn",
-        href: "https://linkedin.com/in/leanale",
-        external: true,
-    },
-    {
-        label: "GitHub",
-        href: "https://github.com/chuot-the-rat",
-        external: true,
-    },
-    { label: "Resume", href: "/Le_Leana_Resume_NoNumber.pdf", download: true },
-];
-
-function HeroSection() {
-    const heroRef = useRef(null);
-    const nameRef = useRef(null);
-    const ctaRef = useRef(null);
-    const rafId = useRef(null);
-    const mousePos = useRef({ x: 0.5, y: 0.5 });
-    const smoothPos = useRef({ x: 0.5, y: 0.5 });
-    const isInsideHero = useRef(false);
-
-    const [introPhase, setIntroPhase] = useState(0);
-    const [ctaText, setCtaText] = useState(CTA_DEFAULT);
-    const ctaHoverTimer = useRef(null);
-    const [magnetActive, setMagnetActive] = useState(false);
-
-    const prefersReducedMotion = useRef(
-        typeof window !== "undefined" &&
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    );
-    const isMobile = useRef(
-        typeof window !== "undefined" && window.innerWidth < 768,
-    );
-
-    /* ── 1) TYPE-IN INTRO ── */
-    const nameLetters = HERO_NAME.split("");
-    const nameDuration = nameLetters.length * 45;
-
-    useEffect(() => {
-        if (prefersReducedMotion.current) {
-            setIntroPhase(5);
-            return;
-        }
-        const t = setTimeout(() => setIntroPhase(1), 100);
-        return () => clearTimeout(t);
-    }, []);
-
-    useEffect(() => {
-        if (introPhase !== 1) return;
-        const t = setTimeout(() => setIntroPhase(2), nameDuration + 80);
-        return () => clearTimeout(t);
-    }, [introPhase, nameDuration]);
-
-    useEffect(() => {
-        if (introPhase !== 2) return;
-        const t = setTimeout(() => setIntroPhase(3), 450);
-        return () => clearTimeout(t);
-    }, [introPhase]);
-
-    useEffect(() => {
-        if (introPhase !== 3) return;
-        const t = setTimeout(() => setIntroPhase(4), 350);
-        return () => clearTimeout(t);
-    }, [introPhase]);
-
-    useEffect(() => {
-        if (introPhase !== 4) return;
-        const t = setTimeout(
-            () => setIntroPhase(5),
-            INLINE_LINKS.length * 100 + 200,
-        );
-        return () => clearTimeout(t);
-    }, [introPhase]);
-
-    /* ── 2) MAGNETIC CURSOR ── */
-    const lerp = (a, b, t) => a + (b - a) * t;
-
-    const startMagneticLoop = useCallback(() => {
-        if (rafId.current) return;
-        const tick = () => {
-            smoothPos.current = {
-                x: lerp(smoothPos.current.x, mousePos.current.x, 0.08),
-                y: lerp(smoothPos.current.y, mousePos.current.y, 0.08),
-            };
-            const dx = (smoothPos.current.x - 0.5) * 2;
-            const dy = (smoothPos.current.y - 0.5) * 2;
-
-            if (nameRef.current) {
-                nameRef.current.style.transform = `translate(${dx * 6}px, ${dy * 3}px)`;
-            }
-            if (ctaRef.current) {
-                ctaRef.current.style.transform = `translate(${dx * -10}px, ${dy * -5}px)`;
-            }
-
-            if (
-                isInsideHero.current ||
-                Math.abs(smoothPos.current.x - 0.5) > 0.005
-            ) {
-                rafId.current = requestAnimationFrame(tick);
-            } else {
-                if (nameRef.current) nameRef.current.style.transform = "";
-                if (ctaRef.current) ctaRef.current.style.transform = "";
-                rafId.current = null;
-            }
-        };
-        rafId.current = requestAnimationFrame(tick);
-    }, []);
-
-    const handleMouseMove = useCallback(
-        (e) => {
-            if (isMobile.current || prefersReducedMotion.current) return;
-            const rect = heroRef.current?.getBoundingClientRect();
-            if (!rect) return;
-            mousePos.current = {
-                x: (e.clientX - rect.left) / rect.width,
-                y: (e.clientY - rect.top) / rect.height,
-            };
-            if (!isInsideHero.current) {
-                isInsideHero.current = true;
-                setMagnetActive(true);
-                startMagneticLoop();
-            }
-        },
-        [startMagneticLoop],
-    );
-
-    const handleMouseLeave = useCallback(() => {
-        isInsideHero.current = false;
-        setMagnetActive(false);
-        mousePos.current = { x: 0.5, y: 0.5 };
-    }, []);
-
-    useEffect(() => {
-        return () => {
-            if (rafId.current) cancelAnimationFrame(rafId.current);
-            if (ctaHoverTimer.current) clearTimeout(ctaHoverTimer.current);
-        };
-    }, []);
-
-    /* ── 3) CTA HOVER TEXT MUTATION ── */
-    const handleCtaEnter = useCallback(() => {
-        if (prefersReducedMotion.current) return;
-        if (ctaHoverTimer.current) clearTimeout(ctaHoverTimer.current);
-        setCtaText(CTA_MUTATED);
-        ctaHoverTimer.current = setTimeout(() => setCtaText(CTA_DEFAULT), 400);
-    }, []);
-
-    const handleCtaLeave = useCallback(() => {
-        if (ctaHoverTimer.current) clearTimeout(ctaHoverTimer.current);
-        setCtaText(CTA_DEFAULT);
-    }, []);
-
-    const showName = introPhase >= 1 || prefersReducedMotion.current;
-    const showSubtitle = introPhase >= 1;
-    const showLabel = introPhase >= 2;
-    const showCta = introPhase >= 3;
-    const showLinks = introPhase >= 4;
-
-    return (
-        <section
-            ref={heroRef}
-            className={`home-hero${magnetActive ? " magnetic-active" : ""}`}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-        >
-            {/* Pixel loop background animation */}
-            <div className="hero-bg-layer">
-                <PixelLoopCanvas />
-            </div>
-
-            {/* Default Hero Content (Clean/Chaos modes) */}
-            <div className="hero-content hero-content-default">
-                <div className="hero-left">
-                    <h1
-                        className="home-hero-title"
-                        ref={nameRef}
-                    >
-                        {nameLetters.map((ch, i) => (
-                            <motion.span
-                                key={i}
-                                className="hero-letter"
-                                initial={
-                                    prefersReducedMotion.current
-                                        ? {}
-                                        : { opacity: 0, y: 8 }
-                                }
-                                animate={showName ? { opacity: 1, y: 0 } : {}}
-                                transition={{
-                                    duration: 0.3,
-                                    delay: i * 0.045,
-                                    ease: [0.22, 1, 0.36, 1],
-                                }}
-                            >
-                                {ch === " " ? "\u00A0" : ch}
-                            </motion.span>
-                        ))}
-                    </h1>
-
-                    <motion.div
-                        className="hero-bracket-cycler"
-                        initial={
-                            prefersReducedMotion.current
-                                ? {}
-                                : { opacity: 0, y: 10 }
-                        }
-                        animate={showName ? { opacity: 1, y: 0 } : {}}
-                        transition={{
-                            duration: 0.5,
-                            delay: nameDuration / 1000 + 0.1,
-                            ease: [0.4, 0, 0.2, 1],
-                        }}
-                    >
-                        <BracketCycler
-                            baseText="leanale"
-                            primaryTokens={[".com", "003@gmail.com"]}
-                            burstTokens={[
-                                "ux",
-                                "ui",
-                                "react",
-                                "motion",
-                                "figma",
-                                "design",
-                                "code",
-                                "available",
-                                "burnaby",
-                            ]}
-                        />
-                    </motion.div>
-
-                    <motion.p
-                        className="home-hero-subtitle"
-                        initial={
-                            prefersReducedMotion.current
-                                ? {}
-                                : { opacity: 0, y: 10 }
-                        }
-                        animate={showSubtitle ? { opacity: 1, y: 0 } : {}}
-                        transition={{
-                            duration: 0.5,
-                            delay: nameDuration / 1000 + 0.05,
-                            ease: [0.4, 0, 0.2, 1],
-                        }}
-                    >
-                        UI/UX Designer &amp; Developer creating thoughtful user
-                        experiences through research-driven design and clean
-                        code.
-                    </motion.p>
-                </div>
-
-                <div className="hero-right">
-                    <motion.span
-                        className="hero-system-label"
-                        initial={
-                            prefersReducedMotion.current ? {} : { opacity: 0 }
-                        }
-                        animate={showLabel ? { opacity: 0.6 } : {}}
-                        transition={{ duration: 0.3 }}
-                    >
-                        [ SYSTEM: PROFILE_INITIALIZED ]
-                    </motion.span>
-
-                    <motion.a
-                        ref={ctaRef}
-                        href="mailto:leanale003@gmail.com"
-                        className="hero-primary-cta"
-                        initial={
-                            prefersReducedMotion.current
-                                ? {}
-                                : { opacity: 0, scale: 0.98 }
-                        }
-                        animate={showCta ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                        onMouseEnter={handleCtaEnter}
-                        onMouseLeave={handleCtaLeave}
-                    >
-                        <span className="cta-text">{ctaText}</span>
-                    </motion.a>
-
-                    <nav
-                        className="hero-inline-links"
-                        aria-label="Connect"
-                    >
-                        {INLINE_LINKS.map((link, i) => (
-                            <motion.a
-                                key={link.label}
-                                href={link.href}
-                                className="hero-inline-link"
-                                target={link.external ? "_blank" : undefined}
-                                rel={
-                                    link.external
-                                        ? "noopener noreferrer"
-                                        : undefined
-                                }
-                                download={
-                                    link.download
-                                        ? "Leana_Le_Resume.pdf"
-                                        : undefined
-                                }
-                                initial={
-                                    prefersReducedMotion.current
-                                        ? {}
-                                        : { opacity: 0, y: 6 }
-                                }
-                                animate={showLinks ? { opacity: 1, y: 0 } : {}}
-                                transition={{
-                                    duration: 0.3,
-                                    delay: i * 0.1,
-                                    ease: [0.4, 0, 0.2, 1],
-                                }}
-                            >
-                                {link.label}
-                            </motion.a>
-                        ))}
-                    </nav>
-                </div>
-            </div>
-
-            {/* Hero Content */}
-            <div className="hero-content hero-content-terminal">
-                <motion.div
-                    className="terminal-line"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.15 }}
-                >
-                    <span className="terminal-prompt">&gt;</span>
-                    <span className="terminal-text"> leana_le — portfolio</span>
-                </motion.div>
-                <motion.span
-                    className="terminal-cursor"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{
-                        duration: 1.2,
-                        repeat: Infinity,
-                        delay: 0.4,
-                        ease: "linear",
-                    }}
-                >
-                    _
-                </motion.span>
-            </div>
-
-            <motion.div
-                className="hero-ctas hero-ctas-terminal"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.15, delay: 0.4 }}
-            >
-                <a
-                    href="mailto:leanale003@gmail.com"
-                    className="terminal-cta-link"
-                >
-                    [contact]
-                </a>
-                <a
-                    href="/Le_Leana_Resume_NoNumber.pdf"
-                    download="Leana_Le_Resume.pdf"
-                    className="terminal-cta-link"
-                >
-                    [resume]
-                </a>
-                <span className="terminal-separator">::</span>
-                <a
-                    href="#projects"
-                    className="terminal-cta-link"
-                >
-                    [projects_index]
-                </a>
-            </motion.div>
-        </section>
-    );
-}
 
 const Home = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [hoveredProject, setHoveredProject] = useState(null);
+    const [heroMode, setHeroMode] = useState("work");
 
-    // Assign hover patterns to projects
     const hoverPatterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
 
     useEffect(() => {
@@ -473,6 +85,7 @@ const Home = () => {
 
                                 // Fetch supplemental data.json for real image paths
                                 let realImages = [];
+                                let coverImage = null;
                                 try {
                                     const supRes = await fetch(
                                         `/projects/${caseStudyProject.id}/data.json`,
@@ -480,6 +93,12 @@ const Home = () => {
                                     if (supRes.ok) {
                                         const supData = await supRes.json();
                                         realImages = collectAllImages(supData);
+                                        // Prefer a finished-looking cover: hifi > solution > overview
+                                        coverImage =
+                                            supData?.hifi?.images?.[0]?.src ??
+                                            supData?.solution?.images?.[0]?.src ??
+                                            supData?.overview?.images?.[0]?.src ??
+                                            null;
                                     }
                                 } catch {
                                     // No supplemental data — use mapper data
@@ -503,6 +122,7 @@ const Home = () => {
                                             index % hoverPatterns.length
                                         ],
                                     allImages: realImages,
+                                    coverImage,
                                 };
                             },
                         ),
@@ -534,6 +154,11 @@ const Home = () => {
                                         ...(data.solution?.images || []),
                                         ...(data.styleGuide?.images || []),
                                     ].filter((img) => img && img.src),
+                                    coverImage:
+                                        data?.hifi?.images?.[0]?.src ??
+                                        data?.solution?.images?.[0]?.src ??
+                                        data?.overview?.images?.[0]?.src ??
+                                        null,
                                 };
                             } catch {
                                 return null;
@@ -574,288 +199,64 @@ const Home = () => {
         <div className="home">
             <main className="home-main">
                 <div className="container">
-                    {/* Hero Section — System Activated + Magnetic Field */}
-                    <HeroSection />
+                    {/* Hero Section — new modular system
+                        To revert: replace <HeroContainer> with <HeroSection /> */}
+                    <HeroContainer
+                        config={homeHeroConfig}
+                        mode={heroMode}
+                        onModeChange={setHeroMode}
+                    />
 
-                    {/* Projects Grid */}
-                    <section
-                        className="home-projects"
-                        id="projects"
-                    >
-                        {/* Projects Header */}
-                        <motion.div
-                            className="home-projects-header home-projects-header-terminal"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.15, delay: 0 }}
-                        >
-                            <span className="terminal-prompt">&gt;</span>
-                            <span className="terminal-text">
-                                {" "}
-                                projects_index
-                            </span>
-                            <span className="terminal-count">
-                                {" "}
-                                [{projects.length} entries]
-                            </span>
-                        </motion.div>
+                    {/* Work list — category tabs + Sharleen-style rows */}
+                    {loading ? (
+                        <div className="home-loading">
+                            <motion.div
+                                className="loading-spinner"
+                                animate={{ rotate: 360 }}
+                                transition={{
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                }}
+                            />
+                        </div>
+                    ) : (
+                        <HomeWorkList projects={projects} />
+                    )}
 
-                        {loading ? (
-                            <div className="home-loading">
-                                <motion.div
-                                    className="loading-spinner"
-                                    animate={{ rotate: 360 }}
-                                    transition={{
-                                        duration: 1,
-                                        repeat: Infinity,
-                                        ease: "linear",
-                                    }}
-                                />
-                            </div>
-                        ) : (
-                            <div className="projects-container">
-                                {/* Folder Explorer (Clean/Chaos modes) */}
-                                <div className="projects-explorer projects-explorer-default">
-                                    {/* Left pane — folder list */}
-                                    <div className="projects-folders">
-                                        {projects.map((project, index) => (
-                                            <motion.div
-                                                key={project.id}
-                                                initial={{ opacity: 0, y: 20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{
-                                                    duration: 0.5,
-                                                    delay: 0.08 * index,
-                                                    ease: [0.4, 0, 0.2, 1],
-                                                }}
-                                            >
-                                                <Link
-                                                    to={getProjectPath(
-                                                        project.id,
-                                                    )}
-                                                    className="folder-item-link"
-                                                    onMouseEnter={() => {
-                                                        // Re-shuffle images on each hover
-                                                        const imgs =
-                                                            project.allImages ||
-                                                            [];
-                                                        const shuffled = [
-                                                            ...imgs,
-                                                        ].sort(
-                                                            () =>
-                                                                Math.random() -
-                                                                0.5,
-                                                        );
-                                                        const count = Math.min(
-                                                            3 +
-                                                                Math.floor(
-                                                                    Math.random() *
-                                                                        3,
-                                                                ),
-                                                            shuffled.length,
-                                                        ); // 3-5
-                                                        setHoveredProject({
-                                                            ...project,
-                                                            hoverImages:
-                                                                shuffled.slice(
-                                                                    0,
-                                                                    count,
-                                                                ),
-                                                        });
-                                                    }}
-                                                    onMouseLeave={() =>
-                                                        setHoveredProject(null)
-                                                    }
-                                                >
-                                                    <motion.div
-                                                        className={`folder-item${hoveredProject?.id === project.id ? " folder-active" : ""}${hoveredProject !== null && hoveredProject?.id !== project.id ? " folder-dimmed" : ""}`}
-                                                        animate={{
-                                                            y:
-                                                                hoveredProject?.id ===
-                                                                project.id
-                                                                    ? -2
-                                                                    : 0,
-                                                        }}
-                                                        transition={{
-                                                            duration: 0.22,
-                                                            ease: [
-                                                                0.4, 0, 0.2, 1,
-                                                            ],
-                                                        }}
-                                                    >
-                                                        <div className="folder-tab">
-                                                            <span className="folder-tab-label">
-                                                                {project.title}
-                                                            </span>
-                                                        </div>
-                                                        <div className="folder-body">
-                                                            <div className="folder-meta">
-                                                                <span className="folder-category">
-                                                                    {
-                                                                        project.category
-                                                                    }
-                                                                </span>
-                                                                <span className="folder-dot">
-                                                                    ·
-                                                                </span>
-                                                                <span className="folder-year">
-                                                                    {
-                                                                        project.year
-                                                                    }
-                                                                </span>
-                                                                <span className="folder-index">
-                                                                    {String(
-                                                                        index +
-                                                                            1,
-                                                                    ).padStart(
-                                                                        2,
-                                                                        "0",
-                                                                    )}{" "}
-                                                                    /{" "}
-                                                                    {String(
-                                                                        projects.length,
-                                                                    ).padStart(
-                                                                        2,
-                                                                        "0",
-                                                                    )}
-                                                                </span>
-                                                            </div>
-                                                            {(project.subtitle ||
-                                                                project.tagline) && (
-                                                                <p className="folder-description">
-                                                                    {project.subtitle ||
-                                                                        project.tagline}
-                                                                </p>
-                                                            )}
-                                                        </div>
-                                                    </motion.div>
-                                                </Link>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-
-                                    {/* Right pane — preview window */}
-                                    <div className="projects-preview">
-                                        <div className="preview-window">
-                                            <div className="preview-window-bar">
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-dot" />
-                                                <span className="preview-window-title">
-                                                    {hoveredProject
-                                                        ? hoveredProject.title
-                                                        : "Preview"}
-                                                </span>
-                                            </div>
-                                            <div className="preview-window-body">
-                                                <AnimatePresence mode="wait">
-                                                    {hoveredProject ? (
-                                                        <motion.div
-                                                            key={
-                                                                hoveredProject.id
-                                                            }
-                                                            className="preview-window-content"
-                                                            initial={{
-                                                                opacity: 0,
-                                                                y: 8,
-                                                            }}
-                                                            animate={{
-                                                                opacity: 1,
-                                                                y: 0,
-                                                            }}
-                                                            exit={{
-                                                                opacity: 0,
-                                                                y: -6,
-                                                            }}
-                                                            transition={{
-                                                                duration: 0.22,
-                                                                ease: [
-                                                                    0.4, 0, 0.2,
-                                                                    1,
-                                                                ],
-                                                            }}
-                                                        >
-                                                            <PreviewPanel
-                                                                project={
-                                                                    hoveredProject
-                                                                }
-                                                                hoverPattern={
-                                                                    hoveredProject.hoverPattern
-                                                                }
-                                                            />
-                                                        </motion.div>
-                                                    ) : (
-                                                        <motion.div
-                                                            className="preview-empty"
-                                                            initial={{
-                                                                opacity: 0,
-                                                            }}
-                                                            animate={{
-                                                                opacity: 1,
-                                                            }}
-                                                            exit={{
-                                                                opacity: 0,
-                                                            }}
-                                                            transition={{
-                                                                duration: 0.2,
-                                                            }}
-                                                        >
-                                                            <div className="preview-empty-grid" />
-                                                            <span className="preview-empty-text">
-                                                                Hover a folder
-                                                                to preview
-                                                            </span>
-                                                        </motion.div>
-                                                    )}
-                                                </AnimatePresence>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </section>
-
-                    {/* Skills Section */}
-                    <SkillsSection variant="grid" />
-
-                    {/* Education Section */}
-                    <EducationSection variant="timeline" />
                 </div>
             </main>
 
             {/* Footer */}
             <footer className="home-footer">
                 <div className="container">
-                    <div className="footer-content">
-                        <div className="footer-links">
-                            <a
-                                href="mailto:leanale003@gmail.com"
-                                className="footer-link"
-                            >
-                                Email
-                            </a>
-                            <a
-                                href="https://linkedin.com/in/leanale"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="footer-link"
-                            >
-                                LinkedIn
-                            </a>
-                            <a
-                                href="https://github.com/chuot-the-rat"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="footer-link"
-                            >
-                                GitHub
-                            </a>
-                        </div>
-                        <p className="footer-copyright">
-                            © {new Date().getFullYear()} Leana Le
-                        </p>
+                    <p className="footer-heading">Let's connect</p>
+                    <div className="footer-links">
+                        <a href="mailto:leanale003@gmail.com" className="footer-link">
+                            Email
+                        </a>
+                        <span className="footer-sep" aria-hidden>/</span>
+                        <a
+                            href="https://linkedin.com/in/leanale"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                        >
+                            LinkedIn
+                        </a>
+                        <span className="footer-sep" aria-hidden>/</span>
+                        <a
+                            href="https://github.com/chuot-the-rat"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                        >
+                            GitHub
+                        </a>
                     </div>
+                    <p className="footer-copyright">
+                        © {new Date().getFullYear()} Leana Le · Designed & developed with care
+                    </p>
                 </div>
             </footer>
         </div>
