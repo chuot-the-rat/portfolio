@@ -235,9 +235,11 @@ const ProjectLayout = () => {
                 >
                     <video
                         src={resolveImage(project.video.src)}
-                        alt={project.video.alt || "Project animation"}
+                        aria-label={project.video.alt || "Project animation"}
                         controls
+                        playsInline
                         autoPlay={project.video.autoplay || false}
+                        muted={project.video.autoplay || false}
                     />
                 </motion.div>
             )}

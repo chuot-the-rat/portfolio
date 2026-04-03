@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { getProjectById } from "../utils/projectDataMapper";
-import PivotDiagram from "../components/PivotDiagram";
 import {
     SectionIndex,
     SectionTag,
@@ -170,8 +169,8 @@ const ProjectDetail = () => {
                                 )}
                             </div>
 
-                            {/* CTAs — positioned after meta, before body */}
-                            {(project.links?.live || project.links?.prototype) && (
+                            {/* CTAs — live site, prototype, github */}
+                            {(project.links?.live || project.links?.prototype || project.links?.github) && (
                                 <div className="project-hero-ctas">
                                     {project.links?.live && (
                                         <motion.a
@@ -201,6 +200,20 @@ const ProjectDetail = () => {
                                             </svg>
                                         </motion.a>
                                     )}
+                                    {project.links?.github && (
+                                        <motion.a
+                                            href={project.links.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="project-cta-link"
+                                            whileHover={{ y: -1, transition: { duration: 0.2 } }}
+                                        >
+                                            <span>GitHub</span>
+                                            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                                                <path d="M6 3h7v7M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </motion.a>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -221,21 +234,6 @@ const ProjectDetail = () => {
                             </motion.div>
                         )}
                     </div>
-
-                    {/* Responsibilities — below two-column layout */}
-                    {project.responsibilities &&
-                        project.responsibilities.length > 0 && (
-                            <div className="project-responsibilities">
-                                <span className="meta-label">Key Responsibilities</span>
-                                <ul className="responsibilities-list">
-                                    {project.responsibilities.map((resp, index) => (
-                                        <li key={index} className="responsibility-item">
-                                            {resp}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
 
                     {/* Tools - Categorized */}
                     {project.toolsCategories &&
@@ -863,43 +861,6 @@ const ProjectContentMain = ({ project }) => {
                                     onCount={(n) => {
                                         imageNum += n;
                                     }}
-                                />
-                            )}
-                        </motion.section>
-                    );
-                })()}
-
-            {/* Challenges & Pivots */}
-            {project.challenges &&
-                (() => {
-                    const s = nextSection();
-                    return (
-                        <motion.section
-                            className="project-section challenges-section"
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.45 }}
-                        >
-                            <SectionIndex
-                                caseIndex={ci}
-                                sectionIndex={s}
-                                title="Challenges"
-                            />
-                            <h2 className="section-title">
-                                {project.challenges.title}
-                            </h2>
-                            <SectionTag
-                                sectionIndex={s}
-                                version="2.0"
-                            />
-                            <p className="section-description">
-                                {project.challenges.description}
-                            </p>
-
-                            {project.challenges.pivots?.length > 0 && (
-                                <PivotDiagram
-                                    pivots={project.challenges.pivots}
                                 />
                             )}
                         </motion.section>

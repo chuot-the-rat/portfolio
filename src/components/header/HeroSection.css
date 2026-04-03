@@ -408,9 +408,9 @@
 .hs-mode-toggle {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  margin-top: var(--space-5);
-  padding: var(--space-1);
+  gap: 0;
+  margin-top: var(--space-6);
+  padding: 4px;
   background: color-mix(in srgb, var(--color-bg) 88%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -420,8 +420,8 @@
 }
 
 .hs-mode-btn {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -433,6 +433,7 @@
   transition:
     background var(--dur-ui) var(--ease-out-premium),
     color var(--dur-ui) var(--ease-out-premium);
+  flex-shrink: 0;
 }
 
 .hs-mode-btn:hover {

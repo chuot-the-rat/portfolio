@@ -96,7 +96,7 @@ export default function About() {
                                     href="mailto:leanale003@gmail.com"
                                     className="about-connect-link about-connect-link--primary"
                                 >
-                                    Send an email
+                                    leanale003@gmail.com
                                 </a>
                                 <a
                                     href="https://linkedin.com/in/leanale"

@@ -28,13 +28,53 @@ export const homeHeroConfig = {
   // MediaBlock — null until portrait asset is added
   media: null,
 
-  // FloatingTags — skill/status pills. Always visible regardless of mode.
+  // FloatingTags — skill/status pills. Spring between mode-specific positions.
   tags: [
-    { label: "Available", icon: "✦", initialX: 680, initialY: -18, index: 0 },
-    { label: "Figma",     icon: null, initialX: 820, initialY:  70, index: 1 },
-    { label: "React",     icon: null, initialX: 700, initialY: 160, index: 2 },
-    { label: "Framer",    icon: null, initialX: 950, initialY: 160, index: 3 },
-    { label: "CSS",       icon: null, initialX: 840, initialY: 250, index: 4 },
+    {
+      label: "Available", icon: "✦", index: 0,
+      initialX: 680, initialY: -18,
+      modes: {
+        work:  { x: 680, y: -18 },
+        study: { x: 640, y: -40 },
+        chaos: { x: 560, y:  80 },
+      },
+    },
+    {
+      label: "Figma", icon: null, index: 1,
+      initialX: 820, initialY: 70,
+      modes: {
+        work:  { x: 820, y:  70 },
+        study: { x: 780, y:  20 },
+        chaos: { x: 940, y: -30 },
+      },
+    },
+    {
+      label: "React", icon: null, index: 2,
+      initialX: 700, initialY: 160,
+      modes: {
+        work:  { x: 700, y: 160 },
+        study: { x: 660, y: 120 },
+        chaos: { x: 610, y: 220 },
+      },
+    },
+    {
+      label: "Framer", icon: null, index: 3,
+      initialX: 950, initialY: 160,
+      modes: {
+        work:  { x: 950, y: 160 },
+        study: { x: 900, y: 100 },
+        chaos: { x: 870, y: 260 },
+      },
+    },
+    {
+      label: "CSS", icon: null, index: 4,
+      initialX: 840, initialY: 250,
+      modes: {
+        work:  { x: 840, y: 250 },
+        study: { x: 760, y: 200 },
+        chaos: { x: 700, y: 330 },
+      },
+    },
   ],
 
   // FloatingImages — draggable image cards that rearrange per mode.
