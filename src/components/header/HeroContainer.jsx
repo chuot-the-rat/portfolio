@@ -62,7 +62,7 @@ export default function HeroContainer({
       style={{ minHeight }}
       aria-label="Hero section"
     >
-      {/* FloatingTags: skill/status pills, always visible */}
+      {/* FloatingTags: spring to mode-specific positions */}
       {tags.map((tag) => (
         <FloatingTag
           key={tag.label}
@@ -71,6 +71,7 @@ export default function HeroContainer({
           initialX={tag.initialX ?? 0}
           initialY={tag.initialY ?? 0}
           index={tag.index ?? 0}
+          position={tag.modes?.[mode] ?? { x: tag.initialX ?? 0, y: tag.initialY ?? 0 }}
           dragConstraintsRef={containerRef}
           idleMotion={idleMotion}
         />

@@ -1,21 +1,17 @@
 /**
  * FloatingTag.jsx
- * Draggable pill element positioned absolutely within HeroContainer.
+ * Draggable pill positioned absolutely within HeroContainer.
+ * Springs to mode-specific positions on mode change.
  *
- * - Drag is constrained to the parent HeroContainer via dragConstraintsRef.
- * - On mobile (< 768px): drag is disabled. The tag is hidden at its absolute
- *   position; HeroContainer renders a separate static version in the mobile
- *   tag row below the CTAs.
- * - idleMotion enables a slow breathing opacity pulse (6s loop).
- * - Entrance is staggered via the `index` prop fed into tagVariants.
+ * - position { x, y } is the target for the current mode
+ * - useMotionValue + animate() shares motion values between drag and spring
+ *   so mode transitions don't snap the element back after dragging
+ * - On mobile: returns null; HeroContainer renders static chips instead
  */
 
-import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import {
-  tagVariants,
-  tagIdleVariants,
-} from "../../utils/header/heroMotion";
+import { useState, useEffect } from "react";
+import { motion, useMotionValue, useReducedMotion, animate } from "framer-motion";
+import { tagVariants, tagIdleVariants } from "../../utils/header/heroMotion";
 
 export default function FloatingTag({
   label,
@@ -23,34 +19,40 @@ export default function FloatingTag({
   initialX = 0,
   initialY = 0,
   index = 0,
+  position,          // { x, y } for current mode — drives spring animation
   dragConstraintsRef,
   idleMotion = true,
 }) {
   const shouldReduceMotion = useReducedMotion();
-
-  // Phase: "entrance" first, then switches to "idle" via onAnimationComplete.
-  // This ensures the entrance (y rise + opacity fade) fully completes before
-  // the breathing pulse begins — not both running simultaneously.
   const [phase, setPhase] = useState("entrance");
 
-  // Check at render time — sufficient for Vite/React (no SSR)
-  const isMobile =
-    typeof window !== "undefined" && window.innerWidth < 768;
-
-  // On mobile: the absolute tag is hidden via CSS; don't bother animating it
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   if (isMobile) return null;
 
+  // Shared motion values — both drag and mode-spring operate on these
+  // so they never conflict with each other
+  const mx = useMotionValue(position?.x ?? initialX);
+  const my = useMotionValue(position?.y ?? initialY);
+
+  // Spring to new mode position whenever position changes
+  useEffect(() => {
+    if (!position) return;
+    const cx = animate(mx, position.x, { type: "spring", stiffness: 160, damping: 24 });
+    const cy = animate(my, position.y, { type: "spring", stiffness: 160, damping: 24 });
+    return () => { cx.stop(); cy.stop(); };
+  }, [position?.x, position?.y]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const motionProps = shouldReduceMotion
-    ? { style: { opacity: 1 } }
+    ? { style: { opacity: 1, x: mx, y: my } }
     : {
         variants: { ...tagVariants, ...tagIdleVariants },
         custom: index,
         initial: "hidden",
         animate: phase === "idle" ? "idle" : "visible",
         onAnimationComplete: (def) => {
-          // Switch to idle loop once entrance ("visible") finishes
           if (def === "visible" && idleMotion) setPhase("idle");
         },
+        style: { x: mx, y: my },
       };
 
   return (
@@ -59,19 +61,20 @@ export default function FloatingTag({
       style={{
         left: initialX,
         top: initialY,
+        ...motionProps.style,
       }}
       drag={!shouldReduceMotion}
       dragConstraints={dragConstraintsRef}
       dragElastic={0.08}
       dragMomentum={false}
       aria-hidden="true"
-      {...motionProps}
+      variants={motionProps.variants}
+      custom={motionProps.custom}
+      initial={motionProps.initial}
+      animate={motionProps.animate}
+      onAnimationComplete={motionProps.onAnimationComplete}
     >
-      {icon && (
-        <i className="hs-tag__icon" aria-hidden="true">
-          {icon}
-        </i>
-      )}
+      {icon && <i className="hs-tag__icon" aria-hidden="true">{icon}</i>}
       {label}
     </motion.span>
   );
