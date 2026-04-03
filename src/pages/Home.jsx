@@ -232,35 +232,33 @@ const Home = () => {
             {/* Footer */}
             <footer className="home-footer">
                 <div className="container">
-                    <div className="footer-content">
-                        <div className="footer-links">
-                            <a
-                                href="mailto:leanale003@gmail.com"
-                                className="footer-link"
-                            >
-                                Email
-                            </a>
-                            <a
-                                href="https://linkedin.com/in/leanale"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="footer-link"
-                            >
-                                LinkedIn
-                            </a>
-                            <a
-                                href="https://github.com/chuot-the-rat"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="footer-link"
-                            >
-                                GitHub
-                            </a>
-                        </div>
-                        <p className="footer-copyright">
-                            © {new Date().getFullYear()} Leana Le
-                        </p>
+                    <p className="footer-heading">Let's connect</p>
+                    <div className="footer-links">
+                        <a href="mailto:leanale003@gmail.com" className="footer-link">
+                            Email
+                        </a>
+                        <span className="footer-sep" aria-hidden>/</span>
+                        <a
+                            href="https://linkedin.com/in/leanale"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                        >
+                            LinkedIn
+                        </a>
+                        <span className="footer-sep" aria-hidden>/</span>
+                        <a
+                            href="https://github.com/chuot-the-rat"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                        >
+                            GitHub
+                        </a>
                     </div>
+                    <p className="footer-copyright">
+                        © {new Date().getFullYear()} Leana Le · Designed & developed with care
+                    </p>
                 </div>
             </footer>
         </div>

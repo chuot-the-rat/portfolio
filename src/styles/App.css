@@ -1,6 +1,8 @@
 .app {
     min-height: 100vh;
     position: relative;
+    /* Global offset for the fixed floating navbar (pill height ~44px + top: 16px + gap) */
+    padding-top: 76px;
 }
 
 /* Global page transitions */
