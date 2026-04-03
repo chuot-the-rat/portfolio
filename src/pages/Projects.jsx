@@ -24,12 +24,13 @@
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
     getAllProjects,
     getProjectPath,
     isStandaloneProject,
 } from "../utils/projectDataMapper";
+import HeroContainer from "../components/header/HeroContainer";
 import "./Projects.css";
 
 export default function Projects() {
@@ -110,30 +111,30 @@ export default function Projects() {
         }
     }, []);
 
+    const heroConfig = useMemo(() => ({
+        layout: "full-left",
+        minHeight: "35vh",
+        text: {
+            descriptor: "Selected Work",
+            headline: loading
+                ? "Projects"
+                : `${projects.length} ${projects.length === 1 ? "project" : "projects"}`,
+            headlineAs: "h1",
+            subline: "Curated case studies and design work",
+        },
+        media: null,
+        tags: [],
+        ctas: [],
+        ctaLayout: "row",
+        idleMotion: false,
+    }), [projects.length, loading]);
+
     return (
         <div className="projects-page">
             <main className="projects-main">
+                <HeroContainer config={heroConfig} />
                 <section className="section">
                     <div className="container--wide stack stack--tight">
-                        {/* Header with kicker label */}
-                        <motion.div
-                            className="stack"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <div className="kicker">Selected Work</div>
-                            <h1 className="projects-title">
-                                {projects.length}{" "}
-                                {projects.length === 1
-                                    ? "project"
-                                    : "projects"}
-                            </h1>
-                            <p className="projects-subtitle">
-                                Curated case studies and design work
-                            </p>
-                        </motion.div>
-
                         {/* Loading state */}
                         {loading ? (
                             <div className="projects-loading">
