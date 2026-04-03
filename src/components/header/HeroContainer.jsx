@@ -84,7 +84,6 @@ export default function HeroContainer({
           alt={img.alt}
           width={img.width}
           position={img.modes?.[mode] ?? { x: 0, y: 0, rotate: 0 }}
-          dragConstraintsRef={containerRef}
           index={i}
         />
       ))}

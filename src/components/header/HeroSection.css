@@ -364,12 +364,7 @@
   left: 0;
   top: 0;
   z-index: 8;
-  cursor: grab;
-  touch-action: none;
-}
-
-.hs-float-img:active {
-  cursor: grabbing;
+  pointer-events: none; /* decorative only */
 }
 
 .hs-float-img__img {

@@ -1,10 +1,10 @@
 /**
  * FloatingImage.jsx
- * Draggable image card that animates between positions when hero mode changes.
+ * Absolutely positioned image card that springs to new positions when
+ * the hero mode changes. Not draggable.
  *
- * - position: { x, y, rotate } — driven by current mode from headerConfig
- * - When mode switches, Framer Motion springs to the new position
- * - If src is null, renders a placeholder so layout is visible during authoring
+ * - position: { x, y, rotate } from the current mode in headerConfig
+ * - Framer Motion's animate prop handles both entrance and mode transitions
  * - Hidden on mobile (< 768px)
  */
 
@@ -15,7 +15,6 @@ export default function FloatingImage({
   alt = "Image",
   width = 180,
   position = { x: 0, y: 0, rotate: 0 },
-  dragConstraintsRef,
   index = 0,
 }) {
   const shouldReduceMotion = useReducedMotion();
@@ -25,13 +24,6 @@ export default function FloatingImage({
   if (isMobile) return null;
 
   const { x, y, rotate = 0 } = position;
-
-  // Shared spring for position changes (mode switch)
-  const springTransition = {
-    type: "spring",
-    stiffness: 130,
-    damping: 22,
-  };
 
   return (
     <motion.div
@@ -49,15 +41,11 @@ export default function FloatingImage({
           : {
               opacity: { duration: 0.45, delay: 0.65 + index * 0.12 },
               scale: { duration: 0.45, delay: 0.65 + index * 0.12 },
-              x: springTransition,
-              y: springTransition,
-              rotate: springTransition,
+              x: { type: "spring", stiffness: 130, damping: 22 },
+              y: { type: "spring", stiffness: 130, damping: 22 },
+              rotate: { type: "spring", stiffness: 130, damping: 22 },
             }
       }
-      drag={!shouldReduceMotion}
-      dragConstraints={dragConstraintsRef}
-      dragElastic={0.08}
-      dragMomentum={false}
       aria-hidden="true"
     >
       {src ? (
