@@ -115,3 +115,9 @@
         gap: var(--space-4);
     }
 }
+
+@media (max-width: 480px) {
+    .resume-main {
+        padding: 0 var(--space-4) var(--section-spacing-base);
+    }
+}

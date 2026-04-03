@@ -456,6 +456,16 @@
   }
 }
 
+@media (max-width: 480px) {
+  .hs-text__headline {
+    font-size: var(--font-size-2xl);
+  }
+
+  .hs-text__subline {
+    font-size: var(--font-size-base);
+  }
+}
+
 /* ── Optional mode variations ───────────────────────────────────────────────
    Uncomment to dim decorative elements in work mode.
    FloatingTags feel more at home in chaos mode.

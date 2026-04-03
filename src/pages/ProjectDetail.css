@@ -1137,6 +1137,25 @@
     }
 }
 
+/* ── Small phones (≤ 480px) ─────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .metric-value {
+        font-size: var(--font-size-2xl);
+    }
+
+    .section-image img {
+        max-height: 320px;
+    }
+
+    .feature-media img {
+        max-height: 280px;
+    }
+
+    .project-hero-title {
+        font-size: var(--font-size-xl);
+    }
+}
+
 /* ──────────────────────────────────────────────────────────────────────
    ACCESSIBILITY
    ────────────────────────────────────────────────────────────────────── */
