@@ -17,6 +17,7 @@ import "../components/SectionLayout.css";
 const Home = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [heroMode, setHeroMode] = useState("work");
 
     const hoverPatterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
 
@@ -202,7 +203,11 @@ const Home = () => {
                 <div className="container">
                     {/* Hero Section — new modular system
                         To revert: replace <HeroContainer> with <HeroSection /> */}
-                    <HeroContainer config={homeHeroConfig} />
+                    <HeroContainer
+                        config={homeHeroConfig}
+                        mode={heroMode}
+                        onModeChange={setHeroMode}
+                    />
 
                     {/* Work list — category tabs + Sharleen-style rows */}
                     {loading ? (

@@ -355,6 +355,112 @@
   }
 }
 
+/* ── Floating images ────────────────────────────────────────────────────────
+   Same structural rules as .hs-tag — absolutely positioned, z-index 8
+   (below tags at z-index 10), draggable.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-float-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 8;
+  cursor: grab;
+  touch-action: none;
+}
+
+.hs-float-img:active {
+  cursor: grabbing;
+}
+
+.hs-float-img__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.14);
+  border: 1px solid var(--color-border);
+  pointer-events: none; /* let the wrapper handle drag */
+}
+
+/* Placeholder — shown when src is null during authoring */
+.hs-float-img--placeholder {
+  opacity: 0.45;
+}
+
+.hs-float-img__placeholder {
+  aspect-ratio: 4 / 3;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hs-float-img__placeholder-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-tertiary);
+  user-select: none;
+}
+
+/* ── Mode toggle ────────────────────────────────────────────────────────────
+   Glass pill matching the floating nav aesthetic.
+   Sits below the CTAs in the text column.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-5);
+  padding: var(--space-1);
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.hs-mode-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-full);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition:
+    background var(--dur-ui) var(--ease-out-premium),
+    color var(--dur-ui) var(--ease-out-premium);
+}
+
+.hs-mode-btn:hover {
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+}
+
+.hs-mode-btn--active {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.hs-mode-btn:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+@media (max-width: 768px) {
+  .hs-float-img {
+    display: none;
+  }
+}
+
 /* ── Optional mode variations ───────────────────────────────────────────────
    Uncomment to dim decorative elements in work mode.
    FloatingTags feel more at home in chaos mode.

@@ -5,13 +5,14 @@
  * - Reads the full config object from headerConfig.js
  * - Sets up the CSS Grid via data-layout attribute
  * - Provides the stagger animation context for child components
- * - Passes containerRef to FloatingTags as their drag boundary
- * - Renders HeroText, MediaBlock, FloatingTag(s), and CTAGroup
+ * - Passes containerRef to FloatingTags and FloatingImages as their drag boundary
+ * - Renders HeroText, MediaBlock, FloatingTag(s), FloatingImage(s), and CTAGroup
+ * - Optionally renders HeroModeToggle when floatingImages are configured
  *
  * Usage:
  *   import HeroContainer from "../components/header/HeroContainer";
  *   import { homeHeroConfig } from "../data/header/headerConfig";
- *   <HeroContainer config={homeHeroConfig} />
+ *   <HeroContainer config={homeHeroConfig} mode="work" onModeChange={setMode} />
  */
 
 import { useRef } from "react";
@@ -19,17 +20,25 @@ import { motion, useReducedMotion } from "framer-motion";
 import HeroText from "./HeroText";
 import MediaBlock from "./MediaBlock";
 import FloatingTag from "./FloatingTag";
+import FloatingImage from "./FloatingImage";
+import HeroModeToggle from "./HeroModeToggle";
 import CTAGroup from "./CTAGroup";
 import { containerVariants } from "../../utils/header/heroMotion";
 import "./HeroSection.css";
 
-export default function HeroContainer({ config, className = "" }) {
+export default function HeroContainer({
+  config,
+  className = "",
+  mode = "work",
+  onModeChange,
+}) {
   const {
     layout = "asymmetric",
     minHeight = "90vh",
     text,
     media,
     tags = [],
+    floatingImages = [],
     ctas = [],
     ctaLayout = "row",
     idleMotion = true,
@@ -38,20 +47,22 @@ export default function HeroContainer({ config, className = "" }) {
   const containerRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // When reduced motion is preferred, skip entrance animation entirely
   const motionProps = shouldReduceMotion
     ? {}
     : { variants: containerVariants, initial: "hidden", animate: "visible" };
+
+  const showModeToggle = floatingImages.length > 0 && typeof onModeChange === "function";
 
   return (
     <section
       ref={containerRef}
       className={["hs-container", className].filter(Boolean).join(" ")}
       data-layout={layout}
+      data-mode={mode}
       style={{ minHeight }}
       aria-label="Hero section"
     >
-      {/* FloatingTags: absolutely positioned over the grid */}
+      {/* FloatingTags: skill/status pills, always visible */}
       {tags.map((tag) => (
         <FloatingTag
           key={tag.label}
@@ -65,6 +76,19 @@ export default function HeroContainer({ config, className = "" }) {
         />
       ))}
 
+      {/* FloatingImages: rearrange per mode */}
+      {floatingImages.map((img, i) => (
+        <FloatingImage
+          key={img.id}
+          src={img.src}
+          alt={img.alt}
+          width={img.width}
+          position={img.modes?.[mode] ?? { x: 0, y: 0, rotate: 0 }}
+          dragConstraintsRef={containerRef}
+          index={i}
+        />
+      ))}
+
       {/* Grid: stagger orchestrator wraps the column structure */}
       <motion.div className="hs-grid" {...motionProps}>
         {/* Text column — always present */}
@@ -72,6 +96,11 @@ export default function HeroContainer({ config, className = "" }) {
           {text && <HeroText {...text} />}
 
           {ctas.length > 0 && <CTAGroup ctas={ctas} layout={ctaLayout} />}
+
+          {/* Mode toggle — rendered below CTAs when floatingImages are configured */}
+          {showModeToggle && (
+            <HeroModeToggle mode={mode} onChange={onModeChange} />
+          )}
 
           {/* Mobile: tags render here as static chips instead of absolute pills */}
           {tags.length > 0 && (

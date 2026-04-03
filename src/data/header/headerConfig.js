@@ -28,14 +28,51 @@ export const homeHeroConfig = {
   // MediaBlock — null until portrait asset is added
   media: null,
 
-  // FloatingTags — px offsets from the HeroContainer top-left origin.
-  // Spread intentionally so they orbit the right side of the headline block.
-  // When switching to "asymmetric" layout, reposition tags to surround the
-  // media panel (e.g. cluster near the panel edges rather than the text).
+  // FloatingTags — skill/status pills. Always visible regardless of mode.
   tags: [
-    { label: "Available", icon: "✦", initialX: 680, initialY: -18, index: 0 }, // upper-right
-    { label: "React",     icon: null,  initialX: 760, initialY:  86, index: 1 }, // far-right mid
-    { label: "Burnaby",   icon: "→",   initialX: 560, initialY: 160, index: 2 }, // lower-center
+    { label: "Available", icon: "✦", initialX: 680, initialY: -18, index: 0 },
+    { label: "Figma",     icon: null, initialX: 820, initialY:  70, index: 1 },
+    { label: "React",     icon: null, initialX: 700, initialY: 160, index: 2 },
+    { label: "Framer",    icon: null, initialX: 950, initialY: 160, index: 3 },
+    { label: "CSS",       icon: null, initialX: 840, initialY: 250, index: 4 },
+  ],
+
+  // FloatingImages — draggable image cards that rearrange per mode.
+  // Set src: "/your/image.jpg" when ready. Leave null to show placeholders.
+  floatingImages: [
+    {
+      id: "hero-img-1",
+      src: null,           // → add your image path here
+      alt: "Project 1",
+      width: 200,
+      modes: {
+        work:  { x: 880, y:  20, rotate:  2 },
+        study: { x: 600, y: -40, rotate: -4 },
+        chaos: { x: 920, y: -70, rotate: 14 },
+      },
+    },
+    {
+      id: "hero-img-2",
+      src: null,
+      alt: "Project 2",
+      width: 160,
+      modes: {
+        work:  { x: 760, y: 260, rotate: -3 },
+        study: { x: 800, y: 190, rotate:  6 },
+        chaos: { x: 630, y: 170, rotate: -18 },
+      },
+    },
+    {
+      id: "hero-img-3",
+      src: null,
+      alt: "Project 3",
+      width: 145,
+      modes: {
+        work:  { x: 980, y: 145, rotate:  4 },
+        study: { x: 700, y: 290, rotate: -8 },
+        chaos: { x: 760, y:  90, rotate: 22 },
+      },
+    },
   ],
 
   // CTAGroup
