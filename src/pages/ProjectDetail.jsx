@@ -2,10 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { getProjectById } from "../utils/projectDataMapper";
-import PivotSection from "../components/PivotSection";
 import PivotDiagram from "../components/PivotDiagram";
-import WeightLiftedPivot from "../components/WeightLiftedPivot";
-import ClaritySubtractionScene from "../components/ClaritySubtractionScene";
 import {
     SectionIndex,
     SectionTag,
@@ -350,10 +347,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section final-experience-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -387,10 +384,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section research-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -436,28 +433,12 @@ const ProjectContentMain = ({ project }) => {
                                     <ul className="findings-list">
                                         {project.research.keyFindings.map(
                                             (finding, i) => (
-                                                <motion.li
+                                                <li
                                                     key={i}
                                                     className="finding-item"
-                                                    initial={{
-                                                        opacity: 0,
-                                                        x: -20,
-                                                    }}
-                                                    whileInView={{
-                                                        opacity: 1,
-                                                        x: 0,
-                                                    }}
-                                                    viewport={{ once: true }}
-                                                    transition={{
-                                                        duration: 0.4,
-                                                        delay: i * 0.1,
-                                                    }}
                                                 >
-                                                    <span className="finding-icon">
-                                                        →
-                                                    </span>
-                                                    <span>{finding}</span>
-                                                </motion.li>
+                                                    {finding}
+                                                </li>
                                             ),
                                         )}
                                     </ul>
@@ -471,12 +452,6 @@ const ProjectContentMain = ({ project }) => {
                                     </strong>{" "}
                                     participants
                                 </p>
-                            )}
-
-                            {project.research.reflection && (
-                                <blockquote className="research-reflection">
-                                    {project.research.reflection}
-                                </blockquote>
                             )}
 
                             {project.research.images?.length > 0 && (
@@ -520,10 +495,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section personas-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -577,10 +552,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section userflows-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -712,10 +687,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section styleguide-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -901,10 +876,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section challenges-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -931,19 +906,6 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* Pivot section */}
-            <PivotSection pivot={project.pivot} />
-
-            {/* Clarity Subtraction Scene */}
-            {project.pivot?.clarityScene && (
-                <ClaritySubtractionScene data={project.pivot.clarityScene} />
-            )}
-
-            {/* Weight Lifted (fallback) */}
-            {project.pivot?.weightLifted && !project.pivot?.clarityScene && (
-                <WeightLiftedPivot {...project.pivot.weightLifted} />
-            )}
-
             {/* Iterations & Refinements (supports both improvements and rounds) */}
             {project.iterations &&
                 (() => {
@@ -951,10 +913,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1114,10 +1076,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section hifi-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1214,10 +1176,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section development-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1302,10 +1264,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section usability-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1529,10 +1491,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section presentation-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1574,10 +1536,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1619,10 +1581,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section solution-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1646,32 +1608,20 @@ const ProjectContentMain = ({ project }) => {
                                         (feature, i) => (
                                             <motion.div
                                                 key={feature.id || i}
-                                                className="feature-item"
-                                                initial={{ opacity: 0, y: 20 }}
+                                                className={`feature-item${feature.image ? " feature-item--has-media" : ""}`}
+                                                initial={{ opacity: 0, y: 16 }}
                                                 whileInView={{
                                                     opacity: 1,
                                                     y: 0,
                                                 }}
                                                 viewport={{ once: true }}
                                                 transition={{
-                                                    duration: 0.5,
-                                                    delay: i * 0.1,
+                                                    duration: 0.45,
+                                                    delay: i * 0.08,
                                                 }}
                                             >
-                                                <h3 className="feature-title">
-                                                    {feature.title}
-                                                </h3>
-                                                <p className="feature-description">
-                                                    {feature.description}
-                                                </p>
-                                                {feature.why && (
-                                                    <p className="feature-why">
-                                                        <strong>Why:</strong>{" "}
-                                                        {feature.why}
-                                                    </p>
-                                                )}
                                                 {feature.image && (
-                                                    <div className="feature-image">
+                                                    <div className="feature-media">
                                                         <FigLabel
                                                             index={nextImage()}
                                                         />
@@ -1681,6 +1631,20 @@ const ProjectContentMain = ({ project }) => {
                                                         />
                                                     </div>
                                                 )}
+                                                <div className="feature-body">
+                                                    <h3 className="feature-title">
+                                                        {feature.title}
+                                                    </h3>
+                                                    <p className="feature-description">
+                                                        {feature.description}
+                                                    </p>
+                                                    {feature.why && (
+                                                        <p className="feature-why">
+                                                            <strong>Why:</strong>{" "}
+                                                            {feature.why}
+                                                        </p>
+                                                    )}
+                                                </div>
                                             </motion.div>
                                         ),
                                     )}
@@ -1713,10 +1677,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section validation-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1741,42 +1705,6 @@ const ProjectContentMain = ({ project }) => {
                                     {project.validation.participantCount &&
                                         ` • ${project.validation.participantCount} participants`}
                                 </p>
-                            )}
-
-                            {project.validation.quotes?.length > 0 && (
-                                <div className="quotes-list">
-                                    {project.validation.quotes.map(
-                                        (quote, i) => (
-                                            <motion.blockquote
-                                                key={i}
-                                                className="validation-quote"
-                                                initial={{ opacity: 0, x: -20 }}
-                                                whileInView={{
-                                                    opacity: 1,
-                                                    x: 0,
-                                                }}
-                                                viewport={{ once: true }}
-                                                transition={{
-                                                    duration: 0.5,
-                                                    delay: i * 0.1,
-                                                }}
-                                            >
-                                                <p className="quote-text">
-                                                    "{quote.text || quote.quote}
-                                                    "
-                                                </p>
-                                                {(quote.author ||
-                                                    quote.attribution) && (
-                                                    <cite className="quote-author">
-                                                        —{" "}
-                                                        {quote.author ||
-                                                            quote.attribution}
-                                                    </cite>
-                                                )}
-                                            </motion.blockquote>
-                                        ),
-                                    )}
-                                </div>
                             )}
 
                             {project.validation.outcomes?.length > 0 && (
@@ -1809,10 +1737,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section learnings-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
@@ -1869,10 +1797,10 @@ const ProjectContentMain = ({ project }) => {
                     return (
                         <motion.section
                             className="project-section outcomes-section"
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.45 }}
                         >
                             <SectionIndex
                                 caseIndex={ci}
