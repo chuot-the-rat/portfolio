@@ -224,9 +224,12 @@
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
-  background: var(--hs-tag-bg);
+  background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--hs-tag-border);
   border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
   font-family: var(--hs-tag-font);
   font-size: var(--hs-tag-size);
   letter-spacing: var(--hs-tag-track);
@@ -236,7 +239,7 @@
   user-select: none;
   white-space: nowrap;
   z-index: 10;
-  touch-action: none; /* required for Framer Motion drag on touch devices */
+  touch-action: none;
 }
 
 .hs-tag:active {
@@ -294,32 +297,33 @@
   outline-offset: var(--focus-offset);
 }
 
-/* Primary: modest filled rectangle — grounded, not bubbly */
+/* Primary: proper pill with weight — Figma/Framer-style */
 .hs-cta--primary {
   background: var(--hs-cta-primary-bg);
   color: var(--hs-cta-primary-text);
-  padding: var(--space-3) var(--space-6);
-  border-radius: 4px;
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
 }
 
 .hs-cta--primary:hover {
   box-shadow: var(--shadow-lg);
-  opacity: 0.92;
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
-/* Ghost: editorial text-link with underline — no border box */
+/* Ghost: clean pill outline */
 .hs-cta--ghost {
   background: transparent;
   color: var(--hs-cta-ghost-text);
-  padding: var(--space-3) 0;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--color-border);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
 }
 
 .hs-cta--ghost:hover {
-  text-decoration-color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
+  background: var(--color-bg-secondary);
 }
 
 /* ── Mobile ─────────────────────────────────────────────────────────────────

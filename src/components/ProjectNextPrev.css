@@ -8,6 +8,8 @@
 .pnp {
     border-top: 1px solid var(--color-border);
     margin-top: var(--space-fluid-2xl);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
 }
 
 /* ── Two-panel grid ──────────────────────────────────────────────────── */
@@ -41,6 +43,10 @@
 
 .pnp-link:hover {
     background: var(--color-bg-secondary);
+}
+
+.pnp-link:hover .pnp-direction {
+    color: var(--color-accent-vivid);
 }
 
 .pnp-link--inactive {

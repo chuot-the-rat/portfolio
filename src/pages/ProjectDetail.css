@@ -205,10 +205,11 @@
 
 /* ─ Hero image — full width below header text ─ */
 .project-hero-media {
-    border-radius: var(--radius-base);
+    border-radius: var(--radius-xl);
     overflow: hidden;
     background: var(--color-bg-secondary);
     margin-bottom: 0;
+    box-shadow: var(--shadow-lg);
 }
 
 .project-hero-media-img {
@@ -264,13 +265,13 @@
 
 /* ─ Section Container ─ */
 .project-section {
-    margin-bottom: var(--section-spacing-base);
+    margin-bottom: var(--section-spacing-lg);
     max-width: var(--max-width-narrow);
 }
 
-/* Increase spacing between major sections */
+/* Increase breathing room between major sections */
 .project-section + .project-section {
-    margin-top: var(--section-spacing-base);
+    margin-top: var(--section-spacing-lg);
 }
 
 /* ─ Section Label (Micro Index + Small) ─ */
@@ -296,11 +297,12 @@
 
 /* ─ Section Description (Intro Text) ─ */
 .section-description {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-12);
-    max-width: 700px;
+    margin-bottom: var(--space-16);
+    max-width: 64ch;
+    font-weight: 300;
 }
 
 /* ──────────────────────────────────────────────────────────────────────
@@ -311,17 +313,18 @@
 .section-images {
     display: flex;
     flex-direction: column;
-    gap: var(--space-12);
-    margin: var(--space-12) 0;
+    gap: var(--space-16);
+    margin: var(--space-16) 0;
 }
 
 .section-image {
     position: relative;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     overflow: hidden;
     background-color: var(--color-bg-secondary);
     cursor: pointer;
     transform-origin: center;
+    box-shadow: var(--shadow-sm);
 
     transition:
         box-shadow var(--duration-base) var(--ease-smooth),
@@ -329,7 +332,8 @@
 }
 
 .section-image:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
 }
 
 /* Subtle scale on hover (restrained) */
@@ -365,9 +369,10 @@
 
 .carousel-viewport {
     position: relative;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     overflow: hidden;
     background-color: var(--color-bg-secondary);
+    box-shadow: var(--shadow-md);
 }
 
 .carousel-viewport img {

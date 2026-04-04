@@ -69,10 +69,16 @@
 
 .about-connect {
     margin-top: var(--section-spacing-base);
-    padding: var(--space-16) var(--space-12);
+    padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     background: var(--color-bg-secondary);
+    box-shadow: var(--shadow-md);
+    transition: box-shadow 0.28s ease;
+}
+
+.about-connect:hover {
+    box-shadow: var(--shadow-lg);
 }
 
 .about-connect-inner {
@@ -136,20 +142,23 @@
 }
 
 .about-connect-link--primary {
-    display: inline-block;
-    padding: var(--space-3) var(--space-6);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-8);
     background: var(--color-text);
     color: var(--color-bg);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     transition:
         opacity 0.18s ease,
-        transform 0.18s ease;
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.22s ease;
 }
 
 .about-connect-link--primary:hover {
     color: var(--color-bg);
-    opacity: 0.85;
-    transform: translateY(-1px);
+    opacity: 0.88;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────────
