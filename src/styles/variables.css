@@ -214,11 +214,12 @@
    ────────────────────────────────────────────────────────────────────── */
 
 [data-theme="dark"] {
-    --color-bg: #0a0a0a;
-    --color-bg-secondary: #171717;
-    --color-text: #fafafa;
-    --color-text-secondary: #a3a3a3;
-    --color-text-tertiary: #737373;
-    --color-border: #262626;
-    --color-accent: #fafafa;
+    /* Warm near-black — candlelight, not terminal */
+    --color-bg: #0e0c0a;
+    --color-bg-secondary: #1a1714;
+    --color-text: #f5f2ee;
+    --color-text-secondary: #a89f96;
+    --color-text-tertiary: #6b6259;
+    --color-border: #2c2722;
+    --color-accent: #f5f2ee;
 }

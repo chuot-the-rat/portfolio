@@ -765,7 +765,7 @@ section {
    ────────────────────────────────────────────────────────────────────── */
 
 [data-theme="dark"] .card {
-    background-color: var(--color-bg);
+    background-color: var(--color-bg-secondary);
 }
 
 [data-theme="dark"] .badge {
@@ -778,4 +778,9 @@ section {
 
 [data-theme="dark"] blockquote {
     border-left-color: var(--color-accent);
+}
+
+/* Warm dark: body background transition matches warmer tone */
+[data-theme="dark"] body {
+    background-color: var(--color-bg);
 }
