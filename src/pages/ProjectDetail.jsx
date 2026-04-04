@@ -11,6 +11,7 @@ import {
 import EvolutionSection from "../components/EvolutionSection";
 import FigmaEmbed from "../components/FigmaEmbed";
 import SimulationSection from "../features/sim/SimulationSection";
+import BackToTop from "../components/BackToTop";
 import "./ProjectDetail.css";
 
 const ProjectDetail = () => {
@@ -299,6 +300,7 @@ const ProjectDetail = () => {
                     </div>
                 </div>
             </div>
+            <BackToTop />
         </div>
     );
 };

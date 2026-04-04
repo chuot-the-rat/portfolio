@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import BackToTop from "../components/BackToTop";
 import "./ProjectLayout.css";
 
 /**
@@ -707,6 +708,7 @@ const ProjectLayout = () => {
                     </Link>
                 </div>
             </div>
+            <BackToTop />
         </div>
     );
 };

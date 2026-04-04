@@ -21,7 +21,8 @@
  * - Standalone: Self-contained projects, route to /design/:id
  */
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Navigation from "./components/Navigation";
 
 // Pages
@@ -49,10 +50,16 @@ import "./styles/App.css";
  */
 export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap"];
 
+function ScrollToTop() {
+    const { pathname } = useLocation();
+    useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+    return null;
+}
+
 function App() {
     return (
         <div className="app">
-            {/* Navigation bar appears on all pages */}
+            <ScrollToTop />
             <Navigation />
 
             {/* Route definitions — determines which page renders based on URL */}
@@ -64,7 +71,7 @@ function App() {
                 />
                 <Route
                     path="/projects"
-                    element={<Projects />}
+                    element={<Navigate to="/" replace />}
                 />
                 <Route
                     path="/about"

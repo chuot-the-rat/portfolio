@@ -46,7 +46,7 @@
             },
             "sections": {
                 "hook": {
-                    "content": "Apprenticeship can take over 6,000 hours. That's years of work, spread across job sites, classrooms, and bureaucratic systems—often without a clear sense of whether you're on track.\n\nEarly in our research, we kept hearing the same thing: confusion was pushing people out. Not inability. Not lack of motivation. Just confusion about where they stood and what came next.\n\nWe wanted to build something that answered one question clearly: Where am I right now?"
+                    "content": "Apprenticeship can take over 6,000 hours. That's years of work spread across job sites, classrooms, and bureaucratic systems — often without a clear sense of whether you're on track."
                 },
                 "problem_framing": {
                     "content": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind."
@@ -167,7 +167,7 @@
                     ]
                 },
                 "hifi_phase": {
-                    "content": "The high-fidelity designs prioritized calm. We chose soft colors, generous spacing, and typography that wouldn't feel clinical or overwhelming.\n\nThe dashboard became the emotional center of the app. Instead of hiding progress behind menus, we made it the first thing users see. Hours completed, hours remaining, competencies achieved—all visible at a glance.\n\nTry scrolling through the dashboard below. Notice how the most important information stays anchored at the top, while details reveal themselves as you explore.",
+                    "content": "The hi-fi designs led with calm. Soft colours, generous whitespace, and typography that doesn't feel clinical. Every screen answers one question without making the user ask it. The dashboard became the emotional anchor — not just a data view, but a sense of progress.",
                     "images": [
                         {
                             "src": "/projects/prolog/hifi-1.png",
@@ -645,7 +645,7 @@
             },
             "sections": {
                 "hook": {
-                    "content": "You have a free afternoon. Nothing planned. No obligations.\n\nSo you open your phone, scroll through options, and thirty minutes later you're still on the couch—paralyzed by choice, defaulting to nothing.\n\nSideQuest was designed for that moment. Not to give you more options, but to give you one good one."
+                    "content": "You have a free afternoon. Nothing planned. So you open your phone, scroll for thirty minutes, and end up back on the couch — paralyzed by options, defaulting to nothing."
                 },
                 "problem_framing": {
                     "content": "Boredom isn't really about having nothing to do. It's about having too much to choose from and not enough motivation to pick.\n\nEvery app promises endless possibilities. But endless possibilities require endless decisions. And decisions are exhausting.\n\nWe wanted to flip that model. Instead of showing users everything they could do, we'd suggest one thing they might enjoy—and make it easy to say yes."
@@ -753,7 +753,7 @@
                     ]
                 },
                 "hifi_phase": {
-                    "content": "The high-fidelity designs introduced a mascot—a small character that guides users through the experience without feeling childish.\n\nWe used playful language ('quest' instead of 'activity') and warm colors to make the app feel inviting rather than utilitarian. The goal was to lower emotional resistance.\n\nTap the button below to receive a quest. Notice how little friction there is between wanting to do something and seeing a suggestion.",
+                    "content": "The hi-fi designs leaned into warmth and play. A mascot guides without hand-holding. Colour pops where it should — on the quest card, not the chrome. Language is casual: \"quest\" not \"activity\", \"try it\" not \"add to list\". The goal was to feel more like a friend nudging you out the door than an app telling you what to do.",
                     "images": [
                         {
                             "src": "/projects/sidequest/hifi-1.png",
