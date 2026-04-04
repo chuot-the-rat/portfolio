@@ -124,31 +124,31 @@
                     "intro": "Each feature was designed to reduce one specific point of friction. Click through the prototype below to see how they work together.",
                     "features": [
                         {
-                            "id": "dashboard",
+                            "id": "progress_dashboard",
                             "title": "Progress Dashboard",
-                            "description": "A centralized view of hours completed, hours remaining, competencies achieved, and certification progress. No digging required—the answer to 'where am I?' is always visible.",
-                            "why": "Apprentices told us they often felt lost in their journey. The dashboard acts as a GPS, providing constant orientation.",
+                            "description": "A centralized view of hours completed, competencies achieved, and certification progress. The answer to \"where am I?\" is always one tap away.",
+                            "why": "Apprentices told us they felt lost. The dashboard acts as a GPS — constant orientation, no digging.",
                             "image": "/projects/prolog/feature-dashboard.png"
                         },
                         {
-                            "id": "hours_tracker",
+                            "id": "hours_discrepancy",
                             "title": "Hours Discrepancy Detector",
-                            "description": "Compares user-logged hours against official records and flags mismatches. Users can document discrepancies and generate reports for their employers.",
-                            "why": "Hour discrepancies are stressful and common. Rather than fixing the problem, we gave users tools to advocate for themselves.",
+                            "description": "Compares user-logged hours against official records and flags mismatches. Users can document and report discrepancies directly.",
+                            "why": "Hour disputes are stressful and common. We gave users tools to advocate for themselves.",
                             "image": "/projects/prolog/feature-hours.png"
                         },
                         {
-                            "id": "financial_resources",
+                            "id": "financial_hub",
                             "title": "Financial Resources Hub",
-                            "description": "Links to grants, funding programs, and itemized cost breakdowns for apprenticeship expenses.",
-                            "why": "Financial stress came up repeatedly in research. We couldn't solve it, but we could make information easier to find.",
+                            "description": "Links to grants, funding programs, and cost breakdowns for apprenticeship expenses — all in one place.",
+                            "why": "Financial stress came up in every research session. We could not solve it, but we could make it easier to navigate.",
                             "image": "/projects/prolog/feature-financial.png"
                         },
                         {
-                            "id": "ai_competency_quiz",
+                            "id": "practice_quizzes",
                             "title": "AI Practice Quizzes",
-                            "description": "Generates unique practice questions based on trade competencies. Designed to build confidence before official exams.",
-                            "why": "Many apprentices feel unprepared for certification exams. Low-stakes practice helps reduce that anxiety.",
+                            "description": "Generates practice questions based on trade competencies to build confidence before official exams.",
+                            "why": "Many apprentices feel underprepared for certification. Low-stakes practice reduces that anxiety.",
                             "image": "/projects/prolog/feature-quiz.png"
                         }
                     ],
@@ -160,7 +160,7 @@
                     }
                 },
                 "validation": {
-                    "content": "We tested the prototype with a small group. Users appreciated that they didn't have to hunt for information—it was just there. The hours tracker resonated strongly, addressing a previously unmet need.",
+                    "content": "Users appreciated not having to hunt for information — it was just there. The hours tracker resonated most, addressing a previously unmet need in the most anxiety-inducing part of the process.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
@@ -463,24 +463,24 @@
                     "intro": "SideQuest has three core elements. Explore each in the prototype below.",
                     "features": [
                         {
-                            "id": "quests",
+                            "id": "quest_suggestions",
                             "title": "Quest Suggestions",
-                            "description": "Small, low-commitment activities framed as optional adventures. Each quest includes a title, brief description, and estimated time.",
-                            "why": "The word 'quest' makes mundane activities feel more interesting. Framing matters.",
+                            "description": "Low-commitment activities framed as optional adventures — each with a title, brief description, and estimated time.",
+                            "why": "The word \"quest\" makes mundane activities feel interesting. Framing matters more than content.",
                             "image": "/projects/sidequest/feature-quests.png"
                         },
                         {
-                            "id": "mascot",
+                            "id": "friendly_guide",
                             "title": "Friendly Guide",
-                            "description": "A small mascot character that appears throughout the experience, offering encouragement without being intrusive.",
-                            "why": "The mascot adds warmth and personality. It makes the app feel less like a tool and more like a companion.",
+                            "description": "A small mascot that appears throughout the experience, offering encouragement without being intrusive.",
+                            "why": "The mascot adds warmth. It makes the app feel like a companion, not a tool.",
                             "image": "/projects/sidequest/feature-mascot.png"
                         },
                         {
-                            "id": "guided_flows",
+                            "id": "quick_start",
                             "title": "Quick Start Flow",
-                            "description": "Users can get a quest in two taps. No account required, no preferences to set up first.",
-                            "why": "Every step between 'I'm bored' and 'here's something to do' is a chance for users to give up. We minimized steps.",
+                            "description": "A quest in two taps. No account required, no preferences to configure.",
+                            "why": "Every step between \"I am bored\" and \"here is something to do\" is a chance to lose the user. We cut every one we could.",
                             "image": "/projects/sidequest/feature-flow.png"
                         }
                     ],

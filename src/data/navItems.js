@@ -8,6 +8,10 @@ export default [
         label: "About",
     },
     {
+        path: "/contact",
+        label: "Contact",
+    },
+    {
         path: "/resume",
         label: "Resume",
     },
