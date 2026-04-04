@@ -79,92 +79,6 @@
                     ],
                     "participant_count": null
                 },
-                "early_challenges": {
-                    "content": "This project started too big.\n\nWe wanted to fix financial stress, employer communication, exam preparation, and progress tracking—all at once. Our advisor encouraged broad exploration, which felt productive at first but eventually led to paralysis.\n\nIt wasn't until we accepted that we couldn't solve everything that the project started moving. Narrowing our focus to neurodivergent apprentices gave us permission to go deeper instead of wider."
-                },
-                "pivots": [
-                    {
-                        "from": "Solving all apprenticeship problems",
-                        "to": "Supporting neurodivergent apprentices specifically",
-                        "reason": "A narrower scope allowed us to design with real empathy instead of generic assumptions. We could make decisions based on specific needs rather than trying to please everyone."
-                    }
-                ],
-                "pivot": {
-                    "timelineSteps": [
-                        "Research",
-                        "Overexpansion",
-                        "Realization",
-                        "Refocus",
-                        "Build"
-                    ],
-                    "highlightedStep": "Realization",
-                    "removedFeatures": [
-                        "Financial planning tools and budget calculators",
-                        "Employer communication portal",
-                        "Full exam preparation suite",
-                        "Social features and community forums"
-                    ],
-                    "weightLifted": {
-                        "title": "From 6 problem spaces to 1 clear focus",
-                        "displayMode": "side-by-side",
-                        "principleLabel": "Less but better",
-                        "beforeItems": [
-                            "Financial planning",
-                            "Employer portal",
-                            "Exam prep suite",
-                            "Community forums",
-                            "Calendar management",
-                            "Generic apprentice tools"
-                        ],
-                        "afterPrimary": "Neurodivergent apprentice support",
-                        "afterSecondary": [
-                            "Progress tracking",
-                            "Hour logging",
-                            "Next-step prompts"
-                        ],
-                        "caption": "Every feature we removed made space for the ones that actually mattered. Depth over breadth turned a generic tool into something personal."
-                    },
-                    "clarity_scene": {
-                        "kicker": "Less but better",
-                        "title": "From 6 problem spaces to 1 clear focus",
-                        "before": {
-                            "chips": [
-                                "Financial planning",
-                                "Employer portal",
-                                "Exam prep",
-                                "Community forums",
-                                "Calendar",
-                                "Generic tools"
-                            ]
-                        },
-                        "after": {
-                            "chips": [
-                                "Neurodivergent apprentice support"
-                            ]
-                        },
-                        "ctaLabel": "Neurodivergent apprentice support",
-                        "annotation_phases": {
-                            "p0": {
-                                "label": "Overloaded",
-                                "text": "Six problem spaces. No clear direction."
-                            },
-                            "p1": {
-                                "label": "Subtraction",
-                                "text": "We cut every feature that diluted the product into something generic."
-                            },
-                            "p2": {
-                                "label": "Compression",
-                                "text": "One audience. One need. Everything else fell away."
-                            },
-                            "p3": {
-                                "label": "Focus",
-                                "text": "Depth over breadth turned a generic tool into something personal."
-                            }
-                        },
-                        "caption": "Every feature we removed made space for the ones that actually mattered.",
-                        "highlight_caption": "Every [[feature we removed]] made space for the ones that [[actually mattered]]. [[Depth over breadth]] turned a generic tool into something [[personal]]."
-                    }
-                },
                 "lofi_phase": {
                     "content": "Our early sketches were deliberately rough. We weren't trying to make things look good—we were trying to understand what information mattered most and how quickly someone could find it.\n\nThe dashboard concept emerged early. We kept asking ourselves: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else was secondary.",
                     "images": [
@@ -205,19 +119,6 @@
                         "description": "Explore the dashboard experience. Pay attention to how progress is communicated without requiring any taps.",
                         "type": "figma"
                     }
-                },
-                "development": {
-                    "content": "As the developer on this project, I had to keep myself honest. It's easy to design features that sound impressive but would require complex backend infrastructure we couldn't build.\n\nData syncing with official systems? Not feasible without partnerships we didn't have. AI-generated quizzes? Possible, but only if we scoped them carefully.\n\nEvery feature was evaluated against a simple question: can we actually build this responsibly?",
-                    "technical_decisions": [
-                        "Chose React Native for cross-platform efficiency",
-                        "Designed offline-first architecture for job site use",
-                        "Scoped AI features to avoid overpromising"
-                    ],
-                    "constraints": [
-                        "No access to official SkilledTradesBC APIs",
-                        "Limited timeline for backend development",
-                        "Team learning curve with mobile development"
-                    ]
                 },
                 "feature_breakdown": {
                     "intro": "Each feature was designed to reduce one specific point of friction. Click through the prototype below to see how they work together.",
@@ -285,36 +186,7 @@
                         "insight": "Qualitative feedback is valid",
                         "reflection": "In student work, we don't always have access to large sample sizes. That doesn't make insights less real."
                     }
-                ],
-                "next_steps": [
-                    {
-                        "title": "Real-Time Data Sync",
-                        "tag": "Integration",
-                        "outcome": "Hours and milestones update automatically through SkilledTradesBC integration.",
-                        "impact": "Removes manual entry — apprentices stay focused on the work, not the paperwork."
-                    },
-                    {
-                        "title": "Deeper Accessibility",
-                        "tag": "Accessibility",
-                        "outcome": "Screen reader optimization and high-contrast modes reach more learners.",
-                        "impact": "The tool becomes genuinely inclusive, not just compliant."
-                    },
-                    {
-                        "title": "Offline-Ready Experience",
-                        "tag": "Infrastructure",
-                        "outcome": "Core features work on job sites with limited or no connectivity.",
-                        "impact": "Progress tracking happens where the work happens — not just where the Wi-Fi is."
-                    }
-                ],
-                "final_experience": {
-                    "intro": "The prototype below represents the complete flow we envisioned—from opening the app to checking progress, logging hours, and preparing for exams.\n\nAs you explore, notice how each screen tries to answer a question before you have to ask it.",
-                    "prototype": {
-                        "url": "https://www.figma.com/proto/prolog-final",
-                        "embed_url": "",
-                        "description": "Click through the full experience. Start from the dashboard and follow the natural flow.",
-                        "type": "figma"
-                    }
-                }
+                ]
             },
             "links": {
                 "live": "",
@@ -390,6 +262,19 @@
                         "New concepts require gentle onboarding; users won't explore without guidance"
                     ],
                     "participant_count": null
+                },
+                "lofi_phase": {
+                    "content": "Our lo-fi work focused on one core interaction: contributing to a story. We sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic — we needed to test logic, not aesthetics.",
+                    "images": [
+                        {
+                            "src": "/projects/inklink/images/Home-lofi.svg",
+                            "alt": "Lo-fi home screen"
+                        },
+                        {
+                            "src": "/projects/inklink/images/Editor-lofi.svg",
+                            "alt": "Lo-fi editor screen"
+                        }
+                    ]
                 },
                 "feature_breakdown": {
                     "intro": "InkLink has three core modes of engagement. Explore them in the prototype below.",
@@ -533,88 +418,6 @@
                     ],
                     "participant_count": null
                 },
-                "early_challenges": {
-                    "content": ""
-                },
-                "pivots": [
-                    {
-                        "from": "Dense filters and category lists",
-                        "to": "Lightweight 'quests' with minimal filtering",
-                        "reason": "Every filter we added made users less likely to act. Simplicity won."
-                    }
-                ],
-                "pivot": {
-                    "timelineSteps": [
-                        "Research",
-                        "Overbuilding",
-                        "Realization",
-                        "Refocus",
-                        "Build"
-                    ],
-                    "highlightedStep": "Realization",
-                    "removedFeatures": [
-                        "Location-based filtering",
-                        "Duration and cost filters",
-                        "Category browsing and tag system",
-                        "User accounts and saved preferences"
-                    ],
-                    "weightLifted": {
-                        "title": "From 5 filters to 1 button",
-                        "displayMode": "stacked",
-                        "principleLabel": "Action over options",
-                        "beforeItems": [
-                            "Location filter",
-                            "Duration filter",
-                            "Cost filter",
-                            "Category browser",
-                            "Tag system"
-                        ],
-                        "afterPrimary": "Give me a quest",
-                        "afterSecondary": [
-                            "Surprise-based discovery"
-                        ],
-                        "caption": "Every filter was another reason not to act. One button removed every excuse."
-                    },
-                    "clarity_scene": {
-                        "kicker": "Action over options",
-                        "title": "From 5 filters to 1 button",
-                        "before": {
-                            "chips": [
-                                "Location filter",
-                                "Duration filter",
-                                "Cost filter",
-                                "Category browser",
-                                "Tag system"
-                            ]
-                        },
-                        "after": {
-                            "chips": [
-                                "Give me a quest"
-                            ]
-                        },
-                        "ctaLabel": "Give me a quest",
-                        "annotation_phases": {
-                            "p0": {
-                                "label": "Overloaded",
-                                "text": "Five filters. Zero commitment."
-                            },
-                            "p1": {
-                                "label": "Subtraction",
-                                "text": "Every filter was another reason not to act."
-                            },
-                            "p2": {
-                                "label": "Compression",
-                                "text": "One action replaced five decisions."
-                            },
-                            "p3": {
-                                "label": "Focus",
-                                "text": "One button removed every excuse."
-                            }
-                        },
-                        "caption": "Every filter was another reason not to act. One button removed every excuse.",
-                        "highlight_caption": "Every [[filter]] was another reason [[not to act]]. One [[button]] removed [[every excuse]]."
-                    }
-                },
                 "lofi_phase": {
                     "content": "Our early wireframes had too many buttons.\n\nFilters for location, duration, cost, category—all logical, all counterproductive. Users would hover over options without committing to any of them.\n\nWe stripped it back. One primary action: 'Give me a quest.' Everything else became optional.",
                     "images": [
@@ -655,19 +458,6 @@
                         "description": "Tap 'Give me a quest' and see what happens. Try refreshing for a different suggestion.",
                         "type": "figma"
                     }
-                },
-                "development": {
-                    "content": "I built this project as well as designed it, which meant every feature had to survive implementation.\n\nSome ideas that looked great in Figma didn't survive contact with code. Others became simpler during development—and often better for it.\n\nThe constraint of being both designer and developer forced honesty about what was actually possible.",
-                    "technical_decisions": [
-                        "Built with React for component reusability",
-                        "Kept quest data local to avoid backend complexity",
-                        "Prioritized fast load times and immediate interaction"
-                    ],
-                    "constraints": [
-                        "Solo development meant limited feature scope",
-                        "No backend meant static quest database",
-                        "Needed to work well on both mobile and desktop"
-                    ]
                 },
                 "feature_breakdown": {
                     "intro": "SideQuest has three core elements. Explore each in the prototype below.",
@@ -724,36 +514,7 @@
                         "insight": "Research, design, and code inform each other",
                         "reflection": "Being involved in all three made each one stronger."
                     }
-                ],
-                "next_steps": [
-                    {
-                        "title": "Personalized Quest Feed",
-                        "tag": "Personalization",
-                        "outcome": "Suggestions evolve based on what you've enjoyed and completed before.",
-                        "impact": "Each session feels more like yours — less random, more resonant."
-                    },
-                    {
-                        "title": "Location-Aware Suggestions",
-                        "tag": "Context",
-                        "outcome": "Quests surface based on what's actually around you right now.",
-                        "impact": "Bridges the gap between digital prompt and real-world action."
-                    },
-                    {
-                        "title": "Shared Quests",
-                        "tag": "Social",
-                        "outcome": "Friends can take on the same quest and compare experiences.",
-                        "impact": "Solo adventures gain a social layer without losing their spontaneity."
-                    }
-                ],
-                "final_experience": {
-                    "intro": "The prototype below represents the full SideQuest experience—from opening the app to completing your first quest.\n\nNotice how the design tries to get out of your way. The goal is momentum, not exploration.",
-                    "prototype": {
-                        "url": "https://www.figma.com/proto/sidequest-final",
-                        "embed_url": "",
-                        "description": "Start fresh. Get a quest, see the details, and mark it complete. The whole flow takes under a minute.",
-                        "type": "figma"
-                    }
-                }
+                ]
             },
             "links": {
                 "live": "",
