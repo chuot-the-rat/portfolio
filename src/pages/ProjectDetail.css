@@ -1050,11 +1050,22 @@
    ────────────────────────────────────────────────────────────────────── */
 
 .image-caption {
-    margin-top: var(--space-3);
-    font-size: var(--font-size-sm);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.04em;
     color: var(--color-text-tertiary);
-    text-align: center;
-    font-style: italic;
+    font-style: normal;
+}
+
+/* Leading dash detail */
+.image-caption::before {
+    content: "—";
+    opacity: 0.35;
+    flex-shrink: 0;
 }
 
 /* ──────────────────────────────────────────────────────────────────────
