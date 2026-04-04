@@ -141,8 +141,7 @@ export default function HomeWorkList({ projects }) {
                     {/* Info panel */}
                     <div className="hw-item-info">
                       <span className="hw-item-index">
-                        {String(index + 1).padStart(2, "0")}&thinsp;/&thinsp;
-                        {activeTab.toUpperCase()}
+                        {String(index + 1).padStart(2, "0")}
                       </span>
 
                       <h3 className="hw-item-title">{project.title}</h3>
@@ -155,17 +154,17 @@ export default function HomeWorkList({ projects }) {
 
                       <div className="hw-item-meta">
                         {project.role && (
-                          <span>
+                          <span className="hw-item-tag">
                             {Array.isArray(project.role)
                               ? project.role[0]
                               : project.role}
                           </span>
                         )}
                         {project.year && (
-                          <>
-                            <span className="hw-item-sep" aria-hidden>·</span>
-                            <span>{project.year}</span>
-                          </>
+                          <span className="hw-item-tag">{project.year}</span>
+                        )}
+                        {project.category && (
+                          <span className="hw-item-tag">{project.category}</span>
                         )}
                       </div>
 

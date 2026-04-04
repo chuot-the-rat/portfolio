@@ -29,7 +29,18 @@ html {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
 }
+
+/* Webkit custom scrollbar — thin, minimal, Figma-adjacent */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-tertiary); }
 
 /* ── Selection color — intentional, not browser-default blue ── */
 ::selection {
@@ -153,7 +164,7 @@ section {
     color: var(--color-text);
     background-color: transparent;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-base);
+    border-radius: var(--radius-full);
     cursor: pointer;
     transition: all var(--duration-fast) var(--ease-smooth);
     outline-offset: var(--focus-offset);
@@ -246,12 +257,12 @@ section {
     display: inline-block;
     padding: var(--space-1) var(--space-3);
     font-size: var(--font-size-xs);
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-tracking);
+    letter-spacing: var(--letter-spacing-micro);
     background-color: var(--color-bg-secondary);
     color: var(--color-text-secondary);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     border: 1px solid var(--color-border);
 }
 

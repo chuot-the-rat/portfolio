@@ -281,18 +281,21 @@
 /* ─ Section Label (Micro Index + Small) ─ */
 .section-label {
     display: block;
+    font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-tracking);
+    letter-spacing: var(--letter-spacing-label);
     color: var(--color-text-tertiary);
-    margin-bottom: var(--space-6);
-    font-weight: 600;
+    margin-bottom: var(--space-5);
+    font-weight: 500;
+    opacity: 0.7;
 }
 
 /* ─ Section Title (Main Heading) ─ */
 .section-title {
+    font-family: var(--font-display);
     font-size: var(--font-size-2xl);
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: var(--letter-spacing-tight);
     margin-bottom: var(--space-8);
     line-height: var(--line-height-tight);
