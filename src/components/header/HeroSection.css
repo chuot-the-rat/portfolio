@@ -19,7 +19,7 @@
   /* Typography — headline */
   --hs-headline-font:     var(--font-display);
   --hs-headline-size:     var(--h1);
-  --hs-headline-weight:   700;
+  --hs-headline-weight:   500;
   --hs-headline-leading:  var(--lh-tight);
   --hs-headline-tracking: var(--track-title);
 

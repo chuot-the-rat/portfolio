@@ -116,7 +116,7 @@
 .project-hero-title {
     font-family: var(--font-display);
     font-size: clamp(2.8rem, 6vw, 5rem);
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.03em;
     margin: 0 0 var(--space-5);
     line-height: 1.0;
@@ -132,39 +132,37 @@
     font-weight: 300;
 }
 
-/* ─ Meta bar — full-width horizontal row ─ */
+/* ─ Meta bar — pill chip row ─ */
 .project-meta-bar {
     display: flex;
-    align-items: stretch;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: var(--space-6) 0 var(--space-8);
     border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
     margin-bottom: var(--space-12);
 }
 
 .project-meta-cell {
-    display: flex;
-    flex-direction: column;
+    display: inline-flex;
+    align-items: center;
     gap: var(--space-2);
-    padding: var(--space-5) var(--space-6);
-    border-right: 1px solid var(--color-border);
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
     min-width: 0;
 }
 
-.project-meta-cell:first-child {
-    padding-left: 0;
-}
-
-.project-meta-cell:last-child {
-    border-right: none;
-}
-
-/* CTAs cell — pushed right, flex-row inside */
+/* CTAs cell — pushed right, no pill */
 .project-meta-cell--ctas {
     margin-left: auto;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-4);
-    padding-right: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    gap: var(--space-3);
 }
 
 .meta-label {
@@ -177,9 +175,12 @@
 }
 
 .meta-value {
-    font-size: var(--font-size-sm);
-    color: var(--color-text);
-    line-height: 1.4;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    line-height: 1;
+    white-space: nowrap;
 }
 
 /* ─ CTAs in meta bar ─ */
@@ -191,12 +192,24 @@
     color: var(--color-text-secondary);
     text-decoration: none;
     white-space: nowrap;
-    transition: color 0.18s ease;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-bg-secondary);
+    box-shadow: var(--shadow-sm);
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.22s ease,
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     outline-offset: var(--focus-offset);
 }
 
 .project-cta-link:hover {
     color: var(--color-text);
+    border-color: var(--color-text-secondary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
 }
 
 .project-cta-link:focus-visible {
@@ -224,19 +237,10 @@
         flex-wrap: wrap;
     }
 
-    .project-meta-cell {
-        flex: 1 1 40%;
-        border-right: none;
-        border-bottom: 1px solid var(--color-border);
-        padding: var(--space-4) 0;
-    }
-
     .project-meta-cell--ctas {
         margin-left: 0;
-        flex: 1 1 100%;
-        flex-direction: row;
         flex-wrap: wrap;
-        gap: var(--space-4);
+        gap: var(--space-2);
     }
 
     .project-hero-title {
