@@ -20,7 +20,10 @@
             "duration": "4 months",
             "context": "School project in collaboration with ConnectHER at BCIT",
             "team_size": 8,
-            "role": ["Developer", "Researcher"],
+            "role": [
+                "Developer",
+                "Researcher"
+            ],
             "responsibilities": [
                 "Led technical implementation and prototyping",
                 "Conducted policy and documentation research",
@@ -34,9 +37,19 @@
                     "Adobe Photoshop",
                     "Premiere Pro"
                 ],
-                "development": ["React Native", "JavaScript"],
-                "research": ["Trello", "Google Forms", "Notion"],
-                "other": ["GitHub", "VS Code"]
+                "development": [
+                    "React Native",
+                    "JavaScript"
+                ],
+                "research": [
+                    "Trello",
+                    "Google Forms",
+                    "Notion"
+                ],
+                "other": [
+                    "GitHub",
+                    "VS Code"
+                ]
             },
             "media": {
                 "thumbnail": "/projects/prolog/thumbnail.png",
@@ -91,7 +104,6 @@
                         "Full exam preparation suite",
                         "Social features and community forums"
                     ],
-
                     "weightLifted": {
                         "title": "From 6 problem spaces to 1 clear focus",
                         "displayMode": "side-by-side",
@@ -126,7 +138,9 @@
                             ]
                         },
                         "after": {
-                            "chips": ["Neurodivergent apprentice support"]
+                            "chips": [
+                                "Neurodivergent apprentice support"
+                            ]
                         },
                         "ctaLabel": "Neurodivergent apprentice support",
                         "annotation_phases": {
@@ -330,16 +344,25 @@
             "duration": "4 months",
             "context": "School project",
             "team_size": 8,
-            "role": ["Researcher", "UI/UX Designer"],
+            "role": [
+                "Researcher",
+                "UI/UX Designer"
+            ],
             "responsibilities": [
                 "Led user research and concept validation",
                 "Designed high-fidelity interfaces",
                 "Conducted usability testing"
             ],
             "tools_used": {
-                "design": ["Figma", "FigJam"],
+                "design": [
+                    "Figma",
+                    "FigJam"
+                ],
                 "development": [],
-                "research": ["Google Forms", "Notion"],
+                "research": [
+                    "Google Forms",
+                    "Notion"
+                ],
                 "other": []
             },
             "media": {
@@ -367,149 +390,6 @@
                         "New concepts require gentle onboarding; users won't explore without guidance"
                     ],
                     "participant_count": null
-                },
-                "early_challenges": {
-                    "content": ""
-                },
-                "pivots": [
-                    {
-                        "from": "Mobile-first design",
-                        "to": "Tablet-first design",
-                        "reason": "Writers consistently preferred larger screens. Mobile felt cramped for both reading and contributing."
-                    },
-                    {
-                        "from": "Newspaper-style multi-column UI",
-                        "to": "Clean, minimal single-column layout",
-                        "reason": "The newspaper aesthetic looked interesting but hurt readability. Hierarchy got lost in the visual noise."
-                    },
-                    {
-                        "from": "Feature-heavy homepage with multiple entry points",
-                        "to": "Single clear call-to-action",
-                        "reason": "Users were overwhelmed by options. One clear path reduced hesitation."
-                    }
-                ],
-                "pivot": {
-                    "timelineSteps": [
-                        "Research",
-                        "Visual Exploration",
-                        "Realization",
-                        "Simplification",
-                        "Build"
-                    ],
-                    "highlightedStep": "Realization",
-                    "removedFeatures": [
-                        "Branching narrative paths",
-                        "Real-time collaborative editing",
-                        "Newspaper-style multi-column layout",
-                        "Multiple homepage entry points and discovery filters"
-                    ],
-
-                    "weightLifted": {
-                        "title": "From a feature-heavy homepage to a single clear action",
-                        "displayMode": "slider",
-                        "principleLabel": "Clarity through subtraction",
-                        "beforeItems": [
-                            "Branching narratives",
-                            "Real-time editing",
-                            "Newspaper layout",
-                            "Multiple entry points",
-                            "Discovery filters",
-                            "Genre browsing"
-                        ],
-                        "afterPrimary": "Read. Write. Pass it on.",
-                        "afterSecondary": [
-                            "Story chain view",
-                            "Simple contribution flow"
-                        ],
-                        "caption": "The homepage had six ways to start. Users chose none. One clear call-to-action made them choose every time."
-                    },
-                    "clarity_scene": {
-                        "kicker": "Clarity through subtraction",
-                        "title": "From a feature-heavy homepage to a single clear action",
-                        "before": {
-                            "chips": [
-                                "Branching narratives",
-                                "Real-time editing",
-                                "Newspaper layout",
-                                "Multiple entry points",
-                                "Discovery filters",
-                                "Genre browsing"
-                            ]
-                        },
-                        "after": {
-                            "chips": ["Read. Write. Pass it on."]
-                        },
-                        "ctaLabel": "Read. Write. Pass it on.",
-                        "annotation_phases": {
-                            "p0": {
-                                "label": "Overloaded",
-                                "text": "Too many ways to start."
-                            },
-                            "p1": {
-                                "label": "Subtraction",
-                                "text": "We removed competing actions so one choice could lead."
-                            },
-                            "p2": {
-                                "label": "Compression",
-                                "text": "Layout collapsed into a single path—less scanning, more momentum."
-                            },
-                            "p3": {
-                                "label": "Focus",
-                                "text": "One clear call-to-action reduced hesitation."
-                            }
-                        },
-                        "caption": "The homepage had six ways to start. Users chose none. One clear CTA made them choose every time.",
-                        "highlight_caption": "The homepage had [[six ways to start]]. Users chose [[none]]. One [[clear call-to-action]] made them choose [[every time]]."
-                    }
-                },
-                "lofi_phase": {
-                    "content": "Our lo-fi work focused on one core interaction: contributing to a story.\n\nWe sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic—we needed to test logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
-                    "images": [
-                        {
-                            "src": "/projects/inklink/lofi-1.png",
-                            "alt": "Story chain wireframe",
-                            "caption": "Early exploration of the contribution flow"
-                        },
-                        {
-                            "src": "/projects/inklink/lofi-2.png",
-                            "alt": "Turn-taking wireframe",
-                            "caption": "Mapping turn order and notifications"
-                        }
-                    ]
-                },
-                "hifi_phase": {
-                    "content": "The high-fidelity designs leaned into typography and whitespace. We wanted the words to breathe.\n\nColor was used sparingly—mostly to indicate interactive elements and turn status. The writing itself stayed neutral, letting each contributor's voice come through without visual interference.\n\nScroll through the reading experience below. Notice how the interface disappears when you're focused on the story.",
-                    "images": [
-                        {
-                            "src": "/projects/inklink/hifi-1.png",
-                            "alt": "Story reading view",
-                            "caption": "Clean reading experience with minimal UI"
-                        },
-                        {
-                            "src": "/projects/inklink/hifi-2.png",
-                            "alt": "Contribution editor",
-                            "caption": "Writing interface with previous context visible"
-                        }
-                    ],
-                    "prototype": {
-                        "url": "https://www.figma.com/proto/inklink-hifi-reading",
-                        "embed_url": "",
-                        "description": "Experience the reading flow. Tap a story to open it, then scroll through contributions.",
-                        "type": "figma"
-                    }
-                },
-                "development": {
-                    "content": "This project was design-focused, but we kept implementation in mind throughout. Real-time collaboration features were scoped out early—they would have required backend complexity beyond our timeline.\n\nInstead, we designed for asynchronous contribution. Turn-based writing actually fit the concept better: it gave each contributor time to think.",
-                    "technical_decisions": [
-                        "Designed for asynchronous rather than real-time collaboration",
-                        "Prioritized tablet-first responsive design",
-                        "Scoped out complex features like branching narratives"
-                    ],
-                    "constraints": [
-                        "Limited development resources on team",
-                        "Real-time sync would require significant backend work",
-                        "Needed to support multiple device sizes"
-                    ]
                 },
                 "feature_breakdown": {
                     "intro": "InkLink has three core modes of engagement. Explore them in the prototype below.",
@@ -566,36 +446,7 @@
                         "insight": "Reducing features can increase engagement",
                         "reflection": "We cut more than we added—and the product got better."
                     }
-                ],
-                "next_steps": [
-                    {
-                        "title": "Saved Drafts",
-                        "tag": "Flow",
-                        "outcome": "Writers can step away mid-thought and return without losing momentum.",
-                        "impact": "Respects the creative process — not every contribution happens in one sitting."
-                    },
-                    {
-                        "title": "Keyboard-First Navigation",
-                        "tag": "Accessibility",
-                        "outcome": "Full keyboard and screen reader support across the writing flow.",
-                        "impact": "The collaborative experience opens up to every kind of writer."
-                    },
-                    {
-                        "title": "Guided First Contribution",
-                        "tag": "Onboarding",
-                        "outcome": "New users understand chain writing through doing, not reading.",
-                        "impact": "Lowers the barrier from curious visitor to active contributor."
-                    }
-                ],
-                "final_experience": {
-                    "intro": "The prototype below shows the complete InkLink experience—from discovering a story to making your first contribution.\n\nPay attention to how little stands between you and writing. That was intentional.",
-                    "prototype": {
-                        "url": "https://www.figma.com/proto/inklink-final",
-                        "embed_url": "",
-                        "description": "Click through the full flow. Find a story, read what others have written, and add your own passage.",
-                        "type": "figma"
-                    }
-                }
+                ]
             },
             "links": {
                 "live": "",
@@ -625,17 +476,36 @@
             "duration": "4 months",
             "context": "School project",
             "team_size": 3,
-            "role": ["Researcher", "UI/UX Designer", "Developer"],
+            "role": [
+                "Researcher",
+                "UI/UX Designer",
+                "Developer"
+            ],
             "responsibilities": [
                 "Led end-to-end design process",
                 "Conducted user research and testing",
                 "Built functional prototype"
             ],
             "tools_used": {
-                "design": ["Figma", "FigJam", "Illustrator"],
-                "development": ["React", "JavaScript", "CSS"],
-                "research": ["Google Forms", "Notion"],
-                "other": ["GitHub", "VS Code", "Vercel"]
+                "design": [
+                    "Figma",
+                    "FigJam",
+                    "Illustrator"
+                ],
+                "development": [
+                    "React",
+                    "JavaScript",
+                    "CSS"
+                ],
+                "research": [
+                    "Google Forms",
+                    "Notion"
+                ],
+                "other": [
+                    "GitHub",
+                    "VS Code",
+                    "Vercel"
+                ]
             },
             "media": {
                 "thumbnail": "/projects/sidequest/thumbnail.png",
@@ -688,7 +558,6 @@
                         "Category browsing and tag system",
                         "User accounts and saved preferences"
                     ],
-
                     "weightLifted": {
                         "title": "From 5 filters to 1 button",
                         "displayMode": "stacked",
@@ -701,7 +570,9 @@
                             "Tag system"
                         ],
                         "afterPrimary": "Give me a quest",
-                        "afterSecondary": ["Surprise-based discovery"],
+                        "afterSecondary": [
+                            "Surprise-based discovery"
+                        ],
                         "caption": "Every filter was another reason not to act. One button removed every excuse."
                     },
                     "clarity_scene": {
@@ -717,7 +588,9 @@
                             ]
                         },
                         "after": {
-                            "chips": ["Give me a quest"]
+                            "chips": [
+                                "Give me a quest"
+                            ]
                         },
                         "ctaLabel": "Give me a quest",
                         "annotation_phases": {
@@ -913,8 +786,18 @@
             "sections"
         ],
         "section_structure": {
-            "hook": { "type": "object", "fields": ["content"] },
-            "problem_framing": { "type": "object", "fields": ["content"] },
+            "hook": {
+                "type": "object",
+                "fields": [
+                    "content"
+                ]
+            },
+            "problem_framing": {
+                "type": "object",
+                "fields": [
+                    "content"
+                ]
+            },
             "research_process": {
                 "type": "object",
                 "fields": [
@@ -924,23 +807,50 @@
                     "reflection"
                 ]
             },
-            "early_challenges": { "type": "object", "fields": ["content"] },
+            "early_challenges": {
+                "type": "object",
+                "fields": [
+                    "content"
+                ]
+            },
             "pivots": {
                 "type": "array",
-                "item_fields": ["from", "to", "reason"]
+                "item_fields": [
+                    "from",
+                    "to",
+                    "reason"
+                ]
             },
-            "lofi_phase": { "type": "object", "fields": ["content", "images"] },
+            "lofi_phase": {
+                "type": "object",
+                "fields": [
+                    "content",
+                    "images"
+                ]
+            },
             "hifi_phase": {
                 "type": "object",
-                "fields": ["content", "images", "prototype"]
+                "fields": [
+                    "content",
+                    "images",
+                    "prototype"
+                ]
             },
             "development": {
                 "type": "object",
-                "fields": ["content", "technical_decisions", "constraints"]
+                "fields": [
+                    "content",
+                    "technical_decisions",
+                    "constraints"
+                ]
             },
             "feature_breakdown": {
                 "type": "object",
-                "fields": ["intro", "features", "prototype"]
+                "fields": [
+                    "intro",
+                    "features",
+                    "prototype"
+                ]
             },
             "validation": {
                 "type": "object",
@@ -954,23 +864,41 @@
             },
             "what_i_learned": {
                 "type": "array",
-                "item_fields": ["insight", "reflection"]
+                "item_fields": [
+                    "insight",
+                    "reflection"
+                ]
             },
             "next_steps": {
                 "type": "array",
-                "item_fields": ["item", "priority"]
+                "item_fields": [
+                    "item",
+                    "priority"
+                ]
             },
             "final_experience": {
                 "type": "object",
-                "fields": ["intro", "prototype"]
+                "fields": [
+                    "intro",
+                    "prototype"
+                ]
             }
         },
         "image_structure": {
-            "fields": ["src", "alt", "caption"],
+            "fields": [
+                "src",
+                "alt",
+                "caption"
+            ],
             "path_format": "/projects/{project_id}/{filename}"
         },
         "prototype_structure": {
-            "fields": ["url", "embed_url", "description", "type"]
+            "fields": [
+                "url",
+                "embed_url",
+                "description",
+                "type"
+            ]
         }
     }
 }

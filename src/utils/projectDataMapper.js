@@ -144,27 +144,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         research: sections?.research_process
             ? {
                   title: "Research & Ideation",
-                  description: (() => {
-                      const process = sections.research_process;
-                      let desc = process.content || "";
-
-                      // Append key findings if they exist
-                      if (
-                          process.key_findings &&
-                          process.key_findings.length > 0
-                      ) {
-                          desc +=
-                              "\n\nKey findings: " +
-                              process.key_findings.join(" ");
-                      }
-
-                      // Append reflection if it exists
-                      if (process.reflection) {
-                          desc += "\n\n" + process.reflection;
-                      }
-
-                      return desc;
-                  })(),
+                  description: sections.research_process.content || "",
                   methods: sections.research_process.methods || [],
                   keyFindings: sections.research_process.key_findings || [],
                   participantCount: sections.research_process.participant_count,
