@@ -101,6 +101,9 @@ export default function HomeWorkList({ projects }) {
                     isHovered ? "hw-item--active" : "",
                     isDimmed  ? "hw-item--dimmed" : "",
                   ].filter(Boolean).join(" ")}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.42, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
                   onMouseEnter={() => setHoveredId(project.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   onFocus={()     => setHoveredId(project.id)}
@@ -167,7 +170,8 @@ export default function HomeWorkList({ projects }) {
                       </div>
 
                       <span className="hw-item-cta" aria-hidden="true">
-                        View case study →
+                        View case study
+                        <span className="hw-item-cta-arrow">→</span>
                       </span>
                     </div>
                   </Link>

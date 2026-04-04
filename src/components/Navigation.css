@@ -29,12 +29,24 @@
     pointer-events: all; /* re-enable on the pill itself */
     width: max-content;
     max-width: calc(100vw - var(--space-8));
+    transition:
+        background 0.28s ease,
+        border-color 0.28s ease,
+        box-shadow 0.28s ease;
+}
+
+/* Scrolled state: slightly more opaque + faint shadow */
+.navbar--scrolled .nav-container {
+    background: color-mix(in srgb, var(--color-bg) 96%, transparent);
+    border-color: color-mix(in srgb, var(--color-border) 100%, transparent);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 /* Logo */
 .nav-logo {
+    font-family: var(--font-display);
     font-size: var(--font-size-sm);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-text);
     text-decoration: none;
     letter-spacing: -0.01em;

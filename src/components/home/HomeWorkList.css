@@ -7,7 +7,7 @@
 
 /* ── Section wrapper ─────────────────────────────────────────────────── */
 .hw {
-  margin-top: var(--space-fluid-2xl);
+  margin-top: var(--space-fluid-xl);
 }
 
 /* ── Category tabs ───────────────────────────────────────────────────── */
@@ -74,7 +74,7 @@
 }
 
 .hw-item--dimmed {
-  opacity: 0.3;
+  opacity: 0.28;
 }
 
 .hw-item-link {
@@ -94,6 +94,11 @@
   border-radius: 6px;
   overflow: hidden;
   position: relative;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hw-item--active .hw-item-image {
+  transform: scale(1.015);
 }
 
 .hw-item-img {
@@ -103,6 +108,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hw-item--active .hw-item-img {
+  transform: scale(1.04);
 }
 
 .hw-item-placeholder {
@@ -115,9 +125,9 @@
   );
 }
 
-/* Subtle scale on the active row's image */
+/* Active image: scale + shadow */
 .hw-item--active .hw-item-image {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* ── Info panel ──────────────────────────────────────────────────────── */
@@ -134,7 +144,12 @@
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--color-text-tertiary);
-  opacity: 0.7;
+  opacity: 0.55;
+  transition: opacity 0.22s ease;
+}
+
+.hw-item--active .hw-item-index {
+  opacity: 0.8;
 }
 
 .hw-item-title {
@@ -145,6 +160,11 @@
   line-height: 1.1;
   margin: 0;
   color: var(--color-text);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hw-item--active .hw-item-title {
+  transform: translateY(-2px);
 }
 
 .hw-item-desc {
@@ -173,23 +193,31 @@
 }
 
 .hw-item-cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: var(--color-text-tertiary);
   margin-top: var(--space-4);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--color-border);
-  transition: text-decoration-color 0.18s ease;
+  transition: color 0.22s ease;
+}
+
+.hw-item-cta-arrow {
+  display: inline-block;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hw-item--active .hw-item-cta,
 .hw-item-link:hover .hw-item-cta {
-  text-decoration-color: var(--color-text-secondary);
+  color: var(--color-text);
+}
+
+.hw-item--active .hw-item-cta-arrow,
+.hw-item-link:hover .hw-item-cta-arrow {
+  transform: translateX(5px);
 }
 
 /* ── Empty state ─────────────────────────────────────────────────────── */

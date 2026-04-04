@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import HeroContainer from "../components/header/HeroContainer";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
@@ -26,15 +27,15 @@ export default function About() {
                             <span className="about-row-label">Intro</span>
                             <div className="about-row-content">
                                 <p className="about-para">
-                                    I spent six years working in hospitality, and what I
+                                    I spent <em className="about-em">six years in hospitality</em>, and what I
                                     loved most was the craft of making someone's experience
                                     feel easy, warm, and just right. That instinct carried
-                                    straight into design — I care about the person on the
-                                    other side of the screen the same way I cared about
-                                    every guest across the counter.
+                                    straight into design — I care about the{" "}
+                                    <em className="about-em">person on the other side of the screen</em>{" "}
+                                    the same way I cared about every guest across the counter.
                                 </p>
                                 <p className="about-para">
-                                    Now I'm a UI/UX designer and front-end developer,
+                                    Now I'm a <em className="about-em">UI/UX designer and front-end developer</em>,
                                     combining that people-first approach with the technical
                                     side of building things. Currently finishing my Diploma
                                     in Digital Design & Development at BCIT.
@@ -54,12 +55,12 @@ export default function About() {
                                     When I'm not designing, I'm probably deep in a manga
                                     arc — isekai and regression, mostly — or rebuilding my
                                     Super Auto Pets team after an embarrassing loss. I love
-                                    making presentations far more than any normal person
-                                    should. I used to cosplay. I still consider myself a
-                                    massive geek.
+                                    making presentations{" "}
+                                    <em className="about-em">far more than any normal person should</em>.
+                                    I used to cosplay. I still consider myself a massive geek.
                                 </p>
                                 <p className="about-para">
-                                    My friends call me Chuot — Vietnamese for mouse.
+                                    My friends call me <em className="about-em">Chuot</em> — Vietnamese for mouse.
                                     You can too.
                                 </p>
                             </div>
@@ -92,12 +93,12 @@ export default function About() {
                                 </p>
                             </div>
                             <div className="about-connect-links">
-                                <a
-                                    href="mailto:leanale003@gmail.com"
+                                <Link
+                                    to="/contact"
                                     className="about-connect-link about-connect-link--primary"
                                 >
-                                    leanale003@gmail.com
-                                </a>
+                                    Get in touch →
+                                </Link>
                                 <a
                                     href="https://linkedin.com/in/leanale"
                                     target="_blank"

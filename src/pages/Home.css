@@ -14,6 +14,13 @@
     padding-bottom: var(--space-24);
 }
 
+/* ── Marquee belt ────────────────────────────────────────────────────────── */
+
+/* Give the marquee some vertical breathing room from the hero */
+.home-main .mq {
+    margin-block: var(--space-fluid-xl);
+}
+
 /* ── Loading ─────────────────────────────────────────────────────────────── */
 
 .home-loading {
@@ -35,53 +42,128 @@
 
 .home-footer {
     margin-top: clamp(6rem, 12vw, 10rem);
-    padding: var(--space-16) 0 var(--space-12);
+    padding: clamp(4rem, 8vw, 7rem) 0 var(--space-12);
     border-top: 1px solid var(--color-border);
-    text-align: center;
 }
 
-.footer-heading {
-    font-size: var(--font-size-xl);
-    font-weight: 400;
-    color: var(--color-text);
-    margin: 0 0 var(--space-6);
-    letter-spacing: -0.01em;
+/* Two-column body: large display text left, nav links right */
+.footer-body {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-16);
+    align-items: flex-end;
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-.footer-links {
+/* Editorial large heading */
+.footer-hero {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-4);
-    margin-bottom: var(--space-8);
+    flex-direction: column;
+    gap: var(--space-3);
 }
 
-.footer-sep {
-    color: var(--color-text-tertiary);
-    font-size: var(--font-size-sm);
-    opacity: 0.5;
-}
-
-.footer-link {
+.footer-kicker {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    letter-spacing: 0.07em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-text-secondary);
+    color: var(--color-text-tertiary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.footer-kicker::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80; /* available green */
+    animation: footer-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes footer-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+.footer-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 6vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* Footer nav links */
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-end;
+    padding-bottom: var(--space-2);
+}
+
+.footer-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
     text-decoration: none;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    min-width: 160px;
     transition: color 0.18s ease;
 }
 
-.footer-link:hover {
+.footer-nav-link:first-child {
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-nav-link:hover {
     color: var(--color-text);
 }
 
-.footer-copyright {
+.footer-nav-label {
+    flex: 1;
+}
+
+.footer-nav-arrow {
+    opacity: 0.4;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+}
+
+.footer-nav-link:hover .footer-nav-arrow {
+    opacity: 1;
+    transform: translate(3px, -3px);
+}
+
+/* Bottom bar */
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-copyright,
+.footer-tagline {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     letter-spacing: 0.05em;
     color: var(--color-text-tertiary);
-    opacity: 0.6;
+    opacity: 0.5;
+    margin: 0;
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
@@ -91,8 +173,25 @@
         padding-bottom: var(--space-12);
     }
 
-    .footer-links {
-        flex-wrap: wrap;
-        gap: var(--space-3);
+    .footer-body {
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
+        align-items: flex-start;
+    }
+
+    .footer-nav {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .footer-nav-link {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
     }
 }

@@ -56,6 +56,16 @@
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
     white-space: nowrap;
+    transition:
+        border-color 0.18s ease,
+        color 0.18s ease,
+        background 0.18s ease;
+}
+
+.skills-pill:hover {
+    border-color: var(--color-text-tertiary);
+    color: var(--color-text);
+    background: var(--color-bg);
 }
 
 @media (max-width: 768px) {

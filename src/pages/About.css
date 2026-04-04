@@ -55,6 +55,13 @@
     margin: 0;
 }
 
+/* Emphasis: key phrases rendered in slightly stronger color, no italic */
+.about-em {
+    font-style: normal;
+    color: var(--color-text);
+    font-weight: 450;
+}
+
 /* ── Let's Talk ─────────────────────────────────────────────────────────────
    Full-width section at the bottom. Left: message. Right: links.
    Different from the footer — bigger, warmer, more personal.
