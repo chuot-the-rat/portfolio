@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { usePageTitle } from "../hooks/usePageTitle";
 import BackToTop from "../components/BackToTop";
+import ProjectCheckpoint from "../components/passbook/ProjectCheckpoint";
 import "./ProjectLayout.css";
 
 /**
@@ -698,6 +699,11 @@ const ProjectLayout = () => {
                     />
                 </motion.div>
             )}
+
+            {/* Passbook checkpoint */}
+            <div className="container">
+                <ProjectCheckpoint projectId={slug} />
+            </div>
 
             {/* ── Footer nav ── */}
             <div className="pl-footer-nav">

@@ -1,0 +1,628 @@
+/* ==========================================================================
+   PROJECT PASSBOOK — System Styles
+   All passbook component styles live here.
+   Uses existing design tokens. Minimal new values.
+   ========================================================================== */
+
+/* ── Passbook surface token (light warm paper / dark warm panel) ─────────── */
+:root {
+    --pb-surface:      var(--color-bg-secondary);
+    --pb-surface-alt:  var(--color-bg);
+    --pb-border:       var(--color-border);
+    --pb-ink:          var(--color-text);
+    --pb-ink-dim:      var(--color-text-tertiary);
+    --pb-ink-mid:      var(--color-text-secondary);
+    --pb-radius:       var(--radius-lg);
+    --pb-shadow:       var(--shadow-lg);
+    --pb-font-code:    var(--font-mono);
+    --pb-font-display: var(--font-display);
+    /* Stamp accent — overridden per-project via style attribute */
+    --pb-accent-hue:   240;
+    --pb-accent:       hsl(var(--pb-accent-hue) 60% 55%);
+    --pb-accent-bg:    hsl(var(--pb-accent-hue) 60% 55% / 0.10);
+}
+
+[data-theme="dark"] {
+    --pb-surface:     var(--color-bg-secondary);
+    --pb-surface-alt: color-mix(in srgb, var(--color-bg) 60%, var(--color-bg-secondary) 40%);
+    --pb-accent:      hsl(var(--pb-accent-hue) 60% 65%);
+    --pb-accent-bg:   hsl(var(--pb-accent-hue) 60% 65% / 0.12);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   A. PASSBOOK DOCK
+   Compact persistent access object. Fixed bottom-right on desktop,
+   sticky bottom pill on mobile.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.pb-dock {
+    position: fixed;
+    bottom: var(--space-5);
+    right: var(--space-5);
+    z-index: 90;
+    display: flex;
+    align-items: center;
+}
+
+.pb-dock__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--pb-surface);
+    border: 1px solid var(--pb-border);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    color: var(--pb-ink-mid);
+    font-family: var(--pb-font-code);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition:
+        background 0.22s var(--ease-out-quad),
+        border-color 0.22s var(--ease-out-quad),
+        box-shadow 0.22s var(--ease-out-quad),
+        color 0.18s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.pb-dock__btn:hover {
+    background: var(--color-bg);
+    border-color: var(--color-text-tertiary);
+    box-shadow: var(--shadow-lg);
+    color: var(--pb-ink);
+}
+
+.pb-dock__btn:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+.pb-dock__icon {
+    font-size: 10px;
+    opacity: 0.7;
+    transition: opacity 0.18s ease;
+}
+
+.pb-dock__btn:hover .pb-dock__icon {
+    opacity: 1;
+}
+
+.pb-dock__progress {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Mobile: wider pill, stays at bottom */
+@media (max-width: 600px) {
+    .pb-dock {
+        bottom: var(--space-4);
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .pb-dock__btn {
+        padding: var(--space-2) var(--space-5);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   B. PASSBOOK DRAWER
+   Desktop: right side panel. Mobile: bottom sheet.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Overlay */
+.pb-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    background: rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+/* Drawer panel */
+.pb-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 120;
+    width: min(360px, 100vw);
+    display: flex;
+    flex-direction: column;
+    background: var(--pb-surface);
+    border-left: 1px solid var(--pb-border);
+    box-shadow: var(--pb-shadow);
+    overflow: hidden;
+}
+
+.pb-drawer__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: var(--space-6) var(--space-6) var(--space-4);
+    border-bottom: 1px solid var(--pb-border);
+    flex-shrink: 0;
+}
+
+.pb-drawer__title-block {}
+
+.pb-drawer__eyebrow {
+    display: block;
+    font-family: var(--pb-font-code);
+    font-size: 10px;
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+    margin-bottom: var(--space-1);
+}
+
+.pb-drawer__title {
+    font-family: var(--pb-font-display);
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--pb-ink);
+    margin: 0;
+}
+
+.pb-drawer__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--pb-border);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--pb-ink-mid);
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.18s ease, color 0.18s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.pb-drawer__close:hover {
+    background: var(--pb-surface-alt);
+    color: var(--pb-ink);
+}
+
+.pb-drawer__close:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+/* Progress summary bar */
+.pb-drawer__summary {
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--pb-border);
+    flex-shrink: 0;
+}
+
+.pb-drawer__progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-2);
+}
+
+.pb-drawer__progress-text {
+    font-family: var(--pb-font-code);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+}
+
+.pb-drawer__progress-count {
+    font-family: var(--pb-font-code);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-micro);
+    color: var(--pb-ink-mid);
+    font-variant-numeric: tabular-nums;
+}
+
+.pb-drawer__progress-track {
+    height: 3px;
+    background: var(--pb-border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.pb-drawer__progress-fill {
+    height: 100%;
+    background: var(--pb-ink);
+    border-radius: var(--radius-full);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Route list */
+.pb-drawer__routes {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-2) 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pb-route-row {
+    display: grid;
+    grid-template-columns: 20px auto 1fr auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--pb-border);
+    transition: background 0.15s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.pb-route-row:last-child {
+    border-bottom: none;
+}
+
+.pb-route-row:hover,
+.pb-route-row:focus-visible {
+    background: var(--pb-surface-alt);
+    outline: none;
+}
+
+/* Stamp indicator dot */
+.pb-route-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--pb-ink-dim);
+    flex-shrink: 0;
+    transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.pb-route-row--stamped .pb-route-dot {
+    background: var(--pb-accent);
+    border-color: var(--pb-accent);
+}
+
+/* Route code */
+.pb-route-code {
+    font-family: var(--pb-font-code);
+    font-size: 10px;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+    white-space: nowrap;
+}
+
+/* Project title */
+.pb-route-title {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--pb-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Stamp label (right side, only when stamped) */
+.pb-route-stamp {
+    font-family: var(--pb-font-code);
+    font-size: 10px;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    color: var(--pb-accent);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(6px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pb-route-row--stamped .pb-route-stamp {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Footer */
+.pb-drawer__footer {
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--pb-border);
+    flex-shrink: 0;
+}
+
+.pb-drawer__footer-note {
+    font-family: var(--pb-font-code);
+    font-size: 10px;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* Mobile: bottom sheet */
+@media (max-width: 600px) {
+    .pb-drawer {
+        top: auto;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        max-height: 80vh;
+        border-left: none;
+        border-top: 1px solid var(--pb-border);
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   C. PASSBOOK PRINT CARD
+   Shown once on homepage hero, auto-settles to compact state.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.pb-print-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    background: var(--pb-surface);
+    border: 1px solid var(--pb-border);
+    border-radius: var(--pb-radius);
+    cursor: pointer;
+    width: fit-content;
+    max-width: 420px;
+    transition:
+        background 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+}
+
+.pb-print-card:hover {
+    background: var(--pb-surface-alt);
+    border-color: var(--color-text-tertiary);
+    box-shadow: var(--shadow-sm);
+}
+
+.pb-print-card:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+/* Left: mark / logo area */
+.pb-print-card__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--pb-border);
+    border-radius: var(--radius-base);
+    flex-shrink: 0;
+    color: var(--pb-ink-mid);
+    font-family: var(--pb-font-code);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    user-select: none;
+}
+
+/* Text block */
+.pb-print-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.pb-print-card__eyebrow {
+    font-family: var(--pb-font-code);
+    font-size: 9px;
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+}
+
+.pb-print-card__label {
+    font-family: var(--pb-font-display);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--pb-ink);
+    letter-spacing: -0.01em;
+}
+
+.pb-print-card__sub {
+    font-family: var(--pb-font-code);
+    font-size: 10px;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Right: arrow */
+.pb-print-card__arrow {
+    margin-left: auto;
+    color: var(--pb-ink-dim);
+    font-size: var(--font-size-sm);
+    flex-shrink: 0;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+    opacity: 0.5;
+}
+
+.pb-print-card:hover .pb-print-card__arrow {
+    transform: translateX(3px);
+    opacity: 0.9;
+}
+
+/* Mobile: full-width strip */
+@media (max-width: 600px) {
+    .pb-print-card {
+        max-width: 100%;
+        width: 100%;
+        margin-top: var(--space-6);
+        margin-bottom: var(--space-4);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   D. PROJECT CHECKPOINT
+   Shown near end of project pages. Reveals stamp collection UX.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.pb-checkpoint {
+    padding: clamp(3rem, 6vw, 4.5rem) 0;
+    border-top: 1px solid var(--pb-border);
+    border-bottom: 1px solid var(--pb-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+}
+
+.pb-checkpoint__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.pb-checkpoint__eyebrow {
+    font-family: var(--pb-font-code);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+}
+
+.pb-checkpoint__route {
+    font-family: var(--pb-font-code);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+    margin-top: var(--space-1);
+}
+
+.pb-checkpoint__label {
+    font-family: var(--pb-font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: var(--pb-ink);
+    margin: 0;
+}
+
+/* Stamp button (not yet stamped) */
+.pb-checkpoint__action {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-6);
+    background: var(--pb-ink);
+    color: var(--pb-surface);
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: var(--pb-font-code);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        opacity 0.18s ease,
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.pb-checkpoint__action:hover {
+    opacity: 0.82;
+}
+
+.pb-checkpoint__action:active {
+    transform: scale(0.97);
+}
+
+.pb-checkpoint__action:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+/* Stamped confirmation state */
+.pb-checkpoint__stamped {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-6);
+    background: var(--pb-accent-bg);
+    border: 1px solid var(--pb-accent);
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+
+.pb-checkpoint__stamped-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--pb-accent);
+    flex-shrink: 0;
+}
+
+.pb-checkpoint__stamped-label {
+    font-family: var(--pb-font-code);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    color: var(--pb-accent);
+}
+
+/* Stamp animation: quick pulse on collect */
+@keyframes pb-stamp-pulse {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.08); }
+    65%  { transform: scale(0.97); }
+    100% { transform: scale(1); }
+}
+
+.pb-checkpoint__stamped--just-collected {
+    animation: pb-stamp-pulse 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Mobile stack */
+@media (max-width: 600px) {
+    .pb-checkpoint {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-6);
+    }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   E. REDUCED MOTION
+   ────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    .pb-dock__btn,
+    .pb-print-card,
+    .pb-print-card__arrow,
+    .pb-drawer,
+    .pb-overlay,
+    .pb-route-stamp,
+    .pb-checkpoint__action {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .pb-checkpoint__stamped--just-collected {
+        animation: none !important;
+    }
+}

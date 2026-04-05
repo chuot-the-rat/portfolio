@@ -10,6 +10,7 @@ import {
 import HeroContainer from "../components/header/HeroContainer";
 import HomeWorkList from "../components/home/HomeWorkList";
 import MarqueeTicker from "../components/MarqueeTicker";
+import PassbookPrintCard from "../components/passbook/PassbookPrintCard";
 import { homeHeroConfig } from "../data/header/headerConfig";
 import "./Home.css";
 import "../components/SectionLayout.css";
@@ -235,6 +236,9 @@ const Home = () => {
                         mode={heroMode}
                         onModeChange={setHeroMode}
                     />
+
+                    {/* Passbook print card — issued once, persists on home */}
+                    <PassbookPrintCard />
 
                     {/* Marquee ticker — editorial skill belt */}
                     <MarqueeTicker />

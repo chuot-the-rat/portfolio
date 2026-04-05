@@ -25,6 +25,9 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "./components/Navigation";
+import { PassbookProvider } from "./components/passbook/PassbookProvider";
+import PassbookDock from "./components/passbook/PassbookDock";
+import PassbookDrawer from "./components/passbook/PassbookDrawer";
 
 // Pages
 import Home from "./pages/Home";
@@ -75,29 +78,36 @@ function App() {
     const location = useLocation();
 
     return (
-        <div className="app">
-            <ScrollToTop />
-            <Navigation />
+        <PassbookProvider>
+            <div className="app">
+                <ScrollToTop />
+                <Navigation />
 
-            <AnimatePresence mode="wait" initial={false}>
-                <Routes location={location} key={location.pathname}>
-                    {/* ─── PRIMARY ROUTES ─── */}
-                    <Route path="/"          element={<P><Home /></P>} />
-                    <Route path="/projects"  element={<Navigate to="/" replace />} />
-                    <Route path="/about"     element={<P><About /></P>} />
-                    <Route path="/resume"    element={<P><Resume /></P>} />
+                {/* Passbook: global dock + drawer, mounted outside Routes
+                    so they persist across page transitions */}
+                <PassbookDock />
+                <PassbookDrawer />
 
-                    {/* ─── CASE STUDY PROJECTS ─── */}
-                    <Route path="/projects/:id"  element={<P><ProjectDetail /></P>} />
+                <AnimatePresence mode="wait" initial={false}>
+                    <Routes location={location} key={location.pathname}>
+                        {/* ─── PRIMARY ROUTES ─── */}
+                        <Route path="/"          element={<P><Home /></P>} />
+                        <Route path="/projects"  element={<Navigate to="/" replace />} />
+                        <Route path="/about"     element={<P><About /></P>} />
+                        <Route path="/resume"    element={<P><Resume /></P>} />
 
-                    {/* ─── STANDALONE PROJECTS ─── */}
-                    <Route path="/design/:slug"  element={<P><ProjectLayout /></P>} />
+                        {/* ─── CASE STUDY PROJECTS ─── */}
+                        <Route path="/projects/:id"  element={<P><ProjectDetail /></P>} />
 
-                    {/* ─── 404 CATCH-ALL ─── */}
-                    <Route path="*" element={<P><NotFound /></P>} />
-                </Routes>
-            </AnimatePresence>
-        </div>
+                        {/* ─── STANDALONE PROJECTS ─── */}
+                        <Route path="/design/:slug"  element={<P><ProjectLayout /></P>} />
+
+                        {/* ─── 404 CATCH-ALL ─── */}
+                        <Route path="*" element={<P><NotFound /></P>} />
+                    </Routes>
+                </AnimatePresence>
+            </div>
+        </PassbookProvider>
     );
 }
 

@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { usePageTitle } from "../hooks/usePageTitle";
+import ProjectCheckpoint from "../components/passbook/ProjectCheckpoint";
 import { getProjectById } from "../utils/projectDataMapper";
 import {
     SectionIndex,
@@ -249,6 +250,11 @@ const ProjectDetail = () => {
                     </div>
                 </div>
             </div>
+            {/* Passbook checkpoint — collect stamp before navigating away */}
+            <div className="container">
+                <ProjectCheckpoint projectId={project.id} />
+            </div>
+
             {/* Next / Prev project navigation */}
             <div className="container">
                 <ProjectNextPrev currentId={project.id} />
