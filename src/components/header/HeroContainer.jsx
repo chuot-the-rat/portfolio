@@ -51,7 +51,7 @@ export default function HeroContainer({
     ? {}
     : { variants: containerVariants, initial: "hidden", animate: "visible" };
 
-  const showModeToggle = floatingImages.length > 0 && typeof onModeChange === "function";
+  const showModeToggle = typeof onModeChange === "function";
 
   return (
     <section

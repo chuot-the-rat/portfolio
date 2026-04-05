@@ -380,11 +380,16 @@
     overflow: hidden;
     background-color: var(--color-bg-secondary);
     box-shadow: var(--shadow-md);
+    /* Lock height so layout never shifts during slide transitions */
+    aspect-ratio: 16 / 9;
 }
 
 .carousel-viewport img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
     display: block;
 }
 

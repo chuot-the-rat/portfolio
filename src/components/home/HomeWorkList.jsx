@@ -15,7 +15,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { getProjectPath } from "../../utils/projectDataMapper";
+import { getProjectPath, isStandaloneProject } from "../../utils/projectDataMapper";
 import "./HomeWorkList.css";
 
 const TABS = ["UX/UI", "Motion Design", "Graphic Design"];
@@ -116,6 +116,11 @@ export default function HomeWorkList({ projects }) {
                             {project.subtitle ?? project.tagline}
                           </span>
                         )}
+                        <span className="hw-item-type">
+                          {isStandaloneProject(project.id)
+                            ? project.category ?? "Project"
+                            : "Case Study"}
+                        </span>
                       </div>
 
                       {/* Year — pushed right */}

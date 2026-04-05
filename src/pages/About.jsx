@@ -1,11 +1,64 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { usePageTitle } from "../hooks/usePageTitle";
 import HeroContainer from "../components/header/HeroContainer";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
 import { aboutHeroConfig } from "../data/header/headerConfig";
 import "./About.css";
+
+// Identity-switching hero content — mode toggle lives here, not on Home.
+const MODE_TEXT = {
+    work: {
+        showStatus: true,
+        descriptor: "About",
+        headline: "Hi! It's Leana.",
+        headlineAs: "h1",
+        subline: "Designer, developer, and recovering hospitality worker.",
+    },
+    study: {
+        showStatus: false,
+        descriptor: "Currently Studying",
+        headline: ["Design &", "Code"],
+        headlineAs: "h1",
+        subline: "Second year, Digital Design & Development at BCIT.",
+    },
+    chaos: {
+        showStatus: false,
+        descriptor: "Chuot the Rat",
+        headline: "Hi! I'm Chuot.",
+        headlineAs: "h1",
+        subline: "Vietnamese for mouse. Manga reader, cosplay retiree, isekai connoisseur.",
+    },
+};
+
+const CONTACT_ROWS = [
+    {
+        label: "LinkedIn",
+        value: "linkedin.com/in/leanale",
+        href: "https://linkedin.com/in/leanale",
+        external: true,
+    },
+    {
+        label: "GitHub",
+        value: "github.com/chuot-the-rat",
+        href: "https://github.com/chuot-the-rat",
+        external: true,
+    },
+    {
+        label: "Location",
+        value: "Vancouver, BC — PST",
+        href: null,
+    },
+    {
+        label: "Status",
+        value: null,
+        href: null,
+    },
+];
+
+const RESUME_LINK =
+    "https://indd.adobe.com/view/8da9a590-bb12-4c21-a861-4ef0ff8106b1";
 
 const fadeUp = {
     initial: { opacity: 0, y: 16 },
@@ -16,11 +69,17 @@ const fadeUp = {
 
 export default function About() {
     usePageTitle("About");
+    const [heroMode, setHeroMode] = useState("work");
+
     return (
         <div className="about">
             <main className="about-main">
                 <div className="container">
-                    <HeroContainer config={aboutHeroConfig} />
+                    <HeroContainer
+                        config={{ ...aboutHeroConfig, text: MODE_TEXT[heroMode] }}
+                        mode={heroMode}
+                        onModeChange={setHeroMode}
+                    />
 
                     <div className="about-body">
 
@@ -82,42 +141,98 @@ export default function About() {
                         {...fadeUp}
                         transition={{ duration: 0.45, delay: 0.08 }}
                     >
-                        <div className="about-connect-inner">
-                            <div className="about-connect-text">
-                                <p className="about-connect-label">Contact</p>
-                                <h2 className="about-connect-heading">
-                                    Let's talk.
-                                </h2>
-                                <p className="about-connect-sub">
-                                    Open to full-time roles, freelance projects, and
-                                    the occasional isekai recommendation. Reach out —
-                                    I don't bite.
-                                </p>
-                            </div>
-                            <div className="about-connect-links">
-                                <Link
-                                    to="/contact"
-                                    className="about-connect-link about-connect-link--primary"
+                        <div className="about-connect-heading-row">
+                            <p className="about-connect-label">Contact</p>
+                            <h2 className="about-connect-heading">Let's talk.</h2>
+                        </div>
+
+                        {/* Primary: email CTA */}
+                        <div className="about-email-cta">
+                            <a
+                                href="mailto:leanale003@gmail.com"
+                                className="about-email-link"
+                            >
+                                leanale003@gmail.com
+                                <span className="about-email-arrow" aria-hidden="true">↗</span>
+                            </a>
+                            <p className="about-email-note">
+                                Hit me up — I don't bite.
+                            </p>
+                        </div>
+
+                        {/* Secondary rows */}
+                        <div className="about-contact-rows">
+                            {CONTACT_ROWS.map((row, i) => (
+                                <motion.div
+                                    key={row.label}
+                                    className="about-contact-row"
+                                    {...fadeUp}
+                                    transition={{ duration: 0.45, delay: 0.05 + i * 0.05 }}
                                 >
-                                    Get in touch →
-                                </Link>
+                                    <span className="about-contact-row-label">{row.label}</span>
+                                    <div className="about-contact-row-content">
+                                        {row.label === "Status" ? (
+                                            <span className="about-contact-value about-contact-value--status">
+                                                <span className="about-status-dot" aria-hidden="true" />
+                                                Open to full-time, freelance &amp; isekai recs.
+                                            </span>
+                                        ) : row.href ? (
+                                            <a
+                                                href={row.href}
+                                                className="about-contact-link"
+                                                {...(row.external
+                                                    ? { target: "_blank", rel: "noopener noreferrer" }
+                                                    : {})}
+                                            >
+                                                {row.value}
+                                                <span className="about-contact-link-arrow" aria-hidden="true">↗</span>
+                                            </a>
+                                        ) : (
+                                            <span className="about-contact-value">{row.value}</span>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.section>
+
+                    {/* ── Resume ── */}
+                    <motion.section
+                        id="resume"
+                        className="about-resume"
+                        {...fadeUp}
+                        transition={{ duration: 0.45, delay: 0.08 }}
+                    >
+                        <div className="about-resume-header">
+                            <div>
+                                <p className="about-connect-label">Resume</p>
+                                <h2 className="about-resume-heading">Experience &amp; Skills</h2>
+                            </div>
+                            <div className="about-resume-actions">
                                 <a
-                                    href="https://linkedin.com/in/leanale"
+                                    href={RESUME_LINK}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="about-connect-link"
+                                    className="about-resume-btn about-resume-btn--primary"
                                 >
-                                    LinkedIn →
+                                    Open in new tab →
                                 </a>
                                 <a
-                                    href="https://github.com/chuot-the-rat"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="about-connect-link"
+                                    href="/Le_Leana_Resume_NoNumber.pdf"
+                                    download="Leana_Le_Resume.pdf"
+                                    className="about-resume-btn about-resume-btn--ghost"
                                 >
-                                    GitHub →
+                                    Download PDF
                                 </a>
                             </div>
+                        </div>
+                        <div className="about-resume-embed">
+                            <iframe
+                                src={RESUME_LINK}
+                                title="Resume — Leana Le"
+                                className="about-resume-iframe"
+                                allowFullScreen
+                            />
                         </div>
                     </motion.section>
 

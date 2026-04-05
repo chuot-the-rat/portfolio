@@ -10,7 +10,7 @@ const BASE = "Leana Le";
  */
 export function usePageTitle(pageTitle) {
     useEffect(() => {
-        document.title = pageTitle ? `${pageTitle} · ${BASE}` : BASE;
+        document.title = pageTitle ? `${pageTitle} · ${BASE}` : `${BASE} · Designer`;
         return () => { document.title = BASE; };
     }, [pageTitle]);
 }

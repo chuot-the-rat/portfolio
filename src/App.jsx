@@ -94,7 +94,8 @@ function App() {
                         <Route path="/"          element={<P><Home /></P>} />
                         <Route path="/projects"  element={<Navigate to="/" replace />} />
                         <Route path="/about"     element={<P><About /></P>} />
-                        <Route path="/resume"    element={<P><Resume /></P>} />
+                        <Route path="/resume"    element={<Navigate to="/about" replace />} />
+                        <Route path="/contact"   element={<Navigate to="/about" replace />} />
 
                         {/* ─── CASE STUDY PROJECTS ─── */}
                         <Route path="/projects/:id"  element={<P><ProjectDetail /></P>} />

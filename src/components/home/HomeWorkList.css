@@ -153,6 +153,22 @@
   color: var(--color-text-secondary);
 }
 
+/* ── Type badge ──────────────────────────────────────────────────────── */
+.hw-item-type {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  opacity: 0.55;
+  margin-top: var(--space-1);
+  transition: opacity 0.22s ease;
+}
+
+.hw-item--active .hw-item-type {
+  opacity: 0.8;
+}
+
 /* ── Year ────────────────────────────────────────────────────────────── */
 .hw-item-year {
   font-family: var(--font-mono);

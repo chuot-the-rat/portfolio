@@ -1,7 +1,7 @@
 /* ==========================================================================
    ABOUT PAGE
-   Label-left / content-right row layout (Sharleen-style bones,
-   warmer personal tone in the content).
+   Merged page: About + Contact + Resume.
+   Label-left / content-right row layout.
    ========================================================================== */
 
 .about {
@@ -15,7 +15,6 @@
 
 /* ── Body rows ──────────────────────────────────────────────────────────────
    Stacked rows, each with a mono label on the left and content on the right.
-   A top border separates each row — same editorial language as the hero.
    ─────────────────────────────────────────────────────────────────────────── */
 
 .about-body {
@@ -37,7 +36,7 @@
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-label);
     color: var(--color-text-tertiary);
-    padding-top: 4px; /* align with first line cap-height */
+    padding-top: 4px;
     user-select: none;
 }
 
@@ -55,36 +54,13 @@
     margin: 0;
 }
 
-/* Emphasis: key phrases rendered in slightly stronger color, no italic */
 .about-em {
     font-style: normal;
     color: var(--color-text);
     font-weight: 500;
 }
 
-/* ── Let's Talk ─────────────────────────────────────────────────────────────
-   Editorial closing statement — no card, no fill.
-   Reads as a natural page-level ending, consistent with about-row grammar.
-   ─────────────────────────────────────────────────────────────────────────── */
-
-.about-connect {
-    margin-top: var(--section-spacing-lg);
-    padding-top: clamp(3rem, 6vw, 5rem);
-    padding-bottom: clamp(3rem, 6vw, 5rem);
-    border-top: 1px solid var(--color-border);
-}
-
-.about-connect-inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: var(--space-16);
-}
-
-.about-connect-text {
-    max-width: 420px;
-}
-
+/* ── Shared mono label (used in Connect + Resume headers) ─────────────────── */
 .about-connect-label {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
@@ -94,65 +70,259 @@
     margin: 0 0 var(--space-3);
 }
 
+/* ── Let's Talk / Contact ────────────────────────────────────────────────────
+   Email CTA + secondary rows. Replaces the old link-buttons section.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.about-connect {
+    margin-top: var(--section-spacing-lg);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--color-border);
+}
+
+.about-connect-heading-row {
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
 .about-connect-heading {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 6vw, 5rem);
     font-weight: 500;
     letter-spacing: -0.03em;
     color: var(--color-text);
-    margin: 0 0 var(--space-4);
+    margin: 0;
     line-height: 1.0;
 }
 
-.about-connect-sub {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-text-secondary);
-    margin: 0;
+/* Primary email CTA */
+.about-email-cta {
+    padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
 }
 
-.about-connect-links {
-    display: flex;
-    flex-direction: column;
+.about-email-link {
+    display: inline-flex;
+    align-items: baseline;
     gap: var(--space-3);
-    align-items: flex-start;
-    flex-shrink: 0;
-    padding-top: var(--space-2);
-}
-
-.about-connect-link {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    transition: color 0.18s ease;
-    white-space: nowrap;
-}
-
-.about-connect-link:hover {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4.5vw, 3.5rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
     color: var(--color-text);
+    text-decoration: none;
+    line-height: 1.1;
+    transition:
+        opacity 0.18s ease,
+        gap 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.about-connect-link--primary {
+.about-email-link:hover {
+    opacity: 0.65;
+    gap: var(--space-5);
+}
+
+.about-email-arrow {
+    font-size: 0.65em;
+    opacity: 0.45;
+    transition:
+        opacity 0.18s ease,
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-email-link:hover .about-email-arrow {
+    opacity: 0.9;
+    transform: translate(4px, -4px);
+}
+
+.about-email-note {
+    margin: var(--space-3) 0 0;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+}
+
+/* Secondary contact rows */
+.about-contact-rows {
+    transition: color 0.2s ease;
+}
+
+.about-contact-rows:hover .about-contact-row {
+    opacity: 0.4;
+}
+
+.about-contact-rows:hover .about-contact-row:hover {
+    opacity: 1;
+}
+
+.about-contact-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: var(--space-16);
+    padding: var(--space-8) 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: opacity 0.2s ease;
+}
+
+.about-contact-row-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-label);
+    color: var(--color-text-tertiary);
+    padding-top: 3px;
+    user-select: none;
+}
+
+.about-contact-row-content {
+    display: flex;
+    align-items: center;
+}
+
+.about-contact-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    transition:
+        opacity 0.18s ease,
+        gap 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-contact-link:hover {
+    opacity: 0.65;
+    gap: var(--space-3);
+}
+
+.about-contact-link-arrow {
+    font-size: 0.75em;
+    opacity: 0.4;
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-contact-link:hover .about-contact-link-arrow {
+    opacity: 0.9;
+    transform: translate(2px, -2px);
+}
+
+.about-contact-value {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+}
+
+.about-contact-value--status {
     display: inline-flex;
     align-items: center;
-    padding: var(--space-3) var(--space-8);
-    background: var(--color-text);
-    color: var(--color-bg);
+    gap: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+}
+
+.about-status-dot {
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: status-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.35; transform: scale(0.7); }
+}
+
+/* ── Resume ──────────────────────────────────────────────────────────────────
+   Iframe embed + action buttons.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.about-resume {
+    margin-top: var(--section-spacing-lg);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--color-border);
+}
+
+.about-resume-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-8);
+    margin-bottom: var(--space-10);
+    flex-wrap: wrap;
+}
+
+.about-resume-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.15;
+}
+
+.about-resume-actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.about-resume-btn {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-full);
     transition:
         opacity 0.18s ease,
-        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 0.22s ease;
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
 }
 
-.about-connect-link--primary:hover {
+.about-resume-btn--primary {
+    background: var(--color-text);
     color: var(--color-bg);
-    opacity: 0.88;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+}
+
+.about-resume-btn--primary:hover {
+    opacity: 0.82;
+    transform: translateY(-1px);
+}
+
+.about-resume-btn--ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+    box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.about-resume-btn--ghost:hover {
+    color: var(--color-text);
+    box-shadow: inset 0 0 0 1px var(--color-text);
+}
+
+.about-resume-embed {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+}
+
+.about-resume-iframe {
+    width: 100%;
+    height: 780px;
+    border: none;
+    display: block;
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────────
@@ -165,15 +335,23 @@
         padding: var(--space-8) 0;
     }
 
-    .about-connect-inner {
+    .about-contact-row {
         grid-template-columns: 1fr;
-        gap: var(--space-10);
+        gap: var(--space-2);
+        padding: var(--space-6) 0;
+    }
+
+    /* Disable sibling dim on touch devices */
+    .about-contact-rows:hover .about-contact-row {
+        opacity: 1;
+    }
+
+    .about-resume-header {
+        flex-direction: column;
         align-items: flex-start;
     }
 
-    .about-connect-links {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: var(--space-4);
+    .about-resume-iframe {
+        height: 520px;
     }
 }
