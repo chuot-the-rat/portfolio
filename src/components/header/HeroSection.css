@@ -465,11 +465,11 @@
 }
 
 .hs-mode-btn {
-  width: 40px;
-  height: 40px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 var(--space-4);
   border: none;
   background: transparent;
   border-radius: var(--radius-full);
@@ -479,6 +479,15 @@
     background var(--dur-ui) var(--ease-out-premium),
     color var(--dur-ui) var(--ease-out-premium);
   flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.hs-mode-btn__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
 .hs-mode-btn:hover {
@@ -486,9 +495,21 @@
   background: var(--color-bg-secondary);
 }
 
+/* Active states — mode-specific accent colors */
 .hs-mode-btn--active {
-  background: var(--color-text);
   color: var(--color-bg);
+}
+
+.hs-mode-btn--active.hs-mode-btn--work {
+  background: var(--color-text);
+}
+
+.hs-mode-btn--active.hs-mode-btn--study {
+  background: #3b82f6;
+}
+
+.hs-mode-btn--active.hs-mode-btn--chaos {
+  background: #f43f5e;
 }
 
 .hs-mode-btn:focus-visible {

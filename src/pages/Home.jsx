@@ -13,6 +13,31 @@ import { homeHeroConfig } from "../data/header/headerConfig";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
+// Mode-specific hero content — swapped in when the toggle changes
+const MODE_TEXT = {
+    work: {
+        showStatus: true,
+        descriptor: "UI/UX Designer & Developer",
+        headline: ["Leana", "Le"],
+        headlineAs: "h1",
+        subline: "Crafting experiences that bridge research, design, and clean code.",
+    },
+    study: {
+        showStatus: false,
+        descriptor: "Currently Studying",
+        headline: ["Design &", "Code"],
+        headlineAs: "h1",
+        subline: "Second year, Digital Design & Development at BCIT. Learning to build things properly.",
+    },
+    chaos: {
+        showStatus: false,
+        descriptor: "Chaos Mode Activated",
+        headline: ["Chuot", "the Rat"],
+        headlineAs: "h1",
+        subline: "Warning: may talk about isekai, Super Auto Pets strategy, or 3AM presentation decks.",
+    },
+};
+
 const Home = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -203,7 +228,7 @@ const Home = () => {
                     {/* Hero Section — new modular system
                         To revert: replace <HeroContainer> with <HeroSection /> */}
                     <HeroContainer
-                        config={homeHeroConfig}
+                        config={{ ...homeHeroConfig, text: MODE_TEXT[heroMode] }}
                         className="home-hero-grid"
                         mode={heroMode}
                         onModeChange={setHeroMode}

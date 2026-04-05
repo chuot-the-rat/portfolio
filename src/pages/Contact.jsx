@@ -4,12 +4,13 @@ import "./Contact.css";
 
 const contactHeroConfig = {
     layout: "full-left",
-    minHeight: "35vh",
+    minHeight: "55vh",
     text: {
+        showStatus: true,
         descriptor: "Contact",
         headline: "Let's talk.",
         headlineAs: "h1",
-        subline: null,
+        subline: "I read every message. Most get a reply within 24 hours.",
     },
     media: null,
     tags: [],
@@ -25,53 +26,28 @@ const fadeUp = {
     transition: { duration: 0.45 },
 };
 
-const ROWS = [
-    {
-        label: "Email",
-        content: (
-            <a href="mailto:leanale003@gmail.com" className="contact-link">
-                leanale003@gmail.com
-            </a>
-        ),
-    },
+const SECONDARY_ROWS = [
     {
         label: "LinkedIn",
-        content: (
-            <a
-                href="https://linkedin.com/in/leanale"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-link"
-            >
-                linkedin.com/in/leanale →
-            </a>
-        ),
+        value: "linkedin.com/in/leanale",
+        href: "https://linkedin.com/in/leanale",
+        external: true,
     },
     {
         label: "GitHub",
-        content: (
-            <a
-                href="https://github.com/chuot-the-rat"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-link"
-            >
-                github.com/chuot-the-rat →
-            </a>
-        ),
+        value: "github.com/chuot-the-rat",
+        href: "https://github.com/chuot-the-rat",
+        external: true,
     },
     {
         label: "Location",
-        content: <span className="contact-value">Vancouver, BC</span>,
+        value: "Vancouver, BC — PST",
+        href: null,
     },
     {
         label: "Status",
-        content: (
-            <span className="contact-value contact-value--status">
-                <span className="contact-status-dot" aria-hidden="true" />
-                Open to full-time, freelance, and isekai recommendations.
-            </span>
-        ),
+        value: null, // rendered specially
+        href: null,
     },
 ];
 
@@ -83,17 +59,59 @@ export default function Contact() {
                     <HeroContainer config={contactHeroConfig} />
 
                     <div className="contact-body">
-                        {ROWS.map((row, i) => (
-                            <motion.div
-                                key={row.label}
-                                className="contact-row"
-                                {...fadeUp}
-                                transition={{ duration: 0.45, delay: i * 0.05 }}
+
+                        {/* ── Primary CTA: email ── */}
+                        <motion.div
+                            className="contact-email-cta"
+                            {...fadeUp}
+                        >
+                            <a
+                                href="mailto:leanale003@gmail.com"
+                                className="contact-email-link"
                             >
-                                <span className="contact-row-label">{row.label}</span>
-                                <div className="contact-row-content">{row.content}</div>
-                            </motion.div>
-                        ))}
+                                leanale003@gmail.com
+                                <span className="contact-email-arrow" aria-hidden="true">↗</span>
+                            </a>
+                            <p className="contact-email-note">
+                                Hit me up — I don't bite.
+                            </p>
+                        </motion.div>
+
+                        {/* ── Secondary rows ── */}
+                        <div className="contact-rows">
+                            {SECONDARY_ROWS.map((row, i) => (
+                                <motion.div
+                                    key={row.label}
+                                    className="contact-row"
+                                    {...fadeUp}
+                                    transition={{ duration: 0.45, delay: 0.05 + i * 0.05 }}
+                                >
+                                    <span className="contact-row-label">{row.label}</span>
+                                    <div className="contact-row-content">
+                                        {row.label === "Status" ? (
+                                            <span className="contact-value contact-value--status">
+                                                <span className="contact-status-dot" aria-hidden="true" />
+                                                Open to full-time, freelance &amp; isekai recs.
+                                            </span>
+                                        ) : row.href ? (
+                                            <a
+                                                href={row.href}
+                                                className="contact-link"
+                                                {...(row.external
+                                                    ? { target: "_blank", rel: "noopener noreferrer" }
+                                                    : {})}
+                                            >
+                                                {row.value}
+                                                <span className="contact-link-arrow" aria-hidden="true">↗</span>
+                                            </a>
+                                        ) : (
+                                            <span className="contact-value">{row.value}</span>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+
                     </div>
                 </div>
             </main>

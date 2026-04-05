@@ -82,9 +82,9 @@ export default function About() {
                     >
                         <div className="about-connect-inner">
                             <div className="about-connect-text">
-                                <p className="about-connect-label">Let's talk</p>
+                                <p className="about-connect-label">Contact</p>
                                 <h2 className="about-connect-heading">
-                                    Want to work together?
+                                    Let's talk.
                                 </h2>
                                 <p className="about-connect-sub">
                                     Open to full-time roles, freelance projects, and

@@ -93,7 +93,7 @@ export default function HeroContainer({
       <motion.div className="hs-grid" {...motionProps}>
         {/* Text column — always present */}
         <div className="hs-text-col">
-          {text && <HeroText {...text} />}
+          {text && <HeroText key={mode} {...text} />}
 
           {ctas.length > 0 && <CTAGroup ctas={ctas} layout={ctaLayout} />}
 

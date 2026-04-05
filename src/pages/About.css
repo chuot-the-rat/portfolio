@@ -63,28 +63,21 @@
 }
 
 /* ── Let's Talk ─────────────────────────────────────────────────────────────
-   Full-width section at the bottom. Left: message. Right: links.
-   Different from the footer — bigger, warmer, more personal.
+   Editorial closing statement — no card, no fill.
+   Reads as a natural page-level ending, consistent with about-row grammar.
    ─────────────────────────────────────────────────────────────────────────── */
 
 .about-connect {
-    margin-top: var(--section-spacing-base);
-    padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    background: var(--color-bg-secondary);
-    box-shadow: var(--shadow-md);
-    transition: box-shadow 0.28s ease;
-}
-
-.about-connect:hover {
-    box-shadow: var(--shadow-lg);
+    margin-top: var(--section-spacing-lg);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--color-border);
 }
 
 .about-connect-inner {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
     gap: var(--space-16);
 }
 
@@ -102,12 +95,13 @@
 }
 
 .about-connect-heading {
-    font-size: var(--font-size-2xl);
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
     font-weight: 500;
-    letter-spacing: var(--letter-spacing-tight);
+    letter-spacing: -0.03em;
     color: var(--color-text);
     margin: 0 0 var(--space-4);
-    line-height: var(--line-height-tight);
+    line-height: 1.0;
 }
 
 .about-connect-sub {
@@ -171,13 +165,10 @@
         padding: var(--space-8) 0;
     }
 
-    .about-connect {
-        padding: var(--space-10) var(--space-8);
-    }
-
     .about-connect-inner {
-        flex-direction: column;
-        gap: var(--space-8);
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+        align-items: flex-start;
     }
 
     .about-connect-links {
