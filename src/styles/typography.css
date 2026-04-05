@@ -25,21 +25,21 @@ h6 {
 h1 {
     font-family: var(--font-display);
     font-size: var(--font-size-3xl);
-    font-weight: 700;
+    font-weight: 500;
 }
 
 /* H2 - Section Title: Also display font, secondary hierarchy */
 h2 {
     font-family: var(--font-display);
     font-size: var(--font-size-2xl);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* H3 - Subsection: Sans font, strong weight for hierarchy */
 h3 {
     font-family: var(--font-sans);
     font-size: var(--font-size-xl);
-    font-weight: 700;
+    font-weight: 500;
 }
 
 /* H4 - Small Title: Sans font, standard */

@@ -21,13 +21,17 @@
  * - Standalone: Self-contained projects, route to /design/:id
  */
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "./components/Navigation";
+import { PassbookProvider } from "./components/passbook/PassbookProvider";
+import PassbookDock from "./components/passbook/PassbookDock";
+import PassbookDrawer from "./components/passbook/PassbookDrawer";
 
 // Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
@@ -50,58 +54,61 @@ import "./styles/App.css";
  */
 export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap"];
 
-function App() {
+function ScrollToTop() {
+    const { pathname } = useLocation();
+    useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+    return null;
+}
+
+/** Wraps each page in a fade transition. Framer Motion handles enter/exit. */
+function P({ children }) {
     return (
-        <div className="app">
-            {/* Navigation bar appears on all pages */}
-            <Navigation />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+        >
+            {children}
+        </motion.div>
+    );
+}
 
-            {/* Route definitions — determines which page renders based on URL */}
-            <Routes>
-                {/* ─── PRIMARY ROUTES ─── */}
-                <Route
-                    path="/"
-                    element={<Home />}
-                />
-                <Route
-                    path="/projects"
-                    element={<Projects />}
-                />
-                <Route
-                    path="/about"
-                    element={<About />}
-                />
-                <Route
-                    path="/contact"
-                    element={<Contact />}
-                />
-                <Route
-                    path="/resume"
-                    element={<Resume />}
-                />
+function App() {
+    const location = useLocation();
 
-                {/* ─── CASE STUDY PROJECTS ─── */}
-                {/* Route for individual case studies (e.g., /projects/inklink) */}
-                <Route
-                    path="/projects/:id"
-                    element={<ProjectDetail />}
-                />
+    return (
+        <PassbookProvider>
+            <div className="app">
+                <ScrollToTop />
+                <Navigation />
 
-                {/* ─── STANDALONE PROJECTS ─── */}
-                {/* Route for standalone design projects (e.g., /design/fizzu-soda) */}
-                <Route
-                    path="/design/:slug"
-                    element={<ProjectLayout />}
-                />
+                {/* Passbook: global dock + drawer, mounted outside Routes
+                    so they persist across page transitions */}
+                <PassbookDock />
+                <PassbookDrawer />
 
-                {/* ─── 404 CATCH-ALL ─── */}
-                {/* Must be last — matches any route not caught above */}
-                <Route
-                    path="*"
-                    element={<NotFound />}
-                />
-            </Routes>
-        </div>
+                <AnimatePresence mode="wait" initial={false}>
+                    <Routes location={location} key={location.pathname}>
+                        {/* ─── PRIMARY ROUTES ─── */}
+                        <Route path="/"          element={<P><Home /></P>} />
+                        <Route path="/projects"  element={<Navigate to="/" replace />} />
+                        <Route path="/about"     element={<P><About /></P>} />
+                        <Route path="/resume"    element={<Navigate to="/about" replace />} />
+                        <Route path="/contact"   element={<Navigate to="/about" replace />} />
+
+                        {/* ─── CASE STUDY PROJECTS ─── */}
+                        <Route path="/projects/:id"  element={<P><ProjectDetail /></P>} />
+
+                        {/* ─── STANDALONE PROJECTS ─── */}
+                        <Route path="/design/:slug"  element={<P><ProjectLayout /></P>} />
+
+                        {/* ─── 404 CATCH-ALL ─── */}
+                        <Route path="*" element={<P><NotFound /></P>} />
+                    </Routes>
+                </AnimatePresence>
+            </div>
+        </PassbookProvider>
     );
 }
 

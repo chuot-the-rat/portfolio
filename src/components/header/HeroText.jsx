@@ -10,14 +10,36 @@
  * - headline can be a string (single line) or string[] (one word per line).
  */
 
+import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { childVariants } from "../../utils/header/heroMotion";
+
+/** Shows Vancouver local time, updating every 30 s */
+function LiveClock() {
+  const fmt = () =>
+    new Date().toLocaleTimeString("en-US", {
+      timeZone: "America/Vancouver",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+  const [time, setTime] = useState(fmt);
+
+  useEffect(() => {
+    const id = setInterval(() => setTime(fmt()), 30_000);
+    return () => clearInterval(id);
+  }, []);
+
+  return <span className="hs-clock">{time}</span>;
+}
 
 export default function HeroText({
   descriptor,
   headline,
   headlineAs: Tag = "h1",
   subline,
+  showStatus = false,
 }) {
   const shouldReduceMotion = useReducedMotion();
 
@@ -29,6 +51,17 @@ export default function HeroText({
 
   return (
     <>
+      {showStatus && (
+        <motion.div className="hs-text__status" {...motionProps}>
+          <span className="hs-status-dot" aria-hidden="true" />
+          <span>Available</span>
+          <span className="hs-status-sep" aria-hidden="true">·</span>
+          <span>Vancouver, BC</span>
+          <span className="hs-status-sep" aria-hidden="true">·</span>
+          <LiveClock />
+        </motion.div>
+      )}
+
       {descriptor && (
         <motion.span className="hs-text__descriptor" {...motionProps}>
           {descriptor}

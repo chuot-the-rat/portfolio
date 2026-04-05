@@ -16,12 +16,14 @@
    Edit values here — never in component JSX.
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
-  /* Typography — headline */
+  /* Typography — headline
+     Default: comfortable page-header size.
+     The home hero overrides these via .home-hero-grid in Home.css. */
   --hs-headline-font:     var(--font-display);
-  --hs-headline-size:     var(--h1);
+  --hs-headline-size:     clamp(2.25rem, 5vw, 3.75rem);
   --hs-headline-weight:   500;
-  --hs-headline-leading:  var(--lh-tight);
-  --hs-headline-tracking: var(--track-title);
+  --hs-headline-leading:  1.05;
+  --hs-headline-tracking: -0.025em;
 
   /* Typography — subline */
   --hs-subline-font:      var(--font-sans);
@@ -79,6 +81,8 @@
   align-items: start;
   width: min(100%, var(--container-max));
   margin-inline: auto;
+  position: relative;
+  z-index: 2; /* above the dot-grid ::before and fade ::after */
 }
 
 /* Asymmetric: text dominates left (1.2), media sits right (0.8) */
@@ -107,6 +111,42 @@
   gap: 0;
   position: relative;
   z-index: 2;
+}
+
+/* ── Status bar — live clock + location ─────────────────────────────────────
+   Shows above the descriptor line. Only rendered when showStatus: true.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-text__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-6);
+}
+
+.hs-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+  animation: hs-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes hs-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.7); }
+}
+
+.hs-status-sep {
+  opacity: 0.35;
+}
+
+.hs-clock {
+  font-variant-numeric: tabular-nums;
 }
 
 .hs-text__descriptor {
@@ -149,6 +189,7 @@
 /* Each word in a headline array renders as its own display block */
 .hs-text__headline-word {
   display: block;
+  line-height: 0.95;
 }
 
 .hs-text__subline {
@@ -224,9 +265,12 @@
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
-  background: var(--hs-tag-bg);
+  background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--hs-tag-border);
   border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
   font-family: var(--hs-tag-font);
   font-size: var(--hs-tag-size);
   letter-spacing: var(--hs-tag-track);
@@ -236,7 +280,7 @@
   user-select: none;
   white-space: nowrap;
   z-index: 10;
-  touch-action: none; /* required for Framer Motion drag on touch devices */
+  touch-action: none;
 }
 
 .hs-tag:active {
@@ -294,32 +338,33 @@
   outline-offset: var(--focus-offset);
 }
 
-/* Primary: modest filled rectangle — grounded, not bubbly */
+/* Primary: proper pill with weight — Figma/Framer-style */
 .hs-cta--primary {
   background: var(--hs-cta-primary-bg);
   color: var(--hs-cta-primary-text);
-  padding: var(--space-3) var(--space-6);
-  border-radius: 4px;
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
 }
 
 .hs-cta--primary:hover {
   box-shadow: var(--shadow-lg);
-  opacity: 0.92;
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
-/* Ghost: editorial text-link with underline — no border box */
+/* Ghost: clean pill outline */
 .hs-cta--ghost {
   background: transparent;
   color: var(--hs-cta-ghost-text);
-  padding: var(--space-3) 0;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--color-border);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
 }
 
 .hs-cta--ghost:hover {
-  text-decoration-color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
+  background: var(--color-bg-secondary);
 }
 
 /* ── Mobile ─────────────────────────────────────────────────────────────────
@@ -420,11 +465,11 @@
 }
 
 .hs-mode-btn {
-  width: 40px;
-  height: 40px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 var(--space-4);
   border: none;
   background: transparent;
   border-radius: var(--radius-full);
@@ -434,6 +479,15 @@
     background var(--dur-ui) var(--ease-out-premium),
     color var(--dur-ui) var(--ease-out-premium);
   flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.hs-mode-btn__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
 .hs-mode-btn:hover {
@@ -441,9 +495,21 @@
   background: var(--color-bg-secondary);
 }
 
+/* Active states — mode-specific accent colors */
 .hs-mode-btn--active {
-  background: var(--color-text);
   color: var(--color-bg);
+}
+
+.hs-mode-btn--active.hs-mode-btn--work {
+  background: var(--color-text);
+}
+
+.hs-mode-btn--active.hs-mode-btn--study {
+  background: #3b82f6;
+}
+
+.hs-mode-btn--active.hs-mode-btn--chaos {
+  background: #f43f5e;
 }
 
 .hs-mode-btn:focus-visible {
@@ -459,7 +525,8 @@
 
 @media (max-width: 480px) {
   .hs-text__headline {
-    font-size: var(--font-size-2xl);
+    font-size: clamp(2rem, 12vw, 3.25rem);
+    letter-spacing: -0.02em;
   }
 
   .hs-text__subline {

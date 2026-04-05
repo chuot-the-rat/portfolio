@@ -10,11 +10,13 @@
  */
 
 import { motion } from "framer-motion";
+import { usePageTitle } from "../hooks/usePageTitle";
 import HeroContainer from "../components/header/HeroContainer";
 import { resumeHeroConfig } from "../data/header/headerConfig";
 import "./Resume.css";
 
 export default function Resume() {
+    usePageTitle("Resume");
     // Adobe InDesign link (embedded view)
     const resumeLink =
         "https://indd.adobe.com/view/8da9a590-bb12-4c21-a861-4ef0ff8106b1";

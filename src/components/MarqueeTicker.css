@@ -1,0 +1,81 @@
+/*
+ * MarqueeTicker.css
+ * Pure-CSS continuously scrolling text belt.
+ * Class prefix: mq-
+ */
+
+/* ── Wrapper ─────────────────────────────────────────────────────────── */
+.mq {
+  overflow: hidden;
+  width: 100%;
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  /* slight mask so items fade at the edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* ── Track ───────────────────────────────────────────────────────────── */
+.mq-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 0; /* items carry their own spacing */
+  will-change: transform;
+  animation: mq-scroll-left var(--mq-speed, 40s) linear infinite;
+}
+
+.mq-track--right {
+  animation-direction: reverse;
+}
+
+/* ── Items ───────────────────────────────────────────────────────────── */
+.mq-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  padding-inline: var(--space-6);
+  transition: color 0.18s ease;
+}
+
+.mq-item:hover {
+  color: var(--color-text-secondary);
+}
+
+.mq-dot {
+  font-size: 8px;
+  opacity: 0.45;
+  flex-shrink: 0;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────────── */
+@keyframes mq-scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* -50% because array is doubled */
+}
+
+/* ── Reduced Motion ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mq-track {
+    animation: none;
+  }
+}

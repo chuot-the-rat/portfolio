@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { usePageTitle } from "../hooks/usePageTitle";
+import ProjectCheckpoint from "../components/passbook/ProjectCheckpoint";
 import { getProjectById } from "../utils/projectDataMapper";
 import {
     SectionIndex,
@@ -11,12 +13,16 @@ import {
 import EvolutionSection from "../components/EvolutionSection";
 import FigmaEmbed from "../components/FigmaEmbed";
 import SimulationSection from "../features/sim/SimulationSection";
+import BackToTop from "../components/BackToTop";
+import ReadingProgress from "../components/ReadingProgress";
+import ProjectNextPrev from "../components/ProjectNextPrev";
 import "./ProjectDetail.css";
 
 const ProjectDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [project, setProject] = useState(null);
+    usePageTitle(project?.title ?? null);
     const [loading, setLoading] = useState(true);
     const contentRef = useRef(null);
 
@@ -46,9 +52,16 @@ const ProjectDetail = () => {
                             "userTesting",
                             "finalPresentation",
                             "embeds",
+                            "links", // project-specific external links (live, prototype, github)
                         ];
                         for (const key of extras) {
-                            if (localData[key]) merged[key] = localData[key];
+                            if (!localData[key]) continue;
+                            // Merge links (shallow) so both sources contribute
+                            if (key === "links" && merged[key]) {
+                                merged[key] = { ...merged[key], ...localData[key] };
+                            } else {
+                                merged[key] = localData[key];
+                            }
                         }
                         // Merge iterations rounds if present in local data
                         if (localData.iterations?.rounds) {
@@ -98,191 +111,136 @@ const ProjectDetail = () => {
         project.overview?.images?.[0]?.src ??
         null;
 
+    // Build meta bar items — only show fields that exist
+    const metaItems = [
+        project.role      && { label: "Role",     value: Array.isArray(project.role) ? project.role.join(", ") : project.role },
+        (project.timeline || project.duration) && { label: "Timeline", value: project.timeline || project.duration },
+        (project.team || project.teamSize)     && { label: "Team",     value: project.team || `${project.teamSize} members` },
+        project.context   && { label: "Context",  value: project.context },
+        project.year      && { label: "Year",     value: project.year },
+    ].filter(Boolean);
+
+    // Favicon swap: active ↔ idle on tab visibility change
+    useEffect(() => {
+        const link = document.querySelector("link[rel~='icon']");
+        if (!link) return;
+        const activeFavicon = link.href;
+        const idleFavicon =
+            "data:image/svg+xml," +
+            encodeURIComponent(
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">` +
+                `<text y="26" font-size="26">💤</text></svg>`
+            );
+
+        const onVisibility = () => {
+            link.href = document.hidden ? idleFavicon : activeFavicon;
+        };
+        document.addEventListener("visibilitychange", onVisibility);
+        return () => {
+            document.removeEventListener("visibilitychange", onVisibility);
+            link.href = activeFavicon;
+        };
+    }, []);
+
     return (
         <div className="project-detail">
-            {/* Back — minimal text link */}
-            <motion.div
-                className="project-detail-back"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.35 }}
-            >
-                <Link to="/" className="back-button">
-                    ← Work
-                </Link>
-            </motion.div>
+            <ReadingProgress />
 
-            {/* Hero */}
+            {/* Hero — full Sharleen-style header */}
             <motion.section
                 className="project-hero"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             >
                 <div className="container">
-                    {/* Two-column layout: text left, image right */}
-                    <div className={`project-hero-inner${heroImage ? " has-media" : ""}`}>
 
-                        {/* Left: text column */}
-                        <div className="project-hero-text">
-                            {/* Category + year */}
-                            <div className="project-hero-meta">
-                                <span className="project-tag">{project.category}</span>
-                                <span className="project-year">{project.year}</span>
-                            </div>
+                    {/* Breadcrumb */}
+                    <motion.nav
+                        className="project-breadcrumb"
+                        aria-label="Breadcrumb"
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.35 }}
+                    >
+                        <Link to="/" className="breadcrumb-link">Work</Link>
+                        <span className="breadcrumb-sep" aria-hidden>/</span>
+                        <span className="breadcrumb-current">{project.title}</span>
+                    </motion.nav>
 
-                            <h1 className="project-hero-title">{project.title}</h1>
+                    {/* Title block */}
+                    <motion.div
+                        className="project-hero-text"
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        {/* Eyebrow: category · year */}
+                        <span className="project-eyebrow">
+                            {project.category}
+                            {project.year && <><span aria-hidden> · </span>{project.year}</>}
+                        </span>
 
-                            {project.tagline && (
-                                <p className="project-hero-tagline">{project.tagline}</p>
-                            )}
+                        <h1 className="project-hero-title">{project.title}</h1>
 
-                            {/* Meta grid: role / timeline / team / context */}
-                            <div className="project-meta-grid">
-                                {project.role && (
-                                    <div className="project-meta-item">
-                                        <span className="meta-label">Role</span>
-                                        <span className="meta-value">{project.role}</span>
-                                    </div>
-                                )}
-                                {(project.timeline || project.duration) && (
-                                    <div className="project-meta-item">
-                                        <span className="meta-label">Timeline</span>
-                                        <span className="meta-value">
-                                            {project.timeline || project.duration}
-                                        </span>
-                                    </div>
-                                )}
-                                {(project.team || project.teamSize) && (
-                                    <div className="project-meta-item">
-                                        <span className="meta-label">Team</span>
-                                        <span className="meta-value">
-                                            {project.team || `${project.teamSize} members`}
-                                        </span>
-                                    </div>
-                                )}
-                                {project.context && (
-                                    <div className="project-meta-item">
-                                        <span className="meta-label">Context</span>
-                                        <span className="meta-value">{project.context}</span>
-                                    </div>
-                                )}
-                            </div>
+                        {project.tagline && (
+                            <p className="project-hero-tagline">{project.tagline}</p>
+                        )}
+                    </motion.div>
 
-                            {/* CTAs — live site, prototype, github */}
+                    {/* Meta bar — horizontal row spanning full width */}
+                    {metaItems.length > 0 && (
+                        <motion.div
+                            className="project-meta-bar"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.45, delay: 0.18 }}
+                        >
+                            {metaItems.map((item, i) => (
+                                <div key={item.label} className="project-meta-cell">
+                                    <span className="meta-label">{item.label}</span>
+                                    <span className="meta-value">{item.value}</span>
+                                </div>
+                            ))}
+
+                            {/* CTAs pushed to the right end of the bar */}
                             {(project.links?.live || project.links?.prototype || project.links?.github) && (
-                                <div className="project-hero-ctas">
+                                <div className="project-meta-cell project-meta-cell--ctas">
                                     {project.links?.live && (
-                                        <motion.a
-                                            href={project.links.live}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="project-cta-link"
-                                            whileHover={{ y: -1, transition: { duration: 0.2 } }}
-                                        >
-                                            <span>Live site</span>
-                                            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-                                                <path d="M6 3h7v7M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </motion.a>
+                                        <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="project-cta-link">
+                                            Live site ↗
+                                        </a>
                                     )}
                                     {project.links?.prototype && (
-                                        <motion.a
-                                            href={project.links.prototype}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="project-cta-link"
-                                            whileHover={{ y: -1, transition: { duration: 0.2 } }}
-                                        >
-                                            <span>Prototype</span>
-                                            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-                                                <path d="M4 2l10 6-10 6V2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </motion.a>
+                                        <a href={project.links.prototype} target="_blank" rel="noopener noreferrer" className="project-cta-link">
+                                            Prototype ↗
+                                        </a>
                                     )}
                                     {project.links?.github && (
-                                        <motion.a
-                                            href={project.links.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="project-cta-link"
-                                            whileHover={{ y: -1, transition: { duration: 0.2 } }}
-                                        >
-                                            <span>GitHub</span>
-                                            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-                                                <path d="M6 3h7v7M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </motion.a>
+                                        <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="project-cta-link">
+                                            GitHub ↗
+                                        </a>
                                     )}
                                 </div>
                             )}
-                        </div>
+                        </motion.div>
+                    )}
 
-                        {/* Right: hero image */}
-                        {heroImage && (
-                            <motion.div
-                                className="project-hero-media"
-                                initial={{ opacity: 0, x: 16 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            >
-                                <img
-                                    src={heroImage}
-                                    alt={`${project.title} preview`}
-                                    className="project-hero-media-img"
-                                />
-                            </motion.div>
-                        )}
-                    </div>
-
-                    {/* Tools - Categorized */}
-                    {project.toolsCategories &&
-                        Object.keys(project.toolsCategories).length > 0 && (
-                            <div className="project-tools-categorized">
-                                {Object.entries(project.toolsCategories).map(
-                                    ([category, tools]) =>
-                                        tools && tools.length > 0 ? (
-                                            <div
-                                                key={category}
-                                                className="tools-category"
-                                            >
-                                                <span className="tools-category-label">
-                                                    {category}
-                                                </span>
-                                                <div className="tools-category-items">
-                                                    {tools.map(
-                                                        (tool, index) => (
-                                                            <span
-                                                                key={index}
-                                                                className="tool-tag"
-                                                            >
-                                                                {tool}
-                                                            </span>
-                                                        ),
-                                                    )}
-                                                </div>
-                                            </div>
-                                        ) : null,
-                                )}
-                            </div>
-                        )}
-
-                    {/* Legacy tools display */}
-                    {(!project.toolsCategories ||
-                        Object.keys(project.toolsCategories).length === 0) &&
-                        project.tools &&
-                        project.tools.length > 0 && (
-                            <div className="project-tools">
-                                {project.tools.map((tool, index) => (
-                                    <span
-                                        key={index}
-                                        className="tool-tag"
-                                    >
-                                        {tool}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
+                    {/* Hero image — full width below the header text */}
+                    {heroImage && (
+                        <motion.div
+                            className="project-hero-media"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.65, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <img
+                                src={heroImage}
+                                alt={`${project.title} preview`}
+                                className="project-hero-media-img"
+                            />
+                        </motion.div>
+                    )}
                 </div>
             </motion.section>
 
@@ -299,6 +257,17 @@ const ProjectDetail = () => {
                     </div>
                 </div>
             </div>
+            {/* Passbook checkpoint — collect stamp before navigating away */}
+            <div className="container">
+                <ProjectCheckpoint projectId={project.id} />
+            </div>
+
+            {/* Next / Prev project navigation */}
+            <div className="container">
+                <ProjectNextPrev currentId={project.id} />
+            </div>
+
+            <BackToTop />
         </div>
     );
 };

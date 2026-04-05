@@ -1,0 +1,83 @@
+/**
+ * passbookConfig.js
+ * Passbook / route metadata for every project in the system.
+ *
+ * Shape per entry:
+ *   routeCode       short identifier in transit style (e.g. "IL-07")
+ *   lineLabel       category / line name shown in drawer
+ *   stampLabel      completion phrase collected on stamp (e.g. "Clarity Restored")
+ *   checkpointLabel section label shown at the project completion checkpoint
+ *   accentHue       HSL hue value (0–360) — used for per-route accent tint
+ *                   intentionally a raw number so callers can compose it freely
+ *
+ * Flexible by design:
+ * - Stamp labels are first-pass and can be revised without any code changes
+ * - Accent hues are loose approximations — final palette TBD
+ * - routeCodes are arbitrary for now; can be made meaningful later
+ *
+ * Keyed by project ID (matches IDs in case_studies_standardized.json
+ * and STANDALONE_PROJECT_IDS in App.jsx).
+ */
+
+export const PASSBOOK_ROUTES = {
+    inklink: {
+        routeCode:        "IL-07",
+        lineLabel:        "UX/UI",
+        stampLabel:       "Clarity Restored",
+        checkpointLabel:  "End of line.",
+        accentHue:        240,    // indigo-adjacent
+    },
+    prolog: {
+        routeCode:        "PL-03",
+        lineLabel:        "UX/UI",
+        stampLabel:       "Route Mapped",
+        checkpointLabel:  "End of line.",
+        accentHue:        210,    // blue
+    },
+    sidequest: {
+        routeCode:        "SQ-11",
+        lineLabel:        "UX/UI",
+        stampLabel:       "Path Tested",
+        checkpointLabel:  "End of line.",
+        accentHue:        142,    // green
+    },
+    "fizzu-soda": {
+        routeCode:        "FS-04",
+        lineLabel:        "Graphic Design",
+        stampLabel:       "Brand Sealed",
+        checkpointLabel:  "End of line.",
+        accentHue:        22,     // warm orange
+    },
+    sap: {
+        routeCode:        "SA-02",
+        lineLabel:        "UX/UI",
+        stampLabel:       "System Logged",
+        checkpointLabel:  "End of line.",
+        accentHue:        188,    // teal
+    },
+};
+
+/**
+ * Canonical display order for drawer / progress readout.
+ * Can be reordered any time without affecting stamp data.
+ */
+export const PASSBOOK_ROUTE_ORDER = [
+    "inklink",
+    "prolog",
+    "sidequest",
+    "fizzu-soda",
+    "sap",
+];
+
+/** Total number of collectable stamps. */
+export const PASSBOOK_TOTAL = PASSBOOK_ROUTE_ORDER.length;
+
+/** Returns config for a project, or null if not in the passbook. */
+export function getPassbookRoute(projectId) {
+    return PASSBOOK_ROUTES[projectId] ?? null;
+}
+
+/** True if this project has a passbook stamp to collect. */
+export function isPassbookProject(projectId) {
+    return Object.prototype.hasOwnProperty.call(PASSBOOK_ROUTES, projectId);
+}

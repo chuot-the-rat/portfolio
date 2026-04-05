@@ -1,9 +1,8 @@
 /**
  * HeroModeToggle.jsx
- * Three-icon pill that switches the hero between work / study / chaos modes.
- *
- * - Active mode: icon uses "fill" weight + highlighted chip
- * - Uses @phosphor-icons/react for crisp, consistent icons
+ * Three-mode pill: Work / Study / Chaos.
+ * Each button shows an icon + a text label.
+ * Active state gets a mode-specific accent color (via CSS class).
  */
 
 import { Laptop, BookOpen, Confetti } from "@phosphor-icons/react";
@@ -22,13 +21,16 @@ export default function HeroModeToggle({ mode, onChange }) {
         return (
           <button
             key={id}
-            className={`hs-mode-btn${isActive ? " hs-mode-btn--active" : ""}`}
+            className={[
+              "hs-mode-btn",
+              isActive ? "hs-mode-btn--active" : "",
+              isActive ? `hs-mode-btn--${id}` : "",
+            ].filter(Boolean).join(" ")}
             onClick={() => onChange(id)}
-            aria-label={`${label} mode`}
             aria-pressed={isActive}
-            title={label}
           >
-            <Icon size={17} weight={isActive ? "fill" : "regular"} />
+            <Icon size={14} weight={isActive ? "fill" : "regular"} />
+            <span className="hs-mode-btn__label">{label}</span>
           </button>
         );
       })}

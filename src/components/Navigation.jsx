@@ -6,6 +6,7 @@ import "./Navigation.css";
 
 export default function Navigation() {
     const location = useLocation();
+    const [scrolled, setScrolled] = useState(false);
 
     // Dark mode — reads from localStorage, falls back to system preference
     const [isDark, setIsDark] = useState(() => {
@@ -24,8 +25,15 @@ export default function Navigation() {
         localStorage.setItem("theme", isDark ? "dark" : "light");
     }, [isDark]);
 
+    // Scroll detection — add class when user scrolls past nav height
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 48);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
     return (
-        <nav className="navbar">
+        <nav className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
             <div className="nav-container">
                 <Link to="/" className="nav-logo">
                     Leana Le
@@ -37,6 +45,7 @@ export default function Navigation() {
                             <Link
                                 to={item.path}
                                 className={`nav-link ${location.pathname === item.path ? "active" : ""}`}
+                                aria-current={location.pathname === item.path ? "page" : undefined}
                             >
                                 {item.label}
                             </Link>

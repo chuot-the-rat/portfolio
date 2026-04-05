@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
 import {
     getAllProjects,
@@ -8,14 +9,16 @@ import {
 } from "../utils/projectDataMapper";
 import HeroContainer from "../components/header/HeroContainer";
 import HomeWorkList from "../components/home/HomeWorkList";
+import MarqueeTicker from "../components/MarqueeTicker";
+import PassbookPrintCard from "../components/passbook/PassbookPrintCard";
 import { homeHeroConfig } from "../data/header/headerConfig";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
 const Home = () => {
+    usePageTitle(null); // "Leana Le · Designer"
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [heroMode, setHeroMode] = useState("work");
 
     const hoverPatterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
 
@@ -203,9 +206,14 @@ const Home = () => {
                         To revert: replace <HeroContainer> with <HeroSection /> */}
                     <HeroContainer
                         config={homeHeroConfig}
-                        mode={heroMode}
-                        onModeChange={setHeroMode}
+                        className="home-hero-grid"
                     />
+
+                    {/* Passbook print card — issued once, persists on home */}
+                    <PassbookPrintCard />
+
+                    {/* Marquee ticker — editorial skill belt */}
+                    <MarqueeTicker />
 
                     {/* Work list — category tabs + Sharleen-style rows */}
                     {loading ? (
@@ -230,33 +238,54 @@ const Home = () => {
             {/* Footer */}
             <footer className="home-footer">
                 <div className="container">
-                    <p className="footer-heading">Let's connect</p>
-                    <div className="footer-links">
-                        <a href="mailto:leanale003@gmail.com" className="footer-link">
-                            Email
-                        </a>
-                        <span className="footer-sep" aria-hidden>/</span>
-                        <a
-                            href="https://linkedin.com/in/leanale"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="footer-link"
-                        >
-                            LinkedIn
-                        </a>
-                        <span className="footer-sep" aria-hidden>/</span>
-                        <a
-                            href="https://github.com/chuot-the-rat"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="footer-link"
-                        >
-                            GitHub
-                        </a>
+                    <div className="footer-body">
+                        {/* Editorial large heading */}
+                        <div className="footer-hero">
+                            <p className="footer-kicker">Available for work</p>
+                            <h2 className="footer-display">
+                                Let's build<br />something.
+                            </h2>
+                        </div>
+
+                        {/* Links column */}
+                        <nav className="footer-nav" aria-label="Footer links">
+                            <a href="mailto:leanale003@gmail.com" className="footer-nav-link">
+                                <span className="footer-nav-label">Email</span>
+                                <span className="footer-nav-arrow">↗</span>
+                            </a>
+                            <a
+                                href="https://linkedin.com/in/leanale"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="footer-nav-link"
+                            >
+                                <span className="footer-nav-label">LinkedIn</span>
+                                <span className="footer-nav-arrow">↗</span>
+                            </a>
+                            <a
+                                href="https://github.com/chuot-the-rat"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="footer-nav-link"
+                            >
+                                <span className="footer-nav-label">GitHub</span>
+                                <span className="footer-nav-arrow">↗</span>
+                            </a>
+                            <Link to="/about#resume" className="footer-nav-link">
+                                <span className="footer-nav-label">Resume</span>
+                                <span className="footer-nav-arrow">→</span>
+                            </Link>
+                        </nav>
                     </div>
-                    <p className="footer-copyright">
-                        © {new Date().getFullYear()} Leana Le · Designed & developed with care
-                    </p>
+
+                    <div className="footer-bottom">
+                        <p className="footer-copyright">
+                            © {new Date().getFullYear()} Leana Le
+                        </p>
+                        <p className="footer-tagline">
+                            Designed & developed with care · Vancouver, BC
+                        </p>
+                    </div>
                 </div>
             </footer>
         </div>

@@ -1,135 +1,97 @@
-/* 404 Not Found Page Styles */
+/* ==========================================================================
+   404 NOT FOUND — minimal, on-brand, dark-mode-safe
+   ========================================================================== */
 
 .not-found {
+    min-height: 100vh;
     display: flex;
-    min-height: calc(100vh - 70px);
     align-items: center;
     justify-content: center;
+    padding: var(--container-pad);
 }
 
 .not-found-main {
-    width: 100%;
-    padding: clamp(2rem, 6vw, 4rem);
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.not-found-content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: flex-start;
+    gap: var(--space-6);
+    max-width: 480px;
 }
 
-.not-found-code {
-    font-size: clamp(5rem, 15vw, 10rem);
-    font-weight: 800;
-    color: #e7e5e4;
+/* "404" — large mono kicker, dim */
+.not-found-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    opacity: 0.7;
+}
+
+/* Display headline */
+.not-found-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    color: var(--color-text);
     margin: 0;
-    line-height: 1;
-    letter-spacing: -2px;
 }
 
-.not-found-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 700;
-    color: #1c1917;
+/* Subline */
+.not-found-sub {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
     margin: 0;
 }
 
-.not-found-text {
-    font-size: 1rem;
-    color: #57534e;
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
+/* CTA row */
 .not-found-actions {
     display: flex;
-    gap: 1rem;
-    justify-content: center;
+    align-items: center;
+    gap: var(--space-4);
     flex-wrap: wrap;
-    margin: 2rem 0;
+    margin-top: var(--space-4);
 }
 
-.not-found-link {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.not-found-link.primary {
-    background: #212121;
-    color: #ffffff;
-}
-
-.not-found-link.primary:hover {
-    background: #1c1917;
-    transform: translate(4px, 0);
-}
-
-.not-found-link.secondary {
-    background: #f0ebe5;
-    color: #1c1917;
-    border: 1px solid #e7e5e4;
-}
-
-.not-found-link.secondary:hover {
-    background: #e7ddd3;
-    transform: translate(-4px, 0);
-}
-
-.not-found-nav {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e7e5e4;
-}
-
-.not-found-nav-title {
-    font-size: 0.9rem;
-    font-weight: 600;
+.not-found-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-8);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-micro);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #616161;
-    margin: 0 0 1rem 0;
-}
-
-.not-found-nav-list {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.not-found-nav-list a {
-    color: #57534e;
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
+    border-radius: var(--radius-full);
+    background: var(--color-text);
+    color: var(--color-bg);
+    border: 1px solid transparent;
+    transition:
+        opacity 0.18s ease,
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.22s ease;
 }
 
-.not-found-nav-list a:hover {
-    color: #1c1917;
+.not-found-cta:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
 }
 
-@media (max-width: 768px) {
-    .not-found-main {
-        padding: clamp(1.5rem, 4vw, 2rem);
-    }
+.not-found-cta--ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border-color: var(--color-border);
+    padding: var(--space-3) var(--space-6);
+}
 
-    .not-found-actions {
-        flex-direction: column;
-    }
-
-    .not-found-link {
-        width: 100%;
-        text-align: center;
-    }
+.not-found-cta--ghost:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-secondary);
+    box-shadow: none;
+    transform: none;
+    opacity: 1;
 }

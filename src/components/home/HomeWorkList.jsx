@@ -1,21 +1,25 @@
 /**
  * HomeWorkList.jsx
- * Editorial project list for the home page.
+ * Text-led project list — Jackie Hu / Sharleen inspired.
  *
- * Layout: Sharleen Wang-style rows — image left, info right.
- * Category tabs (UX/UI · Motion Design · Graphic Design) filter the list.
- * Hovering a row cycles through project screenshots in the image panel.
+ * Layout philosophy:
+ * - Resting state: text rows only. Index | Title + subtitle | Year.
+ * - Hover: floating preview image fades in on the right (desktop only).
+ * - Hovered row: brightens, shifts 4px right.
+ * - Siblings: dim to 0.28 opacity.
+ * - Mobile: no preview, touch goes straight to project.
+ *
+ * No permanent thumbnails in the grid. Image is a reward, not a fixture.
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { getProjectPath } from "../../utils/projectDataMapper";
+import { getProjectPath, isStandaloneProject } from "../../utils/projectDataMapper";
 import "./HomeWorkList.css";
 
 const TABS = ["UX/UI", "Motion Design", "Graphic Design"];
 
-// Map projects.json category values to the three tabs
 const CATEGORY_MAP = {
   "UI/UX":            "UX/UI",
   "Web Design":       "UX/UI",
@@ -24,30 +28,20 @@ const CATEGORY_MAP = {
   "Packaging Design": "Graphic Design",
 };
 
-const IMAGE_CYCLE_MS = 1800;
-
 export default function HomeWorkList({ projects }) {
   const [activeTab, setActiveTab]   = useState("UX/UI");
   const [hoveredId, setHoveredId]   = useState(null);
-  const [cycleIdx, setCycleIdx]     = useState(0);
-  const intervalRef                 = useRef(null);
-
-  // Cycle through images while a row is hovered
-  useEffect(() => {
-    if (hoveredId) {
-      intervalRef.current = setInterval(() => {
-        setCycleIdx((i) => i + 1);
-      }, IMAGE_CYCLE_MS);
-    } else {
-      clearInterval(intervalRef.current);
-      setCycleIdx(0);
-    }
-    return () => clearInterval(intervalRef.current);
-  }, [hoveredId]);
 
   const filtered = projects.filter(
     (p) => (CATEGORY_MAP[p.category] ?? "UX/UI") === activeTab,
   );
+
+  // Find the hovered project and resolve its best preview image
+  const hoveredProject = filtered.find((p) => p.id === hoveredId) ?? null;
+  const previewSrc =
+    hoveredProject?.coverImage ??
+    hoveredProject?.allImages?.[0]?.src ??
+    null;
 
   return (
     <section className="hw" aria-label="Selected work">
@@ -69,114 +63,114 @@ export default function HomeWorkList({ projects }) {
         </span>
       </div>
 
-      {/* ── Project rows ── */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          className="hw-list"
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {filtered.length === 0 ? (
-            <p className="hw-empty">No projects in this category yet.</p>
-          ) : (
-            filtered.map((project, index) => {
-              const isHovered = hoveredId === project.id;
-              const isDimmed  = hoveredId !== null && !isHovered;
-              const images    = project.allImages ?? [];
-              const coverSrc  = project.coverImage
-                ?? images[0]?.src
-                ?? (project.thumbnail ? `/${project.thumbnail}` : null);
-              const cycledSrc = isHovered && images.length > 1
-                ? images[cycleIdx % images.length]?.src
-                : coverSrc;
+      {/* ── Body: text list + sticky preview slot ── */}
+      <div className="hw-body">
 
-              return (
-                <motion.article
-                  key={project.id}
-                  className={[
-                    "hw-item",
-                    isHovered ? "hw-item--active" : "",
-                    isDimmed  ? "hw-item--dimmed" : "",
-                  ].filter(Boolean).join(" ")}
-                  onMouseEnter={() => setHoveredId(project.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onFocus={()     => setHoveredId(project.id)}
-                  onBlur={()      => setHoveredId(null)}
-                >
-                  <Link
-                    to={getProjectPath(project.id)}
-                    className="hw-item-link"
+        {/* Project rows */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            className="hw-list"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {filtered.length === 0 ? (
+              <p className="hw-empty">No projects in this category yet.</p>
+            ) : (
+              filtered.map((project, index) => {
+                const isHovered = hoveredId === project.id;
+                const isDimmed  = hoveredId !== null && !isHovered;
+
+                return (
+                  <motion.article
+                    key={project.id}
+                    className={[
+                      "hw-item",
+                      isHovered ? "hw-item--active" : "",
+                      isDimmed  ? "hw-item--dimmed" : "",
+                    ].filter(Boolean).join(" ")}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.42, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                    onMouseEnter={() => setHoveredId(project.id)}
+                    onMouseLeave={() => setHoveredId(null)}
+                    onFocus={()     => setHoveredId(project.id)}
+                    onBlur={()      => setHoveredId(null)}
                   >
-                    {/* Image panel */}
-                    <div className="hw-item-image" aria-hidden="true">
-                      <AnimatePresence mode="wait">
-                        {cycledSrc ? (
-                          <motion.img
-                            key={cycledSrc}
-                            src={cycledSrc}
-                            alt=""
-                            className="hw-item-img"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.45 }}
-                          />
-                        ) : (
-                          <motion.div
-                            key="placeholder"
-                            className="hw-item-placeholder"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                          />
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    {/* Info panel */}
-                    <div className="hw-item-info">
-                      <span className="hw-item-index">
-                        {String(index + 1).padStart(2, "0")}&thinsp;/&thinsp;
-                        {activeTab.toUpperCase()}
+                    <Link
+                      to={getProjectPath(project.id)}
+                      className="hw-item-link"
+                    >
+                      {/* Index */}
+                      <span className="hw-item-index" aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
                       </span>
 
-                      <h3 className="hw-item-title">{project.title}</h3>
-
-                      {(project.subtitle || project.tagline) && (
-                        <p className="hw-item-desc">
-                          {project.subtitle ?? project.tagline}
-                        </p>
-                      )}
-
-                      <div className="hw-item-meta">
-                        {project.role && (
-                          <span>
-                            {Array.isArray(project.role)
-                              ? project.role[0]
-                              : project.role}
+                      {/* Title + one-line descriptor */}
+                      <div className="hw-item-text">
+                        <span className="hw-item-title">{project.title}</span>
+                        {(project.subtitle || project.tagline) && (
+                          <span className="hw-item-sub">
+                            {project.subtitle ?? project.tagline}
                           </span>
                         )}
-                        {project.year && (
-                          <>
-                            <span className="hw-item-sep" aria-hidden>·</span>
-                            <span>{project.year}</span>
-                          </>
-                        )}
+                        <span className="hw-item-type">
+                          {isStandaloneProject(project.id)
+                            ? project.category ?? "Project"
+                            : "Case Study"}
+                        </span>
                       </div>
 
-                      <span className="hw-item-cta" aria-hidden="true">
-                        View case study →
-                      </span>
-                    </div>
-                  </Link>
-                </motion.article>
-              );
-            })
-          )}
-        </motion.div>
-      </AnimatePresence>
+                      {/* Year — pushed right */}
+                      {project.year && (
+                        <span className="hw-item-year" aria-hidden="true">
+                          {project.year}
+                        </span>
+                      )}
+                    </Link>
+                  </motion.article>
+                );
+              })
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Floating preview — desktop only, hidden on mobile via CSS */}
+        <div className="hw-preview-slot" aria-hidden="true">
+          <AnimatePresence mode="sync">
+            {previewSrc && hoveredId && (
+              <motion.div
+                key={hoveredId}
+                className="hw-preview"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  transition: {
+                    duration: 0.3,
+                    delay: 0.12, // 120ms delay — image is a reward, not instant
+                    ease: [0.16, 1, 0.3, 1],
+                  },
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.97,
+                  transition: { duration: 0.18 },
+                }}
+              >
+                <img
+                  src={previewSrc}
+                  alt=""
+                  className="hw-preview-img"
+                  loading="lazy"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </section>
   );
 }

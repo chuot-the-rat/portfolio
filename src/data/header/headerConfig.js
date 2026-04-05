@@ -18,6 +18,7 @@ export const homeHeroConfig = {
 
   // HeroText
   text: {
+    showStatus: true,
     descriptor: "UI/UX Designer & Developer",
     headline: ["Leana", "Le"], // array = one word per display line
     headlineAs: "h1",
@@ -77,43 +78,8 @@ export const homeHeroConfig = {
     },
   ],
 
-  // FloatingImages — draggable image cards that rearrange per mode.
-  // Set src: "/your/image.jpg" when ready. Leave null to show placeholders.
-  floatingImages: [
-    {
-      id: "hero-img-1",
-      src: null,           // → add your image path here
-      alt: "Project 1",
-      width: 200,
-      modes: {
-        work:  { x: 880, y:  20, rotate:  2 },
-        study: { x: 600, y: -40, rotate: -4 },
-        chaos: { x: 920, y: -70, rotate: 14 },
-      },
-    },
-    {
-      id: "hero-img-2",
-      src: null,
-      alt: "Project 2",
-      width: 160,
-      modes: {
-        work:  { x: 760, y: 260, rotate: -3 },
-        study: { x: 800, y: 190, rotate:  6 },
-        chaos: { x: 630, y: 170, rotate: -18 },
-      },
-    },
-    {
-      id: "hero-img-3",
-      src: null,
-      alt: "Project 3",
-      width: 145,
-      modes: {
-        work:  { x: 980, y: 145, rotate:  4 },
-        study: { x: 700, y: 290, rotate: -8 },
-        chaos: { x: 760, y:  90, rotate: 22 },
-      },
-    },
-  ],
+  // FloatingImages — add real src paths when assets are ready.
+  floatingImages: [],
 
   // CTAGroup
   ctas: [

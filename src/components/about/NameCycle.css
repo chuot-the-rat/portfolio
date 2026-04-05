@@ -1,0 +1,56 @@
+/* ==========================================================================
+   NameCycle — bracket-suffix identity component
+   "Hi! It's LeanaLe[.com]"
+
+   Base text is stable. Only the suffix inside [ ] cycles.
+   Brackets are muted. Suffix uses site accent.
+   ========================================================================== */
+
+.nc {
+    /* Allow inline rendering inside a heading */
+    display: inline;
+}
+
+/* ── Screen reader only ──────────────────────────────────────────────────── */
+.nc__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ── Visual layer ────────────────────────────────────────────────────────── */
+.nc__visual {
+    /* Prevents layout reflow between long/short suffixes at a cost of
+       a fixed-width suffix area. Instead we allow natural reflow and
+       rely on fast animation to mask the width change. */
+    display: inline;
+}
+
+/* Brackets — muted, slightly smaller than the base text */
+.nc__bracket {
+    color: var(--color-text-tertiary);
+    opacity: 0.55;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+/* Suffix — accented, same weight as headline */
+.nc__suffix {
+    display: inline-block;
+    color: var(--color-accent-vivid);
+    /* Prevent animation y-offset from causing scrollbar jitter */
+    vertical-align: baseline;
+}
+
+/* ── Reduced motion — disable animation, show text statically ───────────── */
+@media (prefers-reduced-motion: reduce) {
+    .nc__suffix {
+        animation: none;
+    }
+}

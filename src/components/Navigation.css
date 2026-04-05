@@ -19,9 +19,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-8);
+    gap: var(--space-6);
     padding: var(--space-3) var(--space-4);
-    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    /* Solid fallback first, then color-mix for browsers that support it */
+    background: var(--color-bg);
+    background: color-mix(in srgb, var(--color-bg) 90%, transparent);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--color-border);
@@ -29,10 +31,23 @@
     pointer-events: all; /* re-enable on the pill itself */
     width: max-content;
     max-width: calc(100vw - var(--space-8));
+    overflow: hidden; /* prevent any child from escaping the pill */
+    transition:
+        background 0.28s ease,
+        border-color 0.28s ease,
+        box-shadow 0.28s ease;
+}
+
+/* Scrolled state: slightly more opaque + faint shadow */
+.navbar--scrolled .nav-container {
+    background: color-mix(in srgb, var(--color-bg) 96%, transparent);
+    border-color: color-mix(in srgb, var(--color-border) 100%, transparent);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 /* Logo */
 .nav-logo {
+    font-family: var(--font-display);
     font-size: var(--font-size-sm);
     font-weight: 500;
     color: var(--color-text);
@@ -49,15 +64,6 @@
 
 .nav-logo:focus-visible {
     outline: var(--focus-ring);
-}
-
-/* Divider between logo and links */
-.nav-container::after {
-    content: '';
-    width: 1px;
-    height: 14px;
-    background: var(--color-border);
-    flex-shrink: 0;
 }
 
 /* Menu */
@@ -140,16 +146,36 @@
 /* Mobile */
 @media (max-width: 600px) {
     .nav-container {
-        gap: var(--space-4);
+        gap: var(--space-3);
         padding: var(--space-2) var(--space-3);
     }
 
     .nav-logo {
         font-size: var(--font-size-xs);
+        flex-shrink: 0;
+    }
+
+    .nav-menu {
+        gap: 2px;
     }
 
     .nav-link {
         padding: var(--space-1) var(--space-2);
-        font-size: 11px;
+        font-size: 10px;
+    }
+
+    .nav-sep {
+        display: none; /* reclaim space, theme icon is distinct enough */
+    }
+}
+
+/* Very small screens — hide text labels, keep logo + toggle */
+@media (max-width: 360px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-container {
+        gap: var(--space-4);
     }
 }

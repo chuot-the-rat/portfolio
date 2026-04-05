@@ -1,0 +1,83 @@
+/**
+ * NameCycle.jsx
+ * Stable identity headline with a cycling bracket-suffix.
+ *
+ * Renders: Hi! It's LeanaLe[.com]
+ * The base text is stable. Only the bracketed suffix cycles.
+ *
+ * To edit suffixes — update SUFFIXES below.
+ * Weighted entries appear more often and linger longer automatically.
+ */
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import "./NameCycle.css";
+
+// ── Edit this list to change available suffixes ──────────────────────────────
+const SUFFIXES = [
+    { text: ".com",          weight: 3 },
+    { text: "003@gmail.com", weight: 3 },
+    { text: ".svg",          weight: 1 },
+    { text: ".png",          weight: 1 },
+    { text: ".pdf",          weight: 1 },
+    { text: ".html",         weight: 1 },
+];
+
+// Dwell duration per suffix (ms on screen before switching)
+const DWELL = (text) => {
+    if (text === ".com")          return 3800;
+    if (text === "003@gmail.com") return 4500;
+    return 2200;
+};
+
+// Build weighted pool + shuffle once
+function buildPool() {
+    const pool = SUFFIXES.flatMap(({ text, weight }) => Array(weight).fill(text));
+    for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool;
+}
+
+const POOL = buildPool();
+
+// ── Component ────────────────────────────────────────────────────────────────
+export default function NameCycle() {
+    const [idx, setIdx] = useState(0);
+    const suffix = POOL[idx];
+
+    useEffect(() => {
+        const t = setTimeout(
+            () => setIdx((i) => (i + 1) % POOL.length),
+            DWELL(suffix),
+        );
+        return () => clearTimeout(t);
+    }, [idx, suffix]);
+
+    return (
+        <span className="nc">
+            {/* Visible cycling display — hidden from a11y tree */}
+            <span className="nc__visual" aria-hidden="true">
+                Hi! It&apos;s LeanaLe
+                <span className="nc__bracket">[</span>
+                <AnimatePresence mode="wait">
+                    <motion.span
+                        key={`${suffix}-${idx}`}
+                        className="nc__suffix"
+                        initial={{ opacity: 0, y: 7 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.13, ease: "easeOut" }}
+                    >
+                        {suffix}
+                    </motion.span>
+                </AnimatePresence>
+                <span className="nc__bracket">]</span>
+            </span>
+
+            {/* Stable screen-reader text */}
+            <span className="nc__sr">Hi! It&apos;s Leana Le.</span>
+        </span>
+    );
+}
