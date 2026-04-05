@@ -129,7 +129,7 @@
     color: var(--color-text-secondary);
     margin: 0;
     max-width: 52ch;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /* ─ Meta bar — pill chip row ─ */
@@ -309,7 +309,7 @@
     color: var(--color-text-secondary);
     margin-bottom: var(--space-16);
     max-width: 64ch;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /* ──────────────────────────────────────────────────────────────────────
