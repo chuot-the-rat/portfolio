@@ -28,7 +28,7 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: var(--letter-spacing-label);
     color: var(--color-text-tertiary);
     padding-top: 3px;
     user-select: none;

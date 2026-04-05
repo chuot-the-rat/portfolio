@@ -35,7 +35,7 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: var(--letter-spacing-label);
     color: var(--color-text-tertiary);
     padding-top: 4px; /* align with first line cap-height */
     user-select: none;
@@ -59,7 +59,7 @@
 .about-em {
     font-style: normal;
     color: var(--color-text);
-    font-weight: 450;
+    font-weight: 500;
 }
 
 /* ── Let's Talk ─────────────────────────────────────────────────────────────

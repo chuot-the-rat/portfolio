@@ -23,6 +23,7 @@
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "./components/Navigation";
 
 // Pages
@@ -56,54 +57,46 @@ function ScrollToTop() {
     return null;
 }
 
+/** Wraps each page in a fade transition. Framer Motion handles enter/exit. */
+function P({ children }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+        >
+            {children}
+        </motion.div>
+    );
+}
+
 function App() {
+    const location = useLocation();
+
     return (
         <div className="app">
             <ScrollToTop />
             <Navigation />
 
-            {/* Route definitions — determines which page renders based on URL */}
-            <Routes>
-                {/* ─── PRIMARY ROUTES ─── */}
-                <Route
-                    path="/"
-                    element={<Home />}
-                />
-                <Route
-                    path="/projects"
-                    element={<Navigate to="/" replace />}
-                />
-                <Route
-                    path="/about"
-                    element={<About />}
-                />
+            <AnimatePresence mode="wait" initial={false}>
+                <Routes location={location} key={location.pathname}>
+                    {/* ─── PRIMARY ROUTES ─── */}
+                    <Route path="/"          element={<P><Home /></P>} />
+                    <Route path="/projects"  element={<Navigate to="/" replace />} />
+                    <Route path="/about"     element={<P><About /></P>} />
+                    <Route path="/resume"    element={<P><Resume /></P>} />
 
-                <Route
-                    path="/resume"
-                    element={<Resume />}
-                />
+                    {/* ─── CASE STUDY PROJECTS ─── */}
+                    <Route path="/projects/:id"  element={<P><ProjectDetail /></P>} />
 
-                {/* ─── CASE STUDY PROJECTS ─── */}
-                {/* Route for individual case studies (e.g., /projects/inklink) */}
-                <Route
-                    path="/projects/:id"
-                    element={<ProjectDetail />}
-                />
+                    {/* ─── STANDALONE PROJECTS ─── */}
+                    <Route path="/design/:slug"  element={<P><ProjectLayout /></P>} />
 
-                {/* ─── STANDALONE PROJECTS ─── */}
-                {/* Route for standalone design projects (e.g., /design/fizzu-soda) */}
-                <Route
-                    path="/design/:slug"
-                    element={<ProjectLayout />}
-                />
-
-                {/* ─── 404 CATCH-ALL ─── */}
-                {/* Must be last — matches any route not caught above */}
-                <Route
-                    path="*"
-                    element={<NotFound />}
-                />
-            </Routes>
+                    {/* ─── 404 CATCH-ALL ─── */}
+                    <Route path="*" element={<P><NotFound /></P>} />
+                </Routes>
+            </AnimatePresence>
         </div>
     );
 }

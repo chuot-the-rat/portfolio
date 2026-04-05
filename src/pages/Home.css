@@ -14,6 +14,22 @@
     padding-bottom: var(--space-24);
 }
 
+/* ── Home hero overrides ─────────────────────────────────────────────────── */
+
+/* Scope the massive display headline to the home hero only.
+   Other pages using HeroContainer inherit the smaller safe default. */
+.home-hero-grid {
+    --hs-headline-size:     clamp(3.25rem, 8.5vw, 7rem);
+    --hs-headline-leading:  0.92;
+    --hs-headline-tracking: -0.04em;
+}
+
+@media (max-width: 480px) {
+    .home-hero-grid {
+        --hs-headline-size: clamp(3rem, 14vw, 4.5rem);
+    }
+}
+
 /* ── Home hero dot-grid texture ──────────────────────────────────────────── */
 
 /* Figma-style dot-grid. Applied only to the home hero via className prop.

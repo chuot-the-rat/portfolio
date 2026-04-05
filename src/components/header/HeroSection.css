@@ -16,12 +16,14 @@
    Edit values here — never in component JSX.
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
-  /* Typography — headline */
+  /* Typography — headline
+     Default: comfortable page-header size.
+     The home hero overrides these via .home-hero-grid in Home.css. */
   --hs-headline-font:     var(--font-display);
-  --hs-headline-size:     clamp(3.25rem, 8.5vw, 7rem);
+  --hs-headline-size:     clamp(2.25rem, 5vw, 3.75rem);
   --hs-headline-weight:   500;
-  --hs-headline-leading:  0.92;
-  --hs-headline-tracking: -0.04em;
+  --hs-headline-leading:  1.05;
+  --hs-headline-tracking: -0.025em;
 
   /* Typography — subline */
   --hs-subline-font:      var(--font-sans);
@@ -502,8 +504,8 @@
 
 @media (max-width: 480px) {
   .hs-text__headline {
-    font-size: clamp(3rem, 14vw, 4rem);
-    letter-spacing: -0.03em;
+    font-size: clamp(2rem, 12vw, 3.25rem);
+    letter-spacing: -0.02em;
   }
 
   .hs-text__subline {
