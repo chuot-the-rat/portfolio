@@ -5,60 +5,31 @@ import "./NotFound.css";
 export default function NotFound() {
     return (
         <div className="not-found">
-            <main className="not-found-main">
-                <motion.div
-                    className="not-found-content"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h1 className="not-found-code">404</h1>
-                    <h2 className="not-found-title">Page Not Found</h2>
-                    <p className="not-found-text">
-                        Oops! It looks like you've navigated to a page that
-                        doesn't exist. Let's get you back on track.
-                    </p>
+            <motion.main
+                className="not-found-main"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            >
+                <span className="not-found-eyebrow">404</span>
 
-                    <div className="not-found-actions">
-                        <Link
-                            to="/"
-                            className="not-found-link primary"
-                        >
-                            Back to Home
-                        </Link>
-                        <Link
-                            to="/projects"
-                            className="not-found-link secondary"
-                        >
-                            View Projects
-                        </Link>
-                    </div>
+                <h1 className="not-found-heading">Wrong turn.</h1>
 
-                    <nav className="not-found-nav">
-                        <p className="not-found-nav-title">Quick Navigation</p>
-                        <ul className="not-found-nav-list">
-                            <li>
-                                <Link to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/about">About</Link>
-                            </li>
-                            <li>
-                                <Link to="/projects">Projects</Link>
-                            </li>
-                            <li>
-                                <Link to="/skills">Skills</Link>
-                            </li>
-                            <li>
-                                <Link to="/education">Education</Link>
-                            </li>
-                            <li>
-                                <Link to="/contact">Contact</Link>
-                            </li>
-                        </ul>
-                    </nav>
-                </motion.div>
-            </main>
+                <p className="not-found-sub">
+                    This page doesn't exist — probably an isekai portal.
+                    <br />
+                    Let's get you back.
+                </p>
+
+                <div className="not-found-actions">
+                    <Link to="/" className="not-found-cta">
+                        ← Back to work
+                    </Link>
+                    <Link to="/about" className="not-found-cta not-found-cta--ghost">
+                        About me
+                    </Link>
+                </div>
+            </motion.main>
         </div>
     );
 }
