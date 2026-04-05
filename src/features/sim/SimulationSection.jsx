@@ -46,12 +46,12 @@ export default function SimulationSection({ caseIndex, sectionIndex }) {
             </div>
 
             {/* ─── SECTION TITLE & DESCRIPTION ─── introduce what this section does */}
-            <h2 className="section-title">Design Simulator</h2>
+            <h2 className="section-title">Decision Simulator</h2>
 
             <p className="section-description">
-                Configure a user scenario below to see how InkLink's product
-                scope, tradeoffs, and test priorities would shift. This is the
-                case study as a decision engine — not a static story.
+                Pick a user type, device, and constraints to see how the product
+                scope, tradeoffs, and test priorities would shift. The case study
+                as a decision engine — not a static story.
             </p>
 
             {/* ─── SIMULATION STATE PROVIDER ─── wrap both panel and outcome */}

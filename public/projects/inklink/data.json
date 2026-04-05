@@ -9,9 +9,14 @@
     "role": "Researcher & UI/UX Designer",
     "timeline": "3 months",
     "team": "3 team members",
-    "tools": ["Figma", "FigJam", "Google Forms", "Notion"],
+    "tools": [
+        "Figma",
+        "FigJam",
+        "Google Forms",
+        "Notion"
+    ],
     "links": {
-        "live": "https://inklink.framer.website/",
+        "live": "https://inklink-fe.onrender.com/",
         "figma": "https://www.figma.com/file/inklink",
         "prototype": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup"
     },
@@ -32,10 +37,9 @@
             "title": "InkLink Style Guide"
         }
     },
-
     "overview": {
         "title": "Overview",
-        "description": "Everyone has a story they never finished. Maybe it's a novel that stalled at chapter three. Maybe it's a screenplay that never made it past the outline. The ideas were there—the momentum wasn't.\n\nInkLink started with a simple question: what if writing didn't have to be a solo activity? What if the pressure of finishing was replaced by the fun of contributing?",
+        "description": "Everyone has a story they never finished. Maybe it's a novel that stalled at chapter three. Maybe it's a screenplay that never made it past the outline. The ideas were there\u2014the momentum wasn't.\n\nInkLink started with a simple question: what if writing didn't have to be a solo activity? What if the pressure of finishing was replaced by the fun of contributing?",
         "images": [
             {
                 "src": "/projects/inklink/images/overview.svg",
@@ -43,10 +47,9 @@
             }
         ]
     },
-
     "problem": {
         "title": "The Problem",
-        "description": "Writer's block isn't usually about running out of ideas. It's about pressure. The blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nExisting tools like Google Docs and Notion support collaboration, but they're built for productivity—not creative play. Writers need something that removes friction, not something that adds a toolbar.\n\nWe wanted to design an experience that removed those barriers—not by making writing easier, but by making it shared.",
+        "description": "Writer's block isn't usually about running out of ideas. It's about pressure. The blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nExisting tools like Google Docs and Notion support collaboration, but they're built for productivity\u2014not creative play. Writers need something that removes friction, not something that adds a toolbar.\n\nWe wanted to design an experience that removed those barriers\u2014not by making writing easier, but by making it shared.",
         "keyInsights": [
             "72% of surveyed hobbyist writers reported experiencing writer's block at least once a month",
             "Most collaborative tools are designed for productivity, not creative expression",
@@ -59,7 +62,6 @@
             }
         ]
     },
-
     "research": {
         "title": "Research & Discovery",
         "description": "Peer surveys were conducted with amateur and hobbyist writers, usability testing was performed on early concepts, and concept validation sessions explored interest in chain-based collaborative writing.",
@@ -86,7 +88,7 @@
         "keyFindings": [
             {
                 "insight": "Desktop/tablet preference",
-                "detail": "Most creative writing happens on desktop or tablet—not mobile phones. Writers wanted screen real estate to see the story unfold."
+                "detail": "Most creative writing happens on desktop or tablet\u2014not mobile phones. Writers wanted screen real estate to see the story unfold."
             },
             {
                 "insight": "Dense layouts discourage contribution",
@@ -116,11 +118,10 @@
             },
             {
                 "src": "/projects/inklink/images/Collab board 1.2.svg",
-                "alt": "Collaborative research board — round 2"
+                "alt": "Collaborative research board \u2014 round 2"
             }
         ]
     },
-
     "personas": {
         "title": "User Personas",
         "description": "Two primary personas emerged from the research, representing the core users InkLink would serve.",
@@ -136,7 +137,6 @@
             }
         ]
     },
-
     "userFlows": {
         "title": "User Flows",
         "description": "The core user journeys were mapped to ensure the experience from landing to contributing felt intuitive and low-friction. Three primary flows guided the design decisions.",
@@ -182,25 +182,23 @@
             },
             {
                 "src": "/projects/inklink/images/User Story Map 3.png",
-                "alt": "User story map — refined"
+                "alt": "User story map \u2014 refined"
             }
         ]
     },
-
     "informationArchitecture": {
         "title": "Information Architecture",
         "description": "InkLink's navigation was structured around three core activities: discovering stories, contributing to chains, and managing writing. The IA went through two revisions based on card sorting exercises with test participants.",
         "images": []
     },
-
     "lofi": {
-        "title": "Lo‑Fi Exploration",
-        "description": "Lo-fi exploration focused on one core interaction: contributing to a story. Different approaches to showing story history, handling turn-taking, and branching narratives were sketched. The visuals were intentionally basic—the priority was testing logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
+        "title": "Lo\u2011Fi Exploration",
+        "description": "Lo-fi exploration focused on one core interaction: contributing to a story. Different approaches to showing story history, handling turn-taking, and branching narratives were sketched. The visuals were intentionally basic\u2014the priority was testing logic, not aesthetics.\n\nWhat emerged was a simple chain: read what came before, add your piece, pass it on.",
         "explorations": [
             {
                 "name": "Story Reading View",
                 "description": "Explored scrolling vs. paginated layouts for reading existing chain contributions. Tested vertical thread, horizontal carousel, and card-stack approaches.",
-                "outcome": "Vertical scrolling thread won—users found it the most natural for reading sequential content."
+                "outcome": "Vertical scrolling thread won\u2014users found it the most natural for reading sequential content."
             },
             {
                 "name": "Contribution Interface",
@@ -229,10 +227,9 @@
             }
         ]
     },
-
     "styleGuide": {
         "title": "Style Guide & Design System",
-        "description": "InkLink's visual identity balances warmth and clarity. The interface was designed to feel inviting—like opening a favorite notebook—while staying clean enough that the writing itself takes center stage. Color is used sparingly, mostly to indicate interactive elements and turn status.",
+        "description": "InkLink's visual identity balances warmth and clarity. The interface was designed to feel inviting\u2014like opening a favorite notebook\u2014while staying clean enough that the writing itself takes center stage. Color is used sparingly, mostly to indicate interactive elements and turn status.",
         "embed": {
             "type": "figma-design",
             "src": "https://embed.figma.com/design/ZoL7NWftUWpfKbSBIPg6Gn/InkLink-Style-Guide?node-id=0-1&embed-host=share",
@@ -241,31 +238,30 @@
         "images": [
             {
                 "src": "/projects/inklink/images/Style Guide & Spec Sheet 1.svg",
-                "alt": "Style guide & spec sheet — page 1"
+                "alt": "Style guide & spec sheet \u2014 page 1"
             },
             {
                 "src": "/projects/inklink/images/Style Guide & Spec Sheet 2.svg",
-                "alt": "Style guide & spec sheet — page 2"
+                "alt": "Style guide & spec sheet \u2014 page 2"
             },
             {
                 "src": "/projects/inklink/images/Style Guide & Spec Sheet 3.svg",
-                "alt": "Style guide & spec sheet — page 3"
+                "alt": "Style guide & spec sheet \u2014 page 3"
             },
             {
                 "src": "/projects/inklink/images/Style Guide & Spec Sheet 4.svg",
-                "alt": "Style guide & spec sheet — page 4"
+                "alt": "Style guide & spec sheet \u2014 page 4"
             },
             {
                 "src": "/projects/inklink/images/Style Guide & Spec Sheet 5.svg",
-                "alt": "Style guide & spec sheet — page 5"
+                "alt": "Style guide & spec sheet \u2014 page 5"
             },
             {
                 "src": "/projects/inklink/images/Style Guide & Spec Sheet 6.svg",
-                "alt": "Style guide & spec sheet — page 6"
+                "alt": "Style guide & spec sheet \u2014 page 6"
             }
         ]
     },
-
     "challenges": {
         "title": "Early Challenges & Pivots",
         "description": "Three major pivots emerged based on user feedback and testing. Each one felt like a step backward at the time, but ended up pushing the design forward.",
@@ -287,15 +283,14 @@
             }
         ],
         "removedFeatures": [
-            "Branching narratives (too complex for MVP—users wanted linear chains)",
+            "Branching narratives (too complex for MVP\u2014users wanted linear chains)",
             "Real-time co-editing (shifted to turn-based to preserve individual voice)",
             "Gamification badges (felt inauthentic to creative writing culture)",
             "AI writing suggestions (users wanted human collaboration, not AI assistance)",
             "Comment threads on individual passages (simplified to reactions only)"
         ],
-        "reflection": "Every removed feature made the core experience stronger. For a creative tool, less truly is more—constraint breeds creativity."
+        "reflection": "Every removed feature made the core experience stronger. For a creative tool, less truly is more\u2014constraint breeds creativity."
     },
-
     "iterations": {
         "title": "Mid-Fidelity Iterations",
         "description": "Between wireframes and final designs, two rounds of mid-fidelity testing were conducted to validate layout decisions and interaction patterns. These iterations caught several usability issues before visual polish was invested in.",
@@ -318,7 +313,7 @@
                 "round": 2,
                 "focus": "Browse/discovery experience & onboarding",
                 "findings": [
-                    "Genre filters were underused—users preferred browsing 'trending' and 'new' feeds",
+                    "Genre filters were underused\u2014users preferred browsing 'trending' and 'new' feeds",
                     "First-time users needed a sample story to understand the chain concept",
                     "Story card previews with 2-line excerpts outperformed title-only cards"
                 ],
@@ -332,14 +327,13 @@
         "images": [
             {
                 "src": "/projects/inklink/images/Switched branch.svg",
-                "alt": "Iteration — switched design branch"
+                "alt": "Iteration \u2014 switched design branch"
             }
         ]
     },
-
     "hifi": {
         "title": "High-Fidelity Mockups",
-        "description": "The high-fidelity designs leaned into typography and whitespace. Words were given space to breathe. Color was used sparingly—mostly to indicate interactive elements and turn status. The writing itself stayed neutral, letting each contributor's voice come through without visual interference.",
+        "description": "The high-fidelity designs leaned into typography and whitespace. Words were given space to breathe. Color was used sparingly\u2014mostly to indicate interactive elements and turn status. The writing itself stayed neutral, letting each contributor's voice come through without visual interference.",
         "embed": {
             "type": "figma-design",
             "src": "https://embed.figma.com/design/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=0-1&embed-host=share",
@@ -348,7 +342,7 @@
         "screens": [
             {
                 "name": "Home / Story Feed",
-                "description": "A clean feed of active story chains with trending, new, and following tabs. Each card shows genre, excerpt, contributor count, and time remaining. The single primary CTA—'Start a Chain'—anchors the top of the page.",
+                "description": "A clean feed of active story chains with trending, new, and following tabs. Each card shows genre, excerpt, contributor count, and time remaining. The single primary CTA\u2014'Start a Chain'\u2014anchors the top of the page.",
                 "image": "/projects/inklink/images/Home.svg"
             },
             {
@@ -383,7 +377,7 @@
             },
             {
                 "name": "Onboarding Walkthrough",
-                "description": "Three-step interactive onboarding that teaches the chain-writing concept. Users read a sample story, contribute a practice passage, and submit it—experiencing the full loop before browsing real chains.",
+                "description": "Three-step interactive onboarding that teaches the chain-writing concept. Users read a sample story, contribute a practice passage, and submit it\u2014experiencing the full loop before browsing real chains.",
                 "image": ""
             }
         ],
@@ -402,23 +396,23 @@
             },
             {
                 "src": "/projects/inklink/images/Editor (private) - start writing (submit disabled).svg",
-                "alt": "Private editor — start writing state"
+                "alt": "Private editor \u2014 start writing state"
             },
             {
                 "src": "/projects/inklink/images/New Private Story-1.svg",
-                "alt": "New private story — step 1"
+                "alt": "New private story \u2014 step 1"
             },
             {
                 "src": "/projects/inklink/images/New Private Story-2.svg",
-                "alt": "New private story — step 2"
+                "alt": "New private story \u2014 step 2"
             },
             {
                 "src": "/projects/inklink/images/New Private Story-3.svg",
-                "alt": "New private story — step 3"
+                "alt": "New private story \u2014 step 3"
             },
             {
                 "src": "/projects/inklink/images/Project Page (private) - Passed.svg",
-                "alt": "Private project page — passed state"
+                "alt": "Private project page \u2014 passed state"
             },
             {
                 "src": "/projects/inklink/images/Choose ink to continue from.svg",
@@ -430,22 +424,20 @@
             }
         ]
     },
-
     "prototype": {
         "title": "Interactive Prototype",
         "description": "A fully interactive Figma prototype was built covering the three core flows: browsing and joining a public chain, starting a new story, and managing a private writing circle. The prototype was used for all usability testing sessions.",
         "link": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=2173-14511&p=f&t=3MqWcWHBQIkqxCbQ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3770&show-proto-sidebar=1",
         "flows": [
-            "Browse → Read story → Claim turn → Write → Submit",
-            "Create new chain → Set rules → Write opening → Publish",
-            "Create writing circle → Invite friends → Manage turns"
+            "Browse \u2192 Read story \u2192 Claim turn \u2192 Write \u2192 Submit",
+            "Create new chain \u2192 Set rules \u2192 Write opening \u2192 Publish",
+            "Create writing circle \u2192 Invite friends \u2192 Manage turns"
         ],
         "images": []
     },
-
     "userTesting": {
         "title": "Usability Testing",
-        "description": "Two rounds of moderated usability testing were conducted—once on mid-fidelity wireframes and once on the final high-fidelity prototype. Sessions were conducted remotely via Zoom with screen sharing, and task completion was tracked through Maze.",
+        "description": "Two rounds of moderated usability testing were conducted\u2014once on mid-fidelity wireframes and once on the final high-fidelity prototype. Sessions were conducted remotely via Zoom with screen sharing, and task completion was tracked through Maze.",
         "reportLinks": {
             "lofi": "https://www.figma.com/proto/Ir2RPiW50x0kZPvnXoyzTx/Lo-fi-Usability-Test-Report?node-id=0-1&t=2P1dG9iPdn1BpTdU-1",
             "hifi": "https://www.figma.com/proto/nrat14I5Mu3CmYdCec6VBQ/Hi-fi-Usability-Test-Report?node-id=0-1&t=ygaW6ASjQBDJ4XJQ-1"
@@ -507,26 +499,23 @@
                     {
                         "severity": "low",
                         "finding": "One participant expected to see a word count goal, not just a limit",
-                        "change": "Added an optional suggested word range (e.g., '150–300 words') alongside the hard limit"
+                        "change": "Added an optional suggested word range (e.g., '150\u2013300 words') alongside the hard limit"
                     }
                 ],
                 "taskCompletionRate": "91%"
             }
         ],
-
         "images": []
     },
-
     "finalPresentation": {
         "title": "Final Presentation",
-        "description": "The final presentation walks through the complete design journey—from initial research findings through pivots, iterations, and the final solution. Presented as a Figma slide deck.",
+        "description": "The final presentation walks through the complete design journey\u2014from initial research findings through pivots, iterations, and the final solution. Presented as a Figma slide deck.",
         "embed": {
             "type": "figma-slides",
             "src": "https://embed.figma.com/slides/4WHXBWm1HrsucoLezSzMFP/InkLink-final-presentation?node-id=43-1172&embed-host=share",
             "title": "InkLink Final Presentation"
         }
     },
-
     "solution": {
         "title": "Final Solution",
         "description": "InkLink is a collaborative writing platform with three core modes of engagement. The design prioritizes low-friction entry, creative momentum, and the joy of building something together.",
@@ -534,7 +523,7 @@
         "features": [
             {
                 "title": "Public Story Chains",
-                "description": "Open stories that anyone can contribute to. Writers join, add a passage, and pass the story forward. Low barrier to entry—no commitment required. Browse by trending, new, or genre.",
+                "description": "Open stories that anyone can contribute to. Writers join, add a passage, and pass the story forward. Low barrier to entry\u2014no commitment required. Browse by trending, new, or genre.",
                 "image": "/projects/inklink/images/Home.svg"
             },
             {
@@ -544,7 +533,7 @@
             },
             {
                 "title": "Timed Contributions",
-                "description": "Optional time limits encourage momentum. If a turn expires, the next writer can step in. Deadlines reduce overthinking—users can toggle this on or off per story.",
+                "description": "Optional time limits encourage momentum. If a turn expires, the next writer can step in. Deadlines reduce overthinking\u2014users can toggle this on or off per story.",
                 "image": "/projects/inklink/images/Choose ink to continue from.svg"
             },
             {
@@ -586,10 +575,9 @@
             }
         ]
     },
-
     "validation": {
         "title": "Validation & Results",
-        "description": "Across both testing rounds, the feedback consistently highlighted that InkLink made writing feel approachable and fun. The reduced pressure was noticeable—users said they felt less precious about their contributions because they knew someone else would build on them.",
+        "description": "Across both testing rounds, the feedback consistently highlighted that InkLink made writing feel approachable and fun. The reduced pressure was noticeable\u2014users said they felt less precious about their contributions because they knew someone else would build on them.",
         "quotes": [
             {
                 "text": "I stopped trying to make it perfect because I knew I only had a day.",
@@ -627,7 +615,6 @@
             }
         ]
     },
-
     "learnings": {
         "title": "What I Learned",
         "insights": [
@@ -637,11 +624,11 @@
             },
             {
                 "title": "Visual clarity beats thematic styling",
-                "description": "The newspaper aesthetic was fun but counterproductive. Clean, minimal design let the content—the writing itself—be the hero."
+                "description": "The newspaper aesthetic was fun but counterproductive. Clean, minimal design let the content\u2014the writing itself\u2014be the hero."
             },
             {
                 "title": "Reducing features can increase engagement",
-                "description": "More was cut than added—and the product improved. Every removed feature simplified the mental model for users."
+                "description": "More was cut than added\u2014and the product improved. Every removed feature simplified the mental model for users."
             },
             {
                 "title": "Test assumptions early and cheaply",
@@ -649,23 +636,21 @@
             },
             {
                 "title": "Onboarding is part of the product, not separate from it",
-                "description": "The interactive sample story wasn't just a tutorial—it was the most effective way to communicate InkLink's value proposition."
+                "description": "The interactive sample story wasn't just a tutorial\u2014it was the most effective way to communicate InkLink's value proposition."
             }
         ]
     },
-
     "nextSteps": {
         "title": "Next Steps",
         "items": [
             "Add saved drafts so writers can step away mid-contribution without losing progress",
             "Improve accessibility with keyboard navigation, screen reader support, and WCAG AA compliance",
             "Design better onboarding for first-time users unfamiliar with chain writing",
-            "Explore branching narratives as a future feature—where chains can fork into alternate storylines",
+            "Explore branching narratives as a future feature\u2014where chains can fork into alternate storylines",
             "Build a notification system that gently nudges contributors when their turn is approaching",
             "Conduct longitudinal testing to understand long-term engagement and retention patterns"
         ]
     },
-
     "designProcess": [
         {
             "phase": "Research & Discovery",

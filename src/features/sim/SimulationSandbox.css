@@ -1,22 +1,20 @@
 /* ==========================================================================
-   SIMULATION SANDBOX - CSS REFACTOR
-   Interactive Case Study Punch-Up for InkLink Project
+   SIMULATION SANDBOX
+   InkLink Interactive Design Decision Module
 
-   Design Direction:
-   - Minimal but expressive
-   - Editorial structure with strong whitespace
-   - Product-design portfolio energy (not SaaS dashboard)
-   - Playful but controlled microinteractions
-   - Polished, intentional, quietly confident
-
+   Direction:
+   - Editorial document, not a widget dashboard
+   - Integrated into the case study page rhythm
+   - Panel: clean, precise, product-like
+   - Output: flowing report, not a stack of cards
+   - Light cyber-clean cues only (mono labels, section codes)
    ========================================================================== */
 
-/* ──────────────────────────────────────────────────────────────────────
-   LAYOUT & STRUCTURE
-   ────────────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────────────
+   SECTION WRAPPER
+   ────────────────────────────────────────────────────────────────────────── */
 
 .sim-section {
-    /* Inherits from .project-section but we can add refinements */
     margin-bottom: var(--space-24);
     max-width: 900px;
 }
@@ -41,62 +39,54 @@
     font-weight: 500;
 }
 
-/* Main Layout: Two-Column Grid (Controls | Output) */
+/* ──────────────────────────────────────────────────────────────────────────
+   TWO-COLUMN LAYOUT
+   ────────────────────────────────────────────────────────────────────────── */
+
 .sim-layout {
     display: grid;
-    grid-template-columns: 1fr 1.4fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: var(--space-12);
-    margin-top: var(--space-12);
+    margin-top: var(--space-10);
     align-items: flex-start;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
     .sim-layout {
         grid-template-columns: 1fr;
-        gap: var(--space-16);
+        gap: var(--space-10);
     }
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   SIMULATION PANEL - CONTROLS
-   Styled as a premium, product-like tool, not a form
-   ────────────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────────────
+   CONFIGURATION PANEL (left column)
+   Styled as a focused configuration surface, not a form.
+   ────────────────────────────────────────────────────────────────────────── */
 
 .sim-panel {
-    /* Subtle background, clean edges, restrained elevation */
-    background-color: var(--color-bg);
+    background-color: var(--color-bg-secondary);
     border: 1px solid var(--color-border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: var(--space-8);
     position: sticky;
-    top: 120px;
-    transition: all var(--duration-base) var(--ease-smooth);
+    top: 100px;
 }
 
-.sim-panel:hover {
-    /* Subtle elevation on hover - soft, not aggressive */
-    border-color: var(--color-text-tertiary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/*  Panel Header */
 .sim-panel__header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
     margin-bottom: var(--space-8);
-    padding-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
     border-bottom: 1px solid var(--color-border);
 }
 
 .sim-panel__badge {
     display: inline-block;
-    font-size: var(--font-size-xs);
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: var(--color-text-tertiary);
-    width: fit-content;
+    margin-bottom: var(--space-3);
 }
 
 .sim-panel__hint {
@@ -106,31 +96,32 @@
     margin: 0;
 }
 
-/* Fieldset Group Styling */
+/* Fieldset groups */
 .sim-panel__fieldset {
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-7);
     border: none;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-3);
 }
 
 .sim-panel__fieldset:last-of-type {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-5);
 }
 
-/* Legend Styling - Strong Visual Hierarchy */
 .sim-panel__legend {
+    font-family: var(--font-mono);
     font-size: var(--font-size-xs);
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-text);
+    color: var(--color-text-secondary);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-2);
+    margin-bottom: var(--space-1);
 }
 
 .sim-panel__legend-note {
@@ -140,70 +131,50 @@
     color: var(--color-text-tertiary);
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   SELECT CONTROL - Custom Styling
-   ────────────────────────────────────────────────────────────────────── */
-
+/* Select */
 .sim-panel__select-wrap {
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
 .sim-panel__select {
     appearance: none;
     width: 100%;
-    padding: var(--space-3) var(--space-4);
-    padding-right: var(--space-8);
+    padding: var(--space-3) var(--space-10) var(--space-3) var(--space-4);
     font-size: var(--font-size-sm);
     font-family: inherit;
     color: var(--color-text);
-    background-color: var(--color-bg-secondary);
+    background-color: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border-radius: var(--radius-base);
     cursor: pointer;
-    transition: all var(--duration-fast) var(--ease-smooth);
+    transition: border-color 0.15s ease;
     font-weight: 500;
 }
 
 .sim-panel__select:hover {
-    border-color: var(--color-text-tertiary);
-    background-color: var(--color-bg);
+    border-color: var(--color-text-secondary);
 }
 
 .sim-panel__select:focus {
     outline: none;
     border-color: var(--color-text);
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
 }
 
-.sim-panel__select:active {
-    background-color: var(--color-bg-secondary);
-}
-
-/* Chevron Icon - Positioned Absolutely */
 .sim-panel__select-chevron {
     position: absolute;
-    right: var(--space-3);
+    right: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
     pointer-events: none;
     color: var(--color-text-tertiary);
-    font-size: var(--font-size-sm);
-    transition: color var(--duration-fast) var(--ease-smooth);
+    font-size: 10px;
 }
 
-.sim-panel__select:hover ~ .sim-panel__select-chevron,
-.sim-panel__select:focus ~ .sim-panel__select-chevron {
-    color: var(--color-text);
-}
-
-/* ──────────────────────────────────────────────────────────────────────
-   RADIO GROUP - Device Selection
-   ────────────────────────────────────────────────────────────────────── */
-
+/* Radio buttons */
 .sim-panel__radio-group {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-1);
 }
 
 .sim-panel__radio-label {
@@ -214,16 +185,14 @@
     color: var(--color-text);
     cursor: pointer;
     padding: var(--space-2) var(--space-3);
-    border-radius: 8px;
-    transition: all var(--duration-fast) var(--ease-smooth);
+    border-radius: var(--radius-base);
+    transition: background 0.15s ease;
 }
 
 .sim-panel__radio-label:hover {
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text);
+    background-color: var(--color-bg);
 }
 
-/* Custom Radio Input - Hidden */
 .sim-panel__radio-input {
     appearance: none;
     width: 0;
@@ -232,44 +201,38 @@
     opacity: 0;
 }
 
-/* Custom Radio Dot - Visual Indicator */
 .sim-panel__radio-dot {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    border: 2px solid var(--color-border);
+    border: 1.5px solid var(--color-border);
     background-color: var(--color-bg);
     flex-shrink: 0;
-    transition: all var(--duration-fast) var(--ease-smooth);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-/* Radio Dot - Selected State */
 .sim-panel__radio-input:checked ~ .sim-panel__radio-dot {
     border-color: var(--color-text);
     background-color: var(--color-text);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
 }
 
 .sim-panel__radio-input:checked ~ .sim-panel__radio-dot::after {
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background-color: var(--color-bg);
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   CHECKBOX GROUP - Constraints Selection
-   ────────────────────────────────────────────────────────────────────── */
-
+/* Checkboxes */
 .sim-panel__checkbox-group {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-1);
 }
 
 .sim-panel__checkbox-label {
@@ -280,22 +243,19 @@
     color: var(--color-text);
     cursor: pointer;
     padding: var(--space-2) var(--space-3);
-    border-radius: 8px;
-    transition: all var(--duration-fast) var(--ease-smooth);
+    border-radius: var(--radius-base);
+    transition: background 0.15s ease;
 }
 
 .sim-panel__checkbox-label:hover:not(.sim-panel__checkbox-label--disabled) {
-    background-color: var(--color-bg-secondary);
+    background-color: var(--color-bg);
 }
 
-/* Disabled State */
 .sim-panel__checkbox-label--disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
-    color: var(--color-text-tertiary);
 }
 
-/* Custom Checkbox Input - Hidden */
 .sim-panel__checkbox-input {
     appearance: none;
     width: 0;
@@ -304,207 +264,171 @@
     opacity: 0;
 }
 
-/* Custom Checkbox Box - Visual Indicator */
 .sim-panel__checkbox-box {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 6px;
-    border: 2px solid var(--color-border);
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid var(--color-border);
     background-color: var(--color-bg);
     flex-shrink: 0;
-    transition: all var(--duration-fast) var(--ease-smooth);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
     color: var(--color-bg);
 }
 
-/* Checkbox - Checked State */
 .sim-panel__checkbox-input:checked ~ .sim-panel__checkbox-box {
     border-color: var(--color-text);
     background-color: var(--color-text);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
 }
 
-/* Checkbox - Hover State (Unchecked) */
 .sim-panel__checkbox-label:hover:not(.sim-panel__checkbox-label--disabled)
     .sim-panel__checkbox-box {
     border-color: var(--color-text-secondary);
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   RESET BUTTON
-   ────────────────────────────────────────────────────────────────────── */
-
+/* Reset button */
 .sim-panel__reset {
-    margin-top: var(--space-4);
+    margin-top: var(--space-5);
     width: 100%;
     padding: var(--space-3) var(--space-4);
-    font-size: var(--font-size-sm);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
     font-weight: 500;
-    font-family: inherit;
-    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
     background-color: transparent;
     border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border-radius: var(--radius-base);
     cursor: pointer;
-    transition: all var(--duration-fast) var(--ease-smooth);
+    transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .sim-panel__reset:hover {
     color: var(--color-text);
     border-color: var(--color-text-secondary);
-    background-color: var(--color-bg-secondary);
 }
 
 .sim-panel__reset:active {
-    transform: scale(0.98);
+    transform: scale(0.99);
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   OUTCOME SUMMARY - OUTPUT PANEL
-   Structured, scannable, decision-engine presentation
-   ────────────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────────────
+   OUTCOME / RESULT COLUMN (right column)
+   Editorial document feel — sections separated by dividers, not cards.
+   ────────────────────────────────────────────────────────────────────────── */
 
 .sim-outcome {
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
+    gap: var(--space-6);
 }
 
-/* Context Tags - User Scenario Summary */
+/* Current scenario context bar */
 .sim-outcome__context {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
     align-items: center;
-    font-size: var(--font-size-sm);
-    padding: var(--space-4);
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
     background-color: var(--color-bg-secondary);
-    border-radius: 8px;
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
 }
 
 .sim-outcome__context-tag {
     display: inline-block;
-    padding: var(--space-2) var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 2px var(--space-3);
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: 6px;
-    color: var(--color-text);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
     font-weight: 500;
-    font-size: var(--font-size-xs);
 }
 
 .sim-outcome__context-divider {
     color: var(--color-text-tertiary);
+    font-size: var(--font-size-xs);
     opacity: 0.4;
 }
 
-/* Body Container - Staggered Animation */
+/* Output body — stacked sections with dividers */
 .sim-outcome__body {
     display: flex;
     flex-direction: column;
-    gap: var(--space-12);
+    /* No gap — sections are separated by border-top */
 }
 
-/* Outcome Block - Each Section */
+/* Each outcome section — document row, not a card */
 .sim-outcome__block {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    padding: var(--space-8);
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    transition: all var(--duration-base) var(--ease-smooth);
+    padding: var(--space-7) 0;
+    border-top: 1px solid var(--color-border);
 }
 
-.sim-outcome__block:hover {
-    border-color: var(--color-text-tertiary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+.sim-outcome__block:last-child {
+    border-bottom: 1px solid var(--color-border);
 }
 
-/* Accent Block - Suggested Tests (Highlighted) */
+/* Accent block (Suggested Tests) — subtle left-border highlight */
 .sim-outcome__block--accent {
-    border-color: var(--color-text-tertiary);
-    background-color: var(--color-bg-secondary);
+    padding-left: var(--space-5);
+    border-left: 2px solid var(--color-accent-vivid);
+    /* Override top border to stay consistent */
+    margin-left: -var(--space-5);
 }
 
-.sim-outcome__block--accent:hover {
-    border-color: var(--color-text);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-}
-
-/* Block Label - Section Title */
+/* Block label — mono uppercase, matches rest of site labels */
 .sim-outcome__block-label {
-    font-size: var(--font-size-sm);
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text);
-    margin: 0;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--space-5);
 }
 
-/* List Styling - Clean and Scannable */
+/* List */
 .sim-outcome__list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-3);
     margin: 0;
     padding: 0;
 }
 
 .sim-outcome__list-item {
     display: flex;
-    gap: var(--space-3);
+    gap: var(--space-4);
     align-items: flex-start;
     font-size: var(--font-size-sm);
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--color-text-secondary);
 }
 
-/* Bullet - Subtle Visual Direction */
+/* Bullet — minimal dot */
 .sim-outcome__bullet {
     display: inline-block;
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
     background-color: var(--color-text-tertiary);
     flex-shrink: 0;
-    margin-top: 6px;
+    margin-top: 9px;
+    opacity: 0.5;
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   INTERACTION & MOTION BEHAVIOR
-   Smooth, restrained, editorial
-   ────────────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────────────
+   RESPONSIVE
+   ────────────────────────────────────────────────────────────────────────── */
 
-/* Framer Motion will handle most animation, but we define base transitions */
-
-/* List item entrance stagger - soft, not bouncy */
-@keyframes listItemEnter {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.sim-outcome__list-item {
-    animation: listItemEnter 0.3s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-    animation-delay: calc(var(--animation-order, 0) * 40ms);
-}
-
-/* ──────────────────────────────────────────────────────────────────────
-   RESPONSIVE BEHAVIOR
-   ────────────────────────────────────────────────────────────────────── */
-
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
     .sim-panel {
         position: static;
         top: auto;
@@ -516,47 +440,21 @@
         padding: var(--space-6);
     }
 
-    .sim-panel__fieldset {
-        margin-bottom: var(--space-6);
-    }
-
     .sim-outcome__block {
-        padding: var(--space-6);
-    }
-
-    .section-title {
-        font-size: var(--font-size-xl);
-    }
-
-    .section-description {
-        font-size: var(--font-size-base);
+        padding: var(--space-6) 0;
     }
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   DARK MODE SUPPORT
-   ────────────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────────────
+   ACCESSIBILITY
+   ────────────────────────────────────────────────────────────────────────── */
 
-[data-theme="dark"] .sim-panel__select-chevron {
-    color: var(--color-text-tertiary);
-}
-
-[data-theme="dark"] .sim-panel__select {
-    background-color: var(--color-bg-secondary);
-}
-
-/* ──────────────────────────────────────────────────────────────────────
-   ACCESSIBILITY & FOCUS STATES
-   ────────────────────────────────────────────────────────────────────── */
-
-/* Clear focus rings for keyboard navigation */
 .sim-panel__select:focus-visible,
 .sim-panel__reset:focus-visible {
-    outline: 2px solid var(--color-text);
-    outline-offset: 2px;
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
     .sim-panel,
     .sim-panel__select,

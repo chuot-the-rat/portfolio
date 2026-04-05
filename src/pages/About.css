@@ -1,7 +1,7 @@
 /* ==========================================================================
    ABOUT PAGE
    Merged page: About + Contact + Resume.
-   Label-left / content-right row layout.
+   Custom hero with NameCycle + label-left/content-right row layout.
    ========================================================================== */
 
 .about {
@@ -11,6 +11,48 @@
 
 .about-main {
     padding-bottom: var(--section-spacing-lg);
+}
+
+/* ── Custom hero ─────────────────────────────────────────────────────────────
+   Replaces HeroContainer — the NameCycle is the star of this section.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.about-hero {
+    padding-top: clamp(5rem, 10vh, 8rem);
+    padding-bottom: clamp(3rem, 6vh, 5rem);
+    min-height: 42vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.about-hero-descriptor {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-label);
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--space-5);
+}
+
+.about-hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 6vw, 5rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--color-text);
+    margin: 0 0 var(--space-5);
+    /* Allow long suffix to wrap on narrow screens */
+    overflow-wrap: break-word;
+}
+
+.about-hero-sub {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 480px;
 }
 
 /* ── Body rows ──────────────────────────────────────────────────────────────
@@ -60,7 +102,7 @@
     font-weight: 500;
 }
 
-/* ── Shared mono label (used in Connect + Resume headers) ─────────────────── */
+/* ── Shared mono label (Contact + Resume headers) ─────────────────────────── */
 .about-connect-label {
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
@@ -68,10 +110,20 @@
     letter-spacing: var(--letter-spacing-label);
     color: var(--color-text-tertiary);
     margin: 0 0 var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+/* ✦ placed in front of "Contact" label — sparse, intentional */
+.about-connect-label-star {
+    color: var(--color-accent-vivid);
+    font-size: 0.7em;
+    opacity: 0.7;
+    line-height: 1;
 }
 
 /* ── Let's Talk / Contact ────────────────────────────────────────────────────
-   Email CTA + secondary rows. Replaces the old link-buttons section.
    ─────────────────────────────────────────────────────────────────────────── */
 
 .about-connect {
@@ -240,7 +292,6 @@
 }
 
 /* ── Resume ──────────────────────────────────────────────────────────────────
-   Iframe embed + action buttons.
    ─────────────────────────────────────────────────────────────────────────── */
 
 .about-resume {
@@ -341,7 +392,7 @@
         padding: var(--space-6) 0;
     }
 
-    /* Disable sibling dim on touch devices */
+    /* Disable sibling dim on touch */
     .about-contact-rows:hover .about-contact-row {
         opacity: 1;
     }

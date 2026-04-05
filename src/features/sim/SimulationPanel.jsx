@@ -32,10 +32,9 @@ export default function SimulationPanel() {
     return (
         <div className="sim-panel">
             <div className="sim-panel__header">
-                <span className="sim-panel__badge">SIM MODE</span>
+                <span className="sim-panel__badge">Configure scenario</span>
                 <p className="sim-panel__hint">
-                    Configure a scenario to see how InkLink's product direction
-                    shifts.
+                    Adjust the variables below. Results update in real time.
                 </p>
             </div>
 

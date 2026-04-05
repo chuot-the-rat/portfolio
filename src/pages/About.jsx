@@ -1,36 +1,9 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { usePageTitle } from "../hooks/usePageTitle";
-import HeroContainer from "../components/header/HeroContainer";
+import NameCycle from "../components/about/NameCycle";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
-import { aboutHeroConfig } from "../data/header/headerConfig";
 import "./About.css";
-
-// Identity-switching hero content — mode toggle lives here, not on Home.
-const MODE_TEXT = {
-    work: {
-        showStatus: true,
-        descriptor: "About",
-        headline: "Hi! It's Leana.",
-        headlineAs: "h1",
-        subline: "Designer, developer, and recovering hospitality worker.",
-    },
-    study: {
-        showStatus: false,
-        descriptor: "Currently Studying",
-        headline: ["Design &", "Code"],
-        headlineAs: "h1",
-        subline: "Second year, Digital Design & Development at BCIT.",
-    },
-    chaos: {
-        showStatus: false,
-        descriptor: "Chuot the Rat",
-        headline: "Hi! I'm Chuot.",
-        headlineAs: "h1",
-        subline: "Vietnamese for mouse. Manga reader, cosplay retiree, isekai connoisseur.",
-    },
-};
 
 const CONTACT_ROWS = [
     {
@@ -68,18 +41,28 @@ const fadeUp = {
 };
 
 export default function About() {
-    usePageTitle("About");
-    const [heroMode, setHeroMode] = useState("work");
+    usePageTitle("About", { site: true }); // "Leana Le · About"
 
     return (
         <div className="about">
             <main className="about-main">
                 <div className="container">
-                    <HeroContainer
-                        config={{ ...aboutHeroConfig, text: MODE_TEXT[heroMode] }}
-                        mode={heroMode}
-                        onModeChange={setHeroMode}
-                    />
+
+                    {/* ── Hero ── */}
+                    <motion.section
+                        className="about-hero"
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <p className="about-hero-descriptor">About</p>
+                        <h1 className="about-hero-headline">
+                            <NameCycle />
+                        </h1>
+                        <p className="about-hero-sub">
+                            Designer, developer, and recovering hospitality worker.
+                        </p>
+                    </motion.section>
 
                     <div className="about-body">
 
@@ -99,7 +82,7 @@ export default function About() {
                                     Now I'm a <em className="about-em">UI/UX designer and front-end developer</em>,
                                     combining that people-first approach with the technical
                                     side of building things. Currently finishing my Diploma
-                                    in Digital Design & Development at BCIT.
+                                    in Digital Design &amp; Development at BCIT.
                                 </p>
                             </div>
                         </motion.div>
@@ -142,7 +125,10 @@ export default function About() {
                         transition={{ duration: 0.45, delay: 0.08 }}
                     >
                         <div className="about-connect-heading-row">
-                            <p className="about-connect-label">Contact</p>
+                            <p className="about-connect-label">
+                                <span className="about-connect-label-star" aria-hidden="true">✦</span>
+                                {" "}Contact
+                            </p>
                             <h2 className="about-connect-heading">Let's talk.</h2>
                         </div>
 
