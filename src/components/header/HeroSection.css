@@ -18,10 +18,10 @@
 :root {
   /* Typography — headline */
   --hs-headline-font:     var(--font-display);
-  --hs-headline-size:     var(--h1);
+  --hs-headline-size:     clamp(3.25rem, 8.5vw, 7rem);
   --hs-headline-weight:   500;
-  --hs-headline-leading:  var(--lh-tight);
-  --hs-headline-tracking: var(--track-title);
+  --hs-headline-leading:  0.92;
+  --hs-headline-tracking: -0.04em;
 
   /* Typography — subline */
   --hs-subline-font:      var(--font-sans);
@@ -79,6 +79,8 @@
   align-items: start;
   width: min(100%, var(--container-max));
   margin-inline: auto;
+  position: relative;
+  z-index: 2; /* above the dot-grid ::before and fade ::after */
 }
 
 /* Asymmetric: text dominates left (1.2), media sits right (0.8) */
@@ -107,6 +109,42 @@
   gap: 0;
   position: relative;
   z-index: 2;
+}
+
+/* ── Status bar — live clock + location ─────────────────────────────────────
+   Shows above the descriptor line. Only rendered when showStatus: true.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hs-text__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-6);
+}
+
+.hs-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+  animation: hs-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes hs-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.7); }
+}
+
+.hs-status-sep {
+  opacity: 0.35;
+}
+
+.hs-clock {
+  font-variant-numeric: tabular-nums;
 }
 
 .hs-text__descriptor {
@@ -149,6 +187,7 @@
 /* Each word in a headline array renders as its own display block */
 .hs-text__headline-word {
   display: block;
+  line-height: 0.95;
 }
 
 .hs-text__subline {
@@ -463,7 +502,8 @@
 
 @media (max-width: 480px) {
   .hs-text__headline {
-    font-size: var(--font-size-2xl);
+    font-size: clamp(3rem, 14vw, 4rem);
+    letter-spacing: -0.03em;
   }
 
   .hs-text__subline {

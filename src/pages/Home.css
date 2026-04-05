@@ -14,6 +14,35 @@
     padding-bottom: var(--space-24);
 }
 
+/* ── Home hero dot-grid texture ──────────────────────────────────────────── */
+
+/* Figma-style dot-grid. Applied only to the home hero via className prop.
+   Position: relative is already set on .hs-container. */
+.home-hero-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle, var(--color-border) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Fade the grid out toward the bottom */
+.home-hero-grid::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, var(--color-bg));
+    pointer-events: none;
+    z-index: 1;
+}
+
 /* ── Marquee belt ────────────────────────────────────────────────────────── */
 
 /* Give the marquee some vertical breathing room from the hero */

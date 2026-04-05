@@ -18,6 +18,7 @@ export const homeHeroConfig = {
 
   // HeroText
   text: {
+    showStatus: true,
     descriptor: "UI/UX Designer & Developer",
     headline: ["Leana", "Le"], // array = one word per display line
     headlineAs: "h1",

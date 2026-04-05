@@ -204,6 +204,7 @@ const Home = () => {
                         To revert: replace <HeroContainer> with <HeroSection /> */}
                     <HeroContainer
                         config={homeHeroConfig}
+                        className="home-hero-grid"
                         mode={heroMode}
                         onModeChange={setHeroMode}
                     />
