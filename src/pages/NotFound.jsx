@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { usePageTitle } from "../hooks/usePageTitle";
 import "./NotFound.css";
 
 export default function NotFound() {
+    usePageTitle("404 — Not Found");
     return (
         <div className="not-found">
             <motion.main

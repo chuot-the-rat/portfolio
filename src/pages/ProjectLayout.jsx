@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { usePageTitle } from "../hooks/usePageTitle";
 import BackToTop from "../components/BackToTop";
 import "./ProjectLayout.css";
 
@@ -16,6 +17,7 @@ const ProjectLayout = () => {
     const [project, setProject] = useState(null);
     const [loading, setLoading] = useState(true);
     const [lightboxImage, setLightboxImage] = useState(null);
+    usePageTitle(project?.title ?? null);
 
     const basePath = `/projects/${slug}`;
 

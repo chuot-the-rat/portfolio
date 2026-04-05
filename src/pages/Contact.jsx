@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { usePageTitle } from "../hooks/usePageTitle";
 import HeroContainer from "../components/header/HeroContainer";
 import "./Contact.css";
 
@@ -52,6 +53,7 @@ const SECONDARY_ROWS = [
 ];
 
 export default function Contact() {
+    usePageTitle("Contact");
     return (
         <div className="contact">
             <main className="contact-main">

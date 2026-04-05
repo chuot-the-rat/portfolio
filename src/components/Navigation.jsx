@@ -45,6 +45,7 @@ export default function Navigation() {
                             <Link
                                 to={item.path}
                                 className={`nav-link ${location.pathname === item.path ? "active" : ""}`}
+                                aria-current={location.pathname === item.path ? "page" : undefined}
                             >
                                 {item.label}
                             </Link>

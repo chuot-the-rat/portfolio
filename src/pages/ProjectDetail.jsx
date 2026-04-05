@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { usePageTitle } from "../hooks/usePageTitle";
 import { getProjectById } from "../utils/projectDataMapper";
 import {
     SectionIndex,
@@ -20,6 +21,7 @@ const ProjectDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [project, setProject] = useState(null);
+    usePageTitle(project?.title ?? null);
     const [loading, setLoading] = useState(true);
     const contentRef = useRef(null);
 

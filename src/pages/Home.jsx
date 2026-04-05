@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
 import {
     getAllProjects,
@@ -39,6 +40,7 @@ const MODE_TEXT = {
 };
 
 const Home = () => {
+    usePageTitle(null); // "Leana Le"
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [heroMode, setHeroMode] = useState("work");

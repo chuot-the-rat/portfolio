@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { usePageTitle } from "../hooks/usePageTitle";
 import HeroContainer from "../components/header/HeroContainer";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
@@ -14,6 +15,7 @@ const fadeUp = {
 };
 
 export default function About() {
+    usePageTitle("About");
     return (
         <div className="about">
             <main className="about-main">
