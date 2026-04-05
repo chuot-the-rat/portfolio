@@ -17,32 +17,17 @@
     "overview": {
         "title": "Overview",
         "description": "Ever had one of those Sundays where you're staring at your phone, scrolling for ideas, and nothing sounds good? You want to do something. You just don't know what.\n\nSideQuest was designed for that exact moment. It's not a directory. It's not a list of recommendations. It's a randomized push to try something unexpected—framed like a video game quest to make it feel playful instead of overwhelming.",
-        "images": [
-            {
-                "src": "projects/sidequest/images/overview.svg",
-                "alt": "SideQuest overview"
-            }
-        ]
+        "images": []
     },
     "problem": {
         "title": "The Problem",
         "description": "Traditional activity apps (Yelp, Google Maps, etc.) assume you know what you're looking for. But what about when you don't? What about when the goal isn't optimization—it's inspiration?\n\nYoung adults (especially those new to a city) face decision fatigue. Too many options. Too much browsing. No sense of urgency or fun.",
-        "images": [
-            {
-                "src": "projects/sidequest/images/problem.svg",
-                "alt": "Problem statement"
-            }
-        ]
+        "images": []
     },
     "research": {
         "title": "Research & Framing",
         "description": "Surveys with 30+ young adults examined how they discover and decide on activities. Data revealed that browsing consumed disproportionate time compared to actual activity completion. Participants expressed desire for novelty without the friction of decision-making.\n\nKey insight: A single randomized option creates urgency and removes decision paralysis. Users respond to binary choice (accept/skip) with higher commitment than to extensive browsing options.",
-        "images": [
-            {
-                "src": "projects/sidequest/images/research.svg",
-                "alt": "Research findings"
-            }
-        ]
+        "images": []
     },
     "challenges": {
         "title": "Early Challenges & Pivots",
@@ -104,24 +89,7 @@
                 "description": "Simple binary choice. No infinite scrolling. Users commit or move on."
             }
         ],
-        "images": [
-            {
-                "src": "projects/sidequest/images/solution-main.svg",
-                "alt": "Main solution"
-            },
-            {
-                "src": "projects/sidequest/images/solution-1.svg",
-                "alt": "Solution detail 1"
-            },
-            {
-                "src": "projects/sidequest/images/solution-2.svg",
-                "alt": "Solution detail 2"
-            },
-            {
-                "src": "projects/sidequest/images/solution-3.svg",
-                "alt": "Solution detail 3"
-            }
-        ]
+        "images": []
     },
     "validation": {
         "title": "Validation & User Testing",

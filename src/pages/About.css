@@ -291,6 +291,125 @@
     50%       { opacity: 0.35; transform: scale(0.7); }
 }
 
+/* ── How I Work ─────────────────────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.about-process {
+    margin-top: var(--section-spacing-lg);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--color-border);
+}
+
+.about-process-header {
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.about-process-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.about-process-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about-process-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: var(--space-8);
+    padding: var(--space-7) 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.about-process-step:last-child {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.about-process-step-num {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-label);
+    color: var(--color-text-tertiary);
+    padding-top: 3px;
+    user-select: none;
+}
+
+.about-process-step-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.about-process-step-title {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.about-process-step-desc {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 520px;
+}
+
+/* ── My Philosophy ───────────────────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.about-philosophy {
+    margin-top: var(--section-spacing-lg);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--color-border);
+}
+
+.about-philosophy-header {
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.about-philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.about-philosophy-block {
+    padding: var(--space-10) var(--space-8) var(--space-10) 0;
+    border-right: 1px solid var(--color-border);
+}
+
+.about-philosophy-block:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+.about-philosophy-block:not(:first-child) {
+    padding-left: var(--space-8);
+}
+
+.about-philosophy-block-title {
+    display: block;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+}
+
+.about-philosophy-block-body {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
 /* ── Resume ──────────────────────────────────────────────────────────────────
    ─────────────────────────────────────────────────────────────────────────── */
 
@@ -380,6 +499,29 @@
    ─────────────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+    .about-process-step {
+        grid-template-columns: 36px 1fr;
+        gap: var(--space-5);
+    }
+
+    .about-philosophy-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-philosophy-block {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-8) 0;
+    }
+
+    .about-philosophy-block:last-child {
+        border-bottom: none;
+    }
+
+    .about-philosophy-block:not(:first-child) {
+        padding-left: 0;
+    }
+
     .about-row {
         grid-template-columns: 1fr;
         gap: var(--space-4);

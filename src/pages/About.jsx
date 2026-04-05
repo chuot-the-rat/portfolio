@@ -112,6 +112,93 @@ export default function About() {
 
                     </div>
 
+                    {/* ── How I Work ── */}
+                    <motion.section
+                        className="about-process"
+                        {...fadeUp}
+                        transition={{ duration: 0.45, delay: 0.08 }}
+                    >
+                        <div className="about-process-header">
+                            <p className="about-connect-label">Process</p>
+                            <h2 className="about-process-heading">How I work</h2>
+                        </div>
+                        <ol className="about-process-steps">
+                            {[
+                                {
+                                    title: "Research",
+                                    desc: "Understanding the problem and product space, researching the market, learning the user, and considering potential solutions.",
+                                },
+                                {
+                                    title: "Design Strategy",
+                                    desc: "Crafting design principles to guide the project and set direction for the team.",
+                                },
+                                {
+                                    title: "User Journey",
+                                    desc: "Diving into user stories, personas, and decision-making. Mapping the golden path.",
+                                },
+                                {
+                                    title: "Design Exploration",
+                                    desc: "Brainstorming a wide range of solutions — testing, iterating, and refining through feedback.",
+                                },
+                                {
+                                    title: "Design Refinement",
+                                    desc: "Polishing the chosen direction and preparing designs for handoff.",
+                                },
+                                {
+                                    title: "Handoff",
+                                    desc: "Working closely with devs and product to ensure the solution gets built right.",
+                                },
+                                {
+                                    title: "Monitoring",
+                                    desc: "After launch, tracking performance wherever possible and iterating on findings.",
+                                },
+                            ].map((step, i) => (
+                                <li key={step.title} className="about-process-step">
+                                    <span className="about-process-step-num" aria-hidden="true">
+                                        {String(i + 1).padStart(2, "0")}
+                                    </span>
+                                    <div className="about-process-step-body">
+                                        <strong className="about-process-step-title">{step.title}</strong>
+                                        <p className="about-process-step-desc">{step.desc}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ol>
+                    </motion.section>
+
+                    {/* ── My Philosophy ── */}
+                    <motion.section
+                        className="about-philosophy"
+                        {...fadeUp}
+                        transition={{ duration: 0.45, delay: 0.08 }}
+                    >
+                        <div className="about-philosophy-header">
+                            <p className="about-connect-label">Philosophy</p>
+                            <h2 className="about-process-heading">My philosophy</h2>
+                        </div>
+                        <div className="about-philosophy-grid">
+                            {[
+                                {
+                                    title: "Curiosity",
+                                    body: "I start every challenge by asking \"what if?\" — curiosity drives me deep into the problem and consistently leads me somewhere better than the obvious answer.",
+                                },
+                                {
+                                    title: "Challenge assumptions",
+                                    body: "Confidence in your own ideas is a trap. I test my assumptions with real users whenever I can and let research data steer the solution, not gut feeling alone.",
+                                },
+                                {
+                                    title: "Attention to detail",
+                                    body: "Great design lives in the details. I check everything twice — spacing, copy, edge cases — because the small stuff is what separates polished from almost-there.",
+                                },
+                            ].map((block) => (
+                                <div key={block.title} className="about-philosophy-block">
+                                    <strong className="about-philosophy-block-title">{block.title}</strong>
+                                    <p className="about-philosophy-block-body">{block.body}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.section>
+
                     {/* ── Skills ── */}
                     <SkillsSection variant="grid" />
 
