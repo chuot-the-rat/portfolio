@@ -309,6 +309,29 @@ export default function About() {
                         </div>
                     </motion.section>
 
+                    {/* ── Colophon ── */}
+                    <motion.footer
+                        className="about-colophon"
+                        {...fadeUp}
+                        transition={{ duration: 0.45, delay: 0.1 }}
+                    >
+                        <hr className="about-colophon-rule" />
+                        <div className="about-colophon-grid">
+                            <div className="about-colophon-cell">
+                                <span className="about-colophon-label">Built with</span>
+                                <span className="about-colophon-value">React + Vite, Framer Motion, deployed on Vercel</span>
+                            </div>
+                            <div className="about-colophon-cell">
+                                <span className="about-colophon-label">Typefaces</span>
+                                <span className="about-colophon-value">Syne (display), Inter (body), SF Mono (code)</span>
+                            </div>
+                            <div className="about-colophon-cell">
+                                <span className="about-colophon-label">Design tools</span>
+                                <span className="about-colophon-value">Figma, Adobe CC</span>
+                            </div>
+                        </div>
+                    </motion.footer>
+
                 </div>
             </main>
         </div>

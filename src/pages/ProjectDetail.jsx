@@ -256,6 +256,23 @@ const ProjectDetail = () => {
                     </div>
                 </div>
             </div>
+            {/* Case study end state — resolved landing before the checkpoint */}
+            <div className="container">
+                <motion.div
+                    className="project-end-state"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <hr className="project-end-rule" />
+                    <span className="project-end-mark" aria-hidden="true">✦</span>
+                    <p className="project-end-note">
+                        End of case study — {new Date().getFullYear()}
+                    </p>
+                </motion.div>
+            </div>
+
             {/* Passbook checkpoint — collect stamp before navigating away */}
             <div className="container">
                 <ProjectCheckpoint projectId={project.id} />
