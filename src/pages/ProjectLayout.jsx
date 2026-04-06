@@ -547,6 +547,7 @@ const ProjectLayout = () => {
                                         }
 
                                         if (section.type === "gallery") {
+                                            if (!section.images || section.images.length === 0) return null;
                                             const gridClass =
                                                 section.gridVariant || "medium";
                                             return (
