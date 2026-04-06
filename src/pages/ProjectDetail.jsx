@@ -16,6 +16,8 @@ import SimulationSection from "../features/sim/SimulationSection";
 import BackToTop from "../components/BackToTop";
 import ReadingProgress from "../components/ReadingProgress";
 import ProjectNextPrev from "../components/ProjectNextPrev";
+import MetadataRow from "../components/MetadataRow";
+import SectionDivider from "../components/SectionDivider";
 import { readingTime } from "../utils/readingTime";
 import "./ProjectDetail.css";
 
@@ -191,36 +193,30 @@ const ProjectDetail = () => {
                         )}
                     </motion.div>
 
-                    {/* Meta bar — horizontal row spanning full width */}
+                    {/* Metadata row — editorial dl format, replaces pill chips */}
                     {metaItems.length > 0 && (
                         <motion.div
-                            className="project-meta-bar"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.45, delay: 0.18 }}
                         >
-                            {metaItems.map((item, i) => (
-                                <div key={item.label} className="project-meta-cell">
-                                    <span className="meta-label">{item.label}</span>
-                                    <span className="meta-value">{item.value}</span>
-                                </div>
-                            ))}
+                            <MetadataRow fields={metaItems} />
 
-                            {/* CTAs pushed to the right end of the bar */}
+                            {/* Typographic project links — below the metadata row */}
                             {(project.links?.live || project.links?.prototype || project.links?.github) && (
-                                <div className="project-meta-cell project-meta-cell--ctas">
+                                <div className="project-hero-links">
                                     {project.links?.live && (
-                                        <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="project-cta-link">
+                                        <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="project-hero-link">
                                             Live site ↗
                                         </a>
                                     )}
                                     {project.links?.prototype && (
-                                        <a href={project.links.prototype} target="_blank" rel="noopener noreferrer" className="project-cta-link">
+                                        <a href={project.links.prototype} target="_blank" rel="noopener noreferrer" className="project-hero-link">
                                             Prototype ↗
                                         </a>
                                     )}
                                     {project.links?.github && (
-                                        <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="project-cta-link">
+                                        <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="project-hero-link">
                                             GitHub ↗
                                         </a>
                                     )}
@@ -346,6 +342,11 @@ const ProjectContentMain = ({ project }) => {
                         </motion.section>
                     );
                 })()}
+
+            {/* ── Phase 1: Research divider ── */}
+            {(project.research || project.problem) && (
+                <SectionDivider index={1} label="Research" />
+            )}
 
             {/* Research */}
             {project.research &&
@@ -838,6 +839,11 @@ const ProjectContentMain = ({ project }) => {
                         </motion.section>
                     );
                 })()}
+
+            {/* ── Phase 2: Solution divider ── */}
+            {(project.iterations || project.hifi || project.solution) && (
+                <SectionDivider index={2} label="Solution" />
+            )}
 
             {/* Iterations & Refinements (supports both improvements and rounds) */}
             {project.iterations &&
@@ -1662,6 +1668,11 @@ const ProjectContentMain = ({ project }) => {
                         </motion.section>
                     );
                 })()}
+
+            {/* ── Phase 3: Reflection divider ── */}
+            {(project.learnings || project.outcomes || project.validation) && (
+                <SectionDivider index={3} label="Reflection" />
+            )}
 
             {/* What I Learned */}
             {project.learnings &&

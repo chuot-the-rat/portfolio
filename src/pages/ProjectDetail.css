@@ -220,6 +220,33 @@
     outline: var(--focus-ring);
 }
 
+/* ─ Typographic project links (replaces old pill CTAs) ─ */
+.project-hero-links {
+    display: flex;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.project-hero-link {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-decoration: none;
+    transition: color 0.18s ease;
+}
+
+.project-hero-link:hover {
+    color: var(--color-text);
+}
+
+/* ─ SectionDivider inside case studies — tighter margins than homepage ─ */
+.project-content-main .sd {
+    margin-block: var(--space-24); /* 6rem — beats are clear but not cavernous */
+}
+
 /* ─ Hero image — full width below header text ─ */
 .project-hero-media {
     border-radius: var(--radius-xl);
