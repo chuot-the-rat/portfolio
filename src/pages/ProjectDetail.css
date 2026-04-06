@@ -113,6 +113,10 @@
     opacity: 0.35;
 }
 
+.project-reading-time {
+    opacity: 0.7;
+}
+
 .project-hero-title {
     font-family: var(--font-display);
     font-size: clamp(2.8rem, 6vw, 5rem);

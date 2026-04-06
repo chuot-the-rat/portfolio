@@ -1,0 +1,48 @@
+/*
+ * SectionDivider.css
+ * Class prefix: sd-
+ *
+ * A thin horizontal rule + section label.
+ * Placed between major case study sections.
+ * No animation — should feel like it was always there.
+ */
+
+.sd {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-block: var(--space-section);
+}
+
+.sd__rule {
+  flex: 1;
+  height: 1px;
+  border: none;
+  background: var(--color-border);
+  margin: 0;
+}
+
+.sd__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sd__num {
+  opacity: 0.6;
+}
+
+.sd__sep {
+  opacity: 0.35;
+}
+
+.sd__name {
+  color: var(--color-text-secondary);
+}

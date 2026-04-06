@@ -16,6 +16,7 @@ import SimulationSection from "../features/sim/SimulationSection";
 import BackToTop from "../components/BackToTop";
 import ReadingProgress from "../components/ReadingProgress";
 import ProjectNextPrev from "../components/ProjectNextPrev";
+import { readingTime } from "../utils/readingTime";
 import "./ProjectDetail.css";
 
 const ProjectDetail = () => {
@@ -175,10 +176,12 @@ const ProjectDetail = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        {/* Eyebrow: category · year */}
+                        {/* Eyebrow: category · year · reading time */}
                         <span className="project-eyebrow">
                             {project.category}
                             {project.year && <><span aria-hidden> · </span>{project.year}</>}
+                            <span aria-hidden> · </span>
+                            <span className="project-reading-time">{readingTime(project)} min read</span>
                         </span>
 
                         <h1 className="project-hero-title">{project.title}</h1>

@@ -107,6 +107,34 @@
     font-variant-numeric: tabular-nums;
 }
 
+/* First-time tooltip */
+.pb-dock__tooltip {
+    position: absolute;
+    bottom: calc(100% + var(--space-3));
+    right: 0;
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-family: var(--pb-font-code);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-base);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: var(--shadow-md);
+    line-height: 1.4;
+}
+
+.pb-dock__tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: var(--space-5);
+    border: 5px solid transparent;
+    border-top-color: var(--color-text);
+}
+
 /* Mobile: wider pill, stays at bottom */
 @media (max-width: 600px) {
     .pb-dock {
@@ -117,6 +145,16 @@
 
     .pb-dock__btn {
         padding: var(--space-2) var(--space-5);
+    }
+
+    .pb-dock__tooltip {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .pb-dock__tooltip::after {
+        right: 50%;
+        transform: translateX(50%);
     }
 }
 
@@ -317,7 +355,17 @@
     text-overflow: ellipsis;
 }
 
-/* Stamp label (right side, only when stamped) */
+/* Stamp slot container — always present, holds either stamp or empty state */
+.pb-route-stamp-slot {
+    position: relative;
+    flex-shrink: 0;
+    min-width: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Stamp label — Framer Motion owns opacity/transform, CSS only sets text style */
 .pb-route-stamp {
     font-family: var(--pb-font-code);
     font-size: 10px;
@@ -325,16 +373,15 @@
     text-transform: uppercase;
     color: var(--pb-accent);
     white-space: nowrap;
-    opacity: 0;
-    transform: translateX(6px);
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-block;
 }
 
-.pb-route-row--stamped .pb-route-stamp {
-    opacity: 1;
-    transform: translateX(0);
+/* Empty slot — visible when not yet stamped */
+.pb-route-stamp-empty {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    opacity: 0.35;
+    display: inline-block;
 }
 
 /* Footer */
