@@ -15,7 +15,7 @@ const educationData = [
         program: "Digital Design & Development",
         degree: "Diploma",
         period: "2024 – 2026",
-        status: "In Progress",
+        status: "Graduating 2026",
     },
 ];
 
