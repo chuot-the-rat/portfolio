@@ -68,15 +68,29 @@ export default function HeroText({
         </motion.span>
       )}
 
-      <motion.div {...motionProps}>
-        <Tag className="hs-text__headline">
-          {headlineLines.map((line, i) => (
+      <Tag className="hs-text__headline">
+        {headlineLines.map((line, i) =>
+          shouldReduceMotion ? (
             <span key={i} className="hs-text__headline-word">
               {line}
             </span>
-          ))}
-        </Tag>
-      </motion.div>
+          ) : (
+            <motion.span
+              key={i}
+              className="hs-text__headline-word"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.1 + i * 0.06,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              {line}
+            </motion.span>
+          )
+        )}
+      </Tag>
 
       {subline && (
         <motion.p className="hs-text__subline" {...motionProps}>

@@ -19,11 +19,11 @@ export const homeHeroConfig = {
   // HeroText
   text: {
     showStatus: true,
-    descriptor: "UI/UX Designer & Developer",
+    descriptor: "Product Designer",
     headline: ["Leana", "Le"], // array = one word per display line
     headlineAs: "h1",
     subline:
-      "Crafting experiences that bridge research, design, and clean code.",
+      "I design products that make sense — from research to release.",
   },
 
   // MediaBlock — null until portrait asset is added
@@ -81,17 +81,17 @@ export const homeHeroConfig = {
   // FloatingImages — add real src paths when assets are ready.
   floatingImages: [],
 
-  // CTAGroup
+  // CTAGroup — typographic links, not SaaS buttons
   ctas: [
     {
-      label: "Let's Build Something →",
+      label: "Get in touch →",
       href: "mailto:leanale003@gmail.com",
-      variant: "primary",
+      variant: "text",
     },
     {
-      label: "Resume",
+      label: "Resume ↓",
       href: "/Le_Leana_Resume_NoNumber.pdf",
-      variant: "ghost",
+      variant: "text",
       download: "Leana_Le_Resume.pdf",
     },
   ],

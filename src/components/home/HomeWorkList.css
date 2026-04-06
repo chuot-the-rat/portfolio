@@ -12,7 +12,7 @@
 
 /* ── Section wrapper ─────────────────────────────────────────────────── */
 .hw {
-  margin-top: var(--space-fluid-xl);
+  margin-top: var(--space-section); /* 128px — clear visual beat from marquee */
 }
 
 /* ── Category tabs ───────────────────────────────────────────────────── */

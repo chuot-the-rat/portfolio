@@ -61,9 +61,10 @@
 
 /* ── Marquee belt ────────────────────────────────────────────────────────── */
 
-/* Give the marquee some vertical breathing room from the hero */
+/* Give the marquee breathing room from the hero */
 .home-main .mq {
-    margin-block: var(--space-fluid-xl);
+    margin-top: var(--space-section);
+    margin-bottom: 0; /* hw-list owns the gap below */
 }
 
 /* ── Loading ─────────────────────────────────────────────────────────────── */

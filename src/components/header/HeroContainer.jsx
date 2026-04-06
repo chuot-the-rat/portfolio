@@ -89,6 +89,20 @@ export default function HeroContainer({
         />
       ))}
 
+      {/* Scroll cue — bottom of hero, fades in after content settles */}
+      {!shouldReduceMotion && (
+        <motion.div
+          className="hs-scroll-cue"
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
+        >
+          <span className="hs-scroll-cue__line" />
+          <span className="hs-scroll-cue__label">scroll</span>
+        </motion.div>
+      )}
+
       {/* Grid: stagger orchestrator wraps the column structure */}
       <motion.div className="hs-grid" {...motionProps}>
         {/* Text column — always present */}
