@@ -27,32 +27,17 @@
     "overview": {
         "title": "Overview",
         "description": "Apprenticeship requires over 6,000 hours. That's years of work, spread across job sites, classrooms, and bureaucratic systems—often without a clear sense of whether progress is on track.\n\nEarly research consistently revealed the same finding: confusion was pushing people out. Not lack of ability. Not lack of motivation. Just confusion about current standing and next steps.\n\nThe challenge became designing something that answered one question clearly: Where am I right now?",
-        "images": [
-            {
-                "src": "projects/prolog/images/overview.svg",
-                "alt": "ProLog overview"
-            }
-        ]
+        "images": []
     },
     "problem": {
         "title": "The Problem",
         "description": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind.",
-        "images": [
-            {
-                "src": "projects/prolog/images/problem.svg",
-                "alt": "Problem statement"
-            }
-        ]
+        "images": []
     },
     "research": {
         "title": "Research & Insights",
         "description": "Policy and documentation review (SkilledTradesBC), stakeholder conversations with industry partners, persona development based on lived experience, and team reflection sessions (informed by neurodivergent team members) formed the research foundation.\n\nKey findings revealed: Progress tracking is scattered across multiple platforms with no single source of truth. Official systems are desktop-first and difficult to use on job sites. Discrepancies between employer-logged and self-logged hours create anxiety. Neurodivergent users experience amplified cognitive load from inconsistent interfaces.\n\nDue to limited participant access, the research leaned on available strengths: lived experience from team members, publicly available documentation, and stakeholder conversations.",
-        "images": [
-            {
-                "src": "projects/prolog/images/problem.svg",
-                "alt": "Research findings and user pain points"
-            }
-        ]
+        "images": []
     },
     "challenges": {
         "title": "Early Challenges",
@@ -104,24 +89,7 @@
                 "description": "Generates unique practice questions based on trade competencies. Designed to build confidence before official exams."
             }
         ],
-        "images": [
-            {
-                "src": "projects/prolog/images/solution-main.svg",
-                "alt": "Main solution"
-            },
-            {
-                "src": "projects/prolog/images/solution-1.svg",
-                "alt": "Benefits and features"
-            },
-            {
-                "src": "projects/prolog/images/solution-3.svg",
-                "alt": "Progress pathway"
-            },
-            {
-                "src": "projects/prolog/images/solution-4.svg",
-                "alt": "Team section and CTA"
-            }
-        ]
+        "images": []
     },
     "validation": {
         "title": "Validation & Testing",

@@ -9,12 +9,26 @@
  * Mounted globally at App level — visible on all pages.
  */
 
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { usePassbook } from "./PassbookProvider";
 import "./Passbook.css";
 
 export default function PassbookDock() {
     const { stampCount, totalRoutes, toggleDrawer } = usePassbook();
+    const controls = useAnimation();
+    const prevCount = useRef(stampCount);
+
+    // Pulse animation when a new stamp is collected
+    useEffect(() => {
+        if (stampCount > prevCount.current) {
+            controls.start({
+                scale: [1, 1.18, 0.96, 1.06, 1],
+                transition: { duration: 0.55, ease: "easeOut" },
+            });
+        }
+        prevCount.current = stampCount;
+    }, [stampCount, controls]);
 
     const allDone = stampCount === totalRoutes;
 
@@ -25,8 +39,9 @@ export default function PassbookDock() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-            <button
+            <motion.button
                 className="pb-dock__btn"
+                animate={controls}
                 onClick={toggleDrawer}
                 aria-label={`Open project passbook — ${stampCount} of ${totalRoutes} stamps collected`}
             >
@@ -37,7 +52,7 @@ export default function PassbookDock() {
                     {stampCount}/{totalRoutes}
                 </span>
                 <span aria-hidden="true">Passbook</span>
-            </button>
+            </motion.button>
         </motion.div>
     );
 }
