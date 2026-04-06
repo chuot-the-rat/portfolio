@@ -9,25 +9,29 @@
  * Weighted entries appear more often and linger longer automatically.
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./NameCycle.css";
 
 // ── Edit this list to change available suffixes ──────────────────────────────
 const SUFFIXES = [
-    { text: ".com",          weight: 3 },
-    { text: "003@gmail.com", weight: 3 },
-    { text: ".svg",          weight: 1 },
-    { text: ".png",          weight: 1 },
-    { text: ".pdf",          weight: 1 },
-    { text: ".html",         weight: 1 },
+    { text: ".com",     weight: 1 },
+    { text: ".svg",     weight: 1 },
+    { text: ".png",     weight: 1 },
+    { text: ".pdf",     weight: 1 },
+    { text: ".html",    weight: 1 },
+    { text: ".tsx",     weight: 1 },
+    { text: ".fig",     weight: 1 },
+    { text: ".ux",      weight: 1 },
+    { text: ".json",    weight: 1 },
 ];
 
 // Dwell duration per suffix (ms on screen before switching)
 const DWELL = (text) => {
-    if (text === ".com")          return 3800;
-    if (text === "003@gmail.com") return 4500;
-    return 2200;
+    if (text === ".com")  return 2800;
+    if (text === ".fig")  return 2600;
+    if (text === ".ux")   return 2400;
+    return 2000;
 };
 
 // Build weighted pool + shuffle once
@@ -47,7 +51,14 @@ export default function NameCycle() {
     const [idx, setIdx] = useState(0);
     const suffix = POOL[idx];
 
+    // Respect prefers-reduced-motion — pause cycling
+    const reducedMotion = useRef(
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    );
+
     useEffect(() => {
+        if (reducedMotion.current) return; // stay on first suffix, no cycling
         const t = setTimeout(
             () => setIdx((i) => (i + 1) % POOL.length),
             DWELL(suffix),
@@ -65,10 +76,10 @@ export default function NameCycle() {
                     <motion.span
                         key={`${suffix}-${idx}`}
                         className="nc__suffix"
-                        initial={{ opacity: 0, y: 7 }}
+                        initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -5 }}
-                        transition={{ duration: 0.13, ease: "easeOut" }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.11, ease: "easeOut" }}
                     >
                         {suffix}
                     </motion.span>

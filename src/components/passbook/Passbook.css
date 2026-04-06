@@ -325,16 +325,7 @@
     text-transform: uppercase;
     color: var(--pb-accent);
     white-space: nowrap;
-    opacity: 0;
-    transform: translateX(6px);
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.pb-route-row--stamped .pb-route-stamp {
-    opacity: 1;
-    transform: translateX(0);
+    /* opacity/transform driven by Framer Motion — no CSS transition needed */
 }
 
 /* Footer */
@@ -557,9 +548,7 @@
     opacity: 0.82;
 }
 
-.pb-checkpoint__action:active {
-    transform: scale(0.97);
-}
+/* press handled by Framer Motion whileTap — no CSS override needed */
 
 .pb-checkpoint__action:focus-visible {
     outline: var(--focus-ring);

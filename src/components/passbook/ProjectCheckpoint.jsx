@@ -15,6 +15,7 @@
  */
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePassbook } from "./PassbookProvider";
 import { getPassbookRoute } from "../../data/passbook/passbookConfig";
 import "./Passbook.css";
@@ -56,32 +57,41 @@ export default function ProjectCheckpoint({ projectId }) {
             </div>
 
             {/* Right: action */}
-            {already ? (
-                <div
-                    className={`pb-checkpoint__stamped${
-                        justCollected ? " pb-checkpoint__stamped--just-collected" : ""
-                    }`}
-                    onClick={openDrawer}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => { if (e.key === "Enter") openDrawer(); }}
-                    aria-label="Stamped — open passbook"
-                    style={{ cursor: "pointer" }}
-                >
-                    <span className="pb-checkpoint__stamped-dot" aria-hidden="true" />
-                    <span className="pb-checkpoint__stamped-label">
-                        Stamped
-                    </span>
-                </div>
-            ) : (
-                <button
-                    className="pb-checkpoint__action"
-                    onClick={handleStamp}
-                    aria-label={`Collect stamp: ${route.stampLabel}`}
-                >
-                    Collect stamp
-                </button>
-            )}
+            <AnimatePresence mode="wait">
+                {already ? (
+                    <motion.div
+                        key="stamped"
+                        className={`pb-checkpoint__stamped${
+                            justCollected ? " pb-checkpoint__stamped--just-collected" : ""
+                        }`}
+                        onClick={openDrawer}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === "Enter") openDrawer(); }}
+                        aria-label="Stamped — open passbook"
+                        style={{ cursor: "pointer" }}
+                        initial={{ opacity: 0, scale: 0.82 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ type: "spring", stiffness: 340, damping: 22 }}
+                    >
+                        <span className="pb-checkpoint__stamped-dot" aria-hidden="true" />
+                        <span className="pb-checkpoint__stamped-label">
+                            Stamped
+                        </span>
+                    </motion.div>
+                ) : (
+                    <motion.button
+                        key="action"
+                        className="pb-checkpoint__action"
+                        onClick={handleStamp}
+                        aria-label={`Collect stamp: ${route.stampLabel}`}
+                        whileTap={{ scale: 0.88 }}
+                        transition={{ duration: 0.08 }}
+                    >
+                        Collect stamp
+                    </motion.button>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

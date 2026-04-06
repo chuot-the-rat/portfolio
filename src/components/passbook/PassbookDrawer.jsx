@@ -12,7 +12,7 @@
  *   - Footer note
  */
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { usePassbook } from "./PassbookProvider";
@@ -22,6 +22,16 @@ import {
 } from "../../data/passbook/passbookConfig";
 import { getProjectPath } from "../../utils/projectDataMapper";
 import "./Passbook.css";
+
+/**
+ * Deterministic rotation for each stamp — same every render,
+ * varies per project. Range: ±4deg, feels hand-placed.
+ */
+function stampRotation(id) {
+    let h = 0;
+    for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) & 0xffff;
+    return ((h % 800) - 400) / 100; // -4 to +4
+}
 
 /** Project display names — supplement data without touching project mapper */
 const PROJECT_TITLES = {
@@ -121,9 +131,15 @@ export default function PassbookDrawer() {
                                 <span className="pb-drawer__progress-text">
                                     Routes stamped
                                 </span>
-                                <span className="pb-drawer__progress-count">
+                                <motion.span
+                                    key={stampCount}
+                                    className="pb-drawer__progress-count"
+                                    initial={{ scale: 1.4, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                                >
                                     {stampCount} / {totalRoutes}
-                                </span>
+                                </motion.span>
                             </div>
                             <div className="pb-drawer__progress-track">
                                 <div
@@ -145,6 +161,7 @@ export default function PassbookDrawer() {
                                 const path    = getProjectPath(id);
                                 const hue     = route?.accentHue ?? 240;
 
+                                const rot = stampRotation(id);
                                 return (
                                     <Link
                                         key={id}
@@ -159,11 +176,20 @@ export default function PassbookDrawer() {
                                             {route?.routeCode}
                                         </span>
                                         <span className="pb-route-title">{title}</span>
-                                        {stamped && (
-                                            <span className="pb-route-stamp" aria-hidden="true">
-                                                {route?.stampLabel}
-                                            </span>
-                                        )}
+                                        <AnimatePresence>
+                                            {stamped && (
+                                                <motion.span
+                                                    className="pb-route-stamp"
+                                                    aria-hidden="true"
+                                                    initial={{ opacity: 0, scale: 0.6, rotate: rot * 2 }}
+                                                    animate={{ opacity: 1, scale: 1, rotate: rot }}
+                                                    exit={{ opacity: 0, scale: 0.6 }}
+                                                    transition={{ type: "spring", stiffness: 320, damping: 20 }}
+                                                >
+                                                    {route?.stampLabel}
+                                                </motion.span>
+                                            )}
+                                        </AnimatePresence>
                                     </Link>
                                 );
                             })}
