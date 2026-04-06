@@ -60,7 +60,7 @@ export default function About() {
                             <NameCycle />
                         </h1>
                         <p className="about-hero-sub">
-                            Designer, developer, and recovering hospitality worker.
+                            Product designer who builds. Recovering hospitality worker.
                         </p>
                     </motion.section>
 
@@ -79,10 +79,10 @@ export default function About() {
                                     the same way I cared about every guest across the counter.
                                 </p>
                                 <p className="about-para">
-                                    Now I'm a <em className="about-em">UI/UX designer and front-end developer</em>,
-                                    combining that people-first approach with the technical
-                                    side of building things. Currently finishing my Diploma
-                                    in Digital Design &amp; Development at BCIT.
+                                    Now I'm a <em className="about-em">product designer with front-end chops</em> —
+                                    I can take a design from first-frame research all the way
+                                    to shipped code. Currently finishing my Diploma in
+                                    Digital Design &amp; Development at BCIT.
                                 </p>
                             </div>
                         </motion.div>
@@ -126,31 +126,31 @@ export default function About() {
                             {[
                                 {
                                     title: "Research",
-                                    desc: "Understanding the problem and product space, researching the market, learning the user, and considering potential solutions.",
+                                    desc: "I don't touch Figma until I understand the space. Competitor audits, domain reading, user interviews — I go deep enough that a direction starts to feel obvious, not arbitrary.",
                                 },
                                 {
-                                    title: "Design Strategy",
-                                    desc: "Crafting design principles to guide the project and set direction for the team.",
+                                    title: "Problem framing",
+                                    desc: "Before any visuals, I put the problem in words — usually a deck or a doc. If I can't explain what I'm solving and why in a sentence, the design will wander.",
                                 },
                                 {
-                                    title: "User Journey",
-                                    desc: "Diving into user stories, personas, and decision-making. Mapping the golden path.",
+                                    title: "User journey",
+                                    desc: "I map every state a user might be in — frustrated, confused, delighted, lost. The interesting design decisions live at the edges, not the happy path.",
                                 },
                                 {
-                                    title: "Design Exploration",
-                                    desc: "Brainstorming a wide range of solutions — testing, iterating, and refining through feedback.",
+                                    title: "Exploration",
+                                    desc: "I go wide on purpose. Multiple directions, quick tests, feedback loops. I'll overexplore — that's fine. It's the only way I find solutions I never predicted from the research alone.",
                                 },
                                 {
-                                    title: "Design Refinement",
-                                    desc: "Polishing the chosen direction and preparing designs for handoff.",
+                                    title: "Refinement",
+                                    desc: "This is my danger zone. I can polish indefinitely — spacing, copy, micro-interactions, edge cases. I've learned to set explicit stopping conditions: what has to be true for this to ship?",
                                 },
                                 {
                                     title: "Handoff",
-                                    desc: "Working closely with devs and product to ensure the solution gets built right.",
+                                    desc: "I build. Not just redlines — I can open the codebase and implement components when it helps. The design doesn't stop at the Figma file.",
                                 },
                                 {
-                                    title: "Monitoring",
-                                    desc: "After launch, tracking performance wherever possible and iterating on findings.",
+                                    title: "After launch",
+                                    desc: "I watch what happens. Metrics, user feedback, support patterns — whatever data exists. I treat launch as the beginning of the design, not the end.",
                                 },
                             ].map((step, i) => (
                                 <li key={step.title} className="about-process-step">
@@ -179,16 +179,16 @@ export default function About() {
                         <div className="about-philosophy-grid">
                             {[
                                 {
-                                    title: "Curiosity",
-                                    body: "I start every challenge by asking \"what if?\" — curiosity drives me deep into the problem and consistently leads me somewhere better than the obvious answer.",
+                                    title: "Research first, always",
+                                    body: "I've learned to resist the urge to jump to solutions. The interesting problems are usually not the stated ones — and the only way to find the real one is to stay in research longer than feels comfortable.",
                                 },
                                 {
-                                    title: "Challenge assumptions",
-                                    body: "Confidence in your own ideas is a trap. I test my assumptions with real users whenever I can and let research data steer the solution, not gut feeling alone.",
+                                    title: "Design is a communication problem",
+                                    body: "The best design in the world fails if nobody understands the decision. I spend real time on how I present and explain my work — alignment isn't a soft skill, it's part of the job.",
                                 },
                                 {
-                                    title: "Attention to detail",
-                                    body: "Great design lives in the details. I check everything twice — spacing, copy, edge cases — because the small stuff is what separates polished from almost-there.",
+                                    title: "Ship it, then improve it",
+                                    body: "I have to actively fight my instinct to polish forever. Good design that ships beats perfect design that doesn't. I've gotten better at calling done.",
                                 },
                             ].map((block) => (
                                 <div key={block.title} className="about-philosophy-block">
@@ -247,7 +247,7 @@ export default function About() {
                                         {row.label === "Status" ? (
                                             <span className="about-contact-value about-contact-value--status">
                                                 <span className="about-status-dot" aria-hidden="true" />
-                                                Open to full-time, freelance &amp; isekai recs.
+                                                Open to product design roles — full-time or contract. Isekai recs also welcome.
                                             </span>
                                         ) : row.href ? (
                                             <a
