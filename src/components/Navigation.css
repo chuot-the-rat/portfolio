@@ -169,13 +169,19 @@
     }
 }
 
-/* Very small screens — hide text labels, keep logo + toggle */
+/* Very small screens — compress further but keep About visible */
 @media (max-width: 360px) {
-    .nav-menu {
-        display: none;
+    .nav-container {
+        gap: var(--space-2);
+        padding: var(--space-2) var(--space-2);
     }
 
-    .nav-container {
-        gap: var(--space-4);
+    .nav-logo {
+        font-size: 11px;
+    }
+
+    .nav-link {
+        padding: var(--space-1) var(--space-1);
+        font-size: 10px;
     }
 }

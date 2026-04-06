@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Leana Le</title>
+  <script>
+    // Single-Page Apps on GitHub Pages — SPA redirect trick
+    // Encodes the intended path into the query string so index.html
+    // can pick it up and restore client-side routing.
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.host + l.pathname.split('/').slice(0, 1).join('/') +
+      '/?p=' + encodeURIComponent(l.pathname + l.search) +
+      (l.hash || '')
+    );
+  </script>
+</head>
+<body></body>
+</html>

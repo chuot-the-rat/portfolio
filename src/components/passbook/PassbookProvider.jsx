@@ -41,9 +41,11 @@ const PassbookContext = createContext(null);
 export function PassbookProvider({ children }) {
     const [passbook, setPassbook]             = useState(() => loadPassbook());
     const [drawerOpen, setDrawerOpen]         = useState(false);
-    // isNewlyIssued: true only on the very first page load (passbook not yet issued)
+    // isNewlyIssued: true once per browser session so the print animation is
+    // always visible the first time you open the tab — resets on reload/new tab.
+    // (Previously used localStorage which made it impossible to see after first visit.)
     const [isNewlyIssued, setIsNewlyIssued]   = useState(
-        () => !loadPassbook().issued,
+        () => !sessionStorage.getItem("pb_anim_done"),
     );
 
     // Issue passbook on first load
@@ -79,7 +81,10 @@ export function PassbookProvider({ children }) {
         closeDrawer:      () => setDrawerOpen(false),
         toggleDrawer:     () => setDrawerOpen((v) => !v),
         isNewlyIssued,
-        clearNewlyIssued: () => setIsNewlyIssued(false),
+        clearNewlyIssued: () => {
+            sessionStorage.setItem("pb_anim_done", "1");
+            setIsNewlyIssued(false);
+        },
     };
 
     return (

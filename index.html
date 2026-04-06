@@ -35,6 +35,17 @@
     <meta name="twitter:title" content="Leana Le — UI/UX Designer & Developer">
     <meta name="twitter:description" content="UI/UX designer and front-end developer crafting people-first experiences.">
     <meta name="twitter:image" content="https://leanale.ca/og-image.png">
+
+    <!-- GitHub Pages SPA routing: restore path encoded by 404.html redirect -->
+    <script>
+      (function() {
+        var p = window.location.search.slice(1);
+        if (p.indexOf('p=') === 0) {
+          var decoded = decodeURIComponent(p.slice(2));
+          window.history.replaceState(null, null, decoded);
+        }
+      })();
+    </script>
 </head>
 
 <body>

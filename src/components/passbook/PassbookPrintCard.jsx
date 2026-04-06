@@ -35,20 +35,31 @@ export default function PassbookPrintCard() {
     }, [isNewlyIssued, clearNewlyIssued]);
 
     /* ── Animation ─────────────────────────────────────────────────── */
-    // First visit: fade + slight rise
-    // Return visit: appear instantly
+    // First visit (per session): physical "printing" emerge — card starts
+    // collapsed flat at its top edge, then a spring drives it open like
+    // a booklet being dispensed from a slot.
+    // Return visit (same session): render instantly in resting state.
     const cardVariants = isNewlyIssued
         ? {
-              initial:  { opacity: 0, y: 16 },
-              animate:  {
+              initial: {
+                  scaleY:  0.04,
+                  scaleX:  0.92,
+                  opacity: 0,
+              },
+              animate: {
+                  scaleY:  1,
+                  scaleX:  1,
                   opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.5, delay: 0.9, ease: [0.16, 1, 0.3, 1] },
+                  transition: {
+                      scaleY:  { type: "spring", stiffness: 190, damping: 16, mass: 0.7, delay: 0.7 },
+                      scaleX:  { type: "spring", stiffness: 240, damping: 22, delay: 0.7 },
+                      opacity: { duration: 0.08, delay: 0.7 },
+                  },
               },
           }
         : {
-              initial:  { opacity: 1, y: 0 },
-              animate:  { opacity: 1, y: 0 },
+              initial:  { opacity: 1, scaleY: 1, scaleX: 1 },
+              animate:  { opacity: 1, scaleY: 1, scaleX: 1 },
           };
 
     const allDone = stampCount === totalRoutes;
@@ -58,6 +69,7 @@ export default function PassbookPrintCard() {
             className="pb-print-card"
             onClick={openDrawer}
             aria-label={`Project Passbook — ${stampCount} of ${totalRoutes} stamps collected. Open passbook.`}
+            style={{ transformOrigin: "top center" }}
             {...cardVariants}
         >
             {/* Left: compact mark */}

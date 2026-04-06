@@ -22,7 +22,7 @@
  */
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, Component } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "./components/Navigation";
 import { PassbookProvider } from "./components/passbook/PassbookProvider";
@@ -53,6 +53,40 @@ import "./styles/App.css";
  * - Projects.jsx (to fetch supplemental data)
  */
 export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap"];
+
+/**
+ * Error boundary for project detail pages.
+ * Catches runtime render errors and shows a recoverable error UI
+ * instead of a blank screen or silent redirect.
+ */
+class ProjectErrorBoundary extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { hasError: false };
+    }
+    static getDerivedStateFromError() {
+        return { hasError: true };
+    }
+    componentDidUpdate(prevProps) {
+        // Reset on navigation to a new project
+        if (prevProps.routeKey !== this.props.routeKey && this.state.hasError) {
+            this.setState({ hasError: false });
+        }
+    }
+    render() {
+        if (this.state.hasError) {
+            return (
+                <div style={{ padding: "4rem 2rem", textAlign: "center" }}>
+                    <p style={{ fontFamily: "var(--font-sans)", color: "var(--color-text-secondary)" }}>
+                        Something went wrong loading this project.{" "}
+                        <a href="/" style={{ color: "var(--color-text)" }}>← Back to work</a>
+                    </p>
+                </div>
+            );
+        }
+        return this.props.children;
+    }
+}
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -98,7 +132,7 @@ function App() {
                         <Route path="/contact"   element={<Navigate to="/about" replace />} />
 
                         {/* ─── CASE STUDY PROJECTS ─── */}
-                        <Route path="/projects/:id"  element={<P><ProjectDetail /></P>} />
+                        <Route path="/projects/:id"  element={<ProjectErrorBoundary routeKey={location.pathname}><P><ProjectDetail /></P></ProjectErrorBoundary>} />
 
                         {/* ─── STANDALONE PROJECTS ─── */}
                         <Route path="/design/:slug"  element={<P><ProjectLayout /></P>} />
