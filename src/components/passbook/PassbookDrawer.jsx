@@ -80,10 +80,10 @@ export default function PassbookDrawer() {
                     {/* Overlay */}
                     <motion.div
                         className="pb-overlay"
-                        initial={{ opacity: 0 }}
+                        initial={shouldReduceMotion ? false : { opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.22 }}
+                        transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
                         onClick={closeDrawer}
                         aria-hidden="true"
                     />
@@ -111,7 +111,7 @@ export default function PassbookDrawer() {
                                     Leana Le
                                 </span>
                                 <h2 className="pb-drawer__title">
-                                    Project Passbook
+                                    Archive Passbook
                                 </h2>
                             </div>
                             <button
@@ -212,7 +212,7 @@ export default function PassbookDrawer() {
                             <p className="pb-drawer__footer-note">
                                 {stampCount === totalRoutes
                                     ? "Archive complete. All route seals registered."
-                                    : "Collect one route seal at the end of each project."}
+                                    : "Press to stamp at the end of each project route."}
                             </p>
                         </div>
                     </motion.aside>

@@ -147,10 +147,11 @@ export default function PassbookPrintCard() {
                 aria-label={
                     isParked
                         ? `Project Passbook — ${stampCount} of ${totalRoutes} route seals logged. Open passbook.`
-                        : "Printed pass ready. Press to add passbook."
+                        : "Printed pass ready. Press to add to rail."
                 }
                 initial={cardVariants.initial}
                 animate={cardVariants.animate}
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.985, y: 1 }}
             >
                 <motion.span
                     className="pb-print-card__inner"
@@ -169,7 +170,7 @@ export default function PassbookPrintCard() {
                         </span>
                         <span className="pb-print-card__label">
                             {!isParked
-                                ? "Press to add passbook"
+                                ? "Press to add to rail"
                                 : allDone
                                   ? "All route seals logged."
                                   : "Press to open and log route seals."}
