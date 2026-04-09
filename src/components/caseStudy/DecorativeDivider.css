@@ -1,0 +1,28 @@
+.cs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin: var(--space-8) 0 var(--space-12);
+}
+
+.cs-divider-art {
+    max-width: 100%;
+    height: auto;
+    opacity: 0.82;
+}
+
+.cs-divider-line {
+    flex: 1;
+    max-width: 220px;
+    height: 1px;
+    background: var(--color-border);
+}
+
+.cs-divider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-text-tertiary);
+    opacity: 0.55;
+}

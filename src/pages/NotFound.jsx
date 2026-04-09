@@ -4,7 +4,11 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import "./NotFound.css";
 
 export default function NotFound() {
-    usePageTitle("404 — Not Found");
+    usePageTitle("404 — Not Found", {
+        path: "/404",
+        noindex: true,
+        description: "Page not found on Leana Le's portfolio.",
+    });
     return (
         <div className="not-found">
             <motion.main

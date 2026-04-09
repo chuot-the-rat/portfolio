@@ -132,6 +132,26 @@
     font-weight: 400;
 }
 
+.project-impact-snapshot {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.project-impact-item {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: var(--space-2) var(--space-4);
+}
+
 /* ─ Meta bar — pill chip row ─ */
 .project-meta-bar {
     display: flex;
@@ -265,6 +285,36 @@
 
 .project-content {
     padding-top: var(--section-spacing-base);
+}
+
+.project-credibility {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-16);
+}
+
+.project-credibility-item {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-secondary);
+}
+
+.project-credibility-label {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+}
+
+.project-credibility-value {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-normal);
 }
 
 /* ─ Section Container ─ */
@@ -708,6 +758,11 @@
     background: var(--color-bg-secondary);
 }
 
+.feature-media-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
 .feature-media img {
     width: 100%;
     max-height: 480px;
@@ -1141,6 +1196,10 @@
     }
 
     .project-content-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .project-credibility {
         grid-template-columns: 1fr;
     }
 

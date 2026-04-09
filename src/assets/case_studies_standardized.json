@@ -11,7 +11,7 @@
         {
             "id": "prolog",
             "slug": "prolog",
-            "title": "ProLog",
+            "title": "ProLog — Mobile Apprenticeship Companion",
             "subtitle": "A journey companion for neurodivergent apprentices",
             "summary": "A centralized apprenticeship companion helping neurodivergent apprentices track progress, reduce cognitive overload, and build confidence through clear visualization and structured tools.",
             "project_type": "Mobile application",
@@ -59,7 +59,13 @@
             },
             "sections": {
                 "hook": {
-                    "content": "Apprenticeship can take over 6,000 hours. That's years of work spread across job sites, classrooms, and bureaucratic systems — often without a clear sense of whether you're on track."
+                    "content": "Apprenticeship can take over 6,000 hours. That's years of work spread across job sites, classrooms, and bureaucratic systems — often without a clear sense of whether you're on track.",
+                    "media_demo": {
+                        "src": "/projects/prolog/hero.png",
+                        "type": "image",
+                        "alt": "ProLog dashboard hero preview",
+                        "caption": "ProLog centralizes apprenticeship progress into one calm dashboard."
+                    }
                 },
                 "problem_framing": {
                     "content": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind."
@@ -77,7 +83,25 @@
                         "Discrepancies between employer-logged and self-logged hours create anxiety",
                         "Neurodivergent users experience amplified cognitive load from inconsistent interfaces"
                     ],
-                    "participant_count": null
+                    "participant_count": null,
+                    "verdict": {
+                        "do": {
+                            "title": "Do",
+                            "rule": "Map fragmented systems into one clear progress model users can scan in seconds.",
+                            "illustrationText": "Single source of truth for hours and competencies"
+                        },
+                        "dont": {
+                            "title": "Don't",
+                            "rule": "Don't mirror the original bureaucracy inside the product interface.",
+                            "illustrationText": "Multi-platform status hunting"
+                        }
+                    },
+                    "media_demo": {
+                        "src": "/projects/prolog/hifi-1.png",
+                        "type": "image",
+                        "alt": "ProLog dashboard high fidelity screen",
+                        "caption": "Research translated into a dashboard-first information hierarchy."
+                    }
                 },
                 "lofi_phase": {
                     "content": "Our early sketches were deliberately rough. We weren't trying to make things look good—we were trying to understand what information mattered most and how quickly someone could find it.\n\nThe dashboard concept emerged early. We kept asking ourselves: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else was secondary.",
@@ -157,6 +181,24 @@
                         "embed_url": "",
                         "description": "Walk through each feature. Start with the dashboard, then explore the hours tracker and quiz flow.",
                         "type": "figma"
+                    },
+                    "verdict": {
+                        "do": {
+                            "title": "Do",
+                            "rule": "Tie every feature to one concrete user anxiety and make the payoff explicit.",
+                            "illustrationText": "Problem-to-feature traceability"
+                        },
+                        "dont": {
+                            "title": "Don't",
+                            "rule": "Don't ship utility features that lack a direct apprenticeship outcome.",
+                            "illustrationText": "Feature bloat without confidence gain"
+                        }
+                    },
+                    "media_demo": {
+                        "src": "/projects/prolog/feature-dashboard.png",
+                        "type": "image",
+                        "alt": "ProLog progress dashboard feature",
+                        "caption": "Feature set prioritizes orientation, discrepancy confidence, and exam readiness."
                     }
                 },
                 "validation": {
@@ -167,7 +209,13 @@
                         "Users reported feeling relieved by progress visibility",
                         "Hours tracker addressed a previously unmet need",
                         "Dashboard-first approach validated"
-                    ]
+                    ],
+                    "media_demo": {
+                        "src": "/projects/prolog/hifi-2.png",
+                        "type": "image",
+                        "alt": "ProLog hours tracking screen",
+                        "caption": "Validation centered on whether users felt clearer and less anxious about progress."
+                    }
                 },
                 "what_i_learned": [
                     {
@@ -202,12 +250,41 @@
                 "progress-tracking"
             ],
             "featured": true,
-            "order": 1
+            "order": 1,
+            "hero": {
+                "marqueeText": "CÅSE STUDIËS • PROLOG • MOBILE APPRENTICESHIP COMPANION"
+            },
+            "checklist": {
+                "title": "Case Study Checklist",
+                "subtitle": "A quick anatomy check for the ProLog narrative.",
+                "items": [
+                    {
+                        "title": "Problem framing is user-specific",
+                        "description": "The write-up identifies why fragmented apprenticeship systems are especially harmful for neurodivergent users."
+                    },
+                    {
+                        "title": "Role and team scope are explicit",
+                        "description": "The hero metadata clarifies technical and research ownership in an 8-person team context."
+                    },
+                    {
+                        "title": "Process moves from discovery to design",
+                        "description": "Research, lo-fi, and hi-fi decisions are sequenced so readers can follow causality."
+                    },
+                    {
+                        "title": "Outcome language stays evidence-led",
+                        "description": "Validation outcomes report observed user response without inflated claims."
+                    },
+                    {
+                        "title": "Visuals support skim reading",
+                        "description": "Key screens include captions that communicate purpose even without full paragraph reading."
+                    }
+                ]
+            }
         },
         {
             "id": "inklink",
             "slug": "inklink",
-            "title": "InkLink",
+            "title": "InkLink — Collaborative Writing App",
             "subtitle": "Breaking writer's block through collaboration",
             "summary": "A chain-writing platform that reduces writer's block by turning writing into a shared, low-pressure activity where users contribute one passage at a time.",
             "project_type": "Collaborative writing app",
@@ -243,9 +320,18 @@
                 "hero_image": "/projects/inklink/hero.png",
                 "og_image": "/projects/inklink/og-image.png"
             },
+            "hero": {
+                "marqueeText": "CÅSE STUDIËS • INKLINK • COLLABORATIVE WRITING APP"
+            },
             "sections": {
                 "hook": {
-                    "content": "Everyone has a story they never finished.\n\nMaybe it's a novel that stalled at chapter three. Maybe it's a screenplay that never made it past the outline. The ideas were there—the momentum wasn't.\n\nInkLink started with a simple question: what if writing didn't have to be a solo activity? What if the pressure of finishing was replaced by the fun of contributing?"
+                    "content": "Everyone has a story they never finished.\n\nIdeas were there. Momentum wasn't.\n\nInkLink started with one question: what if writing felt shared instead of solitary?",
+                    "media_demo": {
+                        "src": "/projects/inklink/hero.png",
+                        "type": "image",
+                        "alt": "InkLink hero interface preview",
+                        "caption": "InkLink reframes writing as a shared, low-pressure chain."
+                    }
                 },
                 "problem_framing": {
                     "content": "Writer's block isn't usually about running out of ideas. It's about pressure.\n\nThe blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nWe wanted to design an experience that removed those barriers—not by making writing easier, but by making it shared."
@@ -261,7 +347,25 @@
                         "Dense, text-heavy layouts discourage reading and contribution",
                         "New concepts require gentle onboarding; users won't explore without guidance"
                     ],
-                    "participant_count": null
+                    "participant_count": null,
+                    "verdict": {
+                        "do": {
+                            "title": "Do",
+                            "rule": "Prioritize scan-friendly structure and clear contribution prompts.",
+                            "illustrationText": "Headlines + short paragraphs + clear CTA"
+                        },
+                        "dont": {
+                            "title": "Don't",
+                            "rule": "Avoid dense copy blocks that raise cognitive load before writing starts.",
+                            "illustrationText": "Wall-of-text onboarding"
+                        }
+                    },
+                    "media_demo": {
+                        "src": "/projects/inklink/images/Home.svg",
+                        "type": "image",
+                        "alt": "InkLink home screen concept",
+                        "caption": "Early concept for reducing entry friction with a single clear action."
+                    }
                 },
                 "lofi_phase": {
                     "content": "Our lo-fi work focused on one core interaction: contributing to a story. We sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic — we needed to test logic, not aesthetics.",
@@ -306,6 +410,24 @@
                         "embed_url": "",
                         "description": "Start a new story, invite a friend, or join an existing chain. Follow the prompts to see each flow.",
                         "type": "figma"
+                    },
+                    "verdict": {
+                        "do": {
+                            "title": "Do",
+                            "rule": "Design each mode with one obvious next step so users can start writing immediately.",
+                            "illustrationText": "Single-primary-action flow"
+                        },
+                        "dont": {
+                            "title": "Don't",
+                            "rule": "Don't overload the first screen with options, filters, and setup complexity.",
+                            "illustrationText": "Choice overload before contribution"
+                        }
+                    },
+                    "media_demo": {
+                        "src": "/projects/inklink/images/Editor (public).svg",
+                        "type": "image",
+                        "alt": "InkLink editor screen",
+                        "caption": "The editor keeps participation lightweight so writers stay in flow."
                     }
                 },
                 "validation": {
@@ -333,6 +455,32 @@
                     }
                 ]
             },
+            "checklist": {
+                "title": "Case Study Checklist",
+                "subtitle": "A quick anatomy check for this project write-up.",
+                "items": [
+                    {
+                        "title": "Project context and challenge are explicit",
+                        "description": "The case study opens with the core tension: pressure and perfectionism block participation."
+                    },
+                    {
+                        "title": "Role and team are immediately visible",
+                        "description": "The hero metadata clarifies contribution boundaries before the reader enters process details."
+                    },
+                    {
+                        "title": "Process is chronological and scannable",
+                        "description": "Research, exploration, and feature decisions are broken into short sections with clear labels."
+                    },
+                    {
+                        "title": "Outcome evidence is present",
+                        "description": "Validation outcomes capture user response and why the design direction was retained."
+                    },
+                    {
+                        "title": "Visuals include captions",
+                        "description": "Images carry descriptive captions so skimmers still get the narrative arc."
+                    }
+                ]
+            },
             "links": {
                 "live": "",
                 "github": "",
@@ -352,7 +500,7 @@
         {
             "id": "sidequest",
             "slug": "sidequest",
-            "title": "SideQuest",
+            "title": "SideQuest — Micro-Adventure Web App",
             "subtitle": "Turning boredom into micro-adventures",
             "summary": "A web app that helps users discover small, low-commitment activities to break routine, reframing free time as an opportunity rather than a void to fill.",
             "project_type": "Web application",
@@ -400,7 +548,13 @@
             },
             "sections": {
                 "hook": {
-                    "content": "You have a free afternoon. Nothing planned. So you open your phone, scroll for thirty minutes, and end up back on the couch — paralyzed by options, defaulting to nothing."
+                    "content": "You have a free afternoon. Nothing planned. So you open your phone, scroll for thirty minutes, and end up back on the couch — paralyzed by options, defaulting to nothing.",
+                    "media_demo": {
+                        "src": "/projects/sidequest/hero.png",
+                        "type": "image",
+                        "alt": "SideQuest hero preview",
+                        "caption": "SideQuest reframes idle time as small, low-pressure adventures."
+                    }
                 },
                 "problem_framing": {
                     "content": "Boredom isn't really about having nothing to do. It's about having too much to choose from and not enough motivation to pick.\n\nEvery app promises endless possibilities. But endless possibilities require endless decisions. And decisions are exhausting.\n\nWe wanted to flip that model. Instead of showing users everything they could do, we'd suggest one thing they might enjoy—and make it easy to say yes."
@@ -416,7 +570,25 @@
                         "Choice overload causes hesitation and often leads to inaction",
                         "Guided suggestions outperform open-ended discovery"
                     ],
-                    "participant_count": null
+                    "participant_count": null,
+                    "verdict": {
+                        "do": {
+                            "title": "Do",
+                            "rule": "Reduce choice overload with a guided default that gets users moving quickly.",
+                            "illustrationText": "One clear next action"
+                        },
+                        "dont": {
+                            "title": "Don't",
+                            "rule": "Don't force users through heavy setup before they see their first useful suggestion.",
+                            "illustrationText": "Configuration before value"
+                        }
+                    },
+                    "media_demo": {
+                        "src": "/projects/sidequest/hifi-1.png",
+                        "type": "image",
+                        "alt": "SideQuest home screen with mascot",
+                        "caption": "Research findings drove a quick-start interface with minimal decisions."
+                    }
                 },
                 "lofi_phase": {
                     "content": "Our early wireframes had too many buttons.\n\nFilters for location, duration, cost, category—all logical, all counterproductive. Users would hover over options without committing to any of them.\n\nWe stripped it back. One primary action: 'Give me a quest.' Everything else became optional.",
@@ -489,6 +661,24 @@
                         "embed_url": "",
                         "description": "Start from the home screen. Get a quest, save it for later, or ask for something different.",
                         "type": "figma"
+                    },
+                    "verdict": {
+                        "do": {
+                            "title": "Do",
+                            "rule": "Keep language playful and actionable so users commit before overthinking.",
+                            "illustrationText": "Quest framing + fast interaction"
+                        },
+                        "dont": {
+                            "title": "Don't",
+                            "rule": "Don't over-index on filters and options that delay momentum.",
+                            "illustrationText": "Endless browsing loop"
+                        }
+                    },
+                    "media_demo": {
+                        "src": "/projects/sidequest/feature-quests.png",
+                        "type": "image",
+                        "alt": "SideQuest quest card feature",
+                        "caption": "Core features optimize for immediacy: pick a quest, start, and continue."
                     }
                 },
                 "validation": {
@@ -499,7 +689,13 @@
                         "Playful language ('quest') increased engagement",
                         "Mascot received positive feedback",
                         "Low-pressure framing encouraged action"
-                    ]
+                    ],
+                    "media_demo": {
+                        "src": "/projects/sidequest/hifi-4.png",
+                        "type": "image",
+                        "alt": "SideQuest completion state",
+                        "caption": "Validation measured whether the low-pressure framing increased willingness to act."
+                    }
                 },
                 "what_i_learned": [
                     {
@@ -530,7 +726,36 @@
                 "solo-project"
             ],
             "featured": true,
-            "order": 3
+            "order": 3,
+            "hero": {
+                "marqueeText": "CÅSE STUDIËS • SIDEQUEST • MICRO-ADVENTURE WEB APP"
+            },
+            "checklist": {
+                "title": "Case Study Checklist",
+                "subtitle": "A quick anatomy check for the SideQuest story arc.",
+                "items": [
+                    {
+                        "title": "The behavioral problem is clear",
+                        "description": "The case study defines boredom as decision fatigue, not lack of options."
+                    },
+                    {
+                        "title": "Contribution scope is explicit",
+                        "description": "Role and team metadata establish end-to-end ownership across research, design, and build."
+                    },
+                    {
+                        "title": "Design decisions tie to findings",
+                        "description": "The process shows why simplification and guided prompts replaced option-heavy flows."
+                    },
+                    {
+                        "title": "Outcomes are concrete and honest",
+                        "description": "Validation captures engagement signals without overstating quantitative impact."
+                    },
+                    {
+                        "title": "Visual storytelling is scannable",
+                        "description": "Screens and captions communicate feature intent even for quick readers."
+                    }
+                ]
+            }
         }
     ],
     "schema": {

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -16,11 +15,69 @@ import "./Home.css";
 import "../components/SectionLayout.css";
 
 const hoverPatterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
+const HOME_SCHEMA = [
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Leana Le",
+        url: "https://leanale.com/",
+        image: "https://leanale.com/starfruit.png",
+        jobTitle: "Product Designer",
+        sameAs: [
+            "https://linkedin.com/in/leanale",
+            "https://github.com/chuot-the-rat",
+        ],
+        address: {
+            "@type": "PostalAddress",
+            addressLocality: "Vancouver",
+            addressRegion: "BC",
+            addressCountry: "CA",
+        },
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Selected Portfolio Projects",
+        itemListElement: [
+            {
+                "@type": "ListItem",
+                position: 1,
+                url: "https://leanale.com/case-studies/inklink",
+                name: "InkLink",
+            },
+            {
+                "@type": "ListItem",
+                position: 2,
+                url: "https://leanale.com/case-studies/prolog",
+                name: "ProLog",
+            },
+            {
+                "@type": "ListItem",
+                position: 3,
+                url: "https://leanale.com/case-studies/sidequest",
+                name: "SideQuest",
+            },
+        ],
+    },
+];
+const proofItems = [
+    { label: "Target Role", value: "Product Designer (UX/UI)" },
+    { label: "Location", value: "Vancouver, BC (PST)" },
+    { label: "Availability", value: "Open to full-time + contract" },
+    { label: "Graduation", value: "BCIT D3 • 2026" },
+    { label: "Strengths", value: "Research, IA, Prototyping, Frontend" },
+];
 
 const Home = () => {
-    usePageTitle(null); // "Leana Le · Designer"
+    usePageTitle(null, {
+        description:
+            "Product designer and frontend builder in Vancouver. UX case studies with clear role ownership, impact snapshots, and shipped interactions.",
+        path: "/",
+        structuredData: HOME_SCHEMA,
+    });
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showEnhancements, setShowEnhancements] = useState(false);
 
     const resolveProjectMediaPath = (projectId, src) => {
         if (!src) return null;
@@ -50,6 +107,17 @@ const Home = () => {
         }
         return unique;
     };
+
+    useEffect(() => {
+        let timeoutId = null;
+        const raf = requestAnimationFrame(() => {
+            timeoutId = setTimeout(() => setShowEnhancements(true), 220);
+        });
+        return () => {
+            cancelAnimationFrame(raf);
+            if (timeoutId) clearTimeout(timeoutId);
+        };
+    }, []);
 
     useEffect(() => {
         try {
@@ -256,11 +324,32 @@ const Home = () => {
                         className="home-hero-grid"
                     />
 
-                    {/* Passbook print card — issued once, persists on home */}
-                    <PassbookPrintCard />
+                    <section className="home-proof-strip" aria-label="Recruiter quick facts">
+                        <ul className="home-proof-list">
+                            {proofItems.map((item) => (
+                                <li key={item.label} className="home-proof-item">
+                                    <span className="home-proof-label">{item.label}</span>
+                                    <span className="home-proof-value">{item.value}</span>
+                                </li>
+                            ))}
+                        </ul>
+                        <a
+                            href="mailto:leanale003@gmail.com?subject=Product%20Design%20Role%20at%20%5BCompany%5D"
+                            className="home-proof-cta"
+                        >
+                            Email role details ↗
+                        </a>
+                    </section>
 
-                    {/* Marquee ticker — editorial skill belt */}
-                    <MarqueeTicker />
+                    {showEnhancements ? (
+                        <>
+                            {/* Passbook print card — issued once, persists on home */}
+                            <PassbookPrintCard />
+
+                            {/* Marquee ticker — editorial skill belt */}
+                            <MarqueeTicker />
+                        </>
+                    ) : null}
 
                     {/* Work list — category tabs + Sharleen-style rows */}
                     {loading ? (

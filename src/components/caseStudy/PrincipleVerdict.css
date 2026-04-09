@@ -1,0 +1,69 @@
+.cs-principle-verdict {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    margin: var(--space-10) 0;
+}
+
+.cs-verdict-card {
+    border-radius: var(--radius-base);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    padding: var(--space-6);
+}
+
+.cs-verdict-card--do {
+    border-top: 3px solid #3ecf8e;
+}
+
+.cs-verdict-card--dont {
+    border-top: 3px solid #e74c3c;
+}
+
+.cs-verdict-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+}
+
+.cs-verdict-mark--do {
+    color: #2f8f64;
+    background: rgba(62, 207, 142, 0.2);
+}
+
+.cs-verdict-mark--dont {
+    color: #aa3327;
+    background: rgba(231, 76, 60, 0.2);
+}
+
+.cs-verdict-title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-2);
+}
+
+.cs-verdict-rule {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text);
+}
+
+.cs-verdict-illustration {
+    margin-top: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    .cs-principle-verdict {
+        grid-template-columns: 1fr;
+    }
+}

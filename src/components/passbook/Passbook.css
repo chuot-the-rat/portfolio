@@ -624,3 +624,77 @@
         animation: none !important;
     }
 }
+
+.pb-print-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+}
+
+.pb-print-slot {
+    width: 100%;
+    height: 8px;
+    background: color-mix(
+        in srgb,
+        var(--pb-border, var(--color-border, #d4d0c8)) 68%,
+        var(--pb-ink-mid, var(--color-text-secondary, #888)) 32%
+    );
+    border-radius: 2px 2px 0 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.pb-print-slot__feed {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px, transparent 6px,
+        color-mix(in srgb, currentColor 18%, transparent) 6px,
+        color-mix(in srgb, currentColor 18%, transparent) 7px
+    );
+}
+
+.pb-print-tear {
+    width: 100%;
+    height: 1px;
+    background-image: repeating-linear-gradient(
+        90deg,
+        var(--color-text-secondary, #888) 0px,
+        var(--color-text-secondary, #888) 4px,
+        transparent 4px,
+        transparent 9px
+    );
+    opacity: 0.5;
+    transform-origin: left center;
+}
+
+.pb-print-card {
+    overflow: hidden;
+    transform-origin: top center;
+    max-width: min(420px, 100%);
+    box-sizing: border-box;
+}
+
+.pb-print-wrapper .pb-print-card {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.pb-print-card__inner {
+    display: contents;
+}
+
+@media (max-width: 600px) {
+    .pb-print-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin-top: var(--space-6);
+        margin-bottom: var(--space-4);
+    }
+}

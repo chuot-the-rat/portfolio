@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./MicroIndex.css";
 
 /* ─────────────────────────────────────────────
@@ -24,8 +24,10 @@ export const SectionIndex = ({
     sectionIndex = 1,
     title = "",
 }) => (
-    <span className="mi-mono mi-section-index">
-        {pad2(caseIndex)}.{pad2(sectionIndex)}&nbsp;&nbsp;{title.toUpperCase()}
+    <span className="mi-mono mi-section-index" data-section={pad2(sectionIndex)}>
+        <span className="mi-section-index-label">
+            {pad2(caseIndex)}.{pad2(sectionIndex)}&nbsp;&nbsp;{title.toUpperCase()}
+        </span>
     </span>
 );
 

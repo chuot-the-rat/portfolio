@@ -16,13 +16,112 @@ import SimulationSection from "../features/sim/SimulationSection";
 import BackToTop from "../components/BackToTop";
 import ReadingProgress from "../components/ReadingProgress";
 import ProjectNextPrev from "../components/ProjectNextPrev";
+import {
+    BrowserMockup,
+    CaseStudyHeroMarquee,
+    ChecklistSection,
+    DecorativeDivider,
+    PrincipleVerdict,
+} from "../components/caseStudy";
+import { caseStudyMotion } from "../utils/motion/caseStudyMotion";
 import "./ProjectDetail.css";
+
+const toSentence = (value) =>
+    String(value || "").replace(/\s+/g, " ").trim();
+
+const getImpactSnapshot = (project) => {
+    if (Array.isArray(project?.outcomes?.metrics) && project.outcomes.metrics.length > 0) {
+        return project.outcomes.metrics
+            .slice(0, 3)
+            .map((metric) => `${metric.value} ${metric.label}`);
+    }
+    if (Array.isArray(project?.validation?.outcomes) && project.validation.outcomes.length > 0) {
+        return project.validation.outcomes.slice(0, 3);
+    }
+    return ["Validated through moderated usability sessions and documented outcomes."];
+};
+
+const getCredibilityRows = (project) => {
+    const roleValue = Array.isArray(project?.role)
+        ? project.role.join(", ")
+        : project?.role || "Product design ownership across research and interface decisions.";
+
+    const constraints =
+        project?.development?.constraints?.slice(0, 2) ||
+        project?.challenges?.pivots?.slice(0, 2).map((pivot) => pivot.reason) ||
+        [];
+
+    const decisions =
+        project?.iterations?.improvements?.slice(0, 2) ||
+        project?.solution?.features?.slice(0, 2).map((feature) => feature.title) ||
+        [];
+
+    const measurable = getImpactSnapshot(project).slice(0, 2);
+    const next =
+        project?.evolution?.items?.slice(0, 2).map((item) => item.title || item.outcome) ||
+        [];
+
+    return [
+        {
+            label: "Problem",
+            value:
+                toSentence(project?.problem?.description || project?.overview?.description) ||
+                "The case study documents the user problem and context before solutions.",
+        },
+        {
+            label: "Constraints",
+            value:
+                constraints.length > 0
+                    ? constraints.map(toSentence).join(" • ")
+                    : "Scope and technical constraints are called out in process and implementation sections.",
+        },
+        { label: "My role", value: roleValue },
+        {
+            label: "Key decisions",
+            value:
+                decisions.length > 0
+                    ? decisions.map(toSentence).join(" • ")
+                    : "Design decisions are connected to research findings and validation.",
+        },
+        { label: "Measured outcome", value: measurable.map(toSentence).join(" • ") },
+        {
+            label: "Next iteration",
+            value:
+                next.length > 0
+                    ? next.map(toSentence).join(" • ")
+                    : "Future iterations are tracked with clear next-step hypotheses.",
+        },
+    ];
+};
 
 const ProjectDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [project, setProject] = useState(null);
-    usePageTitle(project?.title ?? null);
+    usePageTitle(project?.title ?? null, {
+        description:
+            project?.summary ||
+            project?.tagline ||
+            "Case study detailing role, process, and measurable product outcomes.",
+        path: id ? `/case-studies/${id}` : "/",
+        image: project?.media?.og_image || "https://leanale.com/starfruit.png",
+        structuredData: project
+            ? {
+                  "@context": "https://schema.org",
+                  "@type": "CreativeWork",
+                  name: project.title,
+                  description:
+                      project.summary ||
+                      project.tagline ||
+                      "Portfolio case study by Leana Le.",
+                  url: `https://leanale.com/case-studies/${project.id}`,
+                  author: {
+                      "@type": "Person",
+                      name: "Leana Le",
+                  },
+              }
+            : null,
+    });
     const [loading, setLoading] = useState(true);
     const contentRef = useRef(null);
 
@@ -141,6 +240,8 @@ const ProjectDetail = () => {
         project.context   && { label: "Context",  value: project.context },
         project.year      && { label: "Year",     value: project.year },
     ].filter(Boolean);
+    const impactSnapshot = getImpactSnapshot(project);
+    const credibilityRows = getCredibilityRows(project);
 
     return (
         <div className="project-detail">
@@ -186,6 +287,12 @@ const ProjectDetail = () => {
                         {project.tagline && (
                             <p className="project-hero-tagline">{project.tagline}</p>
                         )}
+
+                        <ul className="project-impact-snapshot" aria-label="Impact snapshot">
+                            {impactSnapshot.map((item) => (
+                                <li key={item} className="project-impact-item">{item}</li>
+                            ))}
+                        </ul>
                     </motion.div>
 
                     {/* Meta bar — horizontal row spanning full width */}
@@ -196,7 +303,7 @@ const ProjectDetail = () => {
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.45, delay: 0.18 }}
                         >
-                            {metaItems.map((item, i) => (
+                            {metaItems.map((item) => (
                                 <div key={item.label} className="project-meta-cell">
                                     <span className="meta-label">{item.label}</span>
                                     <span className="meta-value">{item.value}</span>
@@ -204,7 +311,7 @@ const ProjectDetail = () => {
                             ))}
 
                             {/* CTAs pushed to the right end of the bar */}
-                            {(project.links?.live || project.links?.prototype || project.links?.github) && (
+                            {(project.links?.live || project.links?.prototype || project.links?.github || project.links?.figma) && (
                                 <div className="project-meta-cell project-meta-cell--ctas">
                                     {project.links?.live && (
                                         <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="project-cta-link">
@@ -221,10 +328,21 @@ const ProjectDetail = () => {
                                             GitHub ↗
                                         </a>
                                     )}
+                                    {project.links?.figma && (
+                                        <a href={project.links.figma} target="_blank" rel="noopener noreferrer" className="project-cta-link">
+                                            Figma ↗
+                                        </a>
+                                    )}
                                 </div>
                             )}
                         </motion.div>
                     )}
+
+                    <CaseStudyHeroMarquee
+                        projectTitle={project.title}
+                        marqueeText={project.heroMarquee}
+                    />
+                    <DecorativeDivider />
 
                     {/* Hero image — full width below the header text */}
                     {heroImage && (
@@ -250,6 +368,14 @@ const ProjectDetail = () => {
                 ref={contentRef}
             >
                 <div className="container">
+                    <section className="project-credibility" aria-label="Case study credibility summary">
+                        {credibilityRows.map((row) => (
+                            <article key={row.label} className="project-credibility-item">
+                                <h2 className="project-credibility-label">{row.label}</h2>
+                                <p className="project-credibility-value">{row.value}</p>
+                            </article>
+                        ))}
+                    </section>
                     <div className="project-content-layout">
                         <ProjectContentMain project={project} />
                         {/* Micro-index scroll progress sidebar */}
@@ -299,6 +425,8 @@ const ProjectContentMain = ({ project }) => {
                             title={project.overview.title}
                             description={project.overview.description}
                             images={project.overview.images}
+                            mediaDemo={project.overview.mediaDemo}
+                            verdict={project.overview.verdict}
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
                                 imageNum += n;
@@ -333,6 +461,8 @@ const ProjectContentMain = ({ project }) => {
                                     {project.finalExperience.intro}
                                 </p>
                             )}
+                            <BrowserMockup mediaDemo={project.finalExperience.mediaDemo} />
+                            <PrincipleVerdict verdict={project.finalExperience.verdict} />
                             {project.finalExperience.prototype && (
                                 <PrototypeEmbed
                                     prototype={
@@ -371,6 +501,8 @@ const ProjectContentMain = ({ project }) => {
                             <p className="section-description">
                                 {project.research.description}
                             </p>
+                            <BrowserMockup mediaDemo={project.research.mediaDemo} />
+                            <PrincipleVerdict verdict={project.research.verdict} />
 
                             {project.research.methods?.length > 0 && (
                                 <div className="research-methods">
@@ -447,6 +579,8 @@ const ProjectContentMain = ({ project }) => {
                             title={project.problem.title}
                             description={project.problem.description}
                             images={project.problem.images}
+                            mediaDemo={project.problem.mediaDemo}
+                            verdict={project.problem.verdict}
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
                                 imageNum += n;
@@ -619,6 +753,8 @@ const ProjectContentMain = ({ project }) => {
                                 project.informationArchitecture.description
                             }
                             images={project.informationArchitecture.images}
+                            mediaDemo={project.informationArchitecture.mediaDemo}
+                            verdict={project.informationArchitecture.verdict}
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
                                 imageNum += n;
@@ -639,6 +775,8 @@ const ProjectContentMain = ({ project }) => {
                             title={project.lofi.title}
                             description={project.lofi.description}
                             images={project.lofi.images}
+                            mediaDemo={project.lofi.mediaDemo}
+                            verdict={project.lofi.verdict}
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
                                 imageNum += n;
@@ -863,6 +1001,8 @@ const ProjectContentMain = ({ project }) => {
                             <p className="section-description">
                                 {project.iterations.description}
                             </p>
+                            <BrowserMockup mediaDemo={project.iterations.mediaDemo} />
+                            <PrincipleVerdict verdict={project.iterations.verdict} />
 
                             {/* Rounds-based iterations (from local data) */}
                             {project.iterations.rounds?.length > 0 && (
@@ -1026,6 +1166,8 @@ const ProjectContentMain = ({ project }) => {
                             <p className="section-description">
                                 {project.hifi.description}
                             </p>
+                            <BrowserMockup mediaDemo={project.hifi.mediaDemo} />
+                            <PrincipleVerdict verdict={project.hifi.verdict} />
 
                             {project.hifi.embed && (
                                 <FigmaEmbed
@@ -1126,6 +1268,8 @@ const ProjectContentMain = ({ project }) => {
                             <p className="section-description">
                                 {project.development.description}
                             </p>
+                            <BrowserMockup mediaDemo={project.development.mediaDemo} />
+                            <PrincipleVerdict verdict={project.development.verdict} />
 
                             {project.development.technicalDecisions?.length >
                                 0 && (
@@ -1531,6 +1675,8 @@ const ProjectContentMain = ({ project }) => {
                             <p className="section-description">
                                 {project.solution.description}
                             </p>
+                            <BrowserMockup mediaDemo={project.solution.mediaDemo} />
+                            <PrincipleVerdict verdict={project.solution.verdict} />
 
                             {project.solution.features?.length > 0 && (
                                 <div className="features-list">
@@ -1551,14 +1697,19 @@ const ProjectContentMain = ({ project }) => {
                                                 }}
                                             >
                                                 {feature.image && (
-                                                    <div className="feature-media">
-                                                        <FigLabel
-                                                            index={nextImage()}
-                                                        />
-                                                        <img
-                                                            src={feature.image}
-                                                            alt={feature.title}
-                                                        />
+                                                    <div className="feature-media-wrap">
+                                                        <div className="feature-media">
+                                                            <FigLabel
+                                                                index={nextImage()}
+                                                            />
+                                                            <img
+                                                                src={feature.image}
+                                                                alt={feature.title}
+                                                            />
+                                                        </div>
+                                                        <p className="image-caption">
+                                                            {feature.caption || feature.title}
+                                                        </p>
                                                     </div>
                                                 )}
                                                 <div className="feature-body">
@@ -1627,6 +1778,8 @@ const ProjectContentMain = ({ project }) => {
                             <p className="section-description">
                                 {project.validation.description}
                             </p>
+                            <BrowserMockup mediaDemo={project.validation.mediaDemo} />
+                            <PrincipleVerdict verdict={project.validation.verdict} />
 
                             {project.validation.method && (
                                 <p className="validation-method">
@@ -1715,6 +1868,8 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
+            {project.checklist && <ChecklistSection checklist={project.checklist} />}
+
             {/* Where It Evolves */}
             {project.evolution && (
                 <EvolutionSection evolution={project.evolution} />
@@ -1791,6 +1946,9 @@ const ProjectContentMain = ({ project }) => {
 
 // Reusable Image Gallery Component with FIG.XX labels
 // Shows all images stacked for ≤2 images; slideshow carousel for 3+
+const getImageCaption = (image) =>
+    image?.caption || image?.alt || "Project visual";
+
 const ImageGallery = ({ images, startIndex = 0, onCount }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -1841,9 +1999,7 @@ const ImageGallery = ({ images, startIndex = 0, onCount }) => {
                             src={img.src}
                             alt={img.alt}
                         />
-                        {img.caption && (
-                            <p className="image-caption">{img.caption}</p>
-                        )}
+                        <p className="image-caption">{getImageCaption(img)}</p>
                     </motion.div>
                 ))}
             </div>
@@ -1928,7 +2084,7 @@ const ImageGallery = ({ images, startIndex = 0, onCount }) => {
                 </button>
             </div>
 
-            {img.caption && <p className="image-caption">{img.caption}</p>}
+            <p className="image-caption">{getImageCaption(img)}</p>
 
             {/* Dot indicators */}
             <div className="carousel-dots">
@@ -2083,15 +2239,17 @@ const IndexedSection = ({
     title,
     description,
     images,
+    mediaDemo,
+    verdict,
     imageStartIndex = 0,
     onImageCount,
 }) => (
     <motion.section
         className="project-section"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
+        initial={caseStudyMotion.sectionReveal.initial}
+        whileInView={caseStudyMotion.sectionReveal.whileInView}
+        viewport={caseStudyMotion.sectionReveal.viewport}
+        transition={caseStudyMotion.sectionReveal.transition}
     >
         <SectionIndex
             caseIndex={caseIndex}
@@ -2104,6 +2262,8 @@ const IndexedSection = ({
             version="2.0"
         />
         <p className="section-description">{description}</p>
+        <BrowserMockup mediaDemo={mediaDemo} />
+        <PrincipleVerdict verdict={verdict} />
 
         {images && images.length > 0 && (
             <ImageGallery

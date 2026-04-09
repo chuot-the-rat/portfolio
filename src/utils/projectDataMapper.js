@@ -53,6 +53,36 @@ const extractImages = (section) => {
     return section.images || section.visuals || [];
 };
 
+const normalizeMediaDemo = (section) => {
+    if (!section?.media_demo) return null;
+    const media = section.media_demo;
+    return {
+        src: media.src || media.image || "",
+        videoSrc: media.video_src || media.videoSrc || "",
+        videoType: media.video_type || media.videoType || "video/mp4",
+        type: media.type || "",
+        poster: media.poster || "",
+        alt: media.alt || "",
+        caption: media.caption || "",
+        muted: media.muted,
+        loop: media.loop,
+        browserBarImage: media.browser_bar_image || media.browserBarImage || "",
+    };
+};
+
+const normalizeVerdict = (section) => {
+    if (!section?.verdict) return null;
+    return {
+        do: section.verdict.do || null,
+        dont: section.verdict.dont || null,
+    };
+};
+
+const mapEditorial = (section) => ({
+    mediaDemo: normalizeMediaDemo(section),
+    verdict: normalizeVerdict(section),
+});
+
 /**
  * Maps a raw case study from the JSON into the format UI components expect.
  * This is the main transformation function — handles data shape differences.
@@ -117,6 +147,9 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         // ─── LINKS & MEDIA ───
         media: caseStudy.media || {},
         links: caseStudy.links || {},
+        heroMarquee:
+            caseStudy.hero?.marqueeText || caseStudy.hero?.marquee_text || "",
+        checklist: caseStudy.checklist || null,
 
         // ─── LEGACY FIELDS ─── for backwards compatibility with older component code
         timeline: caseStudy.duration,
@@ -130,6 +163,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   title: "Overview",
                   description: sections.hook.content,
                   images: extractImages(sections.hook),
+                  ...mapEditorial(sections.hook),
               }
             : null,
 
@@ -138,6 +172,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   title: "The Problem",
                   description: sections.problem_framing.content,
                   images: extractImages(sections.problem_framing),
+                  ...mapEditorial(sections.problem_framing),
               }
             : null,
 
@@ -150,6 +185,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   participantCount: sections.research_process.participant_count,
                   reflection: sections.research_process.reflection,
                   images: extractImages(sections.research_process),
+                  ...mapEditorial(sections.research_process),
               }
             : null,
 
@@ -195,6 +231,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   title: "Lo‑Fi Exploration",
                   description: sections.lofi_phase.content,
                   images: extractImages(sections.lofi_phase),
+                  ...mapEditorial(sections.lofi_phase),
               }
             : null,
 
@@ -205,6 +242,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   improvements: sections.hifi_phase.key_decisions || [],
                   images: extractImages(sections.hifi_phase),
                   prototype: sections.hifi_phase.prototype || null,
+                  ...mapEditorial(sections.hifi_phase),
               }
             : null,
 
@@ -215,6 +253,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   technicalDecisions:
                       sections.development.technical_decisions || [],
                   constraints: sections.development.constraints || [],
+                  ...mapEditorial(sections.development),
               }
             : null,
 
@@ -232,6 +271,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                       })) || [],
                   images: extractImages(sections.feature_breakdown),
                   prototype: sections.feature_breakdown.prototype || null,
+                  ...mapEditorial(sections.feature_breakdown),
               }
             : sections?.development
               ? {
@@ -239,6 +279,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                     description: sections.development.content,
                     features: [],
                     images: extractImages(sections.development),
+                    ...mapEditorial(sections.development),
                 }
               : null,
 
@@ -254,6 +295,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                       sections.validation.participant_quotes ||
                       [],
                   outcomes: sections.validation.outcomes || [],
+                  ...mapEditorial(sections.validation),
               }
             : null,
 
@@ -317,6 +359,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
             ? {
                   intro: sections.final_experience.intro,
                   prototype: sections.final_experience.prototype || null,
+                  ...mapEditorial(sections.final_experience),
               }
             : null,
 

@@ -23,7 +23,7 @@ export const homeHeroConfig = {
     headline: ["Leana", "Le"], // array = one word per display line
     headlineAs: "h1",
     subline:
-      "I design and build clear product experiences.",
+      "Product designer for SaaS and consumer products — turning complex workflows into calm, shippable experiences.",
   },
 
   // MediaBlock — null until portrait asset is added
@@ -84,12 +84,12 @@ export const homeHeroConfig = {
   // CTAGroup
   ctas: [
     {
-      label: "Let's Build Something →",
+      label: "Email role details →",
       href: "mailto:leanale003@gmail.com",
       variant: "primary",
     },
     {
-      label: "Resume",
+      label: "View resume",
       href: "/Le_Leana_Resume_NoNumber.pdf",
       variant: "ghost",
       download: "Leana_Le_Resume.pdf",

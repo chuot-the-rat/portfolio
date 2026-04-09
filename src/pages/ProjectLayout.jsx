@@ -18,7 +18,13 @@ const ProjectLayout = () => {
     const [project, setProject] = useState(null);
     const [loading, setLoading] = useState(true);
     const [lightboxImage, setLightboxImage] = useState(null);
-    usePageTitle(project?.title ?? null);
+    usePageTitle(project?.title ?? null, {
+        description:
+            project?.summary ||
+            project?.tagline ||
+            "Standalone design project by Leana Le.",
+        path: slug ? `/design/${slug}` : "/",
+    });
 
     const basePath = `/projects/${slug}`;
 
@@ -513,7 +519,7 @@ const ProjectLayout = () => {
                                 {/* Custom Sections Array — for flexible gallery layouts */}
                                 {project.sections &&
                                     Array.isArray(project.sections) &&
-                                    project.sections.map((section, idx) => {
+                                    project.sections.map((section) => {
                                         if (section.type === "text") {
                                             return (
                                                 <motion.section

@@ -12,7 +12,7 @@
  *   - Footer note
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { usePassbook } from "./PassbookProvider";

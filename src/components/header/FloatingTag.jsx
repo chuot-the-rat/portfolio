@@ -25,9 +25,18 @@ export default function FloatingTag({
 }) {
   const shouldReduceMotion = useReducedMotion();
   const [phase, setPhase] = useState("entrance");
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.innerWidth < 768,
+  );
 
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  if (isMobile) return null;
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const media = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsMobile(media.matches);
+    onChange();
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
 
   // Shared motion values — both drag and mode-spring operate on these
   // so they never conflict with each other
@@ -54,6 +63,8 @@ export default function FloatingTag({
         },
         style: { x: mx, y: my },
       };
+
+  if (isMobile) return null;
 
   return (
     <motion.span
