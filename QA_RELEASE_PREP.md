@@ -86,3 +86,41 @@ Notes:
 ```powershell
 git add src/App.jsx src/pages/ProjectDetail.css src/pages/CASE_STUDY_PHASE2_ROLLOUT.md QA_RELEASE_PREP.md RELEASE_NOTES.md
 ```
+
+---
+
+## 6) Final Closure Signoff (Release Cycle Wrap-Up)
+
+Date: 2026-04-09
+Decision: `GREEN`
+
+### Finalized deployment set (main)
+- `7aaa538` - SideQuest phase-2 merge baseline
+- `40bef18` - CTA source-of-truth fix (case-study links from standardized source)
+- `9a7c5a9` - strict third-person heading normalization (`Key Learnings`)
+- `d3b6a02` - InkLink parity upgrade (content + CSS + prototype-tab structure)
+- `39d6c9b` - InkLink cleanup (remove placeholder-like feature prototype URL + third-person label cleanup)
+
+### Production availability checks
+- `https://leanale.com/case-studies/inklink` -> `200`
+- `https://leanale.com/case-studies/prolog` -> `200`
+- `https://leanale.com/case-studies/sidequest` -> `200`
+
+### Non-blocking caveats and environment constraints
+- Preview environments may remain auth- or environment-constrained during checks and are treated as blocked/non-gating for this closure.
+- External embed/network console noise can still occur (provider-side constraints) and is tracked as warning-class unless user-visible breakage is introduced.
+
+### Case-study governance lock
+- CTA authority for case studies is standardized data-first; local supplemental JSON must not override hero CTA links.
+- Rendered case-study narrative follows strict third-person voice policy.
+- No fabricated metrics or unsupported impact claims in case-study content.
+
+### When to update (operational rule)
+- Update order: `src/assets/case_studies_standardized.json` first.
+- Then update mapper/rendering only if required for structure parity.
+- Apply scoped CSS refinements last, with regression checks on all three case studies.
+
+### Next-cycle handoff backlog (prioritized)
+1. Replace temporary InkLink Lo-Fi/Hi-Fi prototype links with final Figma URLs once available.
+2. Refresh screenshot evidence set for portfolio consistency across case studies.
+3. Optionally reduce warning-class embed/network console noise if stricter runtime cleanliness is desired.
