@@ -63,6 +63,13 @@ export function PassbookProvider({ children }) {
         setPassbook((prev) => addStamp(prev, projectId));
     }, []);
 
+    const parkPassbook = useCallback(() => {
+        setPassbook((prev) => {
+            if (prev.parked) return prev;
+            return { ...prev, parked: true };
+        });
+    }, []);
+
     const isStamped = useCallback(
         (projectId) => Boolean(passbook.stamps[projectId]?.stamped),
         [passbook.stamps],
@@ -76,6 +83,8 @@ export function PassbookProvider({ children }) {
         isStamped,
         stampCount,
         totalRoutes:      PASSBOOK_TOTAL,
+        isParked:         Boolean(passbook.parked),
+        parkPassbook,
         drawerOpen,
         openDrawer:       () => setDrawerOpen(true),
         closeDrawer:      () => setDrawerOpen(false),

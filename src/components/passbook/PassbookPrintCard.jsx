@@ -26,6 +26,8 @@ export default function PassbookPrintCard() {
         isStamped,
         isNewlyIssued,
         clearNewlyIssued,
+        isParked,
+        parkPassbook,
     } = usePassbook();
 
     const shouldAnimate = true;
@@ -37,7 +39,7 @@ export default function PassbookPrintCard() {
         }
     }, [isNewlyIssued, clearNewlyIssued]);
 
-    const isPrimaryIssue = isNewlyIssued || stampCount === 0;
+    const isPrimaryIssue = isNewlyIssued;
     const profile = isPrimaryIssue
         ? {
               delay: 0.5,
@@ -107,6 +109,13 @@ export default function PassbookPrintCard() {
     };
 
     const allDone = stampCount === totalRoutes;
+    const handlePress = () => {
+        if (!isParked) {
+            parkPassbook();
+            return;
+        }
+        openDrawer();
+    };
 
     return (
         <div className="pb-print-wrapper">
@@ -122,8 +131,12 @@ export default function PassbookPrintCard() {
             />
             <motion.button
                 className="pb-print-card"
-                onClick={openDrawer}
-                aria-label={`Project Passbook — ${stampCount} of ${totalRoutes} stamps collected. Open passbook.`}
+                onClick={handlePress}
+                aria-label={
+                    isParked
+                        ? `Project Passbook — ${stampCount} of ${totalRoutes} route seals logged. Open passbook.`
+                        : "Printed pass ready. Press to add passbook."
+                }
                 initial={cardVariants.initial}
                 animate={cardVariants.animate}
             >
@@ -140,12 +153,14 @@ export default function PassbookPrintCard() {
                     {/* Text block */}
                     <span className="pb-print-card__body">
                         <span className="pb-print-card__eyebrow">
-                            {isNewlyIssued ? "Issuance active" : "Archive passbook"}
+                            {isNewlyIssued ? "Issuance active" : "Printed pass"}
                         </span>
                         <span className="pb-print-card__label">
-                            {allDone
-                                ? "All route seals logged."
-                                : "Press to open and log route seals."}
+                            {!isParked
+                                ? "Press to add passbook"
+                                : allDone
+                                  ? "All route seals logged."
+                                  : "Press to open and log route seals."}
                         </span>
                         <span className="pb-print-card__sub">
                             {stampCount} / {totalRoutes} routes stamped

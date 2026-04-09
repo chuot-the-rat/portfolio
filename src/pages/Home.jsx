@@ -10,6 +10,8 @@ import HeroContainer from "../components/header/HeroContainer";
 import HomeWorkList from "../components/home/HomeWorkList";
 import MarqueeTicker from "../components/MarqueeTicker";
 import PassbookPrintCard from "../components/passbook/PassbookPrintCard";
+import PassbookDock from "../components/passbook/PassbookDock";
+import { usePassbook } from "../components/passbook/PassbookProvider";
 import { homeHeroConfig } from "../data/header/headerConfig";
 import "./Home.css";
 import "../components/SectionLayout.css";
@@ -104,6 +106,7 @@ const safeFetchJson = async (url, options) => {
 };
 
 const Home = () => {
+    const { isParked } = usePassbook();
     usePageTitle(null, {
         description:
             "Product designer and frontend builder in Vancouver. UX case studies with clear role ownership, impact snapshots, and shipped interactions.",
@@ -113,6 +116,7 @@ const Home = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showEnhancements, setShowEnhancements] = useState(false);
+    const [showParkReplay, setShowParkReplay] = useState(false);
 
     const resolveProjectMediaPath = (projectId, src) => {
         if (!src) return null;
@@ -287,6 +291,16 @@ const Home = () => {
         };
     }, []);
 
+    useEffect(() => {
+        if (!isParked) {
+            setShowParkReplay(false);
+            return;
+        }
+        setShowParkReplay(true);
+        const t = setTimeout(() => setShowParkReplay(false), 680);
+        return () => clearTimeout(t);
+    }, [isParked]);
+
     return (
         <div className="home">
             <main className="home-main page-main">
@@ -301,7 +315,11 @@ const Home = () => {
 
                         {/* Passbook issuance rail — desktop right, mobile below hero */}
                         <aside className="home-passbook-rail" aria-label="Passbook issuance rail">
-                            <PassbookPrintCard />
+                            {!isParked || showParkReplay ? (
+                                <PassbookPrintCard />
+                            ) : (
+                                <PassbookDock embedded />
+                            )}
                         </aside>
                     </section>
 

@@ -46,16 +46,6 @@ export default function PassbookDrawer() {
     const { drawerOpen, closeDrawer, isStamped, stampCount, totalRoutes } =
         usePassbook();
 
-    // Lock body scroll when drawer is open
-    useEffect(() => {
-        if (drawerOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
-        return () => { document.body.style.overflow = ""; };
-    }, [drawerOpen]);
-
     // Close on Escape key
     useEffect(() => {
         if (!drawerOpen) return;
@@ -72,14 +62,14 @@ export default function PassbookDrawer() {
 
     const drawerVariants = {
         hidden: isMobile
-            ? { y: "100%", opacity: 0.6 }
-            : { opacity: 0, scale: 0.94, y: 10, x: 10 },
+            ? { opacity: 0, scale: 0.92, x: 18, y: -4 }
+            : { opacity: 0, scale: 0.92, x: 18, y: -4 },
         visible: isMobile
-            ? { y: 0, opacity: 1 }
-            : { opacity: 1, scale: 1, y: 0 },
+            ? { opacity: 1, scale: 1, x: 0, y: 0 }
+            : { opacity: 1, scale: 1, x: 0, y: 0 },
         exit: isMobile
-            ? { y: "100%", opacity: 0.6 }
-            : { opacity: 0, scale: 0.94, y: 10, x: 10 },
+            ? { opacity: 0, scale: 0.92, x: 18, y: -4 }
+            : { opacity: 0, scale: 0.92, x: 18, y: -4 },
     };
 
     return (
@@ -107,11 +97,9 @@ export default function PassbookDrawer() {
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        style={{
-                            transformOrigin: isMobile ? "50% 100%" : "100% 0%",
-                        }}
+                        style={{ transformOrigin: "100% 50%" }}
                         transition={{
-                            duration: isMobile ? 0.32 : 0.34,
+                            duration: isMobile ? 0.3 : 0.32,
                             ease: [0.16, 1, 0.3, 1],
                         }}
                     >

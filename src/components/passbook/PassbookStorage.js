@@ -22,6 +22,7 @@ const STORAGE_KEY = "leana_passbook_v1";
 const DEFAULT_STATE = {
     issued:   false,
     issuedAt: null,
+    parked:   false,
     stamps:   {},
 };
 
