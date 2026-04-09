@@ -26,7 +26,7 @@
     },
     "overview": {
         "title": "Overview",
-        "description": "Apprenticeship requires over 6,000 hours. That's years of work, spread across job sites, classrooms, and bureaucratic systems—often without a clear sense of whether progress is on track.\n\nEarly research consistently revealed the same finding: confusion was pushing people out. Not lack of ability. Not lack of motivation. Just confusion about current standing and next steps.\n\nThe challenge became designing something that answered one question clearly: Where am I right now?",
+        "description": "Apprenticeship requires over 6,000 hours. That's years of work, spread across job sites, classrooms, and bureaucratic systems—often without a clear sense of whether progress is on track.\n\nEarly research consistently revealed the same finding: confusion was pushing people out. Not lack of ability. Not lack of motivation. Just confusion about current standing and next steps.\n\nThe challenge became designing a solution that answered one question clearly: What is the current status?",
         "images": []
     },
     "problem": {
@@ -74,7 +74,7 @@
         "features": [
             {
                 "title": "Progress Dashboard",
-                "description": "A centralized view of hours completed, hours remaining, competencies achieved, and certification progress. No digging required—the answer to 'where am I?' is always visible."
+                "description": "A centralized view of hours completed, hours remaining, competencies achieved, and certification progress. No digging required—the current status is always visible."
             },
             {
                 "title": "Hours Discrepancy Detector",
@@ -93,14 +93,14 @@
     },
     "validation": {
         "title": "Validation & Testing",
-        "description": "The prototype was tested with a small group, yielding unexpected feedback: relief. Users described the dashboard as a 'GPS for my apprenticeship.' They appreciated that they didn't have to hunt for information—it was just there. The hours tracker resonated especially strongly. One participant noted they'd never realized they could document discrepancies themselves.",
+        "description": "The prototype was tested with a small group, yielding unexpected feedback: relief. Users described the dashboard as a reliable orientation tool for apprenticeship progress. Participants appreciated that information did not require searching across multiple systems. The hours tracker resonated especially strongly. One participant noted that discrepancy documentation options had not been clear before using the prototype.",
         "quotes": [
             {
-                "text": "It's like a GPS for my apprenticeship.",
+                "text": "The dashboard functions like a GPS for apprenticeship progress.",
                 "author": "Test participant"
             },
             {
-                "text": "I never realized I could document discrepancies myself.",
+                "text": "Discrepancy documentation options became clear through the workflow.",
                 "author": "Test participant"
             }
         ]

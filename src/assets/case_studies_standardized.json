@@ -67,6 +67,11 @@
                         "caption": "ProLog centralizes apprenticeship progress into one calm dashboard."
                     }
                 },
+                "launch_ad": {
+                    "title": "ProLog YouTube Ad",
+                    "youtube_url": "https://youtu.be/vWXMGQpBQfs",
+                    "caption": "A short product story introducing the core apprenticeship support workflows."
+                },
                 "problem_framing": {
                     "content": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind."
                 },
@@ -75,7 +80,7 @@
                         "Policy and documentation review (SkilledTradesBC)",
                         "Stakeholder conversations with industry partners",
                         "Persona development based on lived experience",
-                        "Team reflection sessions (our team included neurodivergent members)"
+                        "Team reflection sessions that included neurodivergent members"
                     ],
                     "key_findings": [
                         "Progress tracking is scattered across multiple platforms with no single source of truth",
@@ -104,7 +109,57 @@
                     }
                 },
                 "lofi_phase": {
-                    "content": "Our early sketches were deliberately rough. We weren't trying to make things look good—we were trying to understand what information mattered most and how quickly someone could find it.\n\nThe dashboard concept emerged early. We kept asking ourselves: if an apprentice opens this app on a break, what should they see in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else was secondary.",
+                    "content": "Early sketches were deliberately rough. The focus was not visual polish, but identifying which information mattered most and how quickly it could be understood.\n\nThe dashboard concept emerged early. A key framing question guided the exploration: if an apprentice opens the app on a break, what should be visible in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else remained secondary.",
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/Cecvl0e5QYbiQFfLpmHEEJ/Wireframe--Old---Copy-?node-id=1157-8496&t=bsSwXyWOOZJpSjFp-1",
+                        "embed_url": "https://embed.figma.com/design/Cecvl0e5QYbiQFfLpmHEEJ/Wireframe--Old---Copy-?node-id=1157-8496&embed-host=share",
+                        "description": "Mid-fi walkthrough for early structure and hierarchy decisions.",
+                        "type": "figma"
+                    },
+                    "comparisons": [
+                        {
+                            "id": "prolog-dashboard",
+                            "label": "Dashboard",
+                            "before": {
+                                "src": "/projects/prolog/compare/dashboard-before.png",
+                                "alt": "ProLog mid-fi dashboard screen",
+                                "caption": "Mid-fi dashboard organizes progress metrics, reminders, and suggested cards in one vertical layout."
+                            },
+                            "after": {
+                                "src": "/projects/prolog/compare/dashboard-after.png",
+                                "alt": "ProLog hi-fi dashboard screen",
+                                "caption": "Hi-fi dashboard keeps the core structure while refining spacing, color contrast, and component polish."
+                            }
+                        },
+                        {
+                            "id": "prolog-resources",
+                            "label": "Resources / Finance",
+                            "before": {
+                                "src": "/projects/prolog/compare/resources-before.png",
+                                "alt": "ProLog mid-fi finance resources screen",
+                                "caption": "Mid-fi finance screen presents support information in a text-forward single-column structure."
+                            },
+                            "after": {
+                                "src": "/projects/prolog/compare/resources-after.png",
+                                "alt": "ProLog hi-fi school finance screen",
+                                "caption": "Hi-fi finance screen groups funding details into clearer sections with stronger visual hierarchy."
+                            }
+                        },
+                        {
+                            "id": "prolog-quiz",
+                            "label": "Quiz Prep",
+                            "before": {
+                                "src": "/projects/prolog/compare/quiz-before.png",
+                                "alt": "ProLog mid-fi skills progress screen",
+                                "caption": "Mid-fi baseline uses compact progress modules and line-completion indicators."
+                            },
+                            "after": {
+                                "src": "/projects/prolog/compare/quiz-after.png",
+                                "alt": "ProLog hi-fi competency exam prep screen",
+                                "caption": "Hi-fi quiz prep introduces a dedicated study flow with expanded content depth and clearer pacing."
+                            }
+                        }
+                    ],
                     "images": [
                         {
                             "src": "/projects/prolog/lofi-1.png",
@@ -120,6 +175,56 @@
                 },
                 "hifi_phase": {
                     "content": "The hi-fi designs led with calm. Soft colours, generous whitespace, and typography that doesn't feel clinical. Every screen answers one question without making the user ask it. The dashboard became the emotional anchor — not just a data view, but a sense of progress.",
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/WS68LlLF4uqajPd1BcADqH/HiFi-WireFrames--Copy-?node-id=2332-2031&t=mbQTryoXFrkmicSK-1",
+                        "embed_url": "https://embed.figma.com/design/WS68LlLF4uqajPd1BcADqH/HiFi-WireFrames--Copy-?node-id=2332-2031&embed-host=share",
+                        "description": "Hi-fi walkthrough focused on final interface polish and flow.",
+                        "type": "figma"
+                    },
+                    "comparisons": [
+                        {
+                            "id": "prolog-dashboard",
+                            "label": "Dashboard",
+                            "before": {
+                                "src": "/projects/prolog/compare/dashboard-before.png",
+                                "alt": "ProLog mid-fi dashboard screen",
+                                "caption": "Mid-fi dashboard establishes content order for progress, reminders, and quick-access cards."
+                            },
+                            "after": {
+                                "src": "/projects/prolog/compare/dashboard-after.png",
+                                "alt": "ProLog hi-fi dashboard screen",
+                                "caption": "Hi-fi dashboard preserves that layout intent while refining typography, spacing, and visual balance."
+                            }
+                        },
+                        {
+                            "id": "prolog-resources",
+                            "label": "Resources / Finance",
+                            "before": {
+                                "src": "/projects/prolog/compare/resources-before.png",
+                                "alt": "ProLog mid-fi finance resources screen",
+                                "caption": "Mid-fi resources rely on direct text blocks and minimal visual separation."
+                            },
+                            "after": {
+                                "src": "/projects/prolog/compare/resources-after.png",
+                                "alt": "ProLog hi-fi school finance screen",
+                                "caption": "Hi-fi resources apply stronger grouping, spacing, and scannable section hierarchy."
+                            }
+                        },
+                        {
+                            "id": "prolog-quiz",
+                            "label": "Quiz Prep",
+                            "before": {
+                                "src": "/projects/prolog/compare/quiz-before.png",
+                                "alt": "ProLog mid-fi skills progress screen",
+                                "caption": "Mid-fi progress module shows the early visual language for competency tracking elements."
+                            },
+                            "after": {
+                                "src": "/projects/prolog/compare/quiz-after.png",
+                                "alt": "ProLog hi-fi competency exam prep screen",
+                                "caption": "Hi-fi quiz prep screen introduces dedicated exam-study content and clearer progression cues."
+                            }
+                        }
+                    ],
                     "images": [
                         {
                             "src": "/projects/prolog/hifi-1.png",
@@ -136,13 +241,7 @@
                             "alt": "Quiz preparation screen",
                             "caption": "AI-generated practice questions"
                         }
-                    ],
-                    "prototype": {
-                        "url": "https://www.figma.com/proto/prolog-hifi-dashboard",
-                        "embed_url": "",
-                        "description": "Explore the dashboard experience. Pay attention to how progress is communicated without requiring any taps.",
-                        "type": "figma"
-                    }
+                    ]
                 },
                 "feature_breakdown": {
                     "intro": "Each feature was designed to reduce one specific point of friction. Click through the prototype below to see how they work together.",
@@ -150,22 +249,22 @@
                         {
                             "id": "progress_dashboard",
                             "title": "Progress Dashboard",
-                            "description": "A centralized view of hours completed, competencies achieved, and certification progress. The answer to \"where am I?\" is always one tap away.",
-                            "why": "Apprentices told us they felt lost. The dashboard acts as a GPS — constant orientation, no digging.",
+                            "description": "A centralized view of hours completed, competencies achieved, and certification progress. Current status is visible within one tap.",
+                            "why": "Apprentices reported feeling lost in fragmented systems. The dashboard provides constant orientation without extra navigation.",
                             "image": "/projects/prolog/feature-dashboard.png"
                         },
                         {
                             "id": "hours_discrepancy",
                             "title": "Hours Discrepancy Detector",
                             "description": "Compares user-logged hours against official records and flags mismatches. Users can document and report discrepancies directly.",
-                            "why": "Hour disputes are stressful and common. We gave users tools to advocate for themselves.",
+                            "why": "Hour disputes are stressful and common. The feature provides clear tools for reporting and resolution.",
                             "image": "/projects/prolog/feature-hours.png"
                         },
                         {
                             "id": "financial_hub",
                             "title": "Financial Resources Hub",
                             "description": "Links to grants, funding programs, and cost breakdowns for apprenticeship expenses — all in one place.",
-                            "why": "Financial stress came up in every research session. We could not solve it, but we could make it easier to navigate.",
+                            "why": "Financial stress appeared consistently in research. The feature improves visibility and access to available support pathways.",
                             "image": "/projects/prolog/feature-financial.png"
                         },
                         {
@@ -232,14 +331,14 @@
                     },
                     {
                         "insight": "Qualitative feedback is valid",
-                        "reflection": "In student work, we don't always have access to large sample sizes. That doesn't make insights less real."
+                        "reflection": "Student projects do not always have access to large sample sizes. That limitation does not invalidate qualitative insights."
                     }
                 ]
             },
             "links": {
                 "live": "https://prolog.framer.website/",
-                "prototype": "",
-                "github": "",
+                "prototype": "https://www.figma.com/proto/WS68LlLF4uqajPd1BcADqH/HiFi-WireFrames--Copy-?node-id=2332-2031&t=mbQTryoXFrkmicSK-1",
+                "github": "https://github.com/Jinontheclock/ProLog_main",
                 "figma": "",
                 "case_study_pdf": ""
             },

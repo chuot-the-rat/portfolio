@@ -100,9 +100,49 @@ const normalizeVerdict = (section) => {
     };
 };
 
+const normalizeComparisons = (section) => {
+    if (!Array.isArray(section?.comparisons)) return [];
+
+    return section.comparisons
+        .map((comparison, index) => {
+            if (!comparison?.before?.src || !comparison?.after?.src) return null;
+
+            return {
+                id: comparison.id || `comparison-${index + 1}`,
+                label: comparison.label || `Comparison ${index + 1}`,
+                before: {
+                    src: comparison.before.src,
+                    alt:
+                        comparison.before.alt ||
+                        `${comparison.label || "Before"} before state`,
+                    caption: comparison.before.caption || "",
+                },
+                after: {
+                    src: comparison.after.src,
+                    alt:
+                        comparison.after.alt ||
+                        `${comparison.label || "After"} after state`,
+                    caption: comparison.after.caption || "",
+                },
+            };
+        })
+        .filter(Boolean);
+};
+
+const normalizePrototype = (section) => {
+    if (!section?.prototype) return null;
+    return {
+        url: section.prototype.url || "",
+        embed_url: section.prototype.embed_url || "",
+        description: section.prototype.description || "",
+        type: section.prototype.type || "figma",
+    };
+};
+
 const mapEditorial = (section) => ({
     mediaDemo: normalizeMediaDemo(section),
     verdict: normalizeVerdict(section),
+    comparisons: normalizeComparisons(section),
 });
 
 /**
@@ -172,6 +212,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         heroMarquee:
             caseStudy.hero?.marqueeText || caseStudy.hero?.marquee_text || "",
         checklist: caseStudy.checklist || null,
+        launchAd: sections?.launch_ad || null,
 
         // ─── LEGACY FIELDS ─── for backwards compatibility with older component code
         timeline: caseStudy.duration,
@@ -268,6 +309,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                       sections.lofi_phase,
                       "Lo-fi exploration",
                   ),
+                  prototype: normalizePrototype(sections.lofi_phase),
                   ...mapEditorial(sections.lofi_phase),
               }
             : null,
@@ -281,7 +323,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                       sections.hifi_phase,
                       "High-fidelity decisions",
                   ),
-                  prototype: sections.hifi_phase.prototype || null,
+                  prototype: normalizePrototype(sections.hifi_phase),
                   ...mapEditorial(sections.hifi_phase),
               }
             : null,
@@ -426,6 +468,26 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         previewLayout: getPreviewLayout(),
         status: caseStudy.status,
         featured: caseStudy.featured,
+        prototypeTabs: [
+            sections?.lofi_phase?.prototype
+                ? {
+                      id: "midfi",
+                      label: "Mid-Fi",
+                      title: "Mid-Fi Prototype",
+                      embedUrl: sections.lofi_phase.prototype.embed_url || "",
+                      fallbackUrl: sections.lofi_phase.prototype.url || "",
+                  }
+                : null,
+            sections?.hifi_phase?.prototype
+                ? {
+                      id: "hifi",
+                      label: "Hi-Fi",
+                      title: "Hi-Fi Prototype",
+                      embedUrl: sections.hifi_phase.prototype.embed_url || "",
+                      fallbackUrl: sections.hifi_phase.prototype.url || "",
+                  }
+                : null,
+        ].filter(Boolean),
     };
 };
 
