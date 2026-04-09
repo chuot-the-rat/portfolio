@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
 import {
     getAllProjects,
-    getProjectPath,
     isStandaloneProject,
 } from "../utils/projectDataMapper";
 import HeroContainer from "../components/header/HeroContainer";
@@ -121,19 +120,22 @@ export default function Projects() {
         <div className="projects-page">
             <main className="projects-main">
                 <div className="container">
-                    <HeroContainer config={heroConfig} />
+                    <HeroContainer config={heroConfig} className="projects-hero-grid" />
+                    
 
-                    {loading ? (
-                        <div className="projects-loading">
-                            <motion.div
-                                className="projects-spinner"
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                            />
-                        </div>
-                    ) : (
-                        <HomeWorkList projects={projects} />
-                    )}
+                    <section className="projects-work-shell" aria-label="Project listing">
+                        {loading ? (
+                            <div className="projects-loading">
+                                <motion.div
+                                    className="projects-spinner"
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                />
+                            </div>
+                        ) : (
+                            <HomeWorkList projects={projects} />
+                        )}
+                    </section>
                 </div>
             </main>
         </div>

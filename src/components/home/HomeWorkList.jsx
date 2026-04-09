@@ -13,8 +13,7 @@
  */
 
 import { useState } from "react";
-// eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getProjectPath, isStandaloneProject } from "../../utils/projectDataMapper";
 import { MOTION_DURATION, MOTION_EASE } from "../../utils/motion/tokens";
@@ -31,6 +30,7 @@ const CATEGORY_MAP = {
 };
 
 export default function HomeWorkList({ projects }) {
+  const shouldReduceMotion = useReducedMotion();
   const [activeTab, setActiveTab]   = useState("UX/UI");
   const [hoveredId, setHoveredId]   = useState(null);
 
@@ -45,6 +45,7 @@ export default function HomeWorkList({ projects }) {
     hoveredProject?.allImages?.[0]?.src ??
     null;
   const previewVideoSrc = hoveredProject?.previewVideoSrc ?? null;
+  const showPreviewVideo = Boolean(previewVideoSrc && hoveredId && !shouldReduceMotion);
   const projectTags = (hoveredProject?.taxonomyTags ?? []).slice(0, 3);
 
   return (
@@ -86,12 +87,14 @@ export default function HomeWorkList({ projects }) {
               filtered.map((project, index) => {
                 const isHovered = hoveredId === project.id;
                 const isDimmed  = hoveredId !== null && !isHovered;
+                const isFeatured = !isStandaloneProject(project.id);
 
                 return (
                   <motion.article
                     key={project.id}
                     className={[
                       "hw-item",
+                      isFeatured ? "hw-item--featured" : "hw-item--standard",
                       isHovered ? "hw-item--active" : "",
                       isDimmed  ? "hw-item--dimmed" : "",
                     ].filter(Boolean).join(" ")}
@@ -190,7 +193,7 @@ export default function HomeWorkList({ projects }) {
                     className="hw-preview-img"
                     loading="lazy"
                   />
-                  {previewVideoSrc && (
+                  {showPreviewVideo && (
                     <video
                       key={`${hoveredId}-preview-video`}
                       className="hw-preview-video"
@@ -199,7 +202,8 @@ export default function HomeWorkList({ projects }) {
                       loop
                       playsInline
                       autoPlay
-                      preload="metadata"
+                      preload="none"
+                      aria-hidden="true"
                     />
                   )}
                 </div>

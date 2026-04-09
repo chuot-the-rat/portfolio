@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { usePageTitle } from "../hooks/usePageTitle";
 import NameCycle from "../components/about/NameCycle";
@@ -41,8 +40,34 @@ const fadeUp = {
     transition: { duration: 0.45 },
 };
 
+const PROCESS_BLOCKS = [
+    {
+        phase: "01",
+        title: "Discover",
+        body: "I start by getting close to the problem so every decision is grounded in evidence, not preference.",
+        tags: ["Domain research", "User interviews", "Competitive patterns"],
+    },
+    {
+        phase: "02",
+        title: "Shape",
+        body: "I define the problem in plain language, map critical states, and test multiple directions quickly.",
+        tags: ["Problem statement", "Journey mapping", "Rapid exploration"],
+    },
+    {
+        phase: "03",
+        title: "Ship + Learn",
+        body: "I refine with clear ship criteria, implement where it helps, then iterate with real post-launch feedback.",
+        tags: ["Frontend handoff", "Quality polish", "Post-launch feedback"],
+    },
+];
+
 export default function About() {
-    usePageTitle("About", { site: true }); // "Leana Le · About"
+    usePageTitle("About", {
+        site: true,
+        path: "/about",
+        description:
+            "About Leana Le: product designer with frontend implementation experience, based in Vancouver and open to product design roles.",
+    });
 
     return (
         <div className="about">
@@ -67,44 +92,19 @@ export default function About() {
 
                     <div className="about-body">
 
-                        {/* ── Intro ── */}
+                        {/* ── About ── */}
                         <motion.div className="about-row" {...fadeUp}>
-                            <span className="about-row-label">Intro</span>
+                            <span className="about-row-label">About</span>
                             <div className="about-row-content">
                                 <p className="about-para">
                                     I spent <em className="about-em">six years in hospitality</em>, where I learned
-                                    to make complex moments feel easy, warm, and clear. That
-                                    instinct carried straight into design — I still optimize
-                                    for the{" "}
-                                    <em className="about-em">person on the other side of the screen</em> first.
+                                    to make complex moments feel easy, warm, and clear. That instinct carried into
+                                    design, where I still optimize for the <em className="about-em">person on the other side of the screen</em> first.
                                 </p>
                                 <p className="about-para">
-                                    I'm a <em className="about-em">product designer with front-end chops</em>:
-                                    from early research to shipped code. I'm currently finishing
-                                    my Diploma in Digital Design &amp; Development at BCIT.
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        {/* ── About Me ── */}
-                        <motion.div
-                            className="about-row"
-                            {...fadeUp}
-                            transition={{ duration: 0.45, delay: 0.06 }}
-                        >
-                            <span className="about-row-label">About Me</span>
-                            <div className="about-row-content">
-                                <p className="about-para">
-                                    When I'm not designing, I'm probably deep in a manga
-                                    arc — isekai and regression, mostly — or rebuilding my
-                                    Super Auto Pets team after an embarrassing loss. I love
-                                    making presentations{" "}
-                                    <em className="about-em">far more than any normal person should</em>.
-                                    I used to cosplay. I still consider myself a massive geek.
-                                </p>
-                                <p className="about-para">
-                                    My friends call me <em className="about-em">Chuot</em> — Vietnamese for mouse.
-                                    You can too.
+                                    I am a <em className="about-em">product designer with frontend chops</em>, moving from early research to shipped code.
+                                    I am currently finishing my Diploma in Digital Design and Development at BCIT.
+                                    Outside work, I am usually in a manga arc or obsessing over a presentation deck.
                                 </p>
                             </div>
                         </motion.div>
@@ -121,48 +121,31 @@ export default function About() {
                             <p className="about-connect-label">Process</p>
                             <h2 className="about-process-heading">How I work</h2>
                         </div>
-                        <ol className="about-process-steps">
-                            {[
-                                {
-                                    title: "Research",
-                                    desc: "I don't touch Figma until I understand the space. Competitor audits, domain reading, user interviews — I go deep enough that a direction starts to feel obvious, not arbitrary.",
-                                },
-                                {
-                                    title: "Problem framing",
-                                    desc: "Before any visuals, I put the problem in words — usually a deck or a doc. If I can't explain what I'm solving and why in a sentence, the design will wander.",
-                                },
-                                {
-                                    title: "User journey",
-                                    desc: "I map every state a user might be in — frustrated, confused, delighted, lost. The interesting design decisions live at the edges, not the happy path.",
-                                },
-                                {
-                                    title: "Exploration",
-                                    desc: "I go wide on purpose. Multiple directions, quick tests, feedback loops. I'll overexplore — that's fine. It's the only way I find solutions I never predicted from the research alone.",
-                                },
-                                {
-                                    title: "Refinement",
-                                    desc: "This is my danger zone. I can polish indefinitely — spacing, copy, micro-interactions, edge cases. I've learned to set explicit stopping conditions: what has to be true for this to ship?",
-                                },
-                                {
-                                    title: "Handoff",
-                                    desc: "I build. Not just redlines — I can open the codebase and implement components when it helps. The design doesn't stop at the Figma file.",
-                                },
-                                {
-                                    title: "After launch",
-                                    desc: "I watch what happens. Metrics, user feedback, support patterns — whatever data exists. I treat launch as the beginning of the design, not the end.",
-                                },
-                            ].map((step, i) => (
-                                <li key={step.title} className="about-process-step">
-                                    <span className="about-process-step-num" aria-hidden="true">
-                                        {String(i + 1).padStart(2, "0")}
-                                    </span>
-                                    <div className="about-process-step-body">
-                                        <strong className="about-process-step-title">{step.title}</strong>
-                                        <p className="about-process-step-desc">{step.desc}</p>
+                        <div className="about-process-flow" role="list" aria-label="Design process phases">
+                            {PROCESS_BLOCKS.map((step, index) => (
+                                <article
+                                    key={step.title}
+                                    className="about-process-card"
+                                    role="listitem"
+                                >
+                                    <div className="about-process-card-top">
+                                        <span className="about-process-phase" aria-hidden="true">
+                                            {step.phase}
+                                        </span>
+                                        <h3 className="about-process-card-title">{step.title}</h3>
                                     </div>
-                                </li>
+                                    <p className="about-process-card-body">{step.body}</p>
+                                    <div className="about-process-tags">
+                                        {step.tags.map((tag) => (
+                                            <span key={tag} className="about-process-tag">{tag}</span>
+                                        ))}
+                                    </div>
+                                    {index < PROCESS_BLOCKS.length - 1 ? (
+                                        <span className="about-process-arrow" aria-hidden="true">→</span>
+                                    ) : null}
+                                </article>
                             ))}
-                        </ol>
+                        </div>
                     </motion.section>
 
                     {/* ── My Philosophy ── */}

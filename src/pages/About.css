@@ -314,51 +314,83 @@
     line-height: 1.1;
 }
 
-.about-process-steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.about-process-step {
+.about-process-flow {
     display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: var(--space-8);
-    padding: var(--space-7) 0;
-    border-top: 1px solid var(--color-border);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
 }
 
-.about-process-step:last-child {
-    border-bottom: 1px solid var(--color-border);
+.about-process-card {
+    position: relative;
+    padding: var(--space-7);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background:
+        radial-gradient(circle at top right, rgba(255, 184, 108, 0.18), transparent 42%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
 }
 
-.about-process-step-num {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    letter-spacing: var(--letter-spacing-label);
-    color: var(--color-text-tertiary);
-    padding-top: 3px;
-    user-select: none;
-}
-
-.about-process-step-body {
+.about-process-card-top {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
 }
 
-.about-process-step-title {
-    font-size: var(--font-size-base);
+.about-process-phase {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: var(--letter-spacing-label);
+    color: var(--color-accent-vivid);
+    padding: 4px 7px;
+    border: 1px solid color-mix(in srgb, var(--color-accent-vivid) 35%, var(--color-border));
+    border-radius: var(--radius-full);
+}
+
+.about-process-card-title {
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
     font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
     color: var(--color-text);
 }
 
-.about-process-step-desc {
+.about-process-card-body {
     font-size: var(--font-size-sm);
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
-    margin: 0;
-    max-width: 520px;
+    margin: 0 0 var(--space-5);
+}
+
+.about-process-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.about-process-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-bg-secondary) 70%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.about-process-arrow {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.15rem;
+    color: var(--color-text-tertiary);
+    pointer-events: none;
 }
 
 /* ── My Philosophy ───────────────────────────────────────────────────────────
@@ -499,9 +531,17 @@
    ─────────────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
-    .about-process-step {
-        grid-template-columns: 36px 1fr;
-        gap: var(--space-5);
+    .about-process-flow {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .about-process-card {
+        padding: var(--space-6);
+    }
+
+    .about-process-arrow {
+        display: none;
     }
 
     .about-philosophy-grid {

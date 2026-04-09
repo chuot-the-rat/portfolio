@@ -22,23 +22,21 @@
  */
 
 import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
-import { useEffect, Component } from "react";
+import { useEffect, Component, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "./components/Navigation";
 import { PassbookProvider } from "./components/passbook/PassbookProvider";
 import PassbookDock from "./components/passbook/PassbookDock";
 import PassbookDrawer from "./components/passbook/PassbookDrawer";
 
-// Pages
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Resume from "./pages/Resume";
-import NotFound from "./pages/NotFound";
-
-// Project detail pages (existing)
-import ProjectDetail from "./pages/ProjectDetail";
-import ProjectLayout from "./pages/ProjectLayout";
+// Pages (lazy-loaded for better first-load performance)
+const Home = lazy(() => import("./pages/Home"));
+const Projects = lazy(() => import("./pages/Projects"));
+const About = lazy(() => import("./pages/About"));
+const Resume = lazy(() => import("./pages/Resume"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
+const ProjectLayout = lazy(() => import("./pages/ProjectLayout"));
 
 import "./styles/App.css";
 
@@ -129,24 +127,26 @@ function App() {
                 <PassbookDrawer />
 
                 <AnimatePresence mode="wait" initial={false}>
-                    <Routes location={location} key={location.pathname}>
-                        {/* ─── PRIMARY ROUTES ─── */}
-                        <Route path="/"          element={<P><Home /></P>} />
-                        <Route path="/projects"  element={<Navigate to="/" replace />} />
-                        <Route path="/about"     element={<P><About /></P>} />
-                        <Route path="/resume"    element={<Navigate to="/about" replace />} />
-                        <Route path="/contact"   element={<Navigate to="/about" replace />} />
+                    <Suspense fallback={null}>
+                        <Routes location={location} key={location.pathname}>
+                            {/* ─── PRIMARY ROUTES ─── */}
+                            <Route path="/"          element={<P><Home /></P>} />
+                            <Route path="/projects"  element={<P><Projects /></P>} />
+                            <Route path="/about"     element={<P><About /></P>} />
+                            <Route path="/resume"    element={<Navigate to="/about" replace />} />
+                            <Route path="/contact"   element={<Navigate to="/about" replace />} />
 
-                        {/* ─── CASE STUDY PROJECTS ─── */}
-                        <Route path={`${CASE_STUDY_BASE_PATH}/:id`} element={<ProjectErrorBoundary routeKey={location.pathname}><P><ProjectDetail /></P></ProjectErrorBoundary>} />
-                        <Route path="/projects/:id" element={<LegacyProjectRouteRedirect />} />
+                            {/* ─── CASE STUDY PROJECTS ─── */}
+                            <Route path={`${CASE_STUDY_BASE_PATH}/:id`} element={<ProjectErrorBoundary routeKey={location.pathname}><P><ProjectDetail /></P></ProjectErrorBoundary>} />
+                            <Route path="/projects/:id" element={<LegacyProjectRouteRedirect />} />
 
-                        {/* ─── STANDALONE PROJECTS ─── */}
-                        <Route path="/design/:slug"  element={<P><ProjectLayout /></P>} />
+                            {/* ─── STANDALONE PROJECTS ─── */}
+                            <Route path="/design/:slug"  element={<P><ProjectLayout /></P>} />
 
-                        {/* ─── 404 CATCH-ALL ─── */}
-                        <Route path="*" element={<P><NotFound /></P>} />
-                    </Routes>
+                            {/* ─── 404 CATCH-ALL ─── */}
+                            <Route path="*" element={<P><NotFound /></P>} />
+                        </Routes>
+                    </Suspense>
                 </AnimatePresence>
             </div>
         </PassbookProvider>

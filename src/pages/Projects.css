@@ -5,10 +5,79 @@
 .projects-page {
     min-height: 100vh;
     background-color: var(--color-bg);
+    position: relative;
+    overflow: clip;
+}
+
+.projects-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(70% 42% at 10% 0%, rgba(255, 184, 108, 0.08), transparent 62%),
+        radial-gradient(45% 30% at 88% 14%, rgba(255, 138, 76, 0.06), transparent 66%);
+    z-index: 0;
 }
 
 .projects-main {
     padding-bottom: var(--section-spacing-lg);
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Hero polish ───────────────────────────────────────────────────────── */
+.projects-hero-grid {
+    --hs-headline-size: clamp(3.05rem, 7vw, 6rem);
+    --hs-headline-leading: 0.94;
+    --hs-headline-tracking: -0.034em;
+    --hs-subline-size: clamp(1rem, 1.4vw, 1.2rem);
+    margin-bottom: clamp(2.4rem, 6vw, 4.5rem);
+}
+
+.projects-hero-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle, color-mix(in srgb, var(--color-border) 70%, transparent) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.36;
+    z-index: 0;
+}
+
+.projects-hero-grid::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 34%;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--color-bg));
+    z-index: 1;
+}
+
+/* ── Work shell ────────────────────────────────────────────────────────── */
+.projects-work-shell {
+    position: relative;
+    padding-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.projects-work-shell::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        color-mix(in srgb, var(--color-border) 80%, var(--color-accent-vivid)) 45%,
+        transparent 100%
+    );
 }
 
 /* ── Loading ─────────────────────────────────────────────────────────────── */
@@ -32,6 +101,33 @@
 
 @media (max-width: 768px) {
     .projects-main {
+        padding-top: var(--space-8);
         padding-bottom: var(--section-spacing-base);
+    }
+
+    .projects-hero-grid {
+        --hs-headline-size: clamp(2.7rem, 11.5vw, 4.5rem);
+        --hs-subline-size: var(--font-size-base);
+        margin-bottom: var(--space-10);
+    }
+
+    .projects-hero-grid .hs-text__subline {
+        max-width: 34ch;
+    }
+
+    .projects-work-shell {
+        padding-top: var(--space-4);
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-hero-grid {
+        --hs-headline-size: clamp(2.3rem, 13vw, 3.2rem);
+        --hs-headline-leading: 0.96;
+        margin-bottom: var(--space-8);
+    }
+
+    .projects-work-shell {
+        padding-top: var(--space-3);
     }
 }
