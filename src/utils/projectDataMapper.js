@@ -53,6 +53,28 @@ const extractImages = (section) => {
     return section.images || section.visuals || [];
 };
 
+const toHybridNarrative = (value, maxSentences = 2) => {
+    const clean = String(value || "").replace(/\s+/g, " ").trim();
+    if (!clean) return "";
+    const sentences = clean.split(/(?<=[.!?])\s+/);
+    return sentences.slice(0, maxSentences).join(" ");
+};
+
+const normalizeImagesWithContext = (section, contextLabel) =>
+    extractImages(section).map((image, index) => {
+        const altText =
+            image?.alt || `${contextLabel} visual ${index + 1}`;
+        const caption =
+            image?.caption ||
+            `${contextLabel}: ${toHybridNarrative(altText, 1)}`;
+
+        return {
+            ...image,
+            alt: altText,
+            caption,
+        };
+    });
+
 const normalizeMediaDemo = (section) => {
     if (!section?.media_demo) return null;
     const media = section.media_demo;
@@ -161,8 +183,8 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         overview: sections?.hook
             ? {
                   title: "Overview",
-                  description: sections.hook.content,
-                  images: extractImages(sections.hook),
+                  description: toHybridNarrative(sections.hook.content, 2),
+                  images: normalizeImagesWithContext(sections.hook, "Overview"),
                   ...mapEditorial(sections.hook),
               }
             : null,
@@ -170,8 +192,14 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         problem: sections?.problem_framing
             ? {
                   title: "The Problem",
-                  description: sections.problem_framing.content,
-                  images: extractImages(sections.problem_framing),
+                  description: toHybridNarrative(
+                      sections.problem_framing.content,
+                      3,
+                  ),
+                  images: normalizeImagesWithContext(
+                      sections.problem_framing,
+                      "Problem framing",
+                  ),
                   ...mapEditorial(sections.problem_framing),
               }
             : null,
@@ -179,12 +207,18 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         research: sections?.research_process
             ? {
                   title: "Research & Ideation",
-                  description: sections.research_process.content || "",
+                  description: toHybridNarrative(
+                      sections.research_process.content || "",
+                      2,
+                  ),
                   methods: sections.research_process.methods || [],
                   keyFindings: sections.research_process.key_findings || [],
                   participantCount: sections.research_process.participant_count,
                   reflection: sections.research_process.reflection,
-                  images: extractImages(sections.research_process),
+                  images: normalizeImagesWithContext(
+                      sections.research_process,
+                      "Research",
+                  ),
                   ...mapEditorial(sections.research_process),
               }
             : null,
@@ -229,8 +263,11 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         lofi: sections?.lofi_phase
             ? {
                   title: "Lo‑Fi Exploration",
-                  description: sections.lofi_phase.content,
-                  images: extractImages(sections.lofi_phase),
+                  description: toHybridNarrative(sections.lofi_phase.content, 2),
+                  images: normalizeImagesWithContext(
+                      sections.lofi_phase,
+                      "Lo-fi exploration",
+                  ),
                   ...mapEditorial(sections.lofi_phase),
               }
             : null,
@@ -238,9 +275,12 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         iterations: sections?.hifi_phase
             ? {
                   title: "High-Fidelity Designs",
-                  description: sections.hifi_phase.content,
+                  description: toHybridNarrative(sections.hifi_phase.content, 2),
                   improvements: sections.hifi_phase.key_decisions || [],
-                  images: extractImages(sections.hifi_phase),
+                  images: normalizeImagesWithContext(
+                      sections.hifi_phase,
+                      "High-fidelity decisions",
+                  ),
                   prototype: sections.hifi_phase.prototype || null,
                   ...mapEditorial(sections.hifi_phase),
               }
@@ -249,7 +289,10 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         development: sections?.development
             ? {
                   title: "Development Approach",
-                  description: sections.development.content,
+                  description: toHybridNarrative(
+                      sections.development.content,
+                      2,
+                  ),
                   technicalDecisions:
                       sections.development.technical_decisions || [],
                   constraints: sections.development.constraints || [],
@@ -260,7 +303,10 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         solution: sections?.feature_breakdown
             ? {
                   title: "Final Solution",
-                  description: sections.feature_breakdown.intro || "",
+                  description: toHybridNarrative(
+                      sections.feature_breakdown.intro || "",
+                      2,
+                  ),
                   features:
                       sections.feature_breakdown.features?.map((f) => ({
                           id: f.id,
@@ -268,17 +314,30 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                           description: f.description || f.explanation || f.why,
                           why: f.why,
                           image: f.image,
+                          caption: toHybridNarrative(
+                              f.caption || f.why || f.description || "",
+                              1,
+                          ),
                       })) || [],
-                  images: extractImages(sections.feature_breakdown),
+                  images: normalizeImagesWithContext(
+                      sections.feature_breakdown,
+                      "Solution",
+                  ),
                   prototype: sections.feature_breakdown.prototype || null,
                   ...mapEditorial(sections.feature_breakdown),
               }
             : sections?.development
               ? {
                     title: "Final Solution",
-                    description: sections.development.content,
+                    description: toHybridNarrative(
+                        sections.development.content,
+                        2,
+                    ),
                     features: [],
-                    images: extractImages(sections.development),
+                    images: normalizeImagesWithContext(
+                        sections.development,
+                        "Solution",
+                    ),
                     ...mapEditorial(sections.development),
                 }
               : null,
@@ -286,7 +345,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         validation: sections?.validation
             ? {
                   title: "Validation & Testing",
-                  description: sections.validation.content,
+                  description: toHybridNarrative(sections.validation.content, 2),
                   method: sections.validation.method,
                   participantCount: sections.validation.participant_count,
                   quotes:
