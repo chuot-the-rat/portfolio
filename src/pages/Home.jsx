@@ -323,7 +323,16 @@ const Home = () => {
                         </aside>
                     </section>
 
-                    {showEnhancements ? <MarqueeTicker /> : null}
+                    <div className="home-primary-actions" aria-label="Primary navigation actions">
+                        <Link className="home-primary-link home-primary-link--strong" to="/case-studies/inklink">
+                            Read featured case study
+                        </Link>
+                        <a className="home-primary-link" href="#home-work-list">
+                            Jump to selected work
+                        </a>
+                    </div>
+
+                    {showEnhancements ? <MarqueeTicker speed={56} /> : null}
 
                     {/* Work list — category tabs + Sharleen-style rows */}
                     {loading ? (
@@ -339,7 +348,9 @@ const Home = () => {
                             />
                         </div>
                     ) : (
-                        <HomeWorkList projects={projects} />
+                        <section id="home-work-list" aria-label="Selected work list">
+                            <HomeWorkList projects={projects} />
+                        </section>
                     )}
 
                 </div>
