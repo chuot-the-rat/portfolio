@@ -512,9 +512,9 @@
                         }
                     ],
                     "prototype": {
-                        "url": "https://www.figma.com/proto/inklink-features",
-                        "embed_url": "",
-                        "description": "Start a new story, invite a friend, or join an existing chain. Follow the prompts to see each flow.",
+                        "url": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=2173-14511&p=f&t=3MqWcWHBQIkqxCbQ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3770&show-proto-sidebar=1",
+                        "embed_url": "https://embed.figma.com/design/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=0-1&embed-host=share",
+                        "description": "Explore the feature set in the same hi-fi prototype flow used across the case study.",
                         "type": "figma"
                     },
                     "verdict": {

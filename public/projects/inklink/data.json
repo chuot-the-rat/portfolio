@@ -366,8 +366,8 @@
                 "image": "/projects/inklink/images/Project Page (private) - Finished.svg"
             },
             {
-                "name": "Profile & My Stories",
-                "description": "Personal hub showing your contributions, stories you've started, and stories you're following. Stats include total words contributed, chains participated in, and reading streak.",
+                "name": "Profile & Story Library",
+                "description": "Personal hub showing contributions, authored stories, and followed chains. Stats include total words contributed, chains participated in, and reading streak.",
                 "image": "/projects/inklink/images/Profile page 1.1.svg"
             },
             {
