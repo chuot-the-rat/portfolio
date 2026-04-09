@@ -95,6 +95,14 @@ const collectAllImages = (data) => {
     return imgs.filter((img) => img && img.src);
 };
 
+const toRecruiterSummary = (project) => {
+    const raw = project?.subtitle || project?.tagline || "";
+    const compact = String(raw).replace(/\s+/g, " ").trim();
+    if (!compact) return "";
+    if (compact.length <= 108) return compact;
+    return `${compact.slice(0, 105).trimEnd()}…`;
+};
+
 const safeFetchJson = async (url, options) => {
     try {
         const res = await fetch(url, options);
@@ -208,6 +216,10 @@ const Home = () => {
                                 caseStudyProject.id,
                                 projectMeta.previewVideo ?? projectMeta.previewVideoSrc ?? null,
                             ),
+                            recruiterSummary: toRecruiterSummary({
+                                ...projectMeta,
+                                ...caseStudyProject,
+                            }),
                         };
                     }),
                 );
@@ -253,6 +265,10 @@ const Home = () => {
                                         entry.previewVideoSrc ??
                                         null,
                                 ),
+                                recruiterSummary: toRecruiterSummary({
+                                    ...entry,
+                                    ...data,
+                                }),
                             };
                         }),
                     )
@@ -276,6 +292,7 @@ const Home = () => {
                         ].filter((img) => img && img.src),
                         taxonomyTags: buildTaxonomyTags(caseStudyProject, "Case Study"),
                         previewVideoSrc: null,
+                        recruiterSummary: toRecruiterSummary(caseStudyProject),
                     }),
                 );
                 setProjects(fallbackProjects);
@@ -349,6 +366,9 @@ const Home = () => {
                         </div>
                     ) : (
                         <section id="home-work-list" aria-label="Selected work list">
+                            <p className="home-work-intro">
+                                Selected case studies with clear scope, ownership, and outcomes.
+                            </p>
                             <HomeWorkList projects={projects} />
                         </section>
                     )}

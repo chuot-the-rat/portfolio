@@ -124,7 +124,7 @@ export default function HomeWorkList({ projects }) {
                         <span className="hw-item-title">{project.title}</span>
                         {(project.subtitle || project.tagline) && (
                           <span className="hw-item-sub">
-                            {project.subtitle ?? project.tagline}
+                            {project.recruiterSummary ?? project.subtitle ?? project.tagline}
                           </span>
                         )}
                         <div className="hw-item-tags" aria-label="Project tags">

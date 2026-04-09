@@ -158,6 +158,59 @@
     color: var(--color-text);
 }
 
+.home-work-intro {
+    margin: 0 0 var(--space-5);
+    max-width: 56ch;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* Home hero CTA treatment: typographic links over button-like pills */
+.home-hero-grid .hs-cta-group {
+    gap: var(--space-5);
+    margin-top: var(--space-fluid-l);
+}
+
+.home-hero-grid .hs-cta {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.08em;
+    position: relative;
+}
+
+.home-hero-grid .hs-cta::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--motion-dur-hover-base) var(--motion-ease-editorial);
+}
+
+.home-hero-grid .hs-cta:hover::after,
+.home-hero-grid .hs-cta:focus-visible::after {
+    transform: scaleX(1);
+}
+
+.home-hero-grid .hs-cta--primary {
+    color: var(--color-text);
+}
+
+.home-hero-grid .hs-cta:hover {
+    transform: none;
+    box-shadow: none;
+    opacity: 1;
+}
+
 /* ── Loading ─────────────────────────────────────────────────────────────── */
 
 .home-loading {
@@ -386,6 +439,11 @@
     .home-primary-link {
         font-size: 10px;
         letter-spacing: 0.07em;
+    }
+
+    .home-work-intro {
+        font-size: var(--font-size-xs);
+        margin-bottom: var(--space-4);
     }
 
     .home-hero-grid {
