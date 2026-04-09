@@ -23,7 +23,7 @@ export const homeHeroConfig = {
     headline: ["Leana", "Le"], // array = one word per display line
     headlineAs: "h1",
     subline:
-      "I design and build product experiences that make complex workflows feel clear, calm, and ready to ship.",
+      "I design and build product experiences that turn complex workflows into clear, calm outcomes.",
   },
 
   // MediaBlock — null until portrait asset is added
@@ -89,7 +89,7 @@ export const homeHeroConfig = {
       variant: "primary",
     },
     {
-      label: "View resume",
+      label: "Resume",
       href: "/Le_Leana_Resume_NoNumber.pdf",
       variant: "ghost",
       download: "Leana_Le_Resume.pdf",

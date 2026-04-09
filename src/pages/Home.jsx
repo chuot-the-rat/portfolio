@@ -329,10 +329,10 @@ const Home = () => {
 
                     <div className="home-primary-actions" aria-label="Primary navigation actions">
                         <Link className="home-primary-link home-primary-link--strong" to="/case-studies/inklink">
-                            Read featured case study
+                            Read featured case: InkLink
                         </Link>
                         <a className="home-primary-link" href="#home-work-list">
-                            Jump to selected work
+                            Browse selected work
                         </a>
                     </div>
 
@@ -352,7 +352,7 @@ const Home = () => {
                     ) : (
                         <section id="home-work-list" aria-label="Selected work list">
                             <p className="home-work-intro">
-                                Selected case studies with clear scope, ownership, and outcomes.
+                                Selected case studies with clear ownership, process, and outcome evidence.
                             </p>
                             <HomeWorkList projects={projects} />
                         </section>
