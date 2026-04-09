@@ -9,8 +9,8 @@
   overflow: hidden;
   width: 100%;
   padding-block: var(--space-2);
-  border-top: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 58%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 58%, transparent);
   /* slight mask so items fade at the edges */
   -webkit-mask-image: linear-gradient(
     to right,
@@ -51,14 +51,14 @@
   font-size: var(--font-size-xs);
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-text-tertiary) 82%, transparent);
+  color: color-mix(in srgb, var(--color-text-tertiary) 72%, transparent);
   white-space: nowrap;
   padding-inline: var(--space-6);
   transition: color 0.18s ease;
 }
 
 .mq-item:hover {
-  color: color-mix(in srgb, var(--color-text-secondary) 86%, transparent);
+  color: color-mix(in srgb, var(--color-text-secondary) 76%, transparent);
 }
 
 .mq-dot {

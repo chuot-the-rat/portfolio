@@ -300,11 +300,9 @@ const Home = () => {
                         />
 
                         {/* Passbook issuance rail — desktop right, mobile below hero */}
-                        {showEnhancements ? (
-                            <aside className="home-passbook-rail" aria-label="Passbook issuance rail">
-                                <PassbookPrintCard />
-                            </aside>
-                        ) : null}
+                        <aside className="home-passbook-rail" aria-label="Passbook issuance rail">
+                            <PassbookPrintCard />
+                        </aside>
                     </section>
 
                     {showEnhancements ? <MarqueeTicker /> : null}

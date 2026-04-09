@@ -12,7 +12,7 @@
  * Stays visible on the home page as the hero-level passbook touchpoint.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { usePassbook } from "./PassbookProvider";
 import { PASSBOOK_ROUTE_ORDER, PASSBOOK_ROUTES } from "../../data/passbook/passbookConfig";
@@ -28,21 +28,16 @@ export default function PassbookPrintCard() {
         clearNewlyIssued,
     } = usePassbook();
 
-    const [shouldAnimate, setShouldAnimate] = useState(false);
-    const hasMounted = useRef(false);
+    const shouldAnimate = true;
 
     useEffect(() => {
-        if (!hasMounted.current) {
-            hasMounted.current = true;
-            setShouldAnimate(true);
-        }
         if (isNewlyIssued) {
             const t = setTimeout(clearNewlyIssued, 2400);
             return () => clearTimeout(t);
         }
     }, [isNewlyIssued, clearNewlyIssued]);
 
-    const isPrimaryIssue = isNewlyIssued;
+    const isPrimaryIssue = isNewlyIssued || stampCount === 0;
     const profile = isPrimaryIssue
         ? {
               delay: 0.5,
