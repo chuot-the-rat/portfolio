@@ -130,25 +130,43 @@ const Home = () => {
         return `/projects/${projectId}/${src.replace(/^\.?\//, "")}`;
     };
 
-    const buildTaxonomyTags = (project, fallbackKind) => {
+    const normalizeProjectImage = (projectId, image) => {
+        if (!image) return null;
+        if (typeof image === "string") {
+            const src = resolveProjectMediaPath(projectId, image);
+            return src ? { src, alt: "" } : null;
+        }
+        const src = resolveProjectMediaPath(projectId, image.src || image.image);
+        if (!src) return null;
+        return { ...image, src };
+    };
+
+    const buildPreviewCandidates = (projectId, candidates = []) => {
+        const unique = [];
+        const seen = new Set();
+        for (const candidate of candidates) {
+            const src = resolveProjectMediaPath(projectId, candidate);
+            if (!src || seen.has(src)) continue;
+            seen.add(src);
+            unique.push(src);
+        }
+        return unique;
+    };
+
+    const buildTaxonomyTags = (project) => {
         const sourceTags = Array.isArray(project.tags) ? project.tags : [];
         const normalizedSourceTags = sourceTags
             .map((tag) => String(tag).trim())
             .filter(Boolean);
 
-        const candidates = [
-            ...normalizedSourceTags,
-            fallbackKind,
-            project.category,
-            project.year,
-        ];
+        const candidates = [...normalizedSourceTags, project.category];
 
         const unique = [];
         for (const tag of candidates) {
             if (!tag) continue;
             if (unique.includes(tag)) continue;
             unique.push(tag);
-            if (unique.length === 3) break;
+            if (unique.length === 2) break;
         }
         return unique;
     };
@@ -175,8 +193,14 @@ const Home = () => {
                             { signal: controller.signal },
                         );
 
-                        let realImages = supData ? collectAllImages(supData) : [];
-                        const coverImage =
+                        let realImages = supData
+                            ? collectAllImages(supData)
+                                  .map((img) =>
+                                      normalizeProjectImage(caseStudyProject.id, img),
+                                  )
+                                  .filter(Boolean)
+                            : [];
+                        const rawCoverImage =
                             supData?.hifi?.images?.[0]?.src ??
                             supData?.solution?.images?.[0]?.src ??
                             supData?.overview?.images?.[0]?.src ??
@@ -186,19 +210,35 @@ const Home = () => {
                             realImages = [
                                 ...(caseStudyProject.solution?.images || []),
                                 ...(caseStudyProject.overview?.images || []),
-                            ].filter((img) => img && img.src);
+                            ]
+                                .map((img) =>
+                                    normalizeProjectImage(caseStudyProject.id, img),
+                                )
+                                .filter(Boolean);
                         }
+
+                        const previewCandidates = buildPreviewCandidates(
+                            caseStudyProject.id,
+                            [
+                                rawCoverImage,
+                                projectMeta.thumbnail,
+                                caseStudyProject.media?.thumbnail,
+                                caseStudyProject.media?.hero_image,
+                                ...realImages.map((img) => img.src),
+                            ],
+                        );
 
                         return {
                             ...projectMeta,
                             ...caseStudyProject,
                             hoverPattern: hoverPatterns[index % hoverPatterns.length],
                             allImages: realImages,
-                            coverImage,
-                            taxonomyTags: buildTaxonomyTags(
-                                { ...projectMeta, ...caseStudyProject },
-                                "Case Study",
-                            ),
+                            coverImage: previewCandidates[0] ?? null,
+                            previewCandidates,
+                            taxonomyTags: buildTaxonomyTags({
+                                ...projectMeta,
+                                ...caseStudyProject,
+                            }),
                             previewVideoSrc: resolveProjectMediaPath(
                                 caseStudyProject.id,
                                 projectMeta.previewVideo ?? projectMeta.previewVideoSrc ?? null,
@@ -225,24 +265,36 @@ const Home = () => {
                             if (!data) return null;
 
                             const idx = caseStudyCards.length + i;
+                            const allImages = [
+                                ...(data.overview?.images || []),
+                                ...(data.solution?.images || []),
+                                ...(data.styleGuide?.images || []),
+                            ]
+                                .map((img) => normalizeProjectImage(entry.id, img))
+                                .filter(Boolean);
+
+                            const previewCandidates = buildPreviewCandidates(
+                                entry.id,
+                                [
+                                    data?.hifi?.images?.[0]?.src,
+                                    data?.solution?.images?.[0]?.src,
+                                    data?.overview?.images?.[0]?.src,
+                                    entry.thumbnail,
+                                    ...allImages.map((img) => img.src),
+                                ],
+                            );
+
                             return {
                                 ...entry,
                                 ...data,
                                 hoverPattern: hoverPatterns[idx % hoverPatterns.length],
-                                allImages: [
-                                    ...(data.overview?.images || []),
-                                    ...(data.solution?.images || []),
-                                    ...(data.styleGuide?.images || []),
-                                ].filter((img) => img && img.src),
-                                coverImage:
-                                    data?.hifi?.images?.[0]?.src ??
-                                    data?.solution?.images?.[0]?.src ??
-                                    data?.overview?.images?.[0]?.src ??
-                                    null,
-                                taxonomyTags: buildTaxonomyTags(
-                                    { ...entry, ...data },
-                                    "Design Project",
-                                ),
+                                allImages,
+                                coverImage: previewCandidates[0] ?? null,
+                                previewCandidates,
+                                taxonomyTags: buildTaxonomyTags({
+                                    ...entry,
+                                    ...data,
+                                }),
                                 previewVideoSrc: resolveProjectMediaPath(
                                     entry.id,
                                     data?.previewVideo ??
@@ -276,8 +328,25 @@ const Home = () => {
                         allImages: [
                             ...(caseStudyProject.solution?.images || []),
                             ...(caseStudyProject.overview?.images || []),
-                        ].filter((img) => img && img.src),
-                        taxonomyTags: buildTaxonomyTags(caseStudyProject, "Case Study"),
+                        ]
+                            .map((img) =>
+                                normalizeProjectImage(caseStudyProject.id, img),
+                            )
+                            .filter(Boolean),
+                        previewCandidates: buildPreviewCandidates(
+                            caseStudyProject.id,
+                            [
+                                caseStudyProject.media?.thumbnail,
+                                caseStudyProject.media?.hero_image,
+                                ...(caseStudyProject.solution?.images || []).map(
+                                    (img) => img?.src,
+                                ),
+                                ...(caseStudyProject.overview?.images || []).map(
+                                    (img) => img?.src,
+                                ),
+                            ],
+                        ),
+                        taxonomyTags: buildTaxonomyTags(caseStudyProject),
                         previewVideoSrc: null,
                         recruiterSummary: toRecruiterSummary(caseStudyProject),
                     }),

@@ -18,8 +18,6 @@ import ReadingProgress from "../components/ReadingProgress";
 import ProjectNextPrev from "../components/ProjectNextPrev";
 import {
     BrowserMockup,
-    CaseStudyHeroMarquee,
-    ChecklistSection,
     DecorativeDivider,
     PrincipleVerdict,
 } from "../components/caseStudy";
@@ -29,11 +27,47 @@ import "./ProjectDetail.css";
 const toSentence = (value) =>
     String(value || "").replace(/\s+/g, " ").trim();
 
-const toLeadingSentence = (value, fallback = "") => {
+const toLeadingSentence = (value, fallback = "", maxSentences = 2) => {
     const sentence = toSentence(value);
     if (!sentence) return fallback;
     const parts = sentence.split(/(?<=[.!?])\s+/);
-    return parts.slice(0, 2).join(" ");
+    return parts.slice(0, maxSentences).join(" ");
+};
+
+const normalizeTextKey = (value) =>
+    String(value || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+const dedupeTextList = (items = []) => {
+    const seen = new Set();
+    const unique = [];
+
+    for (const item of items) {
+        const text = toSentence(item);
+        if (!text) continue;
+        const key = normalizeTextKey(text);
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        unique.push(text);
+    }
+
+    return unique;
+};
+
+const filterRedundantOutcomes = (description, outcomes = []) => {
+    const compactDescription = normalizeTextKey(description);
+    return dedupeTextList(outcomes).filter((outcome) => {
+        const outcomeKey = normalizeTextKey(outcome);
+        if (!outcomeKey) return false;
+        if (!compactDescription) return true;
+        return !(
+            compactDescription.includes(outcomeKey) ||
+            outcomeKey.includes(compactDescription)
+        );
+    });
 };
 
 const hasConcreteSignal = (value) =>
@@ -477,6 +511,42 @@ const ProjectDetail = () => {
             value: project.team || `${project.teamSize} members`,
         },
     ].filter(Boolean);
+
+    const actionLinks = [
+        project.links?.live && { href: project.links.live, label: "Live site" },
+        project.links?.prototype && {
+            href: project.links.prototype,
+            label: "Prototype",
+        },
+        project.links?.github && { href: project.links.github, label: "GitHub" },
+        project.links?.figma && { href: project.links.figma, label: "Figma" },
+    ].filter(Boolean);
+
+    const hasIterationComparisons =
+        Array.isArray(project.iterations?.comparisons) &&
+        project.iterations.comparisons.length > 0;
+    const comparisonsForLofi = hasIterationComparisons
+        ? []
+        : project.lofi?.comparisons || [];
+    const comparisonsForIterations = hasIterationComparisons
+        ? project.iterations.comparisons
+        : [];
+
+    const compactProblemDescription = toLeadingSentence(
+        project.problem?.description,
+        project.problem?.description || "",
+        1,
+    );
+    const compactValidationDescription = toLeadingSentence(
+        project.validation?.description,
+        project.validation?.description || "",
+        1,
+    );
+    const validationOutcomes = filterRedundantOutcomes(
+        compactValidationDescription,
+        project.validation?.outcomes || [],
+    );
+
     const impactSnapshot = getImpactSnapshot(project);
     const credibilityRows = getCredibilityRows(project);
     const framingStatement = toLeadingSentence(
@@ -541,53 +611,45 @@ const ProjectDetail = () => {
                         </ul>
                     </motion.div>
 
-                    {/* Meta bar — horizontal row spanning full width */}
-                    {metaItems.length > 0 && (
+                    {/* Meta area — separated informational metadata and actions */}
+                    {(metaItems.length > 0 || actionLinks.length > 0) && (
                         <motion.div
                             className="project-meta-bar"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.45, delay: 0.18 }}
                         >
-                            {metaItems.map((item) => (
-                                <div key={item.label} className="project-meta-cell">
-                                    <span className="meta-label">{item.label}</span>
-                                    <span className="meta-value">{item.value}</span>
+                            {metaItems.length > 0 && (
+                                <div className="project-meta-info" aria-label="Case info">
+                                    <p className="project-meta-group-title">Case Info</p>
+                                    {metaItems.map((item) => (
+                                        <div key={item.label} className="project-meta-info-item">
+                                            <span className="meta-label">{item.label}</span>
+                                            <span className="meta-value">{item.value}</span>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                            )}
 
-                            {/* CTAs pushed to the right end of the bar */}
-                            {(project.links?.live || project.links?.prototype || project.links?.github || project.links?.figma) && (
-                                <div className="project-meta-cell project-meta-cell--ctas">
-                                    {project.links?.live && (
-                                        <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="project-cta-link">
-                                            Live site ↗
+                            {actionLinks.length > 0 && (
+                                <div className="project-meta-actions" aria-label="Case links">
+                                    <p className="project-meta-group-title">Actions</p>
+                                    {actionLinks.map((link) => (
+                                        <a
+                                            key={link.label}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="project-meta-action-link"
+                                        >
+                                            {link.label} ↗
                                         </a>
-                                    )}
-                                    {project.links?.prototype && (
-                                        <a href={project.links.prototype} target="_blank" rel="noopener noreferrer" className="project-cta-link">
-                                            Prototype ↗
-                                        </a>
-                                    )}
-                                    {project.links?.github && (
-                                        <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="project-cta-link">
-                                            GitHub ↗
-                                        </a>
-                                    )}
-                                    {project.links?.figma && (
-                                        <a href={project.links.figma} target="_blank" rel="noopener noreferrer" className="project-cta-link">
-                                            Figma ↗
-                                        </a>
-                                    )}
+                                    ))}
                                 </div>
                             )}
                         </motion.div>
                     )}
 
-                    <CaseStudyHeroMarquee
-                        projectTitle={project.title}
-                        marqueeText={project.heroMarquee}
-                    />
                     <DecorativeDivider />
 
                     {/* Hero image — full width below the header text */}
@@ -718,7 +780,7 @@ const ProjectContentMain = ({ project }) => {
                             sectionIndex={s}
                             name="Problem"
                             title={project.problem.title}
-                            description={project.problem.description}
+                            description={compactProblemDescription}
                             images={project.problem.images}
                             mediaDemo={project.problem.mediaDemo}
                             verdict={project.problem.verdict}
@@ -821,29 +883,6 @@ const ProjectContentMain = ({ project }) => {
                                 />
                             )}
                         </motion.section>
-                    );
-                })()}
-
-            {/* Problem framing */}
-            {project.problem &&
-                (() => {
-                    const s = nextSection();
-                    return (
-                        <IndexedSection
-                            caseIndex={ci}
-                            sectionIndex={s}
-                            name="Problem"
-                            title={project.problem.title}
-                            description={project.problem.description}
-                            images={project.problem.images}
-                            mediaDemo={project.problem.mediaDemo}
-                            verdict={project.problem.verdict}
-                            captionContext="Problem framing"
-                            imageStartIndex={imageNum}
-                            onImageCount={(n) => {
-                                imageNum += n;
-                            }}
-                        />
                     );
                 })()}
 
@@ -1037,7 +1076,7 @@ const ProjectContentMain = ({ project }) => {
                             images={project.lofi.images}
                             mediaDemo={project.lofi.mediaDemo}
                             verdict={project.lofi.verdict}
-                            comparisons={project.lofi.comparisons}
+                            comparisons={comparisonsForLofi}
                             captionContext="Lo-fi exploration"
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
@@ -1267,7 +1306,7 @@ const ProjectContentMain = ({ project }) => {
                             <BrowserMockup mediaDemo={project.iterations.mediaDemo} />
                             <PrincipleVerdict verdict={project.iterations.verdict} />
                             <BeforeAfterComparisons
-                                comparisons={project.iterations.comparisons}
+                                comparisons={comparisonsForIterations}
                             />
 
                             {/* Rounds-based iterations (from local data) */}
@@ -2090,7 +2129,7 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.0"
                             />
                             <p className="section-description">
-                                {project.validation.description}
+                                {compactValidationDescription}
                             </p>
                             <BrowserMockup mediaDemo={project.validation.mediaDemo} />
                             <PrincipleVerdict verdict={project.validation.verdict} />
@@ -2104,13 +2143,13 @@ const ProjectContentMain = ({ project }) => {
                                 </p>
                             )}
 
-                            {project.validation.outcomes?.length > 0 && (
+                            {validationOutcomes.length > 0 && (
                                 <div className="validation-outcomes">
                                     <h3 className="subsection-title">
                                         Outcomes
                                     </h3>
                                     <ul className="outcomes-list">
-                                        {project.validation.outcomes.map(
+                                        {validationOutcomes.map(
                                             (o, i) => (
                                                 <li
                                                     key={i}
@@ -2181,8 +2220,6 @@ const ProjectContentMain = ({ project }) => {
                         </motion.section>
                     );
                 })()}
-
-            {project.checklist && <ChecklistSection checklist={project.checklist} />}
 
             {/* Where It Evolves */}
             {project.evolution && (

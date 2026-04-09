@@ -12,7 +12,7 @@
  * No permanent thumbnails in the grid. Image is a reward, not a fixture.
  */
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getProjectPath, isStandaloneProject } from "../../utils/projectDataMapper";
@@ -33,6 +33,7 @@ export default function HomeWorkList({ projects }) {
   const shouldReduceMotion = useReducedMotion();
   const [activeTab, setActiveTab]   = useState("UX/UI");
   const [hoveredId, setHoveredId]   = useState(null);
+  const [previewIndex, setPreviewIndex] = useState(0);
 
   const filtered = projects.filter(
     (p) => (CATEGORY_MAP[p.category] ?? "UX/UI") === activeTab,
@@ -40,13 +41,34 @@ export default function HomeWorkList({ projects }) {
 
   // Find the hovered project and resolve its best preview image
   const hoveredProject = filtered.find((p) => p.id === hoveredId) ?? null;
-  const previewSrc =
-    hoveredProject?.coverImage ??
-    hoveredProject?.allImages?.[0]?.src ??
-    null;
+  const previewCandidates = useMemo(() => {
+    if (!hoveredProject) return [];
+    const candidates = [
+      ...(Array.isArray(hoveredProject.previewCandidates)
+        ? hoveredProject.previewCandidates
+        : []),
+      hoveredProject.coverImage,
+      ...(hoveredProject.allImages || []).map((img) => img?.src),
+    ].filter(Boolean);
+
+    const unique = [];
+    const seen = new Set();
+    for (const src of candidates) {
+      if (!src || seen.has(src)) continue;
+      seen.add(src);
+      unique.push(src);
+    }
+    return unique;
+  }, [hoveredProject]);
+
+  useEffect(() => {
+    setPreviewIndex(0);
+  }, [hoveredId]);
+
+  const previewSrc = previewCandidates[previewIndex] ?? null;
   const previewVideoSrc = hoveredProject?.previewVideoSrc ?? null;
   const showPreviewVideo = Boolean(previewVideoSrc && hoveredId && !shouldReduceMotion);
-  const projectTags = (hoveredProject?.taxonomyTags ?? []).slice(0, 3);
+  const projectTags = (hoveredProject?.taxonomyTags ?? []).slice(0, 2);
 
   return (
     <section className="hw" aria-label="Selected work">
@@ -131,13 +153,11 @@ export default function HomeWorkList({ projects }) {
                           {(project.taxonomyTags?.length
                             ? project.taxonomyTags
                             : [
-                                isStandaloneProject(project.id) ? "Design Project" : "Case Study",
                                 project.category ?? "Project",
-                                project.year,
                               ]
                           )
                             .filter(Boolean)
-                            .slice(0, 3)
+                            .slice(0, 2)
                             .map((tag) => (
                               <span key={`${project.id}-${tag}`} className="hw-item-tag">
                                 {String(tag).toLowerCase()}
@@ -163,7 +183,7 @@ export default function HomeWorkList({ projects }) {
         {/* Floating preview — desktop only, hidden on mobile via CSS */}
         <div className="hw-preview-slot" aria-hidden="true">
           <AnimatePresence mode="sync">
-            {previewSrc && hoveredId && (
+            {hoveredId && (
               <motion.div
                 key={hoveredId}
                 className="hw-preview"
@@ -187,12 +207,30 @@ export default function HomeWorkList({ projects }) {
                   className={`hw-preview-media${previewVideoSrc ? " hw-preview-media--has-video" : ""}`}
                   aria-label={projectTags.length > 0 ? `Preview: ${projectTags.join(", ")}` : "Project preview"}
                 >
-                  <img
-                    src={previewSrc}
-                    alt=""
-                    className="hw-preview-img"
-                    loading="lazy"
-                  />
+                  {previewSrc ? (
+                    <img
+                      src={previewSrc}
+                      alt=""
+                      className="hw-preview-img"
+                      loading="lazy"
+                      onError={() => {
+                        if (previewIndex < previewCandidates.length - 1) {
+                          setPreviewIndex((current) => current + 1);
+                        } else {
+                          setPreviewIndex(previewCandidates.length);
+                        }
+                      }}
+                    />
+                  ) : (
+                    <div className="hw-preview-fallback">
+                      <p className="hw-preview-fallback-title">
+                        Preview coming soon
+                      </p>
+                      <p className="hw-preview-fallback-sub">
+                        {hoveredProject?.title ?? "Project"}
+                      </p>
+                    </div>
+                  )}
                   {showPreviewVideo && (
                     <video
                       key={`${hoveredId}-preview-video`}

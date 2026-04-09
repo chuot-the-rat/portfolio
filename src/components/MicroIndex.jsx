@@ -24,9 +24,9 @@ export const SectionIndex = ({
     sectionIndex = 1,
     title = "",
 }) => (
-    <span className="mi-mono mi-section-index" data-section={pad2(sectionIndex)}>
+    <span className="mi-mono mi-section-index">
         <span className="mi-section-index-label">
-            {pad2(caseIndex)}.{pad2(sectionIndex)}&nbsp;&nbsp;{title.toUpperCase()}
+            {title.toUpperCase()}
         </span>
     </span>
 );
