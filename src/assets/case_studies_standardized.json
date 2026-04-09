@@ -649,7 +649,7 @@
             },
             "sections": {
                 "hook": {
-                    "content": "You have a free afternoon. Nothing planned. So you open your phone, scroll for thirty minutes, and end up back on the couch — paralyzed by options, defaulting to nothing.",
+                    "content": "A free afternoon can quickly turn into prolonged scrolling and indecision. SideQuest reframes that moment with one guided next step so users can start an activity with low effort.",
                     "media_demo": {
                         "src": "/projects/sidequest/hero.png",
                         "type": "image",
@@ -658,18 +658,18 @@
                     }
                 },
                 "problem_framing": {
-                    "content": "Boredom isn't really about having nothing to do. It's about having too much to choose from and not enough motivation to pick.\n\nEvery app promises endless possibilities. But endless possibilities require endless decisions. And decisions are exhausting.\n\nWe wanted to flip that model. Instead of showing users everything they could do, we'd suggest one thing they might enjoy—and make it easy to say yes."
+                    "content": "The core issue was framed as decision fatigue rather than lack of options. When too many choices appear at once, users often delay action and default to passive scrolling.\n\nPersona narratives were used to ground this behavior: Scout represented users with limited free time, and Goobert represented users seeking like-minded social activities.\n\nThe design direction prioritized guided momentum over broad browsing by reducing up-front decisions."
                 },
                 "research_process": {
                     "methods": [
-                        "Persona creation based on peer interviews",
-                        "Usability testing with paper prototypes",
+                        "Persona creation based on peer interviews (Scout and Goobert archetypes)",
+                        "Iterative usability testing from low-fi through high-fi screens",
                         "Competitive analysis of activity discovery apps"
                     ],
                     "key_findings": [
-                        "Users want low-pressure activities that don't require planning",
-                        "Choice overload causes hesitation and often leads to inaction",
-                        "Guided suggestions outperform open-ended discovery"
+                        "Users preferred low-pressure activities that required minimal planning",
+                        "Choice overload frequently delayed first action",
+                        "Participants responded positively to guided, single-next-step flows"
                     ],
                     "participant_count": null,
                     "verdict": {
@@ -692,7 +692,13 @@
                     }
                 },
                 "lofi_phase": {
-                    "content": "Our early wireframes had too many buttons.\n\nFilters for location, duration, cost, category—all logical, all counterproductive. Users would hover over options without committing to any of them.\n\nWe stripped it back. One primary action: 'Give me a quest.' Everything else became optional.",
+                    "content": "Early wireframes included many controls for location, duration, cost, and category. Testing showed that this option-heavy layout increased hesitation before users selected any activity.\n\nThe flow was simplified to one dominant action, \"Get a quest,\" with secondary controls moved out of the primary path.\n\nThis phase established the interaction baseline used for later visual refinement.",
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/8oS5TfdW5ILKt6gPnNkuBf/Low-Fid--Copy-?node-id=188-1978&starting-point-node-id=188%3A1968&t=7pBxLeH5QUNGmsEC-1",
+                        "embed_url": "",
+                        "description": "Lo-fi walkthrough showing early quest-discovery structure and simplified action flow.",
+                        "type": "figma"
+                    },
                     "images": [
                         {
                             "src": "/projects/sidequest/lofi-1.png",
@@ -702,7 +708,7 @@
                     ]
                 },
                 "hifi_phase": {
-                    "content": "The hi-fi designs leaned into warmth and play. A mascot guides without hand-holding. Colour pops where it should — on the quest card, not the chrome. Language is casual: \"quest\" not \"activity\", \"try it\" not \"add to list\". The goal was to feel more like a friend nudging you out the door than an app telling you what to do.",
+                    "content": "The hi-fi phase translated the simplified flow into a warmer visual system with playful language and mascot support.\n\nVisual emphasis was concentrated on quest cards and key actions, while surrounding interface chrome remained restrained.\n\nContent labels kept the \"quest\" framing to maintain a light, approachable tone for activity selection.",
                     "images": [
                         {
                             "src": "/projects/sidequest/hifi-1.png",
@@ -726,9 +732,9 @@
                         }
                     ],
                     "prototype": {
-                        "url": "https://www.figma.com/proto/sidequest-hifi-quest",
-                        "embed_url": "",
-                        "description": "Tap 'Give me a quest' and see what happens. Try refreshing for a different suggestion.",
+                        "url": "https://www.figma.com/proto/rnR9P5RZZOpw7zyji8mAVL/Hifi-Mockups--Copy-?node-id=2003-3156&t=09dhGI6aYFhPMcJT-1",
+                        "embed_url": "https://embed.figma.com/design/rnR9P5RZZOpw7zyji8mAVL/Hifi-Mockups--Copy-?node-id=2003-3156&embed-host=share",
+                        "description": "Hi-fi walkthrough across key SideQuest flows and final interaction states.",
                         "type": "figma"
                     }
                 },
@@ -753,14 +759,14 @@
                             "id": "quick_start",
                             "title": "Quick Start Flow",
                             "description": "A quest in two taps. No account required, no preferences to configure.",
-                            "why": "Every step between \"I am bored\" and \"here is something to do\" is a chance to lose the user. We cut every one we could.",
+                            "why": "Each extra step between initial boredom and first activity selection can reduce momentum. The flow minimizes that gap.",
                             "image": "/projects/sidequest/feature-flow.png"
                         }
                     ],
                     "prototype": {
-                        "url": "https://www.figma.com/proto/sidequest-features",
-                        "embed_url": "",
-                        "description": "Start from the home screen. Get a quest, save it for later, or ask for something different.",
+                        "url": "https://www.figma.com/proto/rnR9P5RZZOpw7zyji8mAVL/Hifi-Mockups--Copy-?node-id=2003-3156&t=09dhGI6aYFhPMcJT-1",
+                        "embed_url": "https://embed.figma.com/design/rnR9P5RZZOpw7zyji8mAVL/Hifi-Mockups--Copy-?node-id=2003-3156&embed-host=share",
+                        "description": "Explore quest browsing, selection, and completion states in the hi-fi flow.",
                         "type": "figma"
                     },
                     "verdict": {
@@ -783,13 +789,13 @@
                     }
                 },
                 "validation": {
-                    "content": "Users responded to the playfulness. The word 'quest' made people smile. The mascot got positive comments. The low-pressure framing worked—users felt more willing to try things because the stakes felt low.",
+                    "content": "Validation focused on whether playful framing and simplified flows were understandable and motivating.\n\nSession feedback highlighted positive reactions to the \"quest\" language, mascot guidance, and low-pressure interaction style.\n\nFindings were used to refine card hierarchy, wording clarity, and feedback states.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Quest framing reduced hesitation and helped users decide faster.",
-                        "Mascot-led prompts received positive feedback for tone and clarity.",
-                        "Low-pressure activity prompts increased willingness to try unfamiliar options."
+                        "Participants described the quest framing as approachable and easy to understand.",
+                        "Mascot-led prompts were interpreted as supportive rather than intrusive.",
+                        "Low-pressure prompts encouraged users to consider activities they might otherwise skip."
                     ],
                     "media_demo": {
                         "src": "/projects/sidequest/hifi-4.png",
@@ -801,21 +807,21 @@
                 "what_i_learned": [
                     {
                         "insight": "Momentum beats choice",
-                        "reflection": "Getting users to act once is more valuable than giving them ten options."
+                        "reflection": "Getting users to take one clear first step can be more valuable than exposing many options at once."
                     },
                     {
                         "insight": "Design should reduce hesitation",
-                        "reflection": "Every element either builds confidence or creates doubt. There's no neutral."
+                        "reflection": "Interface elements either build confidence or introduce friction in early decisions."
                     },
                     {
                         "insight": "Research, design, and code inform each other",
-                        "reflection": "Being involved in all three made each one stronger."
+                        "reflection": "Close alignment between research, design, and implementation improved decision quality across iterations."
                     }
                 ]
             },
             "links": {
                 "live": "https://sidequest.framer.website/",
-                "prototype": "",
+                "prototype": "https://www.figma.com/proto/rnR9P5RZZOpw7zyji8mAVL/Hifi-Mockups--Copy-?node-id=2003-3156&t=09dhGI6aYFhPMcJT-1",
                 "github": "",
                 "figma": "",
                 "case_study_pdf": ""

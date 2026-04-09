@@ -471,9 +471,9 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         prototypeTabs: [
             sections?.lofi_phase?.prototype
                 ? {
-                      id: "midfi",
-                      label: "Mid-Fi",
-                      title: "Mid-Fi Prototype",
+                      id: "lofi",
+                      label: "Lo-Fi",
+                      title: "Lo-Fi Prototype",
                       embedUrl: sections.lofi_phase.prototype.embed_url || "",
                       fallbackUrl: sections.lofi_phase.prototype.url || "",
                   }
