@@ -1,10 +1,10 @@
 import { useEffect } from "react";
+import { DEFAULT_ROUTE_META, getRouteMeta, normalizePath } from "../seo/routeMeta";
 
 const BASE = "Leana Le";
 const SITE_URL = "https://leanale.com";
-const DEFAULT_DESCRIPTION =
-    "Product designer with front-end chops. Case studies in UX, UI, and shipped code.";
-const DEFAULT_IMAGE = `${SITE_URL}/starfruit.png`;
+const DEFAULT_DESCRIPTION = DEFAULT_ROUTE_META.description;
+const DEFAULT_IMAGE = DEFAULT_ROUTE_META.image;
 
 const ensureMeta = (selector, attr, value) => {
     let el = document.head.querySelector(selector);
@@ -72,29 +72,32 @@ export function usePageTitle(pageTitle, options = {}) {
     useEffect(() => {
         const fallbackPath =
             typeof window !== "undefined" ? window.location.pathname : "/";
-        const normalizedPath = path || fallbackPath;
+        const normalizedPath = normalizePath(path || fallbackPath);
+        const routeMeta = getRouteMeta(normalizedPath);
+        const resolvedDescription = description || routeMeta?.description || DEFAULT_DESCRIPTION;
+        const resolvedImage = image || routeMeta?.image || DEFAULT_IMAGE;
         const url = `${SITE_URL}${normalizedPath}`;
 
-        if (!pageTitle) {
-            document.title = `${BASE} · Designer`;
-        } else if (site) {
-            document.title = `${BASE} · ${pageTitle}`;
+        if (pageTitle) {
+            document.title = site ? `${BASE} · ${pageTitle}` : `${pageTitle} · ${BASE}`;
+        } else if (routeMeta?.title) {
+            document.title = routeMeta.title;
         } else {
-            document.title = `${pageTitle} · ${BASE}`;
+            document.title = `${BASE} · Designer`;
         }
 
         const finalTitle = document.title;
         setCanonical(url);
-        setMeta("meta[name='description']", "name", "description", description);
+        setMeta("meta[name='description']", "name", "description", resolvedDescription);
         setMeta("meta[property='og:type']", "property", "og:type", "website");
         setMeta("meta[property='og:title']", "property", "og:title", finalTitle);
-        setMeta("meta[property='og:description']", "property", "og:description", description);
+        setMeta("meta[property='og:description']", "property", "og:description", resolvedDescription);
         setMeta("meta[property='og:url']", "property", "og:url", url);
-        setMeta("meta[property='og:image']", "property", "og:image", image);
+        setMeta("meta[property='og:image']", "property", "og:image", resolvedImage);
         setMeta("meta[name='twitter:card']", "name", "twitter:card", "summary_large_image");
         setMeta("meta[name='twitter:title']", "name", "twitter:title", finalTitle);
-        setMeta("meta[name='twitter:description']", "name", "twitter:description", description);
-        setMeta("meta[name='twitter:image']", "name", "twitter:image", image);
+        setMeta("meta[name='twitter:description']", "name", "twitter:description", resolvedDescription);
+        setMeta("meta[name='twitter:image']", "name", "twitter:image", resolvedImage);
         setMeta(
             "meta[name='robots']",
             "name",

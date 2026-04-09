@@ -12,6 +12,24 @@
     }
   ],
   "rewrites": [
+    { "source": "/about", "destination": "/about/index.html" },
+    { "source": "/about/", "destination": "/about/index.html" },
+    { "source": "/case-studies/inklink", "destination": "/case-studies/inklink/index.html" },
+    { "source": "/case-studies/inklink/", "destination": "/case-studies/inklink/index.html" },
+    { "source": "/case-studies/prolog", "destination": "/case-studies/prolog/index.html" },
+    { "source": "/case-studies/prolog/", "destination": "/case-studies/prolog/index.html" },
+    { "source": "/case-studies/sidequest", "destination": "/case-studies/sidequest/index.html" },
+    { "source": "/case-studies/sidequest/", "destination": "/case-studies/sidequest/index.html" },
+    { "source": "/projects/inklink", "destination": "/projects/inklink/index.html" },
+    { "source": "/projects/inklink/", "destination": "/projects/inklink/index.html" },
+    { "source": "/projects/prolog", "destination": "/projects/prolog/index.html" },
+    { "source": "/projects/prolog/", "destination": "/projects/prolog/index.html" },
+    { "source": "/projects/sidequest", "destination": "/projects/sidequest/index.html" },
+    { "source": "/projects/sidequest/", "destination": "/projects/sidequest/index.html" },
+    { "source": "/design/fizzu-soda", "destination": "/design/fizzu-soda/index.html" },
+    { "source": "/design/fizzu-soda/", "destination": "/design/fizzu-soda/index.html" },
+    { "source": "/design/sap", "destination": "/design/sap/index.html" },
+    { "source": "/design/sap/", "destination": "/design/sap/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

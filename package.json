@@ -5,9 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "vite build && node scripts/prerender-routes.mjs",
+    "lint": "npm run lint:tokens && eslint .",
+    "lint:tokens": "node scripts/check-design-tokens.mjs",
+    "preview": "vite preview",
+    "qa:routes": "node scripts/qa-routes.mjs",
+    "qa:metadata": "node scripts/qa-metadata.mjs",
+    "qa:browser": "npx playwright test tests/qa-browser.spec.js --reporter=line",
+    "qa": "node scripts/run-qa.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
@@ -18,6 +23,7 @@
     "react-router-dom": "^7.13.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@eslint/js": "^9.39.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
