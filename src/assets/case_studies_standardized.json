@@ -206,9 +206,9 @@
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Users reported feeling relieved by progress visibility",
-                        "Hours tracker addressed a previously unmet need",
-                        "Dashboard-first approach validated"
+                        "Participants found current hour status quickly without searching multiple systems.",
+                        "The discrepancy tracker was repeatedly identified as the most useful workflow.",
+                        "Users described the dashboard as confidence-building and less stressful to use."
                     ],
                     "media_demo": {
                         "src": "/projects/prolog/hifi-2.png",
@@ -237,9 +237,10 @@
                 ]
             },
             "links": {
-                "live": "",
+                "live": "https://prolog.framer.website/",
+                "prototype": "",
                 "github": "",
-                "figma": "https://www.figma.com/file/prolog",
+                "figma": "",
                 "case_study_pdf": ""
             },
             "tags": [
@@ -435,9 +436,9 @@
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Users described the experience as 'fun'",
-                        "Reduced pressure led to less perfectionism",
-                        "Time limits helped rather than hurt the experience"
+                        "Participants consistently described collaborative turns as low-pressure and fun.",
+                        "Shared authorship reduced perfectionism and made contribution feel safer.",
+                        "Timed turns increased writing momentum instead of adding stress in sessions."
                     ]
                 },
                 "what_i_learned": [
@@ -482,9 +483,10 @@
                 ]
             },
             "links": {
-                "live": "",
+                "live": "https://inklink.framer.website/",
+                "prototype": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup",
                 "github": "",
-                "figma": "https://www.figma.com/file/inklink",
+                "figma": "",
                 "case_study_pdf": ""
             },
             "tags": [
@@ -686,9 +688,9 @@
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Playful language ('quest') increased engagement",
-                        "Mascot received positive feedback",
-                        "Low-pressure framing encouraged action"
+                        "Quest framing reduced hesitation and helped users decide faster.",
+                        "Mascot-led prompts received positive feedback for tone and clarity.",
+                        "Low-pressure activity prompts increased willingness to try unfamiliar options."
                     ],
                     "media_demo": {
                         "src": "/projects/sidequest/hifi-4.png",
@@ -713,9 +715,10 @@
                 ]
             },
             "links": {
-                "live": "",
+                "live": "https://sidequest.framer.website/",
+                "prototype": "",
                 "github": "",
-                "figma": "https://www.figma.com/file/sidequest",
+                "figma": "",
                 "case_study_pdf": ""
             },
             "tags": [
