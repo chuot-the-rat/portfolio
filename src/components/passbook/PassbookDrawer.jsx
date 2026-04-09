@@ -13,7 +13,7 @@
  */
 
 import { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { usePassbook } from "./PassbookProvider";
 import {
@@ -45,6 +45,7 @@ const PROJECT_TITLES = {
 export default function PassbookDrawer() {
     const { drawerOpen, closeDrawer, isStamped, stampCount, totalRoutes } =
         usePassbook();
+    const shouldReduceMotion = useReducedMotion();
 
     // Close on Escape key
     useEffect(() => {
@@ -99,7 +100,7 @@ export default function PassbookDrawer() {
                         exit="exit"
                         style={{ transformOrigin: "100% 50%" }}
                         transition={{
-                            duration: isMobile ? 0.3 : 0.32,
+                            duration: shouldReduceMotion ? 0 : isMobile ? 0.3 : 0.32,
                             ease: [0.16, 1, 0.3, 1],
                         }}
                     >

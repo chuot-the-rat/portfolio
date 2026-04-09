@@ -13,7 +13,7 @@
  */
 
 import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { usePassbook } from "./PassbookProvider";
 import { PASSBOOK_ROUTE_ORDER, PASSBOOK_ROUTES } from "../../data/passbook/passbookConfig";
 import "./Passbook.css";
@@ -30,7 +30,8 @@ export default function PassbookPrintCard() {
         parkPassbook,
     } = usePassbook();
 
-    const shouldAnimate = true;
+    const shouldReduceMotion = useReducedMotion();
+    const shouldAnimate = !shouldReduceMotion;
 
     useEffect(() => {
         if (isNewlyIssued) {
@@ -58,6 +59,17 @@ export default function PassbookPrintCard() {
               tearDelay: 0.26,
           };
 
+    const finalProfile = shouldReduceMotion
+        ? {
+              delay: 0,
+              feedDuration: 0,
+              tearDuration: 0,
+              contentDuration: 0,
+              contentDelay: 0,
+              tearDelay: 0,
+          }
+        : profile;
+
     const cardVariants = {
         initial: shouldAnimate
             ? { clipPath: "inset(0 0 100% 0)", opacity: 1 }
@@ -67,9 +79,9 @@ export default function PassbookPrintCard() {
             opacity: 1,
             transition: {
                 clipPath: {
-                    duration: profile.feedDuration,
+                    duration: finalProfile.feedDuration,
                     ease: [0.16, 1, 0.3, 1],
-                    delay: profile.delay,
+                    delay: finalProfile.delay,
                 },
             },
         },
@@ -80,8 +92,8 @@ export default function PassbookPrintCard() {
         animate: {
             opacity: 1,
             transition: {
-                duration: profile.contentDuration,
-                delay: shouldAnimate ? profile.delay + profile.contentDelay : 0,
+                duration: finalProfile.contentDuration,
+                delay: shouldAnimate ? finalProfile.delay + finalProfile.contentDelay : 0,
             },
         },
     };
@@ -96,13 +108,13 @@ export default function PassbookPrintCard() {
             opacity: 1,
             transition: {
                 scaleX: {
-                    duration: profile.tearDuration,
+                    duration: finalProfile.tearDuration,
                     ease: "easeOut",
-                    delay: shouldAnimate ? profile.delay + profile.tearDelay : 0,
+                    delay: shouldAnimate ? finalProfile.delay + finalProfile.tearDelay : 0,
                 },
                 opacity: {
                     duration: 0.15,
-                    delay: shouldAnimate ? profile.delay + profile.tearDelay : 0,
+                    delay: shouldAnimate ? finalProfile.delay + finalProfile.tearDelay : 0,
                 },
             },
         },
