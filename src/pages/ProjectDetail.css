@@ -1390,7 +1390,7 @@
     border-radius: var(--radius-xl);
     background: var(--color-bg-secondary);
     box-shadow: var(--shadow-sm);
-    padding: var(--space-5);
+    padding: var(--space-6);
 }
 
 .prototype-tabs-iframe-wrap {
@@ -1413,6 +1413,9 @@
     text-align: center;
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-lg);
+    min-height: clamp(240px, 44vw, 420px);
+    display: grid;
+    place-content: center;
 }
 
 .prototype-tabs-fallback-text {
@@ -1445,12 +1448,38 @@
     display: flex;
     align-items: baseline;
     gap: var(--space-3);
-    margin-top: var(--space-4);
+    margin-top: var(--space-5);
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     letter-spacing: 0.04em;
     color: var(--color-text-tertiary);
     font-style: normal;
+    line-height: 1.55;
+}
+
+.before-after-caption {
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    max-width: 58ch;
+}
+
+/* InkLink-scoped polish: rhythm and media density */
+.project-detail--inklink .project-section {
+    margin-bottom: clamp(4.5rem, 9vw, 7rem);
+}
+
+.project-detail--inklink .section-description {
+    max-width: 68ch;
+    margin-bottom: var(--space-10);
+}
+
+.project-detail--inklink .section-images {
+    gap: var(--space-12);
+    margin: var(--space-12) 0;
+}
+
+.project-detail--inklink .prototype-tabs-section {
+    margin-top: var(--space-12);
 }
 
 /* Leading dash detail */

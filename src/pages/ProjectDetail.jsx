@@ -485,7 +485,7 @@ const ProjectDetail = () => {
     );
 
     return (
-        <div className="project-detail">
+        <div className={`project-detail project-detail--${project.id || "unknown"}`}>
             <ReadingProgress />
 
             {/* Hero — full Sharleen-style header */}

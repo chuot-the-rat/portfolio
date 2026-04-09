@@ -434,7 +434,7 @@
                     }
                 },
                 "problem_framing": {
-                    "content": "Writer's block isn't usually about running out of ideas. It's about pressure.\n\nThe blank page. The expectation of perfection. The lonely weight of being solely responsible for what comes next.\n\nWe wanted to design an experience that removed those barriers—not by making writing easier, but by making it shared."
+                    "content": "Writer's block usually comes from pressure, not a lack of ideas. The blank page, perfection expectations, and solo ownership of every next sentence can stall momentum.\n\nThe design direction focused on removing those barriers by making writing collaborative instead of solitary."
                 },
                 "research_process": {
                     "methods": [
@@ -468,7 +468,7 @@
                     }
                 },
                 "lofi_phase": {
-                    "content": "Our lo-fi work focused on one core interaction: contributing to a story. We sketched different approaches to showing story history, handling turn-taking, and branching narratives. The visuals were intentionally basic — we needed to test logic, not aesthetics.",
+                    "content": "The lo-fi phase focused on one core interaction: contributing to a story. Multiple approaches were explored for showing story history, handling turn-taking, and supporting branching narratives. The visuals stayed intentionally basic so interaction logic could be tested before aesthetic polish.",
                     "images": [
                         {
                             "src": "/projects/inklink/images/Home-lofi.svg",
@@ -478,7 +478,13 @@
                             "src": "/projects/inklink/images/Editor-lofi.svg",
                             "alt": "Lo-fi editor screen"
                         }
-                    ]
+                    ],
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/Ir2RPiW50x0kZPvnXoyzTx/Lo-fi-Usability-Test-Report?node-id=0-1&t=2P1dG9iPdn1BpTdU-1",
+                        "embed_url": "",
+                        "description": "Temporary lo-fi reference sourced from the existing InkLink test artifact.",
+                        "type": "figma"
+                    }
                 },
                 "feature_breakdown": {
                     "intro": "InkLink has three core modes of engagement. Explore them in the prototype below.",
@@ -551,9 +557,41 @@
                     },
                     {
                         "insight": "Reducing features can increase engagement",
-                        "reflection": "We cut more than we added—and the product got better."
+                        "reflection": "More features were removed than added, and the product improved through that reduction."
                     }
-                ]
+                ],
+                "hifi_phase": {
+                    "content": "The hi-fi phase translated validated interaction patterns into a calmer, editorial interface with stronger typography, hierarchy, and whitespace. Visual emphasis stayed on reading and contribution flow, while supporting controls remained secondary.",
+                    "prototype": {
+                        "url": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=2173-14511&p=f&t=3MqWcWHBQIkqxCbQ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3770&show-proto-sidebar=1",
+                        "embed_url": "https://embed.figma.com/design/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=0-1&embed-host=share",
+                        "description": "Temporary hi-fi walkthrough sourced from the current InkLink final prototype.",
+                        "type": "figma"
+                    },
+                    "images": [
+                        {
+                            "src": "/projects/inklink/images/Home.svg",
+                            "alt": "InkLink hi-fi home and story feed",
+                            "caption": "Hi-fi home view prioritizes readable story scanning and clear contribution entry points."
+                        },
+                        {
+                            "src": "/projects/inklink/images/Story page (logged in).svg",
+                            "alt": "InkLink hi-fi story reading view",
+                            "caption": "The reading view keeps contributor context and next-action prompts visible while scrolling."
+                        },
+                        {
+                            "src": "/projects/inklink/images/Editor (public).svg",
+                            "alt": "InkLink hi-fi contribution editor",
+                            "caption": "The editor reduces friction with focused writing space and lightweight status feedback."
+                        }
+                    ],
+                    "media_demo": {
+                        "src": "/projects/inklink/images/Home.svg",
+                        "type": "image",
+                        "alt": "InkLink hi-fi feed preview",
+                        "caption": "Final visual language emphasizes flow, readability, and low-pressure contribution."
+                    }
+                }
             },
             "checklist": {
                 "title": "Case Study Checklist",
