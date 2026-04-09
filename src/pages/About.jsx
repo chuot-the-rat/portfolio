@@ -71,7 +71,7 @@ export default function About() {
 
     return (
         <div className="about">
-            <main className="about-main">
+            <main className="about-main page-main">
                 <div className="container">
 
                     {/* ── Hero ── */}

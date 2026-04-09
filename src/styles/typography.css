@@ -186,58 +186,6 @@ hr {
 }
 
 /* ──────────────────────────────────────────────────────────────────────
-   LABEL TYPOGRAPHY CLASSES
-   Editorial UI styling: wide-tracked labels for "designed" feel
-   Inspired by Jackie Hu portfolio: "P r o d u c t D e s i g n" spacing
-   ────────────────────────────────────────────────────────────────────── */
-
-/* Wide-tracked labels for metadata and section headers */
-.meta,
-.kicker,
-.eyebrow {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-sm);
-    letter-spacing: var(--letter-spacing-label);
-    text-transform: uppercase;
-    line-height: var(--line-height-snug);
-    opacity: 0.78;
-}
-
-/* Tighter tracking for tags, buttons, and compact labels */
-.micro {
-    font-family: var(--font-mono);
-    font-size: 0.8em;
-    letter-spacing: var(--letter-spacing-micro);
-    text-transform: uppercase;
-    opacity: 0.8;
-}
-
-/* ──────────────────────────────────────────────────────────────────────
-   LAYOUT PRIMITIVES
-   Semantic layout helpers for consistent rhythm and composition
-   ────────────────────────────────────────────────────────────────────── */
-
-/* Stack: Vertical rhythm using Every Layout pattern */
-.stack > * + * {
-    margin-top: var(--space-fluid-m);
-}
-
-.stack-tight > * + * {
-    margin-top: var(--space-fluid-s);
-}
-
-.stack-loose > * + * {
-    margin-top: var(--space-fluid-l);
-}
-
-/* Prose: Editorial reading width (65-75ch is proven optimal) */
-.prose {
-    max-width: 68ch;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* ──────────────────────────────────────────────────────────────────────
    RESPONSIVE TYPOGRAPHY
    Adjustments for mobile/tablet viewports
    ────────────────────────────────────────────────────────────────────── */

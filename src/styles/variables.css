@@ -80,6 +80,7 @@
     --space-4: 1rem; /* 16px */
     --space-5: 1.25rem; /* 20px */
     --space-6: 1.5rem; /* 24px */
+    --space-7: 1.75rem; /* 28px */
     --space-8: 2rem; /* 32px */
     --space-10: 2.5rem; /* 40px */
     --space-12: 3rem; /* 48px */
@@ -109,6 +110,12 @@
     --space-fluid-l: clamp(1.5rem, 1.4vw + 1.05rem, 2.25rem);
     --space-fluid-xl: clamp(2rem, 2.2vw + 1.25rem, 3.25rem);
     --space-fluid-2xl: clamp(3rem, 3.6vw + 1.6rem, 5rem);
+    --space-xs: var(--space-fluid-xs);
+    --space-s: var(--space-fluid-s);
+    --space-m: var(--space-fluid-m);
+    --space-l: var(--space-fluid-l);
+    --space-xl: var(--space-fluid-xl);
+    --space-2xl: var(--space-fluid-2xl);
 
     /* ─────────────────────────────────────────────────────────────────
        LAYOUT TOKENS
@@ -120,8 +127,17 @@
     --max-width-wide: 1400px;
     --container-max: 72rem; /* Editorial: ~1152px */
     --container-pad: clamp(1rem, 3.5vw, 2.5rem);
+    --container-wide: var(--max-width-wide);
     --gutter: var(--space-6);
     --gutter-mobile: var(--space-4);
+
+    /* Semantic layout aliases (single source for page shells) */
+    --layout-page-max: var(--max-width);
+    --layout-reading-max: var(--max-width-narrow);
+    --layout-gutter: var(--container-pad);
+    --layout-section-gap: var(--section-spacing-base);
+    --layout-section-gap-lg: var(--section-spacing-lg);
+    --layout-label-col: 160px;
 
     /* ─────────────────────────────────────────────────────────────────
        BORDER RADIUS
@@ -171,6 +187,11 @@
     --dur-2: 220ms; /* Standard interaction */
     --dur-3: 360ms; /* Reveal/preview */
 
+    /* Legacy motion aliases used by existing components */
+    --dur-ui: var(--dur-2);
+    --dur-slow: var(--dur-3);
+    --ease-out-premium: var(--motion-ease-editorial);
+
     /* Shared motion tokens (paired with src/utils/motion/tokens.js) */
     --motion-dur-hover-fast: 150ms;
     --motion-dur-hover-base: 220ms;
@@ -181,6 +202,7 @@
     --motion-stagger-base: 80ms;
     --motion-ease-smooth: cubic-bezier(0.25, 0, 0, 1);
     --motion-ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+    --mq-speed: 28s;
 
     /* ─────────────────────────────────────────────────────────────────
        SHADOW SYSTEM
@@ -201,6 +223,30 @@
     --focus-color: var(--color-accent-vivid);
     --focus-offset: 3px;
     --focus-ring: 2px solid var(--focus-color);
+
+    /* Typography aliases for compatibility across legacy files */
+    --text-sm: var(--font-size-sm);
+    --text-md: var(--font-size-base);
+    --text-lg: var(--font-size-lg);
+    --h1: var(--font-size-5xl);
+    --h2: var(--font-size-4xl);
+    --h3: var(--font-size-2xl);
+    --lh-body: var(--line-height-normal);
+    --lh-title: var(--line-height-tight);
+    --lh-tight: var(--line-height-tight);
+    --track-title: var(--letter-spacing-tight);
+    --track-kicker: var(--letter-spacing-label);
+
+    /* Shared chip/tag contract */
+    --chip-font-family: var(--font-mono);
+    --chip-font-size: var(--font-size-xs);
+    --chip-letter-spacing: 0.08em;
+    --chip-padding-y: var(--space-2);
+    --chip-padding-x: var(--space-4);
+    --chip-radius: var(--radius-full);
+    --chip-border: var(--color-border);
+    --chip-bg: var(--color-bg-secondary);
+    --chip-text: var(--color-text-secondary);
 
     /* ─────────────────────────────────────────────────────────────────
        ANIMATION COMPONENT TOKENS
@@ -238,4 +284,7 @@
     --color-border: #2c2722;
     --color-accent: #f5f2ee;
     --color-accent-vivid: #818cf8; /* lighter in dark mode for contrast */
+    --chip-border: #39332d;
+    --chip-bg: #201c18;
+    --chip-text: #b8afa6;
 }

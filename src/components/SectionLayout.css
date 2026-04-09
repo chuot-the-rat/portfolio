@@ -7,9 +7,9 @@
    ────────────────────────────────────────────────────────────────────── */
 
 .sections-container {
-    max-width: var(--max-width-narrow);
+    max-width: var(--layout-reading-max);
     margin: 0 auto;
-    padding: 0 var(--gutter);
+    padding: 0 var(--layout-gutter);
 }
 
 @media (max-width: 768px) {
@@ -83,8 +83,8 @@
 .floating-sections {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-20);
-    padding: var(--section-spacing-base) 0;
+    gap: var(--layout-section-gap-lg);
+    padding: var(--layout-section-gap) 0;
 }
 
 /* Two-Column Layout on Larger Screens */

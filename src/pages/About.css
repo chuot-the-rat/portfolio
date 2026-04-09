@@ -66,7 +66,7 @@
 
 .about-row {
     display: grid;
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: var(--layout-label-col) 1fr;
     gap: var(--space-16);
     padding: var(--space-12) 0;
     border-bottom: 1px solid var(--color-border);
@@ -165,8 +165,8 @@
     text-decoration: none;
     line-height: 1.1;
     transition:
-        opacity 0.18s ease,
-        gap 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity var(--dur-ui) var(--ease-out-premium),
+        gap var(--dur-ui) var(--ease-out-premium);
 }
 
 .about-email-link:hover {
@@ -178,8 +178,8 @@
     font-size: 0.65em;
     opacity: 0.45;
     transition:
-        opacity 0.18s ease,
-        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity var(--dur-ui) var(--ease-out-premium),
+        transform var(--dur-ui) var(--ease-out-premium);
 }
 
 .about-email-link:hover .about-email-arrow {
@@ -211,7 +211,7 @@
 
 .about-contact-row {
     display: grid;
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: var(--layout-label-col) 1fr;
     gap: var(--space-16);
     padding: var(--space-8) 0;
     border-bottom: 1px solid var(--color-border);
@@ -242,8 +242,8 @@
     color: var(--color-text);
     text-decoration: none;
     transition:
-        opacity 0.18s ease,
-        gap 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity var(--dur-ui) var(--ease-out-premium),
+        gap var(--dur-ui) var(--ease-out-premium);
 }
 
 .about-contact-link:hover {
@@ -255,8 +255,8 @@
     font-size: 0.75em;
     opacity: 0.4;
     transition:
-        opacity 0.18s ease,
-        transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity var(--dur-ui) var(--ease-out-premium),
+        transform var(--dur-ui) var(--ease-out-premium);
 }
 
 .about-contact-link:hover .about-contact-link-arrow {
@@ -338,13 +338,13 @@
 }
 
 .about-process-phase {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: var(--letter-spacing-label);
+    font-family: var(--chip-font-family);
+    font-size: var(--chip-font-size);
+    letter-spacing: var(--chip-letter-spacing);
     color: var(--color-accent-vivid);
-    padding: 4px 7px;
+    padding: var(--space-1) var(--space-3);
     border: 1px solid color-mix(in srgb, var(--color-accent-vivid) 35%, var(--color-border));
-    border-radius: var(--radius-full);
+    border-radius: var(--chip-radius);
 }
 
 .about-process-card-title {
@@ -371,23 +371,23 @@
 .about-process-tag {
     display: inline-flex;
     align-items: center;
-    padding: 6px 10px;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--color-border);
-    background: color-mix(in srgb, var(--color-bg-secondary) 70%, transparent);
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.05em;
+    padding: var(--chip-padding-y) var(--chip-padding-x);
+    border-radius: var(--chip-radius);
+    border: 1px solid var(--chip-border);
+    background: color-mix(in srgb, var(--chip-bg) 78%, transparent);
+    font-family: var(--chip-font-family);
+    font-size: var(--chip-font-size);
+    letter-spacing: var(--chip-letter-spacing);
     text-transform: uppercase;
-    color: var(--color-text-secondary);
+    color: var(--chip-text);
     white-space: nowrap;
 }
 
 .about-process-arrow {
     position: absolute;
-    right: -20px;
+    right: 0;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translate(50%, -50%);
     font-size: 1.15rem;
     color: var(--color-text-tertiary);
     pointer-events: none;
@@ -487,8 +487,8 @@
     padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-full);
     transition:
-        opacity 0.18s ease,
-        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity var(--dur-ui) var(--ease-out-premium),
+        transform var(--dur-ui) var(--ease-out-premium);
     white-space: nowrap;
 }
 
