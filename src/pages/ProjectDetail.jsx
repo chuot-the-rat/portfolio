@@ -29,6 +29,18 @@ import "./ProjectDetail.css";
 const toSentence = (value) =>
     String(value || "").replace(/\s+/g, " ").trim();
 
+const toLeadingSentence = (value, fallback = "") => {
+    const sentence = toSentence(value);
+    if (!sentence) return fallback;
+    const parts = sentence.split(/(?<=[.!?])\s+/);
+    return parts.slice(0, 2).join(" ");
+};
+
+const hasConcreteSignal = (value) =>
+    /\d|%|hour|hours|week|weeks|month|months|participant|prototype|testing|validated|reduced|improved/i.test(
+        String(value || ""),
+    );
+
 const getImpactSnapshot = (project) => {
     if (Array.isArray(project?.outcomes?.metrics) && project.outcomes.metrics.length > 0) {
         return project.outcomes.metrics
@@ -61,21 +73,26 @@ const getCredibilityRows = (project) => {
         project?.evolution?.items?.slice(0, 2).map((item) => item.title || item.outcome) ||
         [];
 
+    const evidenceLine = measurable.map(toSentence).join(" • ");
+
     return [
         {
-            label: "Problem",
+            label: "Problem that mattered",
             value:
-                toSentence(project?.problem?.description || project?.overview?.description) ||
+                toLeadingSentence(
+                    project?.problem?.description || project?.overview?.description,
+                    "The case study starts by defining the user friction and why it blocked progress.",
+                ) ||
                 "The case study documents the user problem and context before solutions.",
         },
         {
-            label: "Constraints",
+            label: "Approach and constraints",
             value:
                 constraints.length > 0
                     ? constraints.map(toSentence).join(" • ")
                     : "Scope and technical constraints are called out in process and implementation sections.",
         },
-        { label: "My role", value: roleValue },
+        { label: "Ownership", value: roleValue },
         {
             label: "Key decisions",
             value:
@@ -83,7 +100,13 @@ const getCredibilityRows = (project) => {
                     ? decisions.map(toSentence).join(" • ")
                     : "Design decisions are connected to research findings and validation.",
         },
-        { label: "Measured outcome", value: measurable.map(toSentence).join(" • ") },
+        {
+            label: "Evidence of impact",
+            value:
+                hasConcreteSignal(evidenceLine)
+                    ? evidenceLine
+                    : "Outcomes are reported through validation findings and qualitative user confidence gains.",
+        },
         {
             label: "Next iteration",
             value:
@@ -233,15 +256,34 @@ const ProjectDetail = () => {
         null;
 
     // Build meta bar items — only show fields that exist
+    const inferredPlatform = /mobile|ios|android/i.test(project.category || "")
+        ? "Mobile"
+        : /web|website|desktop/i.test(project.category || "")
+          ? "Web"
+          : null;
+
     const metaItems = [
-        project.role      && { label: "Role",     value: Array.isArray(project.role) ? project.role.join(", ") : project.role },
+        project.role && {
+            label: "Role",
+            value: Array.isArray(project.role)
+                ? project.role.join(", ")
+                : project.role,
+        },
+        project.year && { label: "Year", value: project.year },
+        project.category && { label: "Type", value: project.category },
+        inferredPlatform && { label: "Platform", value: inferredPlatform },
         (project.timeline || project.duration) && { label: "Timeline", value: project.timeline || project.duration },
-        (project.team || project.teamSize)     && { label: "Team",     value: project.team || `${project.teamSize} members` },
-        project.context   && { label: "Context",  value: project.context },
-        project.year      && { label: "Year",     value: project.year },
+        (project.team || project.teamSize) && {
+            label: "Team",
+            value: project.team || `${project.teamSize} members`,
+        },
     ].filter(Boolean);
     const impactSnapshot = getImpactSnapshot(project);
     const credibilityRows = getCredibilityRows(project);
+    const framingStatement = toLeadingSentence(
+        project?.problem?.description || project?.summary || project?.tagline,
+        "This case study documents the user problem, the design response, and the evidence behind the final outcome.",
+    );
 
     return (
         <div className="project-detail">
@@ -286,6 +328,11 @@ const ProjectDetail = () => {
 
                         {project.tagline && (
                             <p className="project-hero-tagline">{project.tagline}</p>
+                        )}
+                        {framingStatement && (
+                            <p className="project-framing-statement">
+                                {framingStatement}
+                            </p>
                         )}
 
                         <ul className="project-impact-snapshot" aria-label="Impact snapshot">
@@ -427,6 +474,7 @@ const ProjectContentMain = ({ project }) => {
                             images={project.overview.images}
                             mediaDemo={project.overview.mediaDemo}
                             verdict={project.overview.verdict}
+                            captionContext="Overview"
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
                                 imageNum += n;
@@ -435,42 +483,26 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* Final Experience/Prototype */}
-            {project.finalExperience &&
+            {/* Problem framing */}
+            {project.problem &&
                 (() => {
                     const s = nextSection();
                     return (
-                        <motion.section
-                            className="project-section final-experience-section"
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.45 }}
-                        >
-                            <SectionIndex
-                                caseIndex={ci}
-                                sectionIndex={s}
-                                title="Final Experience"
-                            />
-                            <h2 className="section-title">
-                                Complete Prototype
-                            </h2>
-                            <SectionTag sectionIndex={s} />
-                            {project.finalExperience.intro && (
-                                <p className="section-description">
-                                    {project.finalExperience.intro}
-                                </p>
-                            )}
-                            <BrowserMockup mediaDemo={project.finalExperience.mediaDemo} />
-                            <PrincipleVerdict verdict={project.finalExperience.verdict} />
-                            {project.finalExperience.prototype && (
-                                <PrototypeEmbed
-                                    prototype={
-                                        project.finalExperience.prototype
-                                    }
-                                />
-                            )}
-                        </motion.section>
+                        <IndexedSection
+                            caseIndex={ci}
+                            sectionIndex={s}
+                            name="Problem"
+                            title={project.problem.title}
+                            description={project.problem.description}
+                            images={project.problem.images}
+                            mediaDemo={project.problem.mediaDemo}
+                            verdict={project.problem.verdict}
+                            captionContext="Problem framing"
+                            imageStartIndex={imageNum}
+                            onImageCount={(n) => {
+                                imageNum += n;
+                            }}
+                        />
                     );
                 })()}
 
@@ -489,7 +521,7 @@ const ProjectContentMain = ({ project }) => {
                             <SectionIndex
                                 caseIndex={ci}
                                 sectionIndex={s}
-                                title="Research"
+                                title="Approach"
                             />
                             <h2 className="section-title">
                                 {project.research.title}
@@ -556,6 +588,7 @@ const ProjectContentMain = ({ project }) => {
                             {project.research.images?.length > 0 && (
                                 <ImageGallery
                                     images={project.research.images}
+                                    captionContext="Research evidence"
                                     startIndex={imageNum}
                                     onCount={(n) => {
                                         imageNum += n;
@@ -566,9 +599,8 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
-            {/* Problem (legacy) */}
-            {!project.research &&
-                project.problem &&
+            {/* Problem framing */}
+            {project.problem &&
                 (() => {
                     const s = nextSection();
                     return (
@@ -581,6 +613,7 @@ const ProjectContentMain = ({ project }) => {
                             images={project.problem.images}
                             mediaDemo={project.problem.mediaDemo}
                             verdict={project.problem.verdict}
+                            captionContext="Problem framing"
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
                                 imageNum += n;
@@ -729,6 +762,7 @@ const ProjectContentMain = ({ project }) => {
                             {project.userFlows.images?.length > 0 && (
                                 <ImageGallery
                                     images={project.userFlows.images}
+                                    captionContext="User flow evidence"
                                     startIndex={imageNum}
                                     onCount={(n) => {
                                         imageNum += n;
@@ -755,6 +789,7 @@ const ProjectContentMain = ({ project }) => {
                             images={project.informationArchitecture.images}
                             mediaDemo={project.informationArchitecture.mediaDemo}
                             verdict={project.informationArchitecture.verdict}
+                            captionContext="Information architecture"
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
                                 imageNum += n;
@@ -777,6 +812,7 @@ const ProjectContentMain = ({ project }) => {
                             images={project.lofi.images}
                             mediaDemo={project.lofi.mediaDemo}
                             verdict={project.lofi.verdict}
+                            captionContext="Lo-fi exploration"
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
                                 imageNum += n;
@@ -964,6 +1000,7 @@ const ProjectContentMain = ({ project }) => {
                             {project.styleGuide.images?.length > 0 && (
                                 <ImageGallery
                                     images={project.styleGuide.images}
+                                    captionContext="Style system"
                                     startIndex={imageNum}
                                     onCount={(n) => {
                                         imageNum += n;
@@ -1124,6 +1161,7 @@ const ProjectContentMain = ({ project }) => {
                             {project.iterations.images?.length > 0 && (
                                 <ImageGallery
                                     images={project.iterations.images}
+                                    captionContext="Iteration decisions"
                                     startIndex={imageNum}
                                     onCount={(n) => {
                                         imageNum += n;
@@ -1231,6 +1269,7 @@ const ProjectContentMain = ({ project }) => {
                             {project.hifi.images?.length > 0 && (
                                 <ImageGallery
                                     images={project.hifi.images}
+                                    captionContext="Hi-fi execution"
                                     startIndex={imageNum}
                                     onCount={(n) => {
                                         imageNum += n;
@@ -1548,6 +1587,7 @@ const ProjectContentMain = ({ project }) => {
                             {project.userTesting.images?.length > 0 && (
                                 <ImageGallery
                                     images={project.userTesting.images}
+                                    captionContext="Testing evidence"
                                     startIndex={imageNum}
                                     onCount={(n) => {
                                         imageNum += n;
@@ -1735,6 +1775,7 @@ const ProjectContentMain = ({ project }) => {
                             {project.solution.images?.length > 0 && (
                                 <ImageGallery
                                     images={project.solution.images}
+                                    captionContext="Solution details"
                                     startIndex={imageNum}
                                     onCount={(n) => {
                                         imageNum += n;
@@ -1745,6 +1786,45 @@ const ProjectContentMain = ({ project }) => {
                             {project.solution.prototype && (
                                 <PrototypeEmbed
                                     prototype={project.solution.prototype}
+                                />
+                            )}
+                        </motion.section>
+                    );
+                })()}
+
+            {/* Final Experience/Prototype */}
+            {project.finalExperience &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section final-experience-section"
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.45 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Solution"
+                            />
+                            <h2 className="section-title">
+                                Complete Prototype
+                            </h2>
+                            <SectionTag sectionIndex={s} />
+                            {project.finalExperience.intro && (
+                                <p className="section-description">
+                                    {project.finalExperience.intro}
+                                </p>
+                            )}
+                            <BrowserMockup mediaDemo={project.finalExperience.mediaDemo} />
+                            <PrincipleVerdict verdict={project.finalExperience.verdict} />
+                            {project.finalExperience.prototype && (
+                                <PrototypeEmbed
+                                    prototype={
+                                        project.finalExperience.prototype
+                                    }
                                 />
                             )}
                         </motion.section>
@@ -1766,7 +1846,7 @@ const ProjectContentMain = ({ project }) => {
                             <SectionIndex
                                 caseIndex={ci}
                                 sectionIndex={s}
-                                title="Validation"
+                                title="Outcome"
                             />
                             <h2 className="section-title">
                                 {project.validation.title}
@@ -1890,7 +1970,7 @@ const ProjectContentMain = ({ project }) => {
                             <SectionIndex
                                 caseIndex={ci}
                                 sectionIndex={s}
-                                title="Impact"
+                                title="Outcome"
                             />
                             <h2 className="section-title">
                                 {project.outcomes.title}
@@ -1946,10 +2026,23 @@ const ProjectContentMain = ({ project }) => {
 
 // Reusable Image Gallery Component with FIG.XX labels
 // Shows all images stacked for ≤2 images; slideshow carousel for 3+
-const getImageCaption = (image) =>
-    image?.caption || image?.alt || "Project visual";
+const getImageCaption = (image, captionContext = "case study") => {
+    if (image?.caption && String(image.caption).trim().length > 3) {
+        return image.caption;
+    }
+    if (image?.alt && String(image.alt).trim().length > 8) {
+        const alt = String(image.alt).replace(/\.$/, "");
+        return `${captionContext}: ${alt}.`;
+    }
+    return `Supporting visual from the ${captionContext.toLowerCase()} section showing the design decision in context.`;
+};
 
-const ImageGallery = ({ images, startIndex = 0, onCount }) => {
+const ImageGallery = ({
+    images,
+    captionContext,
+    startIndex = 0,
+    onCount,
+}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     if (!images || images.length === 0) return null;
@@ -1999,7 +2092,9 @@ const ImageGallery = ({ images, startIndex = 0, onCount }) => {
                             src={img.src}
                             alt={img.alt}
                         />
-                        <p className="image-caption">{getImageCaption(img)}</p>
+                        <p className="image-caption">
+                            {getImageCaption(img, captionContext)}
+                        </p>
                     </motion.div>
                 ))}
             </div>
@@ -2084,7 +2179,9 @@ const ImageGallery = ({ images, startIndex = 0, onCount }) => {
                 </button>
             </div>
 
-            <p className="image-caption">{getImageCaption(img)}</p>
+            <p className="image-caption">
+                {getImageCaption(img, captionContext)}
+            </p>
 
             {/* Dot indicators */}
             <div className="carousel-dots">
@@ -2241,6 +2338,7 @@ const IndexedSection = ({
     images,
     mediaDemo,
     verdict,
+    captionContext,
     imageStartIndex = 0,
     onImageCount,
 }) => (
@@ -2268,6 +2366,7 @@ const IndexedSection = ({
         {images && images.length > 0 && (
             <ImageGallery
                 images={images}
+                captionContext={captionContext || title || name}
                 startIndex={imageStartIndex}
                 onCount={onImageCount}
             />

@@ -132,6 +132,14 @@
     font-weight: 400;
 }
 
+.project-framing-statement {
+    margin: var(--space-5) 0 0;
+    max-width: 62ch;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+}
+
 .project-impact-snapshot {
     list-style: none;
     margin: var(--space-6) 0 0;
@@ -291,7 +299,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
-    margin-bottom: var(--space-16);
+    margin-bottom: var(--space-14);
 }
 
 .project-credibility-item {
@@ -319,13 +327,13 @@
 
 /* ─ Section Container ─ */
 .project-section {
-    margin-bottom: var(--section-spacing-lg);
+    margin-bottom: clamp(4rem, 8vw, 6.5rem);
     max-width: var(--layout-reading-max);
 }
 
 /* Increase breathing room between major sections */
 .project-section + .project-section {
-    margin-top: var(--section-spacing-lg);
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 /* ─ Section Label (Micro Index + Small) ─ */
@@ -347,7 +355,7 @@
     font-size: var(--font-size-2xl);
     font-weight: 500;
     letter-spacing: var(--letter-spacing-tight);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
     line-height: var(--line-height-tight);
     color: var(--color-text);
 }
@@ -357,7 +365,7 @@
     font-size: var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-16);
+    margin-bottom: var(--space-12);
     max-width: 64ch;
     font-weight: 400;
 }
