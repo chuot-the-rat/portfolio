@@ -86,6 +86,28 @@ const ProjectDetail = () => {
         }
     }, [id, navigate]);
 
+    // Favicon swap: active ↔ idle on tab visibility change
+    useEffect(() => {
+        const link = document.querySelector("link[rel~='icon']");
+        if (!link) return;
+        const activeFavicon = link.href;
+        const idleFavicon =
+            "data:image/svg+xml," +
+            encodeURIComponent(
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">` +
+                `<text y="26" font-size="26">💤</text></svg>`,
+            );
+
+        const onVisibility = () => {
+            link.href = document.hidden ? idleFavicon : activeFavicon;
+        };
+        document.addEventListener("visibilitychange", onVisibility);
+        return () => {
+            document.removeEventListener("visibilitychange", onVisibility);
+            link.href = activeFavicon;
+        };
+    }, []);
+
     if (loading) {
         return (
             <div className="project-detail-loading">
@@ -119,28 +141,6 @@ const ProjectDetail = () => {
         project.context   && { label: "Context",  value: project.context },
         project.year      && { label: "Year",     value: project.year },
     ].filter(Boolean);
-
-    // Favicon swap: active ↔ idle on tab visibility change
-    useEffect(() => {
-        const link = document.querySelector("link[rel~='icon']");
-        if (!link) return;
-        const activeFavicon = link.href;
-        const idleFavicon =
-            "data:image/svg+xml," +
-            encodeURIComponent(
-                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">` +
-                `<text y="26" font-size="26">💤</text></svg>`
-            );
-
-        const onVisibility = () => {
-            link.href = document.hidden ? idleFavicon : activeFavicon;
-        };
-        document.addEventListener("visibilitychange", onVisibility);
-        return () => {
-            document.removeEventListener("visibilitychange", onVisibility);
-            link.href = activeFavicon;
-        };
-    }, []);
 
     return (
         <div className="project-detail">
