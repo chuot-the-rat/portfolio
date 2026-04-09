@@ -1,5 +1,20 @@
 # Release Notes
 
+## Case Study Phase 2 Slice
+
+### Highlights
+- Confirmed ProLog and SideQuest Phase 2 narrative fields are wired and active:
+  hero marquee copy, section-level media demos, do/don't verdict cards, and checklist sections.
+- Activated and validated Phase 2 case-study presentation components in detail flow:
+  `CaseStudyHeroMarquee`, `BrowserMockup`, `PrincipleVerdict`, `ChecklistSection`, and divider rhythm.
+- Fixed legacy project route handling so standalone IDs resolve correctly:
+  `/projects/fizzu-soda` now redirects to `/design/fizzu-soda` instead of `/case-studies/fizzu-soda`.
+
+### Quality + Stability
+- Resolved design-token lint blocker by replacing undefined `--space-14` token with `--space-12` in `ProjectDetail.css`.
+- Lint and production build pass after Phase 2 integration checks.
+- Route smoke checks pass for case-study, standalone design, and unknown routes.
+
 ## Hiring Conversion + Stability Update
 
 ### Highlights
