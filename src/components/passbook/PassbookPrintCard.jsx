@@ -44,19 +44,19 @@ export default function PassbookPrintCard() {
     const profile = isPrimaryIssue
         ? {
               delay: 0.45,
-              feedDuration: 0.76,
-              settleDuration: 0.22,
+              feedDuration: 0.72,
+              settleDuration: 0.2,
               contentDuration: 0.28,
-              contentDelay: 0.5,
-              settleDelay: 0.78,
+              contentDelay: 0.48,
+              settleDelay: 0.74,
           }
         : {
               delay: 0.06,
-              feedDuration: 0.4,
-              settleDuration: 0.18,
+              feedDuration: 0.36,
+              settleDuration: 0.16,
               contentDuration: 0.2,
-              contentDelay: 0.24,
-              settleDelay: 0.36,
+              contentDelay: 0.22,
+              settleDelay: 0.32,
           };
 
     const finalProfile = shouldReduceMotion
@@ -72,12 +72,12 @@ export default function PassbookPrintCard() {
 
     const cardVariants = {
         initial: shouldAnimate
-            ? { clipPath: "inset(0 0 100% 0)", opacity: 0.98, y: -6 }
+            ? { clipPath: "inset(0 0 100% 0)", opacity: 0.98, y: -8 }
             : { clipPath: "inset(0 0 0% 0)", opacity: 1 },
         animate: {
             clipPath: "inset(0 0 0% 0)",
-            opacity: 1,
-            y: 0,
+            opacity: shouldAnimate ? [1, 1, 0.995, 1] : 1,
+            y: shouldAnimate ? [0, 1, 0] : 0,
             transition: {
                 clipPath: {
                     duration: finalProfile.feedDuration,
@@ -90,7 +90,7 @@ export default function PassbookPrintCard() {
                     delay: shouldAnimate ? finalProfile.delay + finalProfile.settleDelay : 0,
                 },
                 opacity: {
-                    duration: 0.18,
+                    duration: 0.16,
                     ease: [0.25, 0, 0, 1],
                     delay: shouldAnimate ? finalProfile.delay + finalProfile.settleDelay : 0,
                 },

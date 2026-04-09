@@ -966,7 +966,7 @@
     height: 2px;
     border: none;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--pb-border) 66%, var(--pb-ink-mid) 34%);
+    background: color-mix(in srgb, var(--pb-border) 56%, var(--pb-ink-mid) 44%);
 }
 
 .pb-print-slot__feed {
@@ -992,7 +992,8 @@
 
 .pb-print-card {
     background: color-mix(in srgb, var(--pb-surface) 94%, var(--pb-surface-alt));
-    border-color: color-mix(in srgb, var(--pb-border) 86%, var(--pb-ink-mid) 14%);
+    border-color: color-mix(in srgb, var(--pb-border) 78%, var(--pb-ink-mid) 22%);
+    border-top-color: color-mix(in srgb, var(--pb-ink-mid) 32%, var(--pb-border));
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
@@ -1014,12 +1015,12 @@
     padding: var(--space-2) var(--space-2);
     border-right: none;
     border-radius: var(--radius-base) 0 0 var(--radius-base);
-    transform: translateX(calc(100% - 14px));
+    transform: translateX(calc(100% - 18px));
 }
 
 .pb-peek-tab__btn:hover,
 .pb-peek-tab__btn:focus-visible {
-    transform: translateX(calc(100% - 32px));
+    transform: translateX(calc(100% - 30px));
 }
 
 .pb-peek-tab__label {
@@ -1029,7 +1030,7 @@
 .pb-peek-tab__progress {
     font-size: 9px;
     letter-spacing: 0.04em;
-    opacity: 0.88;
+    opacity: 0.92;
 }
 
 .pb-peek-tab--embedded .pb-peek-tab__btn {
@@ -1085,12 +1086,12 @@
     .pb-peek-tab__btn {
         min-width: 34px;
         padding: var(--space-2);
-        transform: translateX(calc(100% - 10px));
+        transform: translateX(calc(100% - 12px));
     }
 
     .pb-peek-tab__btn:hover,
     .pb-peek-tab__btn:focus-visible {
-        transform: translateX(calc(100% - 24px));
+        transform: translateX(calc(100% - 20px));
     }
 
     .pb-peek-tab__progress {
@@ -1108,5 +1109,20 @@
     .pb-print-wrapper {
         margin-top: 0;
         margin-bottom: 0;
+    }
+
+    .pb-print-card__eyebrow {
+        font-size: 8px;
+        letter-spacing: 0.09em;
+    }
+
+    .pb-print-card__label {
+        font-size: 10px;
+        line-height: 1.25;
+    }
+
+    .pb-print-card__sub {
+        font-size: 8px;
+        letter-spacing: 0.08em;
     }
 }
