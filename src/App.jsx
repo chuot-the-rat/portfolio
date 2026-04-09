@@ -95,7 +95,10 @@ function ScrollToTop() {
 
 function LegacyProjectRouteRedirect() {
     const { id } = useParams();
-    return <Navigate to={`${CASE_STUDY_BASE_PATH}/${id}`} replace />;
+    const target = STANDALONE_PROJECT_IDS.includes(id)
+        ? `/design/${id}`
+        : `${CASE_STUDY_BASE_PATH}/${id}`;
+    return <Navigate to={target} replace />;
 }
 
 /** Wraps each page in a fade transition. Framer Motion handles enter/exit. */
