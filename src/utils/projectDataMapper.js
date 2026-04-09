@@ -402,7 +402,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
 
         learnings: sections?.what_i_learned
             ? {
-                  title: "What I Learned",
+                  title: "Key Learnings",
                   insights: Array.isArray(sections.what_i_learned)
                       ? sections.what_i_learned.map((item) => ({
                             title: item.insight || item.point || item.title,
