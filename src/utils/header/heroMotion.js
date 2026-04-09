@@ -10,13 +10,15 @@
  * - All easing uses [0.16, 1, 0.3, 1] — matches --ease-out-premium in energy.css.
  */
 
+import { MOTION_DURATION, MOTION_EASE } from "../motion/tokens";
+
 // ── Stagger orchestrator ─────────────────────────────────────────────────────
 // Apply to the top-level motion.div in HeroContainer.
 export const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.06, // 60ms — slightly more deliberate, less mechanical
+      staggerChildren: MOTION_DURATION.staggerFast,
       delayChildren: 0.05,
     },
   },
@@ -30,8 +32,8 @@ export const childVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.72,
-      ease: [0.16, 1, 0.3, 1],
+      duration: MOTION_DURATION.revealSlow,
+      ease: MOTION_EASE.editorial,
     },
   },
 };
@@ -45,8 +47,8 @@ export const mediaVariants = {
     x: 0,
     scale: 1,
     transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1],
+      duration: MOTION_DURATION.revealSlow,
+      ease: MOTION_EASE.editorial,
       delay: 0.35,
     },
   },
@@ -60,8 +62,8 @@ export const tagVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: [0.16, 1, 0.3, 1],
+      duration: MOTION_DURATION.revealBase,
+      ease: MOTION_EASE.editorial,
       delay: 0.55 + i * 0.1,
     },
   }),
@@ -87,7 +89,7 @@ export const mediaHoverVariants = {
   rest: { y: 0 },
   hover: {
     y: -4,
-    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: MOTION_DURATION.hoverBase, ease: MOTION_EASE.editorial },
   },
 };
 
@@ -97,7 +99,7 @@ export const ctaHoverVariants = {
   rest: { y: 0 },
   hover: {
     y: -2,
-    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: MOTION_DURATION.hoverSlow, ease: MOTION_EASE.editorial },
   },
   tap: { y: 0, opacity: 0.7 },
 };

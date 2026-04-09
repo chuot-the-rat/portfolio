@@ -171,6 +171,17 @@
     --dur-2: 220ms; /* Standard interaction */
     --dur-3: 360ms; /* Reveal/preview */
 
+    /* Shared motion tokens (paired with src/utils/motion/tokens.js) */
+    --motion-dur-hover-fast: 150ms;
+    --motion-dur-hover-base: 220ms;
+    --motion-dur-hover-slow: 250ms;
+    --motion-dur-reveal-base: 500ms;
+    --motion-dur-reveal-slow: 600ms;
+    --motion-stagger-fast: 60ms;
+    --motion-stagger-base: 80ms;
+    --motion-ease-smooth: cubic-bezier(0.25, 0, 0, 1);
+    --motion-ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
     /* ─────────────────────────────────────────────────────────────────
        SHADOW SYSTEM
        Elevation through shadows - carefully calibrated for subtlety

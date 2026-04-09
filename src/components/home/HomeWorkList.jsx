@@ -6,16 +6,18 @@
  * - Resting state: text rows only. Index | Title + subtitle | Year.
  * - Hover: floating preview image fades in on the right (desktop only).
  * - Hovered row: brightens, shifts 4px right.
- * - Siblings: dim to 0.28 opacity.
+ * - Siblings: dim subtly to preserve context while focusing selection.
  * - Mobile: no preview, touch goes straight to project.
  *
  * No permanent thumbnails in the grid. Image is a reward, not a fixture.
  */
 
 import { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getProjectPath, isStandaloneProject } from "../../utils/projectDataMapper";
+import { MOTION_DURATION, MOTION_EASE } from "../../utils/motion/tokens";
 import "./HomeWorkList.css";
 
 const TABS = ["UX/UI", "Motion Design", "Graphic Design"];
@@ -42,6 +44,8 @@ export default function HomeWorkList({ projects }) {
     hoveredProject?.coverImage ??
     hoveredProject?.allImages?.[0]?.src ??
     null;
+  const previewVideoSrc = hoveredProject?.previewVideoSrc ?? null;
+  const projectTags = (hoveredProject?.taxonomyTags ?? []).slice(0, 3);
 
   return (
     <section className="hw" aria-label="Selected work">
@@ -74,7 +78,7 @@ export default function HomeWorkList({ projects }) {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: MOTION_DURATION.revealBase, ease: MOTION_EASE.editorial }}
           >
             {filtered.length === 0 ? (
               <p className="hw-empty">No projects in this category yet.</p>
@@ -93,7 +97,11 @@ export default function HomeWorkList({ projects }) {
                     ].filter(Boolean).join(" ")}
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.42, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{
+                      duration: MOTION_DURATION.revealBase,
+                      delay: index * MOTION_DURATION.staggerFast,
+                      ease: MOTION_EASE.editorial,
+                    }}
                     onMouseEnter={() => setHoveredId(project.id)}
                     onMouseLeave={() => setHoveredId(null)}
                     onFocus={()     => setHoveredId(project.id)}
@@ -116,11 +124,23 @@ export default function HomeWorkList({ projects }) {
                             {project.subtitle ?? project.tagline}
                           </span>
                         )}
-                        <span className="hw-item-type">
-                          {isStandaloneProject(project.id)
-                            ? project.category ?? "Project"
-                            : "Case Study"}
-                        </span>
+                        <div className="hw-item-tags" aria-label="Project tags">
+                          {(project.taxonomyTags?.length
+                            ? project.taxonomyTags
+                            : [
+                                isStandaloneProject(project.id) ? "Design Project" : "Case Study",
+                                project.category ?? "Project",
+                                project.year,
+                              ]
+                          )
+                            .filter(Boolean)
+                            .slice(0, 3)
+                            .map((tag) => (
+                              <span key={`${project.id}-${tag}`} className="hw-item-tag">
+                                {String(tag).toLowerCase()}
+                              </span>
+                            ))}
+                        </div>
                       </div>
 
                       {/* Year — pushed right */}
@@ -149,23 +169,40 @@ export default function HomeWorkList({ projects }) {
                   opacity: 1,
                   scale: 1,
                   transition: {
-                    duration: 0.3,
-                    delay: 0.12, // 120ms delay — image is a reward, not instant
-                    ease: [0.16, 1, 0.3, 1],
+                    duration: MOTION_DURATION.hoverBase,
+                    delay: MOTION_DURATION.previewDelay, // delayed reward
+                    ease: MOTION_EASE.editorial,
                   },
                 }}
                 exit={{
                   opacity: 0,
                   scale: 0.97,
-                  transition: { duration: 0.18 },
+                  transition: { duration: MOTION_DURATION.hoverFast, ease: MOTION_EASE.smooth },
                 }}
               >
-                <img
-                  src={previewSrc}
-                  alt=""
-                  className="hw-preview-img"
-                  loading="lazy"
-                />
+                <div
+                  className={`hw-preview-media${previewVideoSrc ? " hw-preview-media--has-video" : ""}`}
+                  aria-label={projectTags.length > 0 ? `Preview: ${projectTags.join(", ")}` : "Project preview"}
+                >
+                  <img
+                    src={previewSrc}
+                    alt=""
+                    className="hw-preview-img"
+                    loading="lazy"
+                  />
+                  {previewVideoSrc && (
+                    <video
+                      key={`${hoveredId}-preview-video`}
+                      className="hw-preview-video"
+                      src={previewVideoSrc}
+                      muted
+                      loop
+                      playsInline
+                      autoPlay
+                      preload="metadata"
+                    />
+                  )}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

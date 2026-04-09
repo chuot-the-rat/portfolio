@@ -23,7 +23,7 @@ export const homeHeroConfig = {
     headline: ["Leana", "Le"], // array = one word per display line
     headlineAs: "h1",
     subline:
-      "Crafting experiences that bridge research, design, and clean code.",
+      "I design and build clear product experiences.",
   },
 
   // MediaBlock — null until portrait asset is added

@@ -1,10 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
 import {
     getAllProjects,
-    getProjectPath,
     isStandaloneProject,
 } from "../utils/projectDataMapper";
 import HeroContainer from "../components/header/HeroContainer";
@@ -15,12 +15,41 @@ import { homeHeroConfig } from "../data/header/headerConfig";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
+const hoverPatterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
+
 const Home = () => {
     usePageTitle(null); // "Leana Le · Designer"
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const hoverPatterns = ["pattern-a", "pattern-b", "pattern-c", "pattern-d"];
+    const resolveProjectMediaPath = (projectId, src) => {
+        if (!src) return null;
+        if (src.startsWith("/") || src.startsWith("http")) return src;
+        return `/projects/${projectId}/${src.replace(/^\.?\//, "")}`;
+    };
+
+    const buildTaxonomyTags = (project, fallbackKind) => {
+        const sourceTags = Array.isArray(project.tags) ? project.tags : [];
+        const normalizedSourceTags = sourceTags
+            .map((tag) => String(tag).trim())
+            .filter(Boolean);
+
+        const candidates = [
+            ...normalizedSourceTags,
+            fallbackKind,
+            project.category,
+            project.year,
+        ];
+
+        const unique = [];
+        for (const tag of candidates) {
+            if (!tag) continue;
+            if (unique.includes(tag)) continue;
+            unique.push(tag);
+            if (unique.length === 3) break;
+        }
+        return unique;
+    };
 
     useEffect(() => {
         try {
@@ -64,16 +93,6 @@ const Home = () => {
                             }
                         }
                         return imgs.filter((img) => img && img.src);
-                    };
-
-                    // Shuffle helper
-                    const shuffle = (arr) => {
-                        const a = [...arr];
-                        for (let i = a.length - 1; i > 0; i--) {
-                            const j = Math.floor(Math.random() * (i + 1));
-                            [a[i], a[j]] = [a[j], a[i]];
-                        }
-                        return a;
                     };
 
                     // Build case-study cards by merging with projects.json metadata
@@ -126,6 +145,16 @@ const Home = () => {
                                         ],
                                     allImages: realImages,
                                     coverImage,
+                                    taxonomyTags: buildTaxonomyTags(
+                                        { ...projectMeta, ...caseStudyProject },
+                                        "Case Study",
+                                    ),
+                                    previewVideoSrc: resolveProjectMediaPath(
+                                        caseStudyProject.id,
+                                        projectMeta.previewVideo ??
+                                            projectMeta.previewVideoSrc ??
+                                            null,
+                                    ),
                                 };
                             },
                         ),
@@ -162,6 +191,19 @@ const Home = () => {
                                         data?.solution?.images?.[0]?.src ??
                                         data?.overview?.images?.[0]?.src ??
                                         null,
+                                    taxonomyTags: buildTaxonomyTags(
+                                        { ...entry, ...data },
+                                        "Design Project",
+                                    ),
+                                    previewVideoSrc: resolveProjectMediaPath(
+                                        entry.id,
+                                        data?.previewVideo ??
+                                            data?.previewVideoSrc ??
+                                            data?.video?.src ??
+                                            entry.previewVideo ??
+                                            entry.previewVideoSrc ??
+                                            null,
+                                    ),
                                 };
                             } catch {
                                 return null;
@@ -187,6 +229,11 @@ const Home = () => {
                                 ...(caseStudyProject.solution?.images || []),
                                 ...(caseStudyProject.overview?.images || []),
                             ].filter((img) => img && img.src),
+                            taxonomyTags: buildTaxonomyTags(
+                                caseStudyProject,
+                                "Case Study",
+                            ),
+                            previewVideoSrc: null,
                         }),
                     );
                     setProjects(projectsWithData);
@@ -194,7 +241,7 @@ const Home = () => {
                 });
         } catch (error) {
             console.error("Error loading case studies:", error);
-            setLoading(false);
+            queueMicrotask(() => setLoading(false));
         }
     }, []);
 

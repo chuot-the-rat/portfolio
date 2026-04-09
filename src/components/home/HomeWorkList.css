@@ -12,7 +12,7 @@
 
 /* ── Section wrapper ─────────────────────────────────────────────────── */
 .hw {
-  margin-top: var(--space-fluid-xl);
+  margin-top: var(--space-fluid-l);
 }
 
 /* ── Category tabs ───────────────────────────────────────────────────── */
@@ -36,7 +36,9 @@
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: color 0.18s ease, background 0.18s ease;
+  transition:
+    color var(--motion-dur-hover-fast) var(--motion-ease-smooth),
+    background var(--motion-dur-hover-fast) var(--motion-ease-smooth);
   line-height: 1;
 }
 
@@ -83,12 +85,12 @@
 .hw-item {
   border-bottom: 1px solid var(--color-border);
   transition:
-    opacity 0.25s ease,
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity var(--motion-dur-hover-base) var(--motion-ease-smooth),
+    transform var(--motion-dur-hover-slow) var(--motion-ease-editorial);
 }
 
 .hw-item--dimmed {
-  opacity: 0.28;
+  opacity: 0.6;
 }
 
 .hw-item--active {
@@ -112,7 +114,7 @@
   letter-spacing: var(--letter-spacing-label);
   color: var(--color-text-tertiary);
   opacity: 0.4;
-  transition: opacity 0.22s ease;
+  transition: opacity var(--motion-dur-hover-base) var(--motion-ease-smooth);
   padding-top: 2px; /* optical alignment with title cap-height */
   flex-shrink: 0;
 }
@@ -131,42 +133,55 @@
 
 .hw-item-title {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
-  font-weight: 500;
+  font-size: clamp(1.65rem, 2.6vw, 2.4rem);
+  font-weight: 520;
   letter-spacing: -0.02em;
   line-height: 1.1;
   color: var(--color-text);
-  transition: color 0.22s ease;
+  transition: color var(--motion-dur-hover-base) var(--motion-ease-smooth);
 }
 
 .hw-item-sub {
   font-size: var(--font-size-sm);
-  line-height: 1.4;
-  color: var(--color-text-tertiary);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  transition: color 0.22s ease;
+  transition: color var(--motion-dur-hover-base) var(--motion-ease-smooth);
 }
 
 .hw-item--active .hw-item-sub {
   color: var(--color-text-secondary);
 }
 
-/* ── Type badge ──────────────────────────────────────────────────────── */
-.hw-item-type {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-tertiary);
-  opacity: 0.55;
+/* ── Tag taxonomy ───────────────────────────────────────────────────── */
+.hw-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
   margin-top: var(--space-1);
-  transition: opacity 0.22s ease;
 }
 
-.hw-item--active .hw-item-type {
+.hw-item-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--color-text-secondary);
+  opacity: 0.78;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 2px 8px;
+  line-height: 1.2;
+  transition:
+    opacity var(--motion-dur-hover-base) var(--motion-ease-smooth),
+    border-color var(--motion-dur-hover-base) var(--motion-ease-smooth);
+}
+
+.hw-item--active .hw-item-tag {
   opacity: 0.8;
+  border-color: color-mix(in srgb, var(--color-text-tertiary) 52%, var(--color-border));
 }
 
 /* ── Year ────────────────────────────────────────────────────────────── */
@@ -175,10 +190,10 @@
   font-size: var(--font-size-xs);
   letter-spacing: 0.06em;
   color: var(--color-text-tertiary);
-  opacity: 0.45;
+  opacity: 0.62;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: opacity 0.22s ease;
+  transition: opacity var(--motion-dur-hover-base) var(--motion-ease-smooth);
 }
 
 .hw-item--active .hw-item-year {
@@ -198,7 +213,7 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--color-bg-secondary);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   border: 1px solid var(--color-border);
 }
 
@@ -207,6 +222,40 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition:
+    opacity var(--motion-dur-hover-slow) var(--motion-ease-editorial),
+    transform var(--motion-dur-reveal-slow) var(--motion-ease-editorial);
+}
+
+.hw-preview-media {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.hw-preview-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity var(--motion-dur-hover-slow) var(--motion-ease-editorial);
+}
+
+.hw-preview-media--has-video .hw-preview-video {
+  opacity: 0;
+}
+
+.hw-preview:hover .hw-preview-media--has-video .hw-preview-video {
+  opacity: 1;
+}
+
+.hw-preview:hover .hw-preview-media--has-video .hw-preview-img {
+  opacity: 0.32;
+  transform: scale(1.02);
 }
 
 /* ── Empty state ─────────────────────────────────────────────────────── */

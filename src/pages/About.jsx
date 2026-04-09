@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { usePageTitle } from "../hooks/usePageTitle";
 import NameCycle from "../components/about/NameCycle";
@@ -60,7 +61,7 @@ export default function About() {
                             <NameCycle />
                         </h1>
                         <p className="about-hero-sub">
-                            Product designer who builds. Recovering hospitality worker.
+                            Product designer who bridges research, interaction, and front-end build.
                         </p>
                     </motion.section>
 
@@ -71,18 +72,16 @@ export default function About() {
                             <span className="about-row-label">Intro</span>
                             <div className="about-row-content">
                                 <p className="about-para">
-                                    I spent <em className="about-em">six years in hospitality</em>, and what I
-                                    loved most was the craft of making someone's experience
-                                    feel easy, warm, and just right. That instinct carried
-                                    straight into design — I care about the{" "}
-                                    <em className="about-em">person on the other side of the screen</em>{" "}
-                                    the same way I cared about every guest across the counter.
+                                    I spent <em className="about-em">six years in hospitality</em>, where I learned
+                                    to make complex moments feel easy, warm, and clear. That
+                                    instinct carried straight into design — I still optimize
+                                    for the{" "}
+                                    <em className="about-em">person on the other side of the screen</em> first.
                                 </p>
                                 <p className="about-para">
-                                    Now I'm a <em className="about-em">product designer with front-end chops</em> —
-                                    I can take a design from first-frame research all the way
-                                    to shipped code. Currently finishing my Diploma in
-                                    Digital Design &amp; Development at BCIT.
+                                    I'm a <em className="about-em">product designer with front-end chops</em>:
+                                    from early research to shipped code. I'm currently finishing
+                                    my Diploma in Digital Design &amp; Development at BCIT.
                                 </p>
                             </div>
                         </motion.div>
