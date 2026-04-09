@@ -15,6 +15,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { usePassbook } from "./PassbookProvider";
+import { PASSBOOK_ROUTE_ORDER, PASSBOOK_ROUTES } from "../../data/passbook/passbookConfig";
 import "./Passbook.css";
 
 export default function PassbookPrintCard() {
@@ -22,6 +23,7 @@ export default function PassbookPrintCard() {
         stampCount,
         totalRoutes,
         openDrawer,
+        isStamped,
         isNewlyIssued,
         clearNewlyIssued,
     } = usePassbook();
@@ -40,7 +42,24 @@ export default function PassbookPrintCard() {
         }
     }, [isNewlyIssued, clearNewlyIssued]);
 
-    const CARD_DELAY = 0.55;
+    const isPrimaryIssue = isNewlyIssued;
+    const profile = isPrimaryIssue
+        ? {
+              delay: 0.5,
+              feedDuration: 0.76,
+              tearDuration: 0.4,
+              contentDuration: 0.3,
+              contentDelay: 0.45,
+              tearDelay: 0.65,
+          }
+        : {
+              delay: 0.05,
+              feedDuration: 0.42,
+              tearDuration: 0.28,
+              contentDuration: 0.24,
+              contentDelay: 0.18,
+              tearDelay: 0.26,
+          };
 
     const cardVariants = {
         initial: shouldAnimate
@@ -51,9 +70,9 @@ export default function PassbookPrintCard() {
             opacity: 1,
             transition: {
                 clipPath: {
-                    duration: 0.72,
+                    duration: profile.feedDuration,
                     ease: [0.16, 1, 0.3, 1],
-                    delay: CARD_DELAY,
+                    delay: profile.delay,
                 },
             },
         },
@@ -64,8 +83,8 @@ export default function PassbookPrintCard() {
         animate: {
             opacity: 1,
             transition: {
-                duration: 0.3,
-                delay: shouldAnimate ? CARD_DELAY + 0.45 : 0,
+                duration: profile.contentDuration,
+                delay: shouldAnimate ? profile.delay + profile.contentDelay : 0,
             },
         },
     };
@@ -80,13 +99,13 @@ export default function PassbookPrintCard() {
             opacity: 1,
             transition: {
                 scaleX: {
-                    duration: 0.4,
+                    duration: profile.tearDuration,
                     ease: "easeOut",
-                    delay: shouldAnimate ? CARD_DELAY + 0.65 : 0,
+                    delay: shouldAnimate ? profile.delay + profile.tearDelay : 0,
                 },
                 opacity: {
                     duration: 0.15,
-                    delay: shouldAnimate ? CARD_DELAY + 0.65 : 0,
+                    delay: shouldAnimate ? profile.delay + profile.tearDelay : 0,
                 },
             },
         },
@@ -126,15 +145,28 @@ export default function PassbookPrintCard() {
                     {/* Text block */}
                     <span className="pb-print-card__body">
                         <span className="pb-print-card__eyebrow">
-                            {isNewlyIssued ? "Issued" : "Project Passbook"}
+                            {isNewlyIssued ? "Issuance active" : "Archive passbook"}
                         </span>
                         <span className="pb-print-card__label">
                             {allDone
-                                ? "All routes complete."
-                                : "Collect stamps as you explore."}
+                                ? "All route seals logged."
+                                : "Press to open and log route seals."}
                         </span>
                         <span className="pb-print-card__sub">
                             {stampCount} / {totalRoutes} routes stamped
+                        </span>
+                        <span className="pb-print-card__slots" aria-hidden="true">
+                            {PASSBOOK_ROUTE_ORDER.map((id) => {
+                                const stamped = isStamped(id);
+                                const route = PASSBOOK_ROUTES[id];
+                                return (
+                                    <span
+                                        key={id}
+                                        className={`pb-print-slot-dot${stamped ? " is-filled" : ""}`}
+                                        style={{ "--pb-accent-hue": route?.accentHue ?? 240 }}
+                                    />
+                                );
+                            })}
                         </span>
                     </span>
 

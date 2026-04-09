@@ -51,7 +51,7 @@ export default function PassbookDock() {
                 <span className="pb-dock__progress">
                     {stampCount}/{totalRoutes}
                 </span>
-                <span aria-hidden="true">Passbook</span>
+                <span aria-hidden="true">Archive Pass</span>
             </motion.button>
         </motion.div>
     );

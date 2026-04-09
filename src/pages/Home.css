@@ -22,10 +22,43 @@
 }
 
 .home-main {
-    flex: 1;
-    padding-top: var(--space-12);
-    padding-bottom: var(--space-24);
-    --home-section-gap: clamp(8rem, 10vw, 12rem);
+    --home-section-gap: clamp(5.5rem, 8vw, 8.5rem);
+}
+
+/* ── Hero + passbook rail layout ────────────────────────────────────────── */
+
+.home-hero-passbook {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(320px, 28vw, 380px);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+    margin-bottom: var(--home-section-gap);
+    position: relative;
+    z-index: 1;
+}
+
+.home-hero-passbook::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(-1 * var(--space-4));
+    height: 1px;
+    background: color-mix(in srgb, var(--color-border) 70%, transparent);
+    pointer-events: none;
+}
+
+.home-passbook-rail {
+    position: sticky;
+    top: calc(76px + var(--space-5));
+    align-self: start;
+    padding-top: clamp(var(--space-6), 5vw, var(--space-10));
+}
+
+.home-passbook-rail .pb-print-wrapper {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* ── Home hero overrides ─────────────────────────────────────────────────── */
@@ -37,7 +70,6 @@
     --hs-headline-leading:  0.92;
     --hs-headline-tracking: -0.04em;
     --hs-subline-size:      clamp(1.05rem, 1.5vw, 1.28rem);
-    margin-bottom: var(--home-section-gap);
     position: relative;
     z-index: 1;
 }
@@ -59,7 +91,7 @@
     background-image:
         radial-gradient(circle, var(--color-border) 1px, transparent 1px);
     background-size: 28px 28px;
-    opacity: 0.55;
+    opacity: 0.38;
     pointer-events: none;
     z-index: 0;
 }
@@ -71,7 +103,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 40%;
+    height: 32%;
     background: linear-gradient(to bottom, transparent, var(--color-bg));
     pointer-events: none;
     z-index: 1;
@@ -79,117 +111,8 @@
 
 /* ── Marquee belt ────────────────────────────────────────────────────────── */
 
-/* Give the marquee some vertical breathing room from the hero */
-.home-main .pb-print-wrapper {
-    margin-bottom: var(--home-section-gap);
-}
-
 .home-main .mq {
-    margin-block: 0 var(--home-section-gap);
-}
-
-/* ── Recruiter proof strip ──────────────────────────────────────────────── */
-
-.home-proof-strip {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--space-6);
-    align-items: center;
-    margin-top: calc(-1 * var(--space-16));
-    margin-bottom: var(--space-16);
-    padding: var(--space-5);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--color-bg) 88%, var(--color-bg-secondary));
-    position: relative;
-    overflow: hidden;
-}
-
-.home-proof-strip::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        color-mix(in srgb, var(--color-accent-vivid) 36%, var(--color-border)),
-        transparent
-    );
-}
-
-.home-proof-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: var(--space-3);
-    margin: 0;
-    padding: 0;
-}
-
-.home-proof-item {
-    min-width: 0;
-    padding: var(--space-3);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-base);
-    background: var(--color-bg);
-    transition:
-        border-color var(--motion-dur-hover-fast) var(--motion-ease-smooth),
-        transform var(--motion-dur-hover-base) var(--motion-ease-editorial);
-}
-
-.home-proof-item:hover {
-    border-color: color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
-    transform: translateY(-1px);
-}
-
-.home-proof-label {
-    display: block;
-    margin-bottom: var(--space-2);
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-tertiary);
-}
-
-.home-proof-value {
-    font-family: var(--font-sans);
-    font-size: var(--font-size-sm);
-    line-height: 1.4;
-    color: var(--color-text-secondary);
-}
-
-.home-proof-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-3) var(--space-6);
-    border-radius: var(--radius-full);
-    border: 1px solid transparent;
-    background: var(--color-accent);
-    color: var(--color-bg);
-    text-decoration: none;
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    transition:
-        opacity var(--motion-dur-hover-fast) var(--motion-ease-smooth),
-        transform var(--motion-dur-hover-base) var(--motion-ease-editorial);
-}
-
-.home-proof-cta:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
-}
-
-.home-proof-cta:focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: var(--focus-offset);
+    margin-block: 0 clamp(4rem, 6vw, 6rem);
 }
 
 /* ── Loading ─────────────────────────────────────────────────────────────── */
@@ -212,8 +135,8 @@
 /* ── Footer ──────────────────────────────────────────────────────────────── */
 
 .home-footer {
-    margin-top: clamp(6rem, 12vw, 10rem);
-    padding: clamp(4rem, 8vw, 7rem) 0 var(--space-12);
+    margin-top: clamp(4rem, 9vw, 7rem);
+    padding: clamp(3rem, 6vw, 5rem) 0 var(--space-12);
     border-top: 1px solid var(--color-border);
 }
 
@@ -360,44 +283,37 @@
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+    .home-hero-passbook {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        margin-bottom: var(--space-10);
+    }
+
+    .home-passbook-rail {
+        position: static;
+    }
+
+    .home-passbook-rail .pb-print-wrapper {
+        width: 100%;
+    }
+
     .home-main {
-        padding-top: var(--space-8);
+        padding-top: var(--space-6);
         padding-bottom: var(--space-12);
     }
 
     .home-hero-grid {
         --hs-headline-size: clamp(2.9rem, 12vw, 4.6rem);
         --hs-subline-size: var(--font-size-base);
-        margin-bottom: var(--space-12);
+        margin-bottom: 0;
     }
 
     .home-hero-grid .hs-text__subline {
         max-width: 36ch;
     }
 
-    .home-proof-strip {
-        grid-template-columns: 1fr;
-        margin-top: calc(-1 * var(--space-10));
-        padding: var(--space-4);
-        gap: var(--space-4);
-    }
-
-    .home-proof-list {
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-2);
-    }
-
-    .home-proof-item {
-        padding: var(--space-2) var(--space-3);
-    }
-
-    .home-proof-value {
-        font-size: var(--font-size-xs);
-    }
-
-    .home-proof-cta {
-        width: 100%;
-        padding: var(--space-3) var(--space-4);
+    .home-hero-passbook::after {
+        bottom: calc(-1 * var(--space-3));
     }
 
     .footer-body {
@@ -427,24 +343,22 @@
     }
 }
 
+@media (max-width: 1100px) and (min-width: 769px) {
+    .home-hero-passbook {
+        grid-template-columns: minmax(0, 1fr) clamp(280px, 31vw, 332px);
+        gap: clamp(1.25rem, 2vw, 2rem);
+    }
+
+    .home-passbook-rail {
+        top: calc(76px + var(--space-4));
+        padding-top: clamp(var(--space-5), 4vw, var(--space-7));
+    }
+}
+
 @media (max-width: 480px) {
     .home-hero-grid {
         --hs-headline-size: clamp(2.4rem, 13vw, 3.3rem);
         --hs-headline-leading: 0.95;
-    }
-
-    .home-proof-strip {
-        margin-top: calc(-1 * var(--space-8));
-        padding: var(--space-3);
-    }
-
-    .home-proof-list {
-        grid-template-columns: 1fr;
-    }
-
-    .home-proof-label {
-        font-size: 9px;
-        margin-bottom: 2px;
     }
 
     .footer-display {

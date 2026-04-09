@@ -54,6 +54,11 @@ export default function ProjectCheckpoint({ projectId }) {
                 <span className="pb-checkpoint__route">
                     {route.routeCode} — {route.lineLabel}
                 </span>
+                {route.microCues?.length > 0 && (
+                    <span className="pb-checkpoint__micro" aria-hidden="true">
+                        + {route.microCues[0]}
+                    </span>
+                )}
             </div>
 
             {/* Right: action */}
@@ -88,7 +93,7 @@ export default function ProjectCheckpoint({ projectId }) {
                         whileTap={{ scale: 0.88 }}
                         transition={{ duration: 0.08 }}
                     >
-                        Collect stamp
+                        Press to stamp
                     </motion.button>
                 )}
             </AnimatePresence>

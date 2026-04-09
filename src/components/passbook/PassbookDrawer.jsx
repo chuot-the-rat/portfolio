@@ -71,9 +71,15 @@ export default function PassbookDrawer() {
         typeof window !== "undefined" && window.innerWidth <= 600;
 
     const drawerVariants = {
-        hidden:  isMobile ? { y: "100%" }    : { x: "100%" },
-        visible: isMobile ? { y: 0 }          : { x: 0 },
-        exit:    isMobile ? { y: "100%" }    : { x: "100%" },
+        hidden: isMobile
+            ? { y: "100%", opacity: 0.6 }
+            : { opacity: 0, scale: 0.94, y: 10, x: 10 },
+        visible: isMobile
+            ? { y: 0, opacity: 1 }
+            : { opacity: 1, scale: 1, y: 0 },
+        exit: isMobile
+            ? { y: "100%", opacity: 0.6 }
+            : { opacity: 0, scale: 0.94, y: 10, x: 10 },
     };
 
     return (
@@ -101,8 +107,11 @@ export default function PassbookDrawer() {
                         initial="hidden"
                         animate="visible"
                         exit="exit"
+                        style={{
+                            transformOrigin: isMobile ? "50% 100%" : "100% 0%",
+                        }}
                         transition={{
-                            duration: 0.36,
+                            duration: isMobile ? 0.32 : 0.34,
                             ease: [0.16, 1, 0.3, 1],
                         }}
                     >
@@ -129,7 +138,7 @@ export default function PassbookDrawer() {
                         <div className="pb-drawer__summary">
                             <div className="pb-drawer__progress-label">
                                 <span className="pb-drawer__progress-text">
-                                    Routes stamped
+                                    Route seals logged
                                 </span>
                                 <motion.span
                                     key={stampCount}
@@ -146,6 +155,20 @@ export default function PassbookDrawer() {
                                     className="pb-drawer__progress-fill"
                                     style={{ width: `${fillPct}%` }}
                                 />
+                            </div>
+                            <div className="pb-drawer__slot-map" aria-label="Route slot map">
+                                {PASSBOOK_ROUTE_ORDER.map((id) => {
+                                    const stamped = isStamped(id);
+                                    const route = PASSBOOK_ROUTES[id];
+                                    return (
+                                        <span
+                                            key={`slot-${id}`}
+                                            className={`pb-drawer__slot${stamped ? " is-filled" : ""}`}
+                                            style={{ "--pb-accent-hue": route?.accentHue ?? 240 }}
+                                            title={`${route?.routeCode} ${stamped ? "sealed" : "open slot"}`}
+                                        />
+                                    );
+                                })}
                             </div>
                         </div>
 
@@ -199,8 +222,8 @@ export default function PassbookDrawer() {
                         <div className="pb-drawer__footer">
                             <p className="pb-drawer__footer-note">
                                 {stampCount === totalRoutes
-                                    ? "All routes completed."
-                                    : "Stamps collected at the end of each project."}
+                                    ? "Archive complete. All route seals registered."
+                                    : "Collect one route seal at the end of each project."}
                             </p>
                         </div>
                     </motion.aside>

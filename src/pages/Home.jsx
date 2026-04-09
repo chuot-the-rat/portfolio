@@ -60,13 +60,48 @@ const HOME_SCHEMA = [
         ],
     },
 ];
-const proofItems = [
-    { label: "Target Role", value: "Product Designer (UX/UI)" },
-    { label: "Location", value: "Vancouver, BC (PST)" },
-    { label: "Availability", value: "Open to full-time + contract" },
-    { label: "Graduation", value: "BCIT D3 • 2026" },
-    { label: "Strengths", value: "Research, IA, Prototyping, Frontend" },
+
+const HOME_IMAGE_SECTIONS = [
+    "overview",
+    "problem",
+    "solution",
+    "research",
+    "personas",
+    "userFlows",
+    "hifi",
+    "prototype",
+    "styleGuide",
+    "iterations",
 ];
+
+const collectAllImages = (data) => {
+    const imgs = [];
+    for (const key of HOME_IMAGE_SECTIONS) {
+        const sec = data?.[key];
+        if (!sec) continue;
+        if (Array.isArray(sec.images)) {
+            sec.images.forEach((img) => imgs.push(img));
+        }
+        if (Array.isArray(sec.screens)) {
+            sec.screens.forEach((screen) => {
+                if (screen?.image) {
+                    imgs.push({ src: screen.image, alt: screen.name });
+                }
+            });
+        }
+    }
+    return imgs.filter((img) => img && img.src);
+};
+
+const safeFetchJson = async (url, options) => {
+    try {
+        const res = await fetch(url, options);
+        if (!res.ok) return null;
+        return await res.json();
+    } catch {
+        return null;
+    }
+};
 
 const Home = () => {
     usePageTitle(null, {
@@ -120,236 +155,159 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        try {
-            // Load case-study projects from centralized JSON
-            const caseStudyProjects = getAllProjects();
+        const controller = new AbortController();
+        let alive = true;
 
-            // Load projects.json for folder paths, thumbnails, and standalone entries
-            fetch("/projects.json")
-                .then((res) => res.json())
-                .then(async (projectsList) => {
-                    // Helper: collect all images from a project's data.json
-                    const collectAllImages = (data) => {
-                        const imgs = [];
-                        const sections = [
-                            "overview",
-                            "problem",
-                            "solution",
-                            "research",
-                            "personas",
-                            "userFlows",
-                            "hifi",
-                            "prototype",
-                            "styleGuide",
-                            "iterations",
-                        ];
-                        for (const key of sections) {
-                            const sec = data[key];
-                            if (!sec) continue;
-                            if (Array.isArray(sec.images)) {
-                                sec.images.forEach((img) => imgs.push(img));
-                            }
-                            // hifi screens with individual images
-                            if (Array.isArray(sec.screens)) {
-                                sec.screens.forEach((s) => {
-                                    if (s.image)
-                                        imgs.push({
-                                            src: s.image,
-                                            alt: s.name,
-                                        });
-                                });
-                            }
-                        }
-                        return imgs.filter((img) => img && img.src);
-                    };
+        const loadProjects = async () => {
+            try {
+                const caseStudyProjects = getAllProjects();
+                const projectsList =
+                    (await safeFetchJson("/projects.json", {
+                        signal: controller.signal,
+                    })) || [];
 
-                    // Build case-study cards by merging with projects.json metadata
-                    // Also fetch supplemental data.json for real images
-                    const caseStudyCards = await Promise.all(
-                        caseStudyProjects.map(
-                            async (caseStudyProject, index) => {
-                                const projectMeta =
-                                    projectsList.find(
-                                        (p) => p.id === caseStudyProject.id,
-                                    ) || {};
+                const caseStudyCards = await Promise.all(
+                    caseStudyProjects.map(async (caseStudyProject, index) => {
+                        const projectMeta =
+                            projectsList.find((p) => p.id === caseStudyProject.id) || {};
 
-                                // Fetch supplemental data.json for real image paths
-                                let realImages = [];
-                                let coverImage = null;
-                                try {
-                                    const supRes = await fetch(
-                                        `/projects/${caseStudyProject.id}/data.json`,
-                                    );
-                                    if (supRes.ok) {
-                                        const supData = await supRes.json();
-                                        realImages = collectAllImages(supData);
-                                        // Prefer a finished-looking cover: hifi > solution > overview
-                                        coverImage =
-                                            supData?.hifi?.images?.[0]?.src ??
-                                            supData?.solution?.images?.[0]?.src ??
-                                            supData?.overview?.images?.[0]?.src ??
-                                            null;
-                                    }
-                                } catch {
-                                    // No supplemental data — use mapper data
-                                }
+                        const supData = await safeFetchJson(
+                            `/projects/${caseStudyProject.id}/data.json`,
+                            { signal: controller.signal },
+                        );
 
-                                // Fall back to mapper images if no supplemental data
-                                if (realImages.length === 0) {
-                                    realImages = [
-                                        ...(caseStudyProject.solution?.images ||
-                                            []),
-                                        ...(caseStudyProject.overview?.images ||
-                                            []),
-                                    ].filter((img) => img && img.src);
-                                }
+                        let realImages = supData ? collectAllImages(supData) : [];
+                        const coverImage =
+                            supData?.hifi?.images?.[0]?.src ??
+                            supData?.solution?.images?.[0]?.src ??
+                            supData?.overview?.images?.[0]?.src ??
+                            null;
 
-                                return {
-                                    ...projectMeta,
-                                    ...caseStudyProject,
-                                    hoverPattern:
-                                        hoverPatterns[
-                                            index % hoverPatterns.length
-                                        ],
-                                    allImages: realImages,
-                                    coverImage,
-                                    taxonomyTags: buildTaxonomyTags(
-                                        { ...projectMeta, ...caseStudyProject },
-                                        "Case Study",
-                                    ),
-                                    previewVideoSrc: resolveProjectMediaPath(
-                                        caseStudyProject.id,
-                                        projectMeta.previewVideo ??
-                                            projectMeta.previewVideoSrc ??
-                                            null,
-                                    ),
-                                };
-                            },
-                        ),
-                    );
-
-                    // Build standalone project cards from their own data.json files
-                    const standaloneEntries = projectsList.filter((p) =>
-                        isStandaloneProject(p.id),
-                    );
-
-                    const standaloneCards = await Promise.all(
-                        standaloneEntries.map(async (entry, i) => {
-                            try {
-                                const res = await fetch(
-                                    `/projects/${entry.id}/data.json`,
-                                );
-                                if (!res.ok) return null;
-                                const data = await res.json();
-                                const idx = caseStudyCards.length + i;
-                                return {
-                                    ...entry,
-                                    ...data,
-                                    hoverPattern:
-                                        hoverPatterns[
-                                            idx % hoverPatterns.length
-                                        ],
-                                    allImages: [
-                                        ...(data.overview?.images || []),
-                                        ...(data.solution?.images || []),
-                                        ...(data.styleGuide?.images || []),
-                                    ].filter((img) => img && img.src),
-                                    coverImage:
-                                        data?.hifi?.images?.[0]?.src ??
-                                        data?.solution?.images?.[0]?.src ??
-                                        data?.overview?.images?.[0]?.src ??
-                                        null,
-                                    taxonomyTags: buildTaxonomyTags(
-                                        { ...entry, ...data },
-                                        "Design Project",
-                                    ),
-                                    previewVideoSrc: resolveProjectMediaPath(
-                                        entry.id,
-                                        data?.previewVideo ??
-                                            data?.previewVideoSrc ??
-                                            data?.video?.src ??
-                                            entry.previewVideo ??
-                                            entry.previewVideoSrc ??
-                                            null,
-                                    ),
-                                };
-                            } catch {
-                                return null;
-                            }
-                        }),
-                    );
-
-                    setProjects([
-                        ...caseStudyCards,
-                        ...standaloneCards.filter(Boolean),
-                    ]);
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    console.error("Error loading projects.json:", error);
-                    // Fall back to just case study data
-                    const projectsWithData = caseStudyProjects.map(
-                        (caseStudyProject, index) => ({
-                            ...caseStudyProject,
-                            hoverPattern:
-                                hoverPatterns[index % hoverPatterns.length],
-                            allImages: [
+                        if (realImages.length === 0) {
+                            realImages = [
                                 ...(caseStudyProject.solution?.images || []),
                                 ...(caseStudyProject.overview?.images || []),
-                            ].filter((img) => img && img.src),
+                            ].filter((img) => img && img.src);
+                        }
+
+                        return {
+                            ...projectMeta,
+                            ...caseStudyProject,
+                            hoverPattern: hoverPatterns[index % hoverPatterns.length],
+                            allImages: realImages,
+                            coverImage,
                             taxonomyTags: buildTaxonomyTags(
-                                caseStudyProject,
+                                { ...projectMeta, ...caseStudyProject },
                                 "Case Study",
                             ),
-                            previewVideoSrc: null,
+                            previewVideoSrc: resolveProjectMediaPath(
+                                caseStudyProject.id,
+                                projectMeta.previewVideo ?? projectMeta.previewVideoSrc ?? null,
+                            ),
+                        };
+                    }),
+                );
+
+                const standaloneEntries = projectsList.filter((p) =>
+                    isStandaloneProject(p.id),
+                );
+
+                const standaloneCards = (
+                    await Promise.all(
+                        standaloneEntries.map(async (entry, i) => {
+                            const data = await safeFetchJson(
+                                `/projects/${entry.id}/data.json`,
+                                { signal: controller.signal },
+                            );
+                            if (!data) return null;
+
+                            const idx = caseStudyCards.length + i;
+                            return {
+                                ...entry,
+                                ...data,
+                                hoverPattern: hoverPatterns[idx % hoverPatterns.length],
+                                allImages: [
+                                    ...(data.overview?.images || []),
+                                    ...(data.solution?.images || []),
+                                    ...(data.styleGuide?.images || []),
+                                ].filter((img) => img && img.src),
+                                coverImage:
+                                    data?.hifi?.images?.[0]?.src ??
+                                    data?.solution?.images?.[0]?.src ??
+                                    data?.overview?.images?.[0]?.src ??
+                                    null,
+                                taxonomyTags: buildTaxonomyTags(
+                                    { ...entry, ...data },
+                                    "Design Project",
+                                ),
+                                previewVideoSrc: resolveProjectMediaPath(
+                                    entry.id,
+                                    data?.previewVideo ??
+                                        data?.previewVideoSrc ??
+                                        data?.video?.src ??
+                                        entry.previewVideo ??
+                                        entry.previewVideoSrc ??
+                                        null,
+                                ),
+                            };
                         }),
-                    );
-                    setProjects(projectsWithData);
-                    setLoading(false);
-                });
-        } catch (error) {
-            console.error("Error loading case studies:", error);
-            queueMicrotask(() => setLoading(false));
-        }
+                    )
+                ).filter(Boolean);
+
+                if (!alive) return;
+                setProjects([...caseStudyCards, ...standaloneCards]);
+                setLoading(false);
+            } catch (error) {
+                if (error?.name === "AbortError") return;
+                console.error("Error loading homepage projects:", error);
+
+                if (!alive) return;
+                const fallbackProjects = getAllProjects().map(
+                    (caseStudyProject, index) => ({
+                        ...caseStudyProject,
+                        hoverPattern: hoverPatterns[index % hoverPatterns.length],
+                        allImages: [
+                            ...(caseStudyProject.solution?.images || []),
+                            ...(caseStudyProject.overview?.images || []),
+                        ].filter((img) => img && img.src),
+                        taxonomyTags: buildTaxonomyTags(caseStudyProject, "Case Study"),
+                        previewVideoSrc: null,
+                    }),
+                );
+                setProjects(fallbackProjects);
+                setLoading(false);
+            }
+        };
+
+        loadProjects();
+
+        return () => {
+            alive = false;
+            controller.abort();
+        };
     }, []);
 
     return (
         <div className="home">
-            <main className="home-main">
+            <main className="home-main page-main">
                 <div className="container">
-                    {/* Hero Section — new modular system
-                        To revert: replace <HeroContainer> with <HeroSection /> */}
-                    <HeroContainer
-                        config={homeHeroConfig}
-                        className="home-hero-grid"
-                    />
+                    <section className="home-hero-passbook" aria-label="Hero and passbook issuance">
+                        {/* Hero Section — new modular system
+                            To revert: replace <HeroContainer> with <HeroSection /> */}
+                        <HeroContainer
+                            config={homeHeroConfig}
+                            className="home-hero-grid"
+                        />
 
-                    <section className="home-proof-strip" aria-label="Recruiter quick facts">
-                        <ul className="home-proof-list">
-                            {proofItems.map((item) => (
-                                <li key={item.label} className="home-proof-item">
-                                    <span className="home-proof-label">{item.label}</span>
-                                    <span className="home-proof-value">{item.value}</span>
-                                </li>
-                            ))}
-                        </ul>
-                        <a
-                            href="mailto:leanale003@gmail.com?subject=Product%20Design%20Role%20at%20%5BCompany%5D"
-                            className="home-proof-cta"
-                        >
-                            Email role details ↗
-                        </a>
+                        {/* Passbook issuance rail — desktop right, mobile below hero */}
+                        {showEnhancements ? (
+                            <aside className="home-passbook-rail" aria-label="Passbook issuance rail">
+                                <PassbookPrintCard />
+                            </aside>
+                        ) : null}
                     </section>
 
-                    {showEnhancements ? (
-                        <>
-                            {/* Passbook print card — issued once, persists on home */}
-                            <PassbookPrintCard />
-
-                            {/* Marquee ticker — editorial skill belt */}
-                            <MarqueeTicker />
-                        </>
-                    ) : null}
+                    {showEnhancements ? <MarqueeTicker /> : null}
 
                     {/* Work list — category tabs + Sharleen-style rows */}
                     {loading ? (

@@ -57,13 +57,13 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-2) var(--space-4);
-    background: var(--color-text);
-    border: 1px solid var(--color-text);
-    border-radius: var(--radius-full);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.10);
+    padding: var(--space-2) var(--space-4) calc(var(--space-2) + 1px);
+    background: color-mix(in srgb, var(--pb-surface) 92%, var(--pb-surface-alt));
+    border: 1px solid var(--pb-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08);
     cursor: pointer;
-    color: var(--color-bg);
+    color: var(--pb-ink);
     font-family: var(--pb-font-code);
     font-size: var(--font-size-xs);
     letter-spacing: var(--letter-spacing-micro);
@@ -79,10 +79,10 @@
 }
 
 .pb-dock__btn:hover {
-    background: var(--color-text-secondary);
-    border-color: var(--color-text-secondary);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.22), 0 2px 6px rgba(0,0,0,0.12);
-    color: var(--color-bg);
+    background: color-mix(in srgb, var(--pb-surface-alt) 88%, var(--pb-surface));
+    border-color: color-mix(in srgb, var(--pb-ink-mid) 52%, var(--pb-border));
+    box-shadow: 0 12px 30px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.10);
+    color: var(--pb-ink);
 }
 
 .pb-dock__btn:focus-visible {
@@ -130,7 +130,7 @@
     position: fixed;
     inset: 0;
     z-index: 110;
-    background: rgba(0, 0, 0, 0.28);
+    background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
 }
@@ -138,16 +138,17 @@
 /* Drawer panel */
 .pb-drawer {
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    top: calc(76px + var(--space-4));
+    right: var(--space-4);
+    bottom: var(--space-5);
     z-index: 120;
-    width: min(360px, 100vw);
+    width: min(420px, calc(100vw - var(--space-8)));
     display: flex;
     flex-direction: column;
-    background: var(--pb-surface);
-    border-left: 1px solid var(--pb-border);
-    box-shadow: var(--pb-shadow);
+    background: color-mix(in srgb, var(--pb-surface) 96%, var(--pb-surface-alt));
+    border: 1px solid var(--pb-border);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.16), 0 4px 14px rgba(0,0,0,0.08);
     overflow: hidden;
 }
 
@@ -250,6 +251,28 @@
     background: var(--pb-ink);
     border-radius: var(--radius-full);
     transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pb-drawer__slot-map {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+.pb-drawer__slot {
+    height: 12px;
+    border-radius: var(--radius-full);
+    border: 1px dashed color-mix(in srgb, var(--pb-border) 50%, var(--pb-ink-dim));
+    background: color-mix(in srgb, var(--pb-surface-alt) 92%, transparent);
+    opacity: 0.72;
+}
+
+.pb-drawer__slot.is-filled {
+    border-style: solid;
+    border-color: hsl(var(--pb-accent-hue) 54% 48%);
+    background: hsl(var(--pb-accent-hue) 64% 52% / 0.18);
+    opacity: 1;
 }
 
 /* Route list */
@@ -381,8 +404,8 @@
         background 0.22s ease,
         border-color 0.22s ease,
         box-shadow 0.22s ease;
-    margin-top: var(--space-8);
-    margin-bottom: var(--space-6);
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .pb-print-card:hover {
@@ -449,6 +472,29 @@
     font-variant-numeric: tabular-nums;
 }
 
+.pb-print-card__slots {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: var(--space-2);
+    width: min(220px, 100%);
+}
+
+.pb-print-slot-dot {
+    height: 8px;
+    border-radius: var(--radius-full);
+    border: 1px dashed color-mix(in srgb, var(--pb-border) 52%, var(--pb-ink-dim));
+    background: transparent;
+    opacity: 0.68;
+}
+
+.pb-print-slot-dot.is-filled {
+    border-style: solid;
+    border-color: hsl(var(--pb-accent-hue) 54% 48%);
+    background: hsl(var(--pb-accent-hue) 64% 52% / 0.2);
+    opacity: 1;
+}
+
 /* Right: arrow */
 .pb-print-card__arrow {
     margin-left: auto;
@@ -513,6 +559,15 @@
     margin-top: var(--space-1);
 }
 
+.pb-checkpoint__micro {
+    font-family: var(--pb-font-code);
+    font-size: 10px;
+    letter-spacing: var(--letter-spacing-micro);
+    text-transform: uppercase;
+    color: var(--pb-ink-dim);
+    opacity: 0.65;
+}
+
 .pb-checkpoint__label {
     font-family: var(--pb-font-display);
     font-size: clamp(1.5rem, 3vw, 2.25rem);
@@ -537,15 +592,22 @@
     letter-spacing: var(--letter-spacing-micro);
     text-transform: uppercase;
     cursor: pointer;
+    box-shadow: 0 3px 0 color-mix(in srgb, var(--pb-ink) 78%, transparent);
     transition:
         opacity 0.18s ease,
-        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.2s ease;
     white-space: nowrap;
     flex-shrink: 0;
 }
 
 .pb-checkpoint__action:hover {
     opacity: 0.82;
+}
+
+.pb-checkpoint__action:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--pb-ink) 68%, transparent);
 }
 
 /* press handled by Framer Motion whileTap — no CSS override needed */
@@ -631,13 +693,18 @@
     align-items: flex-start;
     width: fit-content;
     max-width: 100%;
-    margin-top: var(--space-8);
-    margin-bottom: var(--space-6);
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: var(--space-4);
+    border: 1px solid color-mix(in srgb, var(--pb-border) 86%, transparent);
+    border-radius: var(--radius-xl);
+    background: color-mix(in srgb, var(--pb-surface) 96%, var(--pb-surface-alt));
+    box-shadow: 0 8px 22px rgba(0,0,0,0.09);
 }
 
 .pb-print-slot {
     width: 100%;
-    height: 8px;
+    height: 9px;
     background: color-mix(
         in srgb,
         var(--pb-border, var(--color-border, #d4d0c8)) 68%,
@@ -672,6 +739,7 @@
     );
     opacity: 0.5;
     transform-origin: left center;
+    margin-bottom: 1px;
 }
 
 .pb-print-card {
@@ -684,6 +752,7 @@
 .pb-print-wrapper .pb-print-card {
     margin-top: 0;
     margin-bottom: 0;
+    width: 100%;
 }
 
 .pb-print-card__inner {

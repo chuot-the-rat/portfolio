@@ -22,38 +22,43 @@
 export const PASSBOOK_ROUTES = {
     inklink: {
         routeCode:        "IL-07",
-        lineLabel:        "UX/UI",
-        stampLabel:       "Clarity Restored",
-        checkpointLabel:  "End of line.",
+        lineLabel:        "UX SYSTEM",
+        stampLabel:       "Seal Registered",
+        checkpointLabel:  "Validation point",
         accentHue:        240,    // indigo-adjacent
+        microCues:        ["Quote captured", "Flow branch logged"],
     },
     prolog: {
         routeCode:        "PL-03",
-        lineLabel:        "UX/UI",
-        stampLabel:       "Route Mapped",
-        checkpointLabel:  "End of line.",
+        lineLabel:        "GUIDANCE SYSTEM",
+        stampLabel:       "Route Confirmed",
+        checkpointLabel:  "Validation point",
         accentHue:        210,    // blue
+        microCues:        ["Progress delta noted", "Stress point resolved"],
     },
     sidequest: {
         routeCode:        "SQ-11",
-        lineLabel:        "UX/UI",
-        stampLabel:       "Path Tested",
-        checkpointLabel:  "End of line.",
+        lineLabel:        "BEHAVIOR SYSTEM",
+        stampLabel:       "Path Verified",
+        checkpointLabel:  "Validation point",
         accentHue:        142,    // green
+        microCues:        ["Prompt cadence tuned", "Friction reduced"],
     },
     "fizzu-soda": {
         routeCode:        "FS-04",
-        lineLabel:        "Graphic Design",
-        stampLabel:       "Brand Sealed",
-        checkpointLabel:  "End of line.",
+        lineLabel:        "BRAND SYSTEM",
+        stampLabel:       "Identity Sealed",
+        checkpointLabel:  "Validation point",
         accentHue:        22,     // warm orange
+        microCues:        ["Palette pass", "Packaging lock"],
     },
     sap: {
         routeCode:        "SA-02",
-        lineLabel:        "UX/UI",
+        lineLabel:        "ENTERPRISE SYSTEM",
         stampLabel:       "System Logged",
-        checkpointLabel:  "End of line.",
+        checkpointLabel:  "Validation point",
         accentHue:        188,    // teal
+        microCues:        ["Handoff note", "Constraint marked"],
     },
 };
 
