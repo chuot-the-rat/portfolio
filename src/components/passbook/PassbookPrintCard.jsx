@@ -43,45 +43,56 @@ export default function PassbookPrintCard() {
     const isPrimaryIssue = isNewlyIssued;
     const profile = isPrimaryIssue
         ? {
-              delay: 0.5,
+              delay: 0.45,
               feedDuration: 0.76,
-              tearDuration: 0.4,
-              contentDuration: 0.3,
-              contentDelay: 0.45,
-              tearDelay: 0.65,
+              settleDuration: 0.22,
+              contentDuration: 0.28,
+              contentDelay: 0.5,
+              settleDelay: 0.78,
           }
         : {
-              delay: 0.05,
-              feedDuration: 0.42,
-              tearDuration: 0.28,
-              contentDuration: 0.24,
-              contentDelay: 0.18,
-              tearDelay: 0.26,
+              delay: 0.06,
+              feedDuration: 0.4,
+              settleDuration: 0.18,
+              contentDuration: 0.2,
+              contentDelay: 0.24,
+              settleDelay: 0.36,
           };
 
     const finalProfile = shouldReduceMotion
         ? {
               delay: 0,
               feedDuration: 0,
-              tearDuration: 0,
+              settleDuration: 0,
               contentDuration: 0,
               contentDelay: 0,
-              tearDelay: 0,
+              settleDelay: 0,
           }
         : profile;
 
     const cardVariants = {
         initial: shouldAnimate
-            ? { clipPath: "inset(0 0 100% 0)", opacity: 1 }
+            ? { clipPath: "inset(0 0 100% 0)", opacity: 0.98, y: -6 }
             : { clipPath: "inset(0 0 0% 0)", opacity: 1 },
         animate: {
             clipPath: "inset(0 0 0% 0)",
             opacity: 1,
+            y: 0,
             transition: {
                 clipPath: {
                     duration: finalProfile.feedDuration,
                     ease: [0.16, 1, 0.3, 1],
                     delay: finalProfile.delay,
+                },
+                y: {
+                    duration: finalProfile.settleDuration,
+                    ease: [0.25, 0, 0, 1],
+                    delay: shouldAnimate ? finalProfile.delay + finalProfile.settleDelay : 0,
+                },
+                opacity: {
+                    duration: 0.18,
+                    ease: [0.25, 0, 0, 1],
+                    delay: shouldAnimate ? finalProfile.delay + finalProfile.settleDelay : 0,
                 },
             },
         },
@@ -94,28 +105,6 @@ export default function PassbookPrintCard() {
             transition: {
                 duration: finalProfile.contentDuration,
                 delay: shouldAnimate ? finalProfile.delay + finalProfile.contentDelay : 0,
-            },
-        },
-    };
-
-    const tearVariants = {
-        initial: {
-            scaleX: shouldAnimate ? 0 : 1,
-            opacity: shouldAnimate ? 0 : 1,
-        },
-        animate: {
-            scaleX: 1,
-            opacity: 1,
-            transition: {
-                scaleX: {
-                    duration: finalProfile.tearDuration,
-                    ease: "easeOut",
-                    delay: shouldAnimate ? finalProfile.delay + finalProfile.tearDelay : 0,
-                },
-                opacity: {
-                    duration: 0.15,
-                    delay: shouldAnimate ? finalProfile.delay + finalProfile.tearDelay : 0,
-                },
             },
         },
     };
@@ -134,13 +123,6 @@ export default function PassbookPrintCard() {
             <div className="pb-print-slot" aria-hidden="true">
                 <span className="pb-print-slot__feed" />
             </div>
-            <motion.div
-                className="pb-print-tear"
-                aria-hidden="true"
-                initial={tearVariants.initial}
-                animate={tearVariants.animate}
-                style={{ transformOrigin: "left center" }}
-            />
             <motion.button
                 className="pb-print-card"
                 onClick={handlePress}
@@ -166,17 +148,17 @@ export default function PassbookPrintCard() {
                     {/* Text block */}
                     <span className="pb-print-card__body">
                         <span className="pb-print-card__eyebrow">
-                            {isNewlyIssued ? "Issuance active" : "Printed pass"}
+                            {isNewlyIssued ? "Issuance active" : "Printed artifact"}
                         </span>
                         <span className="pb-print-card__label">
                             {!isParked
-                                ? "Press to add to rail"
+                                ? "Press to add passbook"
                                 : allDone
-                                  ? "All route seals logged."
-                                  : "Press to open and log route seals."}
+                                  ? "All route seals logged"
+                                  : "Press to open route seals"}
                         </span>
                         <span className="pb-print-card__sub">
-                            {stampCount} / {totalRoutes} routes stamped
+                            {stampCount} / {totalRoutes} sealed
                         </span>
                         <span className="pb-print-card__slots" aria-hidden="true">
                             {PASSBOOK_ROUTE_ORDER.map((id) => {

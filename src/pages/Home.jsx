@@ -8,7 +8,6 @@ import {
 } from "../utils/projectDataMapper";
 import HeroContainer from "../components/header/HeroContainer";
 import HomeWorkList from "../components/home/HomeWorkList";
-import MarqueeTicker from "../components/MarqueeTicker";
 import PassbookPrintCard from "../components/passbook/PassbookPrintCard";
 import PassbookDock from "../components/passbook/PassbookDock";
 import { usePassbook } from "../components/passbook/PassbookProvider";
@@ -123,7 +122,6 @@ const Home = () => {
     });
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [showEnhancements, setShowEnhancements] = useState(false);
     const [showParkReplay, setShowParkReplay] = useState(false);
 
     const resolveProjectMediaPath = (projectId, src) => {
@@ -154,17 +152,6 @@ const Home = () => {
         }
         return unique;
     };
-
-    useEffect(() => {
-        let timeoutId = null;
-        const raf = requestAnimationFrame(() => {
-            timeoutId = setTimeout(() => setShowEnhancements(true), 220);
-        });
-        return () => {
-            cancelAnimationFrame(raf);
-            if (timeoutId) clearTimeout(timeoutId);
-        };
-    }, []);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -348,8 +335,6 @@ const Home = () => {
                             Jump to selected work
                         </a>
                     </div>
-
-                    {showEnhancements ? <MarqueeTicker speed={56} /> : null}
 
                     {/* Work list — category tabs + Sharleen-style rows */}
                     {loading ? (

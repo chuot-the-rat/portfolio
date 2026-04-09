@@ -22,7 +22,7 @@
 }
 
 .home-main {
-    --home-section-gap: clamp(5.5rem, 8vw, 8.5rem);
+    --home-section-gap: clamp(4.5rem, 6.2vw, 6.8rem);
 }
 
 /* ── Hero + passbook rail layout ────────────────────────────────────────── */
@@ -32,7 +32,7 @@
     grid-template-columns: minmax(0, 1fr) clamp(272px, 22vw, 332px);
     gap: clamp(1.1rem, 2vw, 1.9rem);
     align-items: start;
-    margin-bottom: var(--home-section-gap);
+    margin-bottom: clamp(3rem, 5vw, 5.2rem);
     position: relative;
     z-index: 1;
 }
@@ -110,11 +110,9 @@
     z-index: 1;
 }
 
-/* ── Marquee belt ────────────────────────────────────────────────────────── */
-
+/* Marquee removed for clarity in conversion pass */
 .home-main .mq {
-    margin-block: 0 clamp(2.7rem, 4.1vw, 4.1rem);
-    opacity: 0.74;
+    display: none !important;
 }
 
 .home-primary-actions {
@@ -390,17 +388,16 @@
         position: absolute;
         top: var(--space-2);
         right: 0;
-        width: clamp(92px, 30vw, 138px);
+        width: clamp(120px, 34vw, 170px);
         z-index: 3;
     }
 
     .home-passbook-rail .pb-print-wrapper {
         width: 100%;
-        padding: var(--space-2);
     }
 
     .home-passbook-rail .pb-print-card {
-        padding: var(--space-2);
+        padding: var(--space-2) var(--space-2);
         gap: var(--space-2);
     }
 
@@ -410,8 +407,6 @@
         font-size: 8px;
     }
 
-    .home-passbook-rail .pb-print-card__eyebrow,
-    .home-passbook-rail .pb-print-card__sub,
     .home-passbook-rail .pb-print-card__slots,
     .home-passbook-rail .pb-print-card__arrow {
         display: none;
@@ -423,7 +418,7 @@
     }
 
     .home-hero-grid {
-        padding-right: clamp(98px, 32vw, 150px);
+        padding-right: clamp(106px, 34vw, 170px);
     }
 
     .home-main {
@@ -496,6 +491,17 @@
     .home-passbook-rail {
         top: calc(76px + var(--space-3));
         padding-top: var(--space-2);
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+    .home-hero-passbook {
+        grid-template-columns: minmax(0, 1fr) clamp(236px, 24vw, 286px);
+        gap: clamp(0.8rem, 1.3vw, 1.2rem);
+    }
+
+    .home-passbook-rail {
+        top: calc(70px + var(--space-2));
     }
 }
 

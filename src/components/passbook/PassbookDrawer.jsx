@@ -63,14 +63,14 @@ export default function PassbookDrawer() {
 
     const drawerVariants = {
         hidden: isMobile
-            ? { opacity: 0, scale: 0.92, x: 18, y: -4 }
-            : { opacity: 0, scale: 0.92, x: 18, y: -4 },
+            ? { opacity: 0, scale: 0.95, x: 14, y: -2 }
+            : { opacity: 0, scale: 0.94, x: 24, y: 0 },
         visible: isMobile
             ? { opacity: 1, scale: 1, x: 0, y: 0 }
             : { opacity: 1, scale: 1, x: 0, y: 0 },
         exit: isMobile
-            ? { opacity: 0, scale: 0.92, x: 18, y: -4 }
-            : { opacity: 0, scale: 0.92, x: 18, y: -4 },
+            ? { opacity: 0, scale: 0.95, x: 14, y: -2 }
+            : { opacity: 0, scale: 0.94, x: 24, y: 0 },
     };
 
     return (
@@ -111,7 +111,7 @@ export default function PassbookDrawer() {
                                     Leana Le
                                 </span>
                                 <h2 className="pb-drawer__title">
-                                    Archive Passbook
+                                    Project Passbook
                                 </h2>
                             </div>
                             <button
@@ -211,8 +211,8 @@ export default function PassbookDrawer() {
                         <div className="pb-drawer__footer">
                             <p className="pb-drawer__footer-note">
                                 {stampCount === totalRoutes
-                                    ? "Archive complete. All route seals registered."
-                                    : "Press to stamp at the end of each project route."}
+                                    ? "Archive complete. All route seals logged."
+                                    : "Press to stamp at the end of each route."}
                             </p>
                         </div>
                     </motion.aside>
