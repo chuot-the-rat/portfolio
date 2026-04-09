@@ -61,6 +61,8 @@ const PROCESS_BLOCKS = [
     },
 ];
 
+const ABOUT_TRAITS = ["Research-led", "System-minded", "Build-aware"];
+
 export default function About() {
     usePageTitle("About", {
         site: true,
@@ -86,8 +88,13 @@ export default function About() {
                             <NameCycle />
                         </h1>
                         <p className="about-hero-sub">
-                            Product designer who bridges research, interaction, and front-end build.
+                            Product designer bridging research, interaction design, and front-end implementation.
                         </p>
+                        <ul className="about-hero-traits" aria-label="Core strengths">
+                            {ABOUT_TRAITS.map((trait) => (
+                                <li key={trait} className="about-hero-trait">{trait}</li>
+                            ))}
+                        </ul>
                     </motion.section>
 
                     <div className="about-body">
@@ -98,13 +105,13 @@ export default function About() {
                             <div className="about-row-content">
                                 <p className="about-para">
                                     I spent <em className="about-em">six years in hospitality</em>, where I learned
-                                    to make complex moments feel easy, warm, and clear. That instinct carried into
-                                    design, where I still optimize for the <em className="about-em">person on the other side of the screen</em> first.
+                                    to make complex moments feel easy, warm, and clear. That instinct carried directly
+                                    into design, where I still optimize for the <em className="about-em">person on the other side of the screen</em> first.
                                 </p>
                                 <p className="about-para">
-                                    I am a <em className="about-em">product designer with frontend chops</em>, moving from early research to shipped code.
+                                    I am a <em className="about-em">product designer with frontend chops</em>, moving from discovery to shipped interfaces.
                                     I am currently finishing my Diploma in Digital Design and Development at BCIT.
-                                    Outside work, I am usually in a manga arc or obsessing over a presentation deck.
+                                    Outside work, I am usually in a manga arc or refining a presentation deck.
                                 </p>
                             </div>
                         </motion.div>

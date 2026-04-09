@@ -7,10 +7,25 @@
 .about {
     background-color: var(--color-bg);
     min-height: 100vh;
+    position: relative;
+    overflow: clip;
+}
+
+.about::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(62% 32% at 8% 0%, rgba(255, 184, 108, 0.12), transparent 68%),
+        radial-gradient(48% 28% at 92% 12%, rgba(255, 138, 76, 0.08), transparent 70%);
+    z-index: 0;
 }
 
 .about-main {
     padding-bottom: var(--section-spacing-lg);
+    position: relative;
+    z-index: 1;
 }
 
 /* ── Custom hero ─────────────────────────────────────────────────────────────
@@ -24,6 +39,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    position: relative;
 }
 
 .about-hero-descriptor {
@@ -33,6 +49,20 @@
     letter-spacing: var(--letter-spacing-label);
     color: var(--color-text-tertiary);
     margin: 0 0 var(--space-5);
+    padding-left: var(--space-5);
+    position: relative;
+}
+
+.about-hero-descriptor::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--space-3);
+    height: 1px;
+    background: currentColor;
+    opacity: 0.4;
 }
 
 .about-hero-headline {
@@ -52,7 +82,30 @@
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
     margin: 0;
-    max-width: 480px;
+    max-width: 54ch;
+}
+
+.about-hero-traits {
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.about-hero-trait {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--chip-radius);
+    border: 1px solid var(--chip-border);
+    background: color-mix(in srgb, var(--chip-bg) 80%, transparent);
+    color: var(--chip-text);
+    padding: var(--chip-padding-y) var(--chip-padding-x);
+    font-family: var(--chip-font-family);
+    font-size: var(--chip-font-size);
+    letter-spacing: var(--chip-letter-spacing);
+    text-transform: uppercase;
 }
 
 /* ── Body rows ──────────────────────────────────────────────────────────────
@@ -60,7 +113,7 @@
    ─────────────────────────────────────────────────────────────────────────── */
 
 .about-body {
-    margin-top: var(--space-4);
+    margin-top: var(--space-6);
     border-top: 1px solid var(--color-border);
 }
 
@@ -86,7 +139,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
-    max-width: 580px;
+    max-width: 62ch;
 }
 
 .about-para {
@@ -151,14 +204,16 @@
     padding: clamp(1.5rem, 3vw, 2.5rem) 0;
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-2);
 }
 
 .about-email-link {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: baseline;
     gap: var(--space-3);
     font-family: var(--font-display);
-    font-size: clamp(1.75rem, 4.5vw, 3.5rem);
+    font-size: clamp(2rem, 4.8vw, 3.8rem);
     font-weight: 500;
     letter-spacing: -0.025em;
     color: var(--color-text);
@@ -199,6 +254,7 @@
 /* Secondary contact rows */
 .about-contact-rows {
     transition: color 0.2s ease;
+    border-top: 1px solid var(--color-border);
 }
 
 .about-contact-rows:hover .about-contact-row {
@@ -213,7 +269,7 @@
     display: grid;
     grid-template-columns: var(--layout-label-col) 1fr;
     gap: var(--space-16);
-    padding: var(--space-8) 0;
+    padding: var(--space-7) 0;
     border-bottom: 1px solid var(--color-border);
     transition: opacity 0.2s ease;
 }
@@ -317,7 +373,7 @@
 .about-process-flow {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-5);
+    gap: var(--space-6);
 }
 
 .about-process-card {
@@ -327,7 +383,12 @@
     border-radius: var(--radius-xl);
     background:
         radial-gradient(circle at top right, rgba(255, 184, 108, 0.18), transparent 42%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+    box-shadow: var(--shadow-sm);
+    transition:
+        transform var(--dur-ui) var(--ease-out-premium),
+        box-shadow var(--dur-ui) var(--ease-out-premium),
+        border-color var(--dur-ui) var(--ease-out-premium);
 }
 
 .about-process-card-top {
@@ -335,6 +396,12 @@
     align-items: center;
     gap: var(--space-3);
     margin-bottom: var(--space-4);
+}
+
+.about-process-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--color-accent-vivid) 24%, var(--color-border));
 }
 
 .about-process-phase {
@@ -356,10 +423,10 @@
 }
 
 .about-process-card-body {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
-    margin: 0 0 var(--space-5);
+    margin: 0 0 var(--space-6);
 }
 
 .about-process-tags {
@@ -379,18 +446,19 @@
     font-size: var(--chip-font-size);
     letter-spacing: var(--chip-letter-spacing);
     text-transform: uppercase;
-    color: var(--chip-text);
+    color: color-mix(in srgb, var(--chip-text) 92%, var(--color-text));
     white-space: nowrap;
 }
 
 .about-process-arrow {
     position: absolute;
-    right: 0;
+    right: -1px;
     top: 50%;
     transform: translate(50%, -50%);
     font-size: 1.15rem;
     color: var(--color-text-tertiary);
     pointer-events: none;
+    opacity: 0.8;
 }
 
 /* ── My Philosophy ───────────────────────────────────────────────────────────
@@ -409,22 +477,24 @@
 .about-philosophy-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
+    gap: var(--space-4);
     border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
 }
 
 .about-philosophy-block {
-    padding: var(--space-10) var(--space-8) var(--space-10) 0;
-    border-right: 1px solid var(--color-border);
+    padding: var(--space-8);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--color-bg-secondary) 74%, transparent);
+    transition:
+        border-color var(--dur-ui) var(--ease-out-premium),
+        transform var(--dur-ui) var(--ease-out-premium);
 }
 
-.about-philosophy-block:last-child {
-    border-right: none;
-    padding-right: 0;
-}
-
-.about-philosophy-block:not(:first-child) {
-    padding-left: var(--space-8);
+.about-philosophy-block:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
+    transform: translateY(-2px);
 }
 
 .about-philosophy-block-title {
@@ -436,10 +506,11 @@
 }
 
 .about-philosophy-block-body {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
     margin: 0;
+    max-width: 34ch;
 }
 
 /* ── Resume ──────────────────────────────────────────────────────────────────
@@ -531,6 +602,37 @@
    ─────────────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+    .about-hero {
+        padding-top: clamp(4.25rem, 11vh, 6rem);
+        min-height: 36vh;
+    }
+
+    .about-hero-headline {
+        font-size: clamp(2.05rem, 10vw, 3.7rem);
+        line-height: 1.03;
+        letter-spacing: -0.025em;
+        margin-bottom: var(--space-4);
+    }
+
+    .about-hero-sub {
+        font-size: 0.98rem;
+        line-height: 1.62;
+        max-width: 36ch;
+    }
+
+    .about-hero-traits {
+        margin-top: var(--space-5);
+    }
+
+    .about-row-content {
+        gap: var(--space-4);
+    }
+
+    .about-para {
+        font-size: 0.98rem;
+        line-height: 1.65;
+    }
+
     .about-process-flow {
         grid-template-columns: 1fr;
         gap: var(--space-4);
@@ -540,26 +642,31 @@
         padding: var(--space-6);
     }
 
+    .about-process-card-title {
+        line-height: 1.25;
+    }
+
+    .about-process-card-body {
+        font-size: 0.98rem;
+        line-height: 1.62;
+    }
+
     .about-process-arrow {
         display: none;
     }
 
     .about-philosophy-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-3);
     }
 
     .about-philosophy-block {
-        border-right: none;
-        border-bottom: 1px solid var(--color-border);
-        padding: var(--space-8) 0;
+        padding: var(--space-7);
     }
 
-    .about-philosophy-block:last-child {
-        border-bottom: none;
-    }
-
-    .about-philosophy-block:not(:first-child) {
-        padding-left: 0;
+    .about-philosophy-block-body {
+        max-width: none;
+        font-size: 0.98rem;
     }
 
     .about-row {
@@ -572,6 +679,17 @@
         grid-template-columns: 1fr;
         gap: var(--space-2);
         padding: var(--space-6) 0;
+    }
+
+    .about-email-link {
+        font-size: clamp(1.6rem, 8.3vw, 2.35rem);
+        line-height: 1.16;
+        overflow-wrap: anywhere;
+        row-gap: var(--space-1);
+    }
+
+    .about-contact-link {
+        overflow-wrap: anywhere;
     }
 
     /* Disable sibling dim on touch */
