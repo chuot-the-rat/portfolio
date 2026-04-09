@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/projects/:id/",
+      "destination": "/case-studies/:id",
+      "permanent": true
+    },
+    {
+      "source": "/projects/:id",
+      "destination": "/case-studies/:id",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

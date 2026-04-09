@@ -9,7 +9,7 @@
  * - Building correct links for different project types
  *
  * Two project types:
- * 1. Case studies: Live in /projects/:id, share structure, defined in database
+ * 1. Case studies: Live in /case-studies/:id, share structure, defined in database
  * 2. Standalone projects: Live in /design/:id, self-contained data.json files
  *
  * Data source:
@@ -19,9 +19,9 @@
 
 // Utility to map case_studies_standardized.json structure to the format expected by UI components
 import caseStudiesData from "../assets/case_studies_standardized.json";
-import { STANDALONE_PROJECT_IDS } from "../App";
+import { CASE_STUDY_BASE_PATH, STANDALONE_PROJECT_IDS } from "../App";
 
-/** IDs that live under /design/:slug instead of /projects/:id */
+/** IDs that live under /design/:slug instead of /case-studies/:id */
 export { STANDALONE_PROJECT_IDS };
 
 /**
@@ -36,10 +36,10 @@ export const isStandaloneProject = (id) => STANDALONE_PROJECT_IDS.includes(id);
  * Get the correct link path for any project.
  * Automatically routes to correct URL based on project type.
  * @param {string} id - Project ID
- * @returns {string} URL path (/projects/:id or /design/:id)
+ * @returns {string} URL path (/case-studies/:id or /design/:id)
  */
 export const getProjectPath = (id) =>
-    isStandaloneProject(id) ? `/design/${id}` : `/projects/${id}`;
+    isStandaloneProject(id) ? `/design/${id}` : `${CASE_STUDY_BASE_PATH}/${id}`;
 
 /**
  * Helper to extract images from section data.

@@ -10,18 +10,18 @@
  * Routing strategy:
  * - /: Home page
  * - /projects: Projects list (shows all case studies + standalone)
- * - /projects/:id: Individual case study detail page
+ * - /case-studies/:id: Individual case study detail page
  * - /design/:slug: Standalone design projects (each has own data.json)
  * - /about: About page
  * - /resume: Resume page with embedded Adobe InDesign
  * - *: 404 catch-all for unknown routes
  *
  * Project types tracked here:
- * - Case studies: Use centralized data, route to /projects/:id
+ * - Case studies: Use centralized data, route to /case-studies/:id
  * - Standalone: Self-contained projects, route to /design/:id
  */
 
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import { useEffect, Component } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "./components/Navigation";
@@ -45,7 +45,7 @@ import "./styles/App.css";
 /**
  * IDs of standalone (non-case-study) projects.
  * These projects:
- * - Live under /design/:slug route instead of /projects/:id
+ * - Live under /design/:slug route instead of /case-studies/:id
  * - Each has its own data.json file instead of using centralized data
  *
  * This list is used by:
@@ -53,6 +53,7 @@ import "./styles/App.css";
  * - Projects.jsx (to fetch supplemental data)
  */
 export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap"];
+export const CASE_STUDY_BASE_PATH = "/case-studies";
 
 /**
  * Error boundary for project detail pages.
@@ -94,6 +95,11 @@ function ScrollToTop() {
     return null;
 }
 
+function LegacyProjectRouteRedirect() {
+    const { id } = useParams();
+    return <Navigate to={`${CASE_STUDY_BASE_PATH}/${id}`} replace />;
+}
+
 /** Wraps each page in a fade transition. Framer Motion handles enter/exit. */
 function P({ children }) {
     return (
@@ -132,7 +138,8 @@ function App() {
                         <Route path="/contact"   element={<Navigate to="/about" replace />} />
 
                         {/* ─── CASE STUDY PROJECTS ─── */}
-                        <Route path="/projects/:id"  element={<ProjectErrorBoundary routeKey={location.pathname}><P><ProjectDetail /></P></ProjectErrorBoundary>} />
+                        <Route path={`${CASE_STUDY_BASE_PATH}/:id`} element={<ProjectErrorBoundary routeKey={location.pathname}><P><ProjectDetail /></P></ProjectErrorBoundary>} />
+                        <Route path="/projects/:id" element={<LegacyProjectRouteRedirect />} />
 
                         {/* ─── STANDALONE PROJECTS ─── */}
                         <Route path="/design/:slug"  element={<P><ProjectLayout /></P>} />

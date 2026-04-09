@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading…</title>
+  <script>
+    (function () {
+      var targetPath = "/case-studies/inklink";
+      var q = window.location.search || "";
+      var h = window.location.hash || "";
+      var target = "/?p=" + encodeURIComponent(targetPath + q) + h;
+      window.location.replace(target);
+    })();
+  </script>
+</head>
+<body></body>
+</html>
