@@ -379,16 +379,10 @@ const ProjectDetail = () => {
                             "userTesting",
                             "finalPresentation",
                             "embeds",
-                            "links", // project-specific external links (live, prototype, github)
                         ];
                         for (const key of extras) {
                             if (!localData[key]) continue;
-                            // Merge links (shallow) so both sources contribute
-                            if (key === "links" && merged[key]) {
-                                merged[key] = { ...merged[key], ...localData[key] };
-                            } else {
-                                merged[key] = localData[key];
-                            }
+                            merged[key] = localData[key];
                         }
                         // Merge iterations rounds if present in local data
                         if (localData.iterations?.rounds) {
