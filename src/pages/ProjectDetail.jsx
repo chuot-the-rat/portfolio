@@ -117,6 +117,211 @@ const getCredibilityRows = (project) => {
     ];
 };
 
+const getYouTubeEmbedUrl = (url) => {
+    const value = String(url || "").trim();
+    if (!value) return "";
+    if (value.includes("youtube-nocookie.com/embed/")) return value;
+    if (value.includes("youtube.com/embed/")) {
+        return value.replace("youtube.com/embed/", "youtube-nocookie.com/embed/");
+    }
+    const shortMatch = value.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+    if (shortMatch?.[1]) {
+        return `https://www.youtube-nocookie.com/embed/${shortMatch[1]}`;
+    }
+    const longMatch = value.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+    if (longMatch?.[1]) {
+        return `https://www.youtube-nocookie.com/embed/${longMatch[1]}`;
+    }
+    return value;
+};
+
+const ScrollableMockupFrame = ({ src, alt }) => {
+    const [hasInteracted, setHasInteracted] = useState(false);
+
+    const markInteracted = () => {
+        if (!hasInteracted) setHasInteracted(true);
+    };
+
+    const handleKeyDown = (event) => {
+        const keys = [
+            "ArrowDown",
+            "ArrowUp",
+            "PageDown",
+            "PageUp",
+            "Home",
+            "End",
+            " ",
+        ];
+        if (keys.includes(event.key)) {
+            markInteracted();
+        }
+    };
+
+    return (
+        <div className="mockup-frame" data-interacted={hasInteracted}>
+            <div className="mockup-frame-bar" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+            </div>
+
+            <div className="mockup-frame-screen">
+                <div
+                    className="mockup-scroll-viewport"
+                    tabIndex={0}
+                    role="region"
+                    aria-label={`Scrollable screen preview: ${alt}`}
+                    onScroll={markInteracted}
+                    onWheel={markInteracted}
+                    onTouchStart={markInteracted}
+                    onKeyDown={handleKeyDown}
+                >
+                    <img src={src} alt={alt} loading="lazy" />
+                </div>
+
+                <div className="mockup-fade mockup-fade-top" aria-hidden="true" />
+                <div
+                    className="mockup-fade mockup-fade-bottom"
+                    aria-hidden="true"
+                />
+            </div>
+
+            {!hasInteracted && (
+                <p className="mockup-scroll-hint" aria-live="polite">
+                    Scroll to view
+                </p>
+            )}
+        </div>
+    );
+};
+
+const BeforeAfterComparisons = ({ comparisons = [] }) => {
+    if (!Array.isArray(comparisons) || comparisons.length === 0) return null;
+
+    return (
+        <div className="before-after-list" aria-label="Before and after comparisons">
+            {comparisons.map((comparison, index) => (
+                <motion.article
+                    key={comparison.id || index}
+                    className="before-after-row"
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.45, delay: index * 0.06 }}
+                >
+                    <header className="before-after-header">
+                        <h3 className="before-after-title">{comparison.label}</h3>
+                    </header>
+
+                    <div className="before-after-grid">
+                        <figure className="before-after-card">
+                            <figcaption className="before-after-tag">Before</figcaption>
+                            <ScrollableMockupFrame
+                                src={comparison.before.src}
+                                alt={comparison.before.alt}
+                            />
+                            {comparison.before.caption && (
+                                <p className="before-after-caption">
+                                    {comparison.before.caption}
+                                </p>
+                            )}
+                        </figure>
+
+                        <figure className="before-after-card">
+                            <figcaption className="before-after-tag">After</figcaption>
+                            <ScrollableMockupFrame
+                                src={comparison.after.src}
+                                alt={comparison.after.alt}
+                            />
+                            {comparison.after.caption && (
+                                <p className="before-after-caption">
+                                    {comparison.after.caption}
+                                </p>
+                            )}
+                        </figure>
+                    </div>
+                </motion.article>
+            ))}
+        </div>
+    );
+};
+
+const PrototypeTabs = ({ tabs = [] }) => {
+    const validTabs = tabs.filter((tab) => tab?.embedUrl || tab?.fallbackUrl);
+    const [activeTab, setActiveTab] = useState(validTabs[0]?.id || "");
+
+    if (!validTabs.length) return null;
+
+    const current = validTabs.find((tab) => tab.id === activeTab) || validTabs[0];
+
+    return (
+        <motion.section
+            className="project-section prototype-tabs-section"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.45 }}
+        >
+            <h2 className="section-title">Prototypes</h2>
+            <p className="section-description">
+                Explore both fidelity levels in one place without breaking reading flow.
+            </p>
+
+            <div className="prototype-tabs-header" role="tablist" aria-label="Prototype views">
+                {validTabs.map((tab) => (
+                    <button
+                        key={tab.id}
+                        type="button"
+                        role="tab"
+                        aria-selected={current.id === tab.id}
+                        aria-controls={`prototype-panel-${tab.id}`}
+                        id={`prototype-tab-${tab.id}`}
+                        className={`prototype-tab ${current.id === tab.id ? "is-active" : ""}`}
+                        onClick={() => setActiveTab(tab.id)}
+                    >
+                        {tab.label}
+                    </button>
+                ))}
+            </div>
+
+            <div
+                id={`prototype-panel-${current.id}`}
+                role="tabpanel"
+                aria-labelledby={`prototype-tab-${current.id}`}
+                className="prototype-tabs-panel"
+            >
+                {current.embedUrl ? (
+                    <div className="prototype-tabs-iframe-wrap">
+                        <iframe
+                            src={current.embedUrl}
+                            title={current.title || "Prototype embed"}
+                            className="prototype-tabs-iframe"
+                            allowFullScreen
+                        />
+                    </div>
+                ) : (
+                    <div className="prototype-tabs-fallback">
+                        <p className="prototype-tabs-fallback-text">
+                            Embed unavailable for this tab.
+                        </p>
+                    </div>
+                )}
+
+                {current.fallbackUrl && (
+                    <a
+                        href={current.fallbackUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="prototype-tabs-link"
+                    >
+                        Open in Figma ↗
+                    </a>
+                )}
+            </div>
+        </motion.section>
+    );
+};
+
 const ProjectDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -408,6 +613,32 @@ const ProjectDetail = () => {
                     )}
                 </div>
             </motion.section>
+
+            {project.launchAd?.youtube_url && (
+                <section className="project-launch-media">
+                    <div className="container">
+                        <div className="launch-media-card">
+                            <p className="launch-media-label">Launch Ad</p>
+                            <h2 className="launch-media-title">
+                                Product Story in Motion
+                            </h2>
+                            {project.launchAd?.caption && (
+                                <p className="launch-media-caption">
+                                    {project.launchAd.caption}
+                                </p>
+                            )}
+                            <div className="launch-media-embed">
+                                <iframe
+                                    src={getYouTubeEmbedUrl(project.launchAd.youtube_url)}
+                                    title={project.launchAd.title || "ProLog launch ad"}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Content Sections */}
             <div
@@ -812,6 +1043,7 @@ const ProjectContentMain = ({ project }) => {
                             images={project.lofi.images}
                             mediaDemo={project.lofi.mediaDemo}
                             verdict={project.lofi.verdict}
+                            comparisons={project.lofi.comparisons}
                             captionContext="Lo-fi exploration"
                             imageStartIndex={imageNum}
                             onImageCount={(n) => {
@@ -1040,6 +1272,9 @@ const ProjectContentMain = ({ project }) => {
                             </p>
                             <BrowserMockup mediaDemo={project.iterations.mediaDemo} />
                             <PrincipleVerdict verdict={project.iterations.verdict} />
+                            <BeforeAfterComparisons
+                                comparisons={project.iterations.comparisons}
+                            />
 
                             {/* Rounds-based iterations (from local data) */}
                             {project.iterations.rounds?.length > 0 && (
@@ -1168,7 +1403,8 @@ const ProjectContentMain = ({ project }) => {
                                     }}
                                 />
                             )}
-                            {project.iterations.prototype && (
+                            {!project.prototypeTabs?.length &&
+                                project.iterations.prototype && (
                                 <PrototypeEmbed
                                     prototype={project.iterations.prototype}
                                 />
@@ -1176,6 +1412,10 @@ const ProjectContentMain = ({ project }) => {
                         </motion.section>
                     );
                 })()}
+
+            {project.prototypeTabs?.length > 0 && (
+                <PrototypeTabs tabs={project.prototypeTabs} />
+            )}
 
             {/* ── High-Fidelity Mockups ── */}
             {project.hifi &&
@@ -2338,6 +2578,7 @@ const IndexedSection = ({
     images,
     mediaDemo,
     verdict,
+    comparisons,
     captionContext,
     imageStartIndex = 0,
     onImageCount,
@@ -2362,6 +2603,7 @@ const IndexedSection = ({
         <p className="section-description">{description}</p>
         <BrowserMockup mediaDemo={mediaDemo} />
         <PrincipleVerdict verdict={verdict} />
+        <BeforeAfterComparisons comparisons={comparisons} />
 
         {images && images.length > 0 && (
             <ImageGallery

@@ -57,3 +57,32 @@ git add src/App.jsx src/pages/About.css src/pages/About.jsx src/pages/Home.css s
 Notes:
 - The repository contains many unrelated modified/untracked files; do not use broad `git add .`.
 - Re-run `git diff --staged --stat` before committing to confirm scope.
+
+---
+
+## 5) Phase 2 Slice Validation (2026-04-09)
+
+### Scope delivered
+- Phase 2 component set is active in case-study detail flow (`ProjectDetail`).
+- Legacy project route redirect now differentiates case-study IDs vs standalone IDs.
+- Token lint regression in case-study styling resolved.
+
+### Commands run
+- `npm run lint` -> PASS
+- `npm run build` -> PASS
+
+### Route smoke checks
+- `/case-studies/prolog` -> 200
+- `/case-studies/sidequest` -> 200
+- `/design/fizzu-soda` -> 200
+- `/projects/prolog` -> 200
+- `/projects/fizzu-soda` -> 200
+- `/not-a-real-page` -> 200
+- `/` -> 200
+- `/projects` -> 200
+- `/about` -> 200
+
+### Scoped staging set for this slice
+```powershell
+git add src/App.jsx src/pages/ProjectDetail.css src/pages/CASE_STUDY_PHASE2_ROLLOUT.md QA_RELEASE_PREP.md RELEASE_NOTES.md
+```
