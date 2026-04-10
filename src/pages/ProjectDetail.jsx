@@ -34,6 +34,12 @@ const toConciseLine = (value, maxChars = 140) => {
     return `${sentence.slice(0, maxChars).replace(/\s+\S*$/, "").trimEnd()}…`;
 };
 
+const toSentenceCaseLine = (value, maxChars = 140) => {
+    const line = toConciseLine(value, maxChars);
+    if (!line) return "";
+    return `${line.charAt(0).toUpperCase()}${line.slice(1)}`;
+};
+
 const toLeadingSentence = (value, fallback = "", maxSentences = 2) => {
     const sentence = toSentence(value);
     if (!sentence) return fallback;
@@ -177,22 +183,22 @@ const getYouTubeEmbedUrl = (url) => {
 };
 
 const getLaunchMediaCaption = (launchAd) => {
-    const explicitCaption = toConciseLine(launchAd?.caption, 156);
+    const explicitCaption = toSentenceCaseLine(launchAd?.caption, 156);
     if (explicitCaption) return explicitCaption;
 
     const hasVideo = Boolean(launchAd?.video_url || launchAd?.youtube_url);
     const hasDeck = Boolean(launchAd?.embed_url);
 
     if (hasVideo && hasDeck) {
-        return "Watch the short promo first, then skim the deck for full context.";
+        return "Watch the short walkthrough first, then use the deck for full context.";
     }
 
     if (hasVideo) {
-        return "A short walkthrough of the concept and key user flow.";
+        return "A short walkthrough of the concept and core user flow.";
     }
 
     if (hasDeck) {
-        return "Slide walkthrough covering concept, process, and final flow.";
+        return "Slide deck covering concept, process, and final flow.";
     }
 
     return "";
@@ -400,7 +406,7 @@ const PrototypeTabs = ({ tabs = [] }) => {
                 ) : (
                     <div className="prototype-tabs-fallback">
                         <p className="prototype-tabs-fallback-text">
-                            Preview unavailable for this tab. Use the direct Figma link below.
+                            Preview is unavailable for this tab. Use the direct Figma link below.
                         </p>
                     </div>
                 )}
@@ -717,7 +723,7 @@ const ProjectDetail = () => {
                         <div className="launch-media-card">
                             <p className="launch-media-label">Launch Media</p>
                             <h2 className="launch-media-title">
-                                {project.launchAd?.title || `${project.title} launch walkthrough`}
+                                {project.launchAd?.title || `${project.title} launch media overview`}
                             </h2>
                             {getLaunchMediaCaption(project.launchAd) && (
                                 <p className="launch-media-caption">
@@ -2390,13 +2396,16 @@ const ProjectContentMain = ({ project }) => {
 // Shows all images stacked for ≤2 images; slideshow carousel for 3+
 const getImageCaption = (image, captionContext = "case study") => {
     if (image?.caption && String(image.caption).trim().length > 3) {
-        return toConciseLine(image.caption, 132);
+        return toSentenceCaseLine(image.caption, 132);
     }
     if (image?.alt && String(image.alt).trim().length > 8) {
         const alt = String(image.alt).replace(/\.$/, "");
-        return toConciseLine(`${captionContext}: ${alt}.`, 132);
+        return toSentenceCaseLine(`${alt} (${captionContext}).`, 132);
     }
-    return `Supporting visual from ${captionContext.toLowerCase()}.`;
+    return toSentenceCaseLine(
+        `Supporting visual from ${captionContext.toLowerCase()}.`,
+        132,
+    );
 };
 
 const ImageGallery = ({
