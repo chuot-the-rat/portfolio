@@ -251,28 +251,32 @@
                             "title": "Progress Dashboard",
                             "description": "A centralized view of hours completed, competencies achieved, and certification progress. Current status is visible within one tap.",
                             "why": "Apprentices reported feeling lost in fragmented systems. The dashboard provides constant orientation without extra navigation.",
-                            "image": "/projects/prolog/compare/dashboard-after.png"
+                            "image": "/projects/prolog/compare/dashboard-after.png",
+                            "caption": "Dashboard overview with hours, milestones, and next steps."
                         },
                         {
                             "id": "hours_discrepancy",
                             "title": "Hours Discrepancy Detector",
                             "description": "Compares user-logged hours against official records and flags mismatches. Users can document and report discrepancies directly.",
                             "why": "Hour disputes are stressful and common. The feature provides clear tools for reporting and resolution.",
-                            "image": "/projects/prolog/compare/dashboard-before.png"
+                            "image": "/projects/prolog/compare/resources-after.png",
+                            "caption": "Hours discrepancy and logging view."
                         },
                         {
                             "id": "financial_hub",
                             "title": "Financial Resources Hub",
                             "description": "Links to grants, funding programs, and cost breakdowns for apprenticeship expenses — all in one place.",
                             "why": "Financial stress appeared consistently in research. The feature improves visibility and access to available support pathways.",
-                            "image": "/projects/prolog/compare/resources-after.png"
+                            "image": "/projects/prolog/compare/resources-after.png",
+                            "caption": "Funding and support resources grouped into one screen."
                         },
                         {
                             "id": "practice_quizzes",
                             "title": "AI Practice Quizzes",
                             "description": "Generates practice questions based on trade competencies to build confidence before official exams.",
                             "why": "Many apprentices feel underprepared for certification. Low-stakes practice reduces that anxiety.",
-                            "image": "/projects/prolog/compare/quiz-after.png"
+                            "image": "/projects/prolog/compare/quiz-after.png",
+                            "caption": "Quiz prep flow with competency-aligned practice prompts."
                         }
                     ],
                     "prototype": {
@@ -307,7 +311,7 @@
                     "outcomes": [
                         "Participants found current hour status quickly without searching multiple systems.",
                         "The discrepancy tracker was repeatedly identified as the most useful workflow.",
-                        "Users described the dashboard as confidence-building and less stressful to use."
+                        "Dashboard structure made progress checks feel clearer and more reliable."
                     ],
                     "media_demo": {
                         "src": "/projects/prolog/compare/resources-after.png",
@@ -415,10 +419,10 @@
                 "other": []
             },
             "media": {
-                "thumbnail": "/projects/inklink/images/overview.svg",
+                "thumbnail": "/projects/inklink/images/Home.svg",
                 "icon": "/projects/inklink/images/Home.svg",
-                "hero_image": "/projects/inklink/images/overview.svg",
-                "og_image": "/projects/inklink/images/overview.svg"
+                "hero_image": "/projects/inklink/images/Home.svg",
+                "og_image": "/projects/inklink/images/Home.svg"
             },
             "hero": {
                 "marqueeText": "CÅSE STUDIËS • INKLINK • COLLABORATIVE WRITING APP"
@@ -427,10 +431,10 @@
                 "hook": {
                     "content": "Everyone has a story they never finished.\n\nIdeas were there. Momentum wasn't.\n\nInkLink started with one question: what if writing felt shared instead of solitary?",
                     "media_demo": {
-                        "src": "/projects/inklink/images/overview.svg",
+                        "src": "/projects/inklink/images/Home.svg",
                         "type": "image",
                         "alt": "InkLink hero interface preview",
-                        "caption": "InkLink reframes writing as a shared, low-pressure chain."
+                        "caption": "InkLink opens with active stories and one clear way to join."
                     }
                 },
                 "launch_ad": {
@@ -500,21 +504,24 @@
                             "title": "Public Story Chains",
                             "description": "Open stories that anyone can contribute to. Writers join, add a passage, and pass the story forward.",
                             "why": "Low barrier to entry. No commitment required—just jump in and write.",
-                            "image": "/projects/inklink/images/Editor (public).svg"
+                            "image": "/projects/inklink/images/Home.svg",
+                            "caption": "Feed view for browsing and joining active chains."
                         },
                         {
                             "id": "private_projects",
                             "title": "Private Writing Circles",
                             "description": "Invite-only spaces for friends or writing groups. Turn order is set by the creator.",
                             "why": "Some writers want collaboration without strangers. Private circles offer that control.",
-                            "image": "/projects/inklink/images/Project Page (private) - Finished.svg"
+                            "image": "/projects/inklink/images/Project Page (private) - Finished.svg",
+                            "caption": "Private circle dashboard with turn order and member activity."
                         },
                         {
                             "id": "timed_turns",
                             "title": "Timed Contributions",
                             "description": "Optional time limits encourage momentum. If a turn expires, the next writer can step in.",
                             "why": "Deadlines reduce overthinking. A 24-hour window is long enough to be fair, short enough to keep stories moving.",
-                            "image": "/projects/inklink/images/Editor (private) - start writing (submit disabled).svg"
+                            "image": "/projects/inklink/images/Editor (private) - start writing (submit disabled).svg",
+                            "caption": "Timed turn editor state with submission guardrails."
                         }
                     ],
                     "prototype": {
@@ -547,9 +554,9 @@
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Participants consistently described collaborative turns as low-pressure and fun.",
-                        "Shared authorship reduced perfectionism and made contribution feel safer.",
-                        "Timed turns increased writing momentum instead of adding stress in sessions."
+                        "Participants could join a chain and submit a turn without facilitator help.",
+                        "Shared authorship reduced hesitation compared with solo drafting.",
+                        "Timed turns helped maintain story momentum during tests."
                     ]
                 },
                 "what_i_learned": [
@@ -605,7 +612,7 @@
                 "items": [
                     {
                         "title": "Project context and challenge are explicit",
-                        "description": "The case study opens with the core tension: pressure and perfectionism block participation."
+                        "description": "The case study opens with the core tension: early pressure can block participation."
                     },
                     {
                         "title": "Role and team are immediately visible",
@@ -795,21 +802,24 @@
                             "title": "Quest Suggestions",
                             "description": "Low-commitment activities framed as optional adventures — each with a title, brief description, and estimated time.",
                             "why": "The word \"quest\" makes mundane activities feel interesting. Framing matters more than content.",
-                            "image": "/projects/sidequest/feature-quests.png"
+                            "image": "/projects/sidequest/feature-quests.png",
+                            "caption": "Quest cards prioritized by effort and time-to-start."
                         },
                         {
                             "id": "friendly_guide",
                             "title": "Friendly Guide",
                             "description": "A small mascot that appears throughout the experience, offering encouragement without being intrusive.",
                             "why": "The mascot adds warmth. It makes the app feel like a companion, not a tool.",
-                            "image": "/projects/sidequest/feature-mascot.png"
+                            "image": "/projects/sidequest/feature-mascot.png",
+                            "caption": "Mascot guidance appears at decision points to reduce hesitation."
                         },
                         {
                             "id": "quick_start",
                             "title": "Quick Start Flow",
                             "description": "A quest in two taps. No account required, no preferences to configure.",
                             "why": "Each extra step between initial boredom and first activity selection can reduce momentum. The flow minimizes that gap.",
-                            "image": "/projects/sidequest/feature-flow.png"
+                            "image": "/projects/sidequest/feature-flow.png",
+                            "caption": "Two-tap flow from idle state to first quest selection."
                         }
                     ],
                     "prototype": {
@@ -842,9 +852,9 @@
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
-                        "Participants described the quest framing as approachable and easy to understand.",
+                        "Participants described quest framing as approachable and easy to understand.",
                         "Mascot-led prompts were interpreted as supportive rather than intrusive.",
-                        "Low-pressure prompts encouraged users to consider activities they might otherwise skip."
+                        "The two-tap quest flow reduced hesitation before picking an activity."
                     ],
                     "media_demo": {
                         "src": "/projects/sidequest/hifi-4.png",

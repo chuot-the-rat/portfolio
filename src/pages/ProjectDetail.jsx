@@ -599,8 +599,16 @@ const ProjectDetail = () => {
         "This case study documents the user problem, the design response, and the evidence behind the final outcome.",
     );
 
+    const previewLayout = String(project.previewLayout || "").toLowerCase();
+    const layoutClass =
+        previewLayout === "mobile" || previewLayout === "tablet"
+            ? `project-detail--layout-${previewLayout}`
+            : "project-detail--layout-tablet";
+
     return (
-        <div className={`project-detail project-detail--${project.id || "unknown"}`}>
+        <div
+            className={`project-detail project-detail--${project.id || "unknown"} ${layoutClass}`}
+        >
             <ReadingProgress />
 
             {/* Hero — full Sharleen-style header */}

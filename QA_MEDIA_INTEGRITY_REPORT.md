@@ -1,9 +1,9 @@
 # Portfolio Media Integrity Report
 
-Generated: 2026-04-10T15:22:06.461Z
+Generated: 2026-04-10T20:27:01.749Z
 
-- Total referenced media: 76
-- Present in `public/projects`: 76
+- Total referenced media: 75
+- Present in `public/projects`: 75
 - Missing from `public/projects`: 0
 
 ## Launch Media Checks (Case Studies)
@@ -20,7 +20,7 @@ Generated: 2026-04-10T15:22:06.461Z
 - Missing paths: none
 
 ### InkLink — Collaborative Writing App (`inklink`)
-- Referenced: 9
+- Referenced: 8
 - Missing: 0
 - Missing paths: none
 

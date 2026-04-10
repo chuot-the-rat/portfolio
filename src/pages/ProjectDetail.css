@@ -38,7 +38,7 @@
 .project-hero {
     padding-top: var(--space-12);
     padding-bottom: 0;
-    margin-bottom: clamp(2.25rem, 4.6vw, 3.5rem);
+    margin-bottom: clamp(1.75rem, 3.8vw, 2.8rem);
 }
 
 /* ─ Breadcrumb ─ */
@@ -300,8 +300,8 @@
 
 /* ─ Launch Media Section ─ */
 .project-launch-media {
-    margin-top: clamp(var(--space-8), 3vw, var(--space-10));
-    margin-bottom: clamp(var(--space-6), 2.6vw, var(--space-8));
+    margin-top: clamp(var(--space-4), 1.8vw, var(--space-6));
+    margin-bottom: clamp(var(--space-8), 3vw, var(--space-10));
 }
 
 .launch-media-card {
@@ -309,7 +309,7 @@
     border-radius: var(--radius-xl);
     background: var(--color-bg-secondary);
     box-shadow: var(--shadow-md);
-    padding: clamp(var(--space-5), 2vw, var(--space-6));
+    padding: clamp(var(--space-5), 2.2vw, var(--space-7));
 }
 
 .launch-media-label {
@@ -331,11 +331,11 @@
 }
 
 .launch-media-caption {
-    margin: var(--space-3) 0 var(--space-5);
-    font-size: clamp(0.88rem, 0.36vw + 0.82rem, 0.95rem);
+    margin: var(--space-3) 0 var(--space-6);
+    font-size: clamp(0.9rem, 0.34vw + 0.84rem, 0.97rem);
     line-height: var(--line-height-relaxed);
     color: var(--color-text-secondary);
-    max-width: 70ch;
+    max-width: 64ch;
 }
 
 .launch-media-embed {
@@ -421,14 +421,14 @@
    ────────────────────────────────────────────────────────────────────── */
 
 .project-content {
-    padding-top: clamp(2.2rem, 4.5vw, 3.4rem);
+    padding-top: clamp(1.9rem, 4vw, 3rem);
 }
 
 .project-credibility {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-10);
 }
 
 .project-credibility-item {
@@ -456,7 +456,7 @@
 
 /* ─ Section Container ─ */
 .project-section {
-    margin-bottom: clamp(3.6rem, 7vw, 5.6rem);
+    margin-bottom: clamp(3.2rem, 6.2vw, 5rem);
     max-width: var(--layout-reading-max);
 }
 
@@ -925,7 +925,7 @@
 }
 
 .accordion-content {
-    padding: 0 var(--space-6) var(--space-6);
+    padding: 0 var(--space-6) var(--space-7);
 }
 
 .accordion-desc {
@@ -1042,8 +1042,8 @@
 .features-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-20);
-    margin: var(--space-16) 0;
+    gap: clamp(var(--space-12), 5vw, var(--space-16));
+    margin: var(--space-12) 0;
 }
 
 .feature-item {
@@ -1095,6 +1095,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    max-width: 58ch;
 }
 
 .feature-title {
@@ -1544,15 +1545,17 @@
 
 .image-caption {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     gap: var(--space-3);
-    margin-top: var(--space-5);
+    margin-top: var(--space-4);
     font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    letter-spacing: 0.04em;
-    color: var(--color-text-tertiary);
+    font-size: clamp(0.7rem, 0.18vw + 0.67rem, 0.78rem);
+    letter-spacing: 0.03em;
+    color: color-mix(in srgb, var(--color-text-secondary) 76%, var(--color-text-tertiary));
     font-style: normal;
-    line-height: 1.55;
+    line-height: 1.6;
+    max-width: 66ch;
+    text-wrap: pretty;
 }
 
 .before-after-caption {
@@ -1578,6 +1581,127 @@
 
 .project-detail--inklink .prototype-tabs-section {
     margin-top: var(--space-12);
+}
+
+/* Layout-aware device framing for case-study media blocks */
+.project-detail--layout-mobile .cs-browser-mockup,
+.project-detail--layout-mobile .section-image,
+.project-detail--layout-mobile .feature-media,
+.project-detail--layout-mobile .hifi-screen-image {
+    max-width: min(420px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.project-detail--layout-mobile .mockup-frame {
+    max-width: min(320px, 84vw);
+    border-radius: 28px;
+}
+
+.project-detail--layout-mobile .mockup-frame-screen {
+    border-radius: 20px;
+}
+
+.project-detail--layout-mobile .cs-browser-content img,
+.project-detail--layout-mobile .cs-browser-content video,
+.project-detail--layout-mobile .section-image img,
+.project-detail--layout-mobile .feature-media img,
+.project-detail--layout-mobile .hifi-screen-image img {
+    max-height: 740px;
+    object-fit: contain;
+}
+
+.project-detail--layout-tablet .cs-browser-mockup,
+.project-detail--layout-tablet .section-image,
+.project-detail--layout-tablet .feature-media,
+.project-detail--layout-tablet .hifi-screen-image {
+    max-width: min(860px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.project-detail--layout-tablet .mockup-frame {
+    max-width: min(680px, 100%);
+    border-radius: 18px;
+    padding: var(--space-4);
+}
+
+.project-detail--layout-tablet .mockup-frame-screen {
+    border-radius: 14px;
+}
+
+.project-detail--layout-tablet .mockup-scroll-viewport {
+    max-height: 560px;
+}
+
+.project-detail--layout-tablet .cs-browser-content img,
+.project-detail--layout-tablet .cs-browser-content video,
+.project-detail--layout-tablet .section-image img,
+.project-detail--layout-tablet .feature-media img,
+.project-detail--layout-tablet .hifi-screen-image img {
+    max-height: 620px;
+    object-fit: contain;
+}
+
+/* InkLink-specific tablet framing: avoid desktop-like width and keep tablet proportions */
+.project-detail--inklink.project-detail--layout-tablet .cs-browser-mockup,
+.project-detail--inklink.project-detail--layout-tablet .section-image,
+.project-detail--inklink.project-detail--layout-tablet .feature-media,
+.project-detail--inklink.project-detail--layout-tablet .hifi-screen-image {
+    max-width: min(clamp(34rem, 72vw, 48rem), 100%);
+}
+
+.project-detail--inklink.project-detail--layout-tablet .mockup-frame {
+    max-width: min(clamp(30rem, 66vw, 40rem), 100%);
+    border-radius: 22px;
+}
+
+.project-detail--inklink.project-detail--layout-tablet .mockup-frame-screen {
+    border-radius: 16px;
+}
+
+.project-detail--inklink.project-detail--layout-tablet .mockup-scroll-viewport {
+    max-height: clamp(480px, 62vh, 700px);
+}
+
+.project-detail--inklink.project-detail--layout-tablet .cs-browser-content img,
+.project-detail--inklink.project-detail--layout-tablet .cs-browser-content video,
+.project-detail--inklink.project-detail--layout-tablet .section-image img,
+.project-detail--inklink.project-detail--layout-tablet .feature-media img,
+.project-detail--inklink.project-detail--layout-tablet .hifi-screen-image img {
+    max-height: clamp(520px, 68vh, 760px);
+}
+
+@media (max-width: 1024px) {
+    .project-detail--inklink.project-detail--layout-tablet .cs-browser-mockup,
+    .project-detail--inklink.project-detail--layout-tablet .section-image,
+    .project-detail--inklink.project-detail--layout-tablet .feature-media,
+    .project-detail--inklink.project-detail--layout-tablet .hifi-screen-image,
+    .project-detail--inklink.project-detail--layout-tablet .mockup-frame {
+        max-width: min(92vw, 42rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .project-detail--inklink.project-detail--layout-tablet .cs-browser-mockup,
+    .project-detail--inklink.project-detail--layout-tablet .section-image,
+    .project-detail--inklink.project-detail--layout-tablet .feature-media,
+    .project-detail--inklink.project-detail--layout-tablet .hifi-screen-image,
+    .project-detail--inklink.project-detail--layout-tablet .mockup-frame {
+        max-width: 100%;
+    }
+
+    .project-detail--inklink.project-detail--layout-tablet .cs-browser-content img,
+    .project-detail--inklink.project-detail--layout-tablet .cs-browser-content video,
+    .project-detail--inklink.project-detail--layout-tablet .section-image img,
+    .project-detail--inklink.project-detail--layout-tablet .feature-media img,
+    .project-detail--inklink.project-detail--layout-tablet .hifi-screen-image img {
+        max-height: clamp(360px, 54vh, 560px);
+    }
+
+    .project-detail--inklink.project-detail--layout-tablet .mockup-scroll-viewport {
+        max-height: clamp(360px, 56vh, 560px);
+    }
 }
 
 /* Leading dash detail */
