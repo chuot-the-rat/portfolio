@@ -27,6 +27,9 @@ const CATEGORY_MAP = {
   "Mobile App":       "UX/UI",
   "Motion Graphics":  "Motion Design",
   "Packaging Design": "Graphic Design",
+  "Editorial Design": "Graphic Design",
+  "Campaign Design":  "Graphic Design",
+  "Graphic Design":   "Graphic Design",
 };
 
 export default function HomeWorkList({ projects }) {
