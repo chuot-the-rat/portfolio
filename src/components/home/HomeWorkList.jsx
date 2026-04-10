@@ -42,11 +42,11 @@ export default function HomeWorkList({ projects }) {
   const bodyRef = useRef(null);
   const previewRafRef = useRef(null);
   const pendingPointerRef = useRef(null);
-  const PREVIEW_RATIO = 4 / 3;
-  const PREVIEW_MIN_WIDTH = 286;
-  const PREVIEW_MAX_WIDTH = 340;
-  const PREVIEW_POINTER_OFFSET_X = 24;
-  const PREVIEW_POINTER_OFFSET_Y = 40;
+  const PREVIEW_RATIO = 5 / 4;
+  const PREVIEW_MIN_WIDTH = 300;
+  const PREVIEW_MAX_WIDTH = 360;
+  const PREVIEW_POINTER_OFFSET_X = 28;
+  const PREVIEW_POINTER_OFFSET_Y = 34;
   const PREVIEW_PADDING = 12;
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -55,9 +55,9 @@ export default function HomeWorkList({ projects }) {
     const bodyRect = bodyRef.current?.getBoundingClientRect();
     if (!bodyRect) return null;
 
-    const previewWidth = clamp(bodyRect.width * 0.24, PREVIEW_MIN_WIDTH, PREVIEW_MAX_WIDTH);
+    const previewWidth = clamp(bodyRect.width * 0.26, PREVIEW_MIN_WIDTH, PREVIEW_MAX_WIDTH);
     const previewHeight = previewWidth / PREVIEW_RATIO;
-    const minX = Math.max(bodyRect.width * 0.52, PREVIEW_PADDING);
+    const minX = Math.max(bodyRect.width * 0.5, PREVIEW_PADDING);
     const maxX = Math.max(PREVIEW_PADDING, bodyRect.width - previewWidth - PREVIEW_PADDING);
     const maxY = Math.max(PREVIEW_PADDING, bodyRect.height - previewHeight - PREVIEW_PADDING);
 
@@ -132,6 +132,28 @@ export default function HomeWorkList({ projects }) {
       window.cancelAnimationFrame(previewRafRef.current);
     }
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!hoveredId || previewMode !== "mouse") return;
+      setPreviewPosition((current) => {
+        const bodyRect = bodyRef.current?.getBoundingClientRect();
+        if (!bodyRect) return current;
+        const previewWidth = clamp(bodyRect.width * 0.26, PREVIEW_MIN_WIDTH, PREVIEW_MAX_WIDTH);
+        const previewHeight = previewWidth / PREVIEW_RATIO;
+        const minX = Math.max(bodyRect.width * 0.5, PREVIEW_PADDING);
+        const maxX = Math.max(PREVIEW_PADDING, bodyRect.width - previewWidth - PREVIEW_PADDING);
+        const maxY = Math.max(PREVIEW_PADDING, bodyRect.height - previewHeight - PREVIEW_PADDING);
+        return {
+          x: clamp(current.x, minX, maxX),
+          y: clamp(current.y, PREVIEW_PADDING, maxY),
+        };
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [hoveredId, previewMode, PREVIEW_RATIO]);
 
   const previewSrc = previewCandidates[previewIndex] ?? null;
   const previewVideoSrc = hoveredProject?.previewVideoSrc ?? null;
