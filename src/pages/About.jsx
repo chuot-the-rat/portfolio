@@ -43,40 +43,52 @@ const fadeUp = {
 
 const HOW_I_WORK_BLOCKS = [
     {
+        code: "01/06",
         id: "approach-discovery",
         group: "Approach",
         title: "Start with context",
         body: "I ground decisions in user behavior, constraints, and business goals before exploring solutions.",
+        framed: false,
     },
     {
+        code: "02/06",
         id: "approach-structure",
         group: "Approach",
         title: "Clarify the flow",
         body: "I simplify complexity into clear states, interactions, and priorities teams can build with confidence.",
+        framed: true,
     },
     {
+        code: "03/06",
         id: "approach-iterate",
         group: "Approach",
         title: "Ship and refine",
         body: "I define what success looks like, ship intentionally, and improve based on real-world signals.",
+        framed: false,
     },
     {
+        code: "04/06",
         id: "principle-research",
         group: "Principles",
         title: "Research over assumptions",
         body: "I would rather test quickly than guess confidently. Evidence keeps direction honest.",
+        framed: false,
     },
     {
+        code: "05/06",
         id: "principle-clarity",
         group: "Principles",
         title: "Clarity is the craft",
         body: "Good design should feel obvious to users and understandable to cross-functional partners.",
+        framed: true,
     },
     {
+        code: "06/06",
         id: "principle-focus",
         group: "Principles",
         title: "Progress over perfection",
         body: "I optimize for meaningful momentum and outcomes, not endless polish for its own sake.",
+        framed: false,
     },
 ];
 
@@ -155,7 +167,7 @@ export default function About() {
                                     into design, where I still optimize for the <em className="about-em">person on the other side of the screen</em> first.
                                 </p>
                                 <p className="about-para">
-                                    I am a <em className="about-em">product designer</em> who enjoys shaping end-to-end product experiences with teams.
+                                    I am a <em className="about-em">product designer</em> who likes making complex product decisions feel clear for users and teams.
                                     I am currently finishing my Diploma in Digital Design and Development at BCIT, and outside work I am usually in a manga arc or refining a presentation deck.
                                 </p>
                             </div>
@@ -172,19 +184,27 @@ export default function About() {
                         <div className="about-work-header">
                             <p className="about-connect-label">Approach</p>
                             <h2 className="about-work-heading">How I work</h2>
+                            <p className="about-work-intro">
+                                I balance user clarity, product goals, and team execution so ideas move cleanly from concept to shipped outcomes.
+                            </p>
                         </div>
-                        <div className="about-work-grid" role="list" aria-label="How I work">
+                        <div className="about-work-timeline" role="list" aria-label="How I work">
                             {HOW_I_WORK_BLOCKS.map((block) => (
                                 <article
                                     key={block.id}
-                                    className="about-work-card"
+                                    className={`about-work-row ${block.framed ? "about-work-row--framed" : ""}`}
                                     role="listitem"
                                 >
-                                    <div className="about-work-card-top">
-                                        <span className="about-work-kicker">{block.group}</span>
-                                        <h3 className="about-work-card-title">{block.title}</h3>
+                                    <div className="about-work-step" aria-hidden="true">
+                                        {block.code}
                                     </div>
-                                    <p className="about-work-card-body">{block.body}</p>
+                                    <div className="about-work-meta">
+                                        <span className="about-work-kicker">{block.group}</span>
+                                    </div>
+                                    <div className="about-work-content">
+                                        <h3 className="about-work-row-title">{block.title}</h3>
+                                        <p className="about-work-row-body">{block.body}</p>
+                                    </div>
                                 </article>
                             ))}
                         </div>
