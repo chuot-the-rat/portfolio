@@ -23,6 +23,7 @@
 
 .home-main {
     --home-section-gap: clamp(4.5rem, 6.2vw, 6.8rem);
+    padding-top: clamp(2rem, 4.4vw, 3.1rem);
 }
 
 /* ── Hero + passbook rail layout ────────────────────────────────────────── */
@@ -32,7 +33,7 @@
     grid-template-columns: minmax(0, 1fr) clamp(336px, 27vw, 420px);
     gap: clamp(1.25rem, 2.2vw, 2.1rem);
     align-items: start;
-    margin-bottom: clamp(2.4rem, 4.2vw, 4.6rem);
+    margin-bottom: clamp(2rem, 3.6vw, 3.8rem);
     position: relative;
     z-index: 1;
 }
@@ -67,7 +68,7 @@
 /* Scope the massive display headline to the home hero only.
    Other pages using HeroContainer inherit the smaller safe default. */
 .home-hero-grid {
-    --hs-headline-size:     clamp(3.6rem, 9vw, 8rem);
+    --hs-headline-size:     clamp(3.2rem, 8.2vw, 7.1rem);
     --hs-headline-leading:  0.92;
     --hs-headline-tracking: -0.04em;
     --hs-subline-size:      clamp(1.05rem, 1.5vw, 1.28rem);
@@ -128,7 +129,7 @@
     background: transparent;
     color: color-mix(in srgb, var(--color-text) 86%, var(--color-text-secondary));
     text-transform: uppercase;
-    font-size: clamp(0.88rem, 1.1vw, 0.98rem);
+    font-size: clamp(0.94rem, 1.15vw, 1.04rem);
     font-weight: 650;
     letter-spacing: 0.07em;
     display: inline-flex;
@@ -191,7 +192,7 @@
 /* ── Footer ──────────────────────────────────────────────────────────────── */
 
 .home-footer {
-    margin-top: clamp(2rem, 4.5vw, 3.8rem);
+    margin-top: clamp(1.75rem, 3.8vw, 3.2rem);
     padding: clamp(2.4rem, 4.4vw, 3.6rem) 0 var(--space-12);
     border-top: 1px solid var(--color-border);
 }
@@ -199,10 +200,9 @@
 /* Two-column body: concise intro left, dominant links right */
 .footer-body {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 36ch);
+    grid-template-columns: minmax(0, 1fr) minmax(350px, 40ch);
     gap: clamp(var(--space-8), 3vw, var(--space-12));
     align-items: start;
-    justify-content: space-between;
     padding-bottom: clamp(1.8rem, 3.6vw, 2.8rem);
 }
 
@@ -214,7 +214,7 @@
 
 .footer-intro-line {
     font-family: var(--font-sans);
-    font-size: clamp(1.04rem, 1.25vw, 1.2rem);
+    font-size: clamp(0.98rem, 1.1vw, 1.1rem);
     line-height: 1.45;
     color: color-mix(in srgb, var(--color-text) 90%, var(--color-text-secondary));
     margin: 0;
@@ -232,6 +232,8 @@
     border-top: 1px solid color-mix(in srgb, var(--color-border) 84%, transparent);
     border-bottom: 1px solid color-mix(in srgb, var(--color-border) 84%, transparent);
     justify-self: end;
+    max-width: 40ch;
+    margin-left: auto;
 }
 
 .footer-nav-link {
@@ -329,7 +331,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: var(--space-6);
+    padding-top: var(--space-5);
     border-top: 1px solid var(--color-border);
 }
 
@@ -372,7 +374,7 @@
     }
 
     .home-main {
-        padding-top: var(--space-6);
+        padding-top: var(--space-5);
         padding-bottom: var(--space-12);
     }
 
@@ -415,7 +417,7 @@
 @media (max-width: 1100px) and (min-width: 769px) {
     .home-hero-passbook {
         grid-template-columns: minmax(0, 1fr) clamp(300px, 30vw, 360px);
-        gap: clamp(0.9rem, 1.6vw, 1.25rem);
+        gap: clamp(0.85rem, 1.3vw, 1.1rem);
     }
 
     .home-passbook-rail {
@@ -426,7 +428,7 @@
 @media (max-width: 1200px) and (min-width: 901px) {
     .home-hero-passbook {
         grid-template-columns: minmax(0, 1fr) clamp(316px, 27vw, 380px);
-        gap: clamp(0.9rem, 1.4vw, 1.2rem);
+        gap: clamp(0.85rem, 1.25vw, 1.05rem);
     }
 
     .home-passbook-rail {
