@@ -193,15 +193,17 @@
 /* Two-column body: concise intro left, dominant links right */
 .footer-body {
     display: grid;
-    grid-template-columns: max-content minmax(280px, 34ch);
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 36ch);
     gap: clamp(var(--space-8), 3vw, var(--space-12));
     align-items: start;
+    justify-content: space-between;
     padding-bottom: clamp(1.8rem, 3.6vw, 2.8rem);
 }
 
 .footer-intro {
     display: flex;
     align-items: flex-start;
+    justify-self: start;
 }
 
 .footer-intro-line {
@@ -223,6 +225,7 @@
     width: 100%;
     border-top: 1px solid color-mix(in srgb, var(--color-border) 84%, transparent);
     border-bottom: 1px solid color-mix(in srgb, var(--color-border) 84%, transparent);
+    justify-self: end;
 }
 
 .footer-nav-link {

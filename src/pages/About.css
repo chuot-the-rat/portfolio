@@ -385,20 +385,19 @@
     50%       { opacity: 0.35; transform: scale(0.7); }
 }
 
-/* ── How I Work ─────────────────────────────────────────────────────────────
-   ─────────────────────────────────────────────────────────────────────────── */
+/* ── How I Work (Unified Section) ───────────────────────────────────────── */
 
-.about-process {
+.about-work {
     margin-top: var(--section-spacing-lg);
     padding-top: clamp(3rem, 6vw, 5rem);
     border-top: 1px solid var(--color-border);
 }
 
-.about-process-header {
+.about-work-header {
     margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.about-process-heading {
+.about-work-heading {
     font-family: var(--font-display);
     font-size: clamp(1.75rem, 3.5vw, 2.75rem);
     font-weight: 500;
@@ -408,14 +407,15 @@
     line-height: 1.1;
 }
 
-.about-process-flow {
+.about-work-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
 }
 
-.about-process-card,
-.about-philosophy-block {
+.about-work-card {
     position: relative;
     padding: var(--space-7);
     border: 1px solid var(--color-border);
@@ -430,52 +430,21 @@
         border-color var(--dur-ui) var(--ease-out-premium);
 }
 
-.about-process-card-top {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
-}
-
-.about-process-card:hover,
-.about-philosophy-block:hover {
+.about-work-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: color-mix(in srgb, var(--color-accent-vivid) 24%, var(--color-border));
 }
 
-.about-process-phase {
-    font-family: var(--chip-font-family);
-    font-size: var(--chip-font-size);
-    letter-spacing: var(--chip-letter-spacing);
-    color: var(--color-accent-vivid);
-    padding: var(--space-1) var(--space-3);
-    border: 1px solid color-mix(in srgb, var(--color-accent-vivid) 35%, var(--color-border));
-    border-radius: var(--chip-radius);
-}
-
-.about-process-card-title {
-    font-size: clamp(1.05rem, 2vw, 1.2rem);
-    font-weight: 500;
-    line-height: 1.2;
-    margin: 0;
-    color: var(--color-text);
-}
-
-.about-process-card-body {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-text-secondary);
-    margin: 0 0 var(--space-6);
-}
-
-.about-process-tags {
+.about-work-card-top {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
 }
 
-.about-process-tag {
+.about-work-kicker {
     display: inline-flex;
     align-items: center;
     padding: var(--chip-padding-y) var(--chip-padding-x);
@@ -490,48 +459,15 @@
     white-space: nowrap;
 }
 
-.about-process-arrow {
-    position: absolute;
-    right: -1px;
-    top: 50%;
-    transform: translate(50%, -50%);
-    font-size: 1.15rem;
-    color: var(--color-text-tertiary);
-    pointer-events: none;
-    opacity: 0.8;
-}
-
-/* ── My Philosophy ───────────────────────────────────────────────────────────
-   ─────────────────────────────────────────────────────────────────────────── */
-
-.about-philosophy {
-    margin-top: var(--section-spacing-lg);
-    padding-top: clamp(3rem, 6vw, 5rem);
-    border-top: 1px solid var(--color-border);
-}
-
-.about-philosophy-header {
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.about-philosophy-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-    border-top: 1px solid var(--color-border);
-    padding-top: var(--space-4);
-}
-
-.about-philosophy-block-title {
-    display: block;
+.about-work-card-title {
     font-size: clamp(1.05rem, 2vw, 1.2rem);
     font-weight: 500;
-    color: var(--color-text);
     line-height: 1.2;
-    margin-bottom: var(--space-3);
+    margin: 0;
+    color: var(--color-text);
 }
 
-.about-philosophy-block-body {
+.about-work-card-body {
     font-size: 0.98rem;
     line-height: 1.52;
     color: var(--color-text-secondary);
@@ -665,40 +601,22 @@
         line-height: 1.65;
     }
 
-    .about-process-flow {
+    .about-work-grid {
         grid-template-columns: 1fr;
         gap: var(--space-4);
     }
 
-    .about-process-card {
+    .about-work-card {
         padding: var(--space-6);
     }
 
-    .about-process-card-title {
+    .about-work-card-title {
         line-height: 1.25;
     }
 
-    .about-process-card-body {
+    .about-work-card-body {
         font-size: 0.98rem;
         line-height: 1.62;
-    }
-
-    .about-process-arrow {
-        display: none;
-    }
-
-    .about-philosophy-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-3);
-    }
-
-    .about-philosophy-block {
-        padding: var(--space-7);
-    }
-
-    .about-philosophy-block-body {
-        max-width: none;
-        font-size: 0.98rem;
     }
 
     .about-row {

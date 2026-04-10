@@ -41,24 +41,42 @@ const fadeUp = {
     transition: { duration: 0.45 },
 };
 
-const PROCESS_BLOCKS = [
+const HOW_I_WORK_BLOCKS = [
     {
-        phase: "01",
-        title: "Discover",
-        body: "I start by getting close to the problem so every decision is grounded in evidence, not preference.",
-        tags: ["Domain research", "User interviews", "Competitive patterns"],
+        id: "approach-discovery",
+        group: "Approach",
+        title: "Start with context",
+        body: "I ground decisions in user behavior, constraints, and business goals before exploring solutions.",
     },
     {
-        phase: "02",
-        title: "Shape",
-        body: "I define the problem in plain language, map critical states, and test multiple directions quickly.",
-        tags: ["Problem statement", "Journey mapping", "Rapid exploration"],
+        id: "approach-structure",
+        group: "Approach",
+        title: "Clarify the flow",
+        body: "I simplify complexity into clear states, interactions, and priorities teams can build with confidence.",
     },
     {
-        phase: "03",
-        title: "Ship + Learn",
-        body: "I refine with clear ship criteria, implement where it helps, then iterate with real post-launch feedback.",
-        tags: ["Frontend handoff", "Quality polish", "Post-launch feedback"],
+        id: "approach-iterate",
+        group: "Approach",
+        title: "Ship and refine",
+        body: "I define what success looks like, ship intentionally, and improve based on real-world signals.",
+    },
+    {
+        id: "principle-research",
+        group: "Principles",
+        title: "Research over assumptions",
+        body: "I would rather test quickly than guess confidently. Evidence keeps direction honest.",
+    },
+    {
+        id: "principle-clarity",
+        group: "Principles",
+        title: "Clarity is the craft",
+        body: "Good design should feel obvious to users and understandable to cross-functional partners.",
+    },
+    {
+        id: "principle-focus",
+        group: "Principles",
+        title: "Progress over perfection",
+        body: "I optimize for meaningful momentum and outcomes, not endless polish for its own sake.",
     },
 ];
 
@@ -116,7 +134,7 @@ export default function About() {
                             <NameCycle />
                         </h1>
                         <p className="about-hero-sub">
-                            Product designer bridging research, interaction design, and front-end implementation.
+                            Product designer focused on research, interaction design, and clear product outcomes.
                         </p>
                         <ul className="about-hero-traits" aria-label="Core strengths">
                             {ABOUT_TRAITS.map((trait) => (
@@ -137,9 +155,8 @@ export default function About() {
                                     into design, where I still optimize for the <em className="about-em">person on the other side of the screen</em> first.
                                 </p>
                                 <p className="about-para">
-                                    I am a <em className="about-em">product designer with frontend chops</em>, moving from discovery to shipped interfaces.
-                                    I am currently finishing my Diploma in Digital Design and Development at BCIT.
-                                    Outside work, I am usually in a manga arc or refining a presentation deck.
+                                    I am a <em className="about-em">product designer</em> who enjoys shaping end-to-end product experiences with teams.
+                                    I am currently finishing my Diploma in Digital Design and Development at BCIT, and outside work I am usually in a manga arc or refining a presentation deck.
                                 </p>
                             </div>
                         </motion.div>
@@ -148,70 +165,27 @@ export default function About() {
 
                     {/* ── How I Work ── */}
                     <motion.section
-                        className="about-process"
+                        className="about-work"
                         {...fadeUp}
                         transition={{ duration: 0.45, delay: 0.08 }}
                     >
-                        <div className="about-process-header">
-                            <p className="about-connect-label">Process</p>
-                            <h2 className="about-process-heading">How I work</h2>
+                        <div className="about-work-header">
+                            <p className="about-connect-label">Approach</p>
+                            <h2 className="about-work-heading">How I work</h2>
                         </div>
-                        <div className="about-process-flow" role="list" aria-label="Design process phases">
-                            {PROCESS_BLOCKS.map((step, index) => (
+                        <div className="about-work-grid" role="list" aria-label="How I work">
+                            {HOW_I_WORK_BLOCKS.map((block) => (
                                 <article
-                                    key={step.title}
-                                    className="about-process-card"
+                                    key={block.id}
+                                    className="about-work-card"
                                     role="listitem"
                                 >
-                                    <div className="about-process-card-top">
-                                        <span className="about-process-phase" aria-hidden="true">
-                                            {step.phase}
-                                        </span>
-                                        <h3 className="about-process-card-title">{step.title}</h3>
+                                    <div className="about-work-card-top">
+                                        <span className="about-work-kicker">{block.group}</span>
+                                        <h3 className="about-work-card-title">{block.title}</h3>
                                     </div>
-                                    <p className="about-process-card-body">{step.body}</p>
-                                    <div className="about-process-tags">
-                                        {step.tags.map((tag) => (
-                                            <span key={tag} className="about-process-tag">{tag}</span>
-                                        ))}
-                                    </div>
-                                    {index < PROCESS_BLOCKS.length - 1 ? (
-                                        <span className="about-process-arrow" aria-hidden="true">→</span>
-                                    ) : null}
+                                    <p className="about-work-card-body">{block.body}</p>
                                 </article>
-                            ))}
-                        </div>
-                    </motion.section>
-
-                    {/* ── My Philosophy ── */}
-                    <motion.section
-                        className="about-philosophy"
-                        {...fadeUp}
-                        transition={{ duration: 0.45, delay: 0.08 }}
-                    >
-                        <div className="about-philosophy-header">
-                            <p className="about-connect-label">Philosophy</p>
-                            <h2 className="about-process-heading">My philosophy</h2>
-                        </div>
-                        <div className="about-philosophy-grid">
-                            {[
-                                {
-                                    title: "Research first, always",
-                                    body: "I stay in discovery long enough to find the real problem. Better framing early leads to stronger decisions later.",
-                                },
-                                {
-                                    title: "Design is a communication problem",
-                                    body: "Great work still fails if it is not clearly explained. I treat alignment and storytelling as part of the deliverable.",
-                                },
-                                {
-                                    title: "Ship it, then improve it",
-                                    body: "I prioritize clear shipping criteria over endless polish. Real usage is where meaningful iteration starts.",
-                                },
-                            ].map((block) => (
-                                <div key={block.title} className="about-philosophy-block">
-                                    <strong className="about-philosophy-block-title">{block.title}</strong>
-                                    <p className="about-philosophy-block-body">{block.body}</p>
-                                </div>
                             ))}
                         </div>
                     </motion.section>
