@@ -1,33 +1,106 @@
 {
-    "id": "sap",
-    "title": "Super Auto Pets Motion Graphics",
-    "category": "Motion Graphics",
-    "year": "2025",
-    "tagline": "Animated illustration series inspired by the deck-building roguelike game",
-    "description": "A motion graphics project bringing the colorful characters and playful energy of Super Auto Pets to life through animated illustrations. The project explores character animation, timing, and visual storytelling.",
-    "role": "Motion Designer & Illustrator",
-    "timeline": "In-class Assignment",
-    "team": "Solo Project",
-    "tools": ["Adobe Illustrator", "Adobe After Effects"],
+  "id": "sap",
+  "title": "Super Auto Pets Motion Graphics",
+  "category": "Motion Graphics",
+  "year": "2025",
+  "tagline": "Animated illustration series inspired by the deck-building roguelike game",
+  "description": "A motion graphics project bringing the colorful characters and playful energy of Super Auto Pets to life through animated illustrations. The project explores character animation, timing, and visual storytelling.",
+  "role": "Motion Designer & Illustrator",
+  "timeline": "In-class Assignment",
+  "team": "Solo Project",
+  "tools": ["Adobe Illustrator", "Adobe After Effects"],
+  
+  "video": {
+    "src": "/projects/sap/sapVid.mp4",
+    "alt": "Super Auto Pets motion graphics animation",
+    "autoplay": false
+  },
 
-    "sections": [
-        {
-            "id": "overview",
-            "title": "Project Overview",
-            "type": "text",
-            "content": "A motion graphics project created for an in-class assignment, bringing the colorful characters and playful energy of Super Auto Pets to life through animated illustrations. The project explores character animation, timing, and visual storytelling through the lens of one of the most engaging deck-building roguelike games."
-        },
-        {
-            "id": "inspiration",
-            "title": "Inspiration: Super Auto Pets",
-            "type": "text",
-            "content": "Super Auto Pets is a strategic deck-building game where players collect and combine adorable creatures to build the ultimate auto-battling team. The game's charming art style, expressive character designs, and strategic depth served as the foundation for this motion project. Each pet has distinct personality and mechanics, making them perfect subjects for animation."
-        },
-        {
-            "id": "process",
-            "title": "Design & Animation Process",
-            "type": "text",
-            "content": "Using Adobe Illustrator, character illustrations and UI elements were created with attention to the game's distinctive aesthetic. These designs were then brought to life in After Effects through keyframe animation, exploring movement, timing, and personality-driven motion."
-        }
-    ]
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Project Overview",
+      "type": "text",
+      "content": "A motion graphics project created for an in-class assignment, bringing the colorful characters and playful energy of Super Auto Pets to life through animated illustrations. The project explores character animation, timing, and visual storytelling through the lens of one of the most engaging deck-building roguelike games."
+    },
+    {
+      "id": "inspiration",
+      "title": "Inspiration: Super Auto Pets",
+      "type": "text",
+      "content": "Super Auto Pets is a strategic deck-building game where players collect and combine adorable creatures to build the ultimate auto-battling team. The game's charming art style, expressive character designs, and strategic depth served as the foundation for this motion project. Each pet has distinct personality and mechanics, making them perfect subjects for animation."
+    },
+    {
+      "id": "process",
+      "title": "Design & Animation Process",
+      "type": "text",
+      "content": "Using Adobe Illustrator, character illustrations and UI elements were created with attention to the game's distinctive aesthetic. These designs were then brought to life in After Effects through keyframe animation, exploring movement, timing, and personality-driven motion."
+    },
+    {
+      "id": "buttons",
+      "title": "UI Buttons & Controls",
+      "type": "gallery",
+      "gridVariant": "small",
+      "images": [
+        { "src": "/projects/sap/SVG/arenaButton.svg", "alt": "Arena button" },
+        { "src": "/projects/sap/SVG/customButton.svg", "alt": "Custom button" },
+        { "src": "/projects/sap/SVG/endTurnButton.svg", "alt": "End turn button" },
+        { "src": "/projects/sap/SVG/friendsButton.svg", "alt": "Friends button" },
+        { "src": "/projects/sap/SVG/petsButton.svg", "alt": "Pets button" },
+        { "src": "/projects/sap/SVG/playButton.svg", "alt": "Play button" },
+        { "src": "/projects/sap/SVG/rollButton.svg", "alt": "Roll button" },
+        { "src": "/projects/sap/SVG/versusButton.svg", "alt": "Versus button" },
+        { "src": "/projects/sap/SVG/hamburgerIcon.svg", "alt": "Menu icon" },
+        { "src": "/projects/sap/SVG/historyButton.svg", "alt": "History button" }
+      ]
+    },
+    {
+      "id": "animals",
+      "title": "Game Animals & Creatures",
+      "type": "gallery",
+      "gridVariant": "medium",
+      "images": [
+        { "src": "/projects/sap/SVG/cat.svg", "alt": "Cat character" },
+        { "src": "/projects/sap/SVG/cow.svg", "alt": "Cow character" },
+        { "src": "/projects/sap/SVG/emu.svg", "alt": "Emu character" },
+        { "src": "/projects/sap/SVG/frog.svg", "alt": "Frog character" },
+        { "src": "/projects/sap/SVG/hammerShark.svg", "alt": "Hammer shark character" },
+        { "src": "/projects/sap/SVG/hedgehog.svg", "alt": "Hedgehog character" },
+        { "src": "/projects/sap/SVG/kiwi.svg", "alt": "Kiwi bird character" },
+        { "src": "/projects/sap/SVG/mole.svg", "alt": "Mole character" },
+        { "src": "/projects/sap/SVG/monkey.svg", "alt": "Monkey character" },
+        { "src": "/projects/sap/SVG/orca.svg", "alt": "Orca character" },
+        { "src": "/projects/sap/SVG/rhino.svg", "alt": "Rhinoceros character" },
+        { "src": "/projects/sap/SVG/turtle.svg", "alt": "Turtle character" },
+        { "src": "/projects/sap/SVG/worm.svg", "alt": "Worm character" }
+      ]
+    },
+    {
+      "id": "backgrounds",
+      "title": "Battle Arena Backgrounds",
+      "type": "gallery",
+      "gridVariant": "large",
+      "images": [
+        { "src": "/projects/sap/SVG/background1.svg", "alt": "Background environment 1" },
+        { "src": "/projects/sap/SVG/background2.svg", "alt": "Background environment 2" },
+        { "src": "/projects/sap/SVG/background3.svg", "alt": "Background environment 3" }
+      ]
+    },
+    {
+      "id": "assets",
+      "title": "Game Assets & UI Elements",
+      "type": "gallery",
+      "gridVariant": "small",
+      "images": [
+        { "src": "/projects/sap/SVG/attack-health.svg", "alt": "Attack and health indicator" },
+        { "src": "/projects/sap/SVG/boneBar.svg", "alt": "Bone bar UI element" },
+        { "src": "/projects/sap/SVG/coin.svg", "alt": "Coin currency icon" },
+        { "src": "/projects/sap/SVG/cursor.svg", "alt": "Custom cursor" },
+        { "src": "/projects/sap/SVG/Health.svg", "alt": "Health icon" },
+        { "src": "/projects/sap/SVG/Hourglass.svg", "alt": "Hourglass timer icon" },
+        { "src": "/projects/sap/SVG/plate.svg", "alt": "Plate/board element" },
+        { "src": "/projects/sap/SVG/speech.svg", "alt": "Speech bubble" },
+        { "src": "/projects/sap/SVG/trophy.svg", "alt": "Trophy achievement icon" }
+      ]
+    }
+  ]
 }

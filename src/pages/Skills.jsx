@@ -1,54 +1,26 @@
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
+import { SKILL_CATEGORIES } from "../data/skills/skillsData";
 import "./Skills.css";
 
-// Chaos mode skill data only
-const skillsData = {
-    design: {
-        label: "Design",
-        skills: [
-            { name: "User Research", level: "v2.0" },
-            { name: "Wireframing", level: "v3.0" },
-            { name: "Prototyping", level: "v3.0" },
-            { name: "User Testing", level: "v1.0" },
-            { name: "User Flows", level: "v2.0" },
-            { name: "Journey Mapping", level: "v1.0" },
-        ],
-    },
-    ui: {
-        label: "UI Design",
-        skills: [
-            { name: "Figma", level: "v3.0" },
-            { name: "Typography", level: "v3.0" },
-            { name: "Color Theory", level: "v3.0" },
-            { name: "Accessibility", level: "v1.0" },
-            { name: "Responsive Design", level: "v2.0" },
-            { name: "Design Systems", level: "v1.0" },
-        ],
-    },
-    development: {
-        label: "Development",
-        skills: [
-            { name: "HTML/CSS", level: "v3.0" },
-            { name: "JavaScript", level: "v1.0" },
-            { name: "React", level: "v1.0" },
-            { name: "Next.js", level: "beta" },
-            { name: "Python", level: "v1.0" },
-            { name: "Git/GitHub", level: "v1.0" },
-        ],
-    },
-    tools: {
-        label: "Tools",
-        skills: [
-            { name: "Adobe Illustrator", level: "v2.0" },
-            { name: "Photoshop", level: "v1.0" },
-            { name: "After Effects", level: "beta" },
-            { name: "Framer", level: "v1.0" },
-            { name: "VS Code", level: "v3.0" },
-            { name: "Notion", level: "v3.0" },
-        ],
-    },
-};
+function LiveClock() {
+    const formatTime = () =>
+        new Date().toLocaleTimeString("en-US", {
+            timeZone: "America/Vancouver",
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true,
+        });
+
+    const [time, setTime] = useState(formatTime);
+
+    useEffect(() => {
+        const id = setInterval(() => setTime(formatTime()), 30_000);
+        return () => clearInterval(id);
+    }, []);
+
+    return <span className="skills-status-time">{time}</span>;
+}
 
 export default function Skills() {
     const [hoveredSkill, setHoveredSkill] = useState(null);
@@ -82,6 +54,14 @@ export default function Skills() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
+                    <div className="skills-status" aria-label="Availability status">
+                        <span className="skills-status-dot" aria-hidden="true" />
+                        <span>Available</span>
+                        <span className="skills-status-sep" aria-hidden="true">·</span>
+                        <span>Vancouver, BC</span>
+                        <span className="skills-status-sep" aria-hidden="true">·</span>
+                        <LiveClock />
+                    </div>
                     <h1 className="skills-title">Skills & Expertise</h1>
                     <p className="skills-subtitle">
                         A toolkit of design and development capabilities
@@ -92,10 +72,9 @@ export default function Skills() {
                     ref={sectionRef}
                     className={`skills-content ${isVisible ? "visible" : ""}`}
                 >
-                    {Object.entries(skillsData).map(
-                        ([key, category], categoryIndex) => (
+                    {SKILL_CATEGORIES.map((category, categoryIndex) => (
                             <motion.div
-                                key={key}
+                                key={category.id}
                                 className="skills-category"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -110,8 +89,7 @@ export default function Skills() {
                                 </h2>
 
                                 <div className="skills-list">
-                                    {category.skills.map(
-                                        (skill, skillIndex) => (
+                                    {category.skills.map((skill, skillIndex) => (
                                             <motion.div
                                                 key={skill.name}
                                                 className="skill-item"
@@ -166,12 +144,10 @@ export default function Skills() {
                                                     </span>
                                                 </div>
                                             </motion.div>
-                                        ),
-                                    )}
+                                    ))}
                                 </div>
                             </motion.div>
-                        ),
-                    )}
+                    ))}
                 </section>
             </main>
         </div>

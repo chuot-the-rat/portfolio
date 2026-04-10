@@ -8,6 +8,35 @@ import HeroContainer from "../components/header/HeroContainer";
 import HomeWorkList from "../components/home/HomeWorkList";
 import "./Projects.css";
 
+const resolveProjectMediaPath = (projectId, src) => {
+    if (!src) return null;
+    if (src.startsWith("/") || src.startsWith("http")) return src;
+    return `/projects/${projectId}/${src.replace(/^\.?\//, "")}`;
+};
+
+const normalizeProjectImage = (projectId, image) => {
+    if (!image) return null;
+    if (typeof image === "string") {
+        const src = resolveProjectMediaPath(projectId, image);
+        return src ? { src, alt: "" } : null;
+    }
+    const src = resolveProjectMediaPath(projectId, image.src || image.image);
+    if (!src) return null;
+    return { ...image, src };
+};
+
+const buildPreviewCandidates = (projectId, candidates = []) => {
+    const unique = [];
+    const seen = new Set();
+    for (const candidate of candidates) {
+        const src = resolveProjectMediaPath(projectId, candidate);
+        if (!src || seen.has(src)) continue;
+        seen.add(src);
+        unique.push(src);
+    }
+    return unique;
+};
+
 export default function Projects() {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -51,11 +80,29 @@ export default function Projects() {
                                         null;
                                 }
                             } catch { /* no supplemental data */ }
+                            const normalizedImages = allImages
+                                .map((img) =>
+                                    normalizeProjectImage(project.id, img),
+                                )
+                                .filter(Boolean);
+                            const previewCandidates = buildPreviewCandidates(project.id, [
+                                coverImage,
+                                meta.thumbnail,
+                                meta.previewImage,
+                                ...normalizedImages.map((img) => img.src),
+                            ]);
                             return {
                                 ...meta,
                                 ...project,
-                                allImages,
-                                coverImage,
+                                allImages: normalizedImages,
+                                coverImage: previewCandidates[0] ?? null,
+                                previewCandidates,
+                                previewVideoSrc: resolveProjectMediaPath(
+                                    project.id,
+                                    meta.previewVideo ??
+                                        meta.previewVideoSrc ??
+                                        null,
+                                ),
                                 hoverPattern: hoverPatterns[i % hoverPatterns.length],
                             };
                         }),
@@ -72,16 +119,34 @@ export default function Projects() {
                                     ...(data.overview?.images || []),
                                     ...(data.solution?.images || []),
                                     ...(data.styleGuide?.images || []),
-                                ].filter((img) => img?.src);
+                                ]
+                                    .map((img) => normalizeProjectImage(entry.id, img))
+                                    .filter(Boolean);
+                                const previewCandidates = buildPreviewCandidates(
+                                    entry.id,
+                                    [
+                                        data?.hifi?.images?.[0]?.src,
+                                        data?.solution?.images?.[0]?.src,
+                                        data?.overview?.images?.[0]?.src,
+                                        entry.thumbnail,
+                                        ...allImages.map((img) => img.src),
+                                    ],
+                                );
                                 return {
                                     ...entry,
                                     ...data,
                                     allImages,
-                                    coverImage:
-                                        data?.hifi?.images?.[0]?.src ??
-                                        data?.solution?.images?.[0]?.src ??
-                                        data?.overview?.images?.[0]?.src ??
-                                        null,
+                                    coverImage: previewCandidates[0] ?? null,
+                                    previewCandidates,
+                                    previewVideoSrc: resolveProjectMediaPath(
+                                        entry.id,
+                                        data?.previewVideo ??
+                                            data?.previewVideoSrc ??
+                                            data?.video?.src ??
+                                            entry.previewVideo ??
+                                            entry.previewVideoSrc ??
+                                            null,
+                                    ),
                                     hoverPattern: hoverPatterns[idx % hoverPatterns.length],
                                 };
                             } catch { return null; }

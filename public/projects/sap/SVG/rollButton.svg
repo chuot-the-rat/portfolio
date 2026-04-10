@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 393.29 151.34">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #651f01;
+      }
+
+      .cls-3 {
+        fill: #db5426;
+      }
+
+      .cls-4 {
+        fill: #ff6a00;
+      }
+
+      .cls-2 {
+        font-family: LapsusPro-Bold, 'Lapsus Pro';
+        font-size: 86px;
+        font-weight: 700;
+      }
+
+      .cls-5 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 15px;
+      }
+    </style>
+  </defs>
+  <g id="Roll">
+    <g>
+      <rect class="cls-5" x="19.15" y="7.5" width="366.64" height="136.34" rx="10" ry="10"/>
+      <rect class="cls-3" x="19.15" y="7.5" width="366.64" height="136.34" rx="10" ry="10"/>
+      <rect class="cls-4" x="19.15" y="7.5" width="366.64" height="116.68" rx="10" ry="10"/>
+      <text class="cls-2" transform="translate(36.06 95.79)"><tspan x="0" y="0">Roll</tspan></text>
+      <path class="cls-1" d="M351.87,105.29l-58.3-1.19c-4,0-6.13-2.64-6.13-6.64l-1.7-58.55c0-2.63,2.13-4.77,4.77-4.77l62.3,1.19c2.82,0,5.28,1.09,5.28,3.91l-1.02,59.57c0,3.43-1.76,6.47-5.19,6.47Z"/>
+      <circle class="cls-4" cx="305.15" cy="87.41" r="7.83"/>
+      <circle class="cls-4" cx="338.02" cy="53.38" r="9.7"/>
+    </g>
+  </g>
+</svg>

@@ -12,7 +12,7 @@
  * No permanent thumbnails in the grid. Image is a reward, not a fixture.
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getProjectPath, isStandaloneProject } from "../../utils/projectDataMapper";
@@ -34,6 +34,50 @@ export default function HomeWorkList({ projects }) {
   const [activeTab, setActiveTab]   = useState("UX/UI");
   const [hoveredId, setHoveredId]   = useState(null);
   const [previewIndex, setPreviewIndex] = useState(0);
+  const [previewMode, setPreviewMode] = useState("mouse");
+  const [previewPosition, setPreviewPosition] = useState({ x: 0, y: 0 });
+  const bodyRef = useRef(null);
+  const PREVIEW_RATIO = 4 / 3;
+  const PREVIEW_MIN_WIDTH = 286;
+  const PREVIEW_MAX_WIDTH = 340;
+  const PREVIEW_POINTER_OFFSET_X = 24;
+  const PREVIEW_POINTER_OFFSET_Y = 40;
+  const PREVIEW_PADDING = 12;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const resolvePreviewMetrics = () => {
+    const bodyRect = bodyRef.current?.getBoundingClientRect();
+    if (!bodyRect) return null;
+
+    const previewWidth = clamp(bodyRect.width * 0.24, PREVIEW_MIN_WIDTH, PREVIEW_MAX_WIDTH);
+    const previewHeight = previewWidth / PREVIEW_RATIO;
+    const minX = Math.max(bodyRect.width * 0.52, PREVIEW_PADDING);
+    const maxX = Math.max(PREVIEW_PADDING, bodyRect.width - previewWidth - PREVIEW_PADDING);
+    const maxY = Math.max(PREVIEW_PADDING, bodyRect.height - previewHeight - PREVIEW_PADDING);
+
+    return { bodyRect, previewWidth, previewHeight, minX, maxX, maxY };
+  };
+
+  const getPointerPreviewPosition = (clientX, clientY) => {
+    const metrics = resolvePreviewMetrics();
+    if (!metrics) return { x: 0, y: 0 };
+
+    const { bodyRect, minX, maxX, maxY } = metrics;
+    const x = clamp(clientX - bodyRect.left + PREVIEW_POINTER_OFFSET_X, minX, maxX);
+    const y = clamp(clientY - bodyRect.top - PREVIEW_POINTER_OFFSET_Y, PREVIEW_PADDING, maxY);
+    return { x, y };
+  };
+
+  const getFocusPreviewPosition = (targetRect) => {
+    const metrics = resolvePreviewMetrics();
+    if (!metrics) return { x: 0, y: 0 };
+
+    const { bodyRect, previewHeight, maxX, maxY } = metrics;
+    const targetMidpointY = targetRect.top - bodyRect.top + targetRect.height / 2;
+    const y = clamp(targetMidpointY - previewHeight / 2, PREVIEW_PADDING, maxY);
+    return { x: maxX, y };
+  };
 
   const filtered = projects.filter(
     (p) => (CATEGORY_MAP[p.category] ?? "UX/UI") === activeTab,
@@ -41,7 +85,7 @@ export default function HomeWorkList({ projects }) {
 
   // Find the hovered project and resolve its best preview image
   const hoveredProject = filtered.find((p) => p.id === hoveredId) ?? null;
-  const previewCandidates = useMemo(() => {
+  const previewCandidates = (() => {
     if (!hoveredProject) return [];
     const candidates = [
       ...(Array.isArray(hoveredProject.previewCandidates)
@@ -59,7 +103,7 @@ export default function HomeWorkList({ projects }) {
       unique.push(src);
     }
     return unique;
-  }, [hoveredProject]);
+  })();
 
   useEffect(() => {
     setPreviewIndex(0);
@@ -67,7 +111,12 @@ export default function HomeWorkList({ projects }) {
 
   const previewSrc = previewCandidates[previewIndex] ?? null;
   const previewVideoSrc = hoveredProject?.previewVideoSrc ?? null;
-  const showPreviewVideo = Boolean(previewVideoSrc && hoveredId && !shouldReduceMotion);
+  const showPreviewVideo = Boolean(
+    previewVideoSrc &&
+    hoveredId &&
+    !shouldReduceMotion &&
+    previewMode === "mouse",
+  );
   const projectTags = (hoveredProject?.taxonomyTags ?? []).slice(0, 2);
 
   return (
@@ -91,13 +140,14 @@ export default function HomeWorkList({ projects }) {
       </div>
 
       {/* ── Body: text list + sticky preview slot ── */}
-      <div className="hw-body">
+      <div className="hw-body" ref={bodyRef}>
 
         {/* Project rows */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
             className="hw-list"
+            onMouseLeave={() => setHoveredId(null)}
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -127,9 +177,28 @@ export default function HomeWorkList({ projects }) {
                       delay: index * MOTION_DURATION.staggerFast,
                       ease: MOTION_EASE.editorial,
                     }}
-                    onMouseEnter={() => setHoveredId(project.id)}
+                    onMouseEnter={(event) => {
+                      setPreviewMode("mouse");
+                      setHoveredId(project.id);
+                      if (!shouldReduceMotion) {
+                        setPreviewPosition(
+                          getPointerPreviewPosition(event.clientX, event.clientY),
+                        );
+                      }
+                    }}
+                    onMouseMove={(event) => {
+                      if (shouldReduceMotion) return;
+                      setPreviewMode("mouse");
+                      setPreviewPosition(
+                        getPointerPreviewPosition(event.clientX, event.clientY),
+                      );
+                    }}
                     onMouseLeave={() => setHoveredId(null)}
-                    onFocus={()     => setHoveredId(project.id)}
+                    onFocus={(event) => {
+                      setPreviewMode("focus");
+                      setHoveredId(project.id);
+                      setPreviewPosition(getFocusPreviewPosition(event.currentTarget.getBoundingClientRect()));
+                    }}
                     onBlur={()      => setHoveredId(null)}
                   >
                     <Link
@@ -191,10 +260,31 @@ export default function HomeWorkList({ projects }) {
                 animate={{
                   opacity: 1,
                   scale: 1,
+                  x: previewPosition.x,
+                  y: previewPosition.y,
                   transition: {
-                    duration: MOTION_DURATION.hoverBase,
-                    delay: MOTION_DURATION.previewDelay, // delayed reward
-                    ease: MOTION_EASE.editorial,
+                    opacity: {
+                      duration: MOTION_DURATION.hoverBase,
+                      delay: MOTION_DURATION.previewDelay,
+                      ease: MOTION_EASE.editorial,
+                    },
+                    scale: {
+                      duration: MOTION_DURATION.hoverBase,
+                      delay: MOTION_DURATION.previewDelay,
+                      ease: MOTION_EASE.editorial,
+                    },
+                    x: {
+                      duration: shouldReduceMotion || previewMode === "focus"
+                        ? MOTION_DURATION.hoverBase
+                        : MOTION_DURATION.hoverSlow,
+                      ease: MOTION_EASE.editorial,
+                    },
+                    y: {
+                      duration: shouldReduceMotion || previewMode === "focus"
+                        ? MOTION_DURATION.hoverBase
+                        : MOTION_DURATION.hoverSlow,
+                      ease: MOTION_EASE.editorial,
+                    },
                   },
                 }}
                 exit={{
@@ -204,7 +294,12 @@ export default function HomeWorkList({ projects }) {
                 }}
               >
                 <div
-                  className={`hw-preview-media${previewVideoSrc ? " hw-preview-media--has-video" : ""}`}
+                  className={[
+                    "hw-preview-media",
+                    previewVideoSrc ? "hw-preview-media--has-video" : "",
+                    showPreviewVideo ? "hw-preview-media--video-active" : "",
+                    previewMode === "focus" ? "hw-preview-media--focus" : "",
+                  ].filter(Boolean).join(" ")}
                   aria-label={projectTags.length > 0 ? `Preview: ${projectTags.join(", ")}` : "Project preview"}
                 >
                   {previewSrc ? (

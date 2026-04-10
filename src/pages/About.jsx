@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { usePageTitle } from "../hooks/usePageTitle";
 import NameCycle from "../components/about/NameCycle";
 import SkillsSection from "../components/SkillsSection";
@@ -63,6 +64,25 @@ const PROCESS_BLOCKS = [
 
 const ABOUT_TRAITS = ["Research-led", "System-minded", "Build-aware"];
 
+function LiveClock() {
+    const formatTime = () =>
+        new Date().toLocaleTimeString("en-US", {
+            timeZone: "America/Vancouver",
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true,
+        });
+
+    const [time, setTime] = useState(formatTime);
+
+    useEffect(() => {
+        const id = setInterval(() => setTime(formatTime()), 30_000);
+        return () => clearInterval(id);
+    }, []);
+
+    return <span className="about-hero-status-time">{time}</span>;
+}
+
 export default function About() {
     usePageTitle("About", {
         site: true,
@@ -84,6 +104,14 @@ export default function About() {
                         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <p className="about-hero-descriptor">About</p>
+                        <div className="about-hero-status" aria-label="Availability status">
+                            <span className="about-hero-status-dot" aria-hidden="true" />
+                            <span>Available</span>
+                            <span className="about-hero-status-sep" aria-hidden="true">·</span>
+                            <span>Vancouver, BC</span>
+                            <span className="about-hero-status-sep" aria-hidden="true">·</span>
+                            <LiveClock />
+                        </div>
                         <h1 className="about-hero-headline">
                             <NameCycle />
                         </h1>

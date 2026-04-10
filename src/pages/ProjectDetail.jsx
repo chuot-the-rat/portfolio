@@ -744,6 +744,29 @@ const ProjectContentMain = ({ project }) => {
     const ci = project.caseIndex || 1;
     const nextSection = () => ++sectionNum;
     const nextImage = () => ++imageNum;
+    const hasIterationComparisons =
+        Array.isArray(project.iterations?.comparisons) &&
+        project.iterations.comparisons.length > 0;
+    const comparisonsForLofi = hasIterationComparisons
+        ? []
+        : project.lofi?.comparisons || [];
+    const comparisonsForIterations = hasIterationComparisons
+        ? project.iterations.comparisons
+        : [];
+    const compactProblemDescription = toLeadingSentence(
+        project.problem?.description,
+        project.problem?.description || "",
+        1,
+    );
+    const compactValidationDescription = toLeadingSentence(
+        project.validation?.description,
+        project.validation?.description || "",
+        1,
+    );
+    const validationOutcomes = filterRedundantOutcomes(
+        compactValidationDescription,
+        project.validation?.outcomes || [],
+    );
 
     return (
         <div className="project-content-main">

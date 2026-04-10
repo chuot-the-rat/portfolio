@@ -396,15 +396,6 @@ const Home = () => {
                         </aside>
                     </section>
 
-                    <div className="home-primary-actions" aria-label="Primary navigation actions">
-                        <Link className="home-primary-link home-primary-link--strong" to="/case-studies/inklink">
-                            Read featured case: InkLink
-                        </Link>
-                        <a className="home-primary-link" href="#home-work-list">
-                            Browse selected work
-                        </a>
-                    </div>
-
                     {/* Work list — category tabs + Sharleen-style rows */}
                     {loading ? (
                         <div className="home-loading">
@@ -420,9 +411,6 @@ const Home = () => {
                         </div>
                     ) : (
                         <section id="home-work-list" aria-label="Selected work list">
-                            <p className="home-work-intro">
-                                Selected case studies with clear ownership, process, and outcome evidence.
-                            </p>
                             <HomeWorkList projects={projects} />
                         </section>
                     )}
@@ -434,17 +422,15 @@ const Home = () => {
             <footer className="home-footer">
                 <div className="container">
                     <div className="footer-body">
-                        {/* Editorial large heading */}
-                        <div className="footer-hero">
-                            <p className="footer-kicker">Available for work</p>
-                            <h2 className="footer-display">
-                                Let's build<br />something.
-                            </h2>
+                        <div className="footer-intro">
+                            <p className="footer-intro-line">
+                                Available for thoughtful digital products
+                            </p>
                         </div>
 
                         {/* Links column */}
                         <nav className="footer-nav" aria-label="Footer links">
-                            <a href="mailto:leanale003@gmail.com" className="footer-nav-link">
+                            <a href="mailto:leanale003@gmail.com" className="footer-nav-link footer-nav-link--primary">
                                 <span className="footer-nav-label">Email</span>
                                 <span className="footer-nav-arrow">↗</span>
                             </a>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SKILL_CATEGORIES } from "../data/skills/skillsData";
 import "./SkillsSection.css";
 
 const fadeUp = {
@@ -8,36 +9,20 @@ const fadeUp = {
     transition: { duration: 0.45 },
 };
 
-const SKILLS = {
-    "UX / Design": [
-        "User Research", "Wireframing", "Prototyping",
-        "User Testing", "User Flows", "Journey Mapping",
-        "Design Systems", "Accessibility",
-    ],
-    "UI / Visual": [
-        "Figma", "Typography", "Color Theory",
-        "Responsive Design", "After Effects", "Framer",
-    ],
-    "Development": [
-        "HTML / CSS", "JavaScript", "React",
-        "Git / GitHub", "VS Code",
-    ],
-    "Tools": [
-        "Adobe Illustrator", "Photoshop", "Notion",
-    ],
-};
-
 export default function SkillsSection() {
     return (
         <motion.div className="skills-row" {...fadeUp}>
             <span className="skills-row-label">Skills</span>
             <div className="skills-row-content">
-                {Object.entries(SKILLS).map(([category, items]) => (
-                    <div key={category} className="skills-group">
-                        <span className="skills-group-label">{category}</span>
+                {SKILL_CATEGORIES.map((category) => (
+                    <div key={category.id} className="skills-group">
+                        <span className="skills-group-label">{category.label}</span>
                         <div className="skills-pills">
-                            {items.map((skill) => (
-                                <span key={skill} className="skills-pill">{skill}</span>
+                            {category.skills.map((skill) => (
+                                <span key={skill.name} className="skills-pill">
+                                    <span className="skills-pill-name">{skill.name}</span>
+                                    <span className="skills-pill-level">{skill.level}</span>
+                                </span>
                             ))}
                         </div>
                     </div>

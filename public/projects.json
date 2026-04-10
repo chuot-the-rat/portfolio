@@ -34,7 +34,8 @@
     {
         "id": "sap",
         "folder": "projects/sap",
-        "thumbnail": "projects/sap/thumbnail.png",
+        "thumbnail": "projects/sap/SVG/petsButton.svg",
+        "previewVideo": "sapVid.mp4",
         "title": "Super Auto Pets Motion Graphics",
         "category": "Motion Graphics",
         "year": "2025"
