@@ -162,13 +162,14 @@ export default function About() {
                             <span className="about-row-label">About</span>
                             <div className="about-row-content">
                                 <p className="about-para">
-                                    I spent <em className="about-em">six years in hospitality</em>, where I learned
-                                    to make complex moments feel easy, warm, and clear. That instinct carried directly
-                                    into design, where I still optimize for the <em className="about-em">person on the other side of the screen</em> first.
+                                    I spent <em className="about-em">six years in hospitality</em>, where I learned to
+                                    make busy, high-pressure moments feel clear for real people. That mindset now drives
+                                    how I design digital products.
                                 </p>
                                 <p className="about-para">
-                                    I am a <em className="about-em">product designer</em> who likes making complex product decisions feel clear for users and teams.
-                                    I am currently finishing my Diploma in Digital Design and Development at BCIT, and outside work I am usually in a manga arc or refining a presentation deck.
+                                    I am a <em className="about-em">product designer</em> finishing the Digital Design and
+                                    Development diploma at BCIT, focused on research-backed decisions, clear interaction
+                                    patterns, and practical handoff-ready work.
                                 </p>
                             </div>
                         </motion.div>
@@ -185,7 +186,7 @@ export default function About() {
                             <p className="about-connect-label">Approach</p>
                             <h2 className="about-work-heading">How I work</h2>
                             <p className="about-work-intro">
-                                I balance user clarity, product goals, and team execution so ideas move cleanly from concept to shipped outcomes.
+                                I keep the process simple: understand the problem, make the flow clear, and ship in small confident steps.
                             </p>
                         </div>
                         <div className="about-work-timeline" role="list" aria-label="How I work">
@@ -240,7 +241,7 @@ export default function About() {
                                 <span className="about-email-arrow" aria-hidden="true">↗</span>
                             </a>
                             <p className="about-email-note">
-                                Hit me up — I don't bite.
+                                Open to full-time and contract product design roles.
                             </p>
                         </div>
 

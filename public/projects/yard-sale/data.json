@@ -1,0 +1,33 @@
+{
+    "id": "yard-sale",
+    "title": "Yard Sale Flyer Series",
+    "category": "Campaign Design",
+    "year": "2025",
+    "tagline": "A multi-format flyer set designed for print, square social, and event promotion touchpoints.",
+    "role": "Graphic Design, Layout, Format Adaptation",
+    "timeline": "Assignment Project",
+    "team": "Solo Project",
+    "tools": ["Adobe Illustrator", "Adobe Photoshop"],
+    "overview": {
+        "title": "Multi-Format Promotion",
+        "description": "This yard sale set translates one visual concept across three formats so the message stays consistent in different channels. The system keeps hierarchy clear while adapting composition for poster, square post, and event graphics.",
+        "images": [
+            {
+                "src": "/projects/yard-sale/yard-sale-flyer.png",
+                "alt": "Main yard sale flyer poster layout",
+                "caption": "Primary poster format for local print and notice board distribution."
+            },
+            {
+                "src": "/projects/yard-sale/square-flyer.png",
+                "alt": "Square yard sale social flyer",
+                "caption": "Square version optimized for feed-based social sharing."
+            },
+            {
+                "src": "/projects/yard-sale/fb-event.png",
+                "alt": "Yard sale Facebook event graphic",
+                "caption": "Event cover variant designed for Facebook event promotion."
+            }
+        ]
+    }
+}
+

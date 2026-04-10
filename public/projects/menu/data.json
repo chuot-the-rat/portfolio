@@ -1,0 +1,43 @@
+{
+    "id": "menu",
+    "title": "Menu Design",
+    "category": "Editorial Design",
+    "year": "2025",
+    "tagline": "A clean, appetite-forward menu layout balancing hierarchy, readability, and brand personality.",
+    "role": "Layout, Typography, Graphic Design",
+    "timeline": "Assignment Project",
+    "team": "Solo Project",
+    "tools": ["Adobe InDesign", "Adobe Illustrator"],
+    "links": {
+        "pdf": "/projects/menu/Leana_Le_Assignment08_Menu.pdf"
+    },
+    "overview": {
+        "title": "Menu System",
+        "description": "This menu project focuses on typographic hierarchy and pacing so guests can scan quickly while still feeling the restaurant's tone. The layout pairs clear section breaks with restrained styling to keep attention on the food and pricing. Assignment copy was provided and intentionally preserved verbatim, including original typos and inconsistencies.",
+        "images": [
+            {
+                "src": "/projects/menu/images/menu-preview-1.png",
+                "alt": "Menu design cover spread",
+                "caption": "Front layout preview with primary categories and visual hierarchy."
+            },
+            {
+                "src": "/projects/menu/images/menu-preview-2.png",
+                "alt": "Menu design inside spread",
+                "caption": "Inside page showing item grouping, spacing, and price alignment."
+            },
+            {
+                "src": "/projects/menu/images/menu-preview-3.png",
+                "alt": "Menu design detail view",
+                "caption": "Detail view emphasizing readability and consistent type rhythm."
+            }
+        ]
+    },
+    "sections": [
+        {
+            "id": "assignment-note",
+            "type": "text",
+            "title": "Assignment Note",
+            "content": "For this assignment, the menu copy was instructor-provided and required to remain exactly as written, including typos and occasional inconsistencies. This project evaluates layout, hierarchy, and readability while preserving the supplied text verbatim."
+        }
+    ]
+}

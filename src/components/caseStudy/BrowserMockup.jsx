@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { caseStudyMotion } from "../../utils/motion/caseStudyMotion";
 import "./BrowserMockup.css";
 
@@ -9,9 +10,14 @@ const isVideoSource = (src = "", type = "") => {
 
 export default function BrowserMockup({ mediaDemo }) {
     const shouldReduceMotion = useReducedMotion();
-    if (!mediaDemo) return null;
+    const [hasImageError, setHasImageError] = useState(false);
+    const source = mediaDemo?.videoSrc || mediaDemo?.src || "";
 
-    const source = mediaDemo.videoSrc || mediaDemo.src || "";
+    useEffect(() => {
+        setHasImageError(false);
+    }, [source]);
+
+    if (!mediaDemo) return null;
     if (!source) return null;
 
     const videoMode = isVideoSource(source, mediaDemo.type);
@@ -55,8 +61,21 @@ export default function BrowserMockup({ mediaDemo }) {
                     >
                         <source src={source} type={mediaDemo.videoType || "video/mp4"} />
                     </video>
+                ) : hasImageError ? (
+                    <div
+                        className="cs-browser-fallback"
+                        role="img"
+                        aria-label={mediaDemo.alt || "Image unavailable"}
+                    >
+                        <span>Image unavailable</span>
+                    </div>
                 ) : (
-                    <img src={source} alt={mediaDemo.alt || "Project demo"} loading="lazy" />
+                    <img
+                        src={source}
+                        alt={mediaDemo.alt || "Project demo"}
+                        loading="lazy"
+                        onError={() => setHasImageError(true)}
+                    />
                 )}
             </div>
 

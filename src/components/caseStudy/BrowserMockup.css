@@ -45,3 +45,28 @@
     max-height: 520px;
     object-fit: cover;
 }
+
+.cs-browser-fallback {
+    width: 100%;
+    min-height: clamp(220px, 38vw, 520px);
+    display: grid;
+    place-items: center;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.86)),
+        repeating-linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.03) 0,
+            rgba(0, 0, 0, 0.03) 10px,
+            transparent 10px,
+            transparent 20px
+        );
+    border-top: 1px solid var(--color-border);
+}
+
+.cs-browser-fallback span {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+}

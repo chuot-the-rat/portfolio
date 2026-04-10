@@ -50,7 +50,7 @@ import "./styles/App.css";
  * - projectDataMapper.js (to identify standalone projects)
  * - Projects.jsx (to fetch supplemental data)
  */
-export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap"];
+export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap", "menu", "yard-sale"];
 export const CASE_STUDY_BASE_PATH = "/case-studies";
 
 /**

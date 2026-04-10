@@ -27,6 +27,13 @@ import "./ProjectDetail.css";
 const toSentence = (value) =>
     String(value || "").replace(/\s+/g, " ").trim();
 
+const toConciseLine = (value, maxChars = 140) => {
+    const sentence = toSentence(value);
+    if (!sentence) return "";
+    if (sentence.length <= maxChars) return sentence;
+    return `${sentence.slice(0, maxChars).replace(/\s+\S*$/, "").trimEnd()}…`;
+};
+
 const toLeadingSentence = (value, fallback = "", maxSentences = 2) => {
     const sentence = toSentence(value);
     if (!sentence) return fallback;
@@ -169,6 +176,63 @@ const getYouTubeEmbedUrl = (url) => {
     return value;
 };
 
+const getLaunchMediaCaption = (launchAd) => {
+    const explicitCaption = toConciseLine(launchAd?.caption, 156);
+    if (explicitCaption) return explicitCaption;
+
+    const hasVideo = Boolean(launchAd?.video_url || launchAd?.youtube_url);
+    const hasDeck = Boolean(launchAd?.embed_url);
+
+    if (hasVideo && hasDeck) {
+        return "Watch the short promo first, then skim the deck for full context.";
+    }
+
+    if (hasVideo) {
+        return "A short walkthrough of the concept and key user flow.";
+    }
+
+    if (hasDeck) {
+        return "Slide walkthrough covering concept, process, and final flow.";
+    }
+
+    return "";
+};
+
+const FALLBACK_IMAGE_ALT = "Image unavailable";
+
+const CaseStudyImage = ({
+    src,
+    alt,
+    className,
+    loading = "lazy",
+    fallbackLabel = "Image unavailable",
+}) => {
+    const [hasError, setHasError] = useState(false);
+    const safeAlt = alt || FALLBACK_IMAGE_ALT;
+
+    useEffect(() => {
+        setHasError(false);
+    }, [src]);
+
+    if (!src || hasError) {
+        return (
+            <div className={`case-image-fallback ${className || ""}`.trim()} role="img" aria-label={safeAlt}>
+                <span className="case-image-fallback-label">{fallbackLabel}</span>
+            </div>
+        );
+    }
+
+    return (
+        <img
+            src={src}
+            alt={safeAlt}
+            className={className}
+            loading={loading}
+            onError={() => setHasError(true)}
+        />
+    );
+};
+
 const ScrollableMockupFrame = ({ src, alt }) => {
     const [hasInteracted, setHasInteracted] = useState(false);
 
@@ -210,7 +274,7 @@ const ScrollableMockupFrame = ({ src, alt }) => {
                     onTouchStart={markInteracted}
                     onKeyDown={handleKeyDown}
                 >
-                    <img src={src} alt={alt} loading="lazy" />
+                    <CaseStudyImage src={src} alt={alt} loading="lazy" />
                 </div>
 
                 <div className="mockup-fade mockup-fade-top" aria-hidden="true" />
@@ -336,7 +400,7 @@ const PrototypeTabs = ({ tabs = [] }) => {
                 ) : (
                     <div className="prototype-tabs-fallback">
                         <p className="prototype-tabs-fallback-text">
-                            Embed unavailable for this tab.
+                            Preview unavailable for this tab. Use the direct Figma link below.
                         </p>
                     </div>
                 )}
@@ -522,31 +586,6 @@ const ProjectDetail = () => {
         project.links?.figma && { href: project.links.figma, label: "Figma" },
     ].filter(Boolean);
 
-    const hasIterationComparisons =
-        Array.isArray(project.iterations?.comparisons) &&
-        project.iterations.comparisons.length > 0;
-    const comparisonsForLofi = hasIterationComparisons
-        ? []
-        : project.lofi?.comparisons || [];
-    const comparisonsForIterations = hasIterationComparisons
-        ? project.iterations.comparisons
-        : [];
-
-    const compactProblemDescription = toLeadingSentence(
-        project.problem?.description,
-        project.problem?.description || "",
-        1,
-    );
-    const compactValidationDescription = toLeadingSentence(
-        project.validation?.description,
-        project.validation?.description || "",
-        1,
-    );
-    const validationOutcomes = filterRedundantOutcomes(
-        compactValidationDescription,
-        project.validation?.outcomes || [],
-    );
-
     const impactSnapshot = getImpactSnapshot(project);
     const credibilityRows = getCredibilityRows(project);
     const framingStatement = toLeadingSentence(
@@ -660,7 +699,7 @@ const ProjectDetail = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.65, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <img
+                            <CaseStudyImage
                                 src={heroImage}
                                 alt={`${project.title} preview`}
                                 className="project-hero-media-img"
@@ -670,26 +709,55 @@ const ProjectDetail = () => {
                 </div>
             </motion.section>
 
-            {project.launchAd?.youtube_url && (
+            {(project.launchAd?.video_url ||
+                project.launchAd?.youtube_url ||
+                project.launchAd?.embed_url) && (
                 <section className="project-launch-media">
                     <div className="container">
                         <div className="launch-media-card">
-                            <p className="launch-media-label">Launch Ad</p>
+                            <p className="launch-media-label">Launch Media</p>
                             <h2 className="launch-media-title">
-                                Product Story in Motion
+                                {project.launchAd?.title || `${project.title} launch walkthrough`}
                             </h2>
-                            {project.launchAd?.caption && (
+                            {getLaunchMediaCaption(project.launchAd) && (
                                 <p className="launch-media-caption">
-                                    {project.launchAd.caption}
+                                    {getLaunchMediaCaption(project.launchAd)}
                                 </p>
                             )}
-                            <div className="launch-media-embed">
-                                <iframe
-                                    src={getYouTubeEmbedUrl(project.launchAd.youtube_url)}
-                                    title={project.launchAd.title || "ProLog launch ad"}
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowFullScreen
-                                />
+                            <div className="launch-media-stack">
+                                {project.launchAd?.video_url && (
+                                    <div className="launch-media-embed">
+                                        <video
+                                            controls
+                                            preload="metadata"
+                                            playsInline
+                                            aria-label={project.launchAd.title || `${project.title} promo video`}
+                                        >
+                                            <source src={project.launchAd.video_url} type="video/mp4" />
+                                        </video>
+                                    </div>
+                                )}
+
+                                {project.launchAd?.youtube_url && (
+                                    <div className="launch-media-embed">
+                                        <iframe
+                                            src={getYouTubeEmbedUrl(project.launchAd.youtube_url)}
+                                            title={project.launchAd.title || `${project.title} launch media`}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowFullScreen
+                                        />
+                                    </div>
+                                )}
+
+                                {project.launchAd?.embed_url && (
+                                    <div className="launch-media-embed">
+                                        <iframe
+                                            src={project.launchAd.embed_url}
+                                            title={`${project.title} presentation`}
+                                            allowFullScreen
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -955,7 +1023,7 @@ const ProjectContentMain = ({ project }) => {
                                         style={{ position: "relative" }}
                                     >
                                         <FigLabel index={nextImage()} />
-                                        <img
+                                        <CaseStudyImage
                                             src={img.src}
                                             alt={img.alt}
                                             loading="lazy"
@@ -2038,7 +2106,7 @@ const ProjectContentMain = ({ project }) => {
                                                             <FigLabel
                                                                 index={nextImage()}
                                                             />
-                                                            <img
+                                                            <CaseStudyImage
                                                                 src={feature.image}
                                                                 alt={feature.title}
                                                             />
@@ -2322,13 +2390,13 @@ const ProjectContentMain = ({ project }) => {
 // Shows all images stacked for ≤2 images; slideshow carousel for 3+
 const getImageCaption = (image, captionContext = "case study") => {
     if (image?.caption && String(image.caption).trim().length > 3) {
-        return image.caption;
+        return toConciseLine(image.caption, 132);
     }
     if (image?.alt && String(image.alt).trim().length > 8) {
         const alt = String(image.alt).replace(/\.$/, "");
-        return `${captionContext}: ${alt}.`;
+        return toConciseLine(`${captionContext}: ${alt}.`, 132);
     }
-    return `Supporting visual from the ${captionContext.toLowerCase()} section showing the design decision in context.`;
+    return `Supporting visual from ${captionContext.toLowerCase()}.`;
 };
 
 const ImageGallery = ({
@@ -2382,7 +2450,7 @@ const ImageGallery = ({
                                 transition: { duration: 0.3 },
                             }}
                         />
-                        <img
+                        <CaseStudyImage
                             src={img.src}
                             alt={img.alt}
                         />
@@ -2413,14 +2481,10 @@ const ImageGallery = ({
             <div className="carousel-viewport">
                 <FigLabel index={startIndex + currentSlide + 1} />
                 <AnimatePresence mode="wait">
-                    <motion.img
+                    <CaseStudyImage
                         key={currentSlide}
                         src={img.src}
                         alt={img.alt}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
                     />
                 </AnimatePresence>
             </div>
@@ -2550,7 +2614,7 @@ const HifiAccordion = ({ screen, index, figIndex }) => {
                             {screen.image && (
                                 <div className="hifi-screen-image">
                                     <FigLabel index={figIndex} />
-                                    <img
+                                    <CaseStudyImage
                                         src={screen.image}
                                         alt={screen.name}
                                         loading="lazy"

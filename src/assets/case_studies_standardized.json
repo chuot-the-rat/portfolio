@@ -52,25 +52,25 @@
                 ]
             },
             "media": {
-                "thumbnail": "/projects/prolog/thumbnail.png",
-                "icon": "/projects/prolog/icon.svg",
-                "hero_image": "/projects/prolog/hero.png",
-                "og_image": "/projects/prolog/og-image.png"
+                "thumbnail": "/projects/prolog/compare/dashboard-after.png",
+                "icon": "/starfruit.png",
+                "hero_image": "/projects/prolog/compare/dashboard-after.png",
+                "og_image": "/projects/prolog/compare/dashboard-after.png"
             },
             "sections": {
                 "hook": {
                     "content": "Apprenticeship can take over 6,000 hours. That's years of work spread across job sites, classrooms, and bureaucratic systems — often without a clear sense of whether you're on track.",
                     "media_demo": {
-                        "src": "/projects/prolog/hero.png",
+                        "src": "/projects/prolog/compare/dashboard-after.png",
                         "type": "image",
                         "alt": "ProLog dashboard hero preview",
                         "caption": "ProLog centralizes apprenticeship progress into one calm dashboard."
                     }
                 },
                 "launch_ad": {
-                    "title": "ProLog YouTube Ad",
+                    "title": "ProLog Launch Media",
                     "youtube_url": "https://youtu.be/vWXMGQpBQfs",
-                    "caption": "A short product story introducing the core apprenticeship support workflows."
+                    "caption": "Short walkthrough of the problem, process, and final ProLog flow."
                 },
                 "problem_framing": {
                     "content": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind."
@@ -102,7 +102,7 @@
                         }
                     },
                     "media_demo": {
-                        "src": "/projects/prolog/hifi-1.png",
+                        "src": "/projects/prolog/compare/dashboard-after.png",
                         "type": "image",
                         "alt": "ProLog dashboard high fidelity screen",
                         "caption": "Research translated into a dashboard-first information hierarchy."
@@ -162,12 +162,12 @@
                     ],
                     "images": [
                         {
-                            "src": "/projects/prolog/lofi-1.png",
+                            "src": "/projects/prolog/compare/dashboard-before.png",
                             "alt": "Early dashboard wireframe sketches",
                             "caption": "Initial explorations of progress visualization"
                         },
                         {
-                            "src": "/projects/prolog/lofi-2.png",
+                            "src": "/projects/prolog/compare/resources-before.png",
                             "alt": "Hours tracking flow wireframes",
                             "caption": "Mapping the hour logging experience"
                         }
@@ -227,52 +227,52 @@
                     ],
                     "images": [
                         {
-                            "src": "/projects/prolog/hifi-1.png",
+                            "src": "/projects/prolog/compare/dashboard-after.png",
                             "alt": "Final dashboard design",
                             "caption": "The dashboard provides immediate progress visibility"
                         },
                         {
-                            "src": "/projects/prolog/hifi-2.png",
+                            "src": "/projects/prolog/compare/resources-after.png",
                             "alt": "Hours tracker interface",
                             "caption": "Discrepancy detection and logging"
                         },
                         {
-                            "src": "/projects/prolog/hifi-3.png",
+                            "src": "/projects/prolog/compare/quiz-after.png",
                             "alt": "Quiz preparation screen",
                             "caption": "AI-generated practice questions"
                         }
                     ]
                 },
                 "feature_breakdown": {
-                    "intro": "Each feature was designed to reduce one specific point of friction. Click through the prototype below to see how they work together.",
+                    "intro": "Each feature addresses one concrete friction point. Explore the prototype to see how they connect.",
                     "features": [
                         {
                             "id": "progress_dashboard",
                             "title": "Progress Dashboard",
                             "description": "A centralized view of hours completed, competencies achieved, and certification progress. Current status is visible within one tap.",
                             "why": "Apprentices reported feeling lost in fragmented systems. The dashboard provides constant orientation without extra navigation.",
-                            "image": "/projects/prolog/feature-dashboard.png"
+                            "image": "/projects/prolog/compare/dashboard-after.png"
                         },
                         {
                             "id": "hours_discrepancy",
                             "title": "Hours Discrepancy Detector",
                             "description": "Compares user-logged hours against official records and flags mismatches. Users can document and report discrepancies directly.",
                             "why": "Hour disputes are stressful and common. The feature provides clear tools for reporting and resolution.",
-                            "image": "/projects/prolog/feature-hours.png"
+                            "image": "/projects/prolog/compare/dashboard-before.png"
                         },
                         {
                             "id": "financial_hub",
                             "title": "Financial Resources Hub",
                             "description": "Links to grants, funding programs, and cost breakdowns for apprenticeship expenses — all in one place.",
                             "why": "Financial stress appeared consistently in research. The feature improves visibility and access to available support pathways.",
-                            "image": "/projects/prolog/feature-financial.png"
+                            "image": "/projects/prolog/compare/resources-after.png"
                         },
                         {
                             "id": "practice_quizzes",
                             "title": "AI Practice Quizzes",
                             "description": "Generates practice questions based on trade competencies to build confidence before official exams.",
                             "why": "Many apprentices feel underprepared for certification. Low-stakes practice reduces that anxiety.",
-                            "image": "/projects/prolog/feature-quiz.png"
+                            "image": "/projects/prolog/compare/quiz-after.png"
                         }
                     ],
                     "prototype": {
@@ -294,7 +294,7 @@
                         }
                     },
                     "media_demo": {
-                        "src": "/projects/prolog/feature-dashboard.png",
+                        "src": "/projects/prolog/compare/dashboard-after.png",
                         "type": "image",
                         "alt": "ProLog progress dashboard feature",
                         "caption": "Feature set prioritizes orientation, discrepancy confidence, and exam readiness."
@@ -310,7 +310,7 @@
                         "Users described the dashboard as confidence-building and less stressful to use."
                     ],
                     "media_demo": {
-                        "src": "/projects/prolog/hifi-2.png",
+                        "src": "/projects/prolog/compare/resources-after.png",
                         "type": "image",
                         "alt": "ProLog hours tracking screen",
                         "caption": "Validation centered on whether users felt clearer and less anxious about progress."
@@ -415,10 +415,10 @@
                 "other": []
             },
             "media": {
-                "thumbnail": "/projects/inklink/thumbnail.png",
-                "icon": "/projects/inklink/icon.svg",
-                "hero_image": "/projects/inklink/hero.png",
-                "og_image": "/projects/inklink/og-image.png"
+                "thumbnail": "/projects/inklink/images/overview.svg",
+                "icon": "/projects/inklink/images/Home.svg",
+                "hero_image": "/projects/inklink/images/overview.svg",
+                "og_image": "/projects/inklink/images/overview.svg"
             },
             "hero": {
                 "marqueeText": "CÅSE STUDIËS • INKLINK • COLLABORATIVE WRITING APP"
@@ -427,11 +427,17 @@
                 "hook": {
                     "content": "Everyone has a story they never finished.\n\nIdeas were there. Momentum wasn't.\n\nInkLink started with one question: what if writing felt shared instead of solitary?",
                     "media_demo": {
-                        "src": "/projects/inklink/hero.png",
+                        "src": "/projects/inklink/images/overview.svg",
                         "type": "image",
                         "alt": "InkLink hero interface preview",
                         "caption": "InkLink reframes writing as a shared, low-pressure chain."
                     }
+                },
+                "launch_ad": {
+                    "title": "InkLink Launch Media",
+                    "video_url": "/projects/inklink/main.mp4",
+                    "embed_url": "https://embed.figma.com/slides/MbevZff1k37GSyjIMQs9NU/InkLink-final-presentation--Copy-?embed-host=share",
+                    "caption": "Promo video plus slide walkthrough of the problem, process, and final InkLink flow."
                 },
                 "problem_framing": {
                     "content": "Writer's block usually comes from pressure, not a lack of ideas. The blank page, perfection expectations, and solo ownership of every next sentence can stall momentum.\n\nThe design direction focused on removing those barriers by making writing collaborative instead of solitary."
@@ -487,28 +493,28 @@
                     }
                 },
                 "feature_breakdown": {
-                    "intro": "InkLink has three core modes of engagement. Explore them in the prototype below.",
+                    "intro": "InkLink focuses on three core collaboration flows. Explore them in the prototype below.",
                     "features": [
                         {
                             "id": "public_projects",
                             "title": "Public Story Chains",
                             "description": "Open stories that anyone can contribute to. Writers join, add a passage, and pass the story forward.",
                             "why": "Low barrier to entry. No commitment required—just jump in and write.",
-                            "image": "/projects/inklink/feature-public.png"
+                            "image": "/projects/inklink/images/Editor (public).svg"
                         },
                         {
                             "id": "private_projects",
                             "title": "Private Writing Circles",
                             "description": "Invite-only spaces for friends or writing groups. Turn order is set by the creator.",
                             "why": "Some writers want collaboration without strangers. Private circles offer that control.",
-                            "image": "/projects/inklink/feature-private.png"
+                            "image": "/projects/inklink/images/Project Page (private) - Finished.svg"
                         },
                         {
                             "id": "timed_turns",
                             "title": "Timed Contributions",
                             "description": "Optional time limits encourage momentum. If a turn expires, the next writer can step in.",
                             "why": "Deadlines reduce overthinking. A 24-hour window is long enough to be fair, short enough to keep stories moving.",
-                            "image": "/projects/inklink/feature-timed.png"
+                            "image": "/projects/inklink/images/Editor (private) - start writing (submit disabled).svg"
                         }
                     ],
                     "prototype": {
@@ -695,6 +701,11 @@
                         "caption": "SideQuest reframes idle time as small, low-pressure adventures."
                     }
                 },
+                "launch_ad": {
+                    "title": "SideQuest Launch Media",
+                    "embed_url": "https://embed.figma.com/slides/MPKZPeksKSJlwFRxYMoctc/Presentation--Copy-?embed-host=share",
+                    "caption": "Slide walkthrough of the problem, process, and final SideQuest flow."
+                },
                 "problem_framing": {
                     "content": "The core issue was framed as decision fatigue rather than lack of options. When too many choices appear at once, users often delay action and default to passive scrolling.\n\nPersona narratives were used to ground this behavior: Scout represented users with limited free time, and Goobert represented users seeking like-minded social activities.\n\nThe design direction prioritized guided momentum over broad browsing by reducing up-front decisions."
                 },
@@ -777,7 +788,7 @@
                     }
                 },
                 "feature_breakdown": {
-                    "intro": "SideQuest has three core elements. Explore each in the prototype below.",
+                    "intro": "SideQuest centers on three core elements. Explore each in the prototype below.",
                     "features": [
                         {
                             "id": "quest_suggestions",

@@ -20,8 +20,8 @@ const pad3 = (n) => String(n).padStart(3, "0");
      title        — section name (uppercased automatically)
    ═════════════════════════════════════════════ */
 export const SectionIndex = ({
-    caseIndex = 1,
-    sectionIndex = 1,
+    caseIndex: _caseIndex = 1,
+    sectionIndex: _sectionIndex = 1,
     title = "",
 }) => (
     <span className="mi-mono mi-section-index">

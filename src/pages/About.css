@@ -219,7 +219,7 @@
 
 .about-connect {
     margin-top: var(--section-spacing-lg);
-    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
     border-top: 1px solid var(--color-border);
 }
 
@@ -239,7 +239,7 @@
 
 /* Primary email CTA */
 .about-email-cta {
-    padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+    padding: clamp(1.1rem, 2.2vw, 1.8rem) 0;
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
     margin-bottom: var(--space-2);
@@ -251,8 +251,8 @@
     align-items: baseline;
     gap: var(--space-3);
     font-family: var(--font-display);
-    font-size: clamp(1.45rem, 3.2vw, 2.05rem);
-    font-weight: 500;
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+    font-weight: 480;
     letter-spacing: -0.02em;
     color: var(--color-text);
     text-decoration: none;
@@ -286,7 +286,7 @@
     font-size: var(--font-size-xs);
     letter-spacing: var(--letter-spacing-label);
     text-transform: uppercase;
-    color: var(--color-text-tertiary);
+    color: color-mix(in srgb, var(--color-text-secondary) 82%, var(--color-text-tertiary));
 }
 
 /* Secondary contact rows */
@@ -428,24 +428,22 @@
     border-bottom: 1px solid var(--color-border);
     transition:
         border-color var(--dur-ui) var(--ease-out-premium),
-        background-color var(--dur-ui) var(--ease-out-premium),
-        transform var(--dur-ui) var(--ease-out-premium);
+        background-color var(--dur-ui) var(--ease-out-premium);
 }
 
 .about-work-row:hover {
-    border-color: color-mix(in srgb, var(--color-accent-vivid) 24%, var(--color-border));
-    background: color-mix(in srgb, var(--color-bg-secondary) 66%, transparent);
-    transform: translateX(1px);
+    border-color: color-mix(in srgb, var(--color-accent-vivid) 18%, var(--color-border));
+    background: color-mix(in srgb, var(--color-bg-secondary) 48%, transparent);
 }
 
 .about-work-row--framed {
-    border: 1px solid color-mix(in srgb, var(--color-border) 86%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-border) 74%, transparent);
     border-radius: var(--radius-lg);
     margin: var(--space-2) 0;
     padding: clamp(1.05rem, 1.8vw, 1.35rem) var(--space-4);
     background:
-        radial-gradient(circle at top right, rgba(67, 121, 144, 0.11), transparent 48%),
-        color-mix(in srgb, var(--color-bg-secondary) 62%, transparent);
+        radial-gradient(circle at top right, rgba(67, 121, 144, 0.08), transparent 54%),
+        color-mix(in srgb, var(--color-bg-secondary) 42%, transparent);
 }
 
 .about-work-row--framed + .about-work-row {

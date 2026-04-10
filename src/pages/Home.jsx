@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { Link } from "react-router-dom";
 import {
@@ -124,13 +124,13 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [showParkReplay, setShowParkReplay] = useState(false);
 
-    const resolveProjectMediaPath = (projectId, src) => {
+    const resolveProjectMediaPath = useCallback((projectId, src) => {
         if (!src) return null;
         if (src.startsWith("/") || src.startsWith("http")) return src;
         return `/projects/${projectId}/${src.replace(/^\.?\//, "")}`;
-    };
+    }, []);
 
-    const normalizeProjectImage = (projectId, image) => {
+    const normalizeProjectImage = useCallback((projectId, image) => {
         if (!image) return null;
         if (typeof image === "string") {
             const src = resolveProjectMediaPath(projectId, image);
@@ -139,9 +139,9 @@ const Home = () => {
         const src = resolveProjectMediaPath(projectId, image.src || image.image);
         if (!src) return null;
         return { ...image, src };
-    };
+    }, [resolveProjectMediaPath]);
 
-    const buildPreviewCandidates = (projectId, candidates = []) => {
+    const buildPreviewCandidates = useCallback((projectId, candidates = []) => {
         const unique = [];
         const seen = new Set();
         for (const candidate of candidates) {
@@ -151,9 +151,9 @@ const Home = () => {
             unique.push(src);
         }
         return unique;
-    };
+    }, [resolveProjectMediaPath]);
 
-    const buildTaxonomyTags = (project) => {
+    const buildTaxonomyTags = useCallback((project) => {
         const sourceTags = Array.isArray(project.tags) ? project.tags : [];
         const normalizedSourceTags = sourceTags
             .map((tag) => String(tag).trim())
@@ -169,7 +169,7 @@ const Home = () => {
             if (unique.length === 2) break;
         }
         return unique;
-    };
+    }, []);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -362,7 +362,7 @@ const Home = () => {
             alive = false;
             controller.abort();
         };
-    }, []);
+    }, [buildPreviewCandidates, buildTaxonomyTags, normalizeProjectImage, resolveProjectMediaPath]);
 
     useEffect(() => {
         if (!isParked) {

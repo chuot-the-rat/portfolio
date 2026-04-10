@@ -235,7 +235,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
                   title: "The Problem",
                   description: toHybridNarrative(
                       sections.problem_framing.content,
-                      3,
+                      2,
                   ),
                   images: normalizeImagesWithContext(
                       sections.problem_framing,
@@ -268,7 +268,10 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
             sections?.early_challenges || sections?.pivots
                 ? {
                       title: "Early Challenges & Pivots",
-                      description: sections.early_challenges?.content || "",
+                      description: toHybridNarrative(
+                          sections.early_challenges?.content || "",
+                          2,
+                      ),
                       pivots:
                           sections.pivots?.map((pivot) => ({
                               from: pivot.from,
