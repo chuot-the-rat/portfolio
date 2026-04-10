@@ -37,6 +37,8 @@ export default function HomeWorkList({ projects }) {
   const [previewMode, setPreviewMode] = useState("mouse");
   const [previewPosition, setPreviewPosition] = useState({ x: 0, y: 0 });
   const bodyRef = useRef(null);
+  const previewRafRef = useRef(null);
+  const pendingPointerRef = useRef(null);
   const PREVIEW_RATIO = 4 / 3;
   const PREVIEW_MIN_WIDTH = 286;
   const PREVIEW_MAX_WIDTH = 340;
@@ -79,6 +81,19 @@ export default function HomeWorkList({ projects }) {
     return { x: maxX, y };
   };
 
+  const schedulePointerPosition = (clientX, clientY) => {
+    pendingPointerRef.current = { clientX, clientY };
+    if (previewRafRef.current !== null) return;
+    previewRafRef.current = window.requestAnimationFrame(() => {
+      previewRafRef.current = null;
+      const pending = pendingPointerRef.current;
+      if (!pending) return;
+      setPreviewPosition(
+        getPointerPreviewPosition(pending.clientX, pending.clientY),
+      );
+    });
+  };
+
   const filtered = projects.filter(
     (p) => (CATEGORY_MAP[p.category] ?? "UX/UI") === activeTab,
   );
@@ -108,6 +123,12 @@ export default function HomeWorkList({ projects }) {
   useEffect(() => {
     setPreviewIndex(0);
   }, [hoveredId]);
+
+  useEffect(() => () => {
+    if (previewRafRef.current !== null) {
+      window.cancelAnimationFrame(previewRafRef.current);
+    }
+  }, []);
 
   const previewSrc = previewCandidates[previewIndex] ?? null;
   const previewVideoSrc = hoveredProject?.previewVideoSrc ?? null;
@@ -181,17 +202,13 @@ export default function HomeWorkList({ projects }) {
                       setPreviewMode("mouse");
                       setHoveredId(project.id);
                       if (!shouldReduceMotion) {
-                        setPreviewPosition(
-                          getPointerPreviewPosition(event.clientX, event.clientY),
-                        );
+                        schedulePointerPosition(event.clientX, event.clientY);
                       }
                     }}
                     onMouseMove={(event) => {
                       if (shouldReduceMotion) return;
                       setPreviewMode("mouse");
-                      setPreviewPosition(
-                        getPointerPreviewPosition(event.clientX, event.clientY),
-                      );
+                      schedulePointerPosition(event.clientX, event.clientY);
                     }}
                     onMouseLeave={() => setHoveredId(null)}
                     onFocus={(event) => {
