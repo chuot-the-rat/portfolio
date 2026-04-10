@@ -197,15 +197,15 @@ export default function About() {
                             {[
                                 {
                                     title: "Research first, always",
-                                    body: "I've learned to resist the urge to jump to solutions. The interesting problems are usually not the stated ones — and the only way to find the real one is to stay in research longer than feels comfortable.",
+                                    body: "I stay in discovery long enough to find the real problem. Better framing early leads to stronger decisions later.",
                                 },
                                 {
                                     title: "Design is a communication problem",
-                                    body: "The best design in the world fails if nobody understands the decision. I spend real time on how I present and explain my work — alignment isn't a soft skill, it's part of the job.",
+                                    body: "Great work still fails if it is not clearly explained. I treat alignment and storytelling as part of the deliverable.",
                                 },
                                 {
                                     title: "Ship it, then improve it",
-                                    body: "I have to actively fight my instinct to polish forever. Good design that ships beats perfect design that doesn't. I've gotten better at calling done.",
+                                    body: "I prioritize clear shipping criteria over endless polish. Real usage is where meaningful iteration starts.",
                                 },
                             ].map((block) => (
                                 <div key={block.title} className="about-philosophy-block">

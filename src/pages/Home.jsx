@@ -431,7 +431,15 @@ const Home = () => {
                         {/* Links column */}
                         <nav className="footer-nav" aria-label="Footer links">
                             <a href="mailto:leanale003@gmail.com" className="footer-nav-link footer-nav-link--primary">
-                                <span className="footer-nav-label">Email</span>
+                                <span className="footer-nav-label-wrap">
+                                    <span className="footer-nav-icon" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" focusable="false">
+                                            <rect x="3" y="6" width="18" height="12" rx="2" />
+                                            <path d="M4 7.5 12 13l8-5.5" />
+                                        </svg>
+                                    </span>
+                                    <span className="footer-nav-label">Email</span>
+                                </span>
                                 <span className="footer-nav-arrow">↗</span>
                             </a>
                             <a
@@ -440,7 +448,15 @@ const Home = () => {
                                 rel="noopener noreferrer"
                                 className="footer-nav-link"
                             >
-                                <span className="footer-nav-label">LinkedIn</span>
+                                <span className="footer-nav-label-wrap">
+                                    <span className="footer-nav-icon" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" focusable="false">
+                                            <rect x="4" y="4" width="16" height="16" rx="2" />
+                                            <path d="M8 11v5M8 8h.01M12 16v-3.5a2 2 0 0 1 4 0V16" />
+                                        </svg>
+                                    </span>
+                                    <span className="footer-nav-label">LinkedIn</span>
+                                </span>
                                 <span className="footer-nav-arrow">↗</span>
                             </a>
                             <a
@@ -449,11 +465,26 @@ const Home = () => {
                                 rel="noopener noreferrer"
                                 className="footer-nav-link"
                             >
-                                <span className="footer-nav-label">GitHub</span>
+                                <span className="footer-nav-label-wrap">
+                                    <span className="footer-nav-icon" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" focusable="false">
+                                            <path d="M9 18c-3 1-3-1.5-4-2m8 4v-3a3.2 3.2 0 0 0-.9-2.5c3-.35 6.2-1.45 6.2-6.6a5.1 5.1 0 0 0-1.3-3.5 4.8 4.8 0 0 0-.08-3.45s-1.05-.35-3.45 1.3a11.9 11.9 0 0 0-6.3 0C4.75.95 3.7 1.3 3.7 1.3a4.8 4.8 0 0 0-.08 3.45A5.1 5.1 0 0 0 2.3 8.2c0 5.1 3.1 6.25 6.2 6.6A3.2 3.2 0 0 0 7.6 17.3V20" />
+                                        </svg>
+                                    </span>
+                                    <span className="footer-nav-label">GitHub</span>
+                                </span>
                                 <span className="footer-nav-arrow">↗</span>
                             </a>
                             <Link to="/about#resume" className="footer-nav-link">
-                                <span className="footer-nav-label">Resume</span>
+                                <span className="footer-nav-label-wrap">
+                                    <span className="footer-nav-icon" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" focusable="false">
+                                            <path d="M8 8h8M8 12h8M8 16h5" />
+                                            <rect x="5" y="4" width="14" height="16" rx="2" />
+                                        </svg>
+                                    </span>
+                                    <span className="footer-nav-label">Resume</span>
+                                </span>
                                 <span className="footer-nav-arrow">→</span>
                             </Link>
                         </nav>

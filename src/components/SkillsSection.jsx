@@ -21,7 +21,6 @@ export default function SkillsSection() {
                             {category.skills.map((skill) => (
                                 <span key={skill.name} className="skills-pill">
                                     <span className="skills-pill-name">{skill.name}</span>
-                                    <span className="skills-pill-level">{skill.level}</span>
                                 </span>
                             ))}
                         </div>

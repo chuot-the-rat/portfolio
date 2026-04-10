@@ -23,7 +23,6 @@ function LiveClock() {
 }
 
 export default function Skills() {
-    const [hoveredSkill, setHoveredSkill] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
 
@@ -92,13 +91,7 @@ export default function Skills() {
                                     {category.skills.map((skill, skillIndex) => (
                                             <motion.div
                                                 key={skill.name}
-                                                className="skill-item"
-                                                onMouseEnter={() =>
-                                                    setHoveredSkill(skill.name)
-                                                }
-                                                onMouseLeave={() =>
-                                                    setHoveredSkill(null)
-                                                }
+                                                className="skill-pill"
                                                 initial={{ opacity: 0 }}
                                                 animate={
                                                     isVisible
@@ -112,37 +105,9 @@ export default function Skills() {
                                                         skillIndex * 0.05,
                                                 }}
                                             >
-                                                <div className="skill-header">
-                                                    <span className="skill-name">
-                                                        {skill.name}
-                                                        {hoveredSkill ===
-                                                            skill.name && (
-                                                            <motion.span
-                                                                className="skill-indicator"
-                                                                initial={{
-                                                                    opacity: 0,
-                                                                    x: -4,
-                                                                }}
-                                                                animate={{
-                                                                    opacity: 1,
-                                                                    x: 0,
-                                                                }}
-                                                                exit={{
-                                                                    opacity: 0,
-                                                                    x: -4,
-                                                                }}
-                                                                transition={{
-                                                                    duration: 0.2,
-                                                                }}
-                                                            >
-                                                                →
-                                                            </motion.span>
-                                                        )}
-                                                    </span>
-                                                    <span className="skill-level">
-                                                        {skill.level}
-                                                    </span>
-                                                </div>
+                                                <span className="skill-pill-name">
+                                                    {skill.name}
+                                                </span>
                                             </motion.div>
                                     ))}
                                 </div>

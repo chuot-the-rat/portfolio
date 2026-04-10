@@ -112,66 +112,36 @@
 
 .skills-list {
     display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
+    flex-wrap: wrap;
+    gap: 0.56rem;
 }
 
-.skill-item {
-    padding: 0.68rem 0.75rem;
-    border-radius: var(--radius-base);
+.skill-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.44rem 0.72rem;
+    border-radius: var(--radius-full);
     border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
     background: color-mix(in srgb, var(--color-bg-secondary) 75%, transparent);
     transition:
         background var(--dur-ui) var(--ease-out-premium),
         border-color var(--dur-ui) var(--ease-out-premium),
         transform var(--dur-ui) var(--ease-out-premium);
-    cursor: pointer;
+    cursor: default;
 }
 
-.skill-item:hover {
+.skill-pill:hover {
     background: color-mix(in srgb, var(--color-bg-secondary) 90%, var(--color-bg));
     border-color: color-mix(in srgb, var(--color-text-secondary) 24%, var(--color-border));
     transform: translateY(-1px);
 }
 
-.skill-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.skill-name {
-    font-size: 0.97rem;
-    font-weight: 520;
-    line-height: 1.35;
-    letter-spacing: 0.004em;
+.skill-pill-name {
+    font-size: 0.88rem;
+    font-weight: 510;
+    line-height: 1.25;
+    letter-spacing: 0.003em;
     color: var(--color-text);
-    display: flex;
-    align-items: center;
-    gap: 0.42rem;
-}
-
-.skill-indicator {
-    font-size: 1rem;
-    color: var(--color-text);
-    font-weight: 520;
-}
-
-.skill-level {
-    font-size: 0.66rem;
-    color: var(--color-text-secondary);
-    font-family: var(--font-mono);
-    font-weight: 620;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    line-height: 1;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-    border: 1px solid color-mix(in srgb, var(--color-border) 74%, transparent);
-    border-radius: var(--radius-full);
-    padding: 4px 8px 3px;
-    background: var(--color-bg);
 }
 
 @media (max-width: 768px) {

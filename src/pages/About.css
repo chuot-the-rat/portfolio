@@ -33,9 +33,9 @@
    ─────────────────────────────────────────────────────────────────────────── */
 
 .about-hero {
-    padding-top: clamp(5rem, 10vh, 8rem);
-    padding-bottom: clamp(3rem, 6vh, 5rem);
-    min-height: 42vh;
+    padding-top: clamp(3.8rem, 7.5vh, 5.7rem);
+    padding-bottom: clamp(2rem, 4vh, 3.2rem);
+    min-height: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -229,12 +229,12 @@
 
 .about-connect-heading {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
     font-weight: 500;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.025em;
     color: var(--color-text);
     margin: 0;
-    line-height: 1.0;
+    line-height: 1.1;
 }
 
 /* Primary email CTA */
@@ -251,9 +251,9 @@
     align-items: baseline;
     gap: var(--space-3);
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4.8vw, 3.8rem);
+    font-size: clamp(1.45rem, 3.2vw, 2.05rem);
     font-weight: 500;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
     color: var(--color-text);
     text-decoration: none;
     line-height: 1.1;
@@ -411,14 +411,15 @@
 .about-process-flow {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-6);
+    gap: var(--space-4);
 }
 
-.about-process-card {
+.about-process-card,
+.about-philosophy-block {
     position: relative;
     padding: var(--space-7);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     background:
         radial-gradient(circle at top right, rgba(67, 121, 144, 0.18), transparent 42%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
@@ -436,7 +437,8 @@
     margin-bottom: var(--space-4);
 }
 
-.about-process-card:hover {
+.about-process-card:hover,
+.about-philosophy-block:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: color-mix(in srgb, var(--color-accent-vivid) 24%, var(--color-border));
@@ -520,35 +522,21 @@
     padding-top: var(--space-4);
 }
 
-.about-philosophy-block {
-    padding: var(--space-8);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--color-bg-secondary) 74%, transparent);
-    transition:
-        border-color var(--dur-ui) var(--ease-out-premium),
-        transform var(--dur-ui) var(--ease-out-premium);
-}
-
-.about-philosophy-block:hover {
-    border-color: color-mix(in srgb, var(--color-accent) 32%, var(--color-border));
-    transform: translateY(-2px);
-}
-
 .about-philosophy-block-title {
     display: block;
-    font-size: var(--font-size-base);
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
     font-weight: 500;
     color: var(--color-text);
-    margin-bottom: var(--space-4);
+    line-height: 1.2;
+    margin-bottom: var(--space-3);
 }
 
 .about-philosophy-block-body {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
+    font-size: 0.98rem;
+    line-height: 1.52;
     color: var(--color-text-secondary);
     margin: 0;
-    max-width: 34ch;
+    max-width: 32ch;
 }
 
 /* ── Resume ──────────────────────────────────────────────────────────────────
@@ -572,12 +560,12 @@
 
 .about-resume-heading {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
     font-weight: 500;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     color: var(--color-text);
     margin: 0;
-    line-height: 1.15;
+    line-height: 1.1;
 }
 
 .about-resume-actions {
@@ -641,7 +629,7 @@
 
 @media (max-width: 768px) {
     .about-hero {
-        padding-top: clamp(4.25rem, 11vh, 6rem);
+        padding-top: clamp(4rem, 10vh, 5.5rem);
         min-height: 36vh;
     }
 
@@ -726,7 +714,7 @@
     }
 
     .about-email-link {
-        font-size: clamp(1.6rem, 8.3vw, 2.35rem);
+        font-size: clamp(1.3rem, 6.8vw, 1.8rem);
         line-height: 1.16;
         overflow-wrap: anywhere;
         row-gap: var(--space-1);
