@@ -6,6 +6,13 @@ import BackToTop from "../components/BackToTop";
 import ProjectCheckpoint from "../components/passbook/ProjectCheckpoint";
 import "./ProjectLayout.css";
 
+const handleActivateFromKeyboard = (event, action) => {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        action();
+    }
+};
+
 /**
  * ProjectLayout — A gallery-forward layout for standalone design projects.
  * Renders from local data.json files (e.g., /projects/fizzu-soda/data.json).
@@ -45,6 +52,19 @@ const ProjectLayout = () => {
 
         loadProject();
     }, [slug, navigate, basePath]);
+
+    useEffect(() => {
+        if (!lightboxImage) return undefined;
+
+        const onKeyDown = (event) => {
+            if (event.key === "Escape") {
+                setLightboxImage(null);
+            }
+        };
+
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [lightboxImage]);
 
     /** Resolve image src — handles both relative ("images/x.png") and absolute ("/...") paths */
     const resolveImage = (src) => {
@@ -609,11 +629,25 @@ const ProjectLayout = () => {
                                                                                 i *
                                                                                 0.05,
                                                                         }}
+                                                                        role="button"
+                                                                        tabIndex={0}
+                                                                        aria-label={`Open image ${i + 1} from ${section.title}`}
                                                                         onClick={() =>
                                                                             setLightboxImage(
                                                                                 resolveImage(
                                                                                     img.src,
                                                                                 ),
+                                                                            )
+                                                                        }
+                                                                        onKeyDown={(event) =>
+                                                                            handleActivateFromKeyboard(
+                                                                                event,
+                                                                                () =>
+                                                                                    setLightboxImage(
+                                                                                        resolveImage(
+                                                                                            img.src,
+                                                                                        ),
+                                                                                    ),
                                                                             )
                                                                         }
                                                                     >
@@ -664,8 +698,17 @@ const ProjectLayout = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: i * 0.08 }}
+                                role="button"
+                                tabIndex={0}
+                                aria-label={`Open gallery image ${i + 1} for ${project.title}`}
                                 onClick={() =>
                                     setLightboxImage(resolveImage(img.src))
+                                }
+                                onKeyDown={(event) =>
+                                    handleActivateFromKeyboard(
+                                        event,
+                                        () => setLightboxImage(resolveImage(img.src)),
+                                    )
                                 }
                             >
                                 <img
@@ -695,10 +738,16 @@ const ProjectLayout = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={() => setLightboxImage(null)}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Image lightbox"
                 >
                     <button
                         className="pl-lightbox-close"
-                        onClick={() => setLightboxImage(null)}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            setLightboxImage(null);
+                        }}
                         aria-label="Close lightbox"
                     >
                         &times;
@@ -706,6 +755,7 @@ const ProjectLayout = () => {
                     <img
                         src={lightboxImage}
                         alt="Enlarged view"
+                        onClick={(event) => event.stopPropagation()}
                     />
                 </motion.div>
             )}
@@ -792,9 +842,21 @@ const PLSection = ({
                             className="pl-section-image"
                             whileHover={{ scale: 1.01 }}
                             transition={{ duration: 0.3 }}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`Open image ${i + 1} from ${title || "section"}`}
                             onClick={() =>
                                 onImageClick?.(
                                     resolveImage?.(img.src) || img.src,
+                                )
+                            }
+                            onKeyDown={(event) =>
+                                handleActivateFromKeyboard(
+                                    event,
+                                    () =>
+                                        onImageClick?.(
+                                            resolveImage?.(img.src) || img.src,
+                                        ),
                                 )
                             }
                         >
@@ -821,6 +883,15 @@ const PLSection = ({
                             <div
                                 className="carousel-viewport"
                                 onClick={() => onImageClick?.(src)}
+                                role="button"
+                                tabIndex={0}
+                                aria-label={`Open enlarged image ${currentSlide + 1} of ${images.length}`}
+                                onKeyDown={(event) =>
+                                    handleActivateFromKeyboard(
+                                        event,
+                                        () => onImageClick?.(src),
+                                    )
+                                }
                             >
                                 <AnimatePresence mode="wait">
                                     <motion.img

@@ -302,7 +302,8 @@
 .pb-route-row:hover,
 .pb-route-row:focus-visible {
     background: var(--pb-surface-alt);
-    outline: none;
+    outline: var(--focus-ring);
+    outline-offset: -2px;
 }
 
 /* Stamp indicator dot */

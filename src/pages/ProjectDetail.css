@@ -1549,9 +1549,9 @@
     gap: var(--space-3);
     margin-top: var(--space-4);
     font-family: var(--font-mono);
-    font-size: clamp(0.7rem, 0.18vw + 0.67rem, 0.78rem);
+    font-size: clamp(0.76rem, 0.18vw + 0.72rem, 0.84rem);
     letter-spacing: 0.03em;
-    color: color-mix(in srgb, var(--color-text-secondary) 76%, var(--color-text-tertiary));
+    color: color-mix(in srgb, var(--color-text-secondary) 90%, var(--color-text-tertiary));
     font-style: normal;
     line-height: 1.6;
     max-width: 66ch;
@@ -1560,7 +1560,7 @@
 
 .before-after-caption {
     line-height: var(--line-height-relaxed);
-    color: var(--color-text-secondary);
+    color: color-mix(in srgb, var(--color-text-secondary) 92%, var(--color-text));
     max-width: 58ch;
 }
 

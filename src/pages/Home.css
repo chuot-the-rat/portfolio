@@ -168,7 +168,8 @@
 }
 
 .home-hero-grid .hs-cta:focus-visible {
-    outline: none;
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
     color: var(--color-text);
 }
 
@@ -284,6 +285,10 @@
     transform: scaleX(1);
 }
 
+.footer-nav-link:focus-visible::after {
+    transform: scaleX(1);
+}
+
 .footer-nav-label {
     flex: 1;
 }
@@ -324,6 +329,11 @@
 .footer-nav-link:hover .footer-nav-arrow {
     opacity: 1;
     transform: translate(3px, -2px);
+}
+
+.footer-nav-link:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
 }
 
 /* Bottom bar */
