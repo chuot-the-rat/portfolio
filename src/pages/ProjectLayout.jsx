@@ -521,10 +521,13 @@ const ProjectLayout = () => {
                                     Array.isArray(project.sections) &&
                                     project.sections.map((section) => {
                                         if (section.type === "text") {
+                                            const isAssignmentNote =
+                                                section.id === "assignment-note" ||
+                                                /assignment note/i.test(section.title || "");
                                             return (
                                                 <motion.section
                                                     key={section.id}
-                                                    className="pl-section"
+                                                    className={`pl-section ${isAssignmentNote ? "pl-section--note" : ""}`}
                                                     initial={{
                                                         opacity: 0,
                                                         y: 30,
@@ -545,7 +548,7 @@ const ProjectLayout = () => {
                                                     <h2 className="section-title">
                                                         {section.title}
                                                     </h2>
-                                                    <p className="section-description">
+                                                    <p className={`section-description ${isAssignmentNote ? "section-description--note" : ""}`}>
                                                         {section.content}
                                                     </p>
                                                 </motion.section>
@@ -674,9 +677,9 @@ const ProjectLayout = () => {
                                     loading="lazy"
                                 />
                                 {img.caption && (
-                                    <span className="pl-gallery-caption">
+                                    <p className="pl-gallery-caption">
                                         {img.caption}
-                                    </span>
+                                    </p>
                                 )}
                             </motion.div>
                         ))}
