@@ -29,10 +29,10 @@
 
 .home-hero-passbook {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(272px, 22vw, 332px);
-    gap: clamp(1.1rem, 2vw, 1.9rem);
+    grid-template-columns: minmax(0, 1fr) clamp(336px, 27vw, 420px);
+    gap: clamp(1.25rem, 2.2vw, 2.1rem);
     align-items: start;
-    margin-bottom: clamp(3rem, 5vw, 5.2rem);
+    margin-bottom: clamp(2.4rem, 4.2vw, 4.6rem);
     position: relative;
     z-index: 1;
 }
@@ -50,10 +50,10 @@
 
 .home-passbook-rail {
     position: sticky;
-    top: calc(70px + var(--space-3));
+    top: calc(70px + var(--space-2));
     align-self: start;
     min-width: 0;
-    padding-top: clamp(var(--space-2), 1.4vw, var(--space-4));
+    padding-top: 0;
 }
 
 .home-passbook-rail .pb-print-wrapper {
@@ -348,46 +348,27 @@
 @media (max-width: 768px) {
     .home-hero-passbook {
         grid-template-columns: 1fr;
-        gap: var(--space-4);
-        margin-bottom: var(--space-10);
+        gap: var(--space-6);
+        margin-bottom: var(--space-8);
         position: relative;
     }
 
     .home-passbook-rail {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: clamp(120px, 34vw, 170px);
-        z-index: 3;
+        position: static;
+        top: auto;
+        right: auto;
+        width: 100%;
+        z-index: 1;
+        padding-top: 0;
     }
 
     .home-passbook-rail .pb-print-wrapper {
         width: 100%;
-    }
-
-    .home-passbook-rail .pb-print-card {
-        padding: var(--space-2);
-        gap: var(--space-2);
-    }
-
-    .home-passbook-rail .pb-print-card__mark {
-        width: 24px;
-        height: 24px;
-        font-size: 8px;
-    }
-
-    .home-passbook-rail .pb-print-card__slots,
-    .home-passbook-rail .pb-print-card__arrow {
-        display: none;
-    }
-
-    .home-passbook-rail .pb-print-card__label {
-        font-size: 10px;
-        line-height: 1.2;
+        max-width: 100%;
     }
 
     .home-hero-grid {
-        padding-right: clamp(112px, 36vw, 176px);
+        padding-right: 0;
     }
 
     .home-main {
@@ -433,20 +414,19 @@
 
 @media (max-width: 1100px) and (min-width: 769px) {
     .home-hero-passbook {
-        grid-template-columns: minmax(0, 1fr) clamp(228px, 26vw, 276px);
-        gap: clamp(0.75rem, 1.4vw, 1.15rem);
+        grid-template-columns: minmax(0, 1fr) clamp(300px, 30vw, 360px);
+        gap: clamp(0.9rem, 1.6vw, 1.25rem);
     }
 
     .home-passbook-rail {
-        top: calc(76px + var(--space-3));
-        padding-top: var(--space-2);
+        top: calc(74px + var(--space-2));
     }
 }
 
 @media (max-width: 1200px) and (min-width: 901px) {
     .home-hero-passbook {
-        grid-template-columns: minmax(0, 1fr) clamp(228px, 23vw, 276px);
-        gap: clamp(0.72rem, 1.2vw, 1.05rem);
+        grid-template-columns: minmax(0, 1fr) clamp(316px, 27vw, 380px);
+        gap: clamp(0.9rem, 1.4vw, 1.2rem);
     }
 
     .home-passbook-rail {

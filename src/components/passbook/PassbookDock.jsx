@@ -38,6 +38,9 @@ export default function PassbookDock({ embedded = false }) {
                 <span className="pb-peek-tab__icon" aria-hidden="true">
                     {allDone ? "◆" : "◇"}
                 </span>
+                <span className="pb-peek-tab__label">
+                    {allDone ? "Open completed passbook" : "Open route passbook"}
+                </span>
                 <span className="pb-peek-tab__progress">
                     {stampCount}/{totalRoutes}
                 </span>
