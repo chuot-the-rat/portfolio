@@ -15,7 +15,17 @@ const ROUTES = [
 const BAD_MARKERS = [
   "Page Not Found",
   "Something went wrong loading this project",
+  "404",
 ];
+
+const toVisibleText = (html = "") =>
+  String(html)
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
 const failures = [];
 
@@ -24,8 +34,9 @@ for (const route of ROUTES) {
   try {
     const res = await fetch(url);
     const html = await res.text();
+    const visibleText = toVisibleText(html);
     const statusOk = res.status === 200;
-    const marker = BAD_MARKERS.find((value) => html.includes(value));
+    const marker = BAD_MARKERS.find((value) => visibleText.includes(value));
     if (!statusOk || marker) {
       failures.push({
         route,
