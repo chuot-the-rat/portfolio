@@ -422,7 +422,7 @@
     margin: var(--space-2) 0 0;
     max-width: 62ch;
     font-size: var(--font-size-base);
-    line-height: 1.6;
+    line-height: 1.58;
     color: var(--color-text-secondary);
 }
 
@@ -432,10 +432,10 @@
 
 .about-work-row {
     display: grid;
-    grid-template-columns: 72px 132px minmax(0, 1fr);
-    gap: var(--space-6);
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: var(--space-5);
     align-items: start;
-    padding: clamp(1.1rem, 2vw, 1.45rem) 0;
+    padding: clamp(1.05rem, 1.9vw, 1.35rem) 0;
     border-bottom: 1px solid var(--color-border);
     transition:
         border-color var(--dur-ui) var(--ease-out-premium),
@@ -444,21 +444,7 @@
 
 .about-work-row:hover {
     border-color: color-mix(in srgb, var(--color-accent-vivid) 18%, var(--color-border));
-    background: color-mix(in srgb, var(--color-bg-secondary) 48%, transparent);
-}
-
-.about-work-row--framed {
-    border: 1px solid color-mix(in srgb, var(--color-border) 74%, transparent);
-    border-radius: var(--radius-lg);
-    margin: var(--space-2) 0;
-    padding: clamp(1.05rem, 1.8vw, 1.35rem) var(--space-4);
-    background:
-        radial-gradient(circle at top right, rgba(67, 121, 144, 0.08), transparent 54%),
-        color-mix(in srgb, var(--color-bg-secondary) 42%, transparent);
-}
-
-.about-work-row--framed + .about-work-row {
-    margin-top: var(--space-2);
+    background: color-mix(in srgb, var(--color-bg-secondary) 32%, transparent);
 }
 
 .about-work-step {
@@ -469,27 +455,6 @@
     color: var(--color-text-tertiary);
     opacity: 0.82;
     padding-top: 3px;
-    white-space: nowrap;
-}
-
-.about-work-meta {
-    display: flex;
-    align-items: flex-start;
-    padding-top: 1px;
-}
-
-.about-work-kicker {
-    display: inline-flex;
-    align-items: center;
-    padding: var(--chip-padding-y) var(--chip-padding-x);
-    border-radius: var(--chip-radius);
-    border: 1px solid var(--chip-border);
-    background: color-mix(in srgb, var(--chip-bg) 78%, transparent);
-    font-family: var(--chip-font-family);
-    font-size: var(--chip-font-size);
-    letter-spacing: var(--chip-letter-spacing);
-    text-transform: uppercase;
-    color: color-mix(in srgb, var(--chip-text) 92%, var(--color-text));
     white-space: nowrap;
 }
 
@@ -651,20 +616,12 @@
 
     .about-work-row {
         grid-template-columns: 1fr;
-        gap: var(--space-2);
-        padding: var(--space-6) 0;
-    }
-
-    .about-work-row--framed {
-        padding: var(--space-5);
+        gap: var(--space-1);
+        padding: var(--space-5) 0;
     }
 
     .about-work-step {
         font-size: 10px;
-        padding-top: 0;
-    }
-
-    .about-work-meta {
         padding-top: 0;
     }
 

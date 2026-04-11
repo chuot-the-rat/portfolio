@@ -41,54 +41,30 @@ const fadeUp = {
     transition: { duration: 0.45 },
 };
 
-const HOW_I_WORK_BLOCKS = [
+const HOW_I_WORK_STEPS = [
     {
-        code: "01/06",
-        id: "approach-discovery",
-        group: "Approach",
-        title: "Start with context",
-        body: "I align on user behavior, product constraints, and business goals before exploring solutions.",
-        framed: false,
+        code: "01/04",
+        id: "discover",
+        title: "Discover",
+        body: "I align on user behavior, product constraints, and business goals before choosing a direction.",
     },
     {
-        code: "02/06",
-        id: "approach-structure",
-        group: "Approach",
-        title: "Clarify the flow",
-        body: "I shape clear states, interactions, and priorities so product and engineering can move quickly together.",
-        framed: true,
+        code: "02/04",
+        id: "structure",
+        title: "Structure",
+        body: "I turn complexity into clear flows, states, and priorities teams can build with confidence.",
     },
     {
-        code: "03/06",
-        id: "approach-iterate",
-        group: "Approach",
-        title: "Ship and refine",
-        body: "I define success criteria early, ship intentionally, and iterate from live feedback.",
-        framed: false,
+        code: "03/04",
+        id: "validate",
+        title: "Validate",
+        body: "I test early, learn quickly, and adjust decisions based on evidence instead of assumptions.",
     },
     {
-        code: "04/06",
-        id: "principle-research",
-        group: "Principles",
-        title: "Research over assumptions",
-        body: "I test quickly instead of guessing. Evidence keeps the team aligned and decisions grounded.",
-        framed: false,
-    },
-    {
-        code: "05/06",
-        id: "principle-clarity",
-        group: "Principles",
-        title: "Clarity is the craft",
-        body: "Good design should feel obvious to users and straightforward to build across teams.",
-        framed: true,
-    },
-    {
-        code: "06/06",
-        id: "principle-focus",
-        group: "Principles",
-        title: "Progress over perfection",
-        body: "I focus on meaningful progress and outcomes instead of polishing details that do not move the product forward.",
-        framed: false,
+        code: "04/04",
+        id: "ship",
+        title: "Ship",
+        body: "I define success criteria, ship intentionally, and iterate from real-world feedback.",
     },
 ];
 
@@ -186,25 +162,22 @@ export default function About() {
                             <p className="about-connect-label">Approach</p>
                             <h2 className="about-work-heading">How I work</h2>
                             <p className="about-work-intro">
-                                I keep the process practical: align on the problem, structure the flow, and ship in small confident steps.
+                                A practical, repeatable process that keeps teams aligned and moves work forward.
                             </p>
                         </div>
                         <div className="about-work-timeline" role="list" aria-label="How I work">
-                            {HOW_I_WORK_BLOCKS.map((block) => (
+                            {HOW_I_WORK_STEPS.map((step) => (
                                 <article
-                                    key={block.id}
-                                    className={`about-work-row ${block.framed ? "about-work-row--framed" : ""}`}
+                                    key={step.id}
+                                    className="about-work-row"
                                     role="listitem"
                                 >
                                     <div className="about-work-step" aria-hidden="true">
-                                        {block.code}
-                                    </div>
-                                    <div className="about-work-meta">
-                                        <span className="about-work-kicker">{block.group}</span>
+                                        {step.code}
                                     </div>
                                     <div className="about-work-content">
-                                        <h3 className="about-work-row-title">{block.title}</h3>
-                                        <p className="about-work-row-body">{block.body}</p>
+                                        <h3 className="about-work-row-title">{step.title}</h3>
+                                        <p className="about-work-row-body">{step.body}</p>
                                     </div>
                                 </article>
                             ))}

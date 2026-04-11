@@ -11,6 +11,10 @@ export const SKILL_CATEGORIES = [
             { name: "Usability Testing" },
             { name: "Heuristic Evaluation" },
             { name: "Journey Mapping" },
+            { name: "Stakeholder Communication" },
+            { name: "Workshop Facilitation" },
+            { name: "UX Writing" },
+            { name: "Cross-functional Collaboration" },
         ],
     },
     {
@@ -19,6 +23,8 @@ export const SKILL_CATEGORIES = [
         skills: [
             { name: "Design Systems" },
             { name: "Accessibility (WCAG)" },
+            { name: "Design QA" },
+            { name: "Design Handoff Documentation" },
             { name: "Responsive Design" },
             { name: "Typography" },
             { name: "Color Systems" },
