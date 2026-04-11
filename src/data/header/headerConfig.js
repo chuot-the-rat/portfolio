@@ -19,11 +19,11 @@ export const homeHeroConfig = {
   // HeroText
   text: {
     showStatus: true,
-    descriptor: "UI/UX Designer & Developer",
+    descriptor: "Product Designer + Frontend",
     headline: ["Leana", "Le"], // array = one word per display line
     headlineAs: "h1",
     subline:
-      "I design and build product experiences that turn complex workflows into clear, calm outcomes.",
+      "I design and ship product experiences that turn complex workflows into clear flows and measurable outcomes.",
   },
 
   // MediaBlock — null until portrait asset is added

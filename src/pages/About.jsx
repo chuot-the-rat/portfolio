@@ -47,7 +47,7 @@ const HOW_I_WORK_BLOCKS = [
         id: "approach-discovery",
         group: "Approach",
         title: "Start with context",
-        body: "I ground decisions in user behavior, constraints, and business goals before exploring solutions.",
+        body: "I align on user behavior, product constraints, and business goals before exploring solutions.",
         framed: false,
     },
     {
@@ -55,7 +55,7 @@ const HOW_I_WORK_BLOCKS = [
         id: "approach-structure",
         group: "Approach",
         title: "Clarify the flow",
-        body: "I simplify complexity into clear states, interactions, and priorities teams can build with confidence.",
+        body: "I shape clear states, interactions, and priorities so product and engineering can move quickly together.",
         framed: true,
     },
     {
@@ -63,7 +63,7 @@ const HOW_I_WORK_BLOCKS = [
         id: "approach-iterate",
         group: "Approach",
         title: "Ship and refine",
-        body: "I define what success looks like, ship intentionally, and improve based on real-world signals.",
+        body: "I define success criteria early, ship intentionally, and iterate from live feedback.",
         framed: false,
     },
     {
@@ -71,7 +71,7 @@ const HOW_I_WORK_BLOCKS = [
         id: "principle-research",
         group: "Principles",
         title: "Research over assumptions",
-        body: "I would rather test quickly than guess confidently. Evidence keeps direction honest.",
+        body: "I test quickly instead of guessing. Evidence keeps the team aligned and decisions grounded.",
         framed: false,
     },
     {
@@ -79,7 +79,7 @@ const HOW_I_WORK_BLOCKS = [
         id: "principle-clarity",
         group: "Principles",
         title: "Clarity is the craft",
-        body: "Good design should feel obvious to users and understandable to cross-functional partners.",
+        body: "Good design should feel obvious to users and straightforward to build across teams.",
         framed: true,
     },
     {
@@ -87,7 +87,7 @@ const HOW_I_WORK_BLOCKS = [
         id: "principle-focus",
         group: "Principles",
         title: "Progress over perfection",
-        body: "I optimize for meaningful momentum and outcomes, not endless polish for its own sake.",
+        body: "I focus on meaningful progress and outcomes instead of polishing details that do not move the product forward.",
         framed: false,
     },
 ];
@@ -146,7 +146,7 @@ export default function About() {
                             <NameCycle />
                         </h1>
                         <p className="about-hero-sub">
-                            Product designer focused on research, interaction design, and clear product outcomes.
+                            Product designer focused on research, interaction clarity, and outcomes teams can ship with confidence.
                         </p>
                         <ul className="about-hero-traits" aria-label="Core strengths">
                             {ABOUT_TRAITS.map((trait) => (
@@ -168,8 +168,8 @@ export default function About() {
                                 </p>
                                 <p className="about-para">
                                     I am a <em className="about-em">product designer</em> finishing the Digital Design and
-                                    Development diploma at BCIT, focused on research-backed decisions, clear interaction
-                                    patterns, and practical handoff-ready work.
+                                    Development diploma at BCIT, focused on research-backed decisions, interaction systems,
+                                    and production-ready delivery with engineering.
                                 </p>
                             </div>
                         </motion.div>
@@ -186,7 +186,7 @@ export default function About() {
                             <p className="about-connect-label">Approach</p>
                             <h2 className="about-work-heading">How I work</h2>
                             <p className="about-work-intro">
-                                I keep the process simple: understand the problem, make the flow clear, and ship in small confident steps.
+                                I keep the process practical: align on the problem, structure the flow, and ship in small confident steps.
                             </p>
                         </div>
                         <div className="about-work-timeline" role="list" aria-label="How I work">
@@ -241,7 +241,7 @@ export default function About() {
                                 <span className="about-email-arrow" aria-hidden="true">↗</span>
                             </a>
                             <p className="about-email-note">
-                                Open to full-time and contract product design roles.
+                                Open to product design roles, with immediate start availability.
                             </p>
                         </div>
 
@@ -259,7 +259,7 @@ export default function About() {
                                         {row.label === "Status" ? (
                                             <span className="about-contact-value about-contact-value--status">
                                                 <span className="about-status-dot" aria-hidden="true" />
-                                                Open to product design roles — full-time or contract. Isekai recs also welcome.
+                                                Open to product design roles — full-time or contract.
                                             </span>
                                         ) : row.href ? (
                                             <a

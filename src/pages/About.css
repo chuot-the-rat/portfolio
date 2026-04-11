@@ -219,7 +219,7 @@
    ─────────────────────────────────────────────────────────────────────────── */
 
 .about-connect {
-    margin-top: clamp(2.8rem, 6vw, 4.8rem);
+    margin-top: clamp(2.4rem, 5vw, 4rem);
     padding-top: clamp(2rem, 4.2vw, 3.2rem);
     border-top: 1px solid var(--color-border);
 }
@@ -230,7 +230,7 @@
 
 .about-connect-heading {
     font-family: var(--font-display);
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
     font-weight: 500;
     letter-spacing: -0.025em;
     color: var(--color-text);
@@ -240,7 +240,7 @@
 
 /* Primary email CTA */
 .about-email-cta {
-    padding: clamp(1.1rem, 2.2vw, 1.8rem) 0;
+    padding: clamp(0.95rem, 1.8vw, 1.35rem) 0;
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
     margin-bottom: var(--space-2);
@@ -252,8 +252,8 @@
     align-items: baseline;
     gap: var(--space-3);
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
-    font-weight: 480;
+    font-size: clamp(1.14rem, 1.8vw, 1.38rem);
+    font-weight: 520;
     letter-spacing: -0.02em;
     color: var(--color-text);
     text-decoration: none;
@@ -291,7 +291,7 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     letter-spacing: var(--letter-spacing-label);
-    text-transform: uppercase;
+    text-transform: none;
     color: color-mix(in srgb, var(--color-text-secondary) 82%, var(--color-text-tertiary));
 }
 

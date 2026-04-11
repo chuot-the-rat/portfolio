@@ -118,7 +118,7 @@
 
 /* Home hero CTA treatment: typographic links over button-like pills */
 .home-hero-grid .hs-cta-group {
-    gap: var(--space-5);
+    gap: var(--space-4);
     margin-top: var(--space-fluid-l);
 }
 
@@ -127,10 +127,10 @@
     border: 0;
     border-radius: 0;
     background: transparent;
-    color: color-mix(in srgb, var(--color-text) 86%, var(--color-text-secondary));
+    color: color-mix(in srgb, var(--color-text) 74%, var(--color-text-secondary));
     text-transform: uppercase;
-    font-size: clamp(0.94rem, 1.15vw, 1.04rem);
-    font-weight: 650;
+    font-size: clamp(1rem, 1.2vw, 1.12rem);
+    font-weight: 620;
     letter-spacing: 0.07em;
     display: inline-flex;
     align-items: center;
@@ -159,6 +159,12 @@
 
 .home-hero-grid .hs-cta--primary {
     color: var(--color-text);
+    font-weight: 700;
+    letter-spacing: 0.075em;
+}
+
+.home-hero-grid .hs-cta:not(.hs-cta--primary) {
+    opacity: 0.78;
 }
 
 .home-hero-grid .hs-cta:hover {
