@@ -159,7 +159,7 @@
 .about-row {
     display: grid;
     grid-template-columns: var(--layout-label-col) 1fr;
-    gap: var(--space-16);
+    gap: var(--space-12);
     padding: var(--space-10) 0;
     border-bottom: 1px solid var(--color-border);
 }
@@ -302,7 +302,7 @@
 }
 
 .about-contact-rows:hover .about-contact-row {
-    opacity: 0.4;
+    opacity: 0.62;
 }
 
 .about-contact-rows:hover .about-contact-row:hover {
@@ -312,7 +312,7 @@
 .about-contact-row {
     display: grid;
     grid-template-columns: var(--layout-label-col) 1fr;
-    gap: var(--space-16);
+    gap: var(--space-12);
     padding: var(--space-7) 0;
     border-bottom: 1px solid var(--color-border);
     transition: opacity 0.2s ease;
@@ -399,7 +399,7 @@
 /* ── How I Work (Unified Section) ───────────────────────────────────────── */
 
 .about-work {
-    margin-top: clamp(2.8rem, 6vw, 4.8rem);
+    margin-top: clamp(2.4rem, 5vw, 4rem);
     padding-top: clamp(2rem, 4.2vw, 3.4rem);
     border-top: 1px solid var(--color-border);
 }
@@ -410,7 +410,7 @@
 
 .about-work-heading {
     font-family: var(--font-display);
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
     font-weight: 500;
     letter-spacing: -0.025em;
     color: var(--color-text);
@@ -419,8 +419,8 @@
 }
 
 .about-work-intro {
-    margin: var(--space-3) 0 0;
-    max-width: 66ch;
+    margin: var(--space-2) 0 0;
+    max-width: 62ch;
     font-size: var(--font-size-base);
     line-height: 1.6;
     color: var(--color-text-secondary);
@@ -534,7 +534,7 @@
 
 .about-resume-heading {
     font-family: var(--font-display);
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
     font-weight: 500;
     letter-spacing: -0.025em;
     color: var(--color-text);

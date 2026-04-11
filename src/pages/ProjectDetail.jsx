@@ -72,9 +72,16 @@ const dedupeTextList = (items = []) => {
 
 const filterRedundantOutcomes = (description, outcomes = []) => {
     const compactDescription = normalizeTextKey(description);
+    const lowValuePatterns = [
+        /collaborative turns/i,
+        /perfectionism/i,
+        /timed turns.*momentum/i,
+        /low-pressure.*fun/i,
+    ];
     return dedupeTextList(outcomes).filter((outcome) => {
         const outcomeKey = normalizeTextKey(outcome);
         if (!outcomeKey) return false;
+        if (lowValuePatterns.some((pattern) => pattern.test(outcome))) return false;
         if (!compactDescription) return true;
         return !(
             compactDescription.includes(outcomeKey) ||

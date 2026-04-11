@@ -90,6 +90,8 @@
     gap: var(--space-6);
     padding: clamp(0.65rem, 1.3vw, 1rem) 0 clamp(0.85rem, 1.8vw, 1.35rem);
     border-top: 1px solid color-mix(in srgb, var(--color-border) 86%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 76%, transparent);
+    margin-bottom: clamp(0.3rem, 0.8vw, 0.6rem);
 }
 
 .projects-conversion-text {
@@ -103,7 +105,7 @@
 .projects-conversion-actions {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-3);
     flex-shrink: 0;
 }
 
@@ -195,6 +197,8 @@
 
     .projects-conversion-actions {
         gap: var(--space-3);
+        width: 100%;
+        flex-wrap: wrap;
     }
 }
 
