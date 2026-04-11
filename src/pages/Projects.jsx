@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import {
     getAllProjects,
     isStandaloneProject,
@@ -45,6 +46,52 @@ const safeFetchJson = async (url, options) => {
     } catch {
         return null;
     }
+};
+
+const toFirstRole = (project = {}) => {
+    const roleArray = Array.isArray(project.roleArray) ? project.roleArray : [];
+    if (roleArray.length > 0) return String(roleArray[0]).trim();
+    if (typeof project.role === "string" && project.role.trim()) {
+        return project.role.split(",")[0].trim();
+    }
+    return "";
+};
+
+const toConciseOutcome = (project = {}) => {
+    const preferred = [
+        project.subtitle,
+        project.summary,
+        project.tagline,
+        project?.overview?.description,
+    ].find((value) => typeof value === "string" && value.trim());
+
+    if (!preferred) return "";
+    const compact = preferred.replace(/\s+/g, " ").trim();
+    if (compact.length <= 106) return compact;
+    return `${compact.slice(0, 103).trimEnd()}…`;
+};
+
+const toRoleOutcomeSnippet = (project = {}) => {
+    const role = toFirstRole(project);
+    const outcome = toConciseOutcome(project);
+    if (role && outcome) return `${role} — ${outcome}`;
+    return outcome || role || "";
+};
+
+const buildTaxonomyTags = (project = {}) => {
+    const sourceTags = Array.isArray(project.tags) ? project.tags : [];
+    const normalizedSourceTags = sourceTags
+        .map((tag) => String(tag).trim())
+        .filter(Boolean);
+
+    const candidates = [...normalizedSourceTags, project.category];
+    const unique = [];
+    for (const tag of candidates) {
+        if (!tag || unique.includes(tag)) continue;
+        unique.push(tag);
+        if (unique.length === 2) break;
+    }
+    return unique;
 };
 
 const scheduleIdleTask = (task) => {
@@ -109,6 +156,14 @@ export default function Projects() {
                         allImages: fallbackImages,
                         coverImage: previewCandidates[0] ?? null,
                         previewCandidates,
+                        recruiterSummary: toRoleOutcomeSnippet({
+                            ...meta,
+                            ...project,
+                        }),
+                        taxonomyTags: buildTaxonomyTags({
+                            ...meta,
+                            ...project,
+                        }),
                         previewVideoSrc: resolveProjectMediaPath(
                             project.id,
                             meta.previewVideo ?? meta.previewVideoSrc ?? null,
@@ -132,6 +187,8 @@ export default function Projects() {
                         allImages: [],
                         coverImage: previewCandidates[0] ?? null,
                         previewCandidates,
+                        recruiterSummary: toRoleOutcomeSnippet(entry),
+                        taxonomyTags: buildTaxonomyTags(entry),
                         previewVideoSrc: resolveProjectMediaPath(
                             entry.id,
                             entry.previewVideo ?? entry.previewVideoSrc ?? null,
@@ -206,6 +263,14 @@ export default function Projects() {
                                 allImages,
                                 coverImage: previewCandidates[0] ?? null,
                                 previewCandidates,
+                                recruiterSummary: toRoleOutcomeSnippet({
+                                    ...entry,
+                                    ...data,
+                                }),
+                                taxonomyTags: buildTaxonomyTags({
+                                    ...entry,
+                                    ...data,
+                                }),
                                 previewVideoSrc: resolveProjectMediaPath(
                                     entry.id,
                                     data?.previewVideo ??
@@ -264,7 +329,7 @@ export default function Projects() {
             descriptor: "Selected Work",
             headline: loading ? "Projects" : `${projects.length} ${projects.length === 1 ? "project" : "projects"}`,
             headlineAs: "h1",
-            subline: "Curated case studies and design work",
+            subline: "Case studies and design projects with clear role ownership and practical outcomes.",
         },
         media: null,
         tags: [],
@@ -278,7 +343,19 @@ export default function Projects() {
             <main className="projects-main">
                 <div className="container">
                     <HeroContainer config={heroConfig} className="projects-hero-grid" />
-                    
+                    <section className="projects-conversion-row" aria-label="Primary contact actions">
+                        <p className="projects-conversion-text">
+                            Hiring for product design? I can walk you through role scope and shipped outcomes.
+                        </p>
+                        <div className="projects-conversion-actions">
+                            <a href="mailto:leanale003@gmail.com" className="projects-conversion-link projects-conversion-link--primary">
+                                Email
+                            </a>
+                            <Link to="/about#resume" className="projects-conversion-link">
+                                Resume
+                            </Link>
+                        </div>
+                    </section>
 
                     <section className="projects-work-shell" aria-label="Project listing">
                         {loading ? (

@@ -155,7 +155,8 @@
 .hw-item-sub {
   font-size: var(--font-size-sm);
   line-height: 1.5;
-  color: color-mix(in srgb, var(--color-text-secondary) 82%, transparent);
+  color: color-mix(in srgb, var(--color-text-secondary) 90%, var(--color-text-tertiary));
+  font-weight: 430;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

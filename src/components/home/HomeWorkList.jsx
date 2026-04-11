@@ -255,7 +255,7 @@ export default function HomeWorkList({ projects }) {
                       {/* Title + one-line descriptor */}
                       <div className="hw-item-text">
                         <span className="hw-item-title">{project.title}</span>
-                        {(project.subtitle || project.tagline) && (
+                        {(project.recruiterSummary || project.subtitle || project.tagline) && (
                           <span className="hw-item-sub">
                             {project.recruiterSummary ?? project.subtitle ?? project.tagline}
                           </span>
