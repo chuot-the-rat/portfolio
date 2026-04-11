@@ -51,10 +51,11 @@ export default function MediaBlock({
             muted
             loop
             playsInline
+            preload="metadata"
             aria-label={alt}
           />
         ) : (
-          <img src={src} alt={alt} loading="lazy" />
+          <img src={src} alt={alt} loading="eager" decoding="async" fetchPriority="high" />
         )}
       </motion.div>
 

@@ -112,6 +112,15 @@ const safeFetchJson = async (url, options) => {
     }
 };
 
+const scheduleIdleTask = (task) => {
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+        const idleId = window.requestIdleCallback(task, { timeout: 1200 });
+        return () => window.cancelIdleCallback(idleId);
+    }
+    const timeoutId = window.setTimeout(task, 220);
+    return () => window.clearTimeout(timeoutId);
+};
+
 const Home = () => {
     const { isParked } = usePassbook();
     usePageTitle(null, {
@@ -174,6 +183,7 @@ const Home = () => {
     useEffect(() => {
         const controller = new AbortController();
         let alive = true;
+        let cancelIdleTask = null;
 
         const loadProjects = async () => {
             try {
@@ -183,88 +193,123 @@ const Home = () => {
                         signal: controller.signal,
                     })) || [];
 
-                const caseStudyCards = await Promise.all(
-                    caseStudyProjects.map(async (caseStudyProject, index) => {
-                        const projectMeta =
-                            projectsList.find((p) => p.id === caseStudyProject.id) || {};
+                const caseStudyCards = caseStudyProjects.map((caseStudyProject, index) => {
+                    const projectMeta =
+                        projectsList.find((p) => p.id === caseStudyProject.id) || {};
 
-                        const supData = await safeFetchJson(
-                            `/projects/${caseStudyProject.id}/data.json`,
-                            { signal: controller.signal },
-                        );
+                    const realImages = [
+                        ...(caseStudyProject.solution?.images || []),
+                        ...(caseStudyProject.overview?.images || []),
+                    ]
+                        .map((img) => normalizeProjectImage(caseStudyProject.id, img))
+                        .filter(Boolean);
 
-                        let realImages = supData
-                            ? collectAllImages(supData)
-                                  .map((img) =>
-                                      normalizeProjectImage(caseStudyProject.id, img),
-                                  )
-                                  .filter(Boolean)
-                            : [];
-                        const rawCoverImage =
-                            supData?.hifi?.images?.[0]?.src ??
-                            supData?.solution?.images?.[0]?.src ??
-                            supData?.overview?.images?.[0]?.src ??
-                            null;
+                    const previewCandidates = buildPreviewCandidates(
+                        caseStudyProject.id,
+                        [
+                            projectMeta.thumbnail,
+                            caseStudyProject.media?.thumbnail,
+                            caseStudyProject.media?.hero_image,
+                            ...realImages.map((img) => img.src),
+                        ],
+                    );
 
-                        if (realImages.length === 0) {
-                            realImages = [
-                                ...(caseStudyProject.solution?.images || []),
-                                ...(caseStudyProject.overview?.images || []),
-                            ]
-                                .map((img) =>
-                                    normalizeProjectImage(caseStudyProject.id, img),
-                                )
-                                .filter(Boolean);
-                        }
-
-                        const previewCandidates = buildPreviewCandidates(
-                            caseStudyProject.id,
-                            [
-                                rawCoverImage,
-                                projectMeta.thumbnail,
-                                caseStudyProject.media?.thumbnail,
-                                caseStudyProject.media?.hero_image,
-                                ...realImages.map((img) => img.src),
-                            ],
-                        );
-
-                        return {
+                    return {
+                        ...projectMeta,
+                        ...caseStudyProject,
+                        hoverPattern: hoverPatterns[index % hoverPatterns.length],
+                        allImages: realImages,
+                        coverImage: previewCandidates[0] ?? null,
+                        previewCandidates,
+                        taxonomyTags: buildTaxonomyTags({
                             ...projectMeta,
                             ...caseStudyProject,
-                            hoverPattern: hoverPatterns[index % hoverPatterns.length],
-                            allImages: realImages,
-                            coverImage: previewCandidates[0] ?? null,
-                            previewCandidates,
-                            taxonomyTags: buildTaxonomyTags({
-                                ...projectMeta,
-                                ...caseStudyProject,
-                            }),
-                            previewVideoSrc: resolveProjectMediaPath(
-                                caseStudyProject.id,
-                                projectMeta.previewVideo ?? projectMeta.previewVideoSrc ?? null,
-                            ),
-                            recruiterSummary: toRecruiterSummary({
-                                ...projectMeta,
-                                ...caseStudyProject,
-                            }),
-                        };
-                    }),
-                );
+                        }),
+                        previewVideoSrc: resolveProjectMediaPath(
+                            caseStudyProject.id,
+                            projectMeta.previewVideo ?? projectMeta.previewVideoSrc ?? null,
+                        ),
+                        recruiterSummary: toRecruiterSummary({
+                            ...projectMeta,
+                            ...caseStudyProject,
+                        }),
+                    };
+                });
 
                 const standaloneEntries = projectsList.filter((p) =>
                     isStandaloneProject(p.id),
                 );
 
-                const standaloneCards = (
-                    await Promise.all(
-                        standaloneEntries.map(async (entry, i) => {
+                const standaloneCards = standaloneEntries.map((entry, i) => {
+                    const idx = caseStudyCards.length + i;
+                    const previewCandidates = buildPreviewCandidates(
+                        entry.id,
+                        [entry.thumbnail],
+                    );
+
+                    return {
+                        ...entry,
+                        hoverPattern: hoverPatterns[idx % hoverPatterns.length],
+                        allImages: [],
+                        coverImage: previewCandidates[0] ?? null,
+                        previewCandidates,
+                        taxonomyTags: buildTaxonomyTags(entry),
+                        previewVideoSrc: resolveProjectMediaPath(
+                            entry.id,
+                            entry.previewVideo ?? entry.previewVideoSrc ?? null,
+                        ),
+                        recruiterSummary: toRecruiterSummary(entry),
+                    };
+                });
+
+                if (!alive) return;
+                setProjects([...caseStudyCards, ...standaloneCards]);
+                setLoading(false);
+
+                cancelIdleTask = scheduleIdleTask(async () => {
+                    const enrichedCaseStudies = await Promise.all(
+                        caseStudyProjects.map(async (caseStudyProject) => {
+                            const projectMeta =
+                                projectsList.find((p) => p.id === caseStudyProject.id) || {};
+                            const supData = await safeFetchJson(
+                                `/projects/${caseStudyProject.id}/data.json`,
+                                { signal: controller.signal },
+                            );
+                            if (!supData) return null;
+
+                            const realImages = collectAllImages(supData)
+                                .map((img) =>
+                                    normalizeProjectImage(caseStudyProject.id, img),
+                                )
+                                .filter(Boolean);
+                            const previewCandidates = buildPreviewCandidates(
+                                caseStudyProject.id,
+                                [
+                                    supData?.hifi?.images?.[0]?.src,
+                                    supData?.solution?.images?.[0]?.src,
+                                    supData?.overview?.images?.[0]?.src,
+                                    projectMeta.thumbnail,
+                                    ...realImages.map((img) => img.src),
+                                ],
+                            );
+
+                            return {
+                                id: caseStudyProject.id,
+                                allImages: realImages,
+                                coverImage: previewCandidates[0] ?? null,
+                                previewCandidates,
+                            };
+                        }),
+                    );
+
+                    const enrichedStandalone = await Promise.all(
+                        standaloneEntries.map(async (entry) => {
                             const data = await safeFetchJson(
                                 `/projects/${entry.id}/data.json`,
                                 { signal: controller.signal },
                             );
                             if (!data) return null;
 
-                            const idx = caseStudyCards.length + i;
                             const allImages = [
                                 ...(data.overview?.images || []),
                                 ...(data.solution?.images || []),
@@ -272,7 +317,6 @@ const Home = () => {
                             ]
                                 .map((img) => normalizeProjectImage(entry.id, img))
                                 .filter(Boolean);
-
                             const previewCandidates = buildPreviewCandidates(
                                 entry.id,
                                 [
@@ -285,9 +329,8 @@ const Home = () => {
                             );
 
                             return {
-                                ...entry,
+                                id: entry.id,
                                 ...data,
-                                hoverPattern: hoverPatterns[idx % hoverPatterns.length],
                                 allImages,
                                 coverImage: previewCandidates[0] ?? null,
                                 previewCandidates,
@@ -310,12 +353,23 @@ const Home = () => {
                                 }),
                             };
                         }),
-                    )
-                ).filter(Boolean);
+                    );
 
-                if (!alive) return;
-                setProjects([...caseStudyCards, ...standaloneCards]);
-                setLoading(false);
+                    if (!alive) return;
+                    const updateMap = new Map(
+                        [...enrichedCaseStudies, ...enrichedStandalone]
+                            .filter(Boolean)
+                            .map((project) => [project.id, project]),
+                    );
+                    if (updateMap.size === 0) return;
+
+                    setProjects((currentProjects) =>
+                        currentProjects.map((project) => {
+                            const update = updateMap.get(project.id);
+                            return update ? { ...project, ...update } : project;
+                        }),
+                    );
+                });
             } catch (error) {
                 if (error?.name === "AbortError") return;
                 console.error("Error loading homepage projects:", error);
@@ -361,6 +415,7 @@ const Home = () => {
         return () => {
             alive = false;
             controller.abort();
+            if (cancelIdleTask) cancelIdleTask();
         };
     }, [buildPreviewCandidates, buildTaxonomyTags, normalizeProjectImage, resolveProjectMediaPath]);
 

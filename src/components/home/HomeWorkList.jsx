@@ -350,6 +350,8 @@ export default function HomeWorkList({ projects }) {
                       alt=""
                       className="hw-preview-img"
                       loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
                       onError={() => {
                         if (previewIndex < previewCandidates.length - 1) {
                           setPreviewIndex((current) => current + 1);
