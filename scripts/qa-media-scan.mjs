@@ -25,6 +25,8 @@ const standaloneProjects = PROJECTS_LIST.filter(
 
 const PROJECT_PATH_PATTERN = /^\/projects\/[^/]+\/.+/i;
 const MEDIA_EXT_PATTERN = /\.(png|jpe?g|webp|svg|gif|avif|mp4|webm|ogg|pdf)$/i;
+const shouldWriteReport =
+  process.argv.includes("--write-report") || process.env.QA_MEDIA_WRITE === "1";
 
 const normalizeMediaPath = (value) => String(value || "").trim();
 
@@ -130,65 +132,76 @@ const allResults = [...caseStudyResults, ...standaloneResults];
 const totalRefs = allResults.reduce((sum, item) => sum + item.total, 0);
 const totalMissing = allResults.reduce((sum, item) => sum + item.missing.length, 0);
 const totalPresent = totalRefs - totalMissing;
+const launchMissingCount = launchMediaChecks.filter(
+  (check) => check.status === "missing-source",
+).length;
+const hasFailures = totalMissing > 0 || launchMissingCount > 0;
 
-const generatedAt = new Date().toISOString();
-const lines = [
-  "# Portfolio Media Integrity Report",
-  "",
-  `Generated: ${generatedAt}`,
-  "",
-  `- Total referenced media: ${totalRefs}`,
-  `- Present in \`public/projects\`: ${totalPresent}`,
-  `- Missing from \`public/projects\`: ${totalMissing}`,
-  "",
-  "## Launch Media Checks (Case Studies)",
-  "",
-];
+const buildReportLines = () => {
+  const generatedAt = new Date().toISOString();
+  const lines = [
+    "# Portfolio Media Integrity Report",
+    "",
+    `Generated: ${generatedAt}`,
+    "",
+    `- Total referenced media: ${totalRefs}`,
+    `- Present in \`public/projects\`: ${totalPresent}`,
+    `- Missing from \`public/projects\`: ${totalMissing}`,
+    "",
+    "## Launch Media Checks (Case Studies)",
+    "",
+  ];
 
-for (const check of launchMediaChecks) {
-  if (check.status === "no-launch-ad") {
-    lines.push(`- ${check.title} (\`${check.id}\`): no launch media block`);
-  } else if (check.ok) {
-    lines.push(`- ${check.title} (\`${check.id}\`): launch media source present`);
-  } else {
-    lines.push(`- ${check.title} (\`${check.id}\`): launch media source missing`);
+  for (const check of launchMediaChecks) {
+    if (check.status === "no-launch-ad") {
+      lines.push(`- ${check.title} (\`${check.id}\`): no launch media block`);
+    } else if (check.ok) {
+      lines.push(`- ${check.title} (\`${check.id}\`): launch media source present`);
+    } else {
+      lines.push(`- ${check.title} (\`${check.id}\`): launch media source missing`);
+    }
   }
-}
 
-lines.push("");
-lines.push("## Missing Paths by Case Study");
-lines.push("");
-
-for (const item of caseStudyResults) {
-  lines.push(`### ${item.title} (\`${item.id}\`)`);
-  lines.push(`- Referenced: ${item.total}`);
-  lines.push(`- Missing: ${item.missing.length}`);
-  if (item.missing.length === 0) {
-    lines.push("- Missing paths: none");
-  } else {
-    lines.push("- Missing paths:");
-    for (const ref of item.missing) lines.push(`  - \`${ref}\``);
-  }
   lines.push("");
-}
-
-lines.push("## Missing Paths by Standalone Design Project");
-lines.push("");
-
-for (const item of standaloneResults) {
-  lines.push(`### ${item.title} (\`${item.id}\`)`);
-  lines.push(`- Referenced: ${item.total}`);
-  lines.push(`- Missing: ${item.missing.length}`);
-  if (item.missing.length === 0) {
-    lines.push("- Missing paths: none");
-  } else {
-    lines.push("- Missing paths:");
-    for (const ref of item.missing) lines.push(`  - \`${ref}\``);
-  }
+  lines.push("## Missing Paths by Case Study");
   lines.push("");
-}
 
-fs.writeFileSync(REPORT_PATH, `${lines.join("\n")}\n`, "utf8");
+  for (const item of caseStudyResults) {
+    lines.push(`### ${item.title} (\`${item.id}\`)`);
+    lines.push(`- Referenced: ${item.total}`);
+    lines.push(`- Missing: ${item.missing.length}`);
+    if (item.missing.length === 0) {
+      lines.push("- Missing paths: none");
+    } else {
+      lines.push("- Missing paths:");
+      for (const ref of item.missing) lines.push(`  - \`${ref}\``);
+    }
+    lines.push("");
+  }
+
+  lines.push("## Missing Paths by Standalone Design Project");
+  lines.push("");
+
+  for (const item of standaloneResults) {
+    lines.push(`### ${item.title} (\`${item.id}\`)`);
+    lines.push(`- Referenced: ${item.total}`);
+    lines.push(`- Missing: ${item.missing.length}`);
+    if (item.missing.length === 0) {
+      lines.push("- Missing paths: none");
+    } else {
+      lines.push("- Missing paths:");
+      for (const ref of item.missing) lines.push(`  - \`${ref}\``);
+    }
+    lines.push("");
+  }
+
+  return lines;
+};
+
+if (shouldWriteReport) {
+  const lines = buildReportLines();
+  fs.writeFileSync(REPORT_PATH, `${lines.join("\n")}\n`, "utf8");
+}
 
 console.log(`[qa:media] Total refs: ${totalRefs}`);
 console.log(`[qa:media] Present: ${totalPresent}`);
@@ -208,5 +221,15 @@ for (const check of launchMediaChecks) {
     console.log(`[qa:media] ${check.id}: launch media source missing`);
   }
 }
-console.log(`[qa:media] Report written: ${path.relative(ROOT, REPORT_PATH)}`);
+if (shouldWriteReport) {
+  console.log(`[qa:media] Report written: ${path.relative(ROOT, REPORT_PATH)}`);
+} else {
+  console.log("[qa:media] Report write skipped (check-only mode).");
+}
 
+if (hasFailures) {
+  console.error(
+    `[qa:media] Integrity check failed (missing media: ${totalMissing}, missing launch sources: ${launchMissingCount}).`,
+  );
+  process.exitCode = 1;
+}

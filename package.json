@@ -6,12 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/prerender-routes.mjs",
+    "build:local": "node scripts/build-local.mjs",
     "lint": "npm run lint:tokens && eslint .",
     "lint:tokens": "node scripts/check-design-tokens.mjs",
     "preview": "vite preview",
     "qa:routes": "node scripts/qa-routes.mjs",
     "qa:metadata": "node scripts/qa-metadata.mjs",
     "qa:media": "node scripts/qa-media-scan.mjs",
+    "qa:media:write": "node scripts/qa-media-scan.mjs --write-report",
     "asset:pdf-previews": "node scripts/extract-pdf-previews.mjs",
     "qa:browser": "npx playwright test tests/qa-browser.spec.js --reporter=line",
     "qa": "node scripts/run-qa.mjs"

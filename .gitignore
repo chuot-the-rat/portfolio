@@ -26,6 +26,7 @@ dist-ssr
 # History and documentation tracking files
 .history/
 .claude/
+test-results/
 *_COMPLETE.md
 *_SUMMARY.md
 *_LOG.md

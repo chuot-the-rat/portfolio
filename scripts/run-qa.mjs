@@ -30,18 +30,19 @@ const waitForServer = async (retries = 40) => {
   throw new Error("Preview server did not become ready in time.");
 };
 
-const preview = spawn(
-  "npm",
-  ["run", "preview", "--", "--host", PREVIEW_HOST, "--port", PREVIEW_PORT],
-  {
-    stdio: "inherit",
-    shell: process.platform === "win32",
-  },
-);
-
 let failed = false;
+let preview = null;
 
 try {
+  await run("node", ["scripts/qa-media-scan.mjs"], { ...process.env, BASE_URL });
+  preview = spawn(
+    "npm",
+    ["run", "preview", "--", "--host", PREVIEW_HOST, "--port", PREVIEW_PORT],
+    {
+      stdio: "inherit",
+      shell: process.platform === "win32",
+    },
+  );
   await waitForServer();
   await run("node", ["scripts/qa-routes.mjs"], { ...process.env, BASE_URL });
   await run("node", ["scripts/qa-metadata.mjs"], { ...process.env, BASE_URL });
@@ -53,7 +54,7 @@ try {
   failed = true;
   console.error(`[qa] ${error.message}`);
 } finally {
-  if (!preview.killed) {
+  if (preview && !preview.killed) {
     preview.kill("SIGTERM");
   }
 }
