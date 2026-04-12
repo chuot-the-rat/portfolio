@@ -421,6 +421,54 @@
    Shown once on homepage hero, auto-settles to compact state.
    ────────────────────────────────────────────────────────────────────────── */
 
+/* Wrapper: column flex, positions slot + tear + card */
+.pb-print-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+}
+
+/* Decorative printer mouth — sits above the card */
+.pb-print-slot {
+    width: 100%;
+    height: 6px;
+    background: var(--color-border);
+    border-radius: 2px 2px 0 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.pb-print-slot__feed {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 6px,
+        color-mix(in srgb, currentColor 8%, transparent) 6px,
+        color-mix(in srgb, currentColor 8%, transparent) 7px
+    );
+}
+
+/* Dashed perforation line — draws in from left after card reveals */
+.pb-print-tear {
+    width: 100%;
+    height: 1px;
+    background-image: repeating-linear-gradient(
+        90deg,
+        var(--color-text-secondary) 0px,
+        var(--color-text-secondary) 4px,
+        transparent 4px,
+        transparent 9px
+    );
+    opacity: 0.35;
+    transform-origin: left center;
+}
+
 .pb-print-card {
     position: relative;
     display: flex;
@@ -437,8 +485,7 @@
         background 0.22s ease,
         border-color 0.22s ease,
         box-shadow 0.22s ease;
-    margin-top: var(--space-8);
-    margin-bottom: var(--space-6);
+    overflow: hidden;
 }
 
 .pb-print-card:hover {
@@ -450,6 +497,11 @@
 .pb-print-card:focus-visible {
     outline: var(--focus-ring);
     outline-offset: var(--focus-offset);
+}
+
+/* Transparent wrapper — lets Framer Motion fade the whole interior */
+.pb-print-card__inner {
+    display: contents;
 }
 
 /* Left: mark / logo area */
@@ -522,11 +574,15 @@
 
 /* Mobile: full-width strip */
 @media (max-width: 600px) {
-    .pb-print-card {
-        max-width: 100%;
+    .pb-print-wrapper {
         width: 100%;
         margin-top: var(--space-6);
         margin-bottom: var(--space-4);
+    }
+
+    .pb-print-card {
+        max-width: 100%;
+        width: 100%;
     }
 }
 
