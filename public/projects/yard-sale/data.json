@@ -13,21 +13,20 @@
         "description": "This yard sale set translates one visual concept across three formats so the message stays consistent in different channels. The system keeps hierarchy clear while adapting composition for poster, square post, and event graphics.",
         "images": [
             {
-                "src": "/projects/yard-sale/yard-sale-flyer.png",
+                "src": "/projects/yard-sale/yard-sale-flyer.svg",
                 "alt": "Main yard sale flyer poster layout",
                 "caption": "Primary poster format for local print and notice board distribution."
             },
             {
-                "src": "/projects/yard-sale/square-flyer.png",
+                "src": "/projects/yard-sale/square-flyer.svg",
                 "alt": "Square yard sale social flyer",
                 "caption": "Square version optimized for feed-based social sharing."
             },
             {
-                "src": "/projects/yard-sale/fb-event.png",
+                "src": "/projects/yard-sale/fb-event.svg",
                 "alt": "Yard sale Facebook event graphic",
                 "caption": "Event cover variant designed for Facebook event promotion."
             }
         ]
     }
 }
-
