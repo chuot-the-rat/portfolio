@@ -20,9 +20,15 @@ const getDistFileForRoute = (route) => {
   return path.join(DIST_DIR, clean, "index.html");
 };
 
+const getServedUrlForRoute = (route) => {
+  if (route === "/") return `${BASE_URL}/`;
+  const normalized = route.endsWith("/") ? route : `${route}/`;
+  return `${BASE_URL}${normalized}`;
+};
+
 const getHtml = async (route) => {
   if (MODE === "served") {
-    const url = `${BASE_URL}${route}`;
+    const url = getServedUrlForRoute(route);
     const res = await fetch(url);
     if (!res.ok) {
       throw new Error(`non-200 response for ${url} (${res.status})`);

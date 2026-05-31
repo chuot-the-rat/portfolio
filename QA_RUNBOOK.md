@@ -25,6 +25,16 @@ Optional: run skill-map guardrails only:
 npm run qa:audit
 ```
 
+4. If Windows file-lock/EPERM issues appear, run lock diagnostics:
+```bash
+npm run qa:lock
+```
+
+5. Retry QA with safe recovery mode (stops known preview/build node processes and retries preview once):
+```bash
+npm run qa -- --recovery
+```
+
 ## What `npm run qa` validates
 
 - `qa:routes`
@@ -58,6 +68,12 @@ npx playwright install chromium
 - If preview server port conflict occurs:
   - Stop existing processes on `4173`.
   - Re-run `npm run qa`.
+
+- If `spawn EPERM` or repeated `404` across all routes occurs:
+  - Run `npm run qa:lock` to identify locked `dist` paths.
+  - Pause OneDrive sync and close tools holding `dist` files.
+  - Run `npm run qa -- --recovery`.
+  - If still blocked, manually clear lock holders before rebuilding/retrying.
 
 - If metadata checks fail:
   - Confirm prerender output exists in `dist/<route>/index.html`.

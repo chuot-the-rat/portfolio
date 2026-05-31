@@ -10,6 +10,7 @@
     "lint": "npm run lint:tokens && eslint .",
     "lint:tokens": "node scripts/check-design-tokens.mjs",
     "preview": "vite preview",
+    "qa:lock": "node scripts/qa-lock-debug.mjs",
     "qa:routes": "node scripts/qa-routes.mjs",
     "qa:metadata": "node scripts/qa-metadata.mjs",
     "qa:media": "node scripts/qa-media-scan.mjs",
