@@ -20,6 +20,11 @@ npm run build
 npm run qa
 ```
 
+Optional: run skill-map guardrails only:
+```bash
+npm run qa:audit
+```
+
 ## What `npm run qa` validates
 
 - `qa:routes`
@@ -33,6 +38,11 @@ npm run qa
     - `og:title`
     - `og:url`
     - `twitter:title`
+- `qa:audit`
+  - Skill-map guardrails for top 3 case studies (`inklink`, `prolog`, `sidequest`):
+    - required `evidence_narrative` fields are present and non-empty
+    - role resolver preserves design-first precedence for project cards
+    - banned vague copy phrases are not present in the target case-study corpus
 - `qa:browser`
   - Desktop and mobile presence checks for nav/footer, home proof strip CTA, case-study trust modules.
   - Keyboard focus traversal sanity.

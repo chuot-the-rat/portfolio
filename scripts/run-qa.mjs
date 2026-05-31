@@ -35,6 +35,7 @@ let preview = null;
 
 try {
   await run("node", ["scripts/qa-media-scan.mjs"], { ...process.env, BASE_URL });
+  await run("node", ["scripts/qa-audit-guardrails.mjs"], { ...process.env, BASE_URL });
   preview = spawn(
     "npm",
     ["run", "preview", "--", "--host", PREVIEW_HOST, "--port", PREVIEW_PORT],
