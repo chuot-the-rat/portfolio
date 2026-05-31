@@ -15,15 +15,15 @@
             "subtitle": "A journey companion for neurodivergent apprentices",
             "summary": "A centralized apprenticeship companion helping neurodivergent apprentices track progress, reduce cognitive overload, and build confidence through clear visualization and structured tools.",
             "evidence_narrative": {
-                "original_assumption": "Mirroring the official apprenticeship system in-app would still feel manageable for daily use.",
-                "research_changed_direction": "Policy review, stakeholder interviews, and persona synthesis showed fragmented status tracking caused high cognitive load for apprentices, especially neurodivergent users.",
-                "what_changed_why": "Because users needed immediate orientation, we shifted to a dashboard-first flow that consolidated progress, discrepancy alerts, and next steps in one screen.",
+                "original_assumption": "Recreating the full apprenticeship system in-app would stay manageable day to day.",
+                "research_changed_direction": "Policy review and stakeholder interviews showed fragmented status tracking created high cognitive load, especially for neurodivergent apprentices.",
+                "what_changed_why": "Because users needed immediate orientation, we moved to a dashboard-first flow that unified progress, discrepancies, and next steps.",
                 "what_was_cut": [
                     "Policy-first navigation depth",
-                    "Secondary utility screens in the primary path",
-                    "Low-priority informational branching"
+                    "Secondary utility screens",
+                    "Low-priority informational branches"
                 ],
-                "next_iteration": "Run moderated tests with active apprentices and measure time-to-report plus completion rate for the discrepancy workflow."
+                "next_iteration": "Measure time-to-report and discrepancy-flow completion with active apprentices in moderated tests."
             },
             "project_type": "Mobile application",
             "status": "completed",
@@ -403,15 +403,15 @@
             "subtitle": "Breaking writer's block through collaboration",
             "summary": "A chain-writing platform that reduces writer's block by turning writing into a shared, low-pressure activity where users contribute one passage at a time.",
             "evidence_narrative": {
-                "original_assumption": "A feature-rich mobile-first interface would best support collaborative writing.",
-                "research_changed_direction": "Usability sessions showed contributors preferred longer drafting on larger screens with stronger story context visibility.",
-                "what_changed_why": "Because contributors needed reading clarity before writing, we moved to a cleaner desktop-first flow with stronger hierarchy and fewer competing actions.",
+                "original_assumption": "Mobile-first with many features would best support collaborative writing.",
+                "research_changed_direction": "Usability tests showed longer drafting worked better on larger screens with clearer story context.",
+                "what_changed_why": "Because contributors needed reading clarity first, we shifted to a desktop-first flow and reduced competing actions.",
                 "what_was_cut": [
                     "Competing homepage entry points",
-                    "Newspaper-style dense content blocks",
-                    "Feature branches outside the core writing loop"
+                    "Dense newspaper-style blocks",
+                    "Non-core feature branches"
                 ],
-                "next_iteration": "Run follow-up tests to measure contribution completion and return-session contribution rate after collaboration cue updates."
+                "next_iteration": "Measure contribution completion and return-session starts after collaboration-cue updates."
             },
             "project_type": "Collaborative writing app",
             "status": "completed",
@@ -678,15 +678,15 @@
             "subtitle": "Turning boredom into micro-adventures",
             "summary": "A web app that helps users discover small, low-commitment activities to break routine, reframing free time as an opportunity rather than a void to fill.",
             "evidence_narrative": {
-                "original_assumption": "Broad filters and upfront controls would improve choice confidence.",
-                "research_changed_direction": "Usability testing showed option-heavy entry screens increased hesitation and delayed first action.",
-                "what_changed_why": "Because users needed momentum over configuration, we simplified the flow to one primary action with clearer quest framing to reduce decision fatigue.",
+                "original_assumption": "Broad filters and upfront controls would improve confidence.",
+                "research_changed_direction": "Usability tests showed option-heavy entry screens increased hesitation before first action.",
+                "what_changed_why": "Because users needed momentum over setup, we reduced the flow to one primary action with clearer quest framing.",
                 "what_was_cut": [
                     "High-friction setup and deep filter stacks",
-                    "Secondary controls in the first decision path",
-                    "Copy variants that diluted the primary CTA"
+                    "Secondary first-path controls",
+                    "CTA-diluting copy variants"
                 ],
-                "next_iteration": "A/B test quest messaging and completion prompts, targeting higher browse-to-first-start conversion."
+                "next_iteration": "A/B test quest messaging and completion prompts for higher browse-to-start conversion."
             },
             "project_type": "Web application",
             "status": "completed",
