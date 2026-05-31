@@ -856,7 +856,18 @@ const ProjectContentMain = ({ project }) => {
         compactValidationDescription,
         project.validation?.outcomes || [],
     );
-
+    const evidenceNarrative = project.evidenceNarrative || null;
+    const hasEvidenceNarrative = Boolean(
+        evidenceNarrative &&
+            (
+                evidenceNarrative.originalAssumption ||
+                evidenceNarrative.researchChangedDirection ||
+                evidenceNarrative.whatChangedWhy ||
+                (Array.isArray(evidenceNarrative.whatWasCut) &&
+                    evidenceNarrative.whatWasCut.length > 0) ||
+                evidenceNarrative.nextIteration
+            ),
+    );
     return (
         <div className="project-content-main">
             {/* Overview */}
@@ -994,6 +1005,85 @@ const ProjectContentMain = ({ project }) => {
                                     }}
                                 />
                             )}
+                        </motion.section>
+                    );
+                })()}
+
+            {/* Decision evidence */}
+            {hasEvidenceNarrative &&
+                (() => {
+                    const s = nextSection();
+                    return (
+                        <motion.section
+                            className="project-section decision-evidence-section"
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.45 }}
+                        >
+                            <SectionIndex
+                                caseIndex={ci}
+                                sectionIndex={s}
+                                title="Decision Evidence"
+                            />
+                            <h2 className="section-title">What changed and why</h2>
+                            <SectionTag sectionIndex={s} version="2.0" />
+                            <p className="section-description">
+                                {evidenceNarrative.whatChangedWhy ||
+                                    "This section traces the assumption, evidence, and resulting product decisions."}
+                            </p>
+
+                            <div className="decision-evidence-grid">
+                                {evidenceNarrative.originalAssumption && (
+                                    <article className="decision-evidence-card">
+                                        <h3 className="subsection-title">Original assumption</h3>
+                                        <p className="decision-evidence-text">
+                                            {evidenceNarrative.originalAssumption}
+                                        </p>
+                                    </article>
+                                )}
+
+                                {evidenceNarrative.researchChangedDirection && (
+                                    <article className="decision-evidence-card">
+                                        <h3 className="subsection-title">Research changed the direction</h3>
+                                        <p className="decision-evidence-text">
+                                            {evidenceNarrative.researchChangedDirection}
+                                        </p>
+                                    </article>
+                                )}
+
+                                {evidenceNarrative.whatChangedWhy && (
+                                    <article className="decision-evidence-card">
+                                        <h3 className="subsection-title">Design response</h3>
+                                        <p className="decision-evidence-text">
+                                            {evidenceNarrative.whatChangedWhy}
+                                        </p>
+                                    </article>
+                                )}
+
+                                {Array.isArray(evidenceNarrative.whatWasCut) &&
+                                    evidenceNarrative.whatWasCut.length > 0 && (
+                                        <article className="decision-evidence-card">
+                                            <h3 className="subsection-title">What was cut</h3>
+                                            <ul className="decision-evidence-list">
+                                                {evidenceNarrative.whatWasCut.map((item) => (
+                                                    <li key={item} className="decision-evidence-item">
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </article>
+                                    )}
+
+                                {evidenceNarrative.nextIteration && (
+                                    <article className="decision-evidence-card">
+                                        <h3 className="subsection-title">Next iteration</h3>
+                                        <p className="decision-evidence-text">
+                                            {evidenceNarrative.nextIteration}
+                                        </p>
+                                    </article>
+                                )}
+                            </div>
                         </motion.section>
                     );
                 })()}

@@ -206,6 +206,11 @@ export default function HomeWorkList({ projects }) {
                 const isHovered = hoveredId === project.id;
                 const isDimmed  = hoveredId !== null && !isHovered;
                 const isFeatured = !isStandaloneProject(project.id);
+                const activeMeta = [
+                  project.displayRole,
+                  project.displayScope,
+                  project.displayYear,
+                ].filter(Boolean).join(" / ");
 
                 return (
                   <motion.article
@@ -255,12 +260,17 @@ export default function HomeWorkList({ projects }) {
                       {/* Title + one-line descriptor */}
                       <div className="hw-item-text">
                         <span className="hw-item-title">{project.title}</span>
-                        {(project.recruiterSummary || project.subtitle || project.tagline) && (
+                        {(project.displaySummary || project.subtitle || project.tagline) && (
                           <span className="hw-item-sub">
-                            {project.recruiterSummary ?? project.subtitle ?? project.tagline}
+                            {project.displaySummary ?? project.subtitle ?? project.tagline}
                           </span>
                         )}
                         <div className="hw-item-tags" aria-label="Project tags">
+                        {activeMeta && (
+                          <span className="hw-item-meta" aria-label="Project metadata">
+                            {activeMeta}
+                          </span>
+                        )}
                           {(project.taxonomyTags?.length
                             ? project.taxonomyTags
                             : [

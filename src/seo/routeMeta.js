@@ -25,13 +25,13 @@ const buildMeta = (path, title, description) => {
 export const ROUTE_META = {
   "/": buildMeta(
     "/",
-    "Leana Le — Product Designer",
-    "Product designer with front-end chops. Case studies in UX, UI, and shipped code.",
+    "Leana Le — UI/UX Product Designer",
+    "UI/UX product designer in Vancouver. Research-informed case studies showing product decisions, visual systems, and measurable outcomes.",
   ),
   "/about": buildMeta(
     "/about",
     "Leana Le · About",
-    "About Leana Le: product designer with frontend implementation experience, based in Vancouver and open to product design roles.",
+    "About Leana Le: UI/UX product designer with frontend fluency as a support skill, based in Vancouver and open to product design roles.",
   ),
   "/case-studies/inklink": buildMeta(
     "/case-studies/inklink",
@@ -51,17 +51,17 @@ export const ROUTE_META = {
   "/projects/inklink": buildMeta(
     "/projects/inklink",
     "InkLink — Collaborative Writing App · Leana Le",
-    "Legacy project route for InkLink. Collaborative writing case study focused on participation and momentum.",
+    "Legacy project route for InkLink. Collaborative writing case study focused on research-backed pivots, participation, and momentum.",
   ),
   "/projects/prolog": buildMeta(
     "/projects/prolog",
     "ProLog — Mobile Apprenticeship Companion · Leana Le",
-    "Legacy project route for ProLog. Apprenticeship companion focused on progress clarity and confidence.",
+    "Legacy project route for ProLog. Apprenticeship companion case study focused on decision clarity, confidence, and support for neurodivergent users.",
   ),
   "/projects/sidequest": buildMeta(
     "/projects/sidequest",
     "SideQuest — Micro-Adventure Web App · Leana Le",
-    "Legacy project route for SideQuest. Micro-adventure app designed to reduce hesitation and increase action.",
+    "Legacy project route for SideQuest. Micro-adventure case study designed to reduce hesitation through evidence-led interaction decisions.",
   ),
   "/design/fizzu-soda": buildMeta(
     "/design/fizzu-soda",

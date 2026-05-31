@@ -19,11 +19,11 @@ export const homeHeroConfig = {
   // HeroText
   text: {
     showStatus: true,
-    descriptor: "Product Designer + Frontend",
+    descriptor: "UI/UX + Product Designer",
     headline: ["Leana", "Le"], // array = one word per display line
     headlineAs: "h1",
     subline:
-      "I design and ship product experiences that turn complex workflows into clear flows and measurable outcomes.",
+      "I design research-informed product experiences that turn complex workflows into clear, usable, and visually polished outcomes.",
   },
 
   // MediaBlock — null until portrait asset is added
@@ -56,24 +56,6 @@ export const homeHeroConfig = {
         work:  { x: 700, y: 160 },
         study: { x: 660, y: 120 },
         chaos: { x: 610, y: 220 },
-      },
-    },
-    {
-      label: "Framer", icon: null, index: 3,
-      initialX: 950, initialY: 160,
-      modes: {
-        work:  { x: 950, y: 160 },
-        study: { x: 900, y: 100 },
-        chaos: { x: 870, y: 260 },
-      },
-    },
-    {
-      label: "CSS", icon: null, index: 4,
-      initialX: 840, initialY: 250,
-      modes: {
-        work:  { x: 840, y: 250 },
-        study: { x: 760, y: 200 },
-        chaos: { x: 700, y: 330 },
       },
     },
   ],

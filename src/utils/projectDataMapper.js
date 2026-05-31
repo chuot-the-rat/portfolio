@@ -78,9 +78,12 @@ const normalizeImagesWithContext = (section, contextLabel) =>
 const normalizeMediaDemo = (section) => {
     if (!section?.media_demo) return null;
     const media = section.media_demo;
+    const src = media.src || media.image || "";
+    const videoSrc = media.video_src || media.videoSrc || "";
+    if (!src && !videoSrc) return null;
     return {
-        src: media.src || media.image || "",
-        videoSrc: media.video_src || media.videoSrc || "",
+        src,
+        videoSrc,
         videoType: media.video_type || media.videoType || "video/mp4",
         type: media.type || "",
         poster: media.poster || "",
@@ -94,6 +97,7 @@ const normalizeMediaDemo = (section) => {
 
 const normalizeVerdict = (section) => {
     if (!section?.verdict) return null;
+    if (!section.verdict.do && !section.verdict.dont) return null;
     return {
         do: section.verdict.do || null,
         dont: section.verdict.dont || null,
@@ -115,14 +119,14 @@ const normalizeComparisons = (section) => {
                     alt:
                         comparison.before.alt ||
                         `${comparison.label || "Before"} before state`,
-                    caption: comparison.before.caption || "",
+                    caption: toHybridNarrative(comparison.before.caption || "", 1),
                 },
                 after: {
                     src: comparison.after.src,
                     alt:
                         comparison.after.alt ||
                         `${comparison.label || "After"} after state`,
-                    caption: comparison.after.caption || "",
+                    caption: toHybridNarrative(comparison.after.caption || "", 1),
                 },
             };
         })
@@ -144,6 +148,47 @@ const mapEditorial = (section) => ({
     verdict: normalizeVerdict(section),
     comparisons: normalizeComparisons(section),
 });
+
+const normalizeEvidenceNarrative = (evidenceNarrative = {}) => {
+    if (!evidenceNarrative || typeof evidenceNarrative !== "object") return null;
+
+    const originalAssumption = toHybridNarrative(
+        evidenceNarrative.original_assumption,
+        2,
+    );
+    const researchChangedDirection = toHybridNarrative(
+        evidenceNarrative.research_changed_direction,
+        2,
+    );
+    const whatChangedWhy = toHybridNarrative(
+        evidenceNarrative.what_changed_why,
+        2,
+    );
+    const whatWasCut = Array.isArray(evidenceNarrative.what_was_cut)
+        ? evidenceNarrative.what_was_cut
+              .map((item) => toHybridNarrative(item, 1))
+              .filter(Boolean)
+        : [];
+    const nextIteration = toHybridNarrative(evidenceNarrative.next_iteration, 2);
+
+    if (
+        !originalAssumption &&
+        !researchChangedDirection &&
+        !whatChangedWhy &&
+        whatWasCut.length === 0 &&
+        !nextIteration
+    ) {
+        return null;
+    }
+
+    return {
+        originalAssumption,
+        researchChangedDirection,
+        whatChangedWhy,
+        whatWasCut,
+        nextIteration,
+    };
+};
 
 /**
  * Maps a raw case study from the JSON into the format UI components expect.
@@ -189,6 +234,7 @@ export const mapCaseStudyToProject = (caseStudy, index = 0) => {
         tagline: caseStudy.subtitle || caseStudy.summary,
         subtitle: caseStudy.subtitle,
         summary: caseStudy.summary,
+        evidenceNarrative: normalizeEvidenceNarrative(caseStudy.evidence_narrative),
         category: caseStudy.project_type,
         year: caseStudy.year,
         duration: caseStudy.duration,
