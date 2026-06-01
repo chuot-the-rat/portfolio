@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -22,6 +22,7 @@ import {
     PrincipleVerdict,
 } from "../components/caseStudy";
 import { caseStudyMotion } from "../utils/motion/caseStudyMotion";
+import { getDisplayProjectMeta } from "../utils/displayProjectMeta";
 import "./ProjectDetail.css";
 
 const toSentence = (value) =>
@@ -95,6 +96,199 @@ const hasConcreteSignal = (value) =>
         String(value || ""),
     );
 
+const CASE_COPY_FALLBACKS = {
+    impactSnapshot:
+        "Validated through moderated usability sessions with documented outcomes.",
+    problem:
+        "Defined the user friction and why it blocked progress.",
+    constraints:
+        "Balanced scope constraints, technical limits, and delivery timing.",
+    ownership:
+        "Owned end-to-end product design from research to shipped UX.",
+    decisions:
+        "Prioritized decisions with evidence from user feedback and testing.",
+    evidence:
+        "Documented impact through validation outcomes and measurable signals.",
+    next:
+        "Captured next-step hypotheses for the following iteration cycle.",
+    heroFraming:
+        "This case study traces the key product decisions, why they changed, and what improved in outcomes.",
+    pageSummary:
+        "Case study detailing role, process, and measurable product outcomes.",
+};
+
+const CASE_SECTION_FALLBACKS = {
+    default: "This section highlights the key decision, implementation move, and resulting impact.",
+    overview:
+        "This overview frames the core user problem, context, and project direction.",
+    problem:
+        "This section defines the user friction and why it blocked progress.",
+    research:
+        "Research signals clarified user needs, constraints, and the most viable direction.",
+    personas:
+        "Personas aligned feature priorities with concrete user needs and usage contexts.",
+    userFlows:
+        "Flow mapping clarified the critical path and removed avoidable decision friction.",
+    ia: "Information architecture organized content into a structure users could scan and trust.",
+    lofi: "Lo-fi exploration tested interaction logic before visual polish was introduced.",
+    styleGuide:
+        "The visual system established consistent hierarchy, readability, and component behavior.",
+    iterations:
+        "Each iteration addressed observed friction, then revalidated the updated interaction.",
+    hifi: "High-fidelity execution translated validated flows into a clearer production-ready experience.",
+    development:
+        "Development decisions balanced implementation constraints with usability and reliability goals.",
+    userTesting:
+        "Testing evaluated task clarity, identified usability risks, and informed focused refinements.",
+    finalPresentation:
+        "This presentation summarizes the problem framing, design rationale, and final outcomes.",
+    solution:
+        "The final solution prioritizes clarity, confidence, and measurable progress through core workflows.",
+    finalExperience:
+        "The complete experience demonstrates the polished end-to-end flow in one contiguous journey.",
+    validation:
+        "Validation findings show where the design improved task completion, confidence, and clarity.",
+    outcomes:
+        "Outcome evidence captures impact with measurable changes and observed behavior shifts.",
+    decisionEvidence:
+        "This section traces the assumption, evidence, and resulting product decisions.",
+};
+
+const CASE_NESTED_FALLBACKS = {
+    default: "This detail clarifies the decision and why it mattered.",
+    flowDescription:
+        "This flow reduces friction on the critical user path from intent to completion.",
+    featureDescription:
+        "This feature targets a specific friction point and clarifies the next user action.",
+    insightDescription:
+        "This learning informed subsequent prioritization and design direction.",
+    prototypeDescription:
+        "This prototype demonstrates the intended interaction model and expected outcomes.",
+    screenDescription:
+        "This screen documents a key interaction state in the final experience.",
+    validationOutcomeLine:
+        "This outcome summarizes observed impact from testing and iteration.",
+};
+
+const CASE_STUDY_COPY_TARGET_IDS = new Set(["inklink", "prolog", "sidequest"]);
+
+const CASE_PILOT_OVERRIDES = {
+    inklink: {
+        tagline:
+            "Collaborative writing that turns writer's block into shared momentum.",
+        framing:
+            "InkLink reframed writing as short, turn-based collaboration so users could keep stories moving without perfection pressure.",
+        sections: {
+            overview:
+                "InkLink reframed stalled solo writing into a collaborative flow where each contributor adds one short passage at a time.",
+            problem:
+                "Writers were not short on ideas; they were blocked by perfection pressure, isolation, and tools optimized for productivity over creative momentum.",
+            research:
+                "Research confirmed the need for low-friction contribution, stronger onboarding, and layouts that support long-form reading on larger screens.",
+            solution:
+                "The final experience centered on public and private story chains, low-friction contribution, and clear status cues that sustain creative momentum.",
+            validation:
+                "Testing showed stronger task completion and higher confidence after onboarding, contribution flow, and interaction hierarchy were refined.",
+            outcomes:
+                "Measured improvements in task completion and satisfaction, paired with direct user feedback, validated the collaborative turn-based model.",
+        },
+        nested: {
+            flowDescription:
+                "Each flow keeps the contribution loop short and legible so users can commit without overthinking.",
+            featureDescription:
+                "Each feature supports momentum by reducing friction between reading, writing, and passing the story forward.",
+            insightDescription:
+                "Each insight captured a concrete product principle that informed later iteration decisions.",
+            validationOutcomeLine:
+                "Testing outcomes showed stronger completion and confidence after interaction hierarchy improvements.",
+        },
+    },
+};
+
+const toEditorialCopy = (
+    value,
+    { fallback = "", maxSentences = 2, maxChars = 220 } = {},
+) => {
+    const leading = toLeadingSentence(value, "", maxSentences);
+    const compact = toSentenceCaseLine(leading || value || "", maxChars);
+    if (compact) return compact;
+    return toSentenceCaseLine(fallback, maxChars) || fallback;
+};
+
+const getCaseOverrides = (project) =>
+    CASE_PILOT_OVERRIDES[String(project?.id || "").toLowerCase()] || null;
+
+const isCaseStudyCopyTarget = (project) =>
+    CASE_STUDY_COPY_TARGET_IDS.has(String(project?.id || "").toLowerCase());
+
+const getHeroTaglineCopy = (project) => {
+    const overrides = getCaseOverrides(project);
+    return toEditorialCopy(overrides?.tagline || project?.tagline || project?.subtitle, {
+        fallback: "A product case study focused on clarity, flow, and measurable outcomes.",
+        maxSentences: 1,
+        maxChars: 98,
+    });
+};
+
+const getHeroFramingCopy = (project, displaySummary = "") => {
+    const overrides = getCaseOverrides(project);
+    return toEditorialCopy(
+        overrides?.framing ||
+            project?.problem?.description ||
+            displaySummary ||
+            project?.summary ||
+            project?.tagline,
+        {
+            fallback: CASE_COPY_FALLBACKS.heroFraming,
+            maxSentences: 1,
+            maxChars: 164,
+        },
+    );
+};
+
+const getSectionIntroCopy = (
+    project,
+    sectionKey,
+    value,
+    { maxSentences = 2, maxChars = 228, fallback } = {},
+) => {
+    const overrides = getCaseOverrides(project);
+    const overrideText = overrides?.sections?.[sectionKey];
+    return toEditorialCopy(overrideText || value, {
+        fallback:
+            fallback ||
+            CASE_SECTION_FALLBACKS[sectionKey] ||
+            CASE_SECTION_FALLBACKS.default,
+        maxSentences,
+        maxChars,
+    });
+};
+
+const getNestedCopy = (
+    project,
+    nestedKey,
+    value,
+    { fallback = "", maxSentences = 1, maxChars = 170 } = {},
+) => {
+    if (!isCaseStudyCopyTarget(project)) {
+        return value || fallback;
+    }
+
+    const overrides = getCaseOverrides(project);
+    const overrideText = overrides?.nested?.[nestedKey];
+    return toEditorialCopy(overrideText || value, {
+        fallback:
+            fallback ||
+            CASE_NESTED_FALLBACKS[nestedKey] ||
+            CASE_NESTED_FALLBACKS.default,
+        maxSentences,
+        maxChars,
+    });
+};
+
+const dedupeAdjacentCopy = (current, previous = "") =>
+    normalizeTextKey(current) === normalizeTextKey(previous) ? "" : current;
+
 const getImpactSnapshot = (project) => {
     if (Array.isArray(project?.outcomes?.metrics) && project.outcomes.metrics.length > 0) {
         return project.outcomes.metrics
@@ -104,13 +298,79 @@ const getImpactSnapshot = (project) => {
     if (Array.isArray(project?.validation?.outcomes) && project.validation.outcomes.length > 0) {
         return project.validation.outcomes.slice(0, 3);
     }
-    return ["Validated through moderated usability sessions and documented outcomes."];
+    return [CASE_COPY_FALLBACKS.impactSnapshot];
+};
+
+const firstNonEmpty = (...values) => {
+    for (const value of values) {
+        const text = toSentence(value);
+        if (text) return text;
+    }
+    return "";
+};
+
+const toShortActionLine = (value, maxChars = 150) =>
+    toSentenceCaseLine(toLeadingSentence(value, "", 1), maxChars);
+
+const getSectionWhyLine = (project, sectionKey) => {
+    const sectionMap = {
+        research: [
+            project?.research?.reflection,
+            project?.research?.keyFindings?.[0],
+            project?.research?.methods?.[0],
+        ],
+        userFlows: [
+            project?.userFlows?.flows?.[0]?.description,
+            project?.userFlows?.description,
+        ],
+        lofi: [
+            project?.lofi?.prototype?.description,
+            project?.lofi?.description,
+        ],
+        iterations: [
+            project?.iterations?.improvements?.[0],
+            project?.iterations?.description,
+        ],
+        hifi: [
+            project?.hifi?.screens?.[0]?.description,
+            project?.hifi?.description,
+        ],
+        development: [
+            project?.development?.technicalDecisions?.[0],
+            project?.development?.constraints?.[0],
+        ],
+        solution: [
+            project?.solution?.features?.[0]?.why,
+            project?.solution?.features?.[0]?.description,
+        ],
+        validation: [
+            project?.validation?.outcomes?.[0],
+            project?.validation?.method,
+        ],
+    };
+
+    const source = firstNonEmpty(...(sectionMap[sectionKey] || []));
+    if (!source) return "";
+    return toShortActionLine(source, 156);
+};
+
+const getWhatChangedClose = (project) => {
+    const sources = [
+        project?.outcomes?.description,
+        project?.validation?.outcomes?.[0],
+        project?.outcomes?.metrics?.[0]
+            ? `${project.outcomes.metrics[0].value} ${project.outcomes.metrics[0].label}`
+            : "",
+    ];
+    const source = firstNonEmpty(...sources);
+    if (!source) return "";
+    return toShortActionLine(source, 172);
 };
 
 const getCredibilityRows = (project) => {
     const roleValue = Array.isArray(project?.role)
         ? project.role.join(", ")
-        : project?.role || "Product design ownership across research and interface decisions.";
+        : project?.role || CASE_COPY_FALLBACKS.ownership;
 
     const constraints =
         project?.development?.constraints?.slice(0, 2) ||
@@ -135,16 +395,16 @@ const getCredibilityRows = (project) => {
             value:
                 toLeadingSentence(
                     project?.problem?.description || project?.overview?.description,
-                    "The case study starts by defining the user friction and why it blocked progress.",
+                    CASE_COPY_FALLBACKS.problem,
                 ) ||
-                "The case study documents the user problem and context before solutions.",
+                CASE_COPY_FALLBACKS.problem,
         },
         {
             label: "Approach and constraints",
             value:
                 constraints.length > 0
                     ? constraints.map(toSentence).join(" • ")
-                    : "Scope and technical constraints are called out in process and implementation sections.",
+                    : CASE_COPY_FALLBACKS.constraints,
         },
         { label: "Ownership", value: roleValue },
         {
@@ -152,21 +412,21 @@ const getCredibilityRows = (project) => {
             value:
                 decisions.length > 0
                     ? decisions.map(toSentence).join(" • ")
-                    : "Design decisions are connected to research findings and validation.",
+                    : CASE_COPY_FALLBACKS.decisions,
         },
         {
             label: "Evidence of impact",
             value:
                 hasConcreteSignal(evidenceLine)
                     ? evidenceLine
-                    : "Outcomes are reported through validation findings and qualitative user confidence gains.",
+                    : CASE_COPY_FALLBACKS.evidence,
         },
         {
             label: "Next iteration",
             value:
                 next.length > 0
                     ? next.map(toSentence).join(" • ")
-                    : "Future iterations are tracked with clear next-step hypotheses.",
+                    : CASE_COPY_FALLBACKS.next,
         },
     ];
 };
@@ -197,15 +457,15 @@ const getLaunchMediaCaption = (launchAd) => {
     const hasDeck = Boolean(launchAd?.embed_url);
 
     if (hasVideo && hasDeck) {
-        return "Watch the short walkthrough first, then use the deck for full context.";
+        return "Use the walkthrough for flow context, then the deck for full rationale.";
     }
 
     if (hasVideo) {
-        return "A short walkthrough of the concept and core user flow.";
+        return "A concise walkthrough of the concept and core user flow.";
     }
 
     if (hasDeck) {
-        return "Slide deck covering concept, process, and final flow.";
+        return "Slide deck summarizing concept, decisions, and final flow.";
     }
 
     return "";
@@ -246,8 +506,21 @@ const CaseStudyImage = ({
     );
 };
 
+const normalizeComparisonItems = (comparisons = []) =>
+    (Array.isArray(comparisons) ? comparisons : []).filter(
+        (comparison) =>
+            comparison?.before?.src &&
+            comparison?.after?.src &&
+            toSentence(comparison?.label),
+    );
+
 const ScrollableMockupFrame = ({ src, alt }) => {
     const [hasInteracted, setHasInteracted] = useState(false);
+    const shouldReduceMotion = useReducedMotion();
+
+    useEffect(() => {
+        setHasInteracted(false);
+    }, [src]);
 
     const markInteracted = () => {
         if (!hasInteracted) setHasInteracted(true);
@@ -268,6 +541,8 @@ const ScrollableMockupFrame = ({ src, alt }) => {
         }
     };
 
+    const safeAlt = toSentence(alt) || "Case study preview";
+
     return (
         <div className="mockup-frame" data-interacted={hasInteracted}>
             <div className="mockup-frame-bar" aria-hidden="true">
@@ -281,13 +556,13 @@ const ScrollableMockupFrame = ({ src, alt }) => {
                     className="mockup-scroll-viewport"
                     tabIndex={0}
                     role="region"
-                    aria-label={`Scrollable screen preview: ${alt}`}
+                    aria-label={`Scrollable screen preview: ${safeAlt}`}
                     onScroll={markInteracted}
                     onWheel={markInteracted}
                     onTouchStart={markInteracted}
                     onKeyDown={handleKeyDown}
                 >
-                    <CaseStudyImage src={src} alt={alt} loading="lazy" />
+                    <CaseStudyImage src={src} alt={safeAlt} loading="lazy" />
                 </div>
 
                 <div className="mockup-fade mockup-fade-top" aria-hidden="true" />
@@ -297,7 +572,7 @@ const ScrollableMockupFrame = ({ src, alt }) => {
                 />
             </div>
 
-            {!hasInteracted && (
+            {!hasInteracted && !shouldReduceMotion && (
                 <p className="mockup-scroll-hint" aria-live="polite">
                     Scroll to view
                 </p>
@@ -307,11 +582,12 @@ const ScrollableMockupFrame = ({ src, alt }) => {
 };
 
 const BeforeAfterComparisons = ({ comparisons = [] }) => {
-    if (!Array.isArray(comparisons) || comparisons.length === 0) return null;
+    const stableComparisons = normalizeComparisonItems(comparisons);
+    if (stableComparisons.length === 0) return null;
 
     return (
         <div className="before-after-list" aria-label="Before and after comparisons">
-            {comparisons.map((comparison, index) => (
+            {stableComparisons.map((comparison, index) => (
                 <motion.article
                     key={comparison.id || index}
                     className="before-after-row"
@@ -375,7 +651,7 @@ const PrototypeTabs = ({ tabs = [] }) => {
         >
             <h2 className="section-title">Prototypes</h2>
             <p className="section-description">
-                Explore both fidelity levels in one place without breaking reading flow.
+                Compare low- and high-fidelity prototypes in one focused view.
             </p>
 
             <div className="prototype-tabs-header" role="tablist" aria-label="Prototype views">
@@ -413,7 +689,7 @@ const PrototypeTabs = ({ tabs = [] }) => {
                 ) : (
                     <div className="prototype-tabs-fallback">
                         <p className="prototype-tabs-fallback-text">
-                            Preview is unavailable for this tab. Use the direct Figma link below.
+                            Preview unavailable for this tab. Open the direct Figma link below.
                         </p>
                     </div>
                 )}
@@ -433,15 +709,33 @@ const PrototypeTabs = ({ tabs = [] }) => {
     );
 };
 
+const ProjectCredibility = ({ rows = [] }) => {
+    const safeRows = rows.filter((row) => toSentence(row?.label) && toSentence(row?.value));
+    if (safeRows.length === 0) return null;
+
+    return (
+        <section className="project-credibility" aria-label="Case study credibility summary">
+            {safeRows.map((row) => (
+                <article key={row.label} className="project-credibility-item">
+                    <h2 className="project-credibility-label">{row.label}</h2>
+                    <p className="project-credibility-value">{row.value}</p>
+                </article>
+            ))}
+        </section>
+    );
+};
+
 const ProjectDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [project, setProject] = useState(null);
+    const pageSummary = toEditorialCopy(project?.summary || project?.tagline, {
+        fallback: CASE_COPY_FALLBACKS.pageSummary,
+        maxSentences: 1,
+        maxChars: 156,
+    });
     usePageTitle(project?.title ?? null, {
-        description:
-            project?.summary ||
-            project?.tagline ||
-            "Case study detailing role, process, and measurable product outcomes.",
+        description: pageSummary,
         path: id ? `/case-studies/${id}` : "/",
         image: project?.media?.og_image || "https://leanale.com/starfruit.png",
         structuredData: project
@@ -449,10 +743,7 @@ const ProjectDetail = () => {
                   "@context": "https://schema.org",
                   "@type": "CreativeWork",
                   name: project.title,
-                  description:
-                      project.summary ||
-                      project.tagline ||
-                      "Portfolio case study by Leana Le.",
+                  description: pageSummary || "Portfolio case study by Leana Le.",
                   url: `https://leanale.com/case-studies/${project.id}`,
                   author: {
                       "@type": "Person",
@@ -465,6 +756,10 @@ const ProjectDetail = () => {
     const contentRef = useRef(null);
 
     useEffect(() => {
+        let alive = true;
+        const controller = new AbortController();
+        setLoading(true);
+
         // Load project data from centralized case studies
         try {
             const projectData = getProjectById(id);
@@ -474,9 +769,10 @@ const ProjectDetail = () => {
             }
 
             // Try to fetch supplemental data (rich sections from local data.json)
-            fetch(`/projects/${id}/data.json`)
+            fetch(`/projects/${id}/data.json`, { signal: controller.signal })
                 .then((res) => (res.ok ? res.json() : null))
                 .then((localData) => {
+                    if (!alive) return;
                     if (localData) {
                         const merged = { ...projectData };
                         // Merge supplemental sections that don't exist in the mapper
@@ -509,6 +805,7 @@ const ProjectDetail = () => {
                     setLoading(false);
                 })
                 .catch(() => {
+                    if (!alive) return;
                     setProject(projectData);
                     setLoading(false);
                 });
@@ -516,6 +813,10 @@ const ProjectDetail = () => {
             console.error("Error loading project:", error);
             navigate("/");
         }
+        return () => {
+            alive = false;
+            controller.abort();
+        };
     }, [id, navigate]);
 
     // Favicon swap: active ↔ idle on tab visibility change
@@ -566,27 +867,35 @@ const ProjectDetail = () => {
         null;
 
     // Build meta bar items — only show fields that exist
-    const inferredPlatform = /mobile|ios|android/i.test(project.category || "")
-        ? "Mobile"
-        : /web|website|desktop/i.test(project.category || "")
-          ? "Web"
-          : null;
+    const {
+        displayScope,
+        displayRole,
+        displayYear,
+        displaySummary,
+    } = getDisplayProjectMeta(project);
+
+    const toolsValue = Array.isArray(project.tools)
+        ? project.tools.slice(0, 3).join(", ")
+        : Array.isArray(project.techStack)
+          ? project.techStack.slice(0, 3).join(", ")
+          : project.tools || project.techStack || "";
 
     const metaItems = [
-        project.role && {
-            label: "Role",
-            value: Array.isArray(project.role)
-                ? project.role.join(", ")
-                : project.role,
+        displayScope && {
+            label: "Scope",
+            value: displayScope,
         },
-        project.year && { label: "Year", value: project.year },
-        project.category && { label: "Type", value: project.category },
-        inferredPlatform && { label: "Platform", value: inferredPlatform },
+        displayRole && {
+            label: "Role",
+            value: displayRole,
+        },
+        displayYear && { label: "Year", value: displayYear },
         (project.timeline || project.duration) && { label: "Timeline", value: project.timeline || project.duration },
         (project.team || project.teamSize) && {
             label: "Team",
             value: project.team || `${project.teamSize} members`,
         },
+        toolsValue && { label: "Tools", value: toolsValue },
     ].filter(Boolean);
 
     const actionLinks = [
@@ -601,10 +910,11 @@ const ProjectDetail = () => {
 
     const impactSnapshot = getImpactSnapshot(project);
     const credibilityRows = getCredibilityRows(project);
-    const framingStatement = toLeadingSentence(
-        project?.problem?.description || project?.summary || project?.tagline,
-        "This case study documents the user problem, the design response, and the evidence behind the final outcome.",
-    );
+    const heroTagline = getHeroTaglineCopy(project);
+    let framingStatement = getHeroFramingCopy(project, displaySummary);
+    if (normalizeTextKey(framingStatement) === normalizeTextKey(heroTagline)) {
+        framingStatement = CASE_COPY_FALLBACKS.heroFraming;
+    }
 
     const previewLayout = String(project.previewLayout || "").toLowerCase();
     const layoutClass =
@@ -655,8 +965,8 @@ const ProjectDetail = () => {
 
                         <h1 className="project-hero-title">{project.title}</h1>
 
-                        {project.tagline && (
-                            <p className="project-hero-tagline">{project.tagline}</p>
+                        {heroTagline && (
+                            <p className="project-hero-tagline">{heroTagline}</p>
                         )}
                         {framingStatement && (
                             <p className="project-framing-statement">
@@ -694,13 +1004,13 @@ const ProjectDetail = () => {
                             {actionLinks.length > 0 && (
                                 <div className="project-meta-actions" aria-label="Case links">
                                     <p className="project-meta-group-title">Actions</p>
-                                    {actionLinks.map((link) => (
+                                    {actionLinks.map((link, index) => (
                                         <a
                                             key={link.label}
                                             href={link.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="project-meta-action-link"
+                                            className={`project-meta-action-link ${index === 0 ? "is-primary" : ""}`.trim()}
                                         >
                                             {link.label} ↗
                                         </a>
@@ -791,14 +1101,7 @@ const ProjectDetail = () => {
                 ref={contentRef}
             >
                 <div className="container">
-                    <section className="project-credibility" aria-label="Case study credibility summary">
-                        {credibilityRows.map((row) => (
-                            <article key={row.label} className="project-credibility-item">
-                                <h2 className="project-credibility-label">{row.label}</h2>
-                                <p className="project-credibility-value">{row.value}</p>
-                            </article>
-                        ))}
-                    </section>
+                    <ProjectCredibility rows={credibilityRows} />
                     <div className="project-content-layout">
                         <ProjectContentMain project={project} />
                         {/* Micro-index scroll progress sidebar */}
@@ -842,20 +1145,47 @@ const ProjectContentMain = ({ project }) => {
     const comparisonsForIterations = hasIterationComparisons
         ? project.iterations.comparisons
         : [];
-    const compactProblemDescription = toLeadingSentence(
+    const sectionIntro = (sectionKey, value, options) =>
+        getSectionIntroCopy(project, sectionKey, value, options);
+    const nestedCopy = (nestedKey, value, options) =>
+        getNestedCopy(project, nestedKey, value, options);
+    const compactProblemDescription = sectionIntro(
+        "problem",
         project.problem?.description,
-        project.problem?.description || "",
-        1,
+        { maxSentences: 1, maxChars: 170 },
     );
-    const compactValidationDescription = toLeadingSentence(
+    const compactValidationDescription = sectionIntro(
+        "validation",
         project.validation?.description,
-        project.validation?.description || "",
-        1,
+        { maxSentences: 1, maxChars: 172 },
     );
     const validationOutcomes = filterRedundantOutcomes(
         compactValidationDescription,
         project.validation?.outcomes || [],
     );
+    const normalizedValidationOutcomes = validationOutcomes
+        .map((outcome, i, arr) => {
+            const current = nestedCopy("validationOutcomeLine", outcome, {
+                maxSentences: 1,
+                maxChars: 156,
+            });
+            if (i === 0) return current;
+            const previous = nestedCopy("validationOutcomeLine", arr[i - 1], {
+                maxSentences: 1,
+                maxChars: 156,
+            });
+            return dedupeAdjacentCopy(current, previous);
+        })
+        .filter(Boolean);
+    const researchWhy = getSectionWhyLine(project, "research");
+    const userFlowsWhy = getSectionWhyLine(project, "userFlows");
+    const lofiWhy = getSectionWhyLine(project, "lofi");
+    const iterationsWhy = getSectionWhyLine(project, "iterations");
+    const hifiWhy = getSectionWhyLine(project, "hifi");
+    const developmentWhy = getSectionWhyLine(project, "development");
+    const solutionWhy = getSectionWhyLine(project, "solution");
+    const validationWhy = getSectionWhyLine(project, "validation");
+    const whatChangedClose = getWhatChangedClose(project);
     const evidenceNarrative = project.evidenceNarrative || null;
     const hasEvidenceNarrative = Boolean(
         evidenceNarrative &&
@@ -868,6 +1198,7 @@ const ProjectContentMain = ({ project }) => {
                 evidenceNarrative.nextIteration
             ),
     );
+
     return (
         <div className="project-content-main">
             {/* Overview */}
@@ -880,7 +1211,7 @@ const ProjectContentMain = ({ project }) => {
                             sectionIndex={s}
                             name="Overview"
                             title={project.overview.title}
-                            description={project.overview.description}
+                            description={sectionIntro("overview", project.overview.description)}
                             images={project.overview.images}
                             mediaDemo={project.overview.mediaDemo}
                             verdict={project.overview.verdict}
@@ -941,8 +1272,13 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.0"
                             />
                             <p className="section-description">
-                                {project.research.description}
+                                {sectionIntro("research", project.research.description)}
                             </p>
+                            {researchWhy && (
+                                <p className="section-why-line">
+                                    <strong>Why this choice:</strong> {researchWhy}
+                                </p>
+                            )}
                             <BrowserMockup mediaDemo={project.research.mediaDemo} />
                             <PrincipleVerdict verdict={project.research.verdict} />
 
@@ -1029,8 +1365,10 @@ const ProjectContentMain = ({ project }) => {
                             <h2 className="section-title">What changed and why</h2>
                             <SectionTag sectionIndex={s} version="2.0" />
                             <p className="section-description">
-                                {evidenceNarrative.whatChangedWhy ||
-                                    "This section traces the assumption, evidence, and resulting product decisions."}
+                                {sectionIntro(
+                                    "decisionEvidence",
+                                    evidenceNarrative.whatChangedWhy,
+                                )}
                             </p>
 
                             <div className="decision-evidence-grid">
@@ -1113,7 +1451,7 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.0"
                             />
                             <p className="section-description">
-                                {project.personas.description}
+                                {sectionIntro("personas", project.personas.description)}
                             </p>
 
                             {project.personas.prototypeLink && (
@@ -1170,8 +1508,13 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.0"
                             />
                             <p className="section-description">
-                                {project.userFlows.description}
+                                {sectionIntro("userFlows", project.userFlows.description)}
                             </p>
+                            {userFlowsWhy && (
+                                <p className="section-why-line">
+                                    <strong>Why this choice:</strong> {userFlowsWhy}
+                                </p>
+                            )}
 
                             {project.userFlows.flows?.length > 0 && (
                                 <div className="flows-list">
@@ -1193,11 +1536,34 @@ const ProjectContentMain = ({ project }) => {
                                             <h3 className="flow-name">
                                                 {flow.name}
                                             </h3>
-                                            {flow.description && (
-                                                <p className="flow-description">
-                                                    {flow.description}
-                                                </p>
-                                            )}
+                                            {(() => {
+                                                const flowDescription = nestedCopy(
+                                                    "flowDescription",
+                                                    flow.description,
+                                                    { maxSentences: 1, maxChars: 158 },
+                                                );
+                                                const prevFlowDescription =
+                                                    i > 0
+                                                        ? nestedCopy(
+                                                            "flowDescription",
+                                                            project.userFlows?.flows?.[i - 1]
+                                                                ?.description,
+                                                            { maxSentences: 1, maxChars: 158 },
+                                                        )
+                                                        : "";
+                                                const resolvedFlowDescription =
+                                                    i > 0
+                                                        ? dedupeAdjacentCopy(
+                                                            flowDescription,
+                                                            prevFlowDescription,
+                                                        )
+                                                        : flowDescription;
+                                                return resolvedFlowDescription ? (
+                                                    <p className="flow-description">
+                                                        {resolvedFlowDescription}
+                                                    </p>
+                                                ) : null;
+                                            })()}
                                             {flow.steps?.length > 0 && (
                                                 <div className="flow-steps">
                                                     {flow.steps.map(
@@ -1249,9 +1615,7 @@ const ProjectContentMain = ({ project }) => {
                             sectionIndex={s}
                             name="IA"
                             title={project.informationArchitecture.title}
-                            description={
-                                project.informationArchitecture.description
-                            }
+                            description={sectionIntro("ia", project.informationArchitecture.description)}
                             images={project.informationArchitecture.images}
                             mediaDemo={project.informationArchitecture.mediaDemo}
                             verdict={project.informationArchitecture.verdict}
@@ -1274,7 +1638,7 @@ const ProjectContentMain = ({ project }) => {
                             sectionIndex={s}
                             name="Lo-Fi Exploration"
                             title={project.lofi.title}
-                            description={project.lofi.description}
+                            description={sectionIntro("lofi", project.lofi.description)}
                             images={project.lofi.images}
                             mediaDemo={project.lofi.mediaDemo}
                             verdict={project.lofi.verdict}
@@ -1287,6 +1651,11 @@ const ProjectContentMain = ({ project }) => {
                         />
                     );
                 })()}
+            {project.lofi && lofiWhy && (
+                <p className="section-why-line section-why-line--after-indexed">
+                    <strong>Why this choice:</strong> {lofiWhy}
+                </p>
+            )}
 
             {/* ── Style Guide ── */}
             {project.styleGuide &&
@@ -1313,7 +1682,7 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.0"
                             />
                             <p className="section-description">
-                                {project.styleGuide.description}
+                                {sectionIntro("styleGuide", project.styleGuide.description)}
                             </p>
 
                             {project.styleGuide.embed && (
@@ -1503,8 +1872,13 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.1"
                             />
                             <p className="section-description">
-                                {project.iterations.description}
+                                {sectionIntro("iterations", project.iterations.description)}
                             </p>
+                            {iterationsWhy && (
+                                <p className="section-why-line">
+                                    <strong>Why this choice:</strong> {iterationsWhy}
+                                </p>
+                            )}
                             <BrowserMockup mediaDemo={project.iterations.mediaDemo} />
                             <PrincipleVerdict verdict={project.iterations.verdict} />
                             <BeforeAfterComparisons
@@ -1641,6 +2015,7 @@ const ProjectContentMain = ({ project }) => {
                             {!project.prototypeTabs?.length &&
                                 project.iterations.prototype && (
                                 <PrototypeEmbed
+                                    project={project}
                                     prototype={project.iterations.prototype}
                                 />
                             )}
@@ -1677,8 +2052,13 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.0"
                             />
                             <p className="section-description">
-                                {project.hifi.description}
+                                {sectionIntro("hifi", project.hifi.description)}
                             </p>
+                            {hifiWhy && (
+                                <p className="section-why-line">
+                                    <strong>Why this choice:</strong> {hifiWhy}
+                                </p>
+                            )}
                             <BrowserMockup mediaDemo={project.hifi.mediaDemo} />
                             <PrincipleVerdict verdict={project.hifi.verdict} />
 
@@ -1698,6 +2078,13 @@ const ProjectContentMain = ({ project }) => {
                                             screen={screen}
                                             index={i}
                                             figIndex={nextImage()}
+                                            project={project}
+                                            previousScreenDescription={
+                                                i > 0
+                                                    ? project.hifi?.screens?.[i - 1]
+                                                        ?.description
+                                                    : ""
+                                            }
                                         />
                                     ))}
                                 </div>
@@ -1780,8 +2167,13 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.0"
                             />
                             <p className="section-description">
-                                {project.development.description}
+                                {sectionIntro("development", project.development.description)}
                             </p>
+                            {developmentWhy && (
+                                <p className="section-why-line">
+                                    <strong>Why this choice:</strong> {developmentWhy}
+                                </p>
+                            )}
                             <BrowserMockup mediaDemo={project.development.mediaDemo} />
                             <PrincipleVerdict verdict={project.development.verdict} />
 
@@ -1870,7 +2262,7 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.0"
                             />
                             <p className="section-description">
-                                {project.userTesting.description}
+                                {sectionIntro("userTesting", project.userTesting.description)}
                             </p>
 
                             {/* Test report links */}
@@ -2099,7 +2491,7 @@ const ProjectContentMain = ({ project }) => {
                             />
                             {project.finalPresentation.description && (
                                 <p className="section-description">
-                                    {project.finalPresentation.description}
+                                    {sectionIntro("finalPresentation", project.finalPresentation.description)}
                                 </p>
                             )}
 
@@ -2188,8 +2580,13 @@ const ProjectContentMain = ({ project }) => {
                                 version="2.1"
                             />
                             <p className="section-description">
-                                {project.solution.description}
+                                {sectionIntro("solution", project.solution.description)}
                             </p>
+                            {solutionWhy && (
+                                <p className="section-why-line">
+                                    <strong>Why this choice:</strong> {solutionWhy}
+                                </p>
+                            )}
                             <BrowserMockup mediaDemo={project.solution.mediaDemo} />
                             <PrincipleVerdict verdict={project.solution.verdict} />
 
@@ -2231,9 +2628,38 @@ const ProjectContentMain = ({ project }) => {
                                                     <h3 className="feature-title">
                                                         {feature.title}
                                                     </h3>
-                                                    <p className="feature-description">
-                                                        {feature.description}
-                                                    </p>
+                                                    {(() => {
+                                                        const featureDescription = nestedCopy(
+                                                            "featureDescription",
+                                                            feature.description,
+                                                            { maxSentences: 1, maxChars: 168 },
+                                                        );
+                                                        const prevFeatureDescription =
+                                                            i > 0
+                                                                ? nestedCopy(
+                                                                    "featureDescription",
+                                                                    project.solution?.features?.[
+                                                                        i - 1
+                                                                    ]?.description,
+                                                                    {
+                                                                        maxSentences: 1,
+                                                                        maxChars: 168,
+                                                                    },
+                                                                )
+                                                                : "";
+                                                        const resolvedFeatureDescription =
+                                                            i > 0
+                                                                ? dedupeAdjacentCopy(
+                                                                    featureDescription,
+                                                                    prevFeatureDescription,
+                                                                )
+                                                                : featureDescription;
+                                                        return resolvedFeatureDescription ? (
+                                                            <p className="feature-description">
+                                                                {resolvedFeatureDescription}
+                                                            </p>
+                                                        ) : null;
+                                                    })()}
                                                     {feature.why && (
                                                         <p className="feature-why">
                                                             <strong>Why:</strong>{" "}
@@ -2260,6 +2686,7 @@ const ProjectContentMain = ({ project }) => {
 
                             {project.solution.prototype && (
                                 <PrototypeEmbed
+                                    project={project}
                                     prototype={project.solution.prototype}
                                 />
                             )}
@@ -2290,13 +2717,14 @@ const ProjectContentMain = ({ project }) => {
                             <SectionTag sectionIndex={s} />
                             {project.finalExperience.intro && (
                                 <p className="section-description">
-                                    {project.finalExperience.intro}
+                                    {sectionIntro("finalExperience", project.finalExperience.intro)}
                                 </p>
                             )}
                             <BrowserMockup mediaDemo={project.finalExperience.mediaDemo} />
                             <PrincipleVerdict verdict={project.finalExperience.verdict} />
                             {project.finalExperience.prototype && (
                                 <PrototypeEmbed
+                                    project={project}
                                     prototype={
                                         project.finalExperience.prototype
                                     }
@@ -2333,6 +2761,11 @@ const ProjectContentMain = ({ project }) => {
                             <p className="section-description">
                                 {compactValidationDescription}
                             </p>
+                            {validationWhy && (
+                                <p className="section-why-line">
+                                    <strong>Why this choice:</strong> {validationWhy}
+                                </p>
+                            )}
                             <BrowserMockup mediaDemo={project.validation.mediaDemo} />
                             <PrincipleVerdict verdict={project.validation.verdict} />
 
@@ -2345,13 +2778,13 @@ const ProjectContentMain = ({ project }) => {
                                 </p>
                             )}
 
-                            {validationOutcomes.length > 0 && (
+                            {normalizedValidationOutcomes.length > 0 && (
                                 <div className="validation-outcomes">
                                     <h3 className="subsection-title">
                                         Outcomes
                                     </h3>
                                     <ul className="outcomes-list">
-                                        {validationOutcomes.map(
+                                        {normalizedValidationOutcomes.map(
                                             (o, i) => (
                                                 <li
                                                     key={i}
@@ -2411,9 +2844,38 @@ const ProjectContentMain = ({ project }) => {
                                                 <h3 className="insight-title">
                                                     {insight.title}
                                                 </h3>
-                                                <p className="insight-description">
-                                                    {insight.description}
-                                                </p>
+                                                {(() => {
+                                                    const insightDescription = nestedCopy(
+                                                        "insightDescription",
+                                                        insight.description,
+                                                        { maxSentences: 1, maxChars: 170 },
+                                                    );
+                                                    const prevInsightDescription =
+                                                        i > 0
+                                                            ? nestedCopy(
+                                                                "insightDescription",
+                                                                project.learnings?.insights?.[
+                                                                    i - 1
+                                                                ]?.description,
+                                                                {
+                                                                    maxSentences: 1,
+                                                                    maxChars: 170,
+                                                                },
+                                                            )
+                                                            : "";
+                                                    const resolvedInsightDescription =
+                                                        i > 0
+                                                            ? dedupeAdjacentCopy(
+                                                                insightDescription,
+                                                                prevInsightDescription,
+                                                            )
+                                                            : insightDescription;
+                                                    return resolvedInsightDescription ? (
+                                                        <p className="insight-description">
+                                                            {resolvedInsightDescription}
+                                                        </p>
+                                                    ) : null;
+                                                })()}
                                             </motion.div>
                                         ),
                                     )}
@@ -2450,7 +2912,7 @@ const ProjectContentMain = ({ project }) => {
                             </h2>
                             <SectionTag sectionIndex={s} />
                             <p className="section-description">
-                                {project.outcomes.description}
+                                {sectionIntro("outcomes", project.outcomes.description)}
                             </p>
 
                             {project.outcomes.metrics?.length > 0 && (
@@ -2486,6 +2948,19 @@ const ProjectContentMain = ({ project }) => {
                     );
                 })()}
 
+            {whatChangedClose && (
+                <motion.section
+                    className="project-section case-close-section"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.45 }}
+                >
+                    <h2 className="section-title">What changed</h2>
+                    <p className="section-description">{whatChangedClose}</p>
+                </motion.section>
+            )}
+
             {/* ── Simulation Mode (InkLink only) ── */}
             {project.id === "inklink" && (
                 <SimulationSection
@@ -2520,6 +2995,11 @@ const ImageGallery = ({
     onCount,
 }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const totalSlides = Array.isArray(images) ? images.length : 0;
+
+    useEffect(() => {
+        setCurrentSlide(0);
+    }, [images]);
 
     if (!images || images.length === 0) return null;
 
@@ -2582,6 +3062,16 @@ const ImageGallery = ({
         setCurrentSlide((s) => (s === 0 ? images.length - 1 : s - 1));
     const next = () =>
         setCurrentSlide((s) => (s === images.length - 1 ? 0 : s + 1));
+    const onCarouselKeyDown = (event) => {
+        if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            prev();
+        }
+        if (event.key === "ArrowRight") {
+            event.preventDefault();
+            next();
+        }
+    };
     const img = images[currentSlide];
 
     return (
@@ -2591,6 +3081,7 @@ const ImageGallery = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
+            onKeyDown={onCarouselKeyDown}
         >
             <div className="carousel-viewport">
                 <FigLabel index={startIndex + currentSlide + 1} />
@@ -2626,7 +3117,7 @@ const ImageGallery = ({
                 </button>
 
                 <span className="carousel-counter">
-                    {currentSlide + 1} / {images.length}
+                    {currentSlide + 1} / {totalSlides}
                 </span>
 
                 <button
@@ -2671,8 +3162,33 @@ const ImageGallery = ({
 };
 
 // Accordion item for Hi-Fi screens — click name to reveal image
-const HifiAccordion = ({ screen, index, figIndex }) => {
+const HifiAccordion = ({
+    screen,
+    index,
+    figIndex,
+    project,
+    previousScreenDescription = "",
+}) => {
     const [open, setOpen] = useState(false);
+    useEffect(() => {
+        setOpen(false);
+    }, [screen?.name, screen?.image]);
+    const currentScreenDescription = getNestedCopy(
+        project,
+        "screenDescription",
+        screen.description,
+        { maxSentences: 1, maxChars: 168 },
+    );
+    const priorScreenDescription = getNestedCopy(
+        project,
+        "screenDescription",
+        previousScreenDescription,
+        { maxSentences: 1, maxChars: 168 },
+    );
+    const screenDescription =
+        index > 0
+            ? dedupeAdjacentCopy(currentScreenDescription, priorScreenDescription)
+            : currentScreenDescription;
 
     return (
         <motion.div
@@ -2720,9 +3236,9 @@ const HifiAccordion = ({ screen, index, figIndex }) => {
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <div className="accordion-content">
-                            {screen.description && (
+                            {screenDescription && (
                                 <p className="accordion-desc">
-                                    {screen.description}
+                                    {screenDescription}
                                 </p>
                             )}
                             {screen.image && (
@@ -2744,8 +3260,14 @@ const HifiAccordion = ({ screen, index, figIndex }) => {
 };
 
 // Reusable Prototype Embed Component
-const PrototypeEmbed = ({ prototype }) => {
+const PrototypeEmbed = ({ prototype, project }) => {
     if (!prototype) return null;
+    const prototypeDescription = getNestedCopy(
+        project,
+        "prototypeDescription",
+        prototype.description,
+        { maxSentences: 1, maxChars: 168 },
+    );
 
     return (
         <motion.div
@@ -2755,8 +3277,8 @@ const PrototypeEmbed = ({ prototype }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
         >
-            {prototype.description && (
-                <p className="prototype-description">{prototype.description}</p>
+            {prototypeDescription && (
+                <p className="prototype-description">{prototypeDescription}</p>
             )}
 
             {/* Figma Embed (if embed_url exists) */}
@@ -2814,38 +3336,46 @@ const IndexedSection = ({
     captionContext,
     imageStartIndex = 0,
     onImageCount,
-}) => (
-    <motion.section
-        className="project-section"
-        initial={caseStudyMotion.sectionReveal.initial}
-        whileInView={caseStudyMotion.sectionReveal.whileInView}
-        viewport={caseStudyMotion.sectionReveal.viewport}
-        transition={caseStudyMotion.sectionReveal.transition}
-    >
-        <SectionIndex
-            caseIndex={caseIndex}
-            sectionIndex={sectionIndex}
-            title={name}
-        />
-        <h2 className="section-title">{title}</h2>
-        <SectionTag
-            sectionIndex={sectionIndex}
-            version="2.0"
-        />
-        <p className="section-description">{description}</p>
-        <BrowserMockup mediaDemo={mediaDemo} />
-        <PrincipleVerdict verdict={verdict} />
-        <BeforeAfterComparisons comparisons={comparisons} />
+}) => {
+    const resolvedDescription = toEditorialCopy(description, {
+        fallback: CASE_SECTION_FALLBACKS.default,
+        maxSentences: 2,
+        maxChars: 228,
+    });
 
-        {images && images.length > 0 && (
-            <ImageGallery
-                images={images}
-                captionContext={captionContext || title || name}
-                startIndex={imageStartIndex}
-                onCount={onImageCount}
+    return (
+        <motion.section
+            className="project-section"
+            initial={caseStudyMotion.sectionReveal.initial}
+            whileInView={caseStudyMotion.sectionReveal.whileInView}
+            viewport={caseStudyMotion.sectionReveal.viewport}
+            transition={caseStudyMotion.sectionReveal.transition}
+        >
+            <SectionIndex
+                caseIndex={caseIndex}
+                sectionIndex={sectionIndex}
+                title={name}
             />
-        )}
-    </motion.section>
-);
+            <h2 className="section-title">{title}</h2>
+            <SectionTag
+                sectionIndex={sectionIndex}
+                version="2.0"
+            />
+            <p className="section-description">{resolvedDescription}</p>
+            <BrowserMockup mediaDemo={mediaDemo} />
+            <PrincipleVerdict verdict={verdict} />
+            <BeforeAfterComparisons comparisons={comparisons} />
+
+            {images && images.length > 0 && (
+                <ImageGallery
+                    images={images}
+                    captionContext={captionContext || title || name}
+                    startIndex={imageStartIndex}
+                    onCount={onImageCount}
+                />
+            )}
+        </motion.section>
+    );
+};
 
 export default ProjectDetail;
