@@ -124,3 +124,23 @@ Decision: `GREEN`
 1. Replace temporary InkLink Lo-Fi/Hi-Fi prototype links with final Figma URLs once available.
 2. Refresh screenshot evidence set for portfolio consistency across case studies.
 3. Optionally reduce warning-class embed/network console noise if stricter runtime cleanliness is desired.
+
+---
+
+## 7) Baseline Lock Note (2026-06-01)
+
+Baseline commit: `162c963`
+
+Merged slices completed:
+- ProjectDetail slice merged via `42a3203`
+- Support-tail slice merged via `162c963`
+
+QA pass set at closeout:
+- `npm run qa:audit` -> PASS
+- `npm run qa:routes` -> PASS
+- `npm run qa:metadata` -> PASS
+- `npm run qa:media` -> PASS
+- `npm run qa:browser` -> PASS
+
+Environment caveat:
+- On this Windows + OneDrive workspace, `dist` lock contention may appear during build/preview; one recovery pass (stop Node holders + remove `dist`) has been sufficient when encountered.
