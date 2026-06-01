@@ -69,6 +69,14 @@ const HOW_I_WORK_STEPS = [
 ];
 
 const ABOUT_TRAITS = ["Research-led", "System-minded", "Build-aware"];
+const ABOUT_ANCHORS = [
+    { id: "about-intro", label: "Intro" },
+    { id: "about-approach", label: "Approach" },
+    { id: "about-skills", label: "Skills" },
+    { id: "about-education", label: "Education" },
+    { id: "about-contact", label: "Contact" },
+    { id: "resume", label: "Resume" },
+];
 
 function LiveClock() {
     const formatTime = () =>
@@ -131,7 +139,15 @@ export default function About() {
                         </ul>
                     </motion.section>
 
-                    <div className="about-body">
+                    <nav className="about-anchor-nav" aria-label="About page sections">
+                        {ABOUT_ANCHORS.map((anchor) => (
+                            <a key={anchor.id} href={`#${anchor.id}`} className="about-anchor-link">
+                                {anchor.label}
+                            </a>
+                        ))}
+                    </nav>
+
+                    <section id="about-intro" className="about-body about-anchor-section">
 
                         {/* ── About ── */}
                         <motion.div className="about-row" {...fadeUp}>
@@ -150,11 +166,12 @@ export default function About() {
                             </div>
                         </motion.div>
 
-                    </div>
+                    </section>
 
                     {/* ── How I Work ── */}
                     <motion.section
-                        className="about-work"
+                        id="about-approach"
+                        className="about-work about-anchor-section"
                         {...fadeUp}
                         transition={{ duration: 0.45, delay: 0.08 }}
                     >
@@ -185,14 +202,19 @@ export default function About() {
                     </motion.section>
 
                     {/* ── Skills ── */}
-                    <SkillsSection variant="grid" />
+                    <section id="about-skills" className="about-anchor-section">
+                        <SkillsSection variant="grid" />
+                    </section>
 
                     {/* ── Education ── */}
-                    <EducationSection variant="timeline" />
+                    <section id="about-education" className="about-anchor-section">
+                        <EducationSection variant="timeline" />
+                    </section>
 
                     {/* ── Let's Talk ── */}
                     <motion.section
-                        className="about-connect"
+                        id="about-contact"
+                        className="about-connect about-anchor-section"
                         {...fadeUp}
                         transition={{ duration: 0.45, delay: 0.08 }}
                     >
@@ -257,7 +279,7 @@ export default function About() {
                     {/* ── Resume ── */}
                     <motion.section
                         id="resume"
-                        className="about-resume"
+                        className="about-resume about-anchor-section"
                         {...fadeUp}
                         transition={{ duration: 0.45, delay: 0.08 }}
                     >
