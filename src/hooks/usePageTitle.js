@@ -106,8 +106,6 @@ export function usePageTitle(pageTitle, options = {}) {
         );
         setStructuredData(structuredData);
 
-        return () => {
-            document.title = `${BASE} · Designer`;
-        };
+        return undefined;
     }, [description, image, noindex, pageTitle, path, site, structuredData]);
 }

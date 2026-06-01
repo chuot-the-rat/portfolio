@@ -25,6 +25,8 @@ export default function ProjectNextPrev({ currentId }) {
         const projects = getAllProjects();
         const idx = projects.findIndex((p) => p.id === currentId);
         if (idx === -1) return;
+        const controller = new AbortController();
+        let alive = true;
 
         const prevProject = idx > 0 ? projects[idx - 1] : null;
         const nextProject = idx < projects.length - 1 ? projects[idx + 1] : null;
@@ -36,15 +38,20 @@ export default function ProjectNextPrev({ currentId }) {
         const fetchThumb = async (project) => {
             if (!project) return;
             try {
-                const res = await fetch(`/projects/${project.id}/data.json`);
+                const res = await fetch(`/projects/${project.id}/data.json`, {
+                    signal: controller.signal,
+                });
                 if (!res.ok) return;
                 const data = await res.json();
                 const src =
+                    data?.previewImage ??
                     data?.hifi?.images?.[0]?.src ??
                     data?.solution?.images?.[0]?.src ??
                     data?.overview?.images?.[0]?.src ??
+                    project.previewImage ??
+                    project.media?.thumbnail ??
                     null;
-                if (src) setThumbs((t) => ({ ...t, [project.id]: src }));
+                if (src && alive) setThumbs((t) => ({ ...t, [project.id]: src }));
             } catch {
                 // no thumbnail — panel shows without image
             }
@@ -52,6 +59,10 @@ export default function ProjectNextPrev({ currentId }) {
 
         fetchThumb(prevProject);
         fetchThumb(nextProject);
+        return () => {
+            alive = false;
+            controller.abort();
+        };
     }, [currentId]);
 
     if (!prev && !next) return null;
@@ -108,7 +119,7 @@ export default function ProjectNextPrev({ currentId }) {
 
             {/* Return to all work */}
             <div className="pnp-return">
-                <Link to="/" className="pnp-return-link">
+                <Link to="/projects" className="pnp-return-link">
                     ← All work
                 </Link>
             </div>
