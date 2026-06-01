@@ -130,7 +130,7 @@ export default function About() {
                             <NameCycle />
                         </h1>
                         <p className="about-hero-sub">
-                            Product designer focused on research, interaction clarity, and outcomes teams can ship with confidence.
+                            Product designer focused on research-informed decisions, interaction clarity, and outcomes teams can ship with confidence.
                         </p>
                         <ul className="about-hero-traits" aria-label="Core strengths">
                             {ABOUT_TRAITS.map((trait) => (
@@ -306,6 +306,13 @@ export default function About() {
                                 </a>
                             </div>
                         </div>
+                        <p className="about-resume-helper">
+                            If the embedded viewer is blocked, use{" "}
+                            <a href={RESUME_LINK} target="_blank" rel="noopener noreferrer">
+                                Open in new tab
+                            </a>
+                            .
+                        </p>
                         <div className="about-resume-embed">
                             <iframe
                                 src={RESUME_LINK}

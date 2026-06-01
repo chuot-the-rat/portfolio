@@ -45,6 +45,9 @@ test.describe("Mobile QA", () => {
     await page.goto(`${BASE_URL}/about`, { waitUntil: "domcontentloaded" });
     await expect(page.locator(".about-connect")).toBeVisible();
     await expect(page.locator("#about-resume, #resume.about-resume")).toBeVisible();
+    await expect(page.locator(".about-email-link")).toBeVisible();
+    await expect(page.locator(".about-resume-btn--primary")).toBeVisible();
+    await expect(page.locator(".about-resume-btn--ghost")).toBeVisible();
     await expect(page).toHaveTitle(/About/i);
   });
 });
@@ -54,4 +57,7 @@ test("reduced-motion mode keeps core content available", async ({ page }) => {
   await page.goto(`${BASE_URL}/case-studies/prolog`, { waitUntil: "domcontentloaded" });
   await expect(page.locator(".project-hero")).toBeVisible();
   await expect(page.locator(".project-content")).toBeVisible();
+  await page.goto(`${BASE_URL}/about`, { waitUntil: "domcontentloaded" });
+  await expect(page.locator(".about-connect")).toBeVisible();
+  await expect(page.locator(".about-resume-actions")).toBeVisible();
 });
