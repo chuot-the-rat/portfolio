@@ -44,7 +44,8 @@ test.describe("Mobile QA", () => {
   test("about contact/resume handoff blocks are present", async ({ page }) => {
     await page.goto(`${BASE_URL}/about`, { waitUntil: "domcontentloaded" });
     await expect(page.locator(".about-connect")).toBeVisible();
-    await expect(page.locator("#resume")).toBeVisible();
+    await expect(page.locator("#about-resume, #resume.about-resume")).toBeVisible();
+    await expect(page).toHaveTitle(/About/i);
   });
 });
 
