@@ -25,6 +25,13 @@ Optional: run skill-map guardrails only:
 npm run qa:audit
 ```
 
+Optional: pre-application confidence pass:
+```bash
+npm run qa:audit
+npm run qa:metadata
+npm run qa:routes
+```
+
 4. If Windows file-lock/EPERM issues appear, run lock diagnostics:
 ```bash
 npm run qa:lock
@@ -53,6 +60,8 @@ npm run qa -- --recovery
     - required `evidence_narrative` fields are present and non-empty
     - role resolver preserves design-first precedence for project cards
     - banned vague copy phrases are not present in the target case-study corpus
+    - homepage and critical metadata remain design-first (no developer-first role drift)
+    - recruiter-scan card contract remains intact (`role / scope / year` + value statement priority)
 - `qa:browser`
   - Desktop and mobile presence checks for nav/footer, home proof strip CTA, case-study trust modules.
   - Keyboard focus traversal sanity.
@@ -79,3 +88,9 @@ npx playwright install chromium
   - Confirm prerender output exists in `dist/<route>/index.html`.
   - Re-run `npm run build` (prerender runs as part of build).
   - Optional served check: `QA_METADATA_MODE=served npm run qa:metadata`.
+
+## Baseline Maintenance
+
+- Update `docs/portfolio-audit/HIRING_READINESS_BASELINE_2026-06-01.md` after:
+  - major copy/positioning changes to home, route metadata, or top-3 case-study narrative, or
+  - one month elapsed since the previous baseline update.

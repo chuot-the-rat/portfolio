@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import { homeHeroConfig } from "../src/data/header/headerConfig.js";
+import { ROUTE_META } from "../src/seo/routeMeta.js";
 
 const TARGET_CASE_IDS = new Set(["inklink", "prolog", "sidequest"]);
 const REQUIRED_EVIDENCE_FIELDS = [
@@ -23,6 +25,13 @@ const DESIGN_ROLE_PRIORITY = [
 ];
 
 const BANNED_PHRASES = ["seamless", "intuitive", "user-friendly", "easy to use"];
+const ROLE_DRIFT_TERMS = [
+  "frontend developer",
+  "front-end developer",
+  "full stack developer",
+  "full-stack developer",
+  "software engineer",
+];
 const failures = [];
 
 const clean = (value) => String(value || "").replace(/\s+/g, " ").trim();
@@ -86,6 +95,14 @@ const caseStudiesData = JSON.parse(fs.readFileSync(dataPath, "utf8"));
 const allCaseStudies = Array.isArray(caseStudiesData?.case_studies)
   ? caseStudiesData.case_studies
   : [];
+const homeWorkListPath = path.join(
+  process.cwd(),
+  "src",
+  "components",
+  "home",
+  "HomeWorkList.jsx",
+);
+const homeWorkListSource = fs.readFileSync(homeWorkListPath, "utf8");
 
 const targetStudies = allCaseStudies.filter((study) => TARGET_CASE_IDS.has(study.id));
 
@@ -147,6 +164,115 @@ for (const study of targetStudies) {
   if (failures.length === 0 || !failures.some((entry) => entry.includes(`[qa:audit] ${study.id}:`))) {
     console.log(`[qa:audit] PASS ${study.id}`);
   }
+}
+
+const ensureTextIncludes = (label, value, requiredTerms = []) => {
+  const normalizedValue = clean(value).toLowerCase();
+  if (!normalizedValue) {
+    failures.push(`[qa:audit] ${label}: missing text value`);
+    return;
+  }
+
+  const hasRequired = requiredTerms.some((term) =>
+    normalizedValue.includes(term.toLowerCase()),
+  );
+
+  if (!hasRequired) {
+    failures.push(
+      `[qa:audit] ${label}: expected one of [${requiredTerms.join(", ")}]`,
+    );
+  }
+};
+
+const rejectRoleDriftTerms = (label, value) => {
+  const normalizedValue = clean(value).toLowerCase();
+  if (!normalizedValue) return;
+
+  for (const term of ROLE_DRIFT_TERMS) {
+    if (normalizedValue.includes(term)) {
+      failures.push(`[qa:audit] ${label}: role-drift phrase found ("${term}")`);
+    }
+  }
+
+  if (normalizedValue.includes("developer") && !normalizedValue.includes("designer")) {
+    failures.push(
+      `[qa:audit] ${label}: includes developer language without design anchor`,
+    );
+  }
+};
+
+const heroDescriptor = homeHeroConfig?.text?.descriptor;
+const heroSubline = homeHeroConfig?.text?.subline;
+const homeMeta = ROUTE_META?.["/"] || {};
+const aboutMeta = ROUTE_META?.["/about"] || {};
+
+ensureTextIncludes("homeHeroConfig.text.descriptor", heroDescriptor, [
+  "ui/ux",
+  "product designer",
+]);
+ensureTextIncludes("homeHeroConfig.text.subline", heroSubline, [
+  "research-informed",
+  "product",
+]);
+ensureTextIncludes("ROUTE_META[/].title", homeMeta.title, ["ui/ux", "product designer"]);
+ensureTextIncludes("ROUTE_META[/].description", homeMeta.description, [
+  "ui/ux",
+  "product",
+  "designer",
+]);
+ensureTextIncludes("ROUTE_META[/about].description", aboutMeta.description, [
+  "ui/ux",
+  "product designer",
+]);
+
+rejectRoleDriftTerms("homeHeroConfig.text.descriptor", heroDescriptor);
+rejectRoleDriftTerms("homeHeroConfig.text.subline", heroSubline);
+rejectRoleDriftTerms("ROUTE_META[/].title", homeMeta.title);
+rejectRoleDriftTerms("ROUTE_META[/].description", homeMeta.description);
+rejectRoleDriftTerms("ROUTE_META[/about].description", aboutMeta.description);
+
+for (const study of targetStudies) {
+  const rawScope = clean(study?.project_type);
+  const rawYear = clean(study?.year);
+  const rawSummary = clean(
+    study?.evidence_narrative?.what_changed_why ||
+      study?.subtitle ||
+      study?.summary,
+  );
+  const rawRole = resolveDisplayRole(study);
+
+  if (!rawRole) {
+    failures.push(`[qa:audit] ${study.id}: missing displayRole for recruiter scan`);
+  }
+  if (!rawScope) {
+    failures.push(`[qa:audit] ${study.id}: missing displayScope for recruiter scan`);
+  }
+  if (!rawYear) {
+    failures.push(`[qa:audit] ${study.id}: missing displayYear for recruiter scan`);
+  }
+  if (!rawSummary) {
+    failures.push(`[qa:audit] ${study.id}: missing value statement summary for recruiter scan`);
+  }
+}
+
+if (
+  !/\[\s*project\.displayRole\s*,\s*project\.displayScope\s*,\s*project\.displayYear\s*,?\s*\]/m.test(
+    homeWorkListSource,
+  )
+) {
+  failures.push(
+    "[qa:audit] HomeWorkList: metadata order regression (expected role/scope/year)",
+  );
+}
+
+if (
+  !/\{\s*project\.displaySummary\s*\?\?\s*project\.subtitle\s*\?\?\s*project\.tagline\s*\}/m.test(
+    homeWorkListSource,
+  )
+) {
+  failures.push(
+    "[qa:audit] HomeWorkList: value-statement fallback regression (expected displaySummary first)",
+  );
 }
 
 if (failures.length > 0) {
