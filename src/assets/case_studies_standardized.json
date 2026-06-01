@@ -75,7 +75,7 @@
                         "src": "/projects/prolog/compare/dashboard-after.png",
                         "type": "image",
                         "alt": "ProLog dashboard hero preview",
-                        "caption": "ProLog centralizes apprenticeship progress into one calm dashboard."
+                        "caption": "Dashboard-first entry reduces cross-system status hunting by surfacing progress and next steps immediately."
                     }
                 },
                 "launch_ad": {
@@ -116,7 +116,7 @@
                         "src": "/projects/prolog/compare/dashboard-after.png",
                         "type": "image",
                         "alt": "ProLog dashboard high fidelity screen",
-                        "caption": "Research translated into a dashboard-first information hierarchy."
+                        "caption": "Research findings were translated into one hierarchy that prioritizes status checks and discrepancy actions."
                     }
                 },
                 "lofi_phase": {
@@ -134,12 +134,12 @@
                             "before": {
                                 "src": "/projects/prolog/compare/dashboard-before.png",
                                 "alt": "ProLog mid-fi dashboard screen",
-                                "caption": "Mid-fi dashboard organizes progress metrics, reminders, and suggested cards in one vertical layout."
+                                "caption": "Before: dashboard sections competed for attention, slowing status checks."
                             },
                             "after": {
                                 "src": "/projects/prolog/compare/dashboard-after.png",
                                 "alt": "ProLog hi-fi dashboard screen",
-                                "caption": "Hi-fi dashboard keeps the core structure while refining spacing, color contrast, and component polish."
+                                "caption": "After: stronger hierarchy and contrast made progress status and next actions faster to scan."
                             }
                         },
                         {
@@ -148,12 +148,12 @@
                             "before": {
                                 "src": "/projects/prolog/compare/resources-before.png",
                                 "alt": "ProLog mid-fi finance resources screen",
-                                "caption": "Mid-fi finance screen presents support information in a text-forward single-column structure."
+                                "caption": "Before: finance support appeared as dense text blocks with weak grouping."
                             },
                             "after": {
                                 "src": "/projects/prolog/compare/resources-after.png",
                                 "alt": "ProLog hi-fi school finance screen",
-                                "caption": "Hi-fi finance screen groups funding details into clearer sections with stronger visual hierarchy."
+                                "caption": "After: grouped funding sections improved scanability and reduced lookup effort."
                             }
                         },
                         {
@@ -162,12 +162,12 @@
                             "before": {
                                 "src": "/projects/prolog/compare/quiz-before.png",
                                 "alt": "ProLog mid-fi skills progress screen",
-                                "caption": "Mid-fi baseline uses compact progress modules and line-completion indicators."
+                                "caption": "Before: quiz-prep progress cues were compact and easy to miss."
                             },
                             "after": {
                                 "src": "/projects/prolog/compare/quiz-after.png",
                                 "alt": "ProLog hi-fi competency exam prep screen",
-                                "caption": "Hi-fi quiz prep introduces a dedicated study flow with expanded content depth and clearer pacing."
+                                "caption": "After: dedicated quiz-prep flow clarified pacing and made study status easier to track."
                             }
                         }
                     ],
@@ -199,12 +199,12 @@
                             "before": {
                                 "src": "/projects/prolog/compare/dashboard-before.png",
                                 "alt": "ProLog mid-fi dashboard screen",
-                                "caption": "Mid-fi dashboard establishes content order for progress, reminders, and quick-access cards."
+                                "caption": "Before: progress and reminders were present but visual priority was uneven."
                             },
                             "after": {
                                 "src": "/projects/prolog/compare/dashboard-after.png",
                                 "alt": "ProLog hi-fi dashboard screen",
-                                "caption": "Hi-fi dashboard preserves that layout intent while refining typography, spacing, and visual balance."
+                                "caption": "After: typography and spacing established clearer priority for progress checks."
                             }
                         },
                         {
@@ -213,12 +213,12 @@
                             "before": {
                                 "src": "/projects/prolog/compare/resources-before.png",
                                 "alt": "ProLog mid-fi finance resources screen",
-                                "caption": "Mid-fi resources rely on direct text blocks and minimal visual separation."
+                                "caption": "Before: resources relied on text-heavy blocks with limited section separation."
                             },
                             "after": {
                                 "src": "/projects/prolog/compare/resources-after.png",
                                 "alt": "ProLog hi-fi school finance screen",
-                                "caption": "Hi-fi resources apply stronger grouping, spacing, and scannable section hierarchy."
+                                "caption": "After: stronger grouping and spacing improved retrieval of funding details."
                             }
                         },
                         {
@@ -227,12 +227,12 @@
                             "before": {
                                 "src": "/projects/prolog/compare/quiz-before.png",
                                 "alt": "ProLog mid-fi skills progress screen",
-                                "caption": "Mid-fi progress module shows the early visual language for competency tracking elements."
+                                "caption": "Before: competency progress was visible but lacked explicit study-flow guidance."
                             },
                             "after": {
                                 "src": "/projects/prolog/compare/quiz-after.png",
                                 "alt": "ProLog hi-fi competency exam prep screen",
-                                "caption": "Hi-fi quiz prep screen introduces dedicated exam-study content and clearer progression cues."
+                                "caption": "After: exam-prep cues made competency progression and next steps more explicit."
                             }
                         }
                     ],
@@ -240,17 +240,17 @@
                         {
                             "src": "/projects/prolog/compare/dashboard-after.png",
                             "alt": "Final dashboard design",
-                            "caption": "The dashboard provides immediate progress visibility"
+                            "caption": "Dashboard view prioritizes current status, reducing time spent checking progress across systems."
                         },
                         {
                             "src": "/projects/prolog/compare/resources-after.png",
                             "alt": "Hours tracker interface",
-                            "caption": "Discrepancy detection and logging"
+                            "caption": "Discrepancy workflow helps users identify and report hour mismatches with less ambiguity."
                         },
                         {
                             "src": "/projects/prolog/compare/quiz-after.png",
                             "alt": "Quiz preparation screen",
-                            "caption": "AI-generated practice questions"
+                            "caption": "Quiz-prep screen supports exam readiness with clear competency-linked practice prompts."
                         }
                     ]
                 },
@@ -328,7 +328,7 @@
                         "src": "/projects/prolog/compare/resources-after.png",
                         "type": "image",
                         "alt": "ProLog hours tracking screen",
-                        "caption": "Validation centered on whether users felt clearer and less anxious about progress."
+                        "caption": "Validation confirmed users could verify status and act on discrepancies with less uncertainty."
                     }
                 },
                 "what_i_learned": [
@@ -456,7 +456,7 @@
                         "src": "/projects/inklink/images/Home.svg",
                         "type": "image",
                         "alt": "InkLink hero interface preview",
-                        "caption": "InkLink opens with active stories and one clear way to join."
+                        "caption": "Hero feed reduces first-action friction by surfacing active stories and one clear join path."
                     }
                 },
                 "launch_ad": {
@@ -496,7 +496,7 @@
                         "src": "/projects/inklink/images/Home.svg",
                         "type": "image",
                         "alt": "InkLink home screen concept",
-                        "caption": "Early concept for reducing entry friction with a single clear action."
+                        "caption": "Research-led concept reduced entry hesitation by emphasizing one primary contribution action."
                     }
                 },
                 "lofi_phase": {
@@ -527,7 +527,7 @@
                             "description": "Open stories that anyone can contribute to. Writers join, add a passage, and pass the story forward.",
                             "why": "Low barrier to entry. No commitment required—just jump in and write.",
                             "image": "/projects/inklink/images/Home.svg",
-                            "caption": "Feed view for browsing and joining active chains."
+                            "caption": "Feed view solves discovery friction with scannable story entries and clear join actions."
                         },
                         {
                             "id": "private_projects",
@@ -535,7 +535,7 @@
                             "description": "Invite-only spaces for friends or writing groups. Turn order is set by the creator.",
                             "why": "Some writers want collaboration without strangers. Private circles offer that control.",
                             "image": "/projects/inklink/images/Project Page (private) - Finished.svg",
-                            "caption": "Private circle dashboard with turn order and member activity."
+                            "caption": "Private-circle view clarifies turn ownership and contribution status to reduce coordination confusion."
                         },
                         {
                             "id": "timed_turns",
@@ -543,7 +543,7 @@
                             "description": "Optional time limits encourage momentum. If a turn expires, the next writer can step in.",
                             "why": "Deadlines reduce overthinking. A 24-hour window is long enough to be fair, short enough to keep stories moving.",
                             "image": "/projects/inklink/images/Editor (private) - start writing (submit disabled).svg",
-                            "caption": "Timed turn editor state with submission guardrails."
+                            "caption": "Timed editor state protects momentum with explicit turn limits and submission feedback."
                         }
                     ],
                     "prototype": {
@@ -568,7 +568,7 @@
                         "src": "/projects/inklink/images/Editor (public).svg",
                         "type": "image",
                         "alt": "InkLink editor screen",
-                        "caption": "The editor keeps participation lightweight so writers stay in flow."
+                        "caption": "Editor interaction keeps contribution lightweight, lowering hesitation before writing."
                     }
                 },
                 "validation": {
@@ -738,7 +738,7 @@
                         "src": "/projects/sidequest/hero.png",
                         "type": "image",
                         "alt": "SideQuest hero preview",
-                        "caption": "SideQuest reframes idle time as small, low-pressure adventures."
+                        "caption": "Hook screen reframes idle time into one low-pressure next action to reduce decision fatigue."
                     }
                 },
                 "launch_ad": {
@@ -777,7 +777,7 @@
                         "src": "/projects/sidequest/hifi-1.png",
                         "type": "image",
                         "alt": "SideQuest home screen with mascot",
-                        "caption": "Research findings drove a quick-start interface with minimal decisions."
+                        "caption": "Research findings drove a quick-start flow that removed high-friction setup decisions."
                     }
                 },
                 "lofi_phase": {
@@ -802,22 +802,22 @@
                         {
                             "src": "/projects/sidequest/hifi-1.png",
                             "alt": "Home screen with mascot",
-                            "caption": "The mascot welcomes users with a single clear action"
+                            "caption": "Home screen centers one quest action so users can start without browsing loops."
                         },
                         {
                             "src": "/projects/sidequest/hifi-2.png",
                             "alt": "Quest card",
-                            "caption": "Quest suggestions are simple and actionable"
+                            "caption": "Quest cards surface effort and time cues to support faster activity selection."
                         },
                         {
                             "src": "/projects/sidequest/hifi-3.png",
                             "alt": "Quest details",
-                            "caption": "Just enough information to get started"
+                            "caption": "Detail screen provides only the information needed to begin, reducing planning overhead."
                         },
                         {
                             "src": "/projects/sidequest/hifi-4.png",
                             "alt": "Completion screen",
-                            "caption": "Celebrating small wins"
+                            "caption": "Completion state reinforces progress and supports repeat engagement."
                         }
                     ],
                     "prototype": {
@@ -893,7 +893,7 @@
                         "src": "/projects/sidequest/hifi-4.png",
                         "type": "image",
                         "alt": "SideQuest completion state",
-                        "caption": "Validation measured whether the low-pressure framing increased willingness to act."
+                        "caption": "Validation confirmed simplified framing reduced hesitation before first quest selection."
                     }
                 },
                 "what_i_learned": [

@@ -29,6 +29,8 @@ Scope: `InkLink`, `SideQuest`, `ProLog` only.
 | SideQuest | 3.7 | Strong concept framing and quick-start simplification | Tradeoff depth not visible enough | Add assumption/decision chain + next-iteration test plan |
 | ProLog | 3.4 | Strong domain complexity and user need relevance | Role framing surfaced as developer-first in previews | Enforce design-first display role precedence and evidence narrative |
 
+Update (2026-06-01): Top-3 media captions and comparison narratives were refreshed for consistent decision-evidence clarity across hook, research, design response, and validation sections.
+
 ## Prioritized Backlog
 
 | Priority | Area | Gap | Implementation task | Status |
