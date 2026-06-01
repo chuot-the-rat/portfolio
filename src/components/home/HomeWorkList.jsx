@@ -4,12 +4,12 @@
  *
  * Layout philosophy:
  * - Resting state: text rows only. Index | Title + subtitle | Year.
- * - Hover: floating preview image fades in on the right (desktop only).
+ * - Hover: floating preview surface fades in on the right (desktop only).
  * - Hovered row: brightens, shifts 4px right.
  * - Siblings: dim subtly to preserve context while focusing selection.
  * - Mobile: no preview, touch goes straight to project.
  *
- * No permanent thumbnails in the grid. Image is a reward, not a fixture.
+ * No permanent thumbnails in the grid. Preview is a reward, not a fixture.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -17,6 +17,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getProjectPath, isStandaloneProject } from "../../utils/projectDataMapper";
 import { MOTION_DURATION, MOTION_EASE } from "../../utils/motion/tokens";
+import { resolvePreviewState } from "../../utils/projectPreviewModel";
 import "./HomeWorkList.css";
 
 const TABS = ["UX/UI", "Motion Design", "Graphic Design"];
@@ -101,27 +102,18 @@ export default function HomeWorkList({ projects }) {
     (p) => (CATEGORY_MAP[p.category] ?? "UX/UI") === activeTab,
   );
 
-  // Find the hovered project and resolve its best preview image
+  // Resolve hovered project preview contract with deterministic fallback order.
   const hoveredProject = filtered.find((p) => p.id === hoveredId) ?? null;
-  const previewCandidates = (() => {
-    if (!hoveredProject) return [];
-    const candidates = [
-      ...(Array.isArray(hoveredProject.previewCandidates)
-        ? hoveredProject.previewCandidates
-        : []),
-      hoveredProject.coverImage,
-      ...(hoveredProject.allImages || []).map((img) => img?.src),
-    ].filter(Boolean);
-
-    const unique = [];
-    const seen = new Set();
-    for (const src of candidates) {
-      if (!src || seen.has(src)) continue;
-      seen.add(src);
-      unique.push(src);
-    }
-    return unique;
-  })();
+  const previewState = hoveredProject
+    ? resolvePreviewState(hoveredProject, "Project preview")
+    : {
+      previewCandidates: [],
+      previewVideo: null,
+      previewAlt: "Project preview",
+      previewFit: "cover",
+      previewFocal: "center",
+    };
+  const previewCandidates = previewState.previewCandidates;
 
   useEffect(() => {
     setPreviewIndex(0);
@@ -156,7 +148,10 @@ export default function HomeWorkList({ projects }) {
   }, [hoveredId, previewMode, PREVIEW_RATIO]);
 
   const previewSrc = previewCandidates[previewIndex] ?? null;
-  const previewVideoSrc = hoveredProject?.previewVideoSrc ?? null;
+  const previewVideoSrc = previewState.previewVideo;
+  const previewAlt = previewState.previewAlt;
+  const previewFit = previewState.previewFit;
+  const previewFocal = previewState.previewFocal;
   const showPreviewVideo = Boolean(
     previewVideoSrc &&
     hoveredId &&
@@ -265,34 +260,12 @@ export default function HomeWorkList({ projects }) {
                             {project.displaySummary ?? project.subtitle ?? project.tagline}
                           </span>
                         )}
-                        <div className="hw-item-tags" aria-label="Project tags">
                         {activeMeta && (
                           <span className="hw-item-meta" aria-label="Project metadata">
                             {activeMeta}
                           </span>
                         )}
-                          {(project.taxonomyTags?.length
-                            ? project.taxonomyTags
-                            : [
-                                project.category ?? "Project",
-                              ]
-                          )
-                            .filter(Boolean)
-                            .slice(0, 2)
-                            .map((tag) => (
-                              <span key={`${project.id}-${tag}`} className="hw-item-tag">
-                                {String(tag).toLowerCase()}
-                              </span>
-                            ))}
-                        </div>
                       </div>
-
-                      {/* Year — pushed right */}
-                      {project.year && (
-                        <span className="hw-item-year" aria-hidden="true">
-                          {project.year}
-                        </span>
-                      )}
                     </Link>
                   </motion.article>
                 );
@@ -351,24 +324,27 @@ export default function HomeWorkList({ projects }) {
                     previewVideoSrc ? "hw-preview-media--has-video" : "",
                     showPreviewVideo ? "hw-preview-media--video-active" : "",
                     previewMode === "focus" ? "hw-preview-media--focus" : "",
+                    previewFit === "contain" ? "hw-preview-media--contain" : "",
                   ].filter(Boolean).join(" ")}
                   aria-label={projectTags.length > 0 ? `Preview: ${projectTags.join(", ")}` : "Project preview"}
                 >
                   {previewSrc ? (
                     <img
                       src={previewSrc}
-                      alt=""
+                      alt={previewAlt}
                       className="hw-preview-img"
                       loading="lazy"
                       decoding="async"
                       fetchPriority="low"
-                      onError={() => {
-                        if (previewIndex < previewCandidates.length - 1) {
-                          setPreviewIndex((current) => current + 1);
-                        } else {
-                          setPreviewIndex(previewCandidates.length);
-                        }
+                      style={{
+                        objectFit: previewFit,
+                        objectPosition: previewFocal,
                       }}
+                      onError={() =>
+                        setPreviewIndex((current) =>
+                          current < previewCandidates.length - 1 ? current + 1 : current,
+                        )
+                      }
                     />
                   ) : (
                     <div className="hw-preview-fallback">

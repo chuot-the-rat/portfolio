@@ -16,8 +16,8 @@
     inset: 0;
     pointer-events: none;
     background:
-        radial-gradient(78% 46% at 8% 0%, rgba(69, 129, 153, 0.08), transparent 62%),
-        radial-gradient(54% 36% at 92% 18%, rgba(41, 98, 118, 0.07), transparent 68%);
+        radial-gradient(72% 42% at 8% 0%, rgba(69, 129, 153, 0.055), transparent 64%),
+        radial-gradient(50% 30% at 92% 16%, rgba(41, 98, 118, 0.045), transparent 70%);
     z-index: 0;
 }
 
@@ -30,8 +30,8 @@
 
 .home-hero-passbook {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(336px, 27vw, 420px);
-    gap: clamp(1.25rem, 2.2vw, 2.1rem);
+    grid-template-columns: minmax(0, 1fr) clamp(300px, 24vw, 360px);
+    gap: clamp(1rem, 1.9vw, 1.7rem);
     align-items: start;
     margin-bottom: clamp(2rem, 3.6vw, 3.8rem);
     position: relative;
@@ -55,12 +55,24 @@
     align-self: start;
     min-width: 0;
     padding-top: 0;
+    opacity: 0.88;
+    transition: opacity var(--motion-dur-hover-base) var(--motion-ease-smooth);
 }
 
 .home-passbook-rail .pb-print-wrapper {
     width: 100%;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.home-passbook-rail:hover,
+.home-passbook-rail:focus-within {
+    opacity: 1;
+}
+
+.home-passbook-rail .pb-print-card,
+.home-passbook-rail .pb-dock__btn {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* ── Home hero overrides ─────────────────────────────────────────────────── */
@@ -93,7 +105,7 @@
     background-image:
         radial-gradient(circle, var(--color-border) 1px, transparent 1px);
     background-size: 28px 28px;
-    opacity: 0.14;
+    opacity: 0.08;
     pointer-events: none;
     z-index: 0;
 }
@@ -164,7 +176,7 @@
 }
 
 .home-hero-grid .hs-cta:not(.hs-cta--primary) {
-    opacity: 0.78;
+    opacity: 0.62;
 }
 
 .home-hero-grid .hs-cta:hover {
@@ -378,6 +390,7 @@
         width: 100%;
         z-index: 1;
         padding-top: 0;
+        opacity: 1;
     }
 
     .home-passbook-rail .pb-print-wrapper {

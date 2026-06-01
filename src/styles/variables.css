@@ -248,6 +248,13 @@
     --chip-bg: var(--color-bg-secondary);
     --chip-text: var(--color-text-secondary);
 
+    /* Shared preview/media contract tokens */
+    --preview-ratio-editorial: 5 / 4;
+    --preview-radius-editorial: var(--radius-xl);
+    --preview-border-editorial: color-mix(in srgb, var(--color-border) 84%, var(--color-text-tertiary));
+    --preview-shadow-editorial-rest: 0 14px 34px rgba(0, 0, 0, 0.11), 0 1px 4px rgba(0, 0, 0, 0.06);
+    --preview-shadow-editorial-motion: 0 18px 38px rgba(0, 0, 0, 0.14), 0 4px 10px rgba(0, 0, 0, 0.08);
+
     /* ─────────────────────────────────────────────────────────────────
        ANIMATION COMPONENT TOKENS
        Specific tokens for complex animations (hero section, bracket-code)
