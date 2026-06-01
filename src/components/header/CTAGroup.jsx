@@ -18,6 +18,14 @@ import {
 
 export default function CTAGroup({ ctas = [], layout = "row" }) {
   const shouldReduceMotion = useReducedMotion();
+  const ctaPriority = { primary: 0, secondary: 1, ghost: 2 };
+  const orderedCtas = ctas
+    .map((cta, index) => ({ ...cta, __index: index }))
+    .sort((a, b) => {
+      const aPriority = ctaPriority[a.variant] ?? 99;
+      const bPriority = ctaPriority[b.variant] ?? 99;
+      return aPriority - bPriority || a.__index - b.__index;
+    });
 
   const entranceProps = shouldReduceMotion ? {} : { variants: childVariants };
 
@@ -37,7 +45,7 @@ export default function CTAGroup({ ctas = [], layout = "row" }) {
       aria-label="Primary actions"
       {...entranceProps}
     >
-      {ctas.map((cta) => {
+      {orderedCtas.map((cta) => {
         // Render as <a> when href is present, otherwise <button>
         if (cta.href) {
           return (
