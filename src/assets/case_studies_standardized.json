@@ -84,7 +84,7 @@
                     "caption": "Short walkthrough of the problem, process, and final ProLog flow."
                 },
                 "problem_framing": {
-                    "content": "Apprentices in British Columbia navigate a surprisingly fragmented system. Hours are logged in one place, competencies tracked in another, and certification requirements buried in dense PDFs.\n\nFor neurotypical users, this is frustrating. For neurodivergent apprentices—who may already struggle with executive function, time blindness, or information overload—it becomes a genuine barrier to completion.\n\nThe system wasn't designed to be hostile. It just wasn't designed with these users in mind."
+                    "content": "Apprentices in British Columbia navigate a fragmented system: hours in one tool, competencies in another, and certification requirements buried in dense PDFs.\n\nBecause status checks required cross-referencing multiple sources, routine progress verification became slow and error-prone. For neurodivergent apprentices, that switching cost increased cognitive load and reduced completion confidence.\n\nThe design goal became clear: reduce cross-system hunting and make next steps visible in one place."
                 },
                 "research_process": {
                     "methods": [
@@ -120,7 +120,7 @@
                     }
                 },
                 "lofi_phase": {
-                    "content": "Early sketches were deliberately rough. The focus was not visual polish, but identifying which information mattered most and how quickly it could be understood.\n\nThe dashboard concept emerged early. A key framing question guided the exploration: if an apprentice opens the app on a break, what should be visible in the first three seconds?\n\nProgress bars, hour counts, and next-step prompts became the core. Everything else remained secondary.",
+                    "content": "Early sketches tested one question: what must an apprentice see in the first three seconds to trust their status?\n\nBecause policy-first layouts buried action details, the structure shifted to dashboard-first with progress, discrepancies, and next-step prompts at the top.\n\nLower-priority utilities stayed secondary until the core orientation flow worked reliably.",
                     "prototype": {
                         "url": "https://www.figma.com/proto/Cecvl0e5QYbiQFfLpmHEEJ/Wireframe--Old---Copy-?node-id=1157-8496&t=bsSwXyWOOZJpSjFp-1",
                         "embed_url": "https://embed.figma.com/design/Cecvl0e5QYbiQFfLpmHEEJ/Wireframe--Old---Copy-?node-id=1157-8496&embed-host=share",
@@ -185,7 +185,7 @@
                     ]
                 },
                 "hifi_phase": {
-                    "content": "The hi-fi designs led with calm. Soft colours, generous whitespace, and typography that doesn't feel clinical. Every screen answers one question without making the user ask it. The dashboard became the emotional anchor — not just a data view, but a sense of progress.",
+                    "content": "Because testing showed users needed fast orientation, the hi-fi phase prioritized calm hierarchy over decorative density. Typography, spacing, and contrast were tuned so progress, discrepancies, and next steps stayed scannable on job-site breaks.\n\nThe dashboard remained the anchor, with secondary utilities visually deprioritized to protect decision speed.",
                     "prototype": {
                         "url": "https://www.figma.com/proto/WS68LlLF4uqajPd1BcADqH/HiFi-WireFrames--Copy-?node-id=2332-2031&t=mbQTryoXFrkmicSK-1",
                         "embed_url": "https://embed.figma.com/design/WS68LlLF4uqajPd1BcADqH/HiFi-WireFrames--Copy-?node-id=2332-2031&embed-host=share",
@@ -316,7 +316,7 @@
                     }
                 },
                 "validation": {
-                    "content": "Users appreciated not having to hunt for information — it was just there. The hours tracker resonated most, addressing a previously unmet need in the most anxiety-inducing part of the process.",
+                    "content": "Validation checked whether participants could confirm status and act on discrepancies without facilitator help.\n\nBecause users quickly located hour status and repeatedly identified discrepancy tracking as the most useful flow, the dashboard-first structure and reporting path were retained.\n\nFeedback then informed copy and hierarchy refinements in final screens.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
@@ -500,7 +500,7 @@
                     }
                 },
                 "lofi_phase": {
-                    "content": "The lo-fi phase focused on one core interaction: contributing to a story. Multiple approaches were explored for showing story history, handling turn-taking, and supporting branching narratives. The visuals stayed intentionally basic so interaction logic could be tested before aesthetic polish.",
+                    "content": "Lo-fi exploration tested one core behavior: contribute without losing story context.\n\nBecause dense layouts reduced reading completion in early tests, the interaction model shifted toward clearer story structure, lighter prompts, and fewer competing actions.\n\nVisual polish was deferred until the contribution flow could be completed quickly and consistently.",
                     "images": [
                         {
                             "src": "/projects/inklink/images/Home-lofi.svg",
@@ -572,7 +572,7 @@
                     }
                 },
                 "validation": {
-                    "content": "Testers described InkLink as 'fun.' The reduced pressure was noticeable. Users felt less precious about their contributions because they knew someone else would build on them. The time limits helped keep the experience moving.",
+                    "content": "Validation focused on whether contributors could join, read context, and submit with minimal guidance.\n\nBecause participants completed the join-to-submit flow without facilitator help and reported lower hesitation with shared authorship, the simplified CTA structure and timed-turn model were retained.\n\nFinal adjustments focused on copy clarity and collaboration cues.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [
@@ -596,7 +596,7 @@
                     }
                 ],
                 "hifi_phase": {
-                    "content": "The hi-fi phase translated validated interaction patterns into a calmer, editorial interface with stronger typography, hierarchy, and whitespace. Visual emphasis stayed on reading and contribution flow, while supporting controls remained secondary.",
+                    "content": "Because testing showed reading clarity drove contribution confidence, the hi-fi phase translated validated flows into a calmer editorial system.\n\nTypography, spacing, and hierarchy emphasized story progression and next action, while secondary controls were de-emphasized.\n\nThe final visual language preserved personality without competing with writing tasks.",
                     "prototype": {
                         "url": "https://www.figma.com/proto/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=2173-14511&p=f&t=3MqWcWHBQIkqxCbQ-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3770&show-proto-sidebar=1",
                         "embed_url": "https://embed.figma.com/design/jfZBrC5vFzOiBSPUb1RHok/InkLink-Final-Mockup?node-id=0-1&embed-host=share",
@@ -747,7 +747,7 @@
                     "caption": "Slide walkthrough of the problem, process, and final SideQuest flow."
                 },
                 "problem_framing": {
-                    "content": "The core issue was framed as decision fatigue rather than lack of options. When too many choices appear at once, users often delay action and default to passive scrolling.\n\nPersona narratives were used to ground this behavior: Scout represented users with limited free time, and Goobert represented users seeking like-minded social activities.\n\nThe design direction prioritized guided momentum over broad browsing by reducing up-front decisions."
+                    "content": "The core problem was decision fatigue, not lack of options. When too many choices appeared at once, participants delayed action and defaulted to passive scrolling.\n\nBecause both persona narratives showed this hesitation pattern, the design direction prioritized guided momentum over broad browsing.\n\nUp-front decisions were reduced so users could start with one clear quest action."
                 },
                 "research_process": {
                     "methods": [
@@ -781,7 +781,7 @@
                     }
                 },
                 "lofi_phase": {
-                    "content": "Early wireframes included many controls for location, duration, cost, and category. Testing showed that this option-heavy layout increased hesitation before users selected any activity.\n\nThe flow was simplified to one dominant action, \"Get a quest,\" with secondary controls moved out of the primary path.\n\nThis phase established the interaction baseline used for later visual refinement.",
+                    "content": "Early wireframes exposed location, duration, cost, and category controls in the first step.\n\nBecause testing showed option-heavy entry screens increased hesitation before first action, the primary path was reduced to one dominant action: \"Get a quest.\"\n\nSecondary controls were moved out of the first screen to protect momentum.",
                     "prototype": {
                         "url": "https://www.figma.com/proto/8oS5TfdW5ILKt6gPnNkuBf/Low-Fid--Copy-?node-id=188-1978&starting-point-node-id=188%3A1968&t=7pBxLeH5QUNGmsEC-1",
                         "embed_url": "",
@@ -797,7 +797,7 @@
                     ]
                 },
                 "hifi_phase": {
-                    "content": "The hi-fi phase translated the simplified flow into a warmer visual system with playful language and mascot support.\n\nVisual emphasis was concentrated on quest cards and key actions, while surrounding interface chrome remained restrained.\n\nContent labels kept the \"quest\" framing to maintain a light, approachable tone for activity selection.",
+                    "content": "Because usability sessions favored fast starts over deep setup, the hi-fi phase kept interaction weight low and concentrated emphasis on quest cards and primary actions.\n\nPlayful language and mascot cues supported orientation, while surrounding interface chrome remained restrained.\n\nThis preserved a light tone without slowing first action.",
                     "images": [
                         {
                             "src": "/projects/sidequest/hifi-1.png",
@@ -877,11 +877,11 @@
                         "src": "/projects/sidequest/feature-quests.png",
                         "type": "image",
                         "alt": "SideQuest quest card feature",
-                        "caption": "Core features optimize for immediacy: pick a quest, start, and continue."
+                                "caption": "Core features prioritize immediacy: pick a quest, start, and continue."
                     }
                 },
                 "validation": {
-                    "content": "Validation focused on whether playful framing and simplified flows were understandable and motivating.\n\nSession feedback highlighted positive reactions to the \"quest\" language, mascot guidance, and low-pressure interaction style.\n\nFindings were used to refine card hierarchy, wording clarity, and feedback states.",
+                    "content": "Validation tested whether the simplified flow and quest framing helped users start activities faster.\n\nBecause participants interpreted mascot prompts as supportive and completed the two-tap path with less hesitation, the simplified hierarchy and wording were retained.\n\nFindings then informed final copy refinements and feedback-state clarity.",
                     "method": "Moderated usability testing",
                     "participant_count": null,
                     "outcomes": [

@@ -38,7 +38,7 @@ Scope: `InkLink`, `SideQuest`, `ProLog` only.
 | P0 | Card model | Mixed-role projects can surface non-design-first role | Add deterministic display-role priority and role/scope/year ordering | Complete |
 | P1 | Guardrails | No automated checks for evidence completeness and copy quality | Add audit guardrail script and wire into QA command | Complete |
 | P1 | Runbook | QA docs missing audit gate coverage | Update QA runbook with audit guardrail checks | Complete |
-| P2 | Content polish | Remaining narrative variance across older sections | Continue tightening legacy copy to evidence-first pattern | Planned |
+| P2 | Content polish | Remaining narrative variance across older sections | Continue tightening legacy copy to evidence-first pattern | Complete |
 
 ## Recruiter Scan Baseline
 
