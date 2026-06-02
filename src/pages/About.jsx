@@ -21,7 +21,7 @@ const CONTACT_ROWS = [
     },
     {
         label: "Location",
-        value: "Vancouver, BC — PST",
+        value: "Vancouver, BC (Pacific Time)",
         href: null,
     },
     {
@@ -120,10 +120,8 @@ export default function About() {
                         <p className="about-hero-descriptor">About</p>
                         <div className="about-hero-status" aria-label="Availability status">
                             <span className="about-hero-status-dot" aria-hidden="true" />
-                            <span>Available</span>
-                            <span className="about-hero-status-sep" aria-hidden="true">·</span>
-                            <span>Vancouver, BC</span>
-                            <span className="about-hero-status-sep" aria-hidden="true">·</span>
+                            <span>Available in Vancouver, BC</span>
+                            <span>Local time</span>
                             <LiveClock />
                         </div>
                         <h1 className="about-hero-headline">
@@ -254,7 +252,7 @@ export default function About() {
                                         {row.label === "Status" ? (
                                             <span className="about-contact-value about-contact-value--status">
                                                 <span className="about-status-dot" aria-hidden="true" />
-                                                Open to product design roles — full-time or contract.
+                                                Open to product design roles for full-time or contract work.
                                             </span>
                                         ) : row.href ? (
                                             <a
@@ -295,7 +293,7 @@ export default function About() {
                                     rel="noopener noreferrer"
                                     className="about-resume-btn about-resume-btn--primary"
                                 >
-                                    Open in new tab →
+                                    Open resume in new tab
                                 </a>
                                 <a
                                     href="/Le_Leana_Resume_NoNumber.pdf"
@@ -307,16 +305,16 @@ export default function About() {
                             </div>
                         </div>
                         <p className="about-resume-helper">
-                            If the embedded viewer is blocked, use{" "}
+                            If the embedded viewer is blocked,{" "}
                             <a href={RESUME_LINK} target="_blank" rel="noopener noreferrer">
-                                Open in new tab
+                                open the resume in a new tab
                             </a>
                             .
                         </p>
                         <div className="about-resume-embed">
                             <iframe
                                 src={RESUME_LINK}
-                                title="Resume — Leana Le"
+                                title="Resume | Leana Le"
                                 className="about-resume-iframe"
                                 allowFullScreen
                             />

@@ -5,6 +5,7 @@ import { CRITICAL_ROUTES, ROUTE_META } from "../src/seo/routeMeta.js";
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const MODE = process.env.QA_METADATA_MODE || "dist";
 const DIST_DIR = path.join(process.cwd(), "dist");
+const MOJIBAKE_MARKERS = ["Ã", "â€", "Â", "�"];
 const failures = [];
 
 const extract = (html, regex) => {
@@ -43,6 +44,9 @@ const getHtml = async (route) => {
   return fs.readFileSync(filePath, "utf8");
 };
 
+const findMojibakeMarker = (value = "") =>
+  MOJIBAKE_MARKERS.find((marker) => value.includes(marker)) || null;
+
 for (const route of CRITICAL_ROUTES) {
   const expected = ROUTE_META[route];
   try {
@@ -70,6 +74,18 @@ for (const route of CRITICAL_ROUTES) {
           field: name,
           actual,
           expected: expectedValue,
+        });
+      }
+    }
+
+    for (const [name, actual] of checks) {
+      const marker = findMojibakeMarker(actual);
+      if (marker) {
+        failures.push({
+          route,
+          field: `${name}:encoding`,
+          actual,
+          expected: `value without mojibake marker ${marker}`,
         });
       }
     }

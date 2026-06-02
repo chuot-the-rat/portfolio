@@ -79,11 +79,11 @@ export function usePageTitle(pageTitle, options = {}) {
         const url = `${SITE_URL}${normalizedPath}`;
 
         if (pageTitle) {
-            document.title = site ? `${BASE} · ${pageTitle}` : `${pageTitle} · ${BASE}`;
+            document.title = site ? `${BASE} | ${pageTitle}` : `${pageTitle} | ${BASE}`;
         } else if (routeMeta?.title) {
             document.title = routeMeta.title;
         } else {
-            document.title = `${BASE} · Designer`;
+            document.title = `${BASE} | Designer`;
         }
 
         const finalTitle = document.title;

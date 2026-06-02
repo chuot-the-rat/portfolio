@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { usePageTitle } from "../hooks/usePageTitle";
 import { getAllProjects } from "../utils/projectDataMapper";
 import {
     buildEnrichedProjectUpdates,
@@ -15,6 +16,12 @@ import HomeWorkList from "../components/home/HomeWorkList";
 import "./Projects.css";
 
 export default function Projects() {
+    usePageTitle(null, {
+        path: "/projects",
+        description:
+            "Selected product design case studies and visual design projects with clear role ownership, practical outcomes, and shipped work.",
+    });
+
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
 

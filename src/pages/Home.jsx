@@ -222,7 +222,7 @@ const Home = () => {
                                     </span>
                                     <span className="footer-nav-label">Email</span>
                                 </span>
-                                <span className="footer-nav-arrow">↗</span>
+                                <span className="footer-nav-arrow" aria-hidden="true">↗</span>
                             </a>
                             <a
                                 href="https://linkedin.com/in/leanale"
@@ -239,7 +239,7 @@ const Home = () => {
                                     </span>
                                     <span className="footer-nav-label">LinkedIn</span>
                                 </span>
-                                <span className="footer-nav-arrow">↗</span>
+                                <span className="footer-nav-arrow" aria-hidden="true">↗</span>
                             </a>
                             <a
                                 href="https://github.com/chuot-the-rat"
@@ -255,7 +255,7 @@ const Home = () => {
                                     </span>
                                     <span className="footer-nav-label">GitHub</span>
                                 </span>
-                                <span className="footer-nav-arrow">↗</span>
+                                <span className="footer-nav-arrow" aria-hidden="true">↗</span>
                             </a>
                             <Link to="/about#resume" className="footer-nav-link">
                                 <span className="footer-nav-label-wrap">
@@ -267,7 +267,7 @@ const Home = () => {
                                     </span>
                                     <span className="footer-nav-label">Resume</span>
                                 </span>
-                                <span className="footer-nav-arrow">→</span>
+                                <span className="footer-nav-arrow" aria-hidden="true">→</span>
                             </Link>
                         </nav>
                     </div>
@@ -277,7 +277,7 @@ const Home = () => {
                             © {new Date().getFullYear()} Leana Le
                         </p>
                         <p className="footer-tagline">
-                            Designed & developed with care · Vancouver, BC
+                            Designed and developed with care in Vancouver, BC
                         </p>
                     </div>
                 </div>
