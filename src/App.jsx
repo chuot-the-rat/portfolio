@@ -29,6 +29,7 @@ import Navigation from "./components/Navigation";
 import { PassbookProvider } from "./components/passbook/PassbookProvider";
 import PassbookDock from "./components/passbook/PassbookDock";
 import PassbookDrawer from "./components/passbook/PassbookDrawer";
+import { resume } from "./data/resume";
 
 // Pages (lazy-loaded for better first-load performance)
 const Home = lazy(() => import("./pages/Home"));
@@ -136,7 +137,7 @@ function App() {
                             <Route path="/"          element={<P><Home /></P>} />
                             <Route path="/projects"  element={<P><Projects /></P>} />
                             <Route path="/about"     element={<P><About /></P>} />
-                            <Route path="/resume"    element={<Navigate to="/about" replace />} />
+                            <Route path="/resume"    element={<Navigate to={resume.sectionPath} replace />} />
                             <Route path="/contact"   element={<Navigate to="/about" replace />} />
 
                             {/* ─── CASE STUDY PROJECTS ─── */}

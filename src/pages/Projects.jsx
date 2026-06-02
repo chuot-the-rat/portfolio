@@ -13,6 +13,7 @@ import {
 } from "../utils/projectListViewModel";
 import HeroContainer from "../components/header/HeroContainer";
 import HomeWorkList from "../components/home/HomeWorkList";
+import { resume } from "../data/resume";
 import "./Projects.css";
 
 export default function Projects() {
@@ -124,7 +125,7 @@ export default function Projects() {
                             <a href="mailto:leanale003@gmail.com" className="projects-conversion-link projects-conversion-link--primary">
                                 Email
                             </a>
-                            <Link to="/about#resume" className="projects-conversion-link">
+                            <Link to={resume.sectionPath} className="projects-conversion-link">
                                 Resume
                             </Link>
                         </div>

@@ -1,3 +1,5 @@
+import { resume } from "./resume";
+
 export const socialLinks = [
     {
         label: "Email",
@@ -15,8 +17,8 @@ export const socialLinks = [
         external: true,
     },
     {
-        label: "Resume",
-        href: "/Le_Leana_Resume_NoNumber.pdf",
-        download: true,
+        label: resume.label,
+        href: resume.publicPath,
+        download: resume.fileName,
     },
 ];

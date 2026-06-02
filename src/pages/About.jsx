@@ -4,6 +4,7 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import NameCycle from "../components/about/NameCycle";
 import SkillsSection from "../components/SkillsSection";
 import EducationSection from "../components/EducationSection";
+import { resume } from "../data/resume";
 import "./About.css";
 
 const CONTACT_ROWS = [
@@ -30,9 +31,6 @@ const CONTACT_ROWS = [
         href: null,
     },
 ];
-
-const RESUME_LINK =
-    "https://indd.adobe.com/view/8da9a590-bb12-4c21-a861-4ef0ff8106b1";
 
 const fadeUp = {
     initial: { opacity: 0, y: 16 },
@@ -288,7 +286,7 @@ export default function About() {
                             </div>
                             <div className="about-resume-actions">
                                 <a
-                                    href={RESUME_LINK}
+                                    href={resume.publicPath}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="about-resume-btn about-resume-btn--primary"
@@ -296,8 +294,8 @@ export default function About() {
                                     Open resume in new tab
                                 </a>
                                 <a
-                                    href="/Le_Leana_Resume_NoNumber.pdf"
-                                    download="Leana_Le_Resume.pdf"
+                                    href={resume.publicPath}
+                                    download={resume.fileName}
                                     className="about-resume-btn about-resume-btn--ghost"
                                 >
                                     Download PDF
@@ -306,14 +304,18 @@ export default function About() {
                         </div>
                         <p className="about-resume-helper">
                             If the embedded viewer is blocked,{" "}
-                            <a href={RESUME_LINK} target="_blank" rel="noopener noreferrer">
-                                open the resume in a new tab
+                            <a href={resume.publicPath} target="_blank" rel="noopener noreferrer">
+                                open the PDF in a new tab
+                            </a>
+                            {" "}or use the{" "}
+                            <a href={resume.externalFallbackUrl} target="_blank" rel="noopener noreferrer">
+                                external resume viewer
                             </a>
                             .
                         </p>
                         <div className="about-resume-embed">
                             <iframe
-                                src={RESUME_LINK}
+                                src={resume.publicPath}
                                 title="Resume | Leana Le"
                                 className="about-resume-iframe"
                                 allowFullScreen

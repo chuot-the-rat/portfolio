@@ -3,6 +3,8 @@ import { test, expect } from "@playwright/test";
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const MOJIBAKE_RE = /(Ã|â€|Â|�)/;
 const HOME_PRIMARY_EMAIL = ".hs-cta--primary[href='mailto:leanale003@gmail.com']";
+const RESUME_PUBLIC_PATH = "/Le_Leana-Resume.pdf";
+const RESUME_DOWNLOAD_NAME = "Leana_Le_Resume.pdf";
 const PASSBOOK_STORAGE_KEY = "leana_passbook_v1";
 
 async function expectCleanRecruiterRoute(page, path, checks) {
@@ -61,6 +63,8 @@ test.describe("Desktop QA", () => {
     await expect(page.locator(".nav-container")).toBeVisible();
     await expect(page.locator("#home-work-list")).toBeVisible();
     await expect(page.locator(HOME_PRIMARY_EMAIL)).toBeVisible();
+    await expect(page.locator(`.hs-cta--ghost[href='${RESUME_PUBLIC_PATH}']`))
+      .toHaveAttribute("download", RESUME_DOWNLOAD_NAME);
     await expect(page.locator(".footer-nav")).toBeVisible();
   });
 
@@ -239,6 +243,10 @@ test.describe("Mobile QA", () => {
     await expect(page.locator(".about-email-link")).toBeVisible();
     await expect(page.locator(".about-resume-btn--primary")).toBeVisible();
     await expect(page.locator(".about-resume-btn--ghost")).toBeVisible();
+    await expect(page.locator(".about-resume-btn--primary")).toHaveAttribute("href", RESUME_PUBLIC_PATH);
+    await expect(page.locator(".about-resume-btn--ghost")).toHaveAttribute("href", RESUME_PUBLIC_PATH);
+    await expect(page.locator(".about-resume-btn--ghost")).toHaveAttribute("download", RESUME_DOWNLOAD_NAME);
+    await expect(page.locator(".about-resume-iframe")).toHaveAttribute("src", RESUME_PUBLIC_PATH);
     await expect(page).toHaveTitle(/About/i);
   });
 });
@@ -252,7 +260,7 @@ test("contact alias redirects to about contact section surface", async ({ page }
 
 test("resume alias redirects to about resume section surface", async ({ page }) => {
   await page.goto(`${BASE_URL}/resume`, { waitUntil: "domcontentloaded" });
-  await expect(page).toHaveURL(/\/about$/);
+  await expect(page).toHaveURL(/\/about#resume$/);
   await expect(page.locator("#about-resume, #resume.about-resume")).toBeVisible();
   await expect(page.locator(".about-resume-btn--primary")).toBeVisible();
 });

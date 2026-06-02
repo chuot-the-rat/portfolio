@@ -17,6 +17,7 @@ import PassbookPrintCard from "../components/passbook/PassbookPrintCard";
 import PassbookDock from "../components/passbook/PassbookDock";
 import { usePassbook } from "../components/passbook/PassbookProvider";
 import { homeHeroConfig } from "../data/header/headerConfig";
+import { resume } from "../data/resume";
 import "./Home.css";
 import "../components/SectionLayout.css";
 
@@ -257,7 +258,7 @@ const Home = () => {
                                 </span>
                                 <span className="footer-nav-arrow" aria-hidden="true">↗</span>
                             </a>
-                            <Link to="/about#resume" className="footer-nav-link">
+                            <Link to={resume.sectionPath} className="footer-nav-link">
                                 <span className="footer-nav-label-wrap">
                                     <span className="footer-nav-icon" aria-hidden="true">
                                         <svg viewBox="0 0 24 24" focusable="false">

@@ -10,6 +10,8 @@
  * - To add a new page header → add a named export following the same shape
  */
 
+import { resumeCta } from "../resume";
+
 // ── Home page hero ───────────────────────────────────────────────────────────
 export const homeHeroConfig = {
   // HeroContainer layout preset
@@ -71,10 +73,7 @@ export const homeHeroConfig = {
       variant: "primary",
     },
     {
-      label: "Resume",
-      href: "/Le_Leana_Resume_NoNumber.pdf",
-      variant: "ghost",
-      download: "Leana_Le_Resume.pdf",
+      ...resumeCta,
     },
   ],
   ctaLayout: "row", // "row" | "stack"
