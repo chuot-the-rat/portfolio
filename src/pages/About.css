@@ -9,8 +9,10 @@
     min-height: 100vh;
     position: relative;
     overflow: clip;
-    --about-section-space: clamp(2.6rem, 5.2vw, 4.2rem);
-    --about-subsection-space: clamp(2rem, 4.2vw, 3.2rem);
+    --about-section-space: clamp(2.35rem, 4.7vw, 3.85rem);
+    --about-subsection-space: clamp(1.8rem, 3.5vw, 2.7rem);
+    --about-divider-color: color-mix(in srgb, var(--color-border) 82%, transparent);
+    --about-surface-soft: color-mix(in srgb, var(--color-bg-secondary) 60%, transparent);
 }
 
 .about::before {
@@ -38,14 +40,14 @@
     display: flex;
     flex-wrap: nowrap;
     gap: var(--space-2);
-    padding: var(--space-3) 0 var(--space-4);
-    margin-top: var(--space-3);
+    padding: var(--space-2) 0 var(--space-3);
+    margin-top: var(--space-2);
     overflow-x: auto;
     scrollbar-width: none;
     background: linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--color-bg) 92%, transparent) 0%,
-        color-mix(in srgb, var(--color-bg) 86%, transparent) 64%,
+        color-mix(in srgb, var(--color-bg) 94%, transparent) 0%,
+        color-mix(in srgb, var(--color-bg) 88%, transparent) 54%,
         transparent 100%
     );
 }
@@ -59,23 +61,25 @@
     font-size: 10px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--color-text-secondary) 94%, var(--color-text));
+    color: color-mix(in srgb, var(--color-text-secondary) 88%, var(--color-text));
     text-decoration: none;
     white-space: nowrap;
-    border: 1px solid color-mix(in srgb, var(--color-border) 90%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
     border-radius: var(--radius-full);
-    padding: 8px 12px;
+    padding: 7px 12px;
     line-height: 1;
     transition:
         color var(--motion-dur-hover-fast) var(--motion-ease-smooth),
         border-color var(--motion-dur-hover-fast) var(--motion-ease-smooth),
-        background var(--motion-dur-hover-fast) var(--motion-ease-smooth);
+        background var(--motion-dur-hover-fast) var(--motion-ease-smooth),
+        transform var(--motion-dur-hover-fast) var(--motion-ease-smooth);
 }
 
 .about-anchor-link:hover {
     color: var(--color-text);
-    border-color: color-mix(in srgb, var(--color-text-secondary) 35%, var(--color-border));
-    background: color-mix(in srgb, var(--color-bg-secondary) 60%, transparent);
+    border-color: color-mix(in srgb, var(--color-text-secondary) 28%, var(--color-border));
+    background: color-mix(in srgb, var(--color-bg-secondary) 48%, transparent);
+    transform: translateY(-1px);
 }
 
 .about-anchor-link:focus-visible {
@@ -100,7 +104,7 @@
 
 .about-hero {
     padding-top: clamp(2.2rem, 4.5vh, 3.5rem);
-    padding-bottom: clamp(1.35rem, 2.9vh, 2.2rem);
+    padding-bottom: clamp(1rem, 2.4vh, 1.7rem);
     min-height: 22vh;
     display: flex;
     flex-direction: column;
@@ -217,16 +221,16 @@
    ─────────────────────────────────────────────────────────────────────────── */
 
 .about-body {
-    margin-top: var(--space-5);
-    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-4);
+    border-top: 1px solid var(--about-divider-color);
 }
 
 .about-row {
     display: grid;
     grid-template-columns: var(--layout-label-col) 1fr;
     gap: var(--space-12);
-    padding: clamp(2rem, 3.8vw, 2.7rem) 0;
-    border-bottom: 1px solid var(--color-border);
+    padding: clamp(1.85rem, 3.3vw, 2.45rem) 0;
+    border-bottom: 1px solid var(--about-divider-color);
 }
 
 .about-row-label {
@@ -286,11 +290,11 @@
 .about-connect {
     margin-top: var(--about-section-space);
     padding-top: var(--about-subsection-space);
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--about-divider-color);
 }
 
 .about-connect-heading-row {
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .about-connect-heading {
@@ -305,11 +309,17 @@
 
 /* Primary email CTA */
 .about-email-cta {
-    padding: clamp(1rem, 1.9vw, 1.45rem);
-    border: 1px solid color-mix(in srgb, var(--color-text) 14%, var(--color-border));
+    padding: clamp(1rem, 1.9vw, 1.35rem);
+    border: 1px solid color-mix(in srgb, var(--color-text) 12%, var(--color-border));
     border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--color-bg-secondary) 82%, transparent);
-    margin-bottom: var(--space-4);
+    background:
+        linear-gradient(
+            180deg,
+            color-mix(in srgb, var(--color-bg-secondary) 78%, transparent),
+            color-mix(in srgb, var(--color-bg-secondary) 62%, transparent)
+        );
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 5%, transparent);
+    margin-bottom: var(--space-5);
 }
 
 .about-email-link {
@@ -359,7 +369,7 @@
 }
 
 .about-email-note {
-    margin: var(--space-3) 0 0;
+    margin: var(--space-2) 0 0;
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     letter-spacing: var(--letter-spacing-label);
@@ -371,11 +381,11 @@
 /* Secondary contact rows */
 .about-contact-rows {
     transition: color 0.2s ease;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--about-divider-color);
 }
 
 .about-contact-rows:hover .about-contact-row {
-    opacity: 0.8;
+    opacity: 0.76;
 }
 
 .about-contact-rows:hover .about-contact-row:hover {
@@ -386,9 +396,22 @@
     display: grid;
     grid-template-columns: var(--layout-label-col) 1fr;
     gap: var(--space-12);
-    padding: var(--space-7) 0;
-    border-bottom: 1px solid var(--color-border);
-    transition: opacity 0.2s ease;
+    padding: clamp(1.15rem, 2vw, 1.35rem) 0;
+    border-bottom: 1px solid var(--about-divider-color);
+    transition:
+        opacity 0.2s ease,
+        border-color var(--dur-ui) var(--ease-out-premium),
+        background-color var(--dur-ui) var(--ease-out-premium);
+}
+
+.about-contact-row:hover,
+.about-contact-row:focus-within {
+    border-color: color-mix(in srgb, var(--color-text-secondary) 16%, var(--about-divider-color));
+    background: linear-gradient(
+        90deg,
+        var(--about-surface-soft) 0%,
+        transparent 72%
+    );
 }
 
 .about-contact-row-label {
@@ -480,11 +503,11 @@
 .about-work {
     margin-top: var(--about-section-space);
     padding-top: var(--about-subsection-space);
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--about-divider-color);
 }
 
 .about-work-header {
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .about-work-heading {
@@ -506,7 +529,7 @@
 }
 
 .about-work-timeline {
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--about-divider-color);
 }
 
 .about-work-row {
@@ -514,16 +537,22 @@
     grid-template-columns: 72px minmax(0, 1fr);
     gap: var(--space-5);
     align-items: start;
-    padding: clamp(1.05rem, 1.9vw, 1.35rem) 0;
-    border-bottom: 1px solid var(--color-border);
+    padding: clamp(1.05rem, 1.8vw, 1.3rem) 0;
+    border-bottom: 1px solid var(--about-divider-color);
     transition:
         border-color var(--dur-ui) var(--ease-out-premium),
-        background-color var(--dur-ui) var(--ease-out-premium);
+        background-color var(--dur-ui) var(--ease-out-premium),
+        transform var(--dur-ui) var(--ease-out-premium);
 }
 
 .about-work-row:hover {
-    border-color: color-mix(in srgb, var(--color-accent-vivid) 18%, var(--color-border));
-    background: color-mix(in srgb, var(--color-bg-secondary) 32%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent-vivid) 14%, var(--about-divider-color));
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-bg-secondary) 36%, transparent) 0%,
+        transparent 70%
+    );
+    transform: translateX(1px);
 }
 
 .about-work-step {
@@ -564,7 +593,7 @@
     margin-top: var(--about-section-space);
     padding-top: var(--about-subsection-space);
     padding-bottom: clamp(3rem, 6vw, 5rem);
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--about-divider-color);
 }
 
 .about-resume-header {
@@ -572,7 +601,7 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--space-8);
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-8);
     flex-wrap: wrap;
 }
 
@@ -591,6 +620,7 @@
     gap: var(--space-3);
     flex-shrink: 0;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .about-resume-btn {
@@ -604,6 +634,8 @@
     transition:
         opacity var(--dur-ui) var(--ease-out-premium),
         color var(--dur-ui) var(--ease-out-premium),
+        background-color var(--dur-ui) var(--ease-out-premium),
+        border-color var(--dur-ui) var(--ease-out-premium),
         box-shadow var(--dur-ui) var(--ease-out-premium),
         transform var(--dur-ui) var(--ease-out-premium);
     white-space: nowrap;
@@ -615,7 +647,8 @@
 }
 
 .about-resume-btn--primary:hover {
-    opacity: 0.82;
+    opacity: 1;
+    background: color-mix(in srgb, var(--color-text) 88%, #000);
     transform: translateY(-1px);
 }
 
@@ -627,7 +660,8 @@
 
 .about-resume-btn--ghost:hover {
     color: var(--color-text);
-    box-shadow: inset 0 0 0 1px var(--color-text);
+    background: color-mix(in srgb, var(--color-bg-secondary) 52%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-text) 68%, var(--color-border));
     transform: translateY(-1px);
 }
 
@@ -643,12 +677,13 @@
 .about-resume-embed {
     border-radius: var(--radius-xl);
     overflow: hidden;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--about-divider-color);
     background: var(--color-bg-secondary);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 5%, transparent);
 }
 
 .about-resume-helper {
-    margin: calc(var(--space-4) * -1) 0 var(--space-6);
+    margin: calc(var(--space-3) * -1) 0 var(--space-5);
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     letter-spacing: 0.04em;
@@ -679,7 +714,7 @@
     .about-anchor-nav {
         position: static;
         top: auto;
-        padding-bottom: var(--space-3);
+        padding-bottom: var(--space-2);
         margin-top: var(--space-2);
         background: none;
     }
@@ -746,13 +781,13 @@
     .about-row {
         grid-template-columns: 1fr;
         gap: var(--space-4);
-        padding: var(--space-8) 0;
+        padding: var(--space-7) 0;
     }
 
     .about-contact-row {
         grid-template-columns: 1fr;
         gap: var(--space-2);
-        padding: var(--space-6) 0;
+        padding: var(--space-5) 0;
     }
 
     .about-email-link {
@@ -804,6 +839,8 @@
 
     .about-email-link:hover,
     .about-contact-link:hover,
+    .about-anchor-link:hover,
+    .about-work-row:hover,
     .about-resume-btn--primary:hover,
     .about-resume-btn--ghost:hover {
         transform: none !important;

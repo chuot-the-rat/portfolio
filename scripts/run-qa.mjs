@@ -223,6 +223,10 @@ try {
     QA_REQUIRE_SERVER: "1",
     QA_START_PREVIEW: "0",
   });
+  await run("node", ["scripts/qa-sitemap-inventory.mjs"], {
+    ...process.env,
+    BASE_URL,
+  });
   await run("node", ["scripts/qa-metadata.mjs"], {
     ...process.env,
     BASE_URL,

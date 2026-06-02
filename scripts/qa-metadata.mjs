@@ -55,16 +55,20 @@ for (const route of CRITICAL_ROUTES) {
     const description = extract(html, /<meta\s+name="description"\s+content="([^"]*)"/i);
     const canonical = extract(html, /<link\s+rel="canonical"\s+href="([^"]*)"/i);
     const ogTitle = extract(html, /<meta\s+property="og:title"\s+content="([^"]*)"/i);
+    const ogDescription = extract(html, /<meta\s+property="og:description"\s+content="([^"]*)"/i);
     const ogUrl = extract(html, /<meta\s+property="og:url"\s+content="([^"]*)"/i);
     const twitterTitle = extract(html, /<meta\s+name="twitter:title"\s+content="([^"]*)"/i);
+    const twitterDescription = extract(html, /<meta\s+name="twitter:description"\s+content="([^"]*)"/i);
 
     const checks = [
       ["title", title, expected.title],
       ["description", description, expected.description],
       ["canonical", canonical, expected.canonical],
       ["og:title", ogTitle, expected.ogTitle],
+      ["og:description", ogDescription, expected.ogDescription],
       ["og:url", ogUrl, expected.ogUrl],
       ["twitter:title", twitterTitle, expected.twitterTitle],
+      ["twitter:description", twitterDescription, expected.twitterDescription],
     ];
 
     for (const [name, actual, expectedValue] of checks) {

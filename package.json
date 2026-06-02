@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "qa:lock": "node scripts/qa-lock-debug.mjs",
     "qa:routes": "node scripts/qa-routes.mjs",
+    "qa:sitemap": "node scripts/qa-sitemap-inventory.mjs",
     "qa:metadata": "node scripts/qa-metadata.mjs",
     "qa:media": "node scripts/qa-media-scan.mjs",
     "qa:audit": "node scripts/qa-audit-guardrails.mjs",

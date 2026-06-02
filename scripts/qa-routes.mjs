@@ -1,22 +1,12 @@
 import { spawn } from "node:child_process";
+import { INDEXED_ROUTE_PATHS } from "../src/seo/routeMeta.js";
 
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const REQUIRE_SERVER = process.env.QA_REQUIRE_SERVER === "1";
 const START_PREVIEW = process.env.QA_START_PREVIEW !== "0";
 const PREVIEW_HOST = process.env.QA_PREVIEW_HOST || "127.0.0.1";
 const PREVIEW_PORT = process.env.QA_PREVIEW_PORT || "4173";
-const ROUTES = [
-  "/",
-  "/about",
-  "/case-studies/inklink",
-  "/case-studies/prolog",
-  "/case-studies/sidequest",
-  "/projects/inklink",
-  "/projects/prolog",
-  "/projects/sidequest",
-  "/design/fizzu-soda",
-  "/design/sap",
-];
+const ROUTES = INDEXED_ROUTE_PATHS;
 
 const BAD_MARKERS = [
   "Page Not Found",

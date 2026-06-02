@@ -1,10 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
-import { CRITICAL_ROUTES, ROUTE_META } from "../src/seo/routeMeta.js";
+import { CRITICAL_ROUTES, ROUTE_META, INDEXED_ROUTE_ENTRIES } from "../src/seo/routeMeta.js";
 
 const root = process.cwd();
 const distDir = path.join(root, "dist");
 const baseHtmlPath = path.join(distDir, "index.html");
+const publicSitemapPath = path.join(root, "public", "sitemap.xml");
+const distSitemapPath = path.join(distDir, "sitemap.xml");
 
 const fail = (msg) => {
   console.error(`[prerender] ${msg}`);
@@ -44,6 +46,11 @@ const injectRouteMeta = (html, meta) => {
   );
   out = upsertMeta(
     out,
+    /<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/i,
+    `<meta property="og:description" content="${meta.ogDescription}">`,
+  );
+  out = upsertMeta(
+    out,
     /<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/i,
     `<meta property="og:url" content="${meta.ogUrl}">`,
   );
@@ -52,7 +59,30 @@ const injectRouteMeta = (html, meta) => {
     /<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/i,
     `<meta name="twitter:title" content="${meta.twitterTitle}">`,
   );
+  out = upsertMeta(
+    out,
+    /<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/i,
+    `<meta name="twitter:description" content="${meta.twitterDescription}">`,
+  );
   return out;
+};
+
+const buildSitemapXml = (entries) => {
+  const lines = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ];
+
+  for (const entry of entries) {
+    lines.push("  <url>");
+    lines.push(`    <loc>${entry.canonical}</loc>`);
+    lines.push(`    <changefreq>${entry.sitemapChangefreq}</changefreq>`);
+    lines.push(`    <priority>${entry.sitemapPriority.toFixed(1)}</priority>`);
+    lines.push("  </url>");
+  }
+
+  lines.push("</urlset>", "");
+  return lines.join("\n");
 };
 
 const writeRouteFile = (route, html) => {
@@ -75,5 +105,9 @@ if (ROUTE_META["/"]) {
   const rootHtml = injectRouteMeta(baseHtml, ROUTE_META["/"]);
   fs.writeFileSync(baseHtmlPath, rootHtml, "utf8");
 }
+
+const sitemapXml = buildSitemapXml(INDEXED_ROUTE_ENTRIES);
+fs.writeFileSync(publicSitemapPath, sitemapXml, "utf8");
+fs.writeFileSync(distSitemapPath, sitemapXml, "utf8");
 
 console.log(`[prerender] Wrote prerendered HTML for ${CRITICAL_ROUTES.length} routes.`);

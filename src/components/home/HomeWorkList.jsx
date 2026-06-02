@@ -14,7 +14,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getProjectPath, isStandaloneProject } from "../../utils/projectDataMapper";
 import { MOTION_DURATION, MOTION_EASE } from "../../utils/motion/tokens";
 import { resolvePreviewState } from "../../utils/projectPreviewModel";
@@ -34,6 +34,7 @@ const CATEGORY_MAP = {
 };
 
 export default function HomeWorkList({ projects }) {
+  const { pathname } = useLocation();
   const shouldReduceMotion = useReducedMotion();
   const [activeTab, setActiveTab]   = useState("UX/UI");
   const [hoveredId, setHoveredId]   = useState(null);
@@ -159,9 +160,13 @@ export default function HomeWorkList({ projects }) {
     previewMode === "mouse",
   );
   const projectTags = (hoveredProject?.taxonomyTags ?? []).slice(0, 2);
+  const useProjectsFocusPolish = pathname === "/projects";
 
   return (
-    <section className="hw" aria-label="Selected work">
+    <section
+      className={`hw${useProjectsFocusPolish ? " hw--projects-focus" : ""}`}
+      aria-label="Selected work"
+    >
       {/* ── Tab row ── */}
       <div className="hw-tabs" role="tablist" aria-label="Work categories">
         {TABS.map((tab) => (
