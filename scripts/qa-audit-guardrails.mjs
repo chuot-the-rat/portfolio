@@ -91,7 +91,13 @@ const dataPath = path.join(
   "assets",
   "case_studies_standardized.json",
 );
+const appPath = path.join(process.cwd(), "src", "App.jsx");
+const contactPagePath = path.join(process.cwd(), "src", "pages", "Contact.jsx");
+const contactCssPath = path.join(process.cwd(), "src", "pages", "Contact.css");
+const resumePagePath = path.join(process.cwd(), "src", "pages", "Resume.jsx");
+const resumeCssPath = path.join(process.cwd(), "src", "pages", "Resume.css");
 const caseStudiesData = JSON.parse(fs.readFileSync(dataPath, "utf8"));
+const appSource = fs.readFileSync(appPath, "utf8");
 const allCaseStudies = Array.isArray(caseStudiesData?.case_studies)
   ? caseStudiesData.case_studies
   : [];
@@ -272,6 +278,38 @@ if (
 ) {
   failures.push(
     "[qa:audit] HomeWorkList: value-statement fallback regression (expected displaySummary first)",
+  );
+}
+
+if (
+  !/<Route\s+path="\/contact"\s+element={<Navigate to="\/about" replace \/>}\s*\/>/m.test(
+    appSource,
+  )
+) {
+  failures.push(
+    "[qa:audit] App routes: expected /contact to remain a redirect to /about",
+  );
+}
+
+if (fs.existsSync(contactPagePath) || fs.existsSync(contactCssPath)) {
+  failures.push(
+    "[qa:audit] Dead contact page regression: standalone Contact page files should not exist while /contact is a redirect",
+  );
+}
+
+if (
+  !/<Route\s+path="\/resume"\s+element={<Navigate to="\/about" replace \/>}\s*\/>/m.test(
+    appSource,
+  )
+) {
+  failures.push(
+    "[qa:audit] App routes: expected /resume to remain a redirect to /about",
+  );
+}
+
+if (fs.existsSync(resumePagePath) || fs.existsSync(resumeCssPath)) {
+  failures.push(
+    "[qa:audit] Dead resume page regression: standalone Resume page files should not exist while /resume is a redirect",
   );
 }
 

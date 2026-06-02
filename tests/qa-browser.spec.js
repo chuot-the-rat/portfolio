@@ -3,6 +3,7 @@ import { test, expect } from "@playwright/test";
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const MOJIBAKE_RE = /(Ã|â€|Â|�)/;
 const HOME_PRIMARY_EMAIL = ".hs-cta--primary[href='mailto:leanale003@gmail.com']";
+const PASSBOOK_STORAGE_KEY = "leana_passbook_v1";
 
 async function expectCleanRecruiterRoute(page, path, checks) {
   await page.goto(`${BASE_URL}${path}`, { waitUntil: "domcontentloaded" });
@@ -30,6 +31,26 @@ async function expectCleanRecruiterRoute(page, path, checks) {
 
   const bodyText = await page.locator("body").innerText();
   expect(bodyText).not.toMatch(MOJIBAKE_RE);
+}
+
+async function resetPassbookState(page) {
+  await page.addInitScript((storageKey) => {
+    if (window.sessionStorage.getItem("__passbook_reset_done")) return;
+    window.localStorage.removeItem(storageKey);
+    window.sessionStorage.removeItem("pb_anim_done");
+    window.sessionStorage.setItem("__passbook_reset_done", "1");
+  }, PASSBOOK_STORAGE_KEY);
+}
+
+async function tabToLocator(page, locator, maxTabs = 24) {
+  for (let index = 0; index < maxTabs; index += 1) {
+    await page.keyboard.press("Tab");
+    const isFocused = await locator.evaluate(
+      (element) => element === document.activeElement,
+    ).catch(() => false);
+    if (isFocused) return true;
+  }
+  return false;
 }
 
 test.describe("Desktop QA", () => {
@@ -61,6 +82,55 @@ test.describe("Desktop QA", () => {
     expect(focused.length).toBeGreaterThan(0);
   });
 
+  test("theme toggle is keyboard reachable and persists dark mode", async ({ page }) => {
+    await page.addInitScript(() => {
+      if (!window.sessionStorage.getItem("__theme_reset_done")) {
+        window.localStorage.removeItem("theme");
+        window.sessionStorage.setItem("__theme_reset_done", "1");
+      }
+    });
+    await page.goto(`${BASE_URL}/`, { waitUntil: "domcontentloaded" });
+
+    const themeToggle = page.locator(".nav-theme-btn");
+    await expect(themeToggle).toBeVisible();
+    await expect(themeToggle).toHaveAccessibleName(/switch to dark mode/i);
+    await expect(themeToggle).toHaveAttribute("aria-pressed", "false");
+    await expect.poll(
+      async () => page.evaluate(() => document.documentElement.getAttribute("data-theme")),
+    ).toBe("light");
+
+    let reachedByKeyboard = false;
+    for (let index = 0; index < 5; index += 1) {
+      await page.keyboard.press("Tab");
+      const isFocused = await themeToggle.evaluate(
+        (element) => element === document.activeElement,
+      );
+      if (isFocused) {
+        reachedByKeyboard = true;
+        break;
+      }
+    }
+    expect(reachedByKeyboard).toBe(true);
+
+    await page.keyboard.press("Space");
+    await expect(themeToggle).toHaveAttribute("aria-pressed", "true");
+    await expect(themeToggle).toHaveAccessibleName(/switch to light mode/i);
+    await expect.poll(
+      async () => page.evaluate(() => document.documentElement.getAttribute("data-theme")),
+    ).toBe("dark");
+    await expect.poll(
+      async () => page.evaluate(() => window.localStorage.getItem("theme")),
+    ).toBe("dark");
+
+    await page.reload({ waitUntil: "domcontentloaded" });
+    const persistedToggle = page.locator(".nav-theme-btn");
+    await expect(persistedToggle).toHaveAccessibleName(/switch to light mode/i);
+    await expect(persistedToggle).toHaveAttribute("aria-pressed", "true");
+    await expect.poll(
+      async () => page.evaluate(() => document.documentElement.getAttribute("data-theme")),
+    ).toBe("dark");
+  });
+
   test("recruiter-facing routes show clean copy", async ({ page }) => {
     await expectCleanRecruiterRoute(page, "/", [
       { type: "locator", selector: HOME_PRIMARY_EMAIL },
@@ -76,6 +146,80 @@ test.describe("Desktop QA", () => {
       { selector: ".projects-conversion-text", text: "Hiring for product design?" },
       { type: "role", role: "link", name: /^Resume$/i },
     ]);
+  });
+
+  test("passbook issuance rail parks on home and opens the drawer", async ({ page }) => {
+    await resetPassbookState(page);
+    await page.goto(`${BASE_URL}/`, { waitUntil: "domcontentloaded" });
+
+    const printCard = page.locator(".pb-print-card");
+    const embeddedDockButton = page.locator(".pb-peek-tab--embedded .pb-peek-tab__btn");
+
+    await expect(printCard).toBeVisible();
+    await expect(printCard).toContainText("Press to add passbook");
+    await expect(printCard).toHaveAccessibleName(/printed pass ready\. press to add to rail\./i);
+    await expect(embeddedDockButton).toHaveCount(0);
+
+    const printCardReachedByKeyboard = await tabToLocator(page, printCard, 12);
+    expect(printCardReachedByKeyboard).toBe(true);
+
+    await page.keyboard.press("Space");
+
+    await expect(embeddedDockButton).toBeVisible();
+    await expect.poll(async () => page.locator(".pb-print-card").count()).toBe(0);
+    await expect(embeddedDockButton).toHaveAccessibleName(/open archive passbook/i);
+    await expect(embeddedDockButton).toContainText("0/5");
+
+    await embeddedDockButton.focus();
+    await page.keyboard.press("Enter");
+
+    const drawer = page.getByRole("dialog", { name: /project passbook/i });
+    await expect(drawer).toBeVisible();
+    await expect(page.getByRole("button", { name: /close passbook/i })).toBeVisible();
+    await expect(page.locator(".pb-drawer__progress-count")).toContainText("0 / 5");
+  });
+
+  test("passbook checkpoint stamping persists on flagship case studies", async ({ page }) => {
+    await resetPassbookState(page);
+    await page.goto(`${BASE_URL}/`, { waitUntil: "domcontentloaded" });
+    await page.locator(".pb-print-card").click();
+    await expect(page.locator(".pb-peek-tab--embedded .pb-peek-tab__btn")).toBeVisible();
+
+    await page.goto(`${BASE_URL}/case-studies/inklink`, { waitUntil: "domcontentloaded" });
+
+    const checkpointAction = page.locator(".pb-checkpoint__action");
+    const stampedControl = page.locator(".pb-checkpoint__stamped");
+
+    await expect(checkpointAction).toBeVisible();
+    await expect(checkpointAction).toHaveAccessibleName(/collect stamp: seal registered/i);
+
+    const checkpointReachedByKeyboard = await tabToLocator(page, checkpointAction, 120);
+    expect(checkpointReachedByKeyboard).toBe(true);
+
+    await page.keyboard.press("Enter");
+
+    await expect(stampedControl).toBeVisible();
+    await expect(stampedControl).toHaveAccessibleName(/stamped.*open passbook/i);
+    await expect(checkpointAction).toHaveCount(0);
+
+    await stampedControl.focus();
+    await page.keyboard.press("Space");
+
+    const drawer = page.getByRole("dialog", { name: /project passbook/i });
+    await expect(drawer).toBeVisible();
+    await expect(page.locator(".pb-drawer__progress-count")).toContainText("1 / 5");
+    await expect(page.locator(".pb-route-row--stamped .pb-route-title")).toContainText("InkLink");
+
+    const storedPassbook = await page.evaluate((storageKey) => {
+      return JSON.parse(window.localStorage.getItem(storageKey) || "null");
+    }, PASSBOOK_STORAGE_KEY);
+    expect(storedPassbook?.parked).toBe(true);
+    expect(storedPassbook?.stamps?.inklink?.stamped).toBe(true);
+
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(page).toHaveURL(/\/case-studies\/inklink$/);
+    await expect(stampedControl).toBeVisible();
+    await expect(checkpointAction).toHaveCount(0);
   });
 });
 
@@ -97,6 +241,20 @@ test.describe("Mobile QA", () => {
     await expect(page.locator(".about-resume-btn--ghost")).toBeVisible();
     await expect(page).toHaveTitle(/About/i);
   });
+});
+
+test("contact alias redirects to about contact section surface", async ({ page }) => {
+  await page.goto(`${BASE_URL}/contact`, { waitUntil: "domcontentloaded" });
+  await expect(page).toHaveURL(/\/about$/);
+  await expect(page.locator(".about-connect")).toBeVisible();
+  await expect(page.locator(".about-email-link")).toBeVisible();
+});
+
+test("resume alias redirects to about resume section surface", async ({ page }) => {
+  await page.goto(`${BASE_URL}/resume`, { waitUntil: "domcontentloaded" });
+  await expect(page).toHaveURL(/\/about$/);
+  await expect(page.locator("#about-resume, #resume.about-resume")).toBeVisible();
+  await expect(page.locator(".about-resume-btn--primary")).toBeVisible();
 });
 
 test("reduced-motion mode keeps core content available", async ({ page }) => {

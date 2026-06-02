@@ -46,29 +46,31 @@ export function PassbookProvider({ children }) {
         () => !sessionStorage.getItem("pb_anim_done"),
     );
 
+    const commitPassbook = useCallback((updater) => {
+        setPassbook((prev) => {
+            const next = updater(prev);
+            savePassbook(next);
+            return next;
+        });
+    }, []);
+
     // Issue passbook on first load
     useEffect(() => {
         if (!passbook.issued) {
-            setPassbook((prev) => issuePassbook(prev));
+            commitPassbook((prev) => issuePassbook(prev));
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    // Persist every time state changes
-    useEffect(() => {
-        savePassbook(passbook);
-    }, [passbook]);
+    }, [commitPassbook, passbook.issued]);
 
     const stamp = useCallback((projectId) => {
-        setPassbook((prev) => addStamp(prev, projectId));
-    }, []);
+        commitPassbook((prev) => addStamp(prev, projectId));
+    }, [commitPassbook]);
 
     const parkPassbook = useCallback(() => {
-        setPassbook((prev) => {
+        commitPassbook((prev) => {
             if (prev.parked) return prev;
             return { ...prev, parked: true };
         });
-    }, []);
+    }, [commitPassbook]);
 
     const isStamped = useCallback(
         (projectId) => Boolean(passbook.stamps[projectId]?.stamped),

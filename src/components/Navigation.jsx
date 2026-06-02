@@ -8,12 +8,12 @@ export default function Navigation() {
     const location = useLocation();
     const [scrolled, setScrolled] = useState(false);
 
-    // Dark mode — reads from localStorage, falls back to system preference
+    // Theme — reads from localStorage, otherwise defaults to light mode
     const [isDark, setIsDark] = useState(() => {
         if (typeof window === "undefined") return false;
         const stored = localStorage.getItem("theme");
         if (stored) return stored === "dark";
-        return window.matchMedia("(prefers-color-scheme: dark)").matches;
+        return false;
     });
 
     // Apply data-theme to <html> and persist whenever it changes
@@ -60,6 +60,7 @@ export default function Navigation() {
                 <button
                     className="nav-theme-btn"
                     onClick={() => setIsDark((d) => !d)}
+                    aria-pressed={isDark ? "true" : "false"}
                     aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
                     title={isDark ? "Light mode" : "Dark mode"}
                 >

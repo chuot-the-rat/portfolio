@@ -12,8 +12,9 @@
  * - /projects: Projects list (shows all case studies + standalone)
  * - /case-studies/:id: Individual case study detail page
  * - /design/:slug: Standalone design projects (each has own data.json)
- * - /about: About page
- * - /resume: Resume page with embedded Adobe InDesign
+ * - /about: About page (includes contact + resume sections)
+ * - /resume: Legacy alias redirect to /about resume section
+ * - /contact: Legacy alias redirect to /about
  * - *: 404 catch-all for unknown routes
  *
  * Project types tracked here:
@@ -33,7 +34,6 @@ import PassbookDrawer from "./components/passbook/PassbookDrawer";
 const Home = lazy(() => import("./pages/Home"));
 const Projects = lazy(() => import("./pages/Projects"));
 const About = lazy(() => import("./pages/About"));
-const Resume = lazy(() => import("./pages/Resume"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const ProjectLayout = lazy(() => import("./pages/ProjectLayout"));

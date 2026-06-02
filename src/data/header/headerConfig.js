@@ -119,26 +119,3 @@ export const projectsHeroConfig = {
   idleMotion: false,
 };
 
-// ── Resume page header ───────────────────────────────────────────────────────
-export const resumeHeroConfig = {
-  layout: "full-left",
-  minHeight: "35vh",
-  text: {
-    descriptor: "Resume",
-    headline: "Experience & Skills",
-    headlineAs: "h1",
-    subline: null,
-  },
-  media: null,
-  tags: [],
-  ctas: [
-    {
-      label: "Download PDF",
-      href: "/Le_Leana_Resume_NoNumber.pdf",
-      variant: "ghost",
-      download: "Leana_Le_Resume.pdf",
-    },
-  ],
-  ctaLayout: "row",
-  idleMotion: false,
-};
