@@ -30,6 +30,7 @@ import { PassbookProvider } from "./components/passbook/PassbookProvider";
 import PassbookDock from "./components/passbook/PassbookDock";
 import PassbookDrawer from "./components/passbook/PassbookDrawer";
 import { resume } from "./data/resume";
+import { CASE_STUDY_BASE_PATH, getProjectPath } from "./config/projectRoutes";
 
 // Pages (lazy-loaded for better first-load performance)
 const Home = lazy(() => import("./pages/Home"));
@@ -40,19 +41,6 @@ const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const ProjectLayout = lazy(() => import("./pages/ProjectLayout"));
 
 import "./styles/App.css";
-
-/**
- * IDs of standalone (non-case-study) projects.
- * These projects:
- * - Live under /design/:slug route instead of /case-studies/:id
- * - Each has its own data.json file instead of using centralized data
- *
- * This list is used by:
- * - projectDataMapper.js (to identify standalone projects)
- * - Projects.jsx (to fetch supplemental data)
- */
-export const STANDALONE_PROJECT_IDS = ["fizzu-soda", "sap", "menu", "yard-sale"];
-export const CASE_STUDY_BASE_PATH = "/case-studies";
 
 /**
  * Error boundary for project detail pages.
@@ -96,9 +84,7 @@ function ScrollToTop() {
 
 function LegacyProjectRouteRedirect() {
     const { id } = useParams();
-    const target = STANDALONE_PROJECT_IDS.includes(id)
-        ? `/design/${id}`
-        : `${CASE_STUDY_BASE_PATH}/${id}`;
+    const target = getProjectPath(id);
     return <Navigate to={target} replace />;
 }
 

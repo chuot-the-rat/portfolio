@@ -1,5 +1,5 @@
 import { getDisplayProjectMeta } from "./displayProjectMeta";
-import { isStandaloneProject } from "./projectDataMapper";
+import { isStandaloneProject } from "../config/projectRoutes";
 import {
     buildPreviewViewModel,
     normalizeProjectImage,
@@ -254,8 +254,12 @@ export const buildEnrichedProjectUpdates = async ({
                 title: caseStudyProject.title || projectMeta.title,
                 curatedPreviewImage: projectMeta.previewImage || projectMeta.thumbnail,
                 explicitPreviewImage: supplementalData?.previewImage,
-                mediaThumbnail: supplementalData?.media?.thumbnail,
-                mediaHeroImage: supplementalData?.media?.hero_image,
+                mediaThumbnail:
+                    supplementalData?.media?.thumbnail ||
+                    caseStudyProject.media?.thumbnail,
+                mediaHeroImage:
+                    supplementalData?.media?.hero_image ||
+                    caseStudyProject.media?.hero_image,
                 derivedImageCandidates: [
                     supplementalData?.hifi?.images?.[0]?.src,
                     supplementalData?.solution?.images?.[0]?.src,

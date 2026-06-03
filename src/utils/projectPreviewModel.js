@@ -4,6 +4,7 @@ export const resolveProjectMediaPath = (projectId, src) => {
     const rawSrc = toCleanString(src);
     if (!rawSrc) return null;
     if (rawSrc.startsWith("/") || rawSrc.startsWith("http")) return rawSrc;
+    if (rawSrc.startsWith("projects/")) return `/${rawSrc}`;
     return `/projects/${projectId}/${rawSrc.replace(/^\.?\//, "")}`;
 };
 
@@ -49,10 +50,10 @@ export const buildPreviewViewModel = ({
     previewFocal = null,
 } = {}) => {
     const previewCandidates = buildPreviewCandidates(projectId, [
-        curatedPreviewImage,
         explicitPreviewImage,
         mediaThumbnail,
         mediaHeroImage,
+        curatedPreviewImage,
         ...derivedImageCandidates,
     ]);
 

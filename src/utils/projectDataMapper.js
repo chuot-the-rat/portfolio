@@ -19,27 +19,16 @@
 
 // Utility to map case_studies_standardized.json structure to the format expected by UI components
 import caseStudiesData from "../assets/case_studies_standardized.json";
-import { CASE_STUDY_BASE_PATH, STANDALONE_PROJECT_IDS } from "../App";
+import {
+    CASE_STUDY_BASE_PATH,
+    getProjectPath,
+    isStandaloneProject,
+    STANDALONE_PROJECT_IDS,
+} from "../config/projectRoutes";
 
 /** IDs that live under /design/:slug instead of /case-studies/:id */
 export { STANDALONE_PROJECT_IDS };
-
-/**
- * Check if a project is a standalone (self-contained) project.
- * Standalone projects aren't case studies and live in their own /design/:id route.
- * @param {string} id - Project ID to check
- * @returns {boolean} True if this is a standalone project
- */
-export const isStandaloneProject = (id) => STANDALONE_PROJECT_IDS.includes(id);
-
-/**
- * Get the correct link path for any project.
- * Automatically routes to correct URL based on project type.
- * @param {string} id - Project ID
- * @returns {string} URL path (/case-studies/:id or /design/:id)
- */
-export const getProjectPath = (id) =>
-    isStandaloneProject(id) ? `/design/${id}` : `${CASE_STUDY_BASE_PATH}/${id}`;
+export { getProjectPath, isStandaloneProject };
 
 /**
  * Helper to extract images from section data.
