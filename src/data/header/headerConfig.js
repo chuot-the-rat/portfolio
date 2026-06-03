@@ -10,7 +10,7 @@
  * - To add a new page header → add a named export following the same shape
  */
 
-import { resumeCta } from "../resume";
+import { resumeCta } from "../resume.js";
 
 // ── Home page hero ───────────────────────────────────────────────────────────
 export const homeHeroConfig = {
@@ -90,7 +90,7 @@ export const aboutHeroConfig = {
     descriptor: "About",
     headline: "Hi! It's Leana.",
     headlineAs: "h1",
-    subline: "Designer, developer, and recovering hospitality worker.",
+    subline: "Product designer with research-informed judgment, UI/UX craft, and build-aware delivery.",
   },
   media: null,
   tags: [],

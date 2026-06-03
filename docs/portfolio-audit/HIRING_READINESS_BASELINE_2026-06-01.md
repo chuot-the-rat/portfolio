@@ -2,6 +2,8 @@
 
 Profile audited: UI/UX + Product Design roles.
 
+Refresh note (2026-06-02): Re-verified after About-page changes. Home/About positioning, contact/resume handoff, and top-3 case-study ordering remain aligned with the hiring-readiness guardrails.
+
 ## Baseline Outcome
 
 - Status: `Ready with minor tailoring per posting`
@@ -12,6 +14,9 @@ Profile audited: UI/UX + Product Design roles.
 ## Alignment Check: Portfolio / Resume / LinkedIn
 
 - Portfolio: design-first framing is clear (`UI/UX + Product Designer`) and supported by top-3 case studies.
+- Home route: selected work still surfaces `InkLink`, `ProLog`, and `SideQuest` first, in that order.
+- About route: contact and resume now live in one recruiter-facing handoff flow on the same page.
+- Legacy aliases: `/contact` redirects to `/about`; `/resume` redirects to `/about#resume`.
 - Resume target framing (required): keep first line aligned to product/UI/UX outcomes before implementation details.
 - LinkedIn target framing (required): match portfolio voice; keep frontend as support signal.
 
@@ -55,6 +60,19 @@ Profile audited: UI/UX + Product Design roles.
 - 10-second: role + first click clarity passes.
 - 30-second: research, product thinking, and visual execution are identifiable.
 - 2-minute: top-3 case studies show problem -> evidence -> decision -> outcome chains.
+
+## Rendered Verification (2026-06-02)
+
+- Automated checks passing: `qa:audit`, `qa:metadata`, `qa:routes`, `lint`, `build`, and `qa:browser`.
+- Browser QA confirms home CTA visibility, footer contact access, and recruiter-facing route copy.
+- Browser QA confirms the About page exposes both the contact block and the embedded resume handoff on desktop and mobile.
+- Browser QA confirms `/contact` lands on the About contact surface and `/resume` lands on the About resume section.
+- Manual hiring-flow read remains intact: `Home hero -> top-3 work list -> About contact block -> About resume block`.
+
+## Current Risk Read
+
+- Primary remaining risk: job-specific tailoring depth, not portfolio clarity.
+- No current regression detected in positioning, route hygiene, or flagship case-study credibility.
 
 ## Next Use Rule
 

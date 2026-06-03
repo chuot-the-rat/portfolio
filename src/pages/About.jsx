@@ -100,7 +100,7 @@ export default function About() {
         site: true,
         path: "/about",
         description:
-            "About Leana Le: product designer with frontend implementation experience, based in Vancouver and open to product design roles.",
+            "About Leana Le: UI/UX product designer with research-informed product judgment, build-aware delivery, and Vancouver availability.",
     });
 
     return (

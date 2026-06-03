@@ -2,6 +2,8 @@
 
 Scope: `InkLink`, `SideQuest`, `ProLog` only.
 
+Superseded note (2026-06-02): Keep this document as historical context only. The current hiring-readiness reference is [HIRING_READINESS_BASELINE_2026-06-01.md](/C:/Users/leana/OneDrive/Desktop/Portfolio/docs/portfolio-audit/HIRING_READINESS_BASELINE_2026-06-01.md), which reflects the current About-page contact/resume handoff, design-first positioning, and browser-verified recruiter flow.
+
 ## Target Positioning
 
 - Positioning statement: UI/UX designer with product thinking, research-informed decisions, strong visual systems, and frontend fluency as a support skill.
@@ -31,6 +33,8 @@ Scope: `InkLink`, `SideQuest`, `ProLog` only.
 
 Update (2026-06-01): Top-3 media captions and comparison narratives were refreshed for consistent decision-evidence clarity across hook, research, design response, and validation sections.
 
+Update (2026-06-02): The remaining route and positioning risks noted here have been resolved in the live structure. `/contact` now remains an alias to `/about`, `/resume` now lands on `/about#resume`, and the About page owns the primary contact/resume handoff without reintroducing a standalone resume or contact page.
+
 ## Prioritized Backlog
 
 | Priority | Area | Gap | Implementation task | Status |
@@ -58,3 +62,8 @@ Update (2026-06-01): Top-3 media captions and comparison narratives were refresh
 - [x] Each top case now includes explicit decision evidence chain.
 - [x] Outcome claims remain qualitative/honest.
 - [x] Ownership is clearer in project-card metadata and case headers.
+
+## Historical Status
+
+- Treat the gaps and actions above as the pre-refresh baseline that led to the June hiring-readiness baseline.
+- Do not reopen the resolved frontend-first positioning or standalone contact/resume page concerns unless a new regression appears in guardrails or browser QA.

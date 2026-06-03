@@ -35,3 +35,12 @@ Use this before each application cycle to keep portfolio, resume, and LinkedIn a
 - [ ] `npm run qa:metadata`
 - [ ] `npm run qa:routes`
 - [ ] Optional final pass: `npm run qa:browser`
+
+## 6) Application Packet Gate
+
+- [ ] Role-fit scorecard created from `ROLE_FIT_SCORECARD_TEMPLATE.md`.
+- [ ] Job requirements mapped to InkLink, ProLog, and SideQuest proof lines.
+- [ ] Resume first line checked against the posting.
+- [ ] LinkedIn headline/about checked against the posting.
+- [ ] 3-5 proof bullets selected from `APPLICATION_MESSAGE_BANK.md`.
+- [ ] Why-me paragraph tailored without unsupported metrics or inflated claims.

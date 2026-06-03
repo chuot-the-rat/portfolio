@@ -298,12 +298,12 @@ if (fs.existsSync(contactPagePath) || fs.existsSync(contactCssPath)) {
 }
 
 if (
-  !/<Route\s+path="\/resume"\s+element={<Navigate to="\/about" replace \/>}\s*\/>/m.test(
+  !/<Route\s+path="\/resume"\s+element={<Navigate to=(?:{resume\.sectionPath}|"\/about(?:#resume)?") replace \/>}\s*\/>/m.test(
     appSource,
   )
 ) {
   failures.push(
-    "[qa:audit] App routes: expected /resume to remain a redirect to /about",
+    "[qa:audit] App routes: expected /resume to remain a redirect to /about or /about#resume",
   );
 }
 
